@@ -1,0 +1,5 @@
+*.pyc
+*.mo
+site_media
+cache
+dev.db
