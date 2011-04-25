@@ -18,10 +18,13 @@ class Command(BaseCommand):
     help = 'sync database against gsm'
 
     def handle(self, *args, **options):
-        root = gsm.get_tree('soccer', 'get_areas').getroot()
-        for element in root.getchildren():
-            if element.tag == 'area':
-                self.save_area(element)
+        for code, language in settings.LANGUAGES:
+            root = gsm.get_tree(code, 'soccer', 'get_areas').getroot()
+            for element in root.getchildren():
+                if element.tag == 'area':
+                    self.save_area(code, element)
+
+        return None
 
         for sport in Sport.objects.all():
             print "Saving seasons for %s" % sport
@@ -137,9 +140,9 @@ class Command(BaseCommand):
             properties
         )
 
-    def save_area(self, element, **properties):
+    def save_area(self, language, element, **properties):
         properties.update({
-            'name': element.attrib['name'],
+            'name_%s' % language: element.attrib['name'],
             'country_code': element.attrib['countrycode'],
         })
 
@@ -153,6 +156,6 @@ class Command(BaseCommand):
 
         for child in element.getchildren():
             if child.tag == 'area':
-                self.save_area(child, parent=area)
+                self.save_area(language, child, parent=area)
             else:
                 raise UnexpectedChild(element, child)

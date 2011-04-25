@@ -2,6 +2,8 @@ import os.path
 import posixpath
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
+gettext = lambda s: s
+
 INSTALLED_APPS = [
     # Django
     "django.contrib.admin",
@@ -18,6 +20,7 @@ INSTALLED_APPS = [
     "staticfiles",
     "debug_toolbar",
     'django_extensions',
+    'modeltranslation',
     
     # Pinax
     
@@ -27,9 +30,15 @@ INSTALLED_APPS = [
 
 LANGUAGE_CODE = "fr-FR"
 TIME_ZONE = "Europe/Paris"
+LANGUAGES = (
+    ('fr', gettext('French')),
+    ('en', gettext('English')),
+)
+MODELTRANSLATION_DEFAULT_LANGUAGE='fr'
+MODELTRANSLATION_TRANSLATION_REGISTRY='translation'
 
-GSM_USERNAME = 'demo'
-GSM_PASSWORD = 'demo'
+GSM_USERNAME = 'cportal'
+GSM_PASSWORD = 'client'
 GSM_LANGUAGE = 'fr'
 GSM_URL = 'http://%s:%s@webpull.globalsportsmedia.com' % (
     GSM_USERNAME,

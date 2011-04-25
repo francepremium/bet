@@ -3,3 +3,4 @@
 site_media
 cache
 dev.db
+*.swp

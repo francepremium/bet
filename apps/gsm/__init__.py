@@ -12,8 +12,8 @@ from gsm.models import *
 # Prevent: XMLSyntaxError: Attempt to load network entity
 etree.set_default_parser(etree.XMLParser(no_network=False, recover=True))
 
-def get_tree(sport, method, **kwargs):
-    kwargs['lang'] = settings.GSM_LANGUAGE
+def get_tree(lang, sport, method, **kwargs):
+    kwargs['lang'] = lang
 
     if isinstance(sport, Sport):
         sport = sport.name

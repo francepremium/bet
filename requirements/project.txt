@@ -5,3 +5,6 @@
 
 # Put project-specific requirements here.
 # See http://pip-installer.org/requirement-format.html for more information.
+#
+
+-e svn+http://django-modeltranslation.googlecode.com/svn/trunk/#egg=modeltranslation
