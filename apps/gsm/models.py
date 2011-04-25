@@ -13,7 +13,7 @@ from django.conf import settings
 from django.core.cache import cache
 
 class Sport(models.Model):
-    name = models.CharField(max_length=30, editable=False)
+    name = models.CharField(max_length=30)
 
     def __unicode__(self):
         return _(self.name)
@@ -22,11 +22,11 @@ class Sport(models.Model):
         ordering = ('-name',)
 
 class Tour(models.Model):
-    gsm_id = models.IntegerField(editable=False)
+    gsm_id = models.IntegerField()
     sport = models.ForeignKey('Sport')
 
-    name = models.CharField(max_length=30, editable=False)
-    last_updated = models.DateTimeField(editable=False, null=True, blank=True)
+    name = models.CharField(max_length=30)
+    last_updated = models.DateTimeField(null=True, blank=True)
 
     def __unicode__(self):
         return self.name
@@ -35,23 +35,23 @@ class Tour(models.Model):
         ordering = ('-name',)
 
 class Season(models.Model):
-    gsm_id = models.IntegerField(editable=False)
+    gsm_id = models.IntegerField()
 
     competition = models.ForeignKey('Competition')
-    name = models.CharField(max_length=30, editable=False)
+    name = models.CharField(max_length=30)
 
     # tennis specific
-    gender = models.CharField(max_length=12, null=True, blank=True, editable=False)
+    gender = models.CharField(max_length=12, null=True, blank=True)
     prize_money = models.IntegerField(null=True, blank=True)
     prize_currency = models.CharField(max_length=3, null=True, blank=True)
-    type = models.CharField(max_length=12, null=True, blank=True, editable=False)
+    type = models.CharField(max_length=12, null=True, blank=True)
     
     # soccer specific
-    service_level = models.IntegerField(null=True, blank=True, editable=False)
+    service_level = models.IntegerField(null=True, blank=True)
 
-    start_date = models.DateTimeField(editable=False)
-    end_date = models.DateTimeField(editable=False)
-    last_updated = models.DateTimeField(editable=False, null=True, blank=True)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    last_updated = models.DateTimeField(null=True, blank=True)
 
     def __unicode__(self):
         return self.name
@@ -60,21 +60,21 @@ class Season(models.Model):
         ordering = ('-name',)
 
 class Competition(models.Model):
-    gsm_id = models.IntegerField(editable=False)
-    display_order = models.IntegerField(editable=False)
+    gsm_id = models.IntegerField()
+    display_order = models.IntegerField()
 
     sport = models.ForeignKey('Sport')
     area = models.ForeignKey('Area')
     tour = models.ForeignKey('Tour', null=True, blank=True)
 
-    name = models.CharField(max_length=100, editable=False)
-    type = models.CharField(max_length=12, null=True, blank=True, editable=False)
-    format = models.CharField(max_length=12, null=True, blank=True, editable=False)
-    soccer_type = models.CharField(max_length=12, null=True, blank=True, editable=False)
-    court_type = models.CharField(max_length=12, null=True, blank=True, editable=False)
-    team_type = models.CharField(max_length=12, null=True, blank=True, editable=False)
-    display_order = models.IntegerField(editable=False, null=True, blank=True)
-    last_updated = models.DateTimeField(editable=False, null=True, blank=True)
+    name = models.CharField(max_length=100)
+    type = models.CharField(max_length=12, null=True, blank=True)
+    format = models.CharField(max_length=12, null=True, blank=True)
+    soccer_type = models.CharField(max_length=12, null=True, blank=True)
+    court_type = models.CharField(max_length=12, null=True, blank=True)
+    team_type = models.CharField(max_length=12, null=True, blank=True)
+    display_order = models.IntegerField(null=True, blank=True)
+    last_updated = models.DateTimeField(null=True, blank=True)
 
     def __unicode__(self):
         return self.name
@@ -83,10 +83,10 @@ class Competition(models.Model):
         ordering = ('-name',)
 
 class Area(models.Model):
-    parent = models.ForeignKey('Area', null=True, blank=True, editable=False)
-    gsm_id = models.IntegerField(editable=False)
-    country_code = models.CharField(max_length=3, editable=False)
-    name = models.CharField(max_length=100, editable=False)
+    parent = models.ForeignKey('Area', null=True, blank=True)
+    gsm_id = models.IntegerField()
+    country_code = models.CharField(max_length=3)
+    name = models.CharField(max_length=100)
 
     def __unicode__(self):
         return self.name
