@@ -43,13 +43,6 @@
         }
     }, 
     {
-        "pk": 5, 
-        "model": "gsm.sport", 
-        "fields": {
-            "name": "golf"
-        }
-    }, 
-    {
         "pk": 3, 
         "model": "gsm.sport", 
         "fields": {
@@ -61,6 +54,27 @@
         "model": "gsm.sport", 
         "fields": {
             "name": "basketball"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "gsm.sport", 
+        "fields": {
+            "name": "americanfootball"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "gsm.sport", 
+        "fields": {
+            "name": "handball"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "gsm.sport", 
+        "fields": {
+            "name": "baseball"
         }
     }
 ]

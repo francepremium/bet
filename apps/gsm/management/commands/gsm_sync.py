@@ -24,23 +24,21 @@ class Command(BaseCommand):
                 if element.tag == 'area':
                     self.save_area(code, element)
 
-        return None
+            for sport in Sport.objects.all():
+                print "Saving seasons for %s" % sport
+                properties = {}
 
-        for sport in Sport.objects.all():
-            print "Saving seasons for %s" % sport
-            properties = {}
+                root = gsm.get_tree(code, sport, 'get_seasons', **properties).getroot()
 
-            root = gsm.get_tree(sport, 'get_seasons', **properties).getroot()
-
-            for element in root.getchildren():
-                if element.tag == 'method':
-                    continue
-                elif element.tag == 'tour':
-                    self.save_tour(sport, element)
-                elif element.tag == 'competition':
-                    self.save_competition(sport, element)
-                else:
-                    raise UnexpectedChild(root, element)
+                for element in root.getchildren():
+                    if element.tag == 'method':
+                        continue
+                    elif element.tag in ('tour', 'championship'):
+                        self.save_tour(code, sport, element)
+                    elif element.tag == 'competition':
+                        self.save_competition(code, sport, element)
+                    else:
+                        raise UnexpectedChild(root, element)
 
     def update_model(self, model_class, unique_properties, properties):
         changed = []
@@ -53,25 +51,26 @@ class Command(BaseCommand):
         for k, v in properties.items():
             if not hasattr(model_class, k):
                 if getattr(model, k) != getattr(model, '_meta').get_field(k).to_python(v):
-                    changed.append(k)
+                    changed.append('normal val %s: %s != %s' % (k, getattr(model, k), getattr(model, '_meta').get_field(k).to_python(v)))
                     setattr(model, k, v)
             else: # handle relations
                 if v is None:
                     if getattr(model, '%s_id' % k) != None:
-                        changed.append(k)
+                        changed.append('none relation %s: %s != %s' % (k, getattr(model, '%s_id' % k), v))
                         setattr(model, k, v)
                 elif getattr(model, '%s_id' % k) != v.pk:
-                    changed.append(k)
+                    changed.append('relation %s: %s != %s' % (k, getattr(model, '%s_id' % k), v.pk))
                     setattr(model, k, v)
 
         if changed:
+            print "CHANGED %s #%s: %s" % (model.__class__, model.gsm_id, "\n".join(changed))
             model.save()
         
         return model
 
-    def save_tour(self, sport, element, **properties):
+    def save_tour(self, language, sport, element, **properties):
         properties.update({
-            'name': element.attrib['name'],
+            'name_%s' % language: element.attrib['name'],
             'last_updated': element.attrib['last_updated'],
             'sport': sport,
         })
@@ -79,7 +78,7 @@ class Command(BaseCommand):
         tour = self.update_model(   
             Tour, 
             {
-                'gsm_id': element.attrib['tour_id'],
+                'gsm_id': element.attrib.get('tour_id', None) or element.attrib.get('championship_id'),
                 'sport': sport,
             },
             properties
@@ -87,12 +86,11 @@ class Command(BaseCommand):
         
         for child in element.getchildren():
             if child.tag == 'competition':
-                self.save_competition(sport, child, tour=tour)
+                self.save_competition(language, sport, child, tour=tour)
 
-    def save_competition(self, sport, element, **properties):
+    def save_competition(self, language, sport, element, **properties):
         properties.update({
-            'sport': sport,
-            'name': element.attrib['name'],
+            'name_%s' % language: element.attrib['name'],
             'area': Area.objects.get(gsm_id=element.attrib['area_id']),
             'court_type': element.attrib.get('court', None),
             'team_type': element.attrib.get('teamtype', None),
@@ -103,24 +101,29 @@ class Command(BaseCommand):
             'display_order': element.attrib.get('display_order', None),
         })
 
+        unique_stuff = {
+            'gsm_id': element.attrib['competition_id'],
+            'sport': sport,
+        }
+
+        if 'tour' in properties:
+            unique_stuff['tour'] = properties.pop('tour')
+
         competition = self.update_model(
             Competition,
-            {
-                'gsm_id': element.attrib['competition_id'],
-                'sport': sport,
-            },
+            unique_stuff,
             properties
         )
 
         for child in element.getchildren():
             if child.tag == 'season':
-                self.save_season(sport, child, competition=competition)
+                self.save_season(language, sport, child, competition=competition)
             else:
                 raise UnexpectedChild(element, child)
 
-    def save_season(self, sport, element, **properties):
+    def save_season(self, language, sport, element, **properties):
         properties.update({
-            'name': element.attrib['name'],
+            'name_%s' % language: element.attrib['name'],
             'type': element.attrib.get('type', None) or None,
             'gender': element.attrib.get('gender', None) or None,
             'prize_money': element.attrib.get('prize_money', None) or None,

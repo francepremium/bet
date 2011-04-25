@@ -49,8 +49,8 @@ class Season(models.Model):
     # soccer specific
     service_level = models.IntegerField(null=True, blank=True)
 
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
+    start_date = models.DateTimeField(null=True, blank=True)
+    end_date = models.DateTimeField(null=True, blank=True)
     last_updated = models.DateTimeField(null=True, blank=True)
 
     def __unicode__(self):
