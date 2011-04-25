@@ -14,8 +14,12 @@ etree.set_default_parser(etree.XMLParser(no_network=False, recover=True))
 
 def get_tree(sport, method, **kwargs):
     kwargs['lang'] = settings.GSM_LANGUAGE
+
     if isinstance(sport, Sport):
-        sport = sport.gsm_name
+        sport = sport.name
+
+    if sport != 'tennis' and method == 'get_seasons':
+        kwargs['authorized'] = 'yes'
 
     url = '/%s/%s?%s' % (
         sport,
@@ -27,6 +31,7 @@ def get_tree(sport, method, **kwargs):
     cache_filepath = os.path.join(settings.GSM_CACHE, cache_filename)
     cache_lockname = '%s.lock' % cache_filename
     cache_lockpath = os.path.join(settings.GSM_CACHE, cache_lockname)
+    print settings.GSM_URL + url
     tmp_filename, message = urllib.urlretrieve(settings.GSM_URL + url)
 
     stop = False

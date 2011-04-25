@@ -11,56 +11,56 @@
         "pk": 1, 
         "model": "gsm.sport", 
         "fields": {
-            "gsm_name": "volleyball"
+            "name": "volleyball"
         }
     }, 
     {
         "pk": 2, 
         "model": "gsm.sport", 
         "fields": {
-            "gsm_name": "tennis"
+            "name": "tennis"
         }
     }, 
     {
         "pk": 8, 
         "model": "gsm.sport", 
         "fields": {
-            "gsm_name": "rugby"
+            "name": "rugby"
         }
     }, 
     {
         "pk": 7, 
         "model": "gsm.sport", 
         "fields": {
-            "gsm_name": "motorsports"
+            "name": "motorsports"
         }
     }, 
     {
         "pk": 6, 
         "model": "gsm.sport", 
         "fields": {
-            "gsm_name": "hockey"
+            "name": "hockey"
         }
     }, 
     {
         "pk": 5, 
         "model": "gsm.sport", 
         "fields": {
-            "gsm_name": "golf"
+            "name": "golf"
         }
     }, 
     {
         "pk": 3, 
         "model": "gsm.sport", 
         "fields": {
-            "gsm_name": "soccer"
+            "name": "soccer"
         }
     }, 
     {
         "pk": 4, 
         "model": "gsm.sport", 
         "fields": {
-            "gsm_name": "basketball"
+            "name": "basketball"
         }
     }
 ]
