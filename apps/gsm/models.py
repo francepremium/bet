@@ -56,6 +56,19 @@ class Area(models.Model):
 class Championship(GsmEntity):
     pass
 
+class Competition(GsmEntity):
+    display_order = models.IntegerField()
+    
+    area = models.ForeignKey('Area')
+    championship = models.ForeignKey('Championship', null=True, blank=True)
+
+    type = models.CharField(max_length=12, null=True, blank=True)
+    format = models.CharField(max_length=12, null=True, blank=True)
+    soccer_type = models.CharField(max_length=12, null=True, blank=True)
+    court_type = models.CharField(max_length=12, null=True, blank=True)
+    team_type = models.CharField(max_length=12, null=True, blank=True)
+    display_order = models.IntegerField(null=True, blank=True)
+
 class Season(GsmEntity):
     competition = models.ForeignKey('Competition')
 
@@ -70,16 +83,3 @@ class Season(GsmEntity):
 
     start_date = models.DateTimeField(null=True, blank=True)
     end_date = models.DateTimeField(null=True, blank=True)
-
-class Competition(GsmEntity):
-    display_order = models.IntegerField()
-    
-    area = models.ForeignKey('Area')
-    championship = models.ForeignKey('Championship', null=True, blank=True)
-
-    type = models.CharField(max_length=12, null=True, blank=True)
-    format = models.CharField(max_length=12, null=True, blank=True)
-    soccer_type = models.CharField(max_length=12, null=True, blank=True)
-    court_type = models.CharField(max_length=12, null=True, blank=True)
-    team_type = models.CharField(max_length=12, null=True, blank=True)
-    display_order = models.IntegerField(null=True, blank=True)
