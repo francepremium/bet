@@ -24,7 +24,7 @@ class Sport(models.Model):
     class Meta:
         ordering = ('-name',)
 
-class Tour(models.Model):
+class Championship(models.Model):
     gsm_id = models.IntegerField()
     sport = models.ForeignKey('Sport')
 
@@ -70,7 +70,7 @@ class Competition(models.Model):
 
     sport = models.ForeignKey('Sport')
     area = models.ForeignKey('Area')
-    tour = models.ForeignKey('Tour', null=True, blank=True)
+    championship = models.ForeignKey('Championship', null=True, blank=True)
 
     name = models.CharField(max_length=100)
     slug = AutoSlugField(populate_from='name_en')

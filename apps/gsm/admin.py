@@ -5,12 +5,12 @@ from models import *
 
 admin.site.register(Sport)
 
-class TourAdmin(TranslationAdmin):
+class ChampionshipAdmin(TranslationAdmin):
     list_display = ('gsm_id', 'sport', 'name')
     list_filter = ('sport', 'last_updated')
     search_fields = ('name_fr', 'name_en')
 
-admin.site.register(Tour, TourAdmin)
+admin.site.register(Championship, ChampionshipAdmin)
 
 class SeasonAdmin(TranslationAdmin):
     list_display = ('gsm_id', 'competition', 'name')
@@ -20,9 +20,9 @@ class SeasonAdmin(TranslationAdmin):
 admin.site.register(Season, SeasonAdmin)
 
 class CompetitionAdmin(TranslationAdmin):
-    list_display = ('gsm_id', 'sport', 'area', 'tour', 'name')
+    list_display = ('gsm_id', 'sport', 'area', 'championship', 'name')
     list_filter = ('sport',)
-    search_fields = ('area__name_fr', 'area__name_en', 'tour__name_fr', 'tour__name_en', 'name_fr', 'name_en')
+    search_fields = ('area__name_fr', 'area__name_en', 'championship__name_fr', 'championship__name_en', 'name_fr', 'name_en')
 
 admin.site.register(Competition, CompetitionAdmin)
 

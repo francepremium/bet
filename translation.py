@@ -1,10 +1,10 @@
 from modeltranslation.translator import translator, TranslationOptions
 
-from gsm.models import Tour, Season, Competition, Area
+from gsm.models import Championship, Season, Competition, Area
 
-class TourTranslation(TranslationOptions):
+class ChampionshipTranslation(TranslationOptions):
     fields = ('name',)
-translator.register(Tour, TourTranslation)
+translator.register(Championship, ChampionshipTranslation)
 
 class SeasonTranslation(TranslationOptions):
     fields = ('name',)

@@ -34,7 +34,7 @@ class Command(BaseCommand):
                     if element.tag == 'method':
                         continue
                     elif element.tag in ('tour', 'championship'):
-                        self.save_tour(code, sport, element)
+                        self.save_championship(code, sport, element)
                     elif element.tag == 'competition':
                         self.save_competition(code, sport, element)
                     else:
@@ -68,15 +68,15 @@ class Command(BaseCommand):
         
         return model
 
-    def save_tour(self, language, sport, element, **properties):
+    def save_championship(self, language, sport, element, **properties):
         properties.update({
             'name_%s' % language: element.attrib['name'],
             'last_updated': element.attrib['last_updated'],
             'sport': sport,
         })
 
-        tour = self.update_model(   
-            Tour, 
+        championship = self.update_model(   
+            Championship, 
             {
                 'gsm_id': element.attrib.get('tour_id', None) or element.attrib.get('championship_id'),
                 'sport': sport,
@@ -86,7 +86,7 @@ class Command(BaseCommand):
         
         for child in element.getchildren():
             if child.tag == 'competition':
-                self.save_competition(language, sport, child, tour=tour)
+                self.save_competition(language, sport, child, championship=championship)
 
     def save_competition(self, language, sport, element, **properties):
         properties.update({
@@ -106,8 +106,8 @@ class Command(BaseCommand):
             'sport': sport,
         }
 
-        if 'tour' in properties:
-            unique_stuff['tour'] = properties.pop('tour')
+        if 'championship' in properties:
+            unique_stuff['championship'] = properties.pop('championship')
 
         competition = self.update_model(
             Competition,
