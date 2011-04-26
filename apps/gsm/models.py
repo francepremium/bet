@@ -23,7 +23,7 @@ class Sport(models.Model):
     class Meta:
         ordering = ('-name',)
 
-class Championship(models.Model):
+class GsmEntity(models.Model):
     gsm_id = models.IntegerField()
     sport = models.ForeignKey('Sport')
 
@@ -36,13 +36,28 @@ class Championship(models.Model):
     
     class Meta:
         ordering = ('-name',)
+        abstract = True
+        unique_together = ('gsm_id', 'sport')
 
-class Season(models.Model):
-    gsm_id = models.IntegerField()
-
-    competition = models.ForeignKey('Competition')
+class Area(models.Model):
+    parent = models.ForeignKey('Area', null=True, blank=True)
+    country_code = models.CharField(max_length=3)
+    gsm_id = models.IntegerField(unique=True)
     name = models.CharField(max_length=30)
     slug = AutoSlugField(populate_from='name_en')
+
+    def __unicode__(self):
+        return self.name
+    
+    class Meta:
+        ordering = ('-name',)
+        order_with_respect_to = 'parent'
+
+class Championship(GsmEntity):
+    pass
+
+class Season(GsmEntity):
+    competition = models.ForeignKey('Competition')
 
     # tennis specific
     gender = models.CharField(max_length=12, null=True, blank=True)
@@ -55,48 +70,16 @@ class Season(models.Model):
 
     start_date = models.DateTimeField(null=True, blank=True)
     end_date = models.DateTimeField(null=True, blank=True)
-    last_updated = models.DateTimeField(null=True, blank=True)
 
-    def __unicode__(self):
-        return self.name
-    
-    class Meta:
-        ordering = ('-name',)
-
-class Competition(models.Model):
-    gsm_id = models.IntegerField()
+class Competition(GsmEntity):
     display_order = models.IntegerField()
-
-    sport = models.ForeignKey('Sport')
+    
     area = models.ForeignKey('Area')
     championship = models.ForeignKey('Championship', null=True, blank=True)
 
-    name = models.CharField(max_length=100)
-    slug = AutoSlugField(populate_from='name_en')
     type = models.CharField(max_length=12, null=True, blank=True)
     format = models.CharField(max_length=12, null=True, blank=True)
     soccer_type = models.CharField(max_length=12, null=True, blank=True)
     court_type = models.CharField(max_length=12, null=True, blank=True)
     team_type = models.CharField(max_length=12, null=True, blank=True)
     display_order = models.IntegerField(null=True, blank=True)
-    last_updated = models.DateTimeField(null=True, blank=True)
-
-    def __unicode__(self):
-        return self.name
-    
-    class Meta:
-        ordering = ('-name',)
-
-class Area(models.Model):
-    parent = models.ForeignKey('Area', null=True, blank=True)
-    gsm_id = models.IntegerField()
-    country_code = models.CharField(max_length=3)
-    name = models.CharField(max_length=100)
-    slug = AutoSlugField(populate_from='name_en')
-
-    def __unicode__(self):
-        return self.name
-    
-    class Meta:
-        order_with_respect_to = 'parent'
-        ordering = ('-name',)

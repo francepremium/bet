@@ -72,7 +72,6 @@ class Command(BaseCommand):
         properties.update({
             'name_%s' % language: element.attrib['name'],
             'last_updated': element.attrib['last_updated'],
-            'sport': sport,
         })
 
         championship = self.update_model(   
@@ -101,17 +100,12 @@ class Command(BaseCommand):
             'display_order': element.attrib.get('display_order', None),
         })
 
-        unique_stuff = {
-            'gsm_id': element.attrib['competition_id'],
-            'sport': sport,
-        }
-
-        if 'championship' in properties:
-            unique_stuff['championship'] = properties.pop('championship')
-
         competition = self.update_model(
             Competition,
-            unique_stuff,
+            {
+                'gsm_id': element.attrib['competition_id'],
+                'sport': sport,
+            },
             properties
         )
 
@@ -138,7 +132,7 @@ class Command(BaseCommand):
             Season,
             {
                 'gsm_id': element.attrib['season_id'],
-                'competition': properties['competition'],
+                'sport': sport,
             },
             properties
         )
