@@ -31,8 +31,8 @@ INSTALLED_APPS = [
 LANGUAGE_CODE = "fr-FR"
 TIME_ZONE = "Europe/Paris"
 LANGUAGES = (
-    ('fr', gettext('French')),
     ('en', gettext('English')),
+    ('fr', gettext('French')),
 )
 MODELTRANSLATION_DEFAULT_LANGUAGE='fr'
 MODELTRANSLATION_TRANSLATION_REGISTRY='translation'
