@@ -2,7 +2,6 @@ import re
 import htmlentitydefs
 import urllib
 import datetime
-from lxml import etree
 
 from django.db import models
 from django.db.models import signals
