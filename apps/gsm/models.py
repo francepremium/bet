@@ -12,8 +12,11 @@ from django.template import defaultfilters
 from django.conf import settings
 from django.core.cache import cache
 
+from autoslug import AutoSlugField
+
 class Sport(models.Model):
     name = models.CharField(max_length=30)
+    slug = AutoSlugField(populate_from='name')
 
     def __unicode__(self):
         return _(self.name)
@@ -26,6 +29,7 @@ class Tour(models.Model):
     sport = models.ForeignKey('Sport')
 
     name = models.CharField(max_length=30)
+    slug = AutoSlugField(populate_from='name_en')
     last_updated = models.DateTimeField(null=True, blank=True)
 
     def __unicode__(self):
@@ -39,6 +43,7 @@ class Season(models.Model):
 
     competition = models.ForeignKey('Competition')
     name = models.CharField(max_length=30)
+    slug = AutoSlugField(populate_from='name_en')
 
     # tennis specific
     gender = models.CharField(max_length=12, null=True, blank=True)
@@ -68,6 +73,7 @@ class Competition(models.Model):
     tour = models.ForeignKey('Tour', null=True, blank=True)
 
     name = models.CharField(max_length=100)
+    slug = AutoSlugField(populate_from='name_en')
     type = models.CharField(max_length=12, null=True, blank=True)
     format = models.CharField(max_length=12, null=True, blank=True)
     soccer_type = models.CharField(max_length=12, null=True, blank=True)
@@ -87,6 +93,7 @@ class Area(models.Model):
     gsm_id = models.IntegerField()
     country_code = models.CharField(max_length=3)
     name = models.CharField(max_length=100)
+    slug = AutoSlugField(populate_from='name_en')
 
     def __unicode__(self):
         return self.name

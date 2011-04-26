@@ -8,3 +8,4 @@
 #
 
 -e svn+http://django-modeltranslation.googlecode.com/svn/trunk/#egg=modeltranslation
+django-autoslug==1.4.1
