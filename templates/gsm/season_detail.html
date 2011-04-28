@@ -1,0 +1,58 @@
+{% extends 'gsm/base.html' %}
+
+{% load i18n %}
+{% load gsm_tags %}
+
+{% block body %}
+    {% gsm_entity element=entity.get_matches.getroot.getchildren.1 key='competition' %}
+    {% gsm_entity element=entity.get_matches.getroot.getchildren.1.getchildren.0 key='season' %}
+    
+    {{ competition.get_area }}
+    {{ competition.attrib.name }}
+    {{ season.attrib.name }}
+    {% for child0 in season.element.getchildren %}
+        {% if child0.tag == 'round' %}
+        {% gsm_entity element=child0 key='round' %}
+
+        <h2>{% trans 'round' %} {{ round.attrib.name }}</h2>
+
+        <table>
+            <tr>
+                <th>{% trans 'type' %}</th>
+                <td>{{ round.attrib.type }}</td>
+                <th>{% trans 'last update' %}</th>
+                <td>{{ round.attrib.last_updated }}</td>
+            </tr>
+            <tr>
+                <th>{% trans 'start' %}</th>
+                <td>{{ round.attrib.start_date }}</td>
+                <th>{% trans 'end' %}</th>
+                <td>{{ round.attrib.end_date }}</td>
+            </tr>
+            <tr>
+                <th>{% trans 'groups' %}</th>
+                <td>{{ round.attrib.groups }}</td>
+                <th>{% trans 'has outgroup matches' %}</th>
+                <td>{{ round.attrib.has_outgroup_matches }}</td>
+            </tr>
+        </table>
+
+        <h3>{% trans 'matches' %}</h3>
+
+        <table>
+            {% for child1 in round.element.getchildren %}
+            {% gsm_entity element=child1 key='match' %}
+            <tr>
+                <td>
+                    <a href="{{ match.get_absolute_url }}" title="{% trans 'details of match between' %} {{ match.attrib.team_A_name }} {% trans 'and' %} {{ match.attrib.team_B_name }}">{% trans 'details' %}</a>
+                </td>
+                <td>{{ match.attrib.gameweek }}</td>
+                <td>{{ match.attrib.date_utc }} {{ match.attrib.time_utc }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}

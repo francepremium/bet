@@ -59,3 +59,10 @@ GSM_URL = 'http://%s:%s@webpull.globalsportsmedia.com' % (
     GSM_PASSWORD,
 )
 GSM_CACHE = os.path.join(PROJECT_ROOT, 'cache', 'gsm')
+
+SPORTS=(
+    ('soccer', 'Soccer'),
+    ('tennis', 'Tennis'),
+    ('basketball', 'Basketball'),
+    ('rugby', 'Rugby'),
+)

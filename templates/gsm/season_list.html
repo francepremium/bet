@@ -1,0 +1,66 @@
+{% extends 'gsm/base.html' %}
+
+{% load i18n %}
+{% load gsm_tags %}
+
+{% block extra_meta %}
+<meta name="description" content=""></meta>
+<meta name="keywords" content=""></meta>
+{% endblock %}
+
+{% block body %}
+    <h1>{% trans 'competitions for' %} {{ sport }}</h1>
+
+    {% for child0 in tree.getroot.getchildren %}
+        {% if child0.tag == 'competition' %}
+            {% gsm_entity element=child0 key='competition' %}
+
+            <h2>{{ competition.attrib.name }}</h2>
+
+            {% trans 'last updated' %} {{ competition.attrib.last_updated }}
+
+            <table>
+                <tr>
+                    <th>{% trans 'team type' %}</th>
+                    <td>{{ competition.attrib.teamtype }}</td>
+                    <th>{% trans 'type' %}</th>
+                    <td>{{ competition.attrib.teamtype }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans 'area' %}</th>
+                    <td>{{ competition.get_area }}</td>
+                    <th>{% trans 'format' %}</th>
+                    <td>{{ competition.attrib.format }}</td>
+                </tr>
+            </table>
+
+            <h3>{% trans 'seasons' %}</h3>
+            <table>
+                <tr>
+                    <th>{% trans 'name' %}</th>
+                    <th>{% trans 'start' %}</th>
+                    <th>{% trans 'end' %}</th>
+                    <th>{% trans 'last update' %}</th>
+                </tr>
+            {% for child1 in child0.getchildren %}
+                {% gsm_entity element=child1 key='season' %}
+                <tr>
+                    <td>
+                        <a href="{{ season.get_absolute_url }}" title="{% trans 'details of season' %} {{ season.attrib.name }} {% trans 'of competition' %} {{ competition.attrib.name }}">{{ season.attrib.name }}</a>
+                    </td>
+                    <td>
+                        {{ season.attrib.start_date }}
+                    </td>
+                    <td>
+                        {{ season.attrib.end_date }}
+                    </td>
+                    <td>
+                        {{ season.attrib.last_updated }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </table>
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}

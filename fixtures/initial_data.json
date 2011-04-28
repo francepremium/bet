@@ -8,34 +8,6 @@
         }
     },
     {
-        "pk": 2, 
-        "model": "gsm.sport", 
-        "fields": {
-            "name": "tennis"
-        }
-    }, 
-    {
-        "pk": 8, 
-        "model": "gsm.sport", 
-        "fields": {
-            "name": "rugby"
-        }
-    }, 
-    {
-        "pk": 1, 
-        "model": "gsm.sport", 
-        "fields": {
-            "name": "soccer"
-        }
-    }, 
-    {
-        "pk": 4, 
-        "model": "gsm.sport", 
-        "fields": {
-            "name": "basketball"
-        }
-    }, 
-    {
         "pk": 1, 
         "model": "auth.user", 
         "fields": {

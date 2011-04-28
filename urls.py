@@ -13,7 +13,8 @@ urlpatterns = patterns("",
     url(r"^$", direct_to_template, {
         "template": "homepage.html",
     }, name="home"),
-    url(r"^admin/", include(admin.site.urls)),
+    url(r"^gsm/", include('gsm.urls')),
+    url(r"^admin/", include(admin.site.urls))
 )
 
 
