@@ -1,0 +1,63 @@
+{% extends 'gsm/base.html' %}
+
+{% load i18n %}
+{% load gsm_tags %}
+
+{% block body %}
+    {% gsm_tree key='statistics' method='get_team_statistics' team_id=entity.gsm_id %}
+    {% gsm_entity key='team' element=statistics.getroot.getchildren.1 %}
+
+    <h1>{{ team.attrib.club_name }}</h1>
+
+    <table>
+        <tr>
+            <th>{% trans 'type' %}</th>
+            <th>{% trans 'matches' %}</th>
+            <th>{% trans 'won' %} (%)</th>
+            <th>{% trans 'lost' %} (%)</th>
+            <th>{% trans 'draw' %} (%)</th>
+            <th>{% trans 'clean sheets' %} (%)</th>
+            <th>{% trans 'goal strike rate' %}</th>
+            <th>{% trans 'goal conced rate' %}</th>
+        </tr>
+        {% for child0 in team.element.getchildren %}
+        <tr>
+            <th>{{ child0.attrib.type }}</th>
+            <td>{{ child0.attrib.matches }}</td>
+            <td>{{ child0.attrib.won_percent }}</td>
+            <td>{{ child0.attrib.lost_percent }}</td>
+            <td>{{ child0.attrib.draw_percent }}</td>
+            <td>{{ child0.attrib.clean_sheets }}</td>
+            <td>{{ child0.attrib.goals_strike_rate }}</td>
+            <td>{{ child0.attrib.goals_concede_rate }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% gsm_tree key='person_statistics' method='get_squads' id=entity.gsm_id type='team' statistics='yes' contracts='yes' %}
+    <table>
+        <tr>
+            <th>{% trans 'name' %}</th>
+            <th>{% trans 'position' %}</th>
+            <th>{% trans 'contract_start' %}</th>
+            <th>{% trans 'contract_end' %}</th>
+        </tr>
+    {% for child0 in person_statistics.getroot.getchildren.1.getchildren %}
+        {% gsm_entity key='person' element=child0 %}
+        <tr>
+            <td>
+                <a href="{{ person.get_absolute_url }}" title="{% trans 'details of player' %} {{ person.attrib.name }}">{{ person.attrib.name }}</a>
+            </td>
+            <td>
+                {{ person.attrib.position }}
+            </td>
+            <td>
+                {{ person.attrib.contract_start }}
+            </td>
+            <td>
+                {{ person.attrib.contract_end }}
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

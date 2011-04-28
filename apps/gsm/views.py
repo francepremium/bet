@@ -9,7 +9,7 @@ from models import *
 import gsm
 
 def entity_list(request, sport, tag, 
-    update=True,
+    update=False,
     template_name='', extra_context=None):
 
     if sport not in [x for x, y in settings.SPORTS]:
@@ -60,11 +60,20 @@ def entity_detail(request, sport, tag, gsm_id,
         tag = tag,
         gsm_id = gsm_id
     )
-    entity.language = context['language']
     context['entity'] = entity
 
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name, context,
         context_instance=template.RequestContext(request))
 
+def sport_detail(request, sport, tab,
+    template_name='', extra_context=None):
 
+    template_name = (
+        template_name
+        'gsm/sport/%s.html' % tab,
+    )
+
+    context.update(extra_context or {})
+    return shortcuts.render_to_response(template_name, context,
+        context_instance=template.RequestContext(request))

@@ -44,25 +44,6 @@ class GsmEntity(models.Model):
         else:
             return Area.objects.get(gsm_id = self.element.attrib['area_id'])
 
-    def _get_language(self, language=None):
-        self_language = getattr(self, 'language', None)
-        if language == None and not self_language:
-            raise GsmEntityNoLanguageException()
-
-        elif self_language and not language:
-            return self_language
-        return language
-
-    def get_matches(self, language=None):
-        language = self._get_language(language)
-        return gsm.get_tree(
-            language,
-            self.sport,
-            'get_matches',
-            id = self.gsm_id,
-            type = self.tag
-        )
-
     def get_B_score(self):
         fs_B  = int(self.attrib['fs_B'] or 0)
         ets_B = int(self.attrib['ets_B'] or 0)

@@ -16,35 +16,37 @@ def get_tree(lang, sport, method, update=False, **parameters):
     if sport != 'tennis' and method in ('get_seasons', 'get_competitions'):
         parameters['authorized'] = 'yes'
 
+    if sport == 'soccer' and method in (
+            'get_team_statistics',
+        ):
+        parameters.pop('lang')
+
     url = '/%s/%s?%s' % (
         sport,
         method,
         urllib.urlencode(parameters)
     )
-    print url
 
     cache_filename = '%s.xml' % sha.sha(url).hexdigest()
     cache_filepath = os.path.join(settings.GSM_CACHE, cache_filename)
+    cache_lockname = '%s.lock' % cache_filename
+    cache_lockpath = os.path.join(settings.GSM_CACHE, cache_lockname)
 
-    if update or not os.path.exists(cache_filename):
-        cache_lockname = '%s.lock' % cache_filename
-        cache_lockpath = os.path.join(settings.GSM_CACHE, cache_lockname)
-        tmp_filename, message = urllib.urlretrieve(settings.GSM_URL + url)
+    # ensure cached version is not too old
+    if not update and os.path.exists(cache_filepath):
+        last = os.path.getmtime(cache_filepath)
+        if time.time()-last > 3600*1:
+            update = True
 
-        stop = False
-        while not stop:
-            try:
-                os.open(cache_lockpath, os.O_WRONLY | os.O_EXCL | os.O_CREAT)
-                shutil.copyfile(tmp_filename, cache_filepath)
-                os.unlink(cache_lockpath)
-                stop = True
-            except OSError as e:
-                if e.errno == 17 and e.filename == cache_lockpath:
-                    time.sleep(0.1)
-                    continue
-                raise e
-    else:
-        print "NO UPDATE ?"
+    if update or not os.path.exists(cache_filepath):
+        try:
+            os.open(cache_lockpath, os.O_WRONLY | os.O_EXCL | os.O_CREAT)
+            tmp_filename, message = urllib.urlretrieve(settings.GSM_URL + url)
+            print "HIT"
+            shutil.copyfile(tmp_filename, cache_filepath)
+            os.unlink(cache_lockpath)
+        except IOError, OSError:
+            pass
 
     tree = etree.parse(cache_filepath)
 

@@ -4,8 +4,9 @@
 {% load gsm_tags %}
 
 {% block body %}
-    {% gsm_entity element=entity.get_matches.getroot.getchildren.1 key='competition' %}
-    {% gsm_entity element=entity.get_matches.getroot.getchildren.1.getchildren.0 key='season' %}
+    {% gsm_tree key='matches_tree' method='get_matches' type=entity.tag id=entity.gsm_id %}
+    {% gsm_entity element=matches_tree.getroot.getchildren.1 key='competition' %}
+    {% gsm_entity element=matches_tree.getroot.getchildren.1.getchildren.0 key='season' %}
     
     {{ competition.get_area }}
     {{ competition.attrib.name }}
