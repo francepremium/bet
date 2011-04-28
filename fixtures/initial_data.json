@@ -8,13 +8,6 @@
         }
     },
     {
-        "pk": 1, 
-        "model": "gsm.sport", 
-        "fields": {
-            "name": "volleyball"
-        }
-    }, 
-    {
         "pk": 2, 
         "model": "gsm.sport", 
         "fields": {
@@ -29,21 +22,7 @@
         }
     }, 
     {
-        "pk": 7, 
-        "model": "gsm.sport", 
-        "fields": {
-            "name": "motorsports"
-        }
-    }, 
-    {
-        "pk": 6, 
-        "model": "gsm.sport", 
-        "fields": {
-            "name": "hockey"
-        }
-    }, 
-    {
-        "pk": 3, 
+        "pk": 1, 
         "model": "gsm.sport", 
         "fields": {
             "name": "soccer"
@@ -57,24 +36,21 @@
         }
     }, 
     {
-        "pk": 9, 
-        "model": "gsm.sport", 
+        "pk": 1, 
+        "model": "auth.user", 
         "fields": {
-            "name": "americanfootball"
-        }
-    }, 
-    {
-        "pk": 10, 
-        "model": "gsm.sport", 
-        "fields": {
-            "name": "handball"
-        }
-    }, 
-    {
-        "pk": 11, 
-        "model": "gsm.sport", 
-        "fields": {
-            "name": "baseball"
+            "username": "test", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": true, 
+            "is_staff": true, 
+            "last_login": "2011-04-26 10:43:14", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$89c45$99a57014a60e2518eced367d8c49de5f50c539dc", 
+            "email": "t@tt.tt", 
+            "date_joined": "2011-04-26 10:43:14"
         }
     }
 ]

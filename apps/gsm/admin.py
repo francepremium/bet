@@ -26,7 +26,15 @@ class CompetitionAdmin(TranslationAdmin):
 
 admin.site.register(Competition, CompetitionAdmin)
 
+class PersonAdmin(admin.ModelAdmin):
+    list_display = ('gsm_id', 'name', 'area')
+    search_fields = ('name', 'first_name', 'last_name')
+    list_filter = ('sport', 'area')
+
+admin.site.register(Person, PersonAdmin)
+
 class AreaAdmin(TranslationAdmin):
     list_display = ('gsm_id', 'country_code', 'parent', 'name')
+    search_fields = ('name_en', 'name_fr', 'parent__name_fr', 'parent__name_en')
 
 admin.site.register(Area, AreaAdmin)
