@@ -63,6 +63,15 @@ class GsmEntity(models.Model):
             type = self.tag
         )
 
+    def get_B_score(self):
+        fs_B  = int(self.attrib['fs_B'] or 0)
+        ets_B = int(self.attrib['ets_B'] or 0)
+        return fs_B + ets_B
+    def get_A_score(self):
+        fs_A  = int(self.attrib['fs_A'] or 0)
+        ets_A = int(self.attrib['ets_A'] or 0)
+        return fs_A + ets_A
+
     @property
     def attrib(self):
         """
