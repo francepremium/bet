@@ -8,6 +8,8 @@
     <input type="submit" />
 </form>
 
+{% autopaginate filter.qs 15 as session_list %}
+
 <table>
     <tr>
         <th>{% trans 'time' %}</th>
@@ -15,9 +17,9 @@
         <th>{% trans 'area' %}</th>
         <th>{% trans 'competition' %}</th>
         <th>{% trans 'match' %}</th>
-        <th>{% trans 'result' %}</th>
+        <th>{% trans 'prognosticate' %}</th>
     </tr>
-    {% for session in filter.qs %}
+    {% for session in session_list %}
     <tr>
         <td>{{ session.datetime_utc.hour }}:{{ session.datetime_utc.minute }}</td>
         <td>{{ session.datetime_utc.date }}</td>
@@ -30,7 +32,7 @@
             -
             <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ session.oponnent_B_name }}">{{ session.oponnent_B_name }}</a>
         </td>
-        <td>{{ session.A_score }} - {{ session.B_score }}</td>
+        <td>{% trans 'prognosticate' %}</td>
     </tr>
     {% endfor %}
 </table>

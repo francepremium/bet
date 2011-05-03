@@ -1,2 +1,30 @@
 {% extends 'gsm/base.html' %}
 
+{% load i18n %}
+
+{% block subnav %}
+<ul>
+    <li class="home tab {% if tab == 'home' %}active{% endif %}">
+        <a href="{{ sport.get_home_absolute_url }}" title="{{ sport }}">{% trans 'home' %}</a>
+    </li>
+    <li class="news tab {% if tab == 'news' %}active{% endif %}">
+        <a href="{{ sport.get_news_absolute_url }}" title="{{ sport }} {% trans 'news' %}">{% trans 'news' %}</a>
+    </li>
+    <li class="informations tab {% if tab == 'informations' %}active{% endif %}">
+        <a href="{{ sport.get_informations_absolute_url }}" title="{{ sport }} {% trans 'informations' %}">{% trans 'informations' %}</a>
+    </li>
+    <li class="results tab {% if tab == 'results' %}active{% endif %}">
+        <a href="{{ sport.get_results_absolute_url }}" title="{{ sport }} {% trans 'results' %}">{% trans 'results' %}</a>
+    </li>
+    <li class="matches tab {% if tab == 'matches' %}active{% endif %}">
+        <a href="{{ sport.get_matches_absolute_url }}" title="{{ sport }} {% trans 'matches' %}">{% trans 'matches' %}</a>
+    </li>
+    <li class="prognostics tab {% if tab == 'prognostics' %}active{% endif %}">
+        <a href="{{ sport.get_prognostics_absolute_url }}" title="{{ sport }} {% trans 'prognostics' %}">{% trans 'prognostics' %}</a>
+    </li>
+    <li class="live tab {% if tab == 'live' %}active{% endif %}">
+        <a href="{{ sport.get_live_absolute_url }}" title="{{ sport }} {% trans 'live' %}">{% trans 'live' %}</a>
+    </li>
+</ul>
+{% endblock %}
+

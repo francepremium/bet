@@ -39,16 +39,17 @@ def get_tree(lang, sport, method, update=False, **parameters):
             update = True
 
     if update or not os.path.exists(cache_filepath):
-        try:
-            os.open(cache_lockpath, os.O_WRONLY | os.O_EXCL | os.O_CREAT)
-            tmp_filename, message = urllib.urlretrieve(settings.GSM_URL + url)
-            print "HIT"
-            shutil.copyfile(tmp_filename, cache_filepath)
-            os.unlink(cache_lockpath)
-        except IOError, OSError:
-            pass
+        ld = os.open(cache_lockpath, os.O_WRONLY | os.O_EXCL | os.O_CREAT)
+        os.close(ld)
+        tmp_filename, message = urllib.urlretrieve(settings.GSM_URL + url)
+        shutil.copyfile(tmp_filename, cache_filepath)
+        os.unlink(cache_lockpath)
 
     tree = etree.parse(cache_filepath)
+
+    if tree.getroot().tag == 'html':
+        # no permissions
+        return False
 
     return tree
 

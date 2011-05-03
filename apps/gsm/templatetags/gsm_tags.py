@@ -121,7 +121,7 @@ def do_gsm_entity(parser, token):
     if 'element' not in arguments:
         if 'tag' not in arguments and 'gsm_id' not in arguments:
             raise template.TemplateSyntaxError("gsm_entity requires either element or both tag and gsm_id arguments (UTSL)")
-
+    
     return GsmEntityNode(**arguments)
 
 class GsmEntityNode(template.Node):
@@ -142,7 +142,11 @@ class GsmEntityNode(template.Node):
     
     def render(self, context):
         if hasattr(self, 'element'):
-            element = self.element.resolve(context)
+            try:
+                element = self.element.resolve(context)
+            except template.VariableDoesNotExist:
+                return ''
+
             entity = GsmEntity(
                 sport = context['sport'],
                 gsm_id = element.attrib['%s_id' % element.tag],

@@ -3,12 +3,26 @@
 {% load i18n %}
 {% load gsm_tags %}
 
+{% block subnav %}
+<ul>
+    <li class="home tab tab_link">{% trans 'home' %}</li>
+    <li class="file tab tab_link">{% trans 'file' %}</li>
+    <li class="squad tab tab_link">{% trans 'squad' %}</li>
+    <li class="news tab tab_link">{% trans 'news' %}</li>
+    <li class="statistics tab tab_link">{% trans 'statistics' %}</li>
+    <li class="calendar tab tab_link">{% trans 'calendar' %}</li>
+    <li class="prognostics tab tab_link">{% trans 'prognostics' %}</li>
+</ul>
+{% endblock %}
+
 {% block body %}
     {% gsm_tree key='statistics' method='get_team_statistics' team_id=entity.gsm_id %}
-    {% gsm_entity key='team' element=statistics.getroot.getchildren.1 %}
+    {% gsm_tree key='person_statistics' method='get_squads' id=entity.gsm_id type='team' statistics='yes' contracts='yes' %}
+    {% gsm_entity key='team' element=person_statistics.getroot.getchildren.1 %}
 
     <h1>{{ team.attrib.club_name }}</h1>
 
+    {% if statistics %}
     <table>
         <tr>
             <th>{% trans 'type' %}</th>
@@ -33,8 +47,8 @@
         </tr>
         {% endfor %}
     </table>
+    {% endif %}
 
-    {% gsm_tree key='person_statistics' method='get_squads' id=entity.gsm_id type='team' statistics='yes' contracts='yes' %}
     <table>
         <tr>
             <th>{% trans 'name' %}</th>
