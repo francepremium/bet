@@ -1,3 +1,4 @@
+import urllib
 from datetime import datetime, date, time
 import sys
 
@@ -20,6 +21,8 @@ class Command(BaseCommand):
     help = 'sync database against gsm'
 
     def handle(self, *args, **options):
+        self.areas_country_code_2()
+        return None
         for code, language in settings.LANGUAGES:
             root = gsm.get_tree(code, 'soccer', 'get_areas').getroot()
             for element in root.getchildren():
@@ -42,6 +45,22 @@ class Command(BaseCommand):
                     else:
                         raise UnexpectedChild(root, element)
 
+    def areas_country_code_2(self):
+        tmpfile, message = urllib.urlretrieve('http://www.andrewpatton.com/countrylist.csv')
+        fh = open(tmpfile)
+        fh.readline() # skip csv header
+        for line in fh.readlines():
+            row = line.split(',')
+            if not row[11][1:-1]: # skip empty codes
+                continue
+            try:
+                area = Area.objects.get(country_code__iexact=row[11][1:-1])
+            except Area.DoesNotExist:
+                continue
+
+            area.country_code_2 = country_code=row[10][1:-1].lower()
+            area.save()
+        fh.close()
 
     def update_model(self, model_class, unique_properties, properties):
         changed = []
@@ -123,6 +142,9 @@ class Command(BaseCommand):
             'display_order': element.attrib.get('display_order', None),
         })
 
+        if 'service_level' in element.attrib:
+            properties['is_nationnal'] = element.attrib['service_level'] == 1
+
         competition = self.update_model(
             Competition,
             {
@@ -201,7 +223,7 @@ class Command(BaseCommand):
         )
 
         for match in element.findall('match'):
-            self.save_session(language, sport, match, session_round=r)
+            self.save_session(language, sport, match, session_round=r, season=r.season)
 
     def save_session(self, language, sport, element, **properties):
         converter = Session._meta.get_field('actual_start_datetime')

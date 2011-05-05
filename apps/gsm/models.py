@@ -34,6 +34,7 @@ def model_class_for_tag(tag):
 class Area(models.Model):
     parent = models.ForeignKey('Area', null=True, blank=True)
     country_code = models.CharField(max_length=3)
+    country_code_2 = models.CharField(max_length=2)
     gsm_id = models.IntegerField(unique=True)
     name = models.CharField(max_length=50)
 
@@ -157,6 +158,8 @@ class Competition(AbstractGsmEntity):
     court_type = models.CharField(max_length=12, null=True, blank=True)
     team_type = models.CharField(max_length=12, null=True, blank=True)
     display_order = models.IntegerField(null=True, blank=True)
+
+    is_nationnal = models.BooleanField(verbose_name=_(u'nationnal league'), default=False)
 
     def get_sessions(self):
         return Session.objects.filter(session_round__season__competition=self).order_by('-datetime_utc')

@@ -1,9 +1,58 @@
+import datetime
+
 from django import template
+from django.conf import settings
+from django.db.models import Q
 
 import gsm
-from gsm.models import GsmEntity
+from gsm.models import GsmEntity, Area, Session
 
 register = template.Library()
+
+@register.filter
+def five_sessions_series(team):
+    team = GsmEntity.objects.get(gsm_id=team.gsm_id, sport=team.sport, 
+        tag=team.tag)
+    
+    sessions = Session.objects.filter(status='Played').filter(
+        Q(oponnent_A=team) |
+        Q(oponnent_B=team)
+    ).distinct().order_by('datetime_utc')[:5]
+
+    serie = []
+    for session in sessions:
+        data = {
+            'entity': session,
+        }
+        if session.draw:
+            data['symbol'] = 'D'
+        elif session.winner == team:
+            data['symbol'] = 'W'
+        else:
+            data['symbol'] = 'L'
+        serie.append(data)
+
+    return serie
+
+@register.filter
+def sub(value, arg):
+    "Subtracts the arg from the value"
+    return int(value) - int(arg)
+sub.is_safe = False
+
+@register.filter
+def gsm_area_id_flag_url(gsm_id):
+    area = Area.objects.get(gsm_id=gsm_id)
+    return '%sflags/%s.png' % (
+        settings.STATIC_URL,
+        area.country_code_2,
+    )
+
+@register.filter
+def age_from_date(date):
+    birth = datetime.datetime.strptime(date, '%Y-%m-%d')
+    delta = datetime.datetime.now() - birth
+    return delta.days / 365
 
 @register.tag(name='gsm_tree')
 def do_gsm_tree(parser, token):

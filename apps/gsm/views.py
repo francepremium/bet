@@ -13,6 +13,9 @@ from filters import *
 
 import gsm
 
+def get_language_from_request(request):
+    return 'en'
+
 def team_detail(request, sport, gsm_id, tag='team'):
     sport = shortcuts.get_object_or_404(Sport, slug=sport)
     gsm_entity_class = model_class_for_tag(tag)
@@ -27,20 +30,104 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
     gsm_entity_class = model_class_for_tag(tag)
     team, created = gsm_entity_class.objects.get_or_create(
         sport=sport, tag=tag, gsm_id=gsm_id)
+
     context = {
         'sport': sport,
         'language': get_language_from_request(request),
         'team': team,
     }
+
     template_name = [
         'gsm/%s/%s/%s.html' % (sport.slug, tag, tab),
         'gsm/%s/%s.html' % (tag, tab),
     ]
 
+    def get_reference_season(team):
+        # find reference seasons for stats
+        q = Competition.objects.filter(sport=sport)
+        q = q.filter(is_nationnal=True)
+        q = q.filter(
+            Q(season__round__session__in=team.sessions_as_A.all()) |
+            Q(season__round__session__in=team.sessions_as_B.all())
+        ).distinct()
+        reference_competition = q[q.count() - 1]
+        q = reference_competition.season_set.all().order_by('-gsm_id')
+        reference_season = q[q.count() - 1]
+        return reference_season
+
+    def get_rankings_for_season(season):
+        # get stats
+        tree = gsm.get_tree(context['language'], sport,
+            'get_tables', id=season.gsm_id, type='season')
+        group_elements = tree.findall('competition/season/round/group')
+        resultstable_elements = tree.findall('competition/season/round/resultstable')
+        if group_elements and not resultstable_elements:
+            for group_element in group_elements:
+                print group_element
+        for resultstable in resultstable_elements:
+            if resultstable.attrib['type'] == 'total':
+                break
+
+        return resultstable.findall('ranking')
+
     if tab == 'home':
+        # find next sessions
         q = Session.objects.filter(sport=sport)
         q = q.filter(Q(oponnent_A=team)|Q(oponnent_B=team))
         context['next_sessions'] = q[:7]
+
+        reference_season = get_reference_season(team)
+        context['rankings'] = get_rankings_for_season(reference_season)
+
+    elif tab == 'squad':
+        # season filter
+        context['team_seasons'] = Season.objects.filter(
+            Q(round__session__in=team.sessions_as_A.all()) |
+            Q(round__session__in=team.sessions_as_B.all())
+        ).distinct().order_by('datetime_utc')
+        if 'season_gsm_id' in request.GET and request.GET['season_gsm_id']:
+            season = shortcuts.get_object_or_404(Season, gsm_id=request.GET['season_gsm_id'])
+        else:
+            season = context['team_seasons'][0]
+        context['season'] = season
+
+        # squad finder
+        tree = gsm.get_tree(context['language'], sport,
+            'get_squads', type='season', id=season.gsm_id, detailed='yes',
+            statistics='yes')
+        for team_element in tree.findall('team'):
+            if str(team.gsm_id) == team_element.attrib['team_id']:
+                break
+
+        context['persons'] = []
+
+        # we need to cut this data as well to get minutes played,
+        # lineups and subs on bench
+        #career_tree = gsm.get_tree(context['language'], sport,
+            #'get_career', type='team', detailed='yes', 
+            #id=team.gsm_id)
+
+        # person orderer
+        positions = {}
+        for person_element in team_element.findall('person'):
+            if person_element.attrib['type'] == 'player':
+                position = person_element.attrib['position']
+            else:
+                continue # pass coach and crap
+                #position = person_element.attrib['type']
+            if position not in positions.keys():
+                positions[position] = []
+            person = GsmEntity(tag='person', sport=sport,
+                gsm_id=person_element.attrib['person_id'],
+                name=person_element.attrib['name'])
+
+            person.element = person_element
+            positions[position].append(person)
+            context['persons'].append(person)
+        context['positions'] = positions
+    elif tab == 'statistics':
+        reference_season = get_reference_season(team)
+        context['rankings'] = get_rankings_for_season(reference_season)
 
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name, context,

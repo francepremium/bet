@@ -2,6 +2,10 @@ from modeltranslation.translator import translator, TranslationOptions
 
 from gsm.models import *
 
+class GsmEntityTranslation(TranslationOptions):
+    fields = ('name',)
+translator.register(GsmEntity, GsmEntityTranslation)
+
 class AreaTranslation(TranslationOptions):
     fields = ('name',)
 translator.register(Area, AreaTranslation)
@@ -25,7 +29,3 @@ translator.register(Round, RoundTranslation)
 class SessionTranslation(TranslationOptions):
     fields = ('name',)
 translator.register(Session, SessionTranslation)
-
-class TeamTranslation(TranslationOptions):
-    fields = ('name',)
-translator.register(Team, TeamTranslation)

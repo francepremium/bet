@@ -24,5 +24,37 @@
             "email": "t@tt.tt", 
             "date_joined": "2011-04-26 10:43:14"
         }
+    },
+    {
+        "pk": 1, 
+        "model": "gsm.sport", 
+        "fields": {
+            "name": "rugby", 
+            "slug": "rugby"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "gsm.sport", 
+        "fields": {
+            "name": "soccer", 
+            "slug": "soccer"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "gsm.sport", 
+        "fields": {
+            "name": "tennis", 
+            "slug": "tennis"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "gsm.sport", 
+        "fields": {
+            "name": "basketball", 
+            "slug": "basketball"
+        }
     }
 ]

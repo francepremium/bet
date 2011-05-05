@@ -1,0 +1,52 @@
+{% extends 'gsm/team/base.html' %}
+
+{% load i18n gsm_tags %}
+
+{% block extra_head %}
+<style type="text/css">
+.current {
+    background-color: gray;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+
+    <table>
+        <tr>
+            <th></th>
+            <th>{% trans 'club' %}</th>
+            <th><acronym title="{% trans 'match played' %}">MP</acronym></th>
+            <th><acronym title="{% trans 'wins' %}">W</acronym></th>
+            <th><acronym title="{% trans 'draw' %}">D</acronym></th>
+            <th><acronym title="{% trans 'lost' %}">L</acronym></th>
+            <th><acronym title="{% trans 'goal difference' %}">D</acronym></th>
+            <th><acronym title="{% trans 'points' %}">P</acronym></th>
+            <td></td>
+        </tr>
+        {% for ranking in rankings %}
+            {% gsm_entity tag='team' gsm_id=ranking.attrib.team_id key='ranked_team' %}
+            <tr class="{% if ranking.attrib.team_id == team.gsm_id|addslashes %}current{% endif %}">
+                <td>{{ forloop.counter }}</td>
+                <td>
+                    <a href="{{ ranked_team.get_absolute_url }}" title="{{ ranking.attrib.club_name }}">{{ ranking.attrib.club_name }}</a>
+                </td>
+                <td>{{ ranking.attrib.matches_total }}</td>
+                <td>{{ ranking.attrib.matches_won }}</td>
+                <td>{{ ranking.attrib.matches_draw }}</td>
+                <td>{{ ranking.attrib.matches_lost }}</td>
+                <td>{{ ranking.attrib.goals_pro|sub:ranking.attrib.goals_against }}</td>
+                <td>{{ ranking.attrib.points }}</td>
+                <td>
+                    {% for data in ranked_team|five_sessions_series %}
+                        <a href="{{ data.entity.get_absolute_url }}" title="{{ data.entity.oponnent_A_name }} vs {{ data.entity.oponnent_B_name }}">
+                            {{ data.symbol }}
+                        </a>
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+{% endblock %}

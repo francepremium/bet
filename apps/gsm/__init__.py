@@ -11,14 +11,19 @@ from django.conf import settings
 etree.set_default_parser(etree.XMLParser(no_network=False, recover=True))
 
 def get_tree(lang, sport, method, update=False, **parameters):
+    LANGUAGE_FAILS = (
+        'get_team_statistics',
+        'get_squads',
+    )
     parameters['lang'] = lang
     
+    if sport.__class__.__name__ == 'Sport':
+        sport = sport.slug
+
     if sport != 'tennis' and method in ('get_seasons', 'get_competitions'):
         parameters['authorized'] = 'yes'
 
-    if sport == 'soccer' and method in (
-            'get_team_statistics',
-        ):
+    if sport == 'soccer' and method in LANGUAGE_FAILS:
         parameters.pop('lang')
 
     url = '/%s/%s?%s' % (
@@ -31,6 +36,7 @@ def get_tree(lang, sport, method, update=False, **parameters):
     cache_filepath = os.path.join(settings.GSM_CACHE, cache_filename)
     cache_lockname = '%s.lock' % cache_filename
     cache_lockpath = os.path.join(settings.GSM_CACHE, cache_lockname)
+    print settings.GSM_URL + url
 
     # ensure cached version is not too old
     if not update and os.path.exists(cache_filepath):

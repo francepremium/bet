@@ -39,8 +39,22 @@
         <div id="tabhead">
             <div class="logo" dir="ltr">{% block logo_link_image %}{% endblock %}</div>
             <div class="login">{% block login %}{% endblock %}{% block locale_switcher %}{% endblock %}<div style="text-align: right;"></div></div>
-            <div id="left_tabs" >{% block left_tabs %}{% endblock %}</div>
-            <div id="right_tabs" >{% block right_tabs %}{% endblock %}</div>
+            <div id="right_tabs" >{% block right_tabs %}
+                <ul class="tabs">
+                    <li>
+                        <a href="{% url gsm_sport_detail 'soccer' %}">{% trans "soccer" %}</a>
+                    </li>
+                    <li>
+                        <a href="{% url gsm_sport_detail 'tennis' %}">{% trans "tennis" %}</a>
+                    </li>
+                    <li>
+                        <a href="{% url gsm_sport_detail 'rugby' %}">{% trans "rugby" %}</a>
+                    </li>
+                    <li>
+                        <a href="{% url gsm_sport_detail 'basketball' %}">{% trans "basketball" %}</a>
+                    </li>
+                </ul>
+            {% endblock %}</div>
         </div>
         <div id="subnav" class="clearfix">{% block subnav_base %}<div class="clearfix">{% block subnav %}&nbsp;{% endblock %}</div>{% endblock %}</div>
         
