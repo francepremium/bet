@@ -1,0 +1,19 @@
+{% extends 'gsm/competition/base.html' %}
+{% load i18n gsm_tags %}
+
+{% block body %}
+    {% gsm_tree key='tables_tree' method='get_tables' type='season' id=competition.get_last_season.gsm_id %}
+
+    {% if tables_tree.getroot.getchildren.1.getchildren.0.getchildren.0.getchildren.0.tag == 'group' %}
+        {% for group in tables_tree.getroot.getchildren.1.getchildren.0.getchildren.0 %}
+            <h4>{{ group.attrib.title }}</h4>
+            {% gsm_resultstable_render group.getchildren.0 %}
+        {% endfor %}
+    {% endif %}
+
+    {% if tables_tree.getroot.getchildren.1.getchildren.0.getchildren.0.getchildren.0.tag == 'resultstable' %}
+        {# assume no groups #}
+        {% gsm_resultstable_render tables_tree.getroot.getchildren.1.getchildren.0.getchildren.0.getchildren.0 %}
+    {% endif %}
+
+{% endblock %}

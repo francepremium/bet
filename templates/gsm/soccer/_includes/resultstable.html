@@ -1,20 +1,10 @@
-{% extends 'gsm/team/base.html' %}
+{% comment %}
+This template requires a "ranking_elements" context variable, which should be a list of ranking elements.
 
+The template uses a "team" variable to highlight a particular team.
+{% endcomment %}
 {% load i18n gsm_tags %}
-
-{% block extra_head %}
-<style type="text/css">
-.current {
-    background-color: gray;
-}
-</style>
-{% endblock %}
-
-{% block body %}
-    {{ block.super }}
-    
-    {{ reference_season.competition.name }}: {{ reference_season.name }}
-
+<div class="ranking">
     <table>
         <tr>
             <th></th>
@@ -23,11 +13,13 @@
             <th><acronym title="{% trans 'wins' %}">W</acronym></th>
             <th><acronym title="{% trans 'draw' %}">D</acronym></th>
             <th><acronym title="{% trans 'lost' %}">L</acronym></th>
-            <th><acronym title="{% trans 'goal difference' %}">D</acronym></th>
+            <th><acronym title="{% trans 'goal difference' %}">GD</acronym></th>
             <th><acronym title="{% trans 'points' %}">P</acronym></th>
-            <td></td>
+            {% if 'last5' in columns %}
+            <th>{% trans 'last 5 matches' %}</th>
+            {% endif %}
         </tr>
-        {% for ranking in rankings %}
+        {% for ranking in resultstable.getchildren %}
             {% gsm_entity tag='team' gsm_id=ranking.attrib.team_id key='ranked_team' %}
             <tr class="{% if ranking.attrib.team_id == team.gsm_id|addslashes %}current{% endif %}">
                 <td>{{ forloop.counter }}</td>
@@ -40,6 +32,7 @@
                 <td>{{ ranking.attrib.matches_lost }}</td>
                 <td>{{ ranking.attrib.goals_pro|sub:ranking.attrib.goals_against }}</td>
                 <td>{{ ranking.attrib.points }}</td>
+                {% if 'last5' in columns %}
                 <td>
                     {% for data in ranked_team|five_sessions_series %}
                         <a href="{{ data.entity.get_absolute_url }}" title="{{ data.entity.oponnent_A_name }} vs {{ data.entity.oponnent_B_name }}">
@@ -47,32 +40,9 @@
                         </a>
                     {% endfor %}
                 </td>
+                {% endif %}
             </tr>
         {% endfor %}
+    
     </table>
-
-    {% gsm_tree key='team_statistics' method='get_team_statistics' team_id=team.gsm_id season_id=reference_season.gsm_id %}
-
-    <table class="team_statistics">
-        {% for element in team_statistics.getroot.getchildren.1.getchildren %}
-            {% if forloop.counter == 1 %}
-            <tr>
-                {% for key, value in element.attrib.items %}
-                    <th class="{{ key }}">{% trans key %}</th>
-                {% endfor %}
-            </tr>
-            {% endif %}
-            <tr>
-            {% for key, value in element.attrib.items %}
-                <td class="{{ key }}">
-                    {% if key == 'type' %}
-                        {% trans value %}
-                    {% else %}
-                        {{ value }}
-                    {% endif %}
-                </td>
-            {% endfor %}
-            </tr>
-        {% endfor %}
-    </table>
-{% endblock %}
+</div>

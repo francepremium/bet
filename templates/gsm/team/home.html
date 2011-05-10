@@ -12,64 +12,9 @@
 {% endblock %}
 
 {% block body %}
-<h1>{{ team.name }}</h1>
+{{ block.super }}
 
-<div class="calendar">
-    <table>
-        <tr>
-            <th>{% trans 'time' %}</th>
-            <th>{% trans 'date' %}</th>
-            <th>{% trans 'area' %}</th>
-            <th>{% trans 'competition' %}</th>
-            <th>{% trans 'match' %}</th>
-        </tr>
-    {% for session in next_sessions %}
-        <tr>
-            <td>{{ session.datetime_utc.hour }}:{{ session.datetime_utc.minute }}</td>
-            <td>{{ session.datetime_utc.date }}</td>
-            <td>{{ session.session_round.season.competition.area }}</td>
-            <td>
-                <a href="{{ session.session_round.season.competition.get_absolute_url }}" title="{{ session.session_round.season.competition.name }}">{{ session.session_round.season.competition.name }}</a>
-            </td>
-            <td>
-                <a href="{{ session.oponnent_A.get_absolute_url }}" title="{{ session.oponnent_A_name }}">{{ session.oponnent_A_name }}</a>
-                -
-                <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ session.oponnent_B_name }}">{{ session.oponnent_B_name }}</a>
-            </td>
+{% gsm_sessions_render next_sessions %}
 
-        </tr>
-    {% endfor %}
-
-    </table>
-</div>
-
-<div class="ranking">
-    <table>
-        <tr>
-            <th></th>
-            <th>{% trans 'club' %}</th>
-            <th><acronym title="{% trans 'match played' %}">MP</acronym></th>
-            <th><acronym title="{% trans 'wins' %}">W</acronym></th>
-            <th><acronym title="{% trans 'draw' %}">D</acronym></th>
-            <th><acronym title="{% trans 'lost' %}">L</acronym></th>
-            <th><acronym title="{% trans 'goal difference' %}">D</acronym></th>
-            <th><acronym title="{% trans 'points' %}">P</acronym></th>
-        </tr>
-        {% for ranking in rankings %}
-            {% gsm_entity tag='team' gsm_id=ranking.attrib.team_id key='ranked_team' %}
-            <tr class="{% if ranking.attrib.team_id == team.gsm_id|addslashes %}current{% endif %}">
-                <td>{{ forloop.counter }}</td>
-                <td>
-                    <a href="{{ ranked_team.get_absolute_url }}" title="{{ ranking.attrib.club_name }}">{{ ranking.attrib.club_name }}</a>
-                </td>
-                <td>{{ ranking.attrib.matches_total }}</td>
-                <td>{{ ranking.attrib.matches_won }}</td>
-                <td>{{ ranking.attrib.matches_draw }}</td>
-                <td>{{ ranking.attrib.matches_lost }}</td>
-                <td>{{ ranking.attrib.goals_pro|sub:ranking.attrib.goals_against }}</td>
-                <td>{{ ranking.attrib.points }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-</div>
+{% gsm_resultstable_render resultstable %}
 {% endblock %}

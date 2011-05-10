@@ -249,8 +249,6 @@ class Command(BaseCommand):
 
         if official_start_datetime not in (' ', ' 00:00:00'):
             official_start_datetime = converter.to_python(official_start_datetime)
-            if official_start_datetime.year < 2011:
-                return True
         else:
             official_start_datetime = None
 

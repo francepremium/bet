@@ -10,6 +10,24 @@ from gsm.models import GsmEntity, Area, Session
 register = template.Library()
 
 @register.filter
+def display_date(date):
+    if datetime.date.today().year == date.year:
+        return '%s/%s' % (date.day, date.month)
+    else:
+        return '%s/%s/%s' % (date.day, date.month, date.year)
+
+@register.filter
+def prepend_zero(number):
+    number = str(number)
+    if len(number) == 1:
+        number = '0' + number
+    return number
+
+@register.filter
+def display_time(time):
+    return '%s:%s' % (prepend_zero(time.hour), prepend_zero(time.minute))
+
+@register.filter
 def five_sessions_series(team):
     team = GsmEntity.objects.get(gsm_id=team.gsm_id, sport=team.sport, 
         tag=team.tag)
@@ -35,6 +53,20 @@ def five_sessions_series(team):
     return serie
 
 @register.filter
+def add(value, arg):
+    "Subtracts the arg from the value"
+    if not arg:
+        arg = 0
+    if not value:
+        value = 0
+    return int(value) + int(arg)
+add.is_safe = False
+
+@register.filter
+def findall(element, path):
+    return element.findall(path)
+
+@register.filter
 def sub(value, arg):
     "Subtracts the arg from the value"
     return int(value) - int(arg)
@@ -53,6 +85,75 @@ def age_from_date(date):
     birth = datetime.datetime.strptime(date, '%Y-%m-%d')
     delta = datetime.datetime.now() - birth
     return delta.days / 365
+
+@register.inclusion_tag('gsm/_includes/tables_tree.html', takes_context=True)
+def gsm_render_tables_tree(context, tree):
+    return {
+        'sport': context['sport'],
+        'language': context['language'],
+        'tables_tree': tree,
+    }
+
+@register.tag(name='gsm_sessions_render')
+def do_gsm_sessions_render(parser, token):
+    """
+    Takes a Session list.
+    """
+    split = token.split_contents()
+    return GsmSessionsTableNode(split[1])
+
+class GsmSessionsTableNode(template.Node):
+    def __init__(self, sessions):
+        self.sessions = template.Variable(sessions)
+    def render(self, context):
+        context['sessions'] = self.sessions.resolve(context)
+
+        if not hasattr(self, 'nodelist'):
+            t = template.loader.select_template([
+                'gsm/%s/_includes/sessions.html' % context['sport'].slug,
+            ])
+            self.nodelist = t.nodelist
+        
+        return self.nodelist.render(context)
+
+@register.tag(name='gsm_resultstable_render')
+def do_gsm_resultstable_render(parser, token):
+    """
+    Takes a "resultstable" element, which should contain "ranking" elements.
+    The socend argument is a list of columns, ie. 'MP,W,D,L' for:
+    | Match played | Win | Draw | Lost |
+    """
+    split = token.split_contents()
+    resultstable_variable = split[1]
+    if len(split) > 2:
+        columns = split[2]
+    else:
+        columns = '""'
+
+    return GsmResultsTableNode(resultstable_variable, columns)
+
+class GsmResultsTableNode(template.Node):
+    def __init__(self, resultstable, columns):
+        self.resultstable = template.Variable(resultstable)
+        if columns[0] in ('"', "'"):
+            self.columns = columns[1:-1]
+        else:
+            self.columns = template.Variable(columns)
+
+    def render(self, context):
+        context['resultstable'] = self.resultstable.resolve(context)
+        if isinstance(self.columns, template.Variable):
+            context['columns'] = self.columns.resolve(context).split(',')
+        else:
+            context['columns'] = self.columns.split(',')
+
+        if not hasattr(self, 'nodelist'):
+            t = template.loader.select_template([
+                'gsm/%s/_includes/resultstable.html' % context['sport'].slug,
+            ])
+            self.nodelist = t.nodelist
+        
+        return self.nodelist.render(context)
 
 @register.tag(name='gsm_tree')
 def do_gsm_tree(parser, token):
@@ -170,7 +271,7 @@ def do_gsm_entity(parser, token):
     if 'element' not in arguments:
         if 'tag' not in arguments and 'gsm_id' not in arguments:
             raise template.TemplateSyntaxError("gsm_entity requires either element or both tag and gsm_id arguments (UTSL)")
-    
+
     return GsmEntityNode(**arguments)
 
 class GsmEntityNode(template.Node):
@@ -188,7 +289,7 @@ class GsmEntityNode(template.Node):
                 setattr(self, k, v)
             else:
                 setattr(self, k, template.Variable(v))
-    
+
     def render(self, context):
         if hasattr(self, 'element'):
             try:
@@ -201,6 +302,11 @@ class GsmEntityNode(template.Node):
                 gsm_id = element.attrib['%s_id' % element.tag],
                 tag = element.tag
             )
+            if hasattr(self, 'name'):
+                if hasattr(self.name, 'resolve'):
+                    entity.name = self.name.resolve(context)
+                else:
+                    entity.name = self.name
             entity.element = element
         else:
             # not bloating with layers for now, refactor when required
@@ -219,6 +325,11 @@ class GsmEntityNode(template.Node):
                 gsm_id = gsm_id,
                 tag = tag
             )
+            if hasattr(self, 'name'):
+                if hasattr(self.name, 'resolve'):
+                    entity.name = self.name.resolve(context)
+                else:
+                    entity.name = self.name
 
         if hasattr(self.key, 'resolve'):
             key = self.key.resolve(context)

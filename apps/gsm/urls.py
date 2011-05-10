@@ -1,17 +1,18 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 
-urlpatterns = patterns('gsm.views',
-    url(
-        r'(?P<sport>[a-z]+)/team/(?P<gsm_id>[0-9]+)/$',
-        'team_detail',
-        name='gsm_team_detail'
-    ),
-    url(
-        r'(?P<sport>[a-z]+)/team/(?P<gsm_id>[0-9]+)/(?P<tab>[a-z]+)/$',
-        'team_detail_tab',
-        name='gsm_team_detail_tab'
-    ),
+urlpatterns = patterns('gsm.views')
+
+for tag in ('team', 'competition', 'session'):
+    urlpatterns += patterns('gsm.views',
+        url(
+            r'(?P<sport>[a-z]+)/%s/(?P<gsm_id>[0-9]+)/(?P<tab>[a-z]+)/$' % tag,
+            '%s_detail_tab' % tag,
+            name='gsm_%s_detail_tab' % tag
+        ),
+    )
+
+urlpatterns += patterns('gsm.views',
     url(
         r'(?P<sport>[a-z]+)/(?P<tag>[a-z_]+)/list/$',
         'entity_list',

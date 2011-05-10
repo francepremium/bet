@@ -3,6 +3,10 @@
 {% load i18n %}
 {% load gsm_tags %}
 
+{% block body %}
+<h1>{{ team.name }}</h1>
+{% endblock %}
+
 {% block subnav %}
 <ul>
     <li class="home tab {% if tab == 'home' %}active{% endif %}">

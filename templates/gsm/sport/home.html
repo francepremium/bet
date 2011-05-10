@@ -3,31 +3,5 @@
 {% load i18n gsm_tags pagination_tags %}
 
 {% block body %}
-<div class="calendar">
-    <table>
-        <tr>
-            <th>{% trans 'time' %}</th>
-            <th>{% trans 'date' %}</th>
-            <th>{% trans 'area' %}</th>
-            <th>{% trans 'competition' %}</th>
-            <th>{% trans 'match' %}</th>
-        </tr>
-    {% for session in next_sessions %}
-        <tr>
-            <td>{{ session.datetime_utc.hour }}:{{ session.datetime_utc.minute }}</td>
-            <td>{{ session.datetime_utc.date }}</td>
-            <td>{{ session.session_round.season.competition.area }}</td>
-            <td>
-                <a href="{{ session.session_round.season.competition.get_absolute_url }}" title="{{ session.session_round.season.competition.name }}">{{ session.session_round.season.competition.name }}</a>
-            </td>
-            <td>
-                <a href="{{ session.oponnent_A.get_absolute_url }}" title="{{ session.oponnent_A_name }}">{{ session.oponnent_A_name }}</a>
-                -
-                <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ session.oponnent_B_name }}">{{ session.oponnent_B_name }}</a>
-            </td>
-
-        </tr>
-    {% endfor %}
-    </table>
-</div>
+{% gsm_sessions_render next_sessions %}
 {% endblock %}

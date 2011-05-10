@@ -16,12 +16,70 @@ import gsm
 def get_language_from_request(request):
     return 'en'
 
-def team_detail(request, sport, gsm_id, tag='team'):
+def session_detail_tab(request, sport, gsm_id, tab, tag='match',
+    update=False,
+    template_name='', extra_context=None):
+    sport = shortcuts.get_object_or_404(Sport, slug=sport)
+
+    gsm_entity_class = model_class_for_tag(tag)
+    session = shortcuts.get_object_or_404(Session,
+        sport=sport, gsm_id=gsm_id)
+
+    context = {
+        'sport': sport,
+        'language': get_language_from_request(request),
+        'session': session,
+    }
+
+    t = gsm.get_tree(context['language'], sport, 'get_matches', 
+        type='match', id=session.gsm_id, detailed='yes')
+    c = t.getroot().getchildren()[1]
+    while c.tag != 'match':
+        c = c.getchildren()[0]
+    session.element = c
+
+    t = gsm.get_tree(context['language'], sport, 'get_match_statistics', 
+        id=session.gsm_id)
+    c = t.getroot().getchildren()[1]
+    while c.tag != 'match':
+        c = c.getchildren()[0]
+    context['statistics'] = statistics = c
+
+    template_name = [
+        'gsm/%s/%s/%s.html' % (sport.slug, 'session', tab),
+        'gsm/%s/%s.html' % ('session', tab),
+    ]
+
+    context.update(extra_context or {})
+    return shortcuts.render_to_response(template_name, context,
+        context_instance=template.RequestContext(request))
+
+def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
+    update=False,
+    template_name='', extra_context=None):
     sport = shortcuts.get_object_or_404(Sport, slug=sport)
     gsm_entity_class = model_class_for_tag(tag)
-    team, created = gsm_entity_class.objects.get_or_create(
+    competition, created = gsm_entity_class.objects.get_or_create(
         sport=sport, tag=tag, gsm_id=gsm_id)
-    return shortcuts.redirect(team.get_home_absolute_url())
+
+    context = {
+        'sport': sport,
+        'language': get_language_from_request(request),
+        'competition': competition,
+    }
+
+    template_name = [
+        'gsm/%s/%s/%s.html' % (sport.slug, tag, tab),
+        'gsm/%s/%s.html' % (tag, tab),
+    ]
+
+    if tab == 'calendar':
+        gameweek = context['gameweek'] = request.GET.get('gameweek', competition.get_last_season().get_current_gameweek())
+        context['sessions'] = competition.get_last_season().session_set.filter(gameweek=gameweek)
+
+    context.update(extra_context or {})
+    return shortcuts.render_to_response(template_name, context,
+        context_instance=template.RequestContext(request))
 
 def team_detail_tab(request, sport, gsm_id, tab, tag='team',
     update=False,
@@ -55,7 +113,7 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         reference_season = q[q.count() - 1]
         return reference_season
 
-    def get_rankings_for_season(season):
+    def get_resultstable_for_season(season):
         # get stats
         tree = gsm.get_tree(context['language'], sport,
             'get_tables', id=season.gsm_id, type='season')
@@ -68,7 +126,7 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
             if resultstable.attrib['type'] == 'total':
                 break
 
-        return resultstable.findall('ranking')
+        return resultstable
 
     if tab == 'home':
         # find next sessions
@@ -77,14 +135,14 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         context['next_sessions'] = q[:7]
 
         reference_season = get_reference_season(team)
-        context['rankings'] = get_rankings_for_season(reference_season)
+        context['resultstable'] = get_resultstable_for_season(reference_season)
 
     elif tab == 'squad':
         # season filter
         context['team_seasons'] = Season.objects.filter(
             Q(round__session__in=team.sessions_as_A.all()) |
             Q(round__session__in=team.sessions_as_B.all())
-        ).distinct().order_by('datetime_utc')
+        ).distinct().order_by('name')
         if 'season_gsm_id' in request.GET and request.GET['season_gsm_id']:
             season = shortcuts.get_object_or_404(Season, gsm_id=request.GET['season_gsm_id'])
         else:
@@ -127,7 +185,8 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         context['positions'] = positions
     elif tab == 'statistics':
         reference_season = get_reference_season(team)
-        context['rankings'] = get_rankings_for_season(reference_season)
+        context['reference_season'] = reference_season
+        context['resultstable'] = get_resultstable_for_season(reference_season)
 
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name, context,
@@ -179,6 +238,8 @@ def entity_detail(request, sport, tag, gsm_id,
     }
 
     gsm_entity_class = model_class_for_tag(tag)
+    if gsm_entity_class in (Session, Competition):
+        return http.HttpResponseNotFound()
     
     entity, created = gsm_entity_class.objects.get_or_create(
         sport = sport,

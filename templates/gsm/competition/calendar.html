@@ -1,0 +1,8 @@
+{% extends 'gsm/competition/base.html' %}
+{% load i18n gsm_tags %}
+
+{% block body %}
+    <a href="?gameweek={{ gameweek|sub:1 }}" title="">prev</a>
+    <a href="?gameweek={{ gameweek|add:1 }}" title="">next</a>
+    {% gsm_sessions_render sessions %}
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'gsm/base.html' %}
+
+{% load i18n %}
+{% load gsm_tags %}
+
+{% block body %}
+{% comment %}
+<h1><a rel="canonical" href="{{ session.oponnent_A.get_absolute_url }}" title="{{ sport }}: {{ session.oponnent_A_name }}">{{ session.oponnent_A_name }}</a> {% trans 'vs' %} <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ sport }}: {{ session.oponnent_B_name }}" rel="canonical">{{ session.oponnent_B_name }}</a></h1>
+{% if session.season %}
+<h2><a href="{{ session.season.competition.get_absolute_url }}" title="{{ session.season.competition.name }}" rel="canonical">{{ session.season.competition.name }}</a></h2>
+{% endif %}
+{% endcomment %}
+
+<table class="soccer session header">
+    <tr>
+        <th>
+            <a rel="canonical" href="{{ session.oponnent_A.get_absolute_url }}" title="{{ sport }}: {{ session.oponnent_A_name }}">{{ session.oponnent_A_name }}</a>
+        </th>
+        <th colspan="2">
+            {% if session.status == 'Fixture' %}
+                {{ session.datetime_utc|display_time }}
+            {% else %}
+                {{ session.A_score|add:session.A_ets }}
+                -
+                {{ session.B_score|add:session.B_ets }}
+            {% endif %}
+        </th>
+        <th>
+            <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ sport }}: {{ session.oponnent_B_name }}" rel="canonical">{{ session.oponnent_B_name }}</a>
+        </th>
+    </tr>
+    <tr>
+        <td>
+            {% for data in session.oponnent_A|five_sessions_series %}
+                <a href="{{ data.entity.get_absolute_url }}" title="{{ data.entity.oponnent_A_name }} vs {{ data.entity.oponnent_A_name }}">
+                    {{ data.symbol }}
+                </a>
+            {% endfor %}
+        </td>
+        <td colspan="2">
+        </td>
+        <td>
+            {% for data in session.oponnent_B|five_sessions_series %}
+                <a href="{{ data.entity.get_absolute_url }}" title="{{ data.entity.oponnent_A_name }} vs {{ data.entity.oponnent_B_name }}">
+                    {{ data.symbol }}
+                </a>
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="5">
+            <img src="http://imagecache.soccerway.com/new/teams/150x150/{{ session.oponnent_A.gsm_id }}.gif" />
+        </td>
+        <td colspan="2"></td>
+        <td rowspan="5">
+            <img src="http://imagecache.soccerway.com/new/teams/150x150/{{ session.oponnent_B.gsm_id }}.gif" />
+        </td>
+    </tr>
+    <tr>
+        <td>{% trans 'competition' %}</td>
+        <td><a href="{{ session.season.competition.get_absolute_url }}" title="{{ session.season.competition.name }}" rel="canonical">{{ session.season.competition.name }}</a></td>
+    </tr>
+    <tr>
+        <td>{% trans 'date' %}</td>
+        <td>{{ session.datetime_utc.date }}</td>
+    </tr>
+    <tr>
+        <td>{% trans 'gameweek' %}</td>
+        <td>{{ session.gameweek }}</td>
+    </tr>
+    <tr>
+        <td>{% trans 'kickoff' %}</td>
+        <td>{{ session.datetime_utc|display_time }}</td>
+    </tr>
+</table>
+
+{% endblock %}
+
+{% block subnav %}
+<ul>
+    <li class="home tab {% if tab == 'home' %}active{% endif %}">
+        <a href="{{ session.get_home_absolute_url }}" title="{{ session.name }}">{% trans 'before' %}</a>
+    </li>
+    <li class="after tab {% if tab == 'after' %}active{% endif %}">
+        <a href="{{ session.get_after_absolute_url }}" title="{{ session.name }}">{% trans 'after' %}</a>
+    </li>
+    <li class="news tab {% if tab == 'news' %}active{% endif %}">
+        <a href="{{ session.get_news_absolute_url }}" title="{{ session.name }}">{% trans 'news' %}</a>
+    </li>
+    <li class="prognostics tab {% if tab == 'prognostics' %}active{% endif %}">
+        <a href="{{ session.get_prognostics_absolute_url }}" title="{{ session.name }}">{% trans 'prognostics' %}</a>
+    </li>
+    <li class="live tab {% if tab == 'live' %}active{% endif %}">
+        <a href="{{ session.get_live_absolute_url }}" title="{{ session.name }}">{% trans 'live' %}</a>
+    </li>
+</ul>
+{% endblock %}
+

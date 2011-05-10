@@ -1,0 +1,79 @@
+{% extends 'gsm/team/base.html' %}
+
+{% load i18n gsm_tags %}
+
+{% block extra_head %}
+<style type="text/css">
+td.score.left, td.score.right {
+    text-align: center;
+    width: 32px;
+}
+tr.win td.score {
+    background-color: green;
+}
+tr.lost td.score {
+    background-color: red;
+}
+tr.draw td.score {
+    background-color: orange;
+}
+tr.Fixture td.score {
+    background-color: grey;
+}
+tr.Fixture td.score.left {
+    text-align: right;
+}
+tr.Fixture td.score.right {
+    text-align: left;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+{{ block.super }}
+<table>
+    {% for session in team.get_sessions %}
+    <tr class="{{ session.status }} {% if session.winner == team %}win{% endif %} {% if session.draw %}draw{% endif %} {% if session.winner != team and session.status = 'Played' %}lost{% endif %}">
+        <td>{{ session.datetime_utc.date }} {{ session.status }}</td>
+        <td>{{ session.session_round.season.competition.area }}</td>
+        <td>
+            <a href="{{ session.session_round.season.competition.get_absolute_url }}" title="{{ session.session_round.season.competition.name }}">{{ session.session_round.season.competition.name }}</a>
+        </td>
+        <td>
+            <a href="{{ session.oponnent_A.get_absolute_url }}" title="{{ session.oponnent_A_name }}">{{ session.oponnent_A_name }}</a>
+        </td>
+        {% if session.status == 'Played' %}
+            <td class="score left">
+                {% if session.A_score != None %}
+                    {{ session.A_score }}
+                {% endif %}
+            </td>
+            <td class="score center">
+                -
+            </td>
+            <td class="score right">
+                {% if session.B_score != None %}
+                    {{ session.B_score }}
+                {% endif %}
+            </td>
+        {% endif %}
+        {% if session.status == 'Fixture' %}
+            <td class="score left">
+                {{ session.datetime_utc.hour }}
+            </td>
+            <td class="score center">
+                :
+            </td>
+            <td class="score right">
+                {{ session.datetime_utc.minute }}
+            </td>
+        {% endif %}
+        <td>
+            <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ session.oponnent_B_name }}">{{ session.oponnent_B_name }}</a>
+        </td>
+
+    </tr>
+    {% endfor %}
+
+</table>
+{% endblock %}

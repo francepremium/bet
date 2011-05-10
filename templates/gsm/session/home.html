@@ -1,0 +1,58 @@
+{% extends 'gsm/session/base.html' %}
+
+{% load i18n gsm_tags %}
+
+{% block extra_head %}
+<style type="text/css">
+table.session.header {
+    width: 100%;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+    {{ block.super }}
+
+    {% gsm_tree key='tables_tree' method='get_tables' type='season' id=session.season.competition.get_last_season.gsm_id %}
+    {% gsm_render_tables_tree tables_tree %}
+
+    {% gsm_tree key='h2h_tree' method='get_head_2_head_statistics' team_1_id=session.oponnent_A.gsm_id team_2_id=session.oponnent_B.gsm_id %}
+    <h2>{% trans 'previous matches' %}</h2>
+    <table>
+    {% for element in h2h_tree.getroot|findall:'head2head/match' %}
+        {% gsm_entity key='team_A' tag='team' gsm_id=element.attrib.team_A_id name=element.attrib.team_A %}
+        {% gsm_entity key='team_B' tag='team' gsm_id=element.attrib.team_B_id name=element.attrib.team_B %}
+        {% gsm_entity key='match' tag='session' gsm_id=element.attrib.match_id name=element.attrib.team_B %}
+        <tr>
+            <td class="{% if element.attrib.winner == 'team_A' %}winner{% endif %}">
+                <a href="{{ team_A.get_absolute_url }}" title="{{ team_A.name }}">{{ team_A.name }}</a>
+            </td>
+            <td>
+                <a href="{{ match.get_absolute_url }}">{{ element.attrib.fs_A|add:element.attrib.ets_A }}</a>
+            </td>
+            <td>
+                <a href="{{ match.get_absolute_url }}">-</a>
+            </td>
+            <td>
+                <a href="{{ match.get_absolute_url }}">{{ element.attrib.fs_B|add:element.attrib.ets_B }}</a>
+            </td>
+            <td class="{% if element.attrib.winner == 'team_B' %}winner{% endif %}">
+                <a href="{{ team_B.get_absolute_url }}" title="{{ team_B.name }}">{{ team_B.name }}</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+
+    <h2>{% trans 'head to head' %}</h2>
+    <table>
+    {% for element in h2h_tree.getroot|findall:'head2head/data' %}
+        <tr>
+            <th>{% trans element.attrib.type %}</th>
+            <td>{{ element.attrib.matches }}</td>
+            <td>{{ element.attrib.team_1_percent }}</td>
+            <td>{{ element.attrib.team_2_percent }}</td>
+            <td>{{ element.attrib.draw_percent }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

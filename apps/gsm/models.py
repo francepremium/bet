@@ -3,6 +3,7 @@ import htmlentitydefs
 import urllib
 import datetime
 
+from django.db import connection, transaction
 from django.db import models
 from django.db.models import signals
 from django.utils.translation import ugettext as _
@@ -110,8 +111,12 @@ class AbstractGsmEntity(models.Model):
 
     def get_absolute_url(self):
         try:
-            return urlresolvers.reverse('gsm_%s_detail' % self.tag, args=(
-                self.sport, self.gsm_id, ))
+            if self.tag == 'match':
+                tag = 'session'
+            else:
+                tag = self.tag
+            return urlresolvers.reverse('gsm_%s_detail_tab' % tag, args=(
+                self.sport, self.gsm_id, 'home'))
         except urlresolvers.NoReverseMatch:
             return urlresolvers.reverse('gsm_entity_detail', args=(
                 self.sport, self.tag, self.gsm_id,))
@@ -142,7 +147,11 @@ class AbstractGsmEntity(models.Model):
         return '%s (<%s> #%s %s)' % (self.name, self.tag, self.gsm_id, self.sport)
 
 class GsmEntity(AbstractGsmEntity):
-    pass
+    def get_sessions(self):
+        q = Session.objects.filter(sport=self.sport)
+        q = q.filter(models.Q(oponnent_A=self)|models.Q(oponnent_B=self))
+        q = q.order_by('-datetime_utc')
+        return q
 
 class Championship(AbstractGsmEntity):
     pass
@@ -164,6 +173,11 @@ class Competition(AbstractGsmEntity):
     def get_sessions(self):
         return Session.objects.filter(session_round__season__competition=self).order_by('-datetime_utc')
 
+    def get_last_season(self):
+        if not hasattr(self, '_last_season'):
+            self._last_season = self.season_set.all().order_by('-end_date')[0]
+        return self._last_season
+
 class Season(AbstractGsmEntity):
     competition = models.ForeignKey('Competition')
 
@@ -176,6 +190,25 @@ class Season(AbstractGsmEntity):
 
     start_date = models.DateTimeField(null=True, blank=True)
     end_date = models.DateTimeField(null=True, blank=True)
+
+    def get_gameweeks(self):
+        if not hasattr(self, '_gameweeks'):
+            self._gameweeks = []
+            sql = 'select distinct on (gameweek) gameweek, datetime_utc from gsm_session where season_id = %s'
+            cursor = connection.cursor()
+            cursor.execute(sql, (self.pk,))
+            self._gameweeks = cursor.fetchall()
+        return self._gameweeks
+
+    def get_current_gameweek(self):
+        if not hasattr(self, '_current_gameweek'):
+            self._current_gameweek = self.session_set.filter(status='Fixture', datetime_utc__gte=datetime.date.today()).order_by('datetime_utc')[0].gameweek
+        return self._current_gameweek
+
+    def get_sessions_for_current_gameweek(self):
+        if not hasattr(self, '_sessions_for_current_gameweek'):
+            self._sessions_for_current_gameweek = self.session_set.filter(gameweek=self.get_current_gameweek).order_by('datetime_utc')
+        return self._sessions_for_current_gameweek
 
 class Round(AbstractGsmEntity):
     season = models.ForeignKey('Season')
@@ -236,3 +269,12 @@ class Session(AbstractGsmEntity):
 
     class Meta:
         ordering = ['-datetime_utc']
+
+    def get_tab_absolute_url(self, tab):
+        return urlresolvers.reverse('gsm_%s_detail_tab' % 'session', args=(
+            self.sport, self.gsm_id, tab))
+    
+    def get_after_absolute_url(self):
+        return self.get_tab_absolute_url('after')
+    def get_live_absolute_url(self):
+        return self.get_tab_absolute_url('live')
