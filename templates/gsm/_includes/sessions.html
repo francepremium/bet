@@ -1,0 +1,59 @@
+{% load i18n gsm_tags %}
+<div class="sessions">
+    <table>
+        {% for session in sessions %}
+        <tr class="{{ session.status }} {% if session.winner == team %}win{% endif %} {% if session.draw %}draw{% endif %} {% if session.winner != team and session.status = 'Played' %}lost{% endif %}">
+            <td>{{ session.datetime_utc.date }}</td>
+            <td>{{ session.session_round.season.competition.area }}</td>
+            <td>
+                <a href="{{ session.session_round.season.competition.get_absolute_url }}" title="{{ session.session_round.season.competition.name }}">{{ session.session_round.season.competition.name }}</a>
+            </td>
+            <td>
+                <a href="{{ session.oponnent_A.get_absolute_url }}" title="{{ session.oponnent_A_name }}">{{ session.oponnent_A_name }}</a>
+            </td>
+            {% if session.status == 'Played' %}
+                <td class="score left">
+                    <a href="{{ session.get_absolute_url }}" title="{{ session.oponnent_A_name }} {% trans 'vs' %} {{ session.oponnent_B_name }}">
+                        {% if session.A_score != None %}
+                            {{ session.A_score }}
+                        {% endif %}
+                    </a>
+                </td>
+                <td class="score center">
+                    <a href="{{ session.get_absolute_url }}" title="{{ session.oponnent_A_name }} {% trans 'vs' %} {{ session.oponnent_B_name }}">
+                    -
+                    </a>
+                </td>
+                <td class="score right">
+                    <a href="{{ session.get_absolute_url }}" title="{{ session.oponnent_A_name }} {% trans 'vs' %} {{ session.oponnent_B_name }}">
+                    {% if session.B_score != None %}
+                        {{ session.B_score }}
+                    {% endif %}
+                    </a>
+                </td>
+            {% endif %}
+            {% if session.status == 'Fixture' %}
+                <td class="score left">
+                    <a href="{{ session.get_absolute_url }}" title="{{ session.oponnent_A_name }} {% trans 'vs' %} {{ session.oponnent_B_name }}">
+                    {{ session.datetime_utc.hour|prepend_zero }}
+                    </a>
+                </td>
+                <td class="score center">
+                    <a href="{{ session.get_absolute_url }}" title="{{ session.oponnent_A_name }} {% trans 'vs' %} {{ session.oponnent_B_name }}">
+                    :
+                    </a>
+                </td>
+                <td class="score right">
+                    <a href="{{ session.get_absolute_url }}" title="{{ session.oponnent_A_name }} {% trans 'vs' %} {{ session.oponnent_B_name }}">
+                    {{ session.datetime_utc.minute|prepend_zero }}
+                    </a>
+                </td>
+            {% endif %}
+            <td>
+                <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ session.oponnent_B_name }}">{{ session.oponnent_B_name }}</a>
+            </td>
+        </tr>
+
+        {% endfor %}
+    </table>
+</div>

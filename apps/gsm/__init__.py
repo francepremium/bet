@@ -14,6 +14,7 @@ def get_tree(lang, sport, method, update=False, **parameters):
     LANGUAGE_FAILS = (
         'get_team_statistics',
         'get_squads',
+        'get_career',
     )
     parameters['lang'] = lang
     

@@ -22,7 +22,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.areas_country_code_2()
-        return None
+        
         for code, language in settings.LANGUAGES:
             root = gsm.get_tree(code, 'soccer', 'get_areas').getroot()
             for element in root.getchildren():

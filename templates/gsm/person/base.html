@@ -1,0 +1,29 @@
+{% extends 'gsm/base.html' %}
+
+{% load i18n %}
+{% load gsm_tags %}
+
+{% block body %}
+<h1>{{ person.attrib.first_name }} {{ person.attrib.last_name }}</h1>
+{% endblock %}
+
+{% block subnav %}
+<ul>
+    <li class="home tab {% if tab == 'home' %}active{% endif %}">
+        <a href="{{ team.get_home_absolute_url }}" title="{{ team.name }}">{% trans 'file' %}</a>
+    </li>
+    <li class="news tab {% if tab == 'news' %}active{% endif %}">
+        <a href="{{ team.get_news_absolute_url }}" title="{{ team.name }}">{% trans 'news' %}</a>
+    </li>
+    {% if sport.slug == 'tennis' %}
+    <li class="matches tab {% if tab == 'matches' %}active{% endif %}">
+        <a href="{{ team.get_matches_absolute_url }}" title="{{ team.name }}">{% trans 'matches' %}</a>
+    </li>
+    {% endif %}
+    <li class="prognostics tab {% if tab == 'prognostics' %}active{% endif %}">
+        <a href="{{ team.get_prognostics_absolute_url }}" title="{{ team.name }}">{% trans 'prognostics' %}</a>
+    </li>
+</ul>
+{% endblock %}
+
+

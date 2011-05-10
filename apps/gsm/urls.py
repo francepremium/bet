@@ -3,8 +3,14 @@ from django.conf import settings
 
 urlpatterns = patterns('gsm.views')
 
-for tag in ('team', 'competition', 'session'):
+for tag in ('team', 'competition', 'session', 'person'):
     urlpatterns += patterns('gsm.views',
+        url(
+            r'(?P<sport>[a-z]+)/%s/(?P<gsm_id>[0-9]+)/$' % tag,
+            '%s_detail_tab' % tag,
+            {'tab': 'home'},
+            name='gsm_%s_detail' % tag
+        ),
         url(
             r'(?P<sport>[a-z]+)/%s/(?P<gsm_id>[0-9]+)/(?P<tab>[a-z]+)/$' % tag,
             '%s_detail_tab' % tag,

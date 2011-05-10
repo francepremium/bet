@@ -14,7 +14,38 @@ from filters import *
 import gsm
 
 def get_language_from_request(request):
-    return 'en'
+    return 'fr'
+
+def person_detail_tab(request, sport, gsm_id, tab, tag='person',
+    update=False,
+    template_name='', extra_context=None):
+    sport = shortcuts.get_object_or_404(Sport, slug=sport)
+
+    gsm_entity_class = model_class_for_tag(tag)
+    person, created = gsm_entity_class.objects.get_or_create(
+        sport = sport,
+        tag = tag,
+        gsm_id = gsm_id
+    )
+    context = {
+        'sport': sport,
+        'language': get_language_from_request(request),
+        'person': person,
+    }
+
+
+    t = gsm.get_tree(context['language'], sport, 'get_career', 
+        type='player', id=person.gsm_id, detailed='yes')
+    person.element = t.getroot().getchildren()[1]
+
+    template_name = [
+        'gsm/%s/%s/%s.html' % (sport.slug, 'person', tab),
+        'gsm/%s/%s.html' % ('person', tab),
+    ]
+
+    context.update(extra_context or {})
+    return shortcuts.render_to_response(template_name, context,
+        context_instance=template.RequestContext(request))
 
 def session_detail_tab(request, sport, gsm_id, tab, tag='match',
     update=False,
