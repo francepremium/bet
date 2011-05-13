@@ -20,9 +20,29 @@
             {% if session.status == 'Fixture' %}
                 {{ session.datetime_utc|display_time }}
             {% else %}
+                {% if sport.slug == 'tennis' %}
+                <table>
+                    <tr>
+                        <td>{% if session.A1_score %}{{ session.A1_score }}{% endif %}</td>
+                        <td>{% if session.A2_score %}{{ session.A2_score }}{% endif %}</td>
+                        <td>{% if session.A3_score %}{{ session.A3_score }}{% endif %}</td>
+                        <td>{% if session.A4_score %}{{ session.A4_score }}{% endif %}</td>
+                        <td>{% if session.A5_score %}{{ session.A5_score }}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td>{% if session.B1_score %}{{ session.B1_score }}{% endif %}</td>
+                        <td>{% if session.B2_score %}{{ session.B2_score }}{% endif %}</td>
+                        <td>{% if session.B3_score %}{{ session.B3_score }}{% endif %}</td>
+                        <td>{% if session.B4_score %}{{ session.B4_score }}{% endif %}</td>
+                        <td>{% if session.B5_score %}{{ session.B5_score }}{% endif %}</td>
+                    </tr>
+                </table>
+
+                {% else %}
                 {{ session.A_score|add:session.A_ets }}
                 -
                 {{ session.B_score|add:session.B_ets }}
+                {% endif %}
             {% endif %}
         </th>
         <th>
@@ -49,11 +69,11 @@
     </tr>
     <tr>
         <td rowspan="5">
-            <img src="http://imagecache.soccerway.com/new/teams/150x150/{{ session.oponnent_A.gsm_id }}.gif" />
+            <img src="{{ session.oponnent_A.get_large_image_url }}" />
         </td>
         <td colspan="2"></td>
         <td rowspan="5">
-            <img src="http://imagecache.soccerway.com/new/teams/150x150/{{ session.oponnent_B.gsm_id }}.gif" />
+            <img src="{{ session.oponnent_B.get_large_image_url }}" />
         </td>
     </tr>
     <tr>
@@ -65,13 +85,23 @@
         <td>{{ session.datetime_utc.date }}</td>
     </tr>
     <tr>
+        {% if session.gameweek %}
         <td>{% trans 'gameweek' %}</td>
         <td>{{ session.gameweek }}</td>
+        {% else %}
+        <td colspan="2"></td>
+        {% endif %}
     </tr>
+    {% if session.datetime_utc %}
     <tr>
         <td>{% trans 'kickoff' %}</td>
         <td>{{ session.datetime_utc|display_time }}</td>
     </tr>
+    {% else %}
+    <tr>
+        <td colspan="2"></td>
+    </tr>
+    {% endif %}
 </table>
 
 {% endblock %}

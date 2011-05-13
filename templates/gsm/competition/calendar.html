@@ -2,7 +2,42 @@
 {% load i18n gsm_tags %}
 
 {% block body %}
-    <a href="?gameweek={{ gameweek|sub:1 }}" title="">prev</a>
-    <a href="?gameweek={{ gameweek|add:1 }}" title="">next</a>
+    {{ block.super }}
+
+    <h2 class="round">{{ round.name }}</h2>
+    {% if cup or round %}
+        {% if round.get_previous_round %}
+            <a href="?round={{ round.get_previous_round.pk }}" title="">prev</a>
+        {% endif %}
+        {% if round.get_next_round %}
+            <a href="?round={{ round.get_next_round.pk }}" title="">next</a>
+        {% endif %}
+    {% else %}
+        {% if gameweek %}
+            {% if gameweek > 1 %}
+                <a href="?gameweek={{ gameweek|sub:1 }}" title="">prev</a>
+            {% endif %}
+            {% if gameweek < competition.get_last_season.get_last_gameweek %}
+                <a href="?gameweek={{ gameweek|add:1 }}" title="">next</a>
+            {% endif %}
+        {% else %}
+            {% if previous_week %}
+                <a href="?week={{ previous_week }}">prev</a>
+            {% endif %}
+            {% if next_week %}
+                <a href="?week={{ next_week }}">next</a>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+
     {% gsm_sessions_render sessions %}
+
+    {% if last_sessions %}
+        <h2 class="last_sessions">{% trans 'last matches' %}</h2>
+        {% gsm_sessions_render last_sessions %}
+    {% endif %}
+    {% if next_sessions %}
+        <h2 class="next_sessions">{% trans 'next matches' %}</h2>
+        {% gsm_sessions_render next_sessions %}
+    {% endif %}
 {% endblock %}

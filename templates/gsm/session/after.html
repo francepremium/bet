@@ -14,7 +14,7 @@ table.lineups {
 {{ block.super }}
 
 {% for child0 in session.element.getchildren %}
-{% if child0.tag == 'lineups' %}
+{% if child0.tag == 'lineups' and child0.getchildren %}
 <h2>{% trans 'lineups' %}</h2>
 <table class="lineups A">
     {% for lineup in child0.getchildren %}
@@ -42,7 +42,7 @@ table.lineups {
 </table>
 {% endif %}
 
-{% if child0.tag == 'substitutions' %}
+{% if child0.tag == 'substitutions' and child0.getchildren %}
 <h2>{% trans 'substitutions' %}</h2>
 <table class="substitutions">
     <tr>
@@ -94,7 +94,7 @@ table.lineups {
 </table>
 {% endif %}
 
-{% if child0.tag == 'lineups_bench' %}
+{% if child0.tag == 'lineups_bench' and child0.getchildren %}
 <h2>{% trans 'lineups bench' %}</h2>
 <table class="lineups bench A">
     {% for lineup in child0.getchildren %}
@@ -122,7 +122,7 @@ table.lineups {
 </table>
 {% endif %}
 
-{% if child0.tag == 'goals' %}
+{% if child0.tag == 'goals' and child0.getchildren %}
 <h2>{% trans 'goals' %}</h2>
 <table class="goals">
     {% for goal in child0.getchildren %}
@@ -159,6 +159,7 @@ table.lineups {
 {% endif %}
 {% endfor %}
 
+{% if statistics.getchildren %}
 <h2>{% trans 'statistics' %}</h2>
 <table>
     <tr>
@@ -174,6 +175,7 @@ table.lineups {
     </tr>
     {% endfor %}
 </table>
+{% endif %}
 
 {% render_comment_form for session %}
 {% render_comment_list for session %}

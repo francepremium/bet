@@ -13,7 +13,9 @@ The template uses a "team" variable to highlight a particular team.
             <th><acronym title="{% trans 'wins' %}">W</acronym></th>
             <th><acronym title="{% trans 'draw' %}">D</acronym></th>
             <th><acronym title="{% trans 'lost' %}">L</acronym></th>
+            {% if sport.slug == 'soccer' %}
             <th><acronym title="{% trans 'goal difference' %}">GD</acronym></th>
+            {% endif %}
             <th><acronym title="{% trans 'points' %}">P</acronym></th>
             {% if 'last5' in columns %}
             <th>{% trans 'last 5 matches' %}</th>
@@ -30,7 +32,9 @@ The template uses a "team" variable to highlight a particular team.
                 <td>{{ ranking.attrib.matches_won }}</td>
                 <td>{{ ranking.attrib.matches_draw }}</td>
                 <td>{{ ranking.attrib.matches_lost }}</td>
+                {% if sport.slug == 'soccer' %}
                 <td>{{ ranking.attrib.goals_pro|sub:ranking.attrib.goals_against }}</td>
+                {% endif %}
                 <td>{{ ranking.attrib.points }}</td>
                 {% if 'last5' in columns %}
                 <td>

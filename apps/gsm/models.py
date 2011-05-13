@@ -56,12 +56,17 @@ class Sport(models.Model):
     class Meta:
         ordering = ('id',)
 
+    def get_competition_areas(self):
+        return Area.objects.filter(competition__sport=self).order_by('name').distinct()
+
     def get_absolute_url(self, tab):
         return urlresolvers.reverse('gsm_sport_detail', args=(self.slug,))
     def get_tab_absolute_url(self, tab):
         return urlresolvers.reverse('gsm_sport_detail_tab', args=(self.slug, tab,))
     def get_home_absolute_url(self):
         return self.get_tab_absolute_url('home')
+    def get_competitions_absolute_url(self):
+        return self.get_tab_absolute_url('competitions')
     def get_informations_absolute_url(self):
         return self.get_tab_absolute_url('informations')
     def get_news_absolute_url(self):
@@ -102,6 +107,8 @@ class AbstractGsmEntity(models.Model):
         return self.get_tab_absolute_url('squad')
     def get_news_absolute_url(self):
         return self.get_tab_absolute_url('news')
+    def get_matches_absolute_url(self):
+        return self.get_tab_absolute_url('matches')
     def get_statistics_absolute_url(self):
         return self.get_tab_absolute_url('statistics')
     def get_calendar_absolute_url(self):
@@ -153,6 +160,20 @@ class GsmEntity(AbstractGsmEntity):
         q = q.order_by('-datetime_utc')
         return q
 
+    def get_large_image_url(self):
+        tag = self.tag
+        ext = 'jpg'
+        if tag == 'person':
+            tag = 'players'
+        elif tag == 'team':
+            if self.sport.slug == 'soccer':
+                return 'http://imagecache.soccerway.com/new/teams/150x150/%s.gif' % self.gsm_id
+            else:
+                tag = 'teams'
+                ext = 'gif'
+
+        return 'http://images.globalsportsmedia.com/%s/%s/150x150/%s.%s' % (self.sport.slug, tag, self.gsm_id, ext)
+
 class Championship(AbstractGsmEntity):
     pass
 
@@ -200,10 +221,29 @@ class Season(AbstractGsmEntity):
             self._gameweeks = cursor.fetchall()
         return self._gameweeks
 
+    def get_last_gameweek(self):
+        if not hasattr(self, '_last_gameweek'):
+            self._last_gameweek = int(self.get_gameweeks()[-1][0])
+        return self._last_gameweek
+
     def get_current_gameweek(self):
         if not hasattr(self, '_current_gameweek'):
-            self._current_gameweek = self.session_set.filter(status='Fixture', datetime_utc__gte=datetime.date.today()).order_by('datetime_utc')[0].gameweek
+            sessions = self.session_set.filter(status='Fixture', datetime_utc__gte=datetime.date.today()).order_by('datetime_utc')
+            if sessions.count() and sessions[0].gameweek:
+                self._current_gameweek = int(sessions[0].gameweek)
+            else:
+                self._current_gameweek = False
         return self._current_gameweek
+
+    def get_current_round(self):
+        if not hasattr(self, '_current_round'):
+            next_rounds = self.round_set.filter(end_date__gte=datetime.date.today()).order_by('-end_date')
+            if next_rounds.count():
+                self._current_round = next_rounds[0]
+            else:
+                self._current_round = self.round_set.order_by('-end_date')[0]
+
+        return self._current_round
 
     def get_sessions_for_current_gameweek(self):
         if not hasattr(self, '_sessions_for_current_gameweek'):
@@ -221,6 +261,24 @@ class Round(AbstractGsmEntity):
     scoring_system = models.CharField(max_length=12, null=True, blank=True)
     groups = models.IntegerField()
     has_outgroup_matches = models.BooleanField()
+
+    def get_previous_round(self):
+        if not hasattr(self, '_previous_round'):
+            previous_rounds = Round.objects.filter(start_date__lt=self.start_date, season=self.season).order_by('-start_date')
+            if previous_rounds.count():
+                self._previous_round = previous_rounds[0]
+            else:
+                self._previous_round = False
+        return self._previous_round
+
+    def get_next_round(self):
+        if not hasattr(self, '_next_round'):
+            next_rounds = Round.objects.filter(start_date__gt=self.start_date, season=self.season).order_by('start_date')
+            if next_rounds.count():
+                self._next_round = next_rounds[0]
+            else:
+                self._next_round = False
+        return self._next_round
 
 class Session(AbstractGsmEntity):
     season = models.ForeignKey('Season', null=True, blank=True)
@@ -242,12 +300,12 @@ class Session(AbstractGsmEntity):
     A2_score = models.IntegerField(null=True, blank=True)
     A3_score = models.IntegerField(null=True, blank=True)
     A4_score = models.IntegerField(null=True, blank=True)
-    AE_score = models.IntegerField(null=True, blank=True)
+    A5_score = models.IntegerField(null=True, blank=True)
     B1_score = models.IntegerField(null=True, blank=True)
     B2_score = models.IntegerField(null=True, blank=True)
     B3_score = models.IntegerField(null=True, blank=True)
     B4_score = models.IntegerField(null=True, blank=True)
-    BE_score = models.IntegerField(null=True, blank=True)
+    B5_score = models.IntegerField(null=True, blank=True)
 
     # soccer, rugby
     A_score = models.IntegerField(null=True, blank=True)

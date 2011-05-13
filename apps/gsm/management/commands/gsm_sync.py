@@ -85,9 +85,7 @@ class Command(BaseCommand):
                     setattr(model, k, v)
 
         if changed:
-            #print "CHANGED %s #%s: %s" % (model.__class__, model.gsm_id, "\n".join(changed))
             model.save()
-        
         return model
 
     def save_area(self, language, element, **properties):
@@ -162,6 +160,8 @@ class Command(BaseCommand):
                 raise UnexpectedChild(element, child)
 
     def save_season(self, language, sport, element, **properties):
+        if element.attrib['season_id'] in (str(22), str(20)):
+            return None
         properties.update({
             'name_%s' % language: element.attrib['name'],
             'season_type': element.attrib.get('type', None) or None,
@@ -183,14 +183,25 @@ class Command(BaseCommand):
             properties
         )
 
-        if sport.name == 'motorsports': # directly handle sessions
+        # save teams: actually we ain't
+        #if sport.slug in ('rugby', 'basketball', 'soccer'):
+            #root = gsm.get_tree(language, sport, 'get_teams', 
+                #detailed=True, type='saeson', id=season.gsm_id).getroot()
+            #for team_element in root.findall('team'):
+                #self.save_team(language, sport, team_element)
+
+        if sport.slug == 'motorsports': # directly handle sessions
             root = gsm.get_tree(language, sport, 'get_sessions', 
                 type='season', id=season.gsm_id).getroot()
             for session_element in root.findall('championship/competition/season/session'):
                 self.save_session(language, sport, session_element, season=season)
         else: # handle rounds
-            root = gsm.get_tree(language, sport, 'get_matches', 
-                type='season', id=season.gsm_id).getroot()
+            if sport.slug == 'tennis':
+                root = gsm.get_tree(language, sport, 'get_matches', 
+                    type='season', id=season.gsm_id, detailed='yes').getroot()
+            else:
+                root = gsm.get_tree(language, sport, 'get_matches', 
+                    type='season', id=season.gsm_id).getroot()
 
             rounds = root.findall('competition/season/round')
             if not rounds:
@@ -198,6 +209,19 @@ class Command(BaseCommand):
 
             for round_element in rounds:
                 self.save_round(language, sport, round_element, season=season)
+
+    def save_team(self, language, sport, element, **properties):
+        if element.attrib.get('area_id', False):
+            area = Area.objects.get(gsm_id=element.attrib['area_id'])
+        else:
+            area = None
+
+        properties.update({
+            'name_%s' % language: element.attrib.get('official_name'),
+            'area': area,
+        })
+
+        # actually we ain't doing that yet because features won't be even between sports
 
     def save_round(self, language, sport, element, **properties):
         has_outgroup_matches = element.attrib.get('has_outgroup_matches', 'no') == 'yes'
@@ -222,8 +246,21 @@ class Command(BaseCommand):
             properties
         )
 
-        for match in element.findall('match'):
-            self.save_session(language, sport, match, session_round=r, season=r.season)
+        # 3 fucking structures, just for 2 soccer competitions
+        matches = element.findall('match')
+        if matches:
+            for match in matches:
+                self.save_session(language, sport, match, session_round=r, season=r.season)
+
+        matches = element.findall('group/match')
+        if matches:
+            for match in matches:
+                self.save_session(language, sport, match, session_round=r, season=r.season)
+
+        matches = element.findall('aggr/match')
+        if matches:
+            for match in matches:
+                self.save_session(language, sport, match, session_round=r, season=r.season)
 
     def save_session(self, language, sport, element, **properties):
         converter = Session._meta.get_field('actual_start_datetime')
@@ -259,7 +296,6 @@ class Command(BaseCommand):
             'last_updated': element.attrib.get('last_updated', None),
             'datetime_utc': official_start_datetime,
         })
-
 
         xml_map = (
             ('person_%s_name', 'person'),
@@ -309,34 +345,54 @@ class Command(BaseCommand):
         if sport.slug == 'tennis':
             i = 1
             for set_element in element.findall('set'):
-                properties['A%s_score' % i] = element.attrib.get('score_A', None) or None
-                properties['B%s_score' % i] = element.attrib.get('score_B', None) or None
+                properties['A%s_score' % i] = set_element.attrib.get('score_A', None) or None
+                properties['B%s_score' % i] = set_element.attrib.get('score_B', None) or None
                 i += 1
+                if i > 5:
+                    break
         elif sport.slug == 'basketball':
             properties['A1_score'] = element.attrib.get('p1s_A', None) or None
             properties['A2_score'] = element.attrib.get('p2s_A', None) or None
             properties['A3_score'] = element.attrib.get('p3s_A', None) or None
             properties['A4_score'] = element.attrib.get('p4s_A', None) or None
-            properties['AE_score'] = element.attrib.get('eps_A', None) or None
+            properties['A5_score'] = element.attrib.get('eps_A', None) or None
             properties['B1_score'] = element.attrib.get('p1s_B', None) or None
             properties['B2_score'] = element.attrib.get('p2s_B', None) or None
             properties['B3_score'] = element.attrib.get('p3s_B', None) or None
             properties['B4_score'] = element.attrib.get('p4s_B', None) or None
-            properties['BE_score'] = element.attrib.get('eps_B', None) or None
+            properties['B5_score'] = element.attrib.get('eps_B', None) or None
+            properties['A_score'] = element.attrib.get('fs_A', None) or None
+            properties['B_score'] = element.attrib.get('fs_B', None) or None
+            properties['A_ets'] = element.attrib.get('eps_A', None) or None
+            properties['B_ets'] = element.attrib.get('eps_B', None) or None
         elif sport.slug == 'soccer':
             properties['A_score'] = element.attrib.get('fs_A', None) or None
             properties['B_score'] = element.attrib.get('fs_B', None) or None
             properties['A_ets'] = element.attrib.get('ets_A', None) or None
             properties['B_ets'] = element.attrib.get('ets_B', None) or None
             ps_A = element.attrib.get('ps_A', '')
-            s_B = element.attrib.get('ps_B', '')
+            ps_B = element.attrib.get('ps_B', '')
             if ps_A:
                 if ps_A > ps_B:
                     properties['penalty'] = 'A'
                 else:
                     properties['penalty'] = 'B'
         elif sport.slug == 'rugby':
-            pass
+            properties['A1_score'] = element.attrib.get('p1s_A', None) or None
+            properties['A2_score'] = element.attrib.get('p2s_A', None) or None
+            properties['B1_score'] = element.attrib.get('p1s_B', None) or None
+            properties['B2_score'] = element.attrib.get('p2s_B', None) or None
+            properties['A_score'] = element.attrib.get('fs_A', None) or None
+            properties['B_score'] = element.attrib.get('fs_B', None) or None
+            properties['A_ets'] = element.attrib.get('ets_A', None) or None
+            properties['B_ets'] = element.attrib.get('ets_B', None) or None
+            sds_A = element.attrib.get('sds_A', '')
+            sds_B = element.attrib.get('sds_B', '')
+            if sds_A:
+                if sds_A > sds_B:
+                    properties['penalty'] = 'A'
+                else:
+                    properties['penalty'] = 'B'
 
         if not properties.get('name', False):
             properties['name'] = '%s vs. %s' % (properties['oponnent_A_name'], properties['oponnent_B_name'])

@@ -25,6 +25,8 @@ def prepend_zero(number):
 
 @register.filter
 def display_time(time):
+    if not hasattr(time, 'hour'):
+        return False
     return '%s:%s' % (prepend_zero(time.hour), prepend_zero(time.minute))
 
 @register.filter
@@ -73,8 +75,15 @@ def sub(value, arg):
 sub.is_safe = False
 
 @register.filter
-def gsm_area_id_flag_url(gsm_id):
-    area = Area.objects.get(gsm_id=gsm_id)
+def gsm_area_id_flag_url(arg):
+    if not arg:
+        return False
+
+    if arg.isdigit():
+        area = Area.objects.get(gsm_id=int(arg))
+    elif isinstance(arg, str):
+        area = Area.objects.get(country_code=arg)
+
     return '%sflags/%s.png' % (
         settings.STATIC_URL,
         area.country_code_2,
@@ -82,6 +91,8 @@ def gsm_area_id_flag_url(gsm_id):
 
 @register.filter
 def age_from_date(date):
+    if not date:
+        return ''
     birth = datetime.datetime.strptime(date, '%Y-%m-%d')
     delta = datetime.datetime.now() - birth
     return delta.days / 365
@@ -111,6 +122,7 @@ class GsmSessionsTableNode(template.Node):
         if not hasattr(self, 'nodelist'):
             t = template.loader.select_template([
                 'gsm/%s/_includes/sessions.html' % context['sport'].slug,
+                'gsm/_includes/sessions.html',
             ])
             self.nodelist = t.nodelist
         
@@ -150,6 +162,7 @@ class GsmResultsTableNode(template.Node):
         if not hasattr(self, 'nodelist'):
             t = template.loader.select_template([
                 'gsm/%s/_includes/resultstable.html' % context['sport'].slug,
+                'gsm/_includes/resultstable.html',
             ])
             self.nodelist = t.nodelist
         

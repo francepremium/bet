@@ -1,0 +1,38 @@
+{% comment %}
+This template requires a "ranking_elements" context variable, which should be a list of ranking elements.
+
+The template uses a "team" variable to highlight a particular team.
+{% endcomment %}
+
+{% load i18n gsm_tags %}
+<div class="ranking">
+    <table>
+        <tr>
+            <th colspan="3"></th>
+            <th>{% trans 'points' %}</th>
+            <th>{% trans 'tournaments played' %}</th>
+        </tr>
+        {% for ranking in resultstable.getchildren %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>
+                {% if ranking.attrib.double_id %}
+                    {% gsm_entity key='person_1' tag='person' gsm_id=ranking.attrib.person_1_id %}
+                {% else %}
+                    {% gsm_entity key='person' tag='person' gsm_id=ranking.attrib.people_id name=ranking.attrib.name %}
+                    <a href="{{ person.get_absolute_url }}" title="{{ person.name }}">{{ person.name }}</a>
+                {% endif %}
+            </td>
+            <td>
+                <img src="{{ ranking.attrib.country|gsm_area_id_flag_url }}" alt="{{ ranking.attrib.country }}" title="{{ ranking.attrib.country }}" />
+            </td>
+            <td>
+                {{ ranking.attrib.points }}
+            </td>
+            <td>
+                {{ ranking.attrib.tournaments_played }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>

@@ -14,7 +14,13 @@
 {% block body %}
 {{ block.super }}
 
-{% gsm_sessions_render next_sessions %}
+{% if next_sessions %}
+    <h2 class="next_matches">{% trans 'next matches' %}</h2>
+    {% gsm_sessions_render next_sessions %}
+{% endif %}
 
-{% gsm_resultstable_render resultstable %}
+{% if resultstable %}
+    <h2 class="results_table">{% trans 'results table' %}</h2>
+    {% gsm_resultstable_render resultstable %}
+{% endif %}
 {% endblock %}

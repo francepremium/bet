@@ -15,15 +15,19 @@
     <li class="file tab {% if tab == 'file' %}active{% endif %}">
         <a href="{{ team.get_file_absolute_url }}" title="{{ team.name }}">{% trans 'file' %}</a>
     </li>
+    {% if sport.slug != 'basketball' %}
     <li class="squad tab {% if tab == 'squad' %}active{% endif %}">
         <a href="{{ team.get_squad_absolute_url }}" title="{{ team.name }}">{% trans 'squad' %}</a>
     </li>
+    {% endif %}
     <li class="news tab {% if tab == 'news' %}active{% endif %}">
         <a href="{{ team.get_news_absolute_url }}" title="{{ team.name }}">{% trans 'news' %}</a>
     </li>
+    {% if sport.slug != 'basketball' %}
     <li class="statistics tab {% if tab == 'statistics' %}active{% endif %}">
         <a href="{{ team.get_statistics_absolute_url }}" title="{{ team.name }}">{% trans 'statistics' %}</a>
     </li>
+    {% endif %}
     <li class="calendar tab {% if tab == 'calendar' %}active{% endif %}">
         <a href="{{ team.get_calendar_absolute_url }}" title="{{ team.name }}">{% trans 'calendar' %}</a>
     </li>

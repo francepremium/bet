@@ -67,62 +67,64 @@
 
 <h2>{% trans 'career' %}</h2>
 
-<table>
-    <tr>
-        <th>{% trans 'competition' %}</th>
-        <th>{% trans 'season' %}</th>
-        <th>{% trans 'team' %}</th>
-        <th><img src="{{ STATIC_URL }}img/events/minute_played.png" alt="{% trans 'Minutes played' %}" title="{% trans 'Minutes played' %}" /></th>
-        <th><img src="{{ STATIC_URL }}img/events/appearance.png" alt="{% trans 'Appearances' %}" title="{% trans 'Appearances' %}" /></th>
-        <th><img src="{{ STATIC_URL }}img/events/SI.png" alt="{% trans 'Substitute in' %}" title="{% trans 'Substitute in' %}" /></th>
-        <th><img src="{{ STATIC_URL }}img/events/SO.png" alt="{% trans 'Substitute out' %}" title="{% trans 'Substitute out' %}" /></th>
-        <th><img src="{{ STATIC_URL }}img/events/bench.png" alt="{% trans 'Substitutes on the bench' %}" title="{% trans 'Substitutes on the bench' %}" /></th>
-        <th><img src="{{ STATIC_URL }}img/events/G.png" alt="{% trans 'Goal' %}" title="{% trans 'Goal' %}" /></th>
-        <th><img src="{{ STATIC_URL }}img/events/YC.png" alt="{% trans 'Yellow card' %}" title="{% trans 'Yellow card' %}" /></th>
-        <th><img src="{{ STATIC_URL }}img/events/Y2C.png" alt="{% trans 'Yellow 2nd/RC' %}" title="{% trans 'Yellow 2nd/RC' %}" /></th>
-        <th><img src="{{ STATIC_URL }}img/events/RC.png" alt="{% trans 'Red card' %}" title="{% trans 'Red card' %}" /></th>
-    </tr>
-{% for membership in person.element|findall:'membership' %}
-    {% gsm_entity key='team' tag='team' gsm_id=membership.attrib.team_id name=membership.attrib.club_name %}
-    {% for statistics in membership.getchildren %}
-    {% gsm_entity key='competition' tag='competition' gsm_id=statistics.attrib.competition_id name=statistics.attrib.competition_name %}
-    <tr>
-        <td>
-            <a href="{{ competition.get_absolute_url }}" title="{{ competition.name }}">{{ competition.name }}</a>
-        </td>
-        <td>{{ statistics.attrib.season_name }}</td>
-        <td>
-            <a href="{{ team.get_absolute_url }}" title="{{ team.name }}">{{ team.name }}</a>
-        </td>
-        <td>
-            {{ statistics.attrib.minutes_played|default:'?' }}
-        </td>
-        <td>
-            {{ statistics.attrib.appearances|default:'?' }}
-        </td>
-        <td>
-            {{ statistics.attrib.substitute_in|default:'?' }}
-        </td>
-        <td>
-            {{ statistics.attrib.substitute_out|default:'?' }}
-        </td>
-        <td>
-            {{ statistics.attrib.subs_on_bench|default:'?' }}
-        </td>
-        <td>
-            {{ statistics.attrib.goals|default:'?' }}
-        </td>
-        <td>
-            {{ statistics.attrib.yellow_cards|default:'?' }}
-        </td>
-        <td>
-            {{ statistics.attrib.second_yellow_cards|default:'?' }}
-        </td>
-        <td>
-            {{ statistics.attrib.red_cards|default:'?' }}
-        </td>
-    </tr>
+{% if sport.slug != 'tennis' %}
+    <table>
+        <tr>
+            <th>{% trans 'competition' %}</th>
+            <th>{% trans 'season' %}</th>
+            <th>{% trans 'team' %}</th>
+            <th><img src="{{ STATIC_URL }}img/events/minute_played.png" alt="{% trans 'Minutes played' %}" title="{% trans 'Minutes played' %}" /></th>
+            <th><img src="{{ STATIC_URL }}img/events/appearance.png" alt="{% trans 'Appearances' %}" title="{% trans 'Appearances' %}" /></th>
+            <th><img src="{{ STATIC_URL }}img/events/SI.png" alt="{% trans 'Substitute in' %}" title="{% trans 'Substitute in' %}" /></th>
+            <th><img src="{{ STATIC_URL }}img/events/SO.png" alt="{% trans 'Substitute out' %}" title="{% trans 'Substitute out' %}" /></th>
+            <th><img src="{{ STATIC_URL }}img/events/bench.png" alt="{% trans 'Substitutes on the bench' %}" title="{% trans 'Substitutes on the bench' %}" /></th>
+            <th><img src="{{ STATIC_URL }}img/events/G.png" alt="{% trans 'Goal' %}" title="{% trans 'Goal' %}" /></th>
+            <th><img src="{{ STATIC_URL }}img/events/YC.png" alt="{% trans 'Yellow card' %}" title="{% trans 'Yellow card' %}" /></th>
+            <th><img src="{{ STATIC_URL }}img/events/Y2C.png" alt="{% trans 'Yellow 2nd/RC' %}" title="{% trans 'Yellow 2nd/RC' %}" /></th>
+            <th><img src="{{ STATIC_URL }}img/events/RC.png" alt="{% trans 'Red card' %}" title="{% trans 'Red card' %}" /></th>
+        </tr>
+    {% for membership in person.element|findall:'membership' %}
+        {% gsm_entity key='team' tag='team' gsm_id=membership.attrib.team_id name=membership.attrib.club_name %}
+        {% for statistics in membership.getchildren %}
+        {% gsm_entity key='competition' tag='competition' gsm_id=statistics.attrib.competition_id name=statistics.attrib.competition_name %}
+        <tr>
+            <td>
+                <a href="{{ competition.get_absolute_url }}" title="{{ competition.name }}">{{ competition.name }}</a>
+            </td>
+            <td>{{ statistics.attrib.season_name }}</td>
+            <td>
+                <a href="{{ team.get_absolute_url }}" title="{{ team.name }}">{{ team.name }}</a>
+            </td>
+            <td>
+                {{ statistics.attrib.minutes_played|default:'?' }}
+            </td>
+            <td>
+                {{ statistics.attrib.appearances|default:'?' }}
+            </td>
+            <td>
+                {{ statistics.attrib.substitute_in|default:'?' }}
+            </td>
+            <td>
+                {{ statistics.attrib.substitute_out|default:'?' }}
+            </td>
+            <td>
+                {{ statistics.attrib.subs_on_bench|default:'?' }}
+            </td>
+            <td>
+                {{ statistics.attrib.goals|default:'?' }}
+            </td>
+            <td>
+                {{ statistics.attrib.yellow_cards|default:'?' }}
+            </td>
+            <td>
+                {{ statistics.attrib.second_yellow_cards|default:'?' }}
+            </td>
+            <td>
+                {{ statistics.attrib.red_cards|default:'?' }}
+            </td>
+        </tr>
+        {% endfor %}
     {% endfor %}
-{% endfor %}
-</table>
+    </table>
+{% endif %}
 {% endblock %}

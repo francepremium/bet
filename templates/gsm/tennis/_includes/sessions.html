@@ -12,37 +12,24 @@
                 <a href="{{ session.oponnent_A.get_absolute_url }}" title="{{ session.oponnent_A_name }}">{{ session.oponnent_A_name }}</a>
             </td>
             {% if session.status == 'Played' %}
-                <td class="score left">
-                    <a href="{{ session.get_absolute_url }}" title="{{ session.oponnent_A_name }} {% trans 'vs' %} {{ session.oponnent_B_name }}">
-                        {% if session.A_score != None %}
-                            {{ session.A_score }}
-                        {% endif %}
-                    </a>
-                    {% if session.A_ets and session.A_ets > session.B_ets and session.winner == session.oponnent_A and not session.penalty %}
-                    <span class="extratimescore">E</span>
-                    {% endif %}
-                    {% if session.penalty == 'A' %}
-                    <span class="penalty">P</span>
-                    {% endif %}
-                </td>
-                <td class="score center">
-                    <a href="{{ session.get_absolute_url }}" title="{{ session.oponnent_A_name }} {% trans 'vs' %} {{ session.oponnent_B_name }}">
-                    -
-                    </a>
-                </td>
-                <td class="score right">
-                    <a href="{{ session.get_absolute_url }}" title="{{ session.oponnent_A_name }} {% trans 'vs' %} {{ session.oponnent_B_name }}">
-                    {% if session.B_score != None %}
-                        {{ session.B_score }}
-                    {% endif %}
-                    </a>
-                    {% if session.B_ets and session.B_ets > session.A_ets and session.winner == session.oponnent_B and not session.penalty %}
-                    <span class="extratimescore">E</span>
-                    {% endif %}
-                    {% if session.penalty == 'B' %}
-                    <span class="penalty">P</span>
-                    {% endif %}
-                </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>{% if session.A1_score %}{{ session.A1_score }}{% endif %}</td>
+                        <td>{% if session.A2_score %}{{ session.A2_score }}{% endif %}</td>
+                        <td>{% if session.A3_score %}{{ session.A3_score }}{% endif %}</td>
+                        <td>{% if session.A4_score %}{{ session.A4_score }}{% endif %}</td>
+                        <td>{% if session.A5_score %}{{ session.A5_score }}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td>{% if session.B1_score %}{{ session.B1_score }}{% endif %}</td>
+                        <td>{% if session.B2_score %}{{ session.B2_score }}{% endif %}</td>
+                        <td>{% if session.B3_score %}{{ session.B3_score }}{% endif %}</td>
+                        <td>{% if session.B4_score %}{{ session.B4_score }}{% endif %}</td>
+                        <td>{% if session.B5_score %}{{ session.B5_score }}{% endif %}</td>
+                    </tr>
+                </table>
+            </td>
             {% endif %}
             {% if session.status == 'Fixture' %}
                 <td class="score left">

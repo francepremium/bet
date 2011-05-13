@@ -11,3 +11,4 @@
 django-filter
 django-autoslug==1.4.1
 -e git+https://github.com/ericflo/django-pagination.git#egg=pagination
+python-dateutil

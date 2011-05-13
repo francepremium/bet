@@ -1,0 +1,11 @@
+{% extends 'gsm/competition/base.html' %}
+{% load i18n gsm_tags %}
+
+{% block body %}
+    {{ block.super }}
+
+    {% for tree in rankings_trees %}
+        <h2 class="{{ tree.season.season_type }} {{ tree.season.gender }}">{% trans tree.season.season_type %} {% trans tree.season.gender %}</h2>
+        {% gsm_resultstable_render tree.tree.getroot.getchildren.1 %}
+    {% endfor %}
+{% endblock %}

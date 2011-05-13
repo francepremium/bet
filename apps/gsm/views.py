@@ -1,4 +1,5 @@
 import datetime
+from dateutil.rrule import rrule, WEEKLY
 
 from django.db.models import Q
 from django.utils.translation import ugettext as _
@@ -34,8 +35,12 @@ def person_detail_tab(request, sport, gsm_id, tab, tag='person',
     }
 
 
-    t = gsm.get_tree(context['language'], sport, 'get_career', 
-        type='player', id=person.gsm_id, detailed='yes')
+    if sport.slug == 'tennis':
+        t = gsm.get_tree(context['language'], sport, 'get_players', 
+            type='player', id=person.gsm_id, detailed='yes')
+    else:
+        t = gsm.get_tree(context['language'], sport, 'get_career', 
+            type='player', id=person.gsm_id, detailed='yes')
     person.element = t.getroot().getchildren()[1]
 
     template_name = [
@@ -71,10 +76,11 @@ def session_detail_tab(request, sport, gsm_id, tab, tag='match',
 
     t = gsm.get_tree(context['language'], sport, 'get_match_statistics', 
         id=session.gsm_id)
-    c = t.getroot().getchildren()[1]
-    while c.tag != 'match':
-        c = c.getchildren()[0]
-    context['statistics'] = statistics = c
+    if t != False:
+        c = t.getroot().getchildren()[1]
+        while c.tag != 'match':
+            c = c.getchildren()[0]
+        context['statistics'] = statistics = c
 
     template_name = [
         'gsm/%s/%s/%s.html' % (sport.slug, 'session', tab),
@@ -104,9 +110,82 @@ def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
         'gsm/%s/%s.html' % (tag, tab),
     ]
 
+    context['cup'] = cup = False
+    if competition.get_last_season().round_set.filter(round_type='cup').count():
+        cup = context['cup'] = True
+
     if tab == 'calendar':
-        gameweek = context['gameweek'] = request.GET.get('gameweek', competition.get_last_season().get_current_gameweek())
-        context['sessions'] = competition.get_last_season().session_set.filter(gameweek=gameweek)
+        season = competition.get_last_season()
+        if cup or season.round_set.count() > 1:
+            round_pk = request.GET.get('round', False)
+            if round_pk:
+                context['round'] = season.round_set.get(pk=round_pk)
+            else:
+                context['round'] = season.get_current_round()
+            context['sessions'] = context['round'].session_set.all()
+        elif season.get_current_gameweek():
+            gameweek = context['gameweek'] = int(request.GET.get('gameweek', season.get_current_gameweek()))
+            context['sessions'] = season.session_set.filter(gameweek=gameweek)
+        else:
+            season_round = season.round_set.all()[0]
+
+            this_week_monday = datetime.date.today() - datetime.timedelta(datetime.date.today().weekday())
+            # start_date should be a monday
+            start_date = season_round.start_date - datetime.timedelta(season_round.start_date.weekday())
+            dates = rrule(WEEKLY, dtstart=start_date, until=season_round.end_date)
+
+            week = request.GET.get('week', False)
+            if not week:
+                default_week = True
+                week = 0
+                for date in dates:
+                    if date == this_week_monday:
+                        break
+                    week += 1
+                try:
+                    dates[week]
+                except IndexError:
+                    week = week - 1
+            else:
+                default_week = False
+
+            week = int(week) 
+            try:
+                dates[week+1]
+                context['next_week'] = week + 1
+            except IndexError:
+                pass
+            context['previous_week'] = week - 1
+
+            context['sessions'] = season.session_set.filter(datetime_utc__gte=dates[week]).filter(datetime_utc__lte=dates[week] + datetime.timedelta(7))
+
+            if not context['sessions'].count() and default_week:
+                week -= 1
+                context['previous_week'] -= 1
+                context['sessions'] = season.session_set.filter(datetime_utc__gte=dates[week]).filter(datetime_utc__lte=dates[week] + datetime.timedelta(7))
+
+            context['last_sessions'] = season.session_set.filter(datetime_utc__gte=datetime.date.today() - datetime.timedelta(7)).filter(status='Played')
+            context['next_sessions'] = season.session_set.filter(datetime_utc__lte=datetime.date.today() + datetime.timedelta(7)).filter(status='Fixture')
+
+    if sport.slug == 'tennis':
+        season = competition.get_last_season()
+        seasons = competition.season_set.filter(end_date=season.end_date)
+        context['rankings_trees'] = trees = []
+        for season in seasons:
+            if season.season_type == 'double':
+                trees.append({
+                    'tree': gsm.get_tree(context['language'], sport, 
+                        'get_rankings', type=season.season_type,
+                        tour_id=competition.championship.gsm_id),
+                    'season': season,
+                })
+            else:
+                trees.append({
+                    'tree': gsm.get_tree(context['language'], sport, 
+                        'get_rankings', type=season.season_type, 
+                        tour_id=competition.championship.gsm_id),
+                    'season': season,
+                })
 
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name, context,
@@ -126,6 +205,11 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         'team': team,
     }
 
+    tree = gsm.get_tree(context['language'], sport, 'get_teams', 
+        type='team', id=team.gsm_id, detailed='yes')
+    team.element = tree.getroot().findall('team')[0]
+    team.name = team.element.attrib['official_name']
+
     template_name = [
         'gsm/%s/%s/%s.html' % (sport.slug, tag, tab),
         'gsm/%s/%s.html' % (tag, tab),
@@ -134,17 +218,18 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
     def get_reference_season(team):
         # find reference seasons for stats
         q = Competition.objects.filter(sport=sport)
-        q = q.filter(is_nationnal=True)
-        q = q.filter(
-            Q(season__round__session__in=team.sessions_as_A.all()) |
-            Q(season__round__session__in=team.sessions_as_B.all())
-        ).distinct()
+        if 'country' in team.attrib.keys() and team.attrib['country']:
+            q = q.filter(Q(area__name_fr=team.attrib['country'])|Q(area__name_en=team.attrib['country'])).distinct()
+        else:
+            q = q.filter(Q(season__session__oponnent_A=team)|Q(season__session__oponnent_B=team))
+        if q.filter(is_nationnal=True).count():
+            q = q.filter(is_nationnal=True)
         reference_competition = q[q.count() - 1]
         q = reference_competition.season_set.all().order_by('-gsm_id')
         reference_season = q[q.count() - 1]
         return reference_season
 
-    def get_resultstable_for_season(season):
+    def get_resultstable_for_season(season, team):
         # get stats
         tree = gsm.get_tree(context['language'], sport,
             'get_tables', id=season.gsm_id, type='season')
@@ -152,12 +237,14 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         resultstable_elements = tree.findall('competition/season/round/resultstable')
         if group_elements and not resultstable_elements:
             for group_element in group_elements:
-                print group_element
+                for ranking_element in group_element.findall('resultstable/ranking'):
+                    if ranking_element.attrib['team_id'] == str(team.gsm_id):
+                        resultstable_elements = group_element
+                        break
+
         for resultstable in resultstable_elements:
             if resultstable.attrib['type'] == 'total':
-                break
-
-        return resultstable
+                return resultstable
 
     if tab == 'home':
         # find next sessions
@@ -166,7 +253,7 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         context['next_sessions'] = q[:7]
 
         reference_season = get_reference_season(team)
-        context['resultstable'] = get_resultstable_for_season(reference_season)
+        context['resultstable'] = get_resultstable_for_season(reference_season, team)
 
     elif tab == 'squad':
         # season filter
@@ -175,7 +262,8 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
             Q(round__session__in=team.sessions_as_B.all())
         ).distinct().order_by('name')
         if 'season_gsm_id' in request.GET and request.GET['season_gsm_id']:
-            season = shortcuts.get_object_or_404(Season, gsm_id=request.GET['season_gsm_id'])
+            season = shortcuts.get_object_or_404(Season, gsm_id=request.GET['season_gsm_id'], 
+                sport=sport)
         else:
             season = context['team_seasons'][0]
         context['season'] = season
@@ -190,17 +278,14 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
 
         context['persons'] = []
 
-        # we need to cut this data as well to get minutes played,
-        # lineups and subs on bench
-        #career_tree = gsm.get_tree(context['language'], sport,
-            #'get_career', type='team', detailed='yes', 
-            #id=team.gsm_id)
-
         # person orderer
         positions = {}
         for person_element in team_element.findall('person'):
-            if person_element.attrib['type'] == 'player':
-                position = person_element.attrib['position']
+            if person_element.attrib['type'] in ('player', 'Joueur', 'Player'):
+                if 'position' not in person_element.attrib.keys():
+                    position = _('player')
+                else:
+                    position = person_element.attrib['position']
             else:
                 continue # pass coach and crap
                 #position = person_element.attrib['type']
@@ -217,7 +302,7 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
     elif tab == 'statistics':
         reference_season = get_reference_season(team)
         context['reference_season'] = reference_season
-        context['resultstable'] = get_resultstable_for_season(reference_season)
+        context['resultstable'] = get_resultstable_for_season(reference_season, team)
 
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name, context,

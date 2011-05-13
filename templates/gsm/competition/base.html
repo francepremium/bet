@@ -18,9 +18,11 @@
     <li class="news tab {% if tab == 'news' %}active{% endif %}">
         <a href="{{ competition.get_news_absolute_url }}" title="{{ competition.name }}">{% trans 'news' %}</a>
     </li>
+    {% if sport.slug != 'tennis' %}
     <li class="statistics tab {% if tab == 'statistics' %}active{% endif %}">
         <a href="{{ competition.get_statistics_absolute_url }}" title="{{ competition.name }}">{% trans 'statistics' %}</a>
     </li>
+    {% endif %}
     <li class="calendar tab {% if tab == 'calendar' %}active{% endif %}">
         <a href="{{ competition.get_calendar_absolute_url }}" title="{{ competition.name }}">{% trans 'calendar' %}</a>
     </li>

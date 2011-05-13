@@ -10,6 +10,9 @@
     <li class="news tab {% if tab == 'news' %}active{% endif %}">
         <a href="{{ sport.get_news_absolute_url }}" title="{{ sport }} {% trans 'news' %}">{% trans 'news' %}</a>
     </li>
+    <li class="competitions tab {% if tab == 'competitions' %}active{% endif %}">
+        <a href="{{ sport.get_competitions_absolute_url }}" title="{{ sport }} {% trans 'competitions' %}">{% trans 'competitions' %}</a>
+    </li>
     <li class="informations tab {% if tab == 'informations' %}active{% endif %}">
         <a href="{{ sport.get_informations_absolute_url }}" title="{{ sport }} {% trans 'informations' %}">{% trans 'informations' %}</a>
     </li>

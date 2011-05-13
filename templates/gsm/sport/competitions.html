@@ -1,0 +1,42 @@
+{% extends 'gsm/sport/base.html' %}
+
+{% block extra_head %}
+<style type="text/css">
+div.area ul {
+    display: none;
+}
+</style>
+{% endblock %}
+
+{% block extra_body %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $('div.area').click(function(e) {
+        if ($(this).find('ul:visible').length) {
+            return true;
+        }
+        if ($('div.area ul:visible').length) {
+            $('div.area ul').fadeOut('fast');
+        }
+        $(this).find('ul').fadeIn();
+    });
+});
+</script>
+{% endblock %}
+
+{% block body %}
+    {% for area in sport.get_competition_areas %}
+    <div class="area {{ area.code }}">
+        <h3>{{ area.name }}</h3>
+        <ul>
+        {% for competition in area.competition_set.all.select_related %}
+            {% if competition.sport == sport %}
+                <li>
+                    <a href="{{ competition.get_absolute_url }}" title="{{ competition.name }}">{{ competition.name }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+{% endblock %}
