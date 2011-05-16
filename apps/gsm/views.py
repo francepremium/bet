@@ -23,7 +23,7 @@ def person_detail_tab(request, sport, gsm_id, tab, tag='person',
     sport = shortcuts.get_object_or_404(Sport, slug=sport)
 
     gsm_entity_class = model_class_for_tag(tag)
-    person, created = gsm_entity_class.objects.get_or_create(
+    person = shortcuts.get_object_or_404(gsm_entity_class,
         sport = sport,
         tag = tag,
         gsm_id = gsm_id
@@ -127,45 +127,48 @@ def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
             gameweek = context['gameweek'] = int(request.GET.get('gameweek', season.get_current_gameweek()))
             context['sessions'] = season.session_set.filter(gameweek=gameweek)
         else:
-            season_round = season.round_set.all()[0]
+            if season.session_set.count():
+                season_round = season.round_set.all()[0]
 
-            this_week_monday = datetime.date.today() - datetime.timedelta(datetime.date.today().weekday())
-            # start_date should be a monday
-            start_date = season_round.start_date - datetime.timedelta(season_round.start_date.weekday())
-            dates = rrule(WEEKLY, dtstart=start_date, until=season_round.end_date)
+                this_week_monday = datetime.date.today() - datetime.timedelta(datetime.date.today().weekday())
+                # start_date should be a monday
+                start_date = season_round.start_date - datetime.timedelta(season_round.start_date.weekday())
+                dates = rrule(WEEKLY, dtstart=start_date, until=season_round.end_date)
 
-            week = request.GET.get('week', False)
-            if not week:
-                default_week = True
-                week = 0
-                for date in dates:
-                    if date == this_week_monday:
-                        break
-                    week += 1
+                week = request.GET.get('week', False)
+                if not week:
+                    default_week = True
+                    week = 0
+                    for date in dates:
+                        if date == this_week_monday:
+                            break
+                        week += 1
+                    try:
+                        dates[week]
+                    except IndexError:
+                        week = week - 1
+                else:
+                    default_week = False
+
+                week = int(week) 
                 try:
-                    dates[week]
+                    dates[week+1]
+                    context['next_week'] = week + 1
                 except IndexError:
-                    week = week - 1
-            else:
-                default_week = False
+                    pass
+                context['previous_week'] = week - 1
 
-            week = int(week) 
-            try:
-                dates[week+1]
-                context['next_week'] = week + 1
-            except IndexError:
-                pass
-            context['previous_week'] = week - 1
-
-            context['sessions'] = season.session_set.filter(datetime_utc__gte=dates[week]).filter(datetime_utc__lte=dates[week] + datetime.timedelta(7))
-
-            if not context['sessions'].count() and default_week:
-                week -= 1
-                context['previous_week'] -= 1
                 context['sessions'] = season.session_set.filter(datetime_utc__gte=dates[week]).filter(datetime_utc__lte=dates[week] + datetime.timedelta(7))
 
-            context['last_sessions'] = season.session_set.filter(datetime_utc__gte=datetime.date.today() - datetime.timedelta(7)).filter(status='Played')
-            context['next_sessions'] = season.session_set.filter(datetime_utc__lte=datetime.date.today() + datetime.timedelta(7)).filter(status='Fixture')
+                if not context['sessions'].count() and default_week:
+                    week -= 1
+                    context['previous_week'] -= 1
+                    context['sessions'] = season.session_set.filter(datetime_utc__gte=dates[week]).filter(datetime_utc__lte=dates[week] + datetime.timedelta(7))
+
+                context['last_sessions'] = season.session_set.filter(datetime_utc__gte=datetime.date.today() - datetime.timedelta(7)).filter(status='Played')
+                context['next_sessions'] = season.session_set.filter(datetime_utc__lte=datetime.date.today() + datetime.timedelta(7)).filter(status='Fixture')
+            else:
+                context['sessions'] = None
 
     if sport.slug == 'tennis':
         season = competition.get_last_season()

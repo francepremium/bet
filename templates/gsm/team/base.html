@@ -23,7 +23,7 @@
     <li class="news tab {% if tab == 'news' %}active{% endif %}">
         <a href="{{ team.get_news_absolute_url }}" title="{{ team.name }}">{% trans 'news' %}</a>
     </li>
-    {% if sport.slug != 'basketball' %}
+    {% if sport.slug == 'soccer' %}
     <li class="statistics tab {% if tab == 'statistics' %}active{% endif %}">
         <a href="{{ team.get_statistics_absolute_url }}" title="{{ team.name }}">{% trans 'statistics' %}</a>
     </li>

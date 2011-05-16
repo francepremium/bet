@@ -4,7 +4,7 @@
 {% load gsm_tags %}
 
 {% block body %}
-<h1>{{ competition.name }}</h1>
+<h1>{% if competition.area %}{{ competition.area.name }}: {% endif %}{{ competition.name }}</h1>
 {% endblock %}
 
 {% block subnav %}

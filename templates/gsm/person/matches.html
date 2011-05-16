@@ -1,0 +1,12 @@
+{% extends 'gsm/person/base.html' %}
+
+{% load i18n gsm_tags %}
+
+{% block body %}
+    {{ block.super }}
+
+    {% if person.get_sessions.count %}
+    <h2 class="sessions">{% trans 'matches' %}</h2>
+    {% gsm_sessions_render person.get_sessions %}
+    {% endif %}
+{% endblock %}

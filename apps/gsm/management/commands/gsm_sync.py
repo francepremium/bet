@@ -29,7 +29,7 @@ class Command(BaseCommand):
                 if element.tag == 'area':
                     self.save_area(code, element)
     
-            for sport in Sport.objects.all():
+            for sport in Sport.objects.all().filter(slug='tennis'):
                 print "Saving seasons for %s" % sport
                 properties = {}
 
@@ -263,6 +263,8 @@ class Command(BaseCommand):
                 self.save_session(language, sport, match, session_round=r, season=r.season)
 
     def save_session(self, language, sport, element, **properties):
+        if int(element.attrib.get('match_id')) == 16794:
+            import ipdb; ipdb.set_trace()
         converter = Session._meta.get_field('actual_start_datetime')
         actual_start_datetime = '%s %s' % (
             element.attrib.get('actual_start_date', '') or '',
@@ -273,7 +275,7 @@ class Command(BaseCommand):
         else:
             actual_start_datetime = None
 
-        if 'official_start_datetime' in element.attrib.keys():
+        if 'official_start_date' in element.attrib.keys():
             official_start_datetime = '%s %s' % (
                 element.attrib.get('official_start_date', '') or '',
                 element.attrib.get('official_start_time', '00:00:00') or '00:00:00',
@@ -290,11 +292,10 @@ class Command(BaseCommand):
             official_start_datetime = None
 
         properties.update({
-            'actual_start_datetime': actual_start_datetime,
             'status': element.attrib.get('status'),
             'gameweek': element.attrib.get('gameweek') or None,
             'last_updated': element.attrib.get('last_updated', None),
-            'datetime_utc': official_start_datetime,
+            'datetime_utc': actual_start_datetime or official_start_datetime,
         })
 
         xml_map = (

@@ -81,8 +81,12 @@
         <td><a href="{{ session.season.competition.get_absolute_url }}" title="{{ session.season.competition.name }}" rel="canonical">{{ session.season.competition.name }}</a></td>
     </tr>
     <tr>
-        <td>{% trans 'date' %}</td>
-        <td>{{ session.datetime_utc.date }}</td>
+        {% if session.datetime_utc.date %}
+            <td>{% trans 'date' %}</td>
+            <td>{{ session.datetime_utc.date }}</td>
+        {% else %}
+            <td colspan="2"></td>
+        {% endif %}
     </tr>
     <tr>
         {% if session.gameweek %}

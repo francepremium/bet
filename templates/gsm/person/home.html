@@ -65,9 +65,9 @@
 
 <img src="http://imagecache.soccerway.com/players/150x150/{{ person.gsm_id }}.jpg" />
 
-<h2>{% trans 'career' %}</h2>
+{% if sport.slug == 'soccer' %}
+    <h2>{% trans 'career' %}</h2>
 
-{% if sport.slug != 'tennis' %}
     <table>
         <tr>
             <th>{% trans 'competition' %}</th>

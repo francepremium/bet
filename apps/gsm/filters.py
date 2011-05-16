@@ -25,7 +25,7 @@ class SessionFilter(django_filters.FilterSet):
         super(SessionFilter, self).__init__(*args, **kwargs)
         self.filters['session_round__season__competition'].extra['queryset'] = \
             Competition.objects.filter(sport=sport)
-        self.filters['area'].extra['queryset'] = Area.objects.filter(competition__sport=sport)
+        self.filters['area'].extra['queryset'] = Area.objects.filter(competition__sport=sport).distinct()
 
     class Meta:
         model = Session
