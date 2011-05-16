@@ -66,7 +66,7 @@ INSTALLED_APPS = [
     'gsm',
 ]
 
-LANGUAGE_CODE = "fr-FR"
+LANGUAGE_CODE = "fr"
 TIME_ZONE = "Europe/Paris"
 LANGUAGES = (
     ('en', gettext('English')),

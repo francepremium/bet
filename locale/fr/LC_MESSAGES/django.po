@@ -7,64 +7,499 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-06 04:21-0700\n"
+"POT-Creation-Date: 2011-05-16 12:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
+#: local_settings.py:72
+msgid "English"
+msgstr ""
+
+#: local_settings.py:73
+msgid "French"
+msgstr ""
+
+#: apps/gsm/filters.py:15
+msgid "today"
+msgstr ""
+
+#: apps/gsm/filters.py:16
+msgid "last 3 hours"
+msgstr ""
+
+#: apps/gsm/filters.py:17 apps/gsm/views.py:438
+msgid "tomorrow"
+msgstr ""
+
+#: apps/gsm/filters.py:18
+msgid "7 days"
+msgstr ""
+
+#: apps/gsm/models.py:192
+msgid "nationnal league"
+msgstr ""
+
+#: apps/gsm/models.py:288 apps/gsm.sync/models.py:99
+msgid "match has been played"
+msgstr ""
+
+#: apps/gsm/models.py:289 apps/gsm.sync/models.py:100
+msgid "match is playing (live)"
+msgstr ""
+
+#: apps/gsm/models.py:290 apps/gsm.sync/models.py:101
+msgid "match is scheduled"
+msgstr ""
+
+#: apps/gsm/models.py:291 apps/gsm.sync/models.py:102
+msgid "match is postponed to other (unknown) date"
+msgstr ""
+
+#: apps/gsm/models.py:292 apps/gsm.sync/models.py:103
+msgid "match is cancelled and won't be played again"
+msgstr ""
+
+#: apps/gsm/models.py:293 apps/gsm.sync/models.py:104
+msgid "match is suspended during match"
+msgstr ""
+
+#: apps/gsm/views.py:289
+msgid "player"
+msgstr ""
+
+#: apps/gsm/views.py:435
+msgid "yesterday"
+msgstr ""
+
+#: apps/gsm/views.py:436
+msgid "last 7 days"
+msgstr ""
+
+#: apps/gsm/views.py:439
+msgid "next 7 days"
+msgstr ""
+
+#: apps/gsm.sync/models.py:117
+msgid "extra time score of team A"
+msgstr ""
+
+#: apps/gsm.sync/models.py:117 apps/gsm.sync/models.py:118
+msgid "Extra-time score, available when match gets into overtime."
+msgstr ""
+
+#: apps/gsm.sync/models.py:118
+msgid "extra time score of team B"
+msgstr ""
+
+#: apps/gsm.sync/models.py:119
+msgid "full time score of team A"
+msgstr ""
+
+#: apps/gsm.sync/models.py:119 apps/gsm.sync/models.py:120
+msgid ""
+"Full-time score represents result after regular time (90 minutes) when match "
+"status is played."
+msgstr ""
+
+#: apps/gsm.sync/models.py:120
+msgid "full time score of team B"
+msgstr ""
+
+#: apps/gsm.sync/models.py:121
+msgid "half time score of team A"
+msgstr ""
+
+#: apps/gsm.sync/models.py:121 apps/gsm.sync/models.py:122
+msgid "Half-time score is available as soon as first half ends."
+msgstr ""
+
+#: apps/gsm.sync/models.py:122
+msgid "half time score of team B"
+msgstr ""
+
+#: apps/gsm.sync/models.py:125
+msgid "Score made in penalty shootout by team A"
+msgstr ""
+
+#: apps/gsm.sync/models.py:125 apps/gsm.sync/models.py:126
+msgid ""
+"Score made in penalty shootout, usually when overtime ended with draw. "
+"Updated live."
+msgstr ""
+
+#: apps/gsm.sync/models.py:126
+msgid "Score made in penalty shootout by team B"
+msgstr ""
+
 #: templates/homepage.html:5
 msgid "Welcome"
 msgstr "Bienvenue"
 
-#: templates/homepage.html:11
-msgid "Welcome to Pinax"
-msgstr "Bienevenue sur le site"
-
-#: templates/homepage.html:14
-msgid ""
-"\n"
-"        <b>Pinax</b> is a <a href=\"http://djangoproject.com/\">Django</a>\n"
-"        project intended to provide a starting point for websites. By\n"
-"        integrating numerous reusable Django apps to take care of the\n"
-"        things that many sites have in common, it lets you focus on what\n"
-"        makes your site different.\n"
-"        "
+#: templates/site_base.html:59
+msgid "Hide announcement"
 msgstr ""
 
-#: templates/homepage.html:24
-msgid ""
-"\n"
-"        For more information about Pinax, see\n"
-"        <a href=\"http://pinaxproject.com/\">http://pinaxproject.com/</a>.\n"
-"        "
+#: templates/site_base.html:72
+msgid "soccer"
 msgstr ""
 
-#: templates/homepage.html:30
-msgid "About this project"
-msgstr "A propos de ce projet"
-
-#: templates/homepage.html:33
-msgid ""
-"\n"
-"        This project lays the foundation for all other Pinax starter "
-"projects. It\n"
-"        provides the project directory layout and some key infrastructure "
-"apps on\n"
-"        which the other starter projects are based.\n"
-"        "
+#: templates/site_base.html:75
+msgid "tennis"
 msgstr ""
 
-#: templates/site_base.html:15
-msgid "Tab 1"
+#: templates/site_base.html:78
+msgid "rugby"
 msgstr ""
 
-#: templates/site_base.html:22
-msgid "&copy; 2010 &lt;your company here&gt;"
-msgstr "&copy; 2010 &lt;votre raison sociale ici&gt;"
+#: templates/site_base.html:81
+msgid "basketball"
+msgstr ""
+
+#: templates/site_base.html:94
+msgid "clear"
+msgstr ""
+
+#: templates/gsm/_includes/resultstable.html:11
+#: templates/gsm/soccer/_includes/resultstable.html:11
+#: templates/gsm/team/statistics.html:21
+msgid "club"
+msgstr ""
+
+#: templates/gsm/_includes/resultstable.html:12
+#: templates/gsm/soccer/_includes/resultstable.html:12
+#: templates/gsm/team/statistics.html:22
+msgid "match played"
+msgstr ""
+
+#: templates/gsm/_includes/resultstable.html:13
+#: templates/gsm/soccer/_includes/resultstable.html:13
+#: templates/gsm/team/statistics.html:23
+msgid "wins"
+msgstr ""
+
+#: templates/gsm/_includes/resultstable.html:14
+#: templates/gsm/soccer/_includes/resultstable.html:14
+#: templates/gsm/team/statistics.html:24
+msgid "draw"
+msgstr ""
+
+#: templates/gsm/_includes/resultstable.html:15
+#: templates/gsm/soccer/_includes/resultstable.html:15
+#: templates/gsm/team/statistics.html:25
+msgid "lost"
+msgstr ""
+
+#: templates/gsm/_includes/resultstable.html:17
+#: templates/gsm/soccer/_includes/resultstable.html:16
+#: templates/gsm/team/statistics.html:26
+msgid "goal difference"
+msgstr ""
+
+#: templates/gsm/_includes/resultstable.html:19
+#: templates/gsm/soccer/_includes/resultstable.html:17
+#: templates/gsm/team/statistics.html:27
+#: templates/gsm/tennis/_includes/resultstable.html:12
+msgid "points"
+msgstr ""
+
+#: templates/gsm/_includes/resultstable.html:21
+#: templates/gsm/soccer/_includes/resultstable.html:19
+msgid "last 5 matches"
+msgstr ""
+
+#: templates/gsm/_includes/sessions.html:17
+#: templates/gsm/_includes/sessions.html:30
+#: templates/gsm/_includes/sessions.html:35
+#: templates/gsm/_includes/sessions.html:50
+#: templates/gsm/_includes/sessions.html:55
+#: templates/gsm/_includes/sessions.html:60
+#: templates/gsm/tennis/_includes/sessions.html:39
+#: templates/gsm/tennis/_includes/sessions.html:44
+#: templates/gsm/tennis/_includes/sessions.html:49
+msgid "vs"
+msgstr ""
+
+#: templates/gsm/_includes/sessions.html:73
+#: templates/gsm/tennis/_includes/sessions.html:62
+msgid "no matches to display"
+msgstr ""
+
+#: templates/gsm/competition/base.html:13 templates/gsm/sport/base.html:8
+#: templates/gsm/team/base.html:13
+msgid "home"
+msgstr ""
+
+#: templates/gsm/competition/base.html:16 templates/gsm/person/base.html:13
+#: templates/gsm/team/base.html:16
+#, fuzzy
+msgid "file"
+msgstr "Profil"
+
+#: templates/gsm/competition/base.html:19 templates/gsm/person/base.html:16
+#: templates/gsm/session/base.html:122 templates/gsm/sport/base.html:11
+#: templates/gsm/team/base.html:24
+msgid "news"
+msgstr ""
+
+#: templates/gsm/competition/base.html:23 templates/gsm/session/after.html:163
+#: templates/gsm/soccer/team/squad.html:21 templates/gsm/team/base.html:28
+#: templates/gsm/team/squad.html:20
+msgid "statistics"
+msgstr ""
+
+#: templates/gsm/competition/base.html:27 templates/gsm/team/base.html:32
+msgid "calendar"
+msgstr ""
+
+#: templates/gsm/competition/base.html:30 templates/gsm/person/base.html:24
+#: templates/gsm/session/base.html:125 templates/gsm/sport/base.html:26
+#: templates/gsm/team/base.html:35
+msgid "prognostics"
+msgstr ""
+
+#: templates/gsm/competition/base.html:33 templates/gsm/session/base.html:128
+#: templates/gsm/sport/base.html:29
+msgid "live"
+msgstr ""
+
+#: templates/gsm/competition/calendar.html:36
+msgid "last matches"
+msgstr ""
+
+#: templates/gsm/competition/calendar.html:40 templates/gsm/sport/home.html:7
+#: templates/gsm/team/home.html:18
+msgid "next matches"
+msgstr ""
+
+#: templates/gsm/person/base.html:20 templates/gsm/person/matches.html:9
+#: templates/gsm/sport/base.html:23
+msgid "matches"
+msgstr ""
+
+#: templates/gsm/person/home.html:11
+msgid "first name"
+msgstr ""
+
+#: templates/gsm/person/home.html:17
+msgid "middle name"
+msgstr ""
+
+#: templates/gsm/person/home.html:23
+msgid "last name"
+msgstr ""
+
+#: templates/gsm/person/home.html:29
+msgid "position"
+msgstr ""
+
+#: templates/gsm/person/home.html:35
+msgid "nationality"
+msgstr ""
+
+#: templates/gsm/person/home.html:41
+msgid "date of birth"
+msgstr ""
+
+#: templates/gsm/person/home.html:47
+msgid "country of birth"
+msgstr ""
+
+#: templates/gsm/person/home.html:53
+msgid "height"
+msgstr ""
+
+#: templates/gsm/person/home.html:59
+msgid "weight"
+msgstr ""
+
+#: templates/gsm/person/home.html:69
+msgid "career"
+msgstr ""
+
+#: templates/gsm/person/home.html:73 templates/gsm/session/base.html:80
+msgid "competition"
+msgstr ""
+
+#: templates/gsm/person/home.html:74
+msgid "season"
+msgstr ""
+
+#: templates/gsm/person/home.html:75
+msgid "team"
+msgstr ""
+
+#: templates/gsm/person/home.html:76 templates/gsm/soccer/team/squad.html:49
+#: templates/gsm/team/squad.html:55
+msgid "Minutes played"
+msgstr ""
+
+#: templates/gsm/person/home.html:77 templates/gsm/soccer/team/squad.html:50
+#: templates/gsm/team/squad.html:56
+msgid "Appearances"
+msgstr ""
+
+#: templates/gsm/person/home.html:78 templates/gsm/soccer/team/squad.html:52
+#: templates/gsm/team/squad.html:58
+msgid "Substitute in"
+msgstr ""
+
+#: templates/gsm/person/home.html:79 templates/gsm/soccer/team/squad.html:53
+#: templates/gsm/team/squad.html:59
+msgid "Substitute out"
+msgstr ""
+
+#: templates/gsm/person/home.html:80 templates/gsm/soccer/team/squad.html:54
+#: templates/gsm/team/squad.html:60
+msgid "Substitutes on the bench"
+msgstr ""
+
+#: templates/gsm/person/home.html:81 templates/gsm/soccer/team/squad.html:55
+#: templates/gsm/team/squad.html:61
+msgid "Goal"
+msgstr ""
+
+#: templates/gsm/person/home.html:82 templates/gsm/soccer/team/squad.html:56
+#: templates/gsm/team/squad.html:62
+msgid "Yellow card"
+msgstr ""
+
+#: templates/gsm/person/home.html:83 templates/gsm/soccer/team/squad.html:57
+#: templates/gsm/team/squad.html:63
+msgid "Yellow 2nd/RC"
+msgstr ""
+
+#: templates/gsm/person/home.html:84 templates/gsm/soccer/team/squad.html:58
+#: templates/gsm/team/squad.html:64
+msgid "Red card"
+msgstr ""
+
+#: templates/gsm/session/after.html:18
+msgid "lineups"
+msgstr ""
+
+#: templates/gsm/session/after.html:46
+msgid "substitutions"
+msgstr ""
+
+#: templates/gsm/session/after.html:49 templates/gsm/session/after.html:52
+msgid "in"
+msgstr ""
+
+#: templates/gsm/session/after.html:50 templates/gsm/session/after.html:53
+#, fuzzy
+msgid "out"
+msgstr "A propos"
+
+#: templates/gsm/session/after.html:51
+msgid "minute"
+msgstr ""
+
+#: templates/gsm/session/after.html:98
+msgid "lineups bench"
+msgstr ""
+
+#: templates/gsm/session/after.html:126
+msgid "goals"
+msgstr ""
+
+#: templates/gsm/session/after.html:137 templates/gsm/session/after.html:152
+msgid "assisted by"
+msgstr ""
+
+#: templates/gsm/session/base.html:85
+msgid "date"
+msgstr ""
+
+#: templates/gsm/session/base.html:93
+msgid "gameweek"
+msgstr ""
+
+#: templates/gsm/session/base.html:101
+msgid "kickoff"
+msgstr ""
+
+#: templates/gsm/session/base.html:116
+msgid "before"
+msgstr ""
+
+#: templates/gsm/session/base.html:119
+msgid "after"
+msgstr ""
+
+#: templates/gsm/session/home.html:21
+msgid "previous matches"
+msgstr ""
+
+#: templates/gsm/session/home.html:47
+msgid "head to head"
+msgstr ""
+
+#: templates/gsm/soccer/team/squad.html:20 templates/gsm/team/squad.html:19
+msgid "current"
+msgstr ""
+
+#: templates/gsm/soccer/team/squad.html:33 templates/gsm/team/squad.html:34
+msgid "years old"
+msgstr ""
+
+#: templates/gsm/soccer/team/squad.html:45 templates/gsm/team/squad.html:51
+msgid "name"
+msgstr ""
+
+#: templates/gsm/soccer/team/squad.html:47 templates/gsm/team/squad.html:53
+msgid "age"
+msgstr ""
+
+#: templates/gsm/soccer/team/squad.html:48 templates/gsm/team/squad.html:54
+msgid "Position"
+msgstr ""
+
+#: templates/gsm/soccer/team/squad.html:51 templates/gsm/team/squad.html:57
+msgid "Lineups"
+msgstr ""
+
+#: templates/gsm/sport/base.html:14
+msgid "competitions"
+msgstr ""
+
+#: templates/gsm/sport/base.html:17
+msgid "informations"
+msgstr ""
+
+#: templates/gsm/sport/base.html:20
+msgid "results"
+msgstr ""
+
+#: templates/gsm/team/base.html:20
+msgid "squad"
+msgstr ""
+
+#: templates/gsm/team/calendar.html:9
+msgid "next sessions"
+msgstr ""
+
+#: templates/gsm/team/home.html:23
+msgid "results table"
+msgstr ""
+
+#: templates/gsm/tennis/_includes/resultstable.html:13
+msgid "tournaments played"
+msgstr ""
+
+#~ msgid "Welcome to Pinax"
+#~ msgstr "Bienevenue sur le site"
+
+#~ msgid "About this project"
+#~ msgstr "A propos de ce projet"
+
+#~ msgid "&copy; 2010 &lt;your company here&gt;"
+#~ msgstr "&copy; 2010 &lt;votre raison sociale ici&gt;"
 
 #, fuzzy
 #~ msgid "Wondering <a href=\"%(what_next_url)s\">What Next</a>?"
@@ -75,8 +510,8 @@ msgstr "&copy; 2010 &lt;votre raison sociale ici&gt;"
 #~ "You can <a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s"
 #~ "\">Log in</a> to try out the site."
 #~ msgstr ""
-#~ "Vous pouvez <a href=\"%(signup_url)s\">vous inscrire</a> et <a href=\"%"
-#~ "(login_url)s\">vous authentifier</a> pour essayer le site."
+#~ "Vous pouvez <a href=\"%(signup_url)s\">vous inscrire</a> et <a href="
+#~ "\"%(login_url)s\">vous authentifier</a> pour essayer le site."
 
 #~ msgid "You can <a href=\"%(login_url)s\">Log in</a> to try out the site."
 #~ msgstr ""
@@ -101,14 +536,8 @@ msgstr "&copy; 2010 &lt;votre raison sociale ici&gt;"
 #~ msgid "Sign up"
 #~ msgstr "Inscription"
 
-#~ msgid "Profile"
-#~ msgstr "Profil"
-
 #~ msgid "Notices"
 #~ msgstr "Notifications"
-
-#~ msgid "About"
-#~ msgstr "A propos"
 
 #, fuzzy
 #~ msgid "Terms of Service"
@@ -121,11 +550,11 @@ msgstr "&copy; 2010 &lt;votre raison sociale ici&gt;"
 #~ msgstr "Que faire maintenant?"
 
 #~ msgid ""
-#~ "Start by <a href=\"%(signup_url)s\">signing up</a> and <a href=\"%"
-#~ "(login_url)s\">logging in</a>."
+#~ "Start by <a href=\"%(signup_url)s\">signing up</a> and <a href="
+#~ "\"%(login_url)s\">logging in</a>."
 #~ msgstr ""
-#~ "Commencez par <a href=\"%(signup_url)s\">vous inscrire</a> et <a href=\"%"
-#~ "(login_url)s\">vous authentifier</a>"
+#~ "Commencez par <a href=\"%(signup_url)s\">vous inscrire</a> et <a href="
+#~ "\"%(login_url)s\">vous authentifier</a>"
 
 #~ msgid "Start by <a href=\"%(login_url)s\">logging in</a>."
 #~ msgstr "Commencez par <a href=\"%(login_url)s\">vous authentifier</a>"
