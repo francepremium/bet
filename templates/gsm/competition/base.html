@@ -4,33 +4,33 @@
 {% load gsm_tags %}
 
 {% block body %}
-<h1>{% if competition.area %}{{ competition.area.name }}: {% endif %}{{ competition.name }}</h1>
+<h1>{{ competition }}</h1>
 {% endblock %}
 
 {% block subnav %}
 <ul>
     <li class="home tab {% if tab == 'home' %}active{% endif %}">
-        <a href="{{ competition.get_home_absolute_url }}" title="{{ competition.name }}">{% trans 'home' %}</a>
+        <a href="{{ competition.get_home_absolute_url }}" title="{{ competition }}">{% trans 'home' %}</a>
     </li>
     <li class="file tab {% if tab == 'file' %}active{% endif %}">
-        <a href="{{ competition.get_file_absolute_url }}" title="{{ competition.name }}">{% trans 'file' %}</a>
+        <a href="{{ competition.get_file_absolute_url }}" title="{{ competition }}">{% trans 'file' %}</a>
     </li>
     <li class="news tab {% if tab == 'news' %}active{% endif %}">
-        <a href="{{ competition.get_news_absolute_url }}" title="{{ competition.name }}">{% trans 'news' %}</a>
+        <a href="{{ competition.get_news_absolute_url }}" title="{{ competition }}">{% trans 'news' %}</a>
     </li>
     {% if sport.slug != 'tennis' %}
     <li class="statistics tab {% if tab == 'statistics' %}active{% endif %}">
-        <a href="{{ competition.get_statistics_absolute_url }}" title="{{ competition.name }}">{% trans 'statistics' %}</a>
+        <a href="{{ competition.get_statistics_absolute_url }}" title="{{ competition }}">{% trans 'statistics' %}</a>
     </li>
     {% endif %}
     <li class="calendar tab {% if tab == 'calendar' %}active{% endif %}">
-        <a href="{{ competition.get_calendar_absolute_url }}" title="{{ competition.name }}">{% trans 'calendar' %}</a>
+        <a href="{{ competition.get_calendar_absolute_url }}" title="{{ competition }}">{% trans 'calendar' %}</a>
     </li>
     <li class="prognostics tab {% if tab == 'prognostics' %}active{% endif %}">
-        <a href="{{ competition.get_prognostics_absolute_url }}" title="{{ competition.name }}">{% trans 'prognostics' %}</a>
+        <a href="{{ competition.get_prognostics_absolute_url }}" title="{{ competition }}">{% trans 'prognostics' %}</a>
     </li>
     <li class="live tab {% if tab == 'live' %}active{% endif %}">
-        <a href="{{ competition.get_live_absolute_url }}" title="{{ competition.name }}">{% trans 'live' %}</a>
+        <a href="{{ competition.get_live_absolute_url }}" title="{{ competition }}">{% trans 'live' %}</a>
     </li>
 </ul>
 {% endblock %}

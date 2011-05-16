@@ -96,7 +96,7 @@ def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
     template_name='', extra_context=None):
     sport = shortcuts.get_object_or_404(Sport, slug=sport)
     gsm_entity_class = model_class_for_tag(tag)
-    competition, created = gsm_entity_class.objects.get_or_create(
+    competition = shortcuts.get_object_or_404(gsm_entity_class,
         sport=sport, tag=tag, gsm_id=gsm_id)
 
     context = {
@@ -199,7 +199,7 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
     template_name='', extra_context=None):
     sport = shortcuts.get_object_or_404(Sport, slug=sport)
     gsm_entity_class = model_class_for_tag(tag)
-    team, created = gsm_entity_class.objects.get_or_create(
+    team = shortcuts.get_object_or_404(gsm_entity_class,
         sport=sport, tag=tag, gsm_id=gsm_id)
 
     context = {
@@ -360,7 +360,7 @@ def entity_detail(request, sport, tag, gsm_id,
     if gsm_entity_class in (Session, Competition):
         return http.HttpResponseNotFound()
     
-    entity, created = gsm_entity_class.objects.get_or_create(
+    entity = shortcuts.get_object_or_404(gsm_entity_class,
         sport = sport,
         tag = tag,
         gsm_id = gsm_id
@@ -432,9 +432,11 @@ def sport_detail_tab(request, sport, tab,
         context['filter'] = f
 
     if tab == 'results':
+        f.filters['datetime_utc'].extra['choices'][1][1] = _('last 3 hours')
         f.filters['datetime_utc'].extra['choices'][2][1] = _('yesterday')
         f.filters['datetime_utc'].extra['choices'][3][1] = _('last 7 days')
     elif tab == 'matches':
+        f.filters['datetime_utc'].extra['choices'][1][1] = _('next 3 hours')
         f.filters['datetime_utc'].extra['choices'][2][1] = _('tomorrow')
         f.filters['datetime_utc'].extra['choices'][3][1] = _('next 7 days')
 

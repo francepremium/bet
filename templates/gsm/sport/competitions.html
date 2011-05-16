@@ -32,7 +32,7 @@ $(document).ready(function() {
         {% for competition in area.competition_set.all.select_related %}
             {% if competition.sport == sport %}
                 <li>
-                    <a href="{{ competition.get_absolute_url }}" title="{{ competition.name }}">{{ competition.name }}</a>
+                    <a href="{{ competition.get_absolute_url }}" title="{{ competition }}">{{ competition.name }}</a>
                 </li>
             {% endif %}
         {% endfor %}

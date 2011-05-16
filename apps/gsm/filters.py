@@ -12,8 +12,8 @@ class DummyChoiceFilter(django_filters.ChoiceFilter):
 
 class SessionFilter(django_filters.FilterSet):
     DATETIME_UTC_CHOICES = [
-        ('today', _('today')),
-        ('3hours', _('last 3 hours')),
+        ['today', _('today')],
+        ['3hours', _('last 3 hours')],
         ['1day', _('tomorrow')],
         ['7days', _('7 days')],
     ]

@@ -97,7 +97,7 @@ class AbstractGsmEntity(models.Model):
 
     def get_tab_absolute_url(self, tab):
         return urlresolvers.reverse('gsm_%s_detail_tab' % self.tag, args=(
-            self.sport, self.gsm_id, tab))
+            self.sport.slug, self.gsm_id, tab))
 
     def get_home_absolute_url(self):
         return self.get_tab_absolute_url('home')
@@ -123,10 +123,10 @@ class AbstractGsmEntity(models.Model):
             else:
                 tag = self.tag
             return urlresolvers.reverse('gsm_%s_detail_tab' % tag, args=(
-                self.sport, self.gsm_id, 'home'))
+                self.sport.slug, self.gsm_id, 'home'))
         except urlresolvers.NoReverseMatch:
             return urlresolvers.reverse('gsm_entity_detail', args=(
-                self.sport, self.tag, self.gsm_id,))
+                self.sport.slug, self.tag, self.gsm_id,))
 
     def get_area(self):
         if self.area:
@@ -151,6 +151,11 @@ class AbstractGsmEntity(models.Model):
 
 
     def __unicode__(self):
+        if hasattr(self, 'element'):
+            if 'first_name' in self.attrib.keys():
+                return '%s %s' % (self.attrib['first_name'], self.attrib['last_name'])
+            if 'firstname' in self.attrib.keys():
+                return '%s %s' % (self.attrib['firstname'], self.attrib['lastname'])
         return '%s (<%s> #%s %s)' % (self.name, self.tag, self.gsm_id, self.sport)
 
 class GsmEntity(AbstractGsmEntity):
@@ -198,6 +203,15 @@ class Competition(AbstractGsmEntity):
         if not hasattr(self, '_last_season'):
             self._last_season = self.season_set.all().order_by('-end_date')[0]
         return self._last_season
+
+    def __unicode__(self):
+        if self.area_id:
+            return '%s: %s' % (self.area.name, self.name)
+        if self.name:
+            return self.name
+        if hasattr(self, 'element'):
+            return self.attrib.name
+        return super(Competition, self).__unicode__()
 
 class Season(AbstractGsmEntity):
     competition = models.ForeignKey('Competition')
@@ -316,6 +330,7 @@ class Session(AbstractGsmEntity):
 
     actual_start_datetime = models.DateTimeField(null=True, blank=True)
     datetime_utc = models.DateTimeField(null=True, blank=True)
+    time_unknown = models.BooleanField()
     status = models.CharField(max_length=12, choices=STATUS_CHOICES)
     gameweek = models.IntegerField(null=True, blank=True)
 
@@ -330,7 +345,7 @@ class Session(AbstractGsmEntity):
 
     def get_tab_absolute_url(self, tab):
         return urlresolvers.reverse('gsm_%s_detail_tab' % 'session', args=(
-            self.sport, self.gsm_id, tab))
+            self.sport.slug, self.gsm_id, tab))
     
     def get_after_absolute_url(self):
         return self.get_tab_absolute_url('after')

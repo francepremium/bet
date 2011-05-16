@@ -29,7 +29,7 @@ class Command(BaseCommand):
                 if element.tag == 'area':
                     self.save_area(code, element)
     
-            for sport in Sport.objects.all().filter(slug='tennis'):
+            for sport in Sport.objects.all():
                 print "Saving seasons for %s" % sport
                 properties = {}
 
@@ -263,8 +263,6 @@ class Command(BaseCommand):
                 self.save_session(language, sport, match, session_round=r, season=r.season)
 
     def save_session(self, language, sport, element, **properties):
-        if int(element.attrib.get('match_id')) == 16794:
-            import ipdb; ipdb.set_trace()
         converter = Session._meta.get_field('actual_start_datetime')
         actual_start_datetime = '%s %s' % (
             element.attrib.get('actual_start_date', '') or '',
@@ -297,6 +295,9 @@ class Command(BaseCommand):
             'last_updated': element.attrib.get('last_updated', None),
             'datetime_utc': actual_start_datetime or official_start_datetime,
         })
+
+        if not element.attrib.get('time_utc') and not element.attrib.get('official_start_time'):
+            properties['time_unknown'] = True
 
         xml_map = (
             ('person_%s_name', 'person'),
