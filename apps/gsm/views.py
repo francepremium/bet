@@ -416,7 +416,7 @@ def sport_detail_tab(request, sport, tab,
     elif tab == 'matches':
         sessions_qs = sessions_qs.filter(status='Fixture')
         if datefilter == '3hours':
-            sessions_qs = sessions_qs.filter(datetime_utc__gte=now - datetime.timedelta(0, 0, 0, 0, 0, 3))
+            sessions_qs = sessions_qs.filter(datetime_utc__lte=now + datetime.timedelta(0, 0, 0, 0, 0, 3))
         elif datefilter == 'today':
             sessions_qs = sessions_qs.filter(datetime_utc__gte=today)
             sessions_qs = sessions_qs.filter(datetime_utc__lte=tomorrow)
