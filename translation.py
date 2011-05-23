@@ -1,31 +1,16 @@
 from modeltranslation.translator import translator, TranslationOptions
 
+from bookmaker.models import *
 from gsm.models import *
 
-class GsmEntityTranslation(TranslationOptions):
+class NameTranslation(TranslationOptions):
     fields = ('name',)
-translator.register(GsmEntity, GsmEntityTranslation)
-
-class AreaTranslation(TranslationOptions):
-    fields = ('name',)
-translator.register(Area, AreaTranslation)
-
-class ChampionshipTranslation(TranslationOptions):
-    fields = ('name',)
-translator.register(Championship, ChampionshipTranslation)
-
-class CompetitionTranslation(TranslationOptions):
-    fields = ('name',)
-translator.register(Competition, CompetitionTranslation)
-
-class SeasonTranslation(TranslationOptions):
-    fields = ('name',)
-translator.register(Season, SeasonTranslation)
-
-class RoundTranslation(TranslationOptions):
-    fields = ('name',)
-translator.register(Round, RoundTranslation)
-
-class SessionTranslation(TranslationOptions):
-    fields = ('name',)
-translator.register(Session, SessionTranslation)
+translator.register(GsmEntity, NameTranslation)
+translator.register(Area, NameTranslation)
+translator.register(Championship, NameTranslation)
+translator.register(Competition, NameTranslation)
+translator.register(Season, NameTranslation)
+translator.register(Round, NameTranslation)
+translator.register(Session, NameTranslation)
+translator.register(BetType, NameTranslation)
+translator.register(BetChoice, NameTranslation)

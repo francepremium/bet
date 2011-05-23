@@ -7,7 +7,7 @@
                 <td>{{ session.datetime_utc.date }}</td>
                 <td>{{ session.session_round.season.competition.area }}</td>
                 <td>
-                    <a href="{{ session.session_round.season.competition.get_absolute_url }}" title="{{ session.session_round.season.competition }}">{{ session.session_round.season.competition }}</a>
+                    <a href="{{ session.session_round.season.competition.get_absolute_url }}" title="{{ session.session_round.season.competition }}">{{ session.session_round.season.competition.name }}</a>
                 </td>
                 <td>
                     <a href="{{ session.oponnent_A.get_absolute_url }}" title="{{ session.oponnent_A_name }}">{{ session.oponnent_A_name }}</a>

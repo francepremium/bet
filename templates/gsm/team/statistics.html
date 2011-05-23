@@ -58,12 +58,15 @@
             {% if forloop.counter == 1 %}
             <tr>
                 {% for key, value in element.attrib.items %}
+                    {% if key != 'goals_strike_rate' and key != 'goals_concede_rate' %}
                     <th class="{{ key }}">{% trans key %}</th>
+                    {% endif %}
                 {% endfor %}
             </tr>
             {% endif %}
             <tr>
             {% for key, value in element.attrib.items %}
+                {% if key != 'goals_strike_rate' and key != 'goals_concede_rate' %}
                 <td class="{{ key }}">
                     {% if key == 'type' %}
                         {% trans value %}
@@ -71,6 +74,7 @@
                         {{ value }}
                     {% endif %}
                 </td>
+                {% endif %}
             {% endfor %}
             </tr>
         {% endfor %}

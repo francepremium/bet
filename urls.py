@@ -14,8 +14,13 @@ urlpatterns = patterns("",
         "template": "homepage.html",
     }, name="home"),
     url(r"^gsm/", include('gsm.urls')),
+    url(r"^bet/", include('bet.urls')),
+    url(r"^bookmaker/", include('bookmaker.urls')),
+    url(r"^account/", include('pinax.apps.account.urls')),
+    url(r"^localeurl/", include('localeurl.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
-    url(r"^admin/", include(admin.site.urls))
+    url(r"^admin/", include(admin.site.urls)),
+    url(r'^ajax_select/', include('ajax_select.urls')),
 )
 
 

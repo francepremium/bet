@@ -152,6 +152,10 @@ class AbstractGsmEntity(models.Model):
 
     def __unicode__(self):
         if hasattr(self, 'element'):
+            if 'name' in self.attrib.keys():
+                return self.attrib['name']
+            if 'club_name' in self.attrib.keys():
+                return self.attrib['club_name']
             if 'first_name' in self.attrib.keys():
                 return '%s %s' % (self.attrib['first_name'], self.attrib['last_name'])
             if 'firstname' in self.attrib.keys():
@@ -255,7 +259,7 @@ class Season(AbstractGsmEntity):
             if next_rounds.count():
                 self._current_round = next_rounds[0]
             else:
-                self._current_round = self.round_set.order_by('-end_date')[0]
+                self._current_round = self.round_set.order_by('-end_date', '-gsm_id')[0]
 
         return self._current_round
 

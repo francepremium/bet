@@ -1,0 +1,15 @@
+{% extends 'site_base.html' %}
+
+{% load i18n %}
+
+{% block subnav %}
+<ul>
+    {% if is_admin %}
+    <li><a href="{% url bookmaker_edit bookmaker.pk %}">{% trans 'edit' %}</a></li>
+    <li><a href="{% url bookmaker_list_bet_type bookmaker.pk %}">{% trans 'bet types' %}</a></li>
+    <li><a href="{% url bookmaker_add_bet_type bookmaker.pk %}">{% trans 'add bet type' %}</a></li>
+    {% endif %}
+
+    <li><a href="{% url bookmaker_file bookmaker.pk %}">{% trans 'file' %}</a></li>
+</ul>
+{% endblock %}

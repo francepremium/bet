@@ -1,0 +1,31 @@
+{% extends 'bookmaker/base.html' %}
+{% load i18n %}
+
+{% block body %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% include 'form.html' %}
+
+        <p class="info">
+            {% blocktrans %}For bet types like "what player will score first", leave empty the following table. For bet types with fixed choices like "1X2" fill the table with one choice per line.{% endblocktrans %}
+        </p>
+
+        {{ formset.management_form }}
+
+        <table>
+            <tr>
+                <th>{% trans 'option name english' %}</th>
+                <th>{% trans 'option name french' %}</th>
+                <th>{% trans 'delete' %}</th>
+            </tr>
+            {% for form in formset %}
+            <tr>
+                <td>{{ form.name_en }}</td>
+                <td>{{ form.name_fr }}</td>
+                <td>{{ form.id }}{{ form.DELETE }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <input type="submit" value="{% trans 'save' %}" />
+    </form>
+{% endblock %}

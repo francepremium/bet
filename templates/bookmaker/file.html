@@ -1,0 +1,42 @@
+{% extends 'bookmaker/base.html' %}
+
+{% load url from future %}
+{% load i18n %}
+
+{% block body %}
+    {% if bookmaker.logo %}
+        <img src="{{ bookmaker.logo.url }}" style="float:left" />
+    {% endif %}
+
+    <table>
+        <tr>
+            <th>{% trans 'creation date' %}</th>
+            <td>{{ bookmaker.creation_date }}</td>
+            <th>{% trans 'website' %}</th>
+            <td>{{ bookmaker.url }}</td>
+        </tr>
+        <tr>
+            <th>{% trans 'sports count' %}</th>
+            <td>{{ bookmaker.sports.count }}</td>
+            <th>{% trans 'contact' %}</th>
+            <td>{{ bookmaker.email }}</td>
+        </tr>
+        <tr>
+            <th>{% trans 'address' %}</th>
+            <td>{{ bookmaker.address|linebreaksbr }}</td>
+            <th>{% trans 'live bets' %}</th>
+            <td>{% if bookmaker.live_bets %}{% trans 'yes' %}{% else %}{% trans 'no' %}{% endif %}</td>
+        </tr>
+    </table>
+
+    {% for bettypes_per_sport in bookmaker_bettypes_per_sport %}
+    <div class="sport tree">
+        <h3>{{ bettypes_per_sport.sport }}</h3>
+        {% for bettype in bettypes_per_sport.bettypes %}
+        <ul>
+            <li>{{ bettype.name }}</li>
+        </ul>
+        {% endfor %}
+    </div>
+    {% endfor %}
+{% endblock %}

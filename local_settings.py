@@ -17,6 +17,7 @@ DATABASES = {
 }
 
 MIDDLEWARE_CLASSES = [
+    'localeurl.middleware.LocaleURLMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -40,6 +41,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
 ]
 
 INSTALLED_APPS = [
+    'localeurl',
     # Django
     "django.contrib.admin",
     "django.contrib.auth",
@@ -51,22 +53,34 @@ INSTALLED_APPS = [
     "django.contrib.comments",
     
     "pinax.templatetags",
+    "emailconfirmation",
+    "pinax.apps.account",
     
     # external
+    'modeltranslation',
     "staticfiles",
     "debug_toolbar",
+    "mailer",
+    "uni_form",
+    "django_openid",
+    "ajax_validation",
+    "timezones",
+    "emailconfirmation",
     'django_extensions',
-    'modeltranslation',
     'django_filters',
     'pagination',
+    'ajax_select',
+    'moderation',
     
     # Pinax
     
     # project
     'gsm',
+    'bookmaker',
+    'bet',
 ]
 
-LANGUAGE_CODE = "fr"
+LANGUAGE_CODE = "fr_FR"
 TIME_ZONE = "Europe/Paris"
 LANGUAGES = (
     ('en', gettext('English')),
@@ -90,3 +104,10 @@ SPORTS=(
     ('basketball', 'Basketball'),
     ('rugby', 'Rugby'),
 )
+
+ACCOUNT_OPEN_SIGNUP = True
+LOGIN_URL='/account/login/'
+
+AJAX_LOOKUP_CHANNELS = {
+    'session': ('gsm.lookups', 'SessionLookup'),
+}

@@ -1,0 +1,81 @@
+{% extends 'bookmaker/base.html' %}
+
+{% load i18n %}
+{% load pagination_tags %}
+{% load url from future %}
+
+{% block extra_body %}
+<script type="text/javascript">
+$(document).ready(function() {
+    var formTarget = '{% url 'bookmaker_change_bet_type' bookmaker.pk %}';
+    $('table.bettype td.add, table.bettype td.remove').click(function(e) {
+        var pk = $(this).attr('class').match(/pk_([0-9]*)/)[1];
+        if ($(this).hasClass('add')) {
+            var action = 'add';
+        } else if ($(this).hasClass('remove')) {
+            var action = 'remove';
+        }
+        $.post(
+            formTarget,
+            {
+                'pk': pk,
+                'action': action,
+                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+            },
+            function(data, textStatus, jqXHR) {
+                add_message(data);
+                var td = $('table.bettype td.pk_'+pk);
+                if (action == 'add') {
+                    td.html('{% trans 'remove from my bet types' %}');
+                    td.removeClass('add').addClass('remove');
+                } else {
+                    td.html('{% trans 'add to my bet types' %}');
+                    td.removeClass('remove').addClass('add');
+                }
+            },
+            'text'
+        );
+    });
+});
+</script>
+{% endblock %}
+
+{% block body %}
+    <form action="" method="get">
+        {% csrf_token %}
+        {{ filter.form.as_p }}
+        <input type="submit" />
+    </form>
+
+    {% autopaginate filter.qs 50 as bettype_list %}
+
+    {% paginate %}
+    
+    <table class="bettype">
+        {% for bettype in bettype_list %}
+        <tr>
+            <td>{{ bettype.sport }}</td>
+            <td>{{ bettype.name }}</td>
+            <td>
+                <table class="choices">
+                    <tr>
+                        {% for choice in bettype.betchoice_set.all %}
+                            <td>{{ choice }}</td>
+                        {% endfor %}
+                    </tr>
+                </table>
+            </td>
+            <td class="{% if bettype in bookmaker.bettype.all %}remove{% else %}add{% endif %} pk_{{ bettype.pk }}">
+                {% if bettype in bookmaker.bettype.all %}
+                    {% trans 'remove from my bet types' %}
+                {% else %}
+                    {% trans 'add to my bet types' %}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% paginate %}
+
+{% endblock %}

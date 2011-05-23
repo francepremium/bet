@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load localeurl_tags %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}">
     <head>
@@ -10,6 +11,7 @@
         <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/announcements.css" />
         <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/accounts.css" />
         <link rel="stylesheet" href="{{ STATIC_URL }}uni_form/uni-form.css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/ui-lightness/jquery-ui-1.8.13.custom.css" />
         {% if LANGUAGE_BIDI %}
         <style type="text/css" media="screen">
             div.right_panel {
@@ -46,10 +48,35 @@ tr.Fixture td.score.left {
 tr.Fixture td.score.right {
     text-align: left;
 }
+#global_bet_form .bookmaker, #global_bet_form .session, #global_bet_form .bettype, #global_bet_form .choice { display: none; }
+div.tree ul, .tab_content { display: none; }
+table.bettype table.choices td,
+table.bettype table.choices tr,
+table.bettype table.choices {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+#ajaxload {
+    cursor: pointer;
+    left: 45%;
+    position: fixed;
+    top: 12px;
+}
+ul#messages {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
         </style>
     </head>
     
     <body class="{% block body_class %}{% endblock %}">
+        <div id="ajaxload">
+            <img src="{{ STATIC_URL }}img/ajax-loader.gif" />
+        </div>
+
         {% if site_wide_announcements %}
             <div id="site_wide_announcements">
                 <ul>
@@ -62,10 +89,20 @@ tr.Fixture td.score.right {
                 </ul>
             </div>
         {% endif %}
-        
+
+        <div id="global_bet_form"></div>
+
         <div id="tabhead">
-            <div class="logo" dir="ltr">{% block logo_link_image %}{% endblock %}</div>
-            <div class="login">{% block login %}{% endblock %}{% block locale_switcher %}{% endblock %}<div style="text-align: right;"></div></div>
+            <div class="logo" dir="ltr">
+                {% for lang in LANGUAGES %}
+                    {% ifequal lang.0 LANGUAGE_CODE %}
+                        <li class="selected">{{ lang.1 }}</li>
+                    {% else %}
+                        <li><a href="{{ request.path|chlocale:lang.0 }}">{{ lang.1 }}</a></li>
+                    {% endifequal %}
+                {% endfor %}
+            </div>
+            <div class="login">{% block login %}{% include "_account_bar.html" %}{% endblock %}{% block locale_switcher %}{% endblock %}<div style="text-align: right;"></div></div>
             <div id="right_tabs" >{% block right_tabs %}
                 <ul class="tabs">
                     <li>
@@ -87,16 +124,16 @@ tr.Fixture td.score.right {
         
         {% block body_outer %}
         <div id="body">
-            {% if messages %}
-                <ul id="messages">
+            <ul id="messages">
+                {% if messages %}
                     {% for message in messages %}
                     <li id="message_{{ forloop.counter }}"{% if message.tags %} class="{{ message.tags }}"{% endif %}>
                         <a href="#"><small>{% trans "clear" %}</small></a>
                         {{ message }}
                     </li>
                     {% endfor %}
-                </ul>
-            {% endif %}
+                {% endif %}
+            </ul>
             
             {% block body %}
             {% endblock %}
@@ -106,10 +143,179 @@ tr.Fixture td.score.right {
         
         <div id="footer">{% block footer %}{% endblock %}</div>
         
-        <script src="{% block jquery_src %}{{ STATIC_URL }}pinax/js/jquery-1.3.2.min.js{% endblock %}" type="text/javascript"></script>
+        <script src="{% block jquery_src %}{{ STATIC_URL }}js/jquery-1.5.1.min.js{% endblock %}" type="text/javascript"></script>
         <script src="{{ STATIC_URL }}pinax/js/base.js" type="text/javascript"></script>
         <script src="{{ STATIC_URL }}uni_form/uni-form.jquery.js" type="text/javascript"></script>
+        <script src="{{ STATIC_URL }}js/jquery-ui-1.8.13.custom.min.js" type="text/javascript"></script>
         {% include "facebox_js.html" %}
+        <script type="text/javascript">
+        $.ajaxSetup({
+            beforeSend: function(req) {},
+            error: function(req, textStatus, error) {
+                if (textStatus == 'error') {
+                    add_message('{% trans 'Sorry, our program failed to process your request. Our techie has been notified by email and will take care of it soonish' %}');
+                }
+            },
+        });
+
+        $('#ajaxload').ajaxStop(function() {
+            $(this).fadeOut();
+        });
+        $('#ajaxload').ajaxStart(function() {
+            $(this).fadeIn();
+        });
+
+        function add_message(message) {
+            var li = $('<li class="success">'+message+'<a href="#"><small>{% trans 'clear' %}</small></a></li>');
+            li.attr('style', 'display:none');
+            $('ul#messages').append(li);
+            li.slideDown();
+            window.setTimeout(function() {
+                li.slideUp();
+            }, 3000);
+        }
+        $(document).ready(function() {
+            $('.tab_link').live('click', function(e) {
+                var tabid = $(this).attr('class').match(/tab_id_([a-z]*)/)[1];
+                var group = $(this).attr('class').match(/tab_group_([a-z]*)/);
+                if (group && group.length) {
+                    var tabgroup = group[1];
+                    $('.tab_content.tab_group_'+tabgroup).hide().removeClass('selected');
+                    $('.tab_content.tab_id_'+tabid+'.tab_group_'+tabgroup).show().addClass('selected');
+                } else {
+                    $('.tab_content').hide().removeClass('selected');
+                    $('.tab_content.tab_id_'+tabid).show().addClass('selected');
+                }
+            });
+            $('.tab_link:first').click();
+
+            $('div.tree').click(function(e) {
+                if ($(this).find('ul:visible').length) {
+                    return true;
+                }
+                if ($('div.tree ul:visible').length) {
+                    $('div.tree ul').slideUp('fast');
+                }
+                $(this).find('ul').slideDown();
+            });
+            
+            $('#ajaxload').fadeOut();
+
+            $('a').click(function(e) {
+                if ($(this).attr('href') != '{% url bet_add %}') {
+                    return true;
+                }
+
+                e.preventDefault();
+                $.get('{% url bet_add %}', {}, function(data, textStatus, jqXHR) {
+                    var container = $('div#global_bet_form');
+                    container.slideUp();
+                    container.hide();
+                    container.html(data);
+                    container.slideDown();
+                });
+            });
+
+            function global_bet_form_bettype_update() {
+                if (! $('#global_bet_form select[name=bookmaker]').val()) {
+                    return false;
+                }
+                if (! $('#global_bet_form select[name=sport]').val()) {
+                    return false;
+                }
+                $.get(
+                    '{% url bookmaker_bet_types_for_bookmaker_and_sport %}',
+                    {
+                        'sport': $('#global_bet_form select[name=sport]').val(),
+                        'bookmaker': $('#global_bet_form select[name=bookmaker]').val(),
+                    },
+                    function(data, textStatus, jqXHR) {
+                        var select = $('#global_bet_form select[name=bettype]');
+                        select.find('option').remove();
+                        select.append($('<option value="">------</option>'));
+
+                        for (var i in data) {
+                            select.append($('<option value="'+data[i][0]+'">'+data[i][1]+'</option>'));
+                        }
+
+                        if (data.length == 0) {
+                            add_message('{% trans 'This bookmaker does not support this sport' %}');
+                            if ($('#global_bet_form .bettype:visible').length > 0) {
+                                $('#global_bet_form .bettype').fadeOut();
+                            }
+                        } else if (! $('#global_bet_form .bettype:visible').length) {
+                            $('#global_bet_form .bettype').fadeIn();
+                        }
+                    },
+                    'json'
+                );
+            }
+
+            $('#global_bet_form select[name=sport]').live('change', function(e) {
+                if (!$(this).val()) {
+                    $('#global_bet_form .bookmaker, #global_bet_form .session, #global_bet_form .bettype, #global_bet_form.choice').fadeOut();
+                } else {
+                    if (! $('#global_bet_form .session:visible').length) {
+                        $('#global_bet_form .session').fadeIn();
+                    }
+                    if (! $('#global_bet_form .bookmaker:visible').length) {
+                        $('#global_bet_form .bookmaker').fadeIn();
+                    }
+                }
+
+                var old_source = $('#global_bet_form input[name=session_text]').autocomplete( "option", "source");
+                if (old_source.match(/sport=/)) {
+                    new_source = old_source.replace(/sport=[^&]$/, 'sport=' + $(this).val());
+                } else {
+                    if (old_source.match(/\?/)) {
+                        new_source = old_source + '&sport=' + $(this).val();
+                    } else {
+                        new_source = old_source + '?sport=' + $(this).val();
+                    }
+                }
+
+                $('#global_bet_form input[name=session_text]').autocomplete( "option", "source", new_source);
+                global_bet_form_bettype_update();
+            })
+
+            $('#global_bet_form select[name=bookmaker]').live('change', function(e) {
+                if (!$(this).val()) {
+                    $('#global_bet_form .session, #global_bet_form .bettype, #global_bet_form .choice').fadeOut();
+                    return false;
+                }
+
+                global_bet_form_bettype_update();
+            });
+            
+            $('#global_bet_form select[name=bettype]').live('change', function(e) {
+                if(! $(this).val()) {
+                    $('#global_bet_form .choice').fadeOut();
+                    return false;
+                }
+
+                $.get(
+                    '{% url bookmaker_bet_choices_for_bettype %}',
+                    {
+                        'bettype': $('#global_bet_form select[name=bettype]').val(),
+                    },
+                    function(data, textStatus, jqXHR) {
+                        var select = $('#global_bet_form select[name=choice]');
+                        select.find('option').remove();
+                        select.append($('<option value="">------</option>'));
+
+                        for (var i in data) {
+                            select.append($('<option value="'+data[i][0]+'">'+data[i][1]+'</option>'));
+                        }
+
+                        if (! $('#global_bet_form .choice:visible').length) {
+                            $('#global_bet_form .bettype').fadeIn();
+                        }
+                    },
+                    'json'
+                );
+            });
+        });
+        </script>
         {% block extra_body_base %}
             {% block extra_body %}{% endblock %}
         {% endblock %}
