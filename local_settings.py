@@ -70,7 +70,6 @@ INSTALLED_APPS = [
     'django_filters',
     'pagination',
     'ajax_select',
-    'moderation',
     
     # Pinax
     
