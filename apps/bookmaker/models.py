@@ -57,3 +57,13 @@ class BetChoice(models.Model):
 
     class Meta:
         ordering = ['name']
+
+def fill_translation_blanks(sender, **kwargs):
+    instance = kwargs.pop('instance')
+    if not hasattr(instance, 'name_fr'):
+        return True
+    if instance.name_en and not instance.name_fr:
+        instance.name_fr = instance.name_en
+    if instance.name_fr and not instance.name_en:
+        instance.name_en = instance.name_fr
+signals.pre_save.connect(fill_translation_blanks)

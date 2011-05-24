@@ -1,0 +1,23 @@
+{% load i18n %}
+oh hi
+<form method="post" action="{% url bet_add_pronostic bet.pk %}">
+{% csrf_token %}
+{{ form.non_field_errors }}
+
+<div class="session">
+    {{ form.session.errors }}
+    {{ form.session }}
+</div>
+<div class="bettype">
+    {{ form.bettype.errors }}
+    <select name="bettype"></select>
+</div>
+<div class="choice">
+    {{ form.choice.errors }}
+    <select name="choice"></select>
+</div>
+
+<div class="submit">
+    {% trans 'save bet' %}
+</div>
+</form>

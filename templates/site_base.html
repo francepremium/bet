@@ -48,7 +48,7 @@ tr.Fixture td.score.left {
 tr.Fixture td.score.right {
     text-align: left;
 }
-#global_bet_form .bookmaker, #global_bet_form .session, #global_bet_form .bettype, #global_bet_form .choice { display: none; }
+#global_bet_form .session, #global_bet_form .bettype, #global_bet_form .choice { display: none; }
 div.tree ul, .tab_content { display: none; }
 table.bettype table.choices td,
 table.bettype table.choices tr,
@@ -216,6 +216,8 @@ ul#messages {
                 });
             });
 
+            {% comment %}
+
             function global_bet_form_bettype_update() {
                 if (! $('#global_bet_form select[name=bookmaker]').val()) {
                     return false;
@@ -308,10 +310,25 @@ ul#messages {
                         }
 
                         if (! $('#global_bet_form .choice:visible').length) {
-                            $('#global_bet_form .bettype').fadeIn();
+                            $('#global_bet_form .choice').fadeIn();
                         }
                     },
                     'json'
+                );
+            });
+            {% endcomment %}
+
+            $('#global_bet_form div.submit').live('click', function(e) {
+                e.preventDefault();
+
+                var form = $(this).parents('form');
+                $.post(
+                    form.attr('action'),
+                    form.serialize(),
+                    function (data, textStatus, jqHXR) {
+                        $('#global_bet_form').html(data);
+                    },
+                    'html'
                 );
             });
         });

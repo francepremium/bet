@@ -1,15 +1,22 @@
-{% csrf_token %}
+{% load i18n %}
 
-{{ form.sport }}
+<form method="post" action="{% url bet_add %}">
+{% csrf_token %}
+{{ form.non_field_errors }}
+
 <div class="bookmaker">
+    bookmaker:
+    {{ form.bookmaker.errors }}
     {{ form.bookmaker }}
 </div>
-<div class="session">
-    {{ form.session }}
+
+<div class="stake">
+    stake:
+    {{ form.stake.errors }}
+    {{ form.stake }}
 </div>
-<div class="bettype">
-    {{ form.bettype }}
+
+<div class="submit">
+    {% trans 'save bet' %}
 </div>
-<div class="choice">
-    {{ form.choice }}
-</div>
+</form>

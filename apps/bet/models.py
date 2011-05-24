@@ -8,11 +8,22 @@ from django.conf import settings
 from django.core.cache import cache
 
 class Bet(models.Model):
+    STAKES = (
+        (0, 0),
+    )
+
     bookmaker = models.ForeignKey('bookmaker.Bookmaker')
+    user = models.ForeignKey('auth.User')
+    stake = models.IntegerField(choices=STAKE_CHOICES)
+
+    def __unicode__(self):
+        return '#%s' % self.pk
+
+class Pronostic(models.Model):
     bettype = models.ForeignKey('bookmaker.BetType')
     choice = models.ForeignKey('bookmaker.BetChoice', null=True)
     session = models.ForeignKey('gsm.Session')
-    user = models.ForeignKey('auth.User')
+    bet = models.ForeignKey('Bet')
 
     def __unicode__(self):
-        return '%s: %s' % (self.type, self.choice)
+        return '%s: %s' % (self.bettype, self.choice)
