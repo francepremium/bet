@@ -63,7 +63,7 @@ class Command(BaseCommand):
         fh.close()
 
     def update_model(self, model_class, unique_properties, properties):
-        changed = []
+        changed = {}
 
         try:
             model = model_class.objects.get(**unique_properties)
@@ -73,18 +73,25 @@ class Command(BaseCommand):
         for k, v in properties.items():
             if not hasattr(model_class, k):
                 if getattr(model, k) != getattr(model, '_meta').get_field(k).to_python(v):
-                    changed.append('normal val %s: %s != %s' % (k, getattr(model, k), getattr(model, '_meta').get_field(k).to_python(v)))
+                    changed[k] = 'normal val %s: %s != %s' % (k, getattr(model, k), getattr(model, '_meta').get_field(k).to_python(v))
                     setattr(model, k, v)
             else: # handle relations
                 if v is None:
                     if getattr(model, '%s_id' % k) != None:
-                        changed.append('none relation %s: %s != %s' % (k, getattr(model, '%s_id' % k), v))
+                        changed[k] = 'none relation %s: %s != %s' % (k, getattr(model, '%s_id' % k), v)
                         setattr(model, k, v)
                 elif getattr(model, '%s_id' % k) != v.pk:
-                    changed.append('relation %s: %s != %s' % (k, getattr(model, '%s_id' % k), v.pk))
+                    changed[k] = 'relation %s: %s != %s' % (k, getattr(model, '%s_id' % k), v.pk)
                     setattr(model, k, v)
 
         if changed:
+            invalid = []
+            for k, v in changed.items():
+                if '4294967295' in v:
+                    invalid.append(k)
+            for k in invalid:
+                setattr(model, k, None)
+                print "FIXED INVALID", changed[k], 'GSM_ID %s' % model.gsm_id
             model.save()
         return model
 

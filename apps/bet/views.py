@@ -21,7 +21,7 @@ def add(request, form_class=BetForm,
         if form.is_valid():
             bet = form.save()
             return shortcuts.redirect(urlresolvers.reverse(
-                'bet_add_pronostic', args=(bet.pk,)))
+                'bet_pronostic_form', args=(bet.pk,)))
     else:
         form = form_class(instance=instance)
    
@@ -32,20 +32,33 @@ def add(request, form_class=BetForm,
         context_instance=template.RequestContext(request))
 
 @login_required
-def add_pronostic(request, bet_pk, form_class=PronosticForm,
-    template_name='bet/add_pronostic.html', extra_context=None):
+def pronostic_form(request, bet_pk, form_class=PronosticForm,
+    template_name='bet/pronostic_form.html', extra_context=None):
 
     context = {}
     context['bet'] = bet = shortcuts.get_object_or_404(Bet, pk=bet_pk)
-    instance = Pronostic(bet=bet)
+
+    pronostic_pk = request.GET.get('pronostic', False)
+    if pronostic_pk:
+        instance = shortcuts.get_object_or_404(Pronostic, pk=pronostic_pk)
+        initial = {
+            'sport': instance.session.sport,
+        }
+    else:
+        instance = Pronostic(bet=bet)
+        initial = {}
+
     if request.method == 'POST':
         form = form_class(request.POST, instance=instance)
         if form.is_valid():
             pronostic = form.save()
             return shortcuts.redirect(urlresolvers.reverse(
-                'bet_add_pronostic', args=(bet.pk,)))
+                'bet_pronostic_form', args=(bet.pk,)))
     else:
-        form = form_class(instance=instance)
+        form = form_class(instance=instance, initial=initial)
+        if initial.get('sport', False):
+            form.fields['bettype'].queryset = BetType.objects.filter(sport=initial['sport'])
+            form.fields['choice'].queryset = BetChoice.objects.filter(bettype=instance.bettype)
    
     context['form'] = form
 

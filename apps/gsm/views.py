@@ -2,6 +2,7 @@ import datetime
 from dateutil.rrule import rrule, WEEKLY
 
 from django.db.models import Q
+from django.utils import simplejson
 from django.utils.translation import ugettext as _
 from django import template
 from django import http
@@ -16,6 +17,24 @@ import gsm
 
 def get_language_from_request(request):
     return 'fr'
+
+def sport_json_competitions(request):
+    if not request.GET.get('sport', False):
+        return http.HttpResponseBadRequest()
+    sport = shortcuts.get_object_or_404(Sport, pk=request.GET['sport'])
+    data = [[c.pk, c.name] for c in sport.get_active_competitions()]
+    return http.HttpResponse(simplejson.dumps(data))
+
+def sport_json_sessions(request):
+    if not request.GET.get('sport', False):
+        return http.HttpResponseBadRequest()
+    sport = shortcuts.get_object_or_404(Sport, pk=request.GET['sport'])
+    qs = Session.objects.filter(datetime_utc__gte=datetime.date.today())
+    competition = request.GET.get('competition', False)
+    if competition:
+        qs = qs.filter(season__competition__pk=competition)
+    data = [[c.pk, c.name] for c in qs]
+    return http.HttpResponse(simplejson.dumps(data))
 
 def person_detail_tab(request, sport, gsm_id, tab, tag='person',
     update=False,

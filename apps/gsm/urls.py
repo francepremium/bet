@@ -30,6 +30,16 @@ urlpatterns += patterns('gsm.views',
         }, 'gsm_entity_detail'
     ),
     url(
+        r'json/sessions/$',
+        'sport_json_sessions', {
+        }, 'gsm_sport_json_sessions'
+    ),
+    url(
+        r'json/competitions/$',
+        'sport_json_competitions', {
+        }, 'gsm_sport_json_competitions'
+    ),
+    url(
         r'(?P<sport>[a-z]+)/(?P<tab>[a-z]+)/$',
         'sport_detail_tab', {
         }, 'gsm_sport_detail_tab'

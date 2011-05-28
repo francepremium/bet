@@ -8,9 +8,7 @@ from django.conf import settings
 from django.core.cache import cache
 
 class Bet(models.Model):
-    STAKES = (
-        (0, 0),
-    )
+    STAKE_CHOICES = [(x,x) for x in range(1,10)]
 
     bookmaker = models.ForeignKey('bookmaker.Bookmaker')
     user = models.ForeignKey('auth.User')
@@ -19,11 +17,20 @@ class Bet(models.Model):
     def __unicode__(self):
         return '#%s' % self.pk
 
+    @property
+    def odds(self):
+        odds = self.pronostic_set.all().values_list('odds', flat=True)
+        i = 1
+        for odd in odds:
+            i = i * odd
+        return i
+
 class Pronostic(models.Model):
     bettype = models.ForeignKey('bookmaker.BetType')
     choice = models.ForeignKey('bookmaker.BetChoice', null=True)
     session = models.ForeignKey('gsm.Session')
     bet = models.ForeignKey('Bet')
+    odds = models.DecimalField(max_digits=4, decimal_places=2)
 
     def __unicode__(self):
         return '%s: %s' % (self.bettype, self.choice)

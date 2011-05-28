@@ -11,6 +11,9 @@ register = template.Library()
 
 @register.filter
 def display_date(date):
+    if not hasattr(date, 'year'):
+        return False
+
     if datetime.date.today().year == date.year:
         return '%s/%s' % (date.day, date.month)
     else:
@@ -27,6 +30,7 @@ def prepend_zero(number):
 def display_time(time):
     if not hasattr(time, 'hour'):
         return False
+
     return '%s:%s' % (prepend_zero(time.hour), prepend_zero(time.minute))
 
 @register.filter

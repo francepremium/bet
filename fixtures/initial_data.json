@@ -56,5 +56,273 @@
             "name": "basketball", 
             "slug": "basketball"
         }
+    },
+    {
+        "pk": 1, 
+        "model": "bookmaker.bookmaker", 
+        "fields": {
+            "bettype": [
+                1, 
+                4, 
+                2, 
+                5, 
+                3, 
+                6
+            ], 
+            "name": "Test Bookie", 
+            "url": "http://bla.com/", 
+            "creation_date": "2011", 
+            "live_bets": true, 
+            "user": 1, 
+            "address": "20 Rue Foo\r\n12345, Bar, France", 
+            "logo": "bookmaker/1/avatar_big_1.png", 
+            "email": "tsaet@tsaheu.com"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "1X2", 
+            "name_fr": "1X2", 
+            "sport": 1, 
+            "name": "1X2", 
+            "creation_bookmaker": 1
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "1X2 half time", 
+            "name_fr": "1X2 \u00e0 mi temps", 
+            "sport": 1, 
+            "name": "1X2 half time", 
+            "creation_bookmaker": 1
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "1X2", 
+            "name_fr": "1X2", 
+            "sport": 2, 
+            "name": "1X2", 
+            "creation_bookmaker": 1
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "1X2 half time", 
+            "name_fr": "1X2 \u00e0 mi temps", 
+            "sport": 2, 
+            "name": "1X2 half time", 
+            "creation_bookmaker": 1
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "1X2", 
+            "name_fr": "1X2", 
+            "sport": 4, 
+            "name": "1X2", 
+            "creation_bookmaker": 1
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "1X2 half time", 
+            "name_fr": "1X2 \u00e0 mi temps", 
+            "sport": 4, 
+            "name": "1X2 half time", 
+            "creation_bookmaker": 1
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "1", 
+            "bettype": 1, 
+            "name_fr": "1", 
+            "name": "1"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "1", 
+            "bettype": 2, 
+            "name_fr": "1", 
+            "name": "1"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "1", 
+            "bettype": 3, 
+            "name_fr": "1", 
+            "name": "1"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "1", 
+            "bettype": 4, 
+            "name_fr": "1", 
+            "name": "1"
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "1", 
+            "bettype": 5, 
+            "name_fr": "1", 
+            "name": "1"
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "1", 
+            "bettype": 6, 
+            "name_fr": "1", 
+            "name": "1"
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "2", 
+            "bettype": 5, 
+            "name_fr": "2", 
+            "name": "2"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "2", 
+            "bettype": 3, 
+            "name_fr": "2", 
+            "name": "2"
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "2", 
+            "bettype": 6, 
+            "name_fr": "2", 
+            "name": "2"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "2", 
+            "bettype": 4, 
+            "name_fr": "2", 
+            "name": "2"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "2", 
+            "bettype": 1, 
+            "name_fr": "2", 
+            "name": "2"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "2", 
+            "bettype": 2, 
+            "name_fr": "2", 
+            "name": "2"
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "X", 
+            "bettype": 6, 
+            "name_fr": "X", 
+            "name": "X"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "X", 
+            "bettype": 3, 
+            "name_fr": "X", 
+            "name": "X"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "X", 
+            "bettype": 1, 
+            "name_fr": "X", 
+            "name": "X"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "X", 
+            "bettype": 2, 
+            "name_fr": "X", 
+            "name": "X"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "X", 
+            "bettype": 4, 
+            "name_fr": "X", 
+            "name": "X"
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "X", 
+            "bettype": 5, 
+            "name_fr": "X", 
+            "name": "X"
+        }
     }
 ]

@@ -1,0 +1,68 @@
+{% load i18n gsm_tags %}
+<div class="bookmaker pk_{{ bet.bookmaker.pk }}">
+    {% trans 'bookmaker' %}: {{ bet.bookmaker }}
+</div>
+<div class="stake">
+    {% trans 'stake' %}: {{ bet.stake }}
+</div>
+<div class="type">
+    {% if bet.pronostic_set.count > 1 %}
+        {% trans 'simple' %}
+    {% else %}
+        {% trans 'combined' %}
+    {% endif %}
+</div>
+<div class="odds">
+    {% trans 'odds' %}: {{ bet.odds }}
+</div>
+
+<table class="pronostics">
+    {% for pronostic in bet.pronostic_set.all %}
+    <tr class="pronostic pk_{{ pronostic.pk }}">
+        <td class="session pk_{{ pronostic.session.pk }}">{{ pronostic.session }}</td>
+        <td>{{ pronostic.session.datedate_utc.date|display_date }}</td>
+        <td>{{ pronostic.session.datetime_utc.time|display_time }}</td>
+        <td>{{ pronostic.bettype }}</td>
+        <td>{{ pronostic.choice }}</td>
+        <td><a href="{% url bet_pronostic_form bet.pk %}?pronostic={{ pronostic.pk }}">{% trans 'edit' %}</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<form method="post" action="{% url bet_pronostic_form bet.pk %}">
+    {% if form.instance.pk %}
+    <div style="display:none" class="pronostic_pk">{{ form.instance.pk }}</div>
+    {% endif %}
+
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <div class="sport">
+        {{ form.sport.errors }}
+        {{ form.sport }}
+    </div>
+    <div class="session">
+        {{ form.session.errors }}
+        {{ form.session }}
+    </div>
+    <div class="odds">
+        {{ form.odds.errors }}
+        {{ form.odds }}
+    </div>
+    <div class="bettype">
+        {{ form.bettype.errors }}
+        {% if form.instance.pk or form.bettype.errors %}
+            {{ form.bettype }}
+        {% else %}
+            <select name="bettype"></select>
+        {% endif %}
+    </div>
+    <div class="choice">
+        {{ form.choice.errors }}
+        {% if form.instance.pk or form.choice.errors %}
+            {{ form.choice }}
+        {% else %}
+            <select name="choice"></select>
+        {% endif %}
+    </div>
+</form>

@@ -56,6 +56,9 @@ class Sport(models.Model):
     class Meta:
         ordering = ('id',)
 
+    def get_active_competitions(self):
+        return self.competition_set.filter(season__session__datetime_utc__gte=datetime.datetime.today()).distinct()
+
     def get_competition_areas(self):
         return Area.objects.filter(competition__sport=self).order_by('name').distinct()
 
