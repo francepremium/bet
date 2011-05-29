@@ -233,6 +233,12 @@ ul#messages {
                     e.preventDefault();
                     load_global_bet_url($(this).attr('href'));
                 }
+
+                if ($('#global_bet_form form').length) {
+                    return confirm("{% trans 'Changing page will loose unsaved changes to the current bet. Do you want to continue ?' %}");
+                }
+
+                return true;
             });
 
             $('input[type=submit].confirm').live('click', function(e) {
@@ -317,11 +323,6 @@ ul#messages {
 
             $('#global_bet_form select[name=stake], #global_bet_form select[name=bookmaker]').live('change', function(e) {
                 if ($('#global_bet_form select[name=stake]').val() && $('#global_bet_form select[name=bookmaker]').val()) {
-                    $(this).parents('form').trigger('submit');
-                }
-            });
-            $('#global_bet_form select[name=choice]').live('change', function(e) {
-                if ($(this).val()) {
                     $(this).parents('form').trigger('submit');
                 }
             });

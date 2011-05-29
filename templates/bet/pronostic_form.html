@@ -51,19 +51,22 @@
 
     <div class="sport">
         {{ form.sport.errors }}
+        {% trans 'sport' %}*:
         {{ form.sport }}
     </div>
     <div class="odds" >
         {{ form.odds.errors }}
-        {% trans 'odds' %}: {{ form.odds }}
+        {% trans 'odds' %}*:
+        {{ form.odds }}
     </div>
     <div class="session" {% if not form.instance.pk %}style="display:none;"{% endif %}>
         {{ form.session.errors }}
-        {% trans 'match' %} {{ form.session }}
+        {% trans 'match' %}*:
+        {{ form.session }}
     </div>
     <div class="bettype" {% if not form.instance.pk %}style="display:none;"{% endif %}>
         {{ form.bettype.errors }}
-        {% trans 'bet type' %}
+        {% trans 'bet type' %}*:
         {% if form.instance.pk or form.bettype.errors %}
             {{ form.bettype }}
         {% else %}
@@ -72,17 +75,25 @@
     </div>
     <div class="choice" {% if not form.instance.pk %}style="display:none;"{% endif %}>
         {{ form.choice.errors }}
-        {% trans 'choice' %}
+        {% trans 'choice' %}*:
         {% if form.instance.pk or form.choice.errors %}
             {{ form.choice }}
         {% else %}
             <select name="choice"></select>
         {% endif %}
     </div>
+    <div class="description">
+        {{ form.description.errors }}
+        {% trans 'reason' %}:
+        {{ form.description }}
+    </div>
+    <div class="media">
+        {{ form.media.errors }}
+        {% trans 'image' %}:
+        {{ form.media }}
+    </div>
 
-    {% if form.instance.pk %}
     <div class="submit">
         <input type="submit" value="{% trans 'save' %}" />
     </div>
-    {% endif %}
 </form>
