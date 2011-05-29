@@ -147,6 +147,7 @@ ul#messages {
         <script src="{{ STATIC_URL }}pinax/js/base.js" type="text/javascript"></script>
         <script src="{{ STATIC_URL }}uni_form/uni-form.jquery.js" type="text/javascript"></script>
         <script src="{{ STATIC_URL }}js/jquery-ui-1.8.13.custom.min.js" type="text/javascript"></script>
+        <script src="http://github.com/malsup/form/raw/master/jquery.form.js" type="text/javascript"></script>
         {% include "facebox_js.html" %}
         <script type="text/javascript">
         $.ajaxSetup({
@@ -200,25 +201,31 @@ ul#messages {
             });
             
             function load_global_bet_html(html) {
+
+                function do_load_global_bet_html(html) {
+                    var session_text = container.find('input[name=session_text]');
+                    var session = container.find('div.session div.results_on_deck div');
+                    var session_display = session.html()
+                    if (session && session_text && session_display) {
+                        session_display = session_display.replace('<span class="iconic" id="kill_id_session">X</span>', '');
+                        session_display = $.trim(session_display);
+                        session_text.val(session_display);
+                    }
+
+                    container.slideDown();
+                }
+
+
                 var container = $('div#global_bet_form');
                 if (container.css('display') != 'none') {
                     container.slideUp('fast', function() {
                         container.html(html);
+                        do_load_global_bet_html(html);
                     });
                 } else {
                     container.html(html);
+                    do_load_global_bet_html(html);
                 }
-
-                var session_text = container.find('input[name=session_text]');
-                var session = container.find('div.session div.results_on_deck div');
-                var session_display = session.html()
-                if (session && session_text && session_display) {
-                    session_display = session_display.replace('<span class="iconic" id="kill_id_session">X</span>', '');
-                    session_display = $.trim(session_display);
-                    session_text.val(session_display);
-                }
-
-                container.slideDown();
             }
             function load_global_bet_url(url) {
                 var container = $('div#global_bet_form');
@@ -228,7 +235,10 @@ ul#messages {
                 });
             }
 
-            $('a').live('click', function(e) {                
+            $('a').live('click', function(e) {
+                if ($(this).attr('href') == undefined) {
+                    return false;
+                }
                 if ($(this).attr('href') == '{% url bet_add %}' || $(this).attr('href').match('{% url bet_pronostic_form '[0-9]+' %}') != null) {
                     e.preventDefault();
                     load_global_bet_url($(this).attr('href'));
@@ -239,6 +249,12 @@ ul#messages {
                 }
 
                 return true;
+            });
+
+            $('#global_bet_form div.close input').live('click', function(e) {
+                $('#global_bet_form').slideUp('fast', function() {
+                    $(this).html('');
+                });
             });
 
             $('input[type=submit].confirm').live('click', function(e) {
@@ -327,19 +343,21 @@ ul#messages {
                 }
             });
 
+
             $('#global_bet_form form').live('submit', function(e) {
                 e.preventDefault();
 
-                $.post(
-                    $(this).attr('action'),
-                    $(this).serialize(),
-                    function (data, textStatus, jqHXR) {
+                $(this).ajaxSubmit({
+                    'success': function(data, textStatus, jqXHR) {
                         load_global_bet_html(data);
                     },
-                    'html'
-                );
+                    'dataType': 'html'
+                });
+
+
             });
-            
+
+
             $('#ajaxload').fadeOut();
         });
         </script>

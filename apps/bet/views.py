@@ -67,16 +67,19 @@ def pronostic_form(request, bet_pk, form_class=PronosticForm,
         initial = {
             'sport': instance.session.sport,
         }
+        context['show_all_fields'] = True
     else:
         instance = Pronostic(bet=bet)
         initial = {}
 
     if request.method == 'POST':
-        form = form_class(request.POST, instance=instance)
+        form = form_class(request.POST, request.FILES, instance=instance)
         if form.is_valid():
             pronostic = form.save()
             return shortcuts.redirect(urlresolvers.reverse(
                 'bet_pronostic_form', args=(bet.pk,)))
+        else:
+            context['show_all_fields'] = True
     else:
         form = form_class(instance=instance, initial=initial)
         if initial.get('sport', False):

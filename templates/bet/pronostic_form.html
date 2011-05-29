@@ -45,7 +45,7 @@
     {% endfor %}
 </table>
 
-<form method="post" action="{% url bet_pronostic_form bet.pk %}{% if form.instance.pk %}?pronostic={{ form.instance.pk }}{% endif %}">
+<form method="post" action="{% url bet_pronostic_form bet.pk %}{% if form.instance.pk %}?pronostic={{ form.instance.pk }}{% endif %}" enctype="multipart/form-data" encoding="multipart/form-data">
     {% csrf_token %}
     {{ form.non_field_errors }}
 
@@ -59,41 +59,45 @@
         {% trans 'odds' %}*:
         {{ form.odds }}
     </div>
-    <div class="session" {% if not form.instance.pk %}style="display:none;"{% endif %}>
+    <div class="session" {% if not show_all_fields %}style="display:none;"{% endif %}>
         {{ form.session.errors }}
         {% trans 'match' %}*:
         {{ form.session }}
     </div>
-    <div class="bettype" {% if not form.instance.pk %}style="display:none;"{% endif %}>
+    <div class="bettype" {% if not show_all_fields %}style="display:none;"{% endif %}>
         {{ form.bettype.errors }}
         {% trans 'bet type' %}*:
-        {% if form.instance.pk or form.bettype.errors %}
+        {% if show_all_fields or form.bettype.errors %}
             {{ form.bettype }}
         {% else %}
             <select name="bettype"></select>
         {% endif %}
     </div>
-    <div class="choice" {% if not form.instance.pk %}style="display:none;"{% endif %}>
+    <div class="choice" {% if not show_all_fields %}style="display:none;"{% endif %}>
         {{ form.choice.errors }}
         {% trans 'choice' %}*:
-        {% if form.instance.pk or form.choice.errors %}
+        {% if show_all_fields or form.choice.errors %}
             {{ form.choice }}
         {% else %}
             <select name="choice"></select>
         {% endif %}
     </div>
-    <div class="description">
-        {{ form.description.errors }}
+    <div class="text">
+        {{ form.text.errors }}
         {% trans 'reason' %}:
-        {{ form.description }}
+        {{ form.text }}
     </div>
-    <div class="media">
-        {{ form.media.errors }}
+    <div class="upload">
+        {{ form.upload.errors }}
         {% trans 'image' %}:
-        {{ form.media }}
+        {{ form.upload }}
     </div>
 
     <div class="submit">
         <input type="submit" value="{% trans 'save' %}" />
     </div>
 </form>
+
+<div class="close">
+    <input type="button" value="{% trans 'close bet' %}" />
+</div>
