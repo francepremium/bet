@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'django_filters',
     'pagination',
     'ajax_select',
+    'sentry.client',
     
     # Pinax
     
@@ -110,3 +111,8 @@ LOGIN_URL='/account/login/'
 AJAX_LOOKUP_CHANNELS = {
     'session': ('gsm.lookups', 'SessionLookup'),
 }
+
+DEBUG=False
+
+SENTRY_KEY = 'ENUTntheou)(098eu)(E0U983$@#$@34342oasuth90$#@$#@'
+SENTRY_REMOTE_URL = 'http://beta.yourlabs.org/sentry/store/'
