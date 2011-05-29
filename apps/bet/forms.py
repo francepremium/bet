@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import ugettext as _
 
 from ajax_select.fields import AutoCompleteSelectMultipleField, AutoCompleteSelectField
 
@@ -18,6 +19,17 @@ class PronosticForm(forms.ModelForm):
     #competition = forms.ModelChoiceField(Competition.objects.all())
     #session = forms.ModelChoiceField(Session.objects.all())
     session = AutoCompleteSelectField('session')
+
+    def clean_session(self):
+        session = self.cleaned_data['session']
+
+        for p in self.instance.bet.pronostic_set.all():
+            if self.instance.pk and p.pk == self.instance.pk:
+                continue
+            if p.session.pk == session.pk:
+                raise forms.ValidationError(_(u'there is already a pronostic for this match in this combined bet. Please choose another match'))
+        
+        return session
 
     class Meta:
         model = Pronostic
