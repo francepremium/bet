@@ -19,7 +19,7 @@
     {% endif %}
 </div>
 <div class="odds">
-    {% trans 'odds' %}: {{ bet.odds }}
+    {% trans 'odds' %}: {{ bet.odds|floatformat:2 }}
 </div>
 
 <table class="pronostics">

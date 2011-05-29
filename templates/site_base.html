@@ -236,7 +236,7 @@ ul#messages {
             }
 
             $('a').live('click', function(e) {
-                if ($(this).attr('href') == undefined) {
+                if ($(this).attr('href') == undefined || $(this).attr('href') == '#' || !$(this).attr('href')) {
                     return false;
                 }
                 if ($(this).attr('href') == '{% url bet_add %}' || $(this).attr('href').match('{% url bet_pronostic_form '[0-9]+' %}') != null) {
