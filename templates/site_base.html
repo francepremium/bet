@@ -235,6 +235,10 @@ ul#messages {
                 }
             });
 
+            $('input[type=submit].confirm').live('click', function(e) {
+                return confirm('{% trans 'Do you want to' %} ' + $(this).attr('title') + ' ?');
+            });
+
             function update_select(select, data) {
                 select.find('option').remove();
                 select.append($('<option value="">-------</option>'));

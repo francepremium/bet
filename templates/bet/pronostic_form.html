@@ -1,4 +1,9 @@
 {% load i18n gsm_tags %}
+<form method="post" action="{% url bet_delete bet.pk %}">
+    {% csrf_token %}
+    <input type="hidden" name="confirm" value="1" />
+    <input type="submit" value="{% trans 'delete bet' %}" title="{% trans 'delete the whole bet' %}" class="confirm" />
+</form>
 <div class="bookmaker pk_{{ bet.bookmaker.pk }}">
     {% trans 'bookmaker' %}: {{ bet.bookmaker }}
 </div>
@@ -6,7 +11,8 @@
     {% trans 'stake' %}: {{ bet.stake }}
 </div>
 <div class="type">
-    {% if bet.pronostic_set.count > 1 %}
+    {% trans 'type' %}:
+    {% if bet.pronostic_set.count < 2 %}
         {% trans 'simple' %}
     {% else %}
         {% trans 'combined' %}
@@ -27,7 +33,13 @@
         <td>{{ pronostic.bettype.name }}</td>
         <td>{{ pronostic.choice.name }}</td>
         <td><a href="{% url bet_pronostic_form bet.pk %}?pronostic={{ pronostic.pk }}">{% trans 'edit' %}</a></td>
-        <td><a href="{% url bet_pronostic_delete pronostic.pk %}">{% trans 'delete' %}</a></td>
+        <td>
+            <form action="{% url bet_pronostic_delete pronostic.pk %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="confirm" value="1" />
+                <input type="submit" value="{% trans 'delete' %}" title="{% trans 'delete pronostic for match' %} {{ pronostic.session.name }}" class="confirm" />
+            </form>
+        </td>
 
     </tr>
     {% endfor %}

@@ -32,8 +32,24 @@ def add(request, form_class=BetForm,
         context_instance=template.RequestContext(request))
 
 @login_required
+def delete(request, bet_pk):
+    bet = shortcuts.get_object_or_404(Bet, pk=bet_pk)
+    if bet.user != request.user and not request.user.is_staff:
+        return http.HttpResponseForbidden()
+    if request.POST.get('confirm', False):
+        bet.delete()
+    return http.HttpResponse(_(u'bet deleted'))
+
+@login_required
 def pronostic_delete(request, pronostic_pk):
-    pass
+    pronostic = shortcuts.get_object_or_404(Pronostic, pk=pronostic_pk)
+    if pronostic.bet.user != request.user and not request.user.is_staff:
+        return http.HttpResponseForbidden()
+    bet = pronostic.bet
+    if request.POST.get('confirm', False):
+        pronostic.delete()
+    return shortcuts.redirect(urlresolvers.reverse(
+        'bet_pronostic_form', args=(bet.pk,)))
 
 @login_required
 def pronostic_form(request, bet_pk, form_class=PronosticForm,
