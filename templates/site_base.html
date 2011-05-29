@@ -202,37 +202,37 @@ ul#messages {
             function load_global_bet_html(html) {
                 var container = $('div#global_bet_form');
                 if (container.css('display') != 'none') {
-                    container.slideUp();
+                    container.slideUp('fast', function() {
+                        container.html(html);
+                    });
+                } else {
+                    container.html(html);
                 }
-                
-                /*
-                var sport = container.find('select[name=sport]');
-                if (sport.val()) {
-                    sport.trigger('change');
-                }
-                
+
+                var session_text = container.find('input[name=session_text]');
                 var session = container.find('div.session div.results_on_deck div');
-                var session_text = container.find('input[type=text][name=session_text]');
-                if (session && session_text) {
-                    var session_display = session.html();
+                var session_display = session.html()
+                if (session && session_text && session_display) {
                     session_display = session_display.replace('<span class="iconic" id="kill_id_session">X</span>', '');
                     session_display = $.trim(session_display);
                     session_text.val(session_display);
-                    session_container = $('#global_bet_form div.session');
-                    if (session_container.attr('display') == 'none') {
-                        $('#global_bet_form div.session').fadeIn();
+                }
+
+                var url = container.find('form').attr('action');
+                if (typeof url == 'string') {
+                    var m = url.match(/\?pronostic=([0-9]+)/);
+                    if (m && m.length == 2) {
+                        var pk = m[1];
+                    } else {
+                        var pk = false;
+                    }
+                    if (pk) {
+                        $('#global_bet_form div.session, #global_bet_form div.bettype, #global_bet_form div.choice').show();
+                    } else {
+                        $('#global_bet_form div.session, #global_bet_form div.bettype, #global_bet_form div.choice').hide();
                     }
                 }
-                
-                var pk = container.find('form div.pronostic_pk');
-                if (pk) {
-                    $('#global_bet_form div.session, #global_bet_form div.bettype, #global_bet_form div.choice').show();
-                } else {
-                    $('#global_bet_form div.session, #global_bet_form div.bettype, #global_bet_form div.choice').hide();
-                }
-                */
 
-                container.html(html);
                 container.slideDown();
             }
             function load_global_bet_url(url) {

@@ -29,11 +29,7 @@
     {% endfor %}
 </table>
 
-<form method="post" action="{% url bet_pronostic_form bet.pk %}">
-    {% if form.instance.pk %}
-    <div style="display:none" class="pronostic_pk">{{ form.instance.pk }}</div>
-    {% endif %}
-
+<form method="post" action="{% url bet_pronostic_form bet.pk %}{% if form.instance.pk %}?pronostic={{ form.instance.pk }}{% endif %}">
     {% csrf_token %}
     {{ form.non_field_errors }}
 
@@ -43,14 +39,15 @@
     </div>
     <div class="session">
         {{ form.session.errors }}
-        {{ form.session }}
+        {% trans 'match' %} {{ form.session }}
     </div>
     <div class="odds">
         {{ form.odds.errors }}
-        {{ form.odds }}
+        {% trans 'odds' %}: {{ form.odds }}
     </div>
     <div class="bettype">
         {{ form.bettype.errors }}
+        {% trans 'bet type' %}
         {% if form.instance.pk or form.bettype.errors %}
             {{ form.bettype }}
         {% else %}
@@ -59,10 +56,17 @@
     </div>
     <div class="choice">
         {{ form.choice.errors }}
+        {% trans 'choice' %}
         {% if form.instance.pk or form.choice.errors %}
             {{ form.choice }}
         {% else %}
             <select name="choice"></select>
         {% endif %}
     </div>
+
+    {% if form.instance.pk %}
+    <div class="submit">
+        <input type="submit" value="{% trans 'save' %}" />
+    </div>
+    {% endif %}
 </form>
