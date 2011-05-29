@@ -34,8 +34,8 @@ class Pronostic(models.Model):
     session = models.ForeignKey('gsm.Session')
     bet = models.ForeignKey('Bet')
     odds = models.DecimalField(max_digits=4, decimal_places=2)
-    text = models.TextField(blank=True)
-    upload = models.FileField(upload_to=media_upload_to, null=True)
+    text = models.TextField(blank=True, null=True)
+    upload = models.FileField(upload_to=media_upload_to, null=True, blank=True)
 
     def __unicode__(self):
         return '%s: %s' % (self.bettype, self.choice)
