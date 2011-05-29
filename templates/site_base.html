@@ -48,7 +48,7 @@ tr.Fixture td.score.left {
 tr.Fixture td.score.right {
     text-align: left;
 }
-#global_bet_form .session, #global_bet_form .bettype, #global_bet_form .results_on_deck, #global_bet_form .choice { display: none; }
+#global_bet_form .results_on_deck { display: none; }
 div.tree ul, .tab_content { display: none; }
 table.bettype table.choices td,
 table.bettype table.choices tr,
@@ -216,21 +216,6 @@ ul#messages {
                     session_display = session_display.replace('<span class="iconic" id="kill_id_session">X</span>', '');
                     session_display = $.trim(session_display);
                     session_text.val(session_display);
-                }
-
-                var url = container.find('form').attr('action');
-                if (typeof url == 'string') {
-                    var m = url.match(/\?pronostic=([0-9]+)/);
-                    if (m && m.length == 2) {
-                        var pk = m[1];
-                    } else {
-                        var pk = false;
-                    }
-                    if (pk) {
-                        $('#global_bet_form div.session, #global_bet_form div.bettype, #global_bet_form div.choice').show();
-                    } else {
-                        $('#global_bet_form div.session, #global_bet_form div.bettype, #global_bet_form div.choice').hide();
-                    }
                 }
 
                 container.slideDown();

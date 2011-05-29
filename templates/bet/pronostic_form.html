@@ -17,14 +17,18 @@
 </div>
 
 <table class="pronostics">
-    {% for pronostic in bet.pronostic_set.all %}
+    {% for pronostic in bet.pronostic_set.all.select_related %}
     <tr class="pronostic pk_{{ pronostic.pk }}">
-        <td class="session pk_{{ pronostic.session.pk }}">{{ pronostic.session }}</td>
-        <td>{{ pronostic.session.datedate_utc.date|display_date }}</td>
-        <td>{{ pronostic.session.datetime_utc.time|display_time }}</td>
-        <td>{{ pronostic.bettype }}</td>
-        <td>{{ pronostic.choice }}</td>
+        <td class="session pk_{{ pronostic.session.pk }}">
+            {{ pronostic.session }}
+        </td>
+        <td>{{ pronostic.session.datetime_utc|display_date }}</td>
+        <td>{{ pronostic.session.datetime_utc|display_time }}</td>
+        <td>{{ pronostic.bettype.name }}</td>
+        <td>{{ pronostic.choice.name }}</td>
         <td><a href="{% url bet_pronostic_form bet.pk %}?pronostic={{ pronostic.pk }}">{% trans 'edit' %}</a></td>
+        <td><a href="{% url bet_pronostic_delete pronostic.pk %}">{% trans 'delete' %}</a></td>
+
     </tr>
     {% endfor %}
 </table>
@@ -37,15 +41,15 @@
         {{ form.sport.errors }}
         {{ form.sport }}
     </div>
-    <div class="session">
-        {{ form.session.errors }}
-        {% trans 'match' %} {{ form.session }}
-    </div>
-    <div class="odds">
+    <div class="odds" >
         {{ form.odds.errors }}
         {% trans 'odds' %}: {{ form.odds }}
     </div>
-    <div class="bettype">
+    <div class="session" {% if not form.instance.pk %}style="display:none;"{% endif %}>
+        {{ form.session.errors }}
+        {% trans 'match' %} {{ form.session }}
+    </div>
+    <div class="bettype" {% if not form.instance.pk %}style="display:none;"{% endif %}>
         {{ form.bettype.errors }}
         {% trans 'bet type' %}
         {% if form.instance.pk or form.bettype.errors %}
@@ -54,7 +58,7 @@
             <select name="bettype"></select>
         {% endif %}
     </div>
-    <div class="choice">
+    <div class="choice" {% if not form.instance.pk %}style="display:none;"{% endif %}>
         {{ form.choice.errors }}
         {% trans 'choice' %}
         {% if form.instance.pk or form.choice.errors %}

@@ -32,11 +32,18 @@ def add(request, form_class=BetForm,
         context_instance=template.RequestContext(request))
 
 @login_required
+def pronostic_delete(request, pronostic_pk):
+    pass
+
+@login_required
 def pronostic_form(request, bet_pk, form_class=PronosticForm,
     template_name='bet/pronostic_form.html', extra_context=None):
 
     context = {}
     context['bet'] = bet = shortcuts.get_object_or_404(Bet, pk=bet_pk)
+
+    if bet.user != request.user and not request.user.is_staff:
+        return http.HttpResponseForbidden()
 
     pronostic_pk = request.GET.get('pronostic', False)
     if pronostic_pk:

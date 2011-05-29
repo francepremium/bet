@@ -350,6 +350,9 @@ class Session(AbstractGsmEntity):
     class Meta:
         ordering = ['-datetime_utc']
 
+    def __unicode__(self):
+        return self.name
+
     def get_tab_absolute_url(self, tab):
         return urlresolvers.reverse('gsm_%s_detail_tab' % 'session', args=(
             self.sport.slug, self.gsm_id, tab))
