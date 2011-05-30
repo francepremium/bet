@@ -1,43 +1,43 @@
 {% load i18n gsm_tags %}
-<form method="post" action="{% url bet_delete bet.pk %}">
+<form method="post" action="{% url bet_ticket_delete ticket.pk %}">
     {% csrf_token %}
     <input type="hidden" name="confirm" value="1" />
-    <input type="submit" value="{% trans 'delete bet' %}" title="{% trans 'delete the whole bet' %}" class="confirm" />
+    <input type="submit" value="{% trans 'delete ticket' %}" title="{% trans 'delete the whole ticket' %}" class="confirm" />
 </form>
-<div class="bookmaker pk_{{ bet.bookmaker.pk }}">
-    {% trans 'bookmaker' %}: {{ bet.bookmaker }}
+<div class="bookmaker pk_{{ ticket.bookmaker.pk }}">
+    {% trans 'bookmaker' %}: {{ ticket.bookmaker }}
 </div>
 <div class="stake">
     {% trans 'stake' %}: {{ bet.stake }}
 </div>
 <div class="type">
     {% trans 'type' %}:
-    {% if bet.pronostic_set.count < 2 %}
+    {% if ticket.bet_set.count < 2 %}
         {% trans 'simple' %}
     {% else %}
         {% trans 'combined' %}
     {% endif %}
 </div>
 <div class="odds">
-    {% trans 'odds' %}: {{ bet.odds|floatformat:2 }}
+    {% trans 'odds' %}: {{ ticket.odds|floatformat:2 }}
 </div>
 
-<table class="pronostics">
-    {% for pronostic in bet.pronostic_set.all.select_related %}
-    <tr class="pronostic pk_{{ pronostic.pk }}">
-        <td class="session pk_{{ pronostic.session.pk }}">
-            {{ pronostic.session }}
+<table class="bets">
+    {% for bet in ticket.bet_set.all.select_related %}
+    <tr class="bet pk_{{ bet.pk }}">
+        <td class="session pk_{{ bet.session.pk }}">
+            {{ bet.session }}
         </td>
-        <td>{{ pronostic.session.datetime_utc|display_date }}</td>
-        <td>{{ pronostic.session.datetime_utc|display_time }}</td>
-        <td>{{ pronostic.bettype.name }}</td>
-        <td>{{ pronostic.choice.name }}</td>
-        <td><a href="{% url bet_pronostic_form bet.pk %}?pronostic={{ pronostic.pk }}">{% trans 'edit' %}</a></td>
+        <td>{{ bet.session.datetime_utc|display_date }}</td>
+        <td>{{ bet.session.datetime_utc|display_time }}</td>
+        <td>{{ bet.bettype.name }}</td>
+        <td>{{ bet.choice.name }}</td>
+        <td><a href="{% url bet_form ticket.pk %}?bet={{ bet.pk }}">{% trans 'edit' %}</a></td>
         <td>
-            <form action="{% url bet_pronostic_delete pronostic.pk %}" method="post">
+            <form action="{% url bet_delete bet.pk %}" method="post">
                 {% csrf_token %}
                 <input type="hidden" name="confirm" value="1" />
-                <input type="submit" value="{% trans 'delete' %}" title="{% trans 'delete pronostic for match' %} {{ pronostic.session.name }}" class="confirm" />
+                <input type="submit" value="{% trans 'delete' %}" title="{% trans 'delete bet for match' %} {{ bet.session.name }}" class="confirm" />
             </form>
         </td>
 
@@ -45,7 +45,7 @@
     {% endfor %}
 </table>
 
-<form method="post" action="{% url bet_pronostic_form bet.pk %}{% if form.instance.pk %}?pronostic={{ form.instance.pk }}{% endif %}" enctype="multipart/form-data" encoding="multipart/form-data">
+<form method="post" action="{% url bet_form ticket.pk %}{% if form.instance.pk %}?bet={{ form.instance.pk }}{% endif %}" enctype="multipart/form-data" encoding="multipart/form-data">
     {% csrf_token %}
     {{ form.non_field_errors }}
 
@@ -66,7 +66,7 @@
     </div>
     <div class="bettype" {% if not show_all_fields %}style="display:none;"{% endif %}>
         {{ form.bettype.errors }}
-        {% trans 'bet type' %}*:
+        {% trans 'ticket type' %}*:
         {% if show_all_fields or form.bettype.errors %}
             {{ form.bettype }}
         {% else %}
@@ -99,5 +99,5 @@
 </form>
 
 <div class="close">
-    <input type="button" value="{% trans 'close bet' %}" />
+    <input type="button" value="{% trans 'close ticket' %}" />
 </div>

@@ -3,23 +3,23 @@ from django.conf import settings
 
 urlpatterns = patterns('bet.views',
     url(
-        r'pronostic/(?P<pronostic_pk>[0-9]+)/delete/$',
-        'pronostic_delete', {
-        }, 'bet_pronostic_delete'
+        r'ticket/(?P<ticket_pk>[^/]+)/delete/$',
+        'ticket_delete', {
+        }, 'bet_ticket_delete'
     ),
     url(
-        r'(?P<bet_pk>[^/]+)/delete/$',
-        'delete', {
+        r'ticket/add/$',
+        'ticket_add', {
+        }, 'bet_ticket_add'
+    ),
+    url(
+        '(?P<bet_pk>[0-9]+)/delete/$',
+        'bet_delete', {
         }, 'bet_delete'
     ),
     url(
-        r'(?P<bet_pk>[^/]+)/pronostic/form/$',
-        'pronostic_form', {
-        }, 'bet_pronostic_form'
-    ),
-    url(
-        r'add/$',
-        'add', {
-        }, 'bet_add'
+        r'(?P<ticket_pk>[^/]+)/bet/form/$',
+        'bet_form', {
+        }, 'bet_form'
     ),
 )

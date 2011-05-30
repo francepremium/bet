@@ -11,17 +11,17 @@ from models import *
 from forms import *
 
 @login_required
-def add(request, form_class=BetForm,
-    template_name='bet/add.html', extra_context=None):
+def ticket_add(request, form_class=TicketForm,
+    template_name='bet/ticket_add.html', extra_context=None):
 
     context = {}
-    instance = Bet(user=request.user)
+    instance = Ticket(user=request.user)
     if request.method == 'POST':
         form = form_class(request.POST, instance=instance)
         if form.is_valid():
-            bet = form.save()
+            ticket = form.save()
             return shortcuts.redirect(urlresolvers.reverse(
-                'bet_pronostic_form', args=(bet.pk,)))
+                'bet_form', args=(ticket.pk,)))
     else:
         form = form_class(instance=instance)
    
@@ -32,52 +32,52 @@ def add(request, form_class=BetForm,
         context_instance=template.RequestContext(request))
 
 @login_required
-def delete(request, bet_pk):
-    bet = shortcuts.get_object_or_404(Bet, pk=bet_pk)
-    if bet.user != request.user and not request.user.is_staff:
+def ticket_delete(request, ticket_pk):
+    ticket = shortcuts.get_object_or_404(Ticket, pk=ticket_pk)
+    if ticket.user != request.user and not request.user.is_staff:
         return http.HttpResponseForbidden()
+    if request.POST.get('confirm', False):
+        ticket.delete()
+    return http.HttpResponse(_(u'ticket deleted'))
+
+@login_required
+def bet_delete(request, bet_pk):
+    bet = shortcuts.get_object_or_404(Bet, pk=bet_pk)
+    if bet.ticket.user != request.user and not request.user.is_staff:
+        return http.HttpResponseForbidden()
+    ticket = bet.ticket
     if request.POST.get('confirm', False):
         bet.delete()
-    return http.HttpResponse(_(u'bet deleted'))
-
-@login_required
-def pronostic_delete(request, pronostic_pk):
-    pronostic = shortcuts.get_object_or_404(Pronostic, pk=pronostic_pk)
-    if pronostic.bet.user != request.user and not request.user.is_staff:
-        return http.HttpResponseForbidden()
-    bet = pronostic.bet
-    if request.POST.get('confirm', False):
-        pronostic.delete()
     return shortcuts.redirect(urlresolvers.reverse(
-        'bet_pronostic_form', args=(bet.pk,)))
+        'bet_form', args=(bet.ticket.pk,)))
 
 @login_required
-def pronostic_form(request, bet_pk, form_class=PronosticForm,
-    template_name='bet/pronostic_form.html', extra_context=None):
+def bet_form(request, ticket_pk, form_class=BetForm,
+    template_name='bet/bet_form.html', extra_context=None):
 
     context = {}
-    context['bet'] = bet = shortcuts.get_object_or_404(Bet, pk=bet_pk)
+    context['ticket'] = ticket = shortcuts.get_object_or_404(Ticket, pk=ticket_pk)
 
-    if bet.user != request.user and not request.user.is_staff:
+    if ticket.user != request.user and not request.user.is_staff:
         return http.HttpResponseForbidden()
 
-    pronostic_pk = request.GET.get('pronostic', False)
-    if pronostic_pk:
-        instance = shortcuts.get_object_or_404(Pronostic, pk=pronostic_pk)
+    bet_pk = request.GET.get('bet', False)
+    if bet_pk:
+        instance = shortcuts.get_object_or_404(Bet, pk=bet_pk)
         initial = {
             'sport': instance.session.sport,
         }
         context['show_all_fields'] = True
     else:
-        instance = Pronostic(bet=bet)
+        instance = Bet(ticket=ticket)
         initial = {}
 
     if request.method == 'POST':
         form = form_class(request.POST, request.FILES, instance=instance)
         if form.is_valid():
-            pronostic = form.save()
+            bet = form.save()
             return shortcuts.redirect(urlresolvers.reverse(
-                'bet_pronostic_form', args=(bet.pk,)))
+                'bet_form', args=(ticket.pk,)))
         else:
             context['show_all_fields'] = True
     else:

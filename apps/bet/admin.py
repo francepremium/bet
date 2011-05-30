@@ -2,14 +2,14 @@ from django.contrib import admin
 
 from models import *
 
-class PronosticInline(admin.TabularInline):
+class BetInline(admin.TabularInline):
     raw_id_fields = ('session', 'bettype')
-    model = Pronostic
+    model = Bet
 
-class BetAdmin(admin.ModelAdmin):
+class TicketAdmin(admin.ModelAdmin):
     raw_id_fields = ('user',)
     inlines = (
-        PronosticInline,
+        BetInline,
     )
 
-admin.site.register(Bet, BetAdmin)
+admin.site.register(Ticket, TicketAdmin)

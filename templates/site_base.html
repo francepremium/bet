@@ -48,7 +48,7 @@ tr.Fixture td.score.left {
 tr.Fixture td.score.right {
     text-align: left;
 }
-#global_bet_form .results_on_deck { display: none; }
+#global_ticket_form .results_on_deck { display: none; }
 div.tree ul, .tab_content { display: none; }
 table.bettype table.choices td,
 table.bettype table.choices tr,
@@ -90,7 +90,7 @@ ul#messages {
             </div>
         {% endif %}
 
-        <div id="global_bet_form"></div>
+        <div id="global_ticket_form"></div>
 
         <div id="tabhead">
             <div class="logo" dir="ltr">
@@ -147,7 +147,7 @@ ul#messages {
         <script src="{{ STATIC_URL }}pinax/js/base.js" type="text/javascript"></script>
         <script src="{{ STATIC_URL }}uni_form/uni-form.jquery.js" type="text/javascript"></script>
         <script src="{{ STATIC_URL }}js/jquery-ui-1.8.13.custom.min.js" type="text/javascript"></script>
-        <script src="http://github.com/malsup/form/raw/master/jquery.form.js" type="text/javascript"></script>
+        <script src="{{ STATIC_URL }}js/jquery.form.js" type="text/javascript"></script>
         {% include "facebox_js.html" %}
         <script type="text/javascript">
         $.ajaxSetup({
@@ -200,9 +200,9 @@ ul#messages {
                 $(this).find('ul').slideDown();
             });
             
-            function load_global_bet_html(html) {
+            function load_global_ticket_html(html) {
 
-                function do_load_global_bet_html(html) {
+                function do_load_global_ticket_html(html) {
                     var session_text = container.find('input[name=session_text]');
                     var session = container.find('div.session div.results_on_deck div');
                     var session_display = session.html()
@@ -216,22 +216,22 @@ ul#messages {
                 }
 
 
-                var container = $('div#global_bet_form');
+                var container = $('div#global_ticket_form');
                 if (container.css('display') != 'none') {
                     container.slideUp('fast', function() {
                         container.html(html);
-                        do_load_global_bet_html(html);
+                        do_load_global_ticket_html(html);
                     });
                 } else {
                     container.html(html);
-                    do_load_global_bet_html(html);
+                    do_load_global_ticket_html(html);
                 }
             }
-            function load_global_bet_url(url) {
-                var container = $('div#global_bet_form');
+            function load_global_ticket_url(url) {
+                var container = $('div#global_ticket_form');
                 container.slideUp();
                 $.get(url, {}, function(data, textStatus, jqXHR) {
-                    load_global_bet_html(data);
+                    load_global_ticket_html(data);
                 });
             }
 
@@ -239,20 +239,20 @@ ul#messages {
                 if ($(this).attr('href') == undefined || $(this).attr('href') == '#' || !$(this).attr('href')) {
                     return false;
                 }
-                if ($(this).attr('href') == '{% url bet_add %}' || $(this).attr('href').match('{% url bet_pronostic_form '[0-9]+' %}') != null) {
+                if ($(this).attr('href') == '{% url bet_ticket_add %}' || $(this).attr('href').match('{% url bet_form '[0-9]+' %}') != null) {
                     e.preventDefault();
-                    load_global_bet_url($(this).attr('href'));
+                    load_global_ticket_url($(this).attr('href'));
                 }
 
-                if ($('#global_bet_form form').length) {
-                    return confirm("{% trans 'Changing page will loose unsaved changes to the current bet. Do you want to continue ?' %}");
+                if ($('#global_ticket_form form').length) {
+                    return confirm("{% trans 'Changing page will loose unsaved changes to the current ticket. Do you want to continue ?' %}");
                 }
 
                 return true;
             });
 
-            $('#global_bet_form div.close input').live('click', function(e) {
-                $('#global_bet_form').slideUp('fast', function() {
+            $('#global_ticket_form div.close input').live('click', function(e) {
+                $('#global_ticket_form').slideUp('fast', function() {
                     $(this).html('');
                 });
             });
@@ -278,11 +278,11 @@ ul#messages {
             - trigger bettype change
             - show bettype select
             */
-            $('#global_bet_form select[name=sport]').live('change', function(e) {
-                $('#global_bet_form input[name=session_text]').val('');
-                $('#global_bet_form input[name=session]').val('');
+            $('#global_ticket_form select[name=sport]').live('change', function(e) {
+                $('#global_ticket_form input[name=session_text]').val('');
+                $('#global_ticket_form input[name=session]').val('');
 
-                var old_source = $('#global_bet_form input[name=session_text]').autocomplete( "option", "source");
+                var old_source = $('#global_ticket_form input[name=session_text]').autocomplete( "option", "source");
                 if (old_source.match(/sport=/)) {
                     new_source = old_source.replace(/sport=[^&]$/, 'sport=' + $(this).val());
                 } else {
@@ -292,21 +292,21 @@ ul#messages {
                         new_source = old_source + '?sport=' + $(this).val();
                     }
                 }
-                $('#global_bet_form input[name=session_text]').autocomplete( "option", "source", new_source);
-                $('#global_bet_form div.session').fadeIn();
+                $('#global_ticket_form input[name=session_text]').autocomplete( "option", "source", new_source);
+                $('#global_ticket_form div.session').fadeIn();
 
-                var bookmaker = $('#global_bet_form div.bookmaker');
+                var bookmaker = $('#global_ticket_form div.bookmaker');
                 var bookmaker_pk = bookmaker.attr('class').match(/pk_([0-9]+)/)[1];
-                var bettypes = $('#global_bet_form select[name=bettype]');
+                var bettypes = $('#global_ticket_form select[name=bettype]');
                 $.get(
                     '{% url bookmaker_bet_types_for_bookmaker_and_sport %}',
                     {
-                        'sport': $('#global_bet_form select[name=sport]').val(),
+                        'sport': $('#global_ticket_form select[name=sport]').val(),
                         'bookmaker': bookmaker_pk,
                     },
                     function(data, textStatus, jqXHR) {
                         update_select(bettypes, data);
-                        $('#global_bet_form div.bettype').fadeIn();
+                        $('#global_ticket_form div.bettype').fadeIn();
                     },
                     'json'
                 );
@@ -319,44 +319,41 @@ ul#messages {
             - update choices select
             - show choices
             */
-            $('#global_bet_form select[name=bettype]').live('change', function(e) {
+            $('#global_ticket_form select[name=bettype]').live('change', function(e) {
                 if ($(this).val() == null) {
-                    $('#global_bet_form div.choice').fadeOut();
+                    $('#global_ticket_form div.choice').fadeOut();
                     return false;
                 }
                 $.get(
-                    '{% url bookmaker_bet_choices_for_bettype %}',
+                    '{% url bookmaker_choices_for_bettype %}',
                     {
-                        'bettype': $('#global_bet_form select[name=bettype]').val(),
+                        'bettype': $('#global_ticket_form select[name=bettype]').val(),
                     },
                     function(data, textStatus, jqXHR) {
-                        update_select($('#global_bet_form select[name=choice]'), data);
-                        $('#global_bet_form div.choice').fadeIn();
+                        update_select($('#global_ticket_form select[name=choice]'), data);
+                        $('#global_ticket_form div.choice').fadeIn();
                     },
                     'json'
                 );
             });
 
-            $('#global_bet_form select[name=stake], #global_bet_form select[name=bookmaker]').live('change', function(e) {
-                if ($('#global_bet_form select[name=stake]').val() && $('#global_bet_form select[name=bookmaker]').val()) {
+            $('#global_ticket_form select[name=stake], #global_ticket_form select[name=bookmaker]').live('change', function(e) {
+                if ($('#global_ticket_form select[name=stake]').val() && $('#global_ticket_form select[name=bookmaker]').val()) {
                     $(this).parents('form').trigger('submit');
                 }
             });
 
 
-            $('#global_bet_form form').live('submit', function(e) {
+            $('#global_ticket_form form').live('submit', function(e) {
                 e.preventDefault();
 
                 $(this).ajaxSubmit({
                     'success': function(data, textStatus, jqXHR) {
-                        load_global_bet_html(data);
+                        load_global_ticket_html(data);
                     },
                     'dataType': 'html'
                 });
-
-
             });
-
 
             $('#ajaxload').fadeOut();
         });

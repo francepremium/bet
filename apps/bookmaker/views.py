@@ -28,7 +28,7 @@ def bet_types_for_bookmaker_and_sport(request,
     return http.HttpResponse(simplejson.dumps(results))
 
 @login_required
-def bet_choices_for_bettype(request, qs=BetChoice.objects.all()):
+def choices_for_bettype(request, qs=BetChoice.objects.all()):
     if request.GET.get('bettype'):
         qs = qs.filter(bettype__pk=request.GET.get('bettype'))
 

@@ -7,7 +7,7 @@ from django.template import defaultfilters
 from django.conf import settings
 from django.core.cache import cache
 
-class Bet(models.Model):
+class Ticket(models.Model):
     STAKE_CHOICES = [(x,x) for x in range(1,10)]
 
     bookmaker = models.ForeignKey('bookmaker.Bookmaker')
@@ -26,13 +26,13 @@ class Bet(models.Model):
         return i
 
 def media_upload_to(instance, filename):
-    return 'bet/%s/%s' % (instance.bet.pk, filename)
+    return 'ticket/%s/%s' % (instance.ticket.pk, filename)
 
-class Pronostic(models.Model):
+class Bet(models.Model):
     bettype = models.ForeignKey('bookmaker.BetType')
     choice = models.ForeignKey('bookmaker.BetChoice', null=True)
     session = models.ForeignKey('gsm.Session')
-    bet = models.ForeignKey('Bet')
+    ticket = models.ForeignKey('Ticket')
     odds = models.DecimalField(max_digits=4, decimal_places=2)
     text = models.TextField(blank=True, null=True)
     upload = models.FileField(upload_to=media_upload_to, null=True, blank=True)

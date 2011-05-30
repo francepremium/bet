@@ -7,14 +7,14 @@ from gsm.models import *
 from bookmaker.models import *
 from models import *
 
-class BetForm(forms.ModelForm):
+class TicketForm(forms.ModelForm):
     class Meta:
-        model = Bet
+        model = Ticket
         exclude = (
             'user',
         )
     
-class PronosticForm(forms.ModelForm):
+class BetForm(forms.ModelForm):
     sport = forms.ModelChoiceField(Sport.objects.all())
     #competition = forms.ModelChoiceField(Competition.objects.all())
     #session = forms.ModelChoiceField(Session.objects.all())
@@ -23,16 +23,16 @@ class PronosticForm(forms.ModelForm):
     def clean_session(self):
         session = self.cleaned_data['session']
 
-        for p in self.instance.bet.pronostic_set.all():
-            if self.instance.pk and p.pk == self.instance.pk:
+        for bet in self.instance.ticket.bet_set.all():
+            if self.instance.pk and bet.pk == self.instance.pk:
                 continue
-            if p.session.pk == session.pk:
+            if bet.session.pk == session.pk:
                 raise forms.ValidationError(_(u'there is already a pronostic for this match in this combined bet. Please choose another match'))
         
         return session
 
     class Meta:
-        model = Pronostic
+        model = Bet
         exclude = (
-            'bet',
+            'ticket',
         )

@@ -4,8 +4,8 @@ from django.conf import settings
 urlpatterns = patterns('bookmaker.views',
     url(
         r'bet_type/choices/$',
-        'bet_choices_for_bettype', {
-        }, 'bookmaker_bet_choices_for_bettype',
+        'choices_for_bettype', {
+        }, 'bookmaker_choices_for_bettype',
     ),
     url(
         r'bet_type/for_bookmaker_and_sport/$',
