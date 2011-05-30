@@ -1,7 +1,14 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 
+import views
+
 urlpatterns = patterns('bet.views',
+    url(
+        r'list/$',
+        views.BetListView.as_view(), {
+        }, 'bet_list'
+    ),
     url(
         r'ticket/(?P<ticket_pk>[^/]+)/delete/$',
         'ticket_delete', {

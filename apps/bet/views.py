@@ -6,9 +6,14 @@ from django import shortcuts
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.views import generic
 
 from models import *
 from forms import *
+
+class BetListView(generic.ListView):
+    model = Bet
+    context_object_name = 'bet_list'
 
 @login_required
 def ticket_add(request, form_class=TicketForm,
