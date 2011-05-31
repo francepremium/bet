@@ -18,13 +18,14 @@ class SessionLookup(object):
         return qs
 
     def format_result(self, session):
-        return "%s vs. %s" % (
+        return '%s vs. %s <span>%s</span>' % (
             session.oponnent_A_name,
             session.oponnent_B_name,
+            session.sport.name,
         )
 
     def format_item(self, session):
-        return "%s vs. %s" % (
+        return '%s vs. %s' % (
             session.oponnent_A_name,
             session.oponnent_B_name,
         )

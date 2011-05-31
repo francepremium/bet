@@ -17,7 +17,7 @@ from forms import *
 def bet_types_for_bookmaker_and_sport(request,
     qs=BetType.objects.all()):
     if request.GET.get('sport'):
-        qs = qs.filter(sport__pk=request.GET['sport'])
+        qs = qs.filter(sport__name__icontains=request.GET['sport'])
     if request.GET.get('bookmaker'):
         qs = qs.filter(bookmaker__pk=request.GET['bookmaker'])
     

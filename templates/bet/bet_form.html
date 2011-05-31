@@ -59,7 +59,7 @@
         {% trans 'odds' %}*:
         {{ form.odds }}
     </div>
-    <div class="session" {% if not show_all_fields %}style="display:none;"{% endif %}>
+    <div class="session" {# if not show_all_fields %}style="display:none;"{% endif #}>
         {{ form.session.errors }}
         {% trans 'match' %}*:
         {{ form.session }}

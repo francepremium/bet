@@ -69,13 +69,9 @@ def bet_form(request, ticket_pk, form_class=BetForm,
     bet_pk = request.GET.get('bet', False)
     if bet_pk:
         instance = shortcuts.get_object_or_404(Bet, pk=bet_pk)
-        initial = {
-            'sport': instance.session.sport,
-        }
         context['show_all_fields'] = True
     else:
         instance = Bet(ticket=ticket)
-        initial = {}
 
     if request.method == 'POST':
         form = form_class(request.POST, request.FILES, instance=instance)
@@ -86,9 +82,9 @@ def bet_form(request, ticket_pk, form_class=BetForm,
         else:
             context['show_all_fields'] = True
     else:
-        form = form_class(instance=instance, initial=initial)
-        if initial.get('sport', False):
-            form.fields['bettype'].queryset = BetType.objects.filter(sport=initial['sport'])
+        form = form_class(instance=instance)
+        if instance.pk:
+            form.fields['bettype'].queryset = BetType.objects.filter(sport=instance.session.sport)
             form.fields['choice'].queryset = BetChoice.objects.filter(bettype=instance.bettype)
    
     context['form'] = form

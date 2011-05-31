@@ -175,6 +175,51 @@ ul#messages {
                 li.slideUp();
             }, 3000);
         }
+
+        function update_select(select, data) {
+            select.find('option').remove();
+            select.append($('<option value="">-------</option>'));
+            for (var i in data) {
+                select.append($('<option value="'+data[i][0]+'">'+data[i][1]+'</option>'));
+            }
+        }
+
+        function load_global_ticket_html(html) {
+
+            function do_load_global_ticket_html(html) {
+                var session_text = container.find('input[name=session_text]');
+                var session = container.find('div.session div.results_on_deck div');
+                var session_display = session.html()
+                if (session && session_text && session_display) {
+                    session_display = session_display.replace('<span class="iconic" id="kill_id_session">X</span>', '');
+                    session_display = $.trim(session_display);
+                    session_text.val(session_display);
+                }
+
+                container.slideDown();
+            }
+
+
+            var container = $('div#global_ticket_form');
+            if (container.css('display') != 'none') {
+                container.slideUp('fast', function() {
+                    container.html(html);
+                    do_load_global_ticket_html(html);
+                });
+            } else {
+                container.html(html);
+                do_load_global_ticket_html(html);
+            }
+        }
+        function load_global_ticket_url(url) {
+            var container = $('div#global_ticket_form');
+            container.slideUp();
+            $.get(url, {}, function(data, textStatus, jqXHR) {
+                load_global_ticket_html(data);
+            });
+        }
+
+
         $(document).ready(function() {
             $('.tab_link').live('click', function(e) {
                 var tabid = $(this).attr('class').match(/tab_id_([a-z]*)/)[1];
@@ -200,41 +245,6 @@ ul#messages {
                 $(this).find('ul').slideDown();
             });
             
-            function load_global_ticket_html(html) {
-
-                function do_load_global_ticket_html(html) {
-                    var session_text = container.find('input[name=session_text]');
-                    var session = container.find('div.session div.results_on_deck div');
-                    var session_display = session.html()
-                    if (session && session_text && session_display) {
-                        session_display = session_display.replace('<span class="iconic" id="kill_id_session">X</span>', '');
-                        session_display = $.trim(session_display);
-                        session_text.val(session_display);
-                    }
-
-                    container.slideDown();
-                }
-
-
-                var container = $('div#global_ticket_form');
-                if (container.css('display') != 'none') {
-                    container.slideUp('fast', function() {
-                        container.html(html);
-                        do_load_global_ticket_html(html);
-                    });
-                } else {
-                    container.html(html);
-                    do_load_global_ticket_html(html);
-                }
-            }
-            function load_global_ticket_url(url) {
-                var container = $('div#global_ticket_form');
-                container.slideUp();
-                $.get(url, {}, function(data, textStatus, jqXHR) {
-                    load_global_ticket_html(data);
-                });
-            }
-
             $('a').live('click', function(e) {
                 if ($(this).attr('href') == undefined || $(this).attr('href') == '#' || !$(this).attr('href')) {
                     return false;
@@ -259,58 +269,6 @@ ul#messages {
 
             $('input[type=submit].confirm').live('click', function(e) {
                 return confirm('{% trans 'Do you want to' %} ' + $(this).attr('title') + ' ?');
-            });
-
-            function update_select(select, data) {
-                select.find('option').remove();
-                select.append($('<option value="">-------</option>'));
-                for (var i in data) {
-                    select.append($('<option value="'+data[i][0]+'">'+data[i][1]+'</option>'));
-                }
-            }
-
-            /*
-            sport select:
-            - empty session autocomplete
-            - update session autocomplete source
-            - show session autocomplete
-            - update bettypes select
-            - trigger bettype change
-            - show bettype select
-            */
-            $('#global_ticket_form select[name=sport]').live('change', function(e) {
-                $('#global_ticket_form input[name=session_text]').val('');
-                $('#global_ticket_form input[name=session]').val('');
-
-                var old_source = $('#global_ticket_form input[name=session_text]').autocomplete( "option", "source");
-                if (old_source.match(/sport=/)) {
-                    new_source = old_source.replace(/sport=[^&]$/, 'sport=' + $(this).val());
-                } else {
-                    if (old_source.match(/\?/)) {
-                        new_source = old_source + '&sport=' + $(this).val();
-                    } else {
-                        new_source = old_source + '?sport=' + $(this).val();
-                    }
-                }
-                $('#global_ticket_form input[name=session_text]').autocomplete( "option", "source", new_source);
-                $('#global_ticket_form div.session').fadeIn();
-
-                var bookmaker = $('#global_ticket_form div.bookmaker');
-                var bookmaker_pk = bookmaker.attr('class').match(/pk_([0-9]+)/)[1];
-                var bettypes = $('#global_ticket_form select[name=bettype]');
-                $.get(
-                    '{% url bookmaker_bet_types_for_bookmaker_and_sport %}',
-                    {
-                        'sport': $('#global_ticket_form select[name=sport]').val(),
-                        'bookmaker': bookmaker_pk,
-                    },
-                    function(data, textStatus, jqXHR) {
-                        update_select(bettypes, data);
-                        $('#global_ticket_form div.bettype').fadeIn();
-                    },
-                    'json'
-                );
-                bettypes.trigger('change');
             });
 
             /*

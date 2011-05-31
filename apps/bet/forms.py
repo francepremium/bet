@@ -15,7 +15,6 @@ class TicketForm(forms.ModelForm):
         )
     
 class BetForm(forms.ModelForm):
-    sport = forms.ModelChoiceField(Sport.objects.all())
     #competition = forms.ModelChoiceField(Competition.objects.all())
     #session = forms.ModelChoiceField(Session.objects.all())
     session = AutoCompleteSelectField('session')
