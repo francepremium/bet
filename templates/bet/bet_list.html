@@ -3,6 +3,15 @@
 {% load gsm_tags i18n %}
 
 {% block body %}
+
+<form action="" method="get">
+    <table>
+        {{ filter.form.as_table }}
+    </table>
+    <input type="submit" />
+    <a href="{{ request.path }}">{% trans 'all' %}</a>
+</form>
+
 <table>
     <thead>
         <tr>

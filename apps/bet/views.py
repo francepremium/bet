@@ -10,10 +10,21 @@ from django.views import generic
 
 from models import *
 from forms import *
+from filters import *
 
 class BetListView(generic.ListView):
     model = Bet
     context_object_name = 'bet_list'
+
+    def get_queryset(self):
+        qs = super(BetListView, self).get_queryset()
+        self.filter = BetFilter(self.request.GET, queryset=qs)
+        return self.filter.qs
+
+    def get_context_data(self, **kwargs):
+        context = super(BetListView, self).get_context_data(**kwargs)
+        context['filter'] = self.filter
+        return context
 
 @login_required
 def ticket_add(request, form_class=TicketForm,
