@@ -48,7 +48,9 @@
                 <a href="{{ membership.user.get_absolute_url }}" title="{{ membership.user }}">{% avatar membership.user %}</a>
                 
                 {% if not membership.kind == 0 %}
-                    <a href="{% url clan_admin clan.slug %}?do=exclude&membership={{ membership.pk }}">exclude</a>
+                    {% if not clan.auto_approve %}
+                        <a href="{% url clan_admin clan.slug %}?do=exclude&membership={{ membership.pk }}">exclude</a>
+                    {% endif %}
                     <a href="{% url clan_admin clan.slug %}?do=promote&membership={{ membership.pk }}">promote</a>
                 {% endif %}
             {% endfor %}

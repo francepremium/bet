@@ -103,6 +103,10 @@ def clan_admin(request, slug,
         return shortcuts.redirect(clan.get_absolute_url())
 
     if request.GET.get('do') in ('reject', 'exclude'):
+        if clan.auto_approve:
+            messages.error(request, _('you may not kick a user from a public group, he must quit by himself'))
+            return shortcuts.redirect(clan.get_absolute_url())
+
         membership.delete()
         if request.GET.get('do') == 'reject':
             messages.success(request, _('rejected application of %s') % membership.user)
