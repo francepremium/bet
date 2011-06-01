@@ -1,2 +1,11 @@
 {% extends 'site_base.html' %}
 
+{% load i18n %}
+
+{% block subnav %}
+    <ul>
+        <li class="tab">
+            <a href="{% url clan_form %}">{% trans 'create clan' %}</a>
+        </li>
+    </ul>
+{% endblock %}

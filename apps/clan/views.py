@@ -20,6 +20,9 @@ def clan_form(request, form_class=ClanForm,
     pk = request.GET.get('pk', False)
     if pk:
         context['clan'] = clan = shortcuts.get_object_or_404(Clan, pk=pk)
+        if not request.user.is_staff and not clan.is_admin(request.user):
+            messages.error(request, _(u'you are not an administrator of this clan'))
+            return shortcuts.redirect(clan.get_absolute_url())
     else:
         context['clan'] = clan = Clan(creation_user=request.user)
 

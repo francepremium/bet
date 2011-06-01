@@ -111,6 +111,6 @@ class Membership(models.Model):
         unique_together = ('user', 'clan')
 
 def membership_auto_approve(sender, **kwargs):
-    if kwargs['instance'].clan.auto_approve:
+    if kwargs['instance'].clan.auto_approve and kwargs['instance'].kind is None:
         kwargs['instance'].kind = 1
 signals.pre_save.connect(membership_auto_approve, sender=Membership)

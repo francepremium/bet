@@ -6,7 +6,7 @@ import views, models
 
 urlpatterns = patterns('clan.views',
     url(
-        r'form/$',
+        r'fo/rm/$',
         'clan_form', {
         }, 'clan_form',
     ),

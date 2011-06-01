@@ -7,6 +7,10 @@
 {% block body %}
     <h1>{{ clan }}</h1>
 
+    {% if clan|is_clan_admin:request.user %}
+    <a href="{% url clan_form %}?pk={{ clan.pk }}">{% trans 'edit' %}</a>
+    {% endif %}
+
     {% if clan.image %}
         <img src="{{ clan.image.url }}" />
     {% endif %}

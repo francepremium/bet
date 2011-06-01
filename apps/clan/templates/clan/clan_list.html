@@ -1,0 +1,7 @@
+{% extends 'clan/base.html' %}
+
+{% block body %}
+    {% for clan in clan_list %}
+        <a href="{{ clan.get_absolute_url }}" title="{{ clan }}">{{ clan }}</a>
+    {% endfor %}
+{% endblock %}
