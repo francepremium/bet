@@ -112,7 +112,7 @@ AJAX_LOOKUP_CHANNELS = {
     'session': ('gsm.lookups', 'SessionLookup'),
 }
 
-DEBUG=False
+DEBUG=True
 
 SENTRY_KEY = 'ENUTntheou)(098eu)(E0U983$@#$@34342oasuth90$#@$#@'
 SENTRY_REMOTE_URL = 'http://beta.yourlabs.org/sentry/store/'

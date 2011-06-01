@@ -1,0 +1,7 @@
+{% extends 'gsm/sport/base.html' %}
+
+{% load bet_tags %}
+
+{% block body %}
+    {% render_bet_list session__sport=sport.pk %}
+{% endblock %}

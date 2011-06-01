@@ -235,6 +235,9 @@ ul#messages {
             });
             $('.tab_link:first').click();
 
+            $('input[name=max_date]').datepicker({ dateFormat: 'yy-mm-dd', });
+            $('input[name=min_date]').datepicker({ dateFormat: 'yy-mm-dd', });
+
             $('div.tree').click(function(e) {
                 if ($(this).find('ul:visible').length) {
                     return true;
@@ -261,7 +264,7 @@ ul#messages {
                 return true;
             });
 
-            $('#global_ticket_form div.close input').live('click', function(e) {
+            $('#global_ticket_form div.close input[type=button]').live('click', function(e) {
                 $('#global_ticket_form').slideUp('fast', function() {
                     $(this).html('');
                 });

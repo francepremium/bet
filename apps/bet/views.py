@@ -15,15 +15,23 @@ from filters import *
 class BetListView(generic.ListView):
     model = Bet
     context_object_name = 'bet_list'
+    preset = {}
 
     def get_queryset(self):
         qs = super(BetListView, self).get_queryset()
-        self.filter = BetFilter(self.request.GET, queryset=qs)
+        
+        qd = {}
+        for k,v in self.request.GET.items():
+            qd[k] = v
+        qd.update(self.preset)
+
+        self.filter = BetFilter(qd, queryset=qs)
         return self.filter.qs
 
     def get_context_data(self, **kwargs):
         context = super(BetListView, self).get_context_data(**kwargs)
         context['filter'] = self.filter
+        context['preset'] = self.preset
         return context
 
 @login_required

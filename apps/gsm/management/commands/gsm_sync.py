@@ -29,7 +29,7 @@ class Command(BaseCommand):
                 if element.tag == 'area':
                     self.save_area(code, element)
     
-            for sport in Sport.objects.all():
+            for sport in Sport.objects.all().filter(slug='rugby'):
                 print "Saving seasons for %s" % sport
                 properties = {}
 
@@ -167,8 +167,6 @@ class Command(BaseCommand):
                 raise UnexpectedChild(element, child)
 
     def save_season(self, language, sport, element, **properties):
-        if element.attrib['season_id'] in (str(22), str(20)):
-            return None
         properties.update({
             'name_%s' % language: element.attrib['name'],
             'season_type': element.attrib.get('type', None) or None,

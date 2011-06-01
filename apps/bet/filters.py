@@ -24,6 +24,8 @@ class BetHasUploadFilter(django_filters.BooleanFilter):
         return qs
 
 class BetFilter(django_filters.FilterSet):
+    min_date = django_filters.DateFilter(lookup_type='gte', name='session__datetime_utc')
+    max_date = django_filters.DateFilter(lookup_type='lte', name='session__datetime_utc')
     session__datetime_utc = django_filters.DateRangeFilter()
     has_text = BetHasTextFilter()
     has_upload = BetHasUploadFilter()

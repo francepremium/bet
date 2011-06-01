@@ -1,0 +1,67 @@
+{% load gsm_tags i18n %}
+
+<form action="" method="get">
+    <table>
+        {{ filter.form.as_table }}
+    </table>
+    <input type="submit" />
+    <a href="{{ request.path }}">{% trans 'all' %}</a>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>{% trans 'nickname' %}</th>
+            <th>{% trans 'date' %}</th>
+            <th>{% trans 'time' %}</th>
+            <th>{% trans 'sport' %}</th>
+            <th>{% trans 'competition' %}</th>
+            <th>{% trans 'area' %}</th>
+            <th>{% trans 'match' %}</th>
+            <th>{% trans 'bet' %}</th>
+            <th>{% trans 'choice' %}</th>
+            <th>{% trans 'stake' %}</th>
+            <th>{% trans 'bookmaker' %}</th>
+            <th>{% trans 'support' %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for bet in filter.qs %}
+        <tr>
+            <td>
+                <a href="{{ bet.ticket.user.get_absolute_url }}" title="{{ bet.ticket.user }}">{{ bet.ticket.user }}</a>
+            </td>
+            <td>{{ bet.session.datetime_utc|display_date }}</td>
+            <td>{{ bet.session.datetime_utc|display_time }}</td>
+            <td>
+                <a href="{{ bet.session.sport.get_absolute_url }}" title="{{ bet.session.sport }}">{{ bet.session.sport }}</a>
+            </td>
+            <td>
+                <a href="{{ bet.session.season.competition.get_absolute_url }}" title="{{ bet.session.season.competition.name }}">{{ bet.session.season.competition.name }}</a>
+            </td>
+            <td>
+                {{ bet.session.season.competition.area }}
+            </td>
+            <td>
+                <a href="{{ bet.session.get_absolute_url }}" title="{{ bet.session }}">{{ bet.session }}</a>
+            </td>
+            <td>
+                {{ bet.bettype }}
+            </td>
+            <td>
+                {{ bet.choice }}
+            </td>
+            <td>
+                {{ bet.ticket.stake }}
+            </td>
+            <td>
+                <a href="{{ bet.ticket.bookmaker.get_absolute_url }}" title="{{ bet.ticket.bookmaker }}">{{ bet.ticket.bookmaker }}</a>
+            </td>
+            <td>
+                {% if bet.text %}{% trans 'text' %}{% endif %}
+                {% if bet.upload %}{% trans 'image' %}{% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
