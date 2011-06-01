@@ -1,0 +1,65 @@
+{% extends 'clan/base.html' %}
+
+{% load avatar_tags %}
+{% load i18n %}
+{% load clan_tags %}
+
+{% block body %}
+    <h1>{{ clan }}</h1>
+
+    {% if clan.image %}
+        <img src="{{ clan.image.url }}" />
+    {% endif %}
+
+    <table>
+        <tr>
+            <th>{% trans 'name' %}</th>
+            <td>{{ name }}</td>
+            <th>{% trans 'description' %}</th>
+            <td>{{ clan.description }}</td>
+        </tr>
+        <tr>
+            <th>{% trans 'created by' %}</th>
+            <td>{{ clan.creation_user }}</td>
+            <th>{% trans 'created on' %}</th>
+            <td>{{ clan.creation_datetime.date }}</td>
+        </tr>
+    </table>
+
+    {% if clan|has_clan_waiting_user:request.user %}
+        <p>{% trans 'you have a pending application to this clan' %}</p>
+        <a href="{% url clan_quit clan.slug %}">{% trans 'cancel application' %}</a>
+    {% else %}
+        {% if clan|has_clan_user:request.user %}
+            <a href="{% url clan_quit clan.slug %}">{% trans 'quit' %}</a>
+        {% else %}
+            <a href="{% url clan_join clan.slug %}">{% trans 'join' %}</a>
+        {% endif %}
+    {% endif %}
+
+    {% for kind, membership_set in clan.active_membership_set_per_kind %}
+        {% if membership_set|length %}
+            <h2>{{ kind }}</h2>
+            {% for membership in membership_set %}
+                <a href="{{ membership.user.get_absolute_url }}" title="{{ membership.user }}">{% avatar membership.user %}</a>
+                
+                {% if not membership.kind == 0 %}
+                    <a href="{% url clan_admin clan.slug %}?do=exclude&membership={{ membership.pk }}">exclude</a>
+                    <a href="{% url clan_admin clan.slug %}?do=promote&membership={{ membership.pk }}">promote</a>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+
+    {% if clan.pending_membership_set|length %}
+        <h2>{% trans 'pending applications' %}</h2>
+        {% for membership in clan.pending_membership_set %}
+            <a href="{{ membership.user.get_absolute_url }}" title="{{ membership.user }}">{% avatar membership.user %}</a>
+            {% if clan|is_clan_admin:request.user %}
+                <a href="{% url clan_admin clan.slug %}?do=approve&membership={{ membership.pk }}">approve</a>
+                <a href="{% url clan_admin clan.slug %}?do=reject&membership={{ membership.pk }}">reject</a>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

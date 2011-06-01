@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'pagination',
     'ajax_select',
     'sentry.client',
+    'avatar',
     
     # Pinax
     
@@ -78,6 +79,7 @@ INSTALLED_APPS = [
     'gsm',
     'bookmaker',
     'bet',
+    'clan',
 ]
 
 LANGUAGE_CODE = "fr_FR"
@@ -116,3 +118,6 @@ DEBUG=True
 
 SENTRY_KEY = 'ENUTntheou)(098eu)(E0U983$@#$@34342oasuth90$#@$#@'
 SENTRY_REMOTE_URL = 'http://beta.yourlabs.org/sentry/store/'
+
+ACCOUNT_EMAIL_VERIFICATION = False
+EMAIL_CONFIRMATION_DAYS = 3

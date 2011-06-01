@@ -26,6 +26,60 @@
         }
     },
     {
+        "pk": 2, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "test0", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2011-06-01 17:30:09", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$48962$6faf1866cb2cc2afe98a1e06607396104483d10c", 
+            "email": "jamespic@gmail.com", 
+            "date_joined": "2011-06-01 17:27:40"
+        }
+    },
+    {
+        "pk": 3, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "test1", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2011-06-01 17:30:09", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$48962$6faf1866cb2cc2afe98a1e06607396104483d10c", 
+            "email": "jamespic@gmail.com", 
+            "date_joined": "2011-06-01 17:27:40"
+        }
+    },
+    {
+        "pk": 4, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "test2", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2011-06-01 17:30:09", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$48962$6faf1866cb2cc2afe98a1e06607396104483d10c", 
+            "email": "jamespic@gmail.com", 
+            "date_joined": "2011-06-01 17:27:40"
+        }
+    },
+    {
         "pk": 1, 
         "model": "gsm.sport", 
         "fields": {
@@ -323,6 +377,87 @@
             "bettype": 5, 
             "name_fr": "X", 
             "name": "X"
+        }
+    },
+    {
+        "pk": 6, 
+        "model": "clan.clan", 
+        "fields": {
+            "kind": 1, 
+            "creation_datetime": "2011-06-01 16:50:58", 
+            "name": "Semi Private Test Clan", 
+            "creation_user": 1, 
+            "description": "", 
+            "image": "clan/None/avatar_big_2.png", 
+            "modification_datetime": "2011-06-01 17:34:35", 
+            "slug": "test", 
+            "auto_approve": false
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "clan.clan", 
+        "fields": {
+            "kind": 0, 
+            "creation_datetime": "2011-06-01 17:34:51", 
+            "name": "Public Clan Test", 
+            "creation_user": 3, 
+            "description": "", 
+            "image": "", 
+            "modification_datetime": "2011-06-01 17:34:51", 
+            "slug": "public-clan-test", 
+            "auto_approve": true
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "clan.clan", 
+        "fields": {
+            "kind": 2, 
+            "creation_datetime": "2011-06-01 17:35:03", 
+            "name": "Private Clan Test", 
+            "creation_user": 4, 
+            "description": "", 
+            "image": "", 
+            "modification_datetime": "2011-06-01 17:35:03", 
+            "slug": "private-clan-test", 
+            "auto_approve": false
+        }
+    },
+    {
+        "pk": 9, 
+        "model": "clan.membership", 
+        "fields": {
+            "clan": 6, 
+            "kind": null, 
+            "creation_datetime": "2011-06-01 17:42:27", 
+            "modification_user": null, 
+            "user": 3, 
+            "modification_datetime": "2011-06-01 17:42:27"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "clan.membership", 
+        "fields": {
+            "clan": 6, 
+            "kind": null, 
+            "creation_datetime": "2011-06-01 17:44:03", 
+            "modification_user": null, 
+            "user": 4, 
+            "modification_datetime": "2011-06-01 17:44:03"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "clan.membership", 
+        "fields": {
+            "clan": 6, 
+            "kind": null, 
+            "creation_datetime": "2011-06-01 17:44:23", 
+            "modification_user": null, 
+            "user": 2, 
+            "modification_datetime": "2011-06-01 17:44:23"
         }
     }
 ]

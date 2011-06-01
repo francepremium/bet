@@ -2,15 +2,15 @@ import datetime
 
 from django.utils.translation import ugettext as _
 
-import django_filters
+import django_filters as filters
 
 from models import *
 
-class DummyChoiceFilter(django_filters.ChoiceFilter):
+class DummyChoiceFilter(filters.ChoiceFilter):
     def filter(self, qs, value):
         return qs
 
-class SessionFilter(django_filters.FilterSet):
+class SessionFilter(filters.FilterSet):
     DATETIME_UTC_CHOICES = [
         ['today', _('today')],
         ['3hours', _('last 3 hours')],

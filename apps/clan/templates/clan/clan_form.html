@@ -1,0 +1,10 @@
+{% extends 'clan/base.html' %}
+
+{% load i18n %}
+
+{% block body %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% include 'form.html' %}
+    <input type="submit" value="{% trans 'save' %}" />
+</form>
+{% endblock %}
