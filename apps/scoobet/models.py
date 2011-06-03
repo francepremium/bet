@@ -1,7 +1,9 @@
 from django.db.models import signals
 from django.db import models
+from django.contrib.contenttypes.models import ContentType
 
 from actstream import action
+from actstream.models import Action
 
 def user_registered_activity(sender, **kwargs):
     if not kwargs.get('created', False):
@@ -9,3 +11,32 @@ def user_registered_activity(sender, **kwargs):
     action.send(kwargs['instance'], verb='registered')
 signals.post_save.connect(user_registered_activity, 
     sender=models.get_model('auth', 'user'))
+
+def delete_object_activities(sender, **kwargs):
+    """
+    This signal attempts to delete any activity which is related to Action
+    through a generic relation. This should keep the Action table sane.
+    """
+    if sender.__name__ == 'Session':
+        return None
+
+    print sender, sender.__class__.__name__
+
+    Action.objects.filter(
+        action_object_object_id=kwargs['instance'].pk,
+        action_object_content_type=ContentType.objects.get_for_model(
+                                                        kwargs['instance'])
+        ).delete()
+    Action.objects.filter(
+        actor_object_id=kwargs['instance'].pk,
+        actor_content_type=ContentType.objects.get_for_model(
+                                                        kwargs['instance'])
+        ).delete()
+    Action.objects.filter(
+        target_object_id=kwargs['instance'].pk,
+        target_content_type=ContentType.objects.get_for_model(
+                                                        kwargs['instance'])
+        ).delete()
+signals.pre_delete.connect(delete_object_activities)
+
+

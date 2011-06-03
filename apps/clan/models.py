@@ -114,3 +114,20 @@ def membership_auto_approve(sender, **kwargs):
     if kwargs['instance'].clan.auto_approve and kwargs['instance'].kind is None:
         kwargs['instance'].kind = 1
 signals.pre_save.connect(membership_auto_approve, sender=Membership)
+
+if 'actstream' in settings.INSTALLED_APPS:
+    import actstream
+
+    def clan_created(sender, **kwargs):
+        if not kwargs.get('created', False):
+            return None
+        actstream.action.send(kwargs['instance'].creation_user, 
+            verb='created clan', action_object=kwargs['instance'])
+    signals.post_save.connect(clan_created, sender=Clan)
+
+    def clan_joined(sender, **kwargs):
+        if not kwargs.get('created', False):
+            return None
+        actstream.action.send(kwargs['instance'].user, 
+            verb='joined clan', action_object=kwargs['instance'].clan)
+    signals.post_save.connect(clan_joined, sender=Membership)

@@ -49,11 +49,6 @@
     {% csrf_token %}
     {{ form.non_field_errors }}
 
-    <div class="sport">
-        {{ form.sport.errors }}
-        {% trans 'sport' %}*:
-        {{ form.sport }}
-    </div>
     <div class="odds" >
         {{ form.odds.errors }}
         {% trans 'odds' %}*:
@@ -93,11 +88,14 @@
         {{ form.upload }}
     </div>
 
-    <div class="submit">
-        <input type="submit" value="{% trans 'save and add next' %}" />
+    <div class="action">
+        <input type="radio" name="action" value="save_and_add_another" /> {% trans 'save and add another' %}
+        <br />
+        <input type="radio" name="action" value="save_and_close" /> {% trans 'save and close' %}
+        <br />
+        {% if ticket.bet_set.count > 0 %}
+        <input type="radio" name="action" value="just_close" /> {% trans 'close ticket' %}
+        <br />
+        {% endif %}
     </div>
 </form>
-
-<div class="close">
-    <input type="button" value="{% trans 'close ticket' %}" />
-</div>

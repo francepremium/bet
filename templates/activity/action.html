@@ -1,0 +1,94 @@
+{% load avatar_tags i18n comments %}
+<div class="activity">
+    <div class="avatar">
+        <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">
+            {% avatar action.actor %}
+        </a>
+    </div>
+    <div class="details">
+        {% if action.verb == 'closed ticket' %}
+            <p class="phrase">
+                <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'added ticket' %} <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>:
+            </p>
+            <table>
+                <tr>
+                    <th>{% trans 'match' %}</th>
+                    <th>{% trans 'question' %}</th>
+                    <th>{% trans 'answer' %}</th>
+                    {% if action.actor == request.user %}
+                    <th>{% trans 'edit' %}</th>
+                    <th>{% trans 'delete' %}</th>
+                    {% endif %}
+                </tr>
+                {% for bet in action.action_object.bet_set.all %}
+                <tr>
+                    <td>
+                        <a href="{{ bet.session.get_absolute_url }}" title="{{ bet.session }}">{{ bet.session }}</a>
+                    </td>
+                    <td>
+                        {{ bet.bettype.name }}
+                    </td>
+                    <td>
+                        {{ bet.choice }}
+                    </td>
+                    {% if action.actor == request.user %}
+                    <td>
+                        <a href="{% url bet_form action.action_object.pk %}?bet={{ bet.pk }}">X</a>
+
+                    </td>
+                    <td>
+                        <form action="{% url bet_delete bet.pk %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="confirm" value="1" />
+                            <input type="hidden" name="noredirect" value="1" />
+                            <input type="submit" value="{% trans 'delete' %}" title="{% trans 'delete bet for match' %} {{ bet.session.name }}" class="confirm" />
+                        </form>
+
+                    </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+        {% if action.verb == 'joined clan' %}
+            <p class="phrase">
+                <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'joined group' %} <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>
+            </p>
+        {% endif %}
+        {% if action.verb == 'created clan' %}
+            <p class="phrase">
+                <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'created group' %} <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>
+            </p>
+        {% endif %}
+    </div>
+
+    <div class="bottom">
+        <span class="date">
+            {{ action.timestamp|timesince }} {% trans 'ago' %}
+        </span>
+        
+        {% get_comment_count for action as comment_count %}
+        <span class="comments">
+            {% trans 'comment' %} ({{ comment_count }})
+        </span>
+    </div>
+
+    <div class="comments">
+        {% render_comment_list for action %}
+        <div class="comment_form_container">
+        {% render_comment_form for action %}
+        </div>
+    </div>
+</div>
+
+{% comment %}
+            [default activity template, it's here for debugging purposes only]
+            {% if action.actor.get_absolute_url %}<a href="{{ action.actor.get_absolute_url }}">{{ action.actor }}</a>
+            {% else %}<a href="{{ action.actor_url }}">{{ action.actor }}</a>{% endif %}
+            {{ action.verb }}
+            {% if action.target %}
+                {% if action.target.get_absolute_url %}<a href="{{ action.target.get_absolute_url }}">{{ action.target }}</a>
+                {% else %}<a href="{{ action.target_url }}">{{ action.target }}</a>{% endif %}
+            {% endif %}
+            {{ action.timestamp|timesince }} ago
+{% endcomment %}

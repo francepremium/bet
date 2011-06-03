@@ -12,6 +12,7 @@ class TicketForm(forms.ModelForm):
         model = Ticket
         exclude = (
             'user',
+            'status',
         )
     
 class BetForm(forms.ModelForm):
@@ -30,8 +31,23 @@ class BetForm(forms.ModelForm):
         
         return session
 
+    def __init__(self, *args, **kwargs):
+        super(BetForm, self).__init__(*args, **kwargs)
+
+        session_pk = self.data.get('session', None)
+        if session_pk:
+            session = Session.objects.get(pk=session_pk)
+            self.fields['bettype'].queryset = BetType.objects.filter(
+                                                sport=session.sport)
+
+        bettype_pk = self.data.get('bettype', None)
+        if bettype_pk:
+            self.fields['choice'].queryset = BetChoice.objects.filter(
+                                                bettype__pk=bettype_pk)
+
     class Meta:
         model = Bet
         exclude = (
             'ticket',
+            'status',
         )

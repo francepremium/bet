@@ -69,6 +69,9 @@ ul#messages {
     right: 0;
     z-index: 2;
 }
+div.activity div.comments {
+    display: none;
+}
         </style>
     </head>
     
@@ -120,6 +123,13 @@ ul#messages {
                     <li>
                         <a href="{% url clan_list %}">{% trans 'clans' %}</a>
                     </li>
+                    {% if request.user.is_authenticated %}
+                    <li>
+                        {% load activity_tags %}
+                        {% get_user_contenttype ctype %}
+                        <a href="{% url actstream_actor content_type_id=ctype.id object_id=request.user.id %}">{% trans 'activities' %}</a>
+                    </li>
+                    {% endif %}
                 </ul>
             {% endblock %}</div>
         </div>
@@ -251,6 +261,28 @@ ul#messages {
                 $(this).find('ul').slideDown();
             });
             
+            $('div.activity form').live('submit',function(e) {
+                var container;
+
+                if ($(this).find('textarea[name=comment]').length < 1) {
+                    return true;
+                }
+                
+                container = $(this).parents('div.comment_form_container')
+                if (!container) {
+                    return true;
+                }
+
+                e.preventDefault();
+
+                $(this).ajaxSubmit({
+                    'success': function(data, textStatus, jqXHR) {
+                        container.html(data);
+                    },
+                    'dataType': 'html',
+                });
+            });
+
             $('a').live('click', function(e) {
                 if ($(this).attr('href') == undefined || $(this).attr('href') == '#' || !$(this).attr('href')) {
                     return false;
@@ -260,17 +292,11 @@ ul#messages {
                     load_global_ticket_url($(this).attr('href'));
                 }
 
-                if ($('#global_ticket_form form').length) {
-                    return confirm("{% trans 'Changing page will loose unsaved changes to the current ticket. Do you want to continue ?' %}");
-                }
-
                 return true;
             });
 
-            $('#global_ticket_form div.close input[type=button]').live('click', function(e) {
-                $('#global_ticket_form').slideUp('fast', function() {
-                    $(this).html('');
-                });
+            $('#global_ticket_form input[name=action]').live('click', function(e) {
+                $(this).parents('form').trigger('submit');
             });
 
             $('input[type=submit].confirm').live('click', function(e) {
@@ -307,7 +333,6 @@ ul#messages {
                 }
             });
 
-
             $('#global_ticket_form form').live('submit', function(e) {
                 e.preventDefault();
 
@@ -317,6 +342,14 @@ ul#messages {
                     },
                     'dataType': 'html'
                 });
+            });
+
+            {% if incomplete_ticket_url %}
+            load_global_ticket_url('{{ incomplete_ticket_url }}');
+            {% endif %}
+
+            $('div.activity div.bottom span.comments').click(function(e) {
+                $(this).parent().next().toggle();
             });
 
             $('#ajaxload').fadeOut();

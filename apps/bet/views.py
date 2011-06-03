@@ -8,6 +8,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views import generic
 
+import actstream
+
 from models import *
 from forms import *
 from filters import *
@@ -72,6 +74,14 @@ def bet_delete(request, bet_pk):
     ticket = bet.ticket
     if request.POST.get('confirm', False):
         bet.delete()
+    if request.POST.get('noredirect', False):
+        if ticket.pk:
+            message = _('bet deleted')
+        else:
+            message = _('bet deleted, ticket without bet deleted too')
+        messages.success(request, message)
+        return shortcuts.redirect(request.META.get('HTTP_REFERER', '/'))
+
     return shortcuts.redirect(urlresolvers.reverse(
         'bet_form', args=(bet.ticket.pk,)))
 
@@ -81,7 +91,8 @@ def bet_form(request, ticket_pk, form_class=BetForm,
 
     context = {}
     context['ticket'] = ticket = shortcuts.get_object_or_404(Ticket, pk=ticket_pk)
-
+    action = request.POST.get('action', 'save_and_add_another')
+    
     if ticket.user != request.user and not request.user.is_staff:
         return http.HttpResponseForbidden()
 
@@ -93,11 +104,22 @@ def bet_form(request, ticket_pk, form_class=BetForm,
         instance = Bet(ticket=ticket)
 
     if request.method == 'POST':
+        if action == 'just_close':
+            ticket.status = TICKET_STATUS_DONE
+            ticket.save()
+            return http.HttpResponse(_('ticket closed'), status=201)
         form = form_class(request.POST, request.FILES, instance=instance)
         if form.is_valid():
             bet = form.save()
-            return shortcuts.redirect(urlresolvers.reverse(
-                'bet_form', args=(ticket.pk,)))
+            if action == 'save_and_close':
+                ticket.status = TICKET_STATUS_DONE
+                ticket.save()
+                actstream.action.send(request.user, verb='closed ticket', action_object=ticket)
+                return http.HttpResponse(
+                    _('bet saved and ticket closed'), status=201)
+            elif action == 'save_and_add_another':
+                return shortcuts.redirect(urlresolvers.reverse(
+                    'bet_form', args=(ticket.pk,)))
         else:
             context['show_all_fields'] = True
     else:

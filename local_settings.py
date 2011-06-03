@@ -34,10 +34,9 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.media",
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
-    
     "staticfiles.context_processors.static_url",
-    
     "pinax.core.context_processors.pinax_settings",
+    "bet.context_processors.incomplete_ticket",
 ]
 
 INSTALLED_APPS = [
