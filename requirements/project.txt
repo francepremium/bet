@@ -28,3 +28,4 @@ django-openid==0.2.3.dev1
 python-openid==2.2.5
 django-uni-form==0.7.0
 -e git+https://github.com/ericflo/django-avatar.git#egg=avatar
+-e git+https://github.com/justquick/django-activity-stream.git#egg=actstream

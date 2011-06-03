@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'ajax_select',
     'sentry.client',
     'avatar',
+    'actstream',
     
     # Pinax
     
@@ -80,6 +81,7 @@ INSTALLED_APPS = [
     'bookmaker',
     'bet',
     'clan',
+    'scoobet',
 ]
 
 LANGUAGE_CODE = "fr_FR"
