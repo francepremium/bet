@@ -49,6 +49,7 @@ class Area(models.Model):
 class Sport(models.Model):
     name = models.CharField(max_length=30)
     slug = models.CharField(max_length=20)
+    fans = models.ManyToManyField('auth.User')
 
     def __unicode__(self):
         return _(self.name)
@@ -62,7 +63,7 @@ class Sport(models.Model):
     def get_competition_areas(self):
         return Area.objects.filter(competition__sport=self).order_by('name').distinct()
 
-    def get_absolute_url(self, tab):
+    def get_absolute_url(self, tab='home'):
         return urlresolvers.reverse('gsm_sport_detail', args=(self.slug,))
     def get_tab_absolute_url(self, tab):
         return urlresolvers.reverse('gsm_sport_detail_tab', args=(self.slug, tab,))
@@ -93,6 +94,7 @@ class AbstractGsmEntity(models.Model):
     area = models.ForeignKey('Area',null=True, blank=True)
     name = models.CharField(max_length=150, null=True, blank=True)
     last_updated = models.DateTimeField(null=True, blank=True)
+    fans = models.ManyToManyField('auth.User')
 
     class Meta:
         unique_together = ('sport', 'tag', 'gsm_id')
@@ -154,6 +156,8 @@ class AbstractGsmEntity(models.Model):
 
 
     def __unicode__(self):
+        if self.pk == 1100:
+            import ipdb; ipdb.set_trace()
         if hasattr(self, 'element'):
             if 'name' in self.attrib.keys():
                 return self.attrib['name']
@@ -163,6 +167,7 @@ class AbstractGsmEntity(models.Model):
                 return '%s %s' % (self.attrib['first_name'], self.attrib['last_name'])
             if 'firstname' in self.attrib.keys():
                 return '%s %s' % (self.attrib['firstname'], self.attrib['lastname'])
+        return self.name
         return '%s (<%s> #%s %s)' % (self.name, self.tag, self.gsm_id, self.sport)
 
 class GsmEntity(AbstractGsmEntity):

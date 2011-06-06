@@ -8,7 +8,12 @@ from django import template
 from django import http
 from django import shortcuts
 from django.conf import settings
+from django.contrib import messages
 from django.utils.translation import get_language_from_request
+from django.contrib.auth.decorators import login_required
+from django.db import models
+
+import actstream
 
 from models import *
 from filters import *
@@ -17,6 +22,20 @@ import gsm
 
 def get_language_from_request(request):
     return 'fr'
+
+@login_required
+def fan(request, action, model_class, model_pk, app_name='gsm'):
+    model_class = models.get_model(app_name, model_class)
+    model = shortcuts.get_object_or_404(model_class, pk=model_pk)
+    if action == 'become':
+        model.fans.add(request.user)
+        actstream.action.send(request.user, verb='bets on',
+            action_object=model)
+    else:
+        model.fans.remove(request.user)
+    message = _('you indicated that you bet on %s') % model
+    messages.success(request, message)
+    return shortcuts.redirect(model.get_absolute_url())
 
 def sport_json_competitions(request):
     if not request.GET.get('sport', False):
@@ -42,7 +61,7 @@ def person_detail_tab(request, sport, gsm_id, tab, tag='person',
     sport = shortcuts.get_object_or_404(Sport, slug=sport)
 
     gsm_entity_class = model_class_for_tag(tag)
-    person = shortcuts.get_object_or_404(gsm_entity_class,
+    person, created = gsm_entity_class.objects.get_or_create(
         sport = sport,
         tag = tag,
         gsm_id = gsm_id
@@ -61,6 +80,10 @@ def person_detail_tab(request, sport, gsm_id, tab, tag='person',
         t = gsm.get_tree(context['language'], sport, 'get_career', 
             type='player', id=person.gsm_id, detailed='yes')
     person.element = t.getroot().getchildren()[1]
+
+    if created:
+        person.name = unicode(person)
+        person.save()
 
     template_name = [
         'gsm/%s/%s/%s.html' % (sport.slug, 'person', tab),

@@ -20,8 +20,6 @@ def delete_object_activities(sender, **kwargs):
     if sender.__name__ == 'Session':
         return None
 
-    print sender, sender.__class__.__name__
-
     Action.objects.filter(
         action_object_object_id=kwargs['instance'].pk,
         action_object_content_type=ContentType.objects.get_for_model(
@@ -39,4 +37,11 @@ def delete_object_activities(sender, **kwargs):
         ).delete()
 signals.pre_delete.connect(delete_object_activities)
 
-
+def comment_posted_activity(sender, **kwargs):
+    if not kwargs.get('created', False):
+        return None
+    if not kwargs['instance'].user:
+        return None
+    action.send(kwargs['instance'].user, verb='commented',
+        action_object=kwargs['instance'].content_object)
+signals.post_save.connect(comment_posted_activity, sender=models.get_model('comments', 'Comment'))

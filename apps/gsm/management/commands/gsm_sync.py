@@ -29,7 +29,7 @@ class Command(BaseCommand):
                 if element.tag == 'area':
                     self.save_area(code, element)
     
-            for sport in Sport.objects.all().filter(slug='rugby'):
+            for sport in Sport.objects.all().exclude(slug='rugby'):
                 print "Saving seasons for %s" % sport
                 properties = {}
 

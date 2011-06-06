@@ -1,0 +1,10 @@
+{% extends 'article/base.html' %}
+
+{% load i18n %}
+
+{% block body %}
+<form action="" method="post">`
+    {% include 'form.html' %}
+    <input type="submit" value="{% trans 'save' %}" />
+</form>
+{% endblock %}

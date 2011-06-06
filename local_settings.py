@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     'bet',
     'clan',
     'scoobet',
+    'article',
 ]
 
 LANGUAGE_CODE = "fr_FR"

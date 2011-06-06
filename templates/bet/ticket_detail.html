@@ -1,0 +1,39 @@
+            <table>
+                <tr>
+                    <th>{% trans 'match' %}</th>
+                    <th>{% trans 'question' %}</th>
+                    <th>{% trans 'answer' %}</th>
+                    {% if action.actor == request.user %}
+                    <th>{% trans 'edit' %}</th>
+                    <th>{% trans 'delete' %}</th>
+                    {% endif %}
+                </tr>
+                {% for bet in action.action_object.bet_set.all %}
+                <tr>
+                    <td>
+                        <a href="{{ bet.session.get_absolute_url }}" title="{{ bet.session }}">{{ bet.session }}</a>
+                    </td>
+                    <td>
+                        {{ bet.bettype.name }}
+                    </td>
+                    <td>
+                        {{ bet.choice }}
+                    </td>
+                    {% if action.actor == request.user %}
+                    <td>
+                        <a href="{% url bet_form action.action_object.pk %}?bet={{ bet.pk }}">X</a>
+
+                    </td>
+                    <td>
+                        <form action="{% url bet_delete bet.pk %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="confirm" value="1" />
+                            <input type="hidden" name="noredirect" value="1" />
+                            <input type="submit" value="{% trans 'delete' %}" title="{% trans 'delete bet for match' %} {{ bet.session.name }}" class="confirm" />
+                        </form>
+
+                    </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>

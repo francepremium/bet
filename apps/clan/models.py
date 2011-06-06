@@ -125,9 +125,13 @@ if 'actstream' in settings.INSTALLED_APPS:
             verb='created clan', action_object=kwargs['instance'])
     signals.post_save.connect(clan_created, sender=Clan)
 
-    def clan_joined(sender, **kwargs):
+    def auto_approve_clan_joined(sender, **kwargs):
         if not kwargs.get('created', False):
             return None
+        if not kwargs['instance'].clan.auto_approve:
+            return False
+        if kwargs['instance'].clan.creation_user == kwargs['instance'].user:
+            return False
         actstream.action.send(kwargs['instance'].user, 
             verb='joined clan', action_object=kwargs['instance'].clan)
-    signals.post_save.connect(clan_joined, sender=Membership)
+    signals.post_save.connect(auto_approve_clan_joined, sender=Membership)

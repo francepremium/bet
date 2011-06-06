@@ -26,4 +26,10 @@
 </ul>
 {% endblock %}
 
-
+{% block body_head %}
+    {% if person in request.user.gsmentity_set.all %}
+        <a href="{% url gsm_fan 'unbecome' 'GsmEntity' person.pk %}">{% trans 'i do not bet on' %} {{ person }}</a>
+    {% else %}
+        <a href="{% url gsm_fan 'become' 'GsmEntity' person.pk %}">{% trans 'i bet on' %} {{ person }}</a>
+    {% endif %}
+{% endblock %}

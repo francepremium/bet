@@ -8,6 +8,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views import generic
 
+if 'actstream' in settings.INSTALLED_APPS:
+    import actstream
+
 from models import *
 from forms import *
 from filters import *
@@ -118,6 +121,9 @@ def clan_admin(request, slug,
             messages.success(request, _('promoted %s') % membership.user)
         else:
             membership.kind = 1
+            if 'actstream' in settings.INSTALLED_APPS:
+                actstream.action.send(request.user, verb='joined clan',
+                    action_object=clan)
             messages.success(request, _('approved %s') % membership.user)
         membership.save()
     else:

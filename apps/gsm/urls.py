@@ -30,6 +30,11 @@ urlpatterns += patterns('gsm.views',
         }, 'gsm_entity_detail'
     ),
     url(
+        r'fan/(?P<action>[a-z]+)/(?P<model_class>[a-zA-Z]+)/(?P<model_pk>[0-9]+)/$',
+        'fan', {
+        }, 'gsm_fan',
+    ),
+    url(
         r'json/sessions/$',
         'sport_json_sessions', {
         }, 'gsm_sport_json_sessions'

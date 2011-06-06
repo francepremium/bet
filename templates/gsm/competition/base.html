@@ -35,3 +35,10 @@
 </ul>
 {% endblock %}
 
+{% block body_head %}
+    {% if competition in request.user.competition_set.all %}
+        <a href="{% url gsm_fan 'unbecome' 'Competition' competition.pk %}">{% trans 'i do not bet on' %} {{ competition }}</a>
+    {% else %}
+        <a href="{% url gsm_fan 'become' 'Competition' competition.pk %}">{% trans 'i bet on' %} {{ competition }}</a>
+    {% endif %}
+{% endblock %}

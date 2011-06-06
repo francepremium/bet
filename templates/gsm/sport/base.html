@@ -31,3 +31,10 @@
 </ul>
 {% endblock %}
 
+{% block body_head %}
+    {% if sport in request.user.sport_set.all %}
+        <a href="{% url gsm_fan 'unbecome' 'Sport' sport.pk %}">{% trans 'i do not bet on' %} {{ sport }}</a>
+    {% else %}
+        <a href="{% url gsm_fan 'become' 'Sport' sport.pk %}">{% trans 'i bet on' %} {{ sport }}</a>
+    {% endif %}
+{% endblock %}

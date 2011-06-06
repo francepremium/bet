@@ -123,6 +123,9 @@ div.activity div.comments {
                     <li>
                         <a href="{% url clan_list %}">{% trans 'clans' %}</a>
                     </li>
+                    <li>
+                        <a href="{% url article_list %}">{% trans 'articles' %}</a>
+                    </li>
                     {% if request.user.is_authenticated %}
                     <li>
                         {% load activity_tags %}
@@ -148,6 +151,8 @@ div.activity div.comments {
                 {% endif %}
             </ul>
             
+            {% block body_head %}
+            {% endblock %}
             {% block body %}
             {% endblock %}
             
@@ -349,7 +354,7 @@ div.activity div.comments {
             {% endif %}
 
             $('div.activity div.bottom span.comments').click(function(e) {
-                $(this).parent().next().toggle();
+                $(this).parent().next().toggle('fast');
             });
 
             $('#ajaxload').fadeOut();

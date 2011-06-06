@@ -140,3 +140,10 @@
 </ul>
 {% endblock %}
 
+{% block body_head %}
+    {% if session in request.user.session_set.all %}
+        <a href="{% url gsm_fan 'unbecome' 'Session' session.pk %}">{% trans 'i do not bet on' %} {{ session }}</a>
+    {% else %}
+        <a href="{% url gsm_fan 'become' 'Session' session.pk %}">{% trans 'i bet on' %} {{ session }}</a>
+    {% endif %}
+{% endblock %}

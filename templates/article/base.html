@@ -1,0 +1,14 @@
+{% extends 'site_base.html' %}
+
+{% load i18n %}
+
+{% block subnav %}
+<ul>
+    <li>
+        <a href="{% url article_list %}">{% trans 'article list' %}</a>
+    </li>
+    <li>
+        <a href="{% url article_create %}">{% trans 'create article' %}</a>
+    </li>
+</ul>
+{% endblock %}

@@ -43,3 +43,4 @@ urlpatterns = patterns('clan.views',
         name='clan_list',
     ),
 )
+
