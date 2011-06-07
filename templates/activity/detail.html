@@ -1,2 +1,9 @@
-<h2>{% include 'activity/action.html' %}</h2>
-<p>On {{ action.timestamp|date }} at {{ action.timestamp|time }}</p>
+{% extends 'site_base.html' %}
+
+{% block body_class %}activity detail{% endblock %}
+
+{% block body %}
+
+{% include 'activity/action.html' %}
+
+{% endblock %}
