@@ -10,6 +10,10 @@ from gsm.models import GsmEntity, Area, Session
 register = template.Library()
 
 @register.filter
+def is_int(val):
+    return val.__class__.__name__ == 'int'
+
+@register.filter
 def display_date(date):
     if not hasattr(date, 'year'):
         return False

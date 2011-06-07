@@ -27,18 +27,18 @@
                 {% if sport.slug == 'tennis' %}
                 <table>
                     <tr>
-                        <td>{% if session.A1_score %}{{ session.A1_score }}{% endif %}</td>
-                        <td>{% if session.A2_score %}{{ session.A2_score }}{% endif %}</td>
-                        <td>{% if session.A3_score %}{{ session.A3_score }}{% endif %}</td>
-                        <td>{% if session.A4_score %}{{ session.A4_score }}{% endif %}</td>
-                        <td>{% if session.A5_score %}{{ session.A5_score }}{% endif %}</td>
+                        <td>{% if session.A1_score|is_int %}{{ session.A1_score }}{% endif %}</td>
+                        <td>{% if session.A2_score|is_int %}{{ session.A2_score }}{% endif %}</td>
+                        <td>{% if session.A3_score|is_int %}{{ session.A3_score }}{% endif %}</td>
+                        <td>{% if session.A4_score|is_int %}{{ session.A4_score }}{% endif %}</td>
+                        <td>{% if session.A5_score|is_int %}{{ session.A5_score }}{% endif %}</td>
                     </tr>
                     <tr>
-                        <td>{% if session.B1_score %}{{ session.B1_score }}{% endif %}</td>
-                        <td>{% if session.B2_score %}{{ session.B2_score }}{% endif %}</td>
-                        <td>{% if session.B3_score %}{{ session.B3_score }}{% endif %}</td>
-                        <td>{% if session.B4_score %}{{ session.B4_score }}{% endif %}</td>
-                        <td>{% if session.B5_score %}{{ session.B5_score }}{% endif %}</td>
+                        <td>{% if session.B1_score|is_int %}{{ session.B1_score }}{% endif %}</td>
+                        <td>{% if session.B2_score|is_int %}{{ session.B2_score }}{% endif %}</td>
+                        <td>{% if session.B3_score|is_int %}{{ session.B3_score }}{% endif %}</td>
+                        <td>{% if session.B4_score|is_int %}{{ session.B4_score }}{% endif %}</td>
+                        <td>{% if session.B5_score|is_int %}{{ session.B5_score }}{% endif %}</td>
                     </tr>
                 </table>
 
