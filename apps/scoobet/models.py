@@ -45,3 +45,12 @@ def comment_posted_activity(sender, **kwargs):
     action.send(kwargs['instance'].user, verb='commented',
         action_object=kwargs['instance'].content_object)
 signals.post_save.connect(comment_posted_activity, sender=models.get_model('comments', 'Comment'))
+
+def new_action_unicode(self):
+    if self.target:
+        if self.action_object:
+            return u'%s %s %s on %s' % (self.actor, self.verb, self.action_object, self.target)
+        else:
+            return u'%s %s %s' % (self.actor, self.verb, self.target)
+    return u'%s %s' % (self.actor, self.verb)
+Action.__unicode__ = new_action_unicode
