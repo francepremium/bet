@@ -13,3 +13,5 @@ class TicketAdmin(admin.ModelAdmin):
     )
 
 admin.site.register(Ticket, TicketAdmin)
+admin.site.register(Bet)
+admin.site.register(Event)

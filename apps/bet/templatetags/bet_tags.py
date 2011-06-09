@@ -83,7 +83,15 @@ class BetListNode(template.Node):
         qd.update(self.kwargs)
         context['filter'] = f = BetFilter(qd, queryset=qs)
 
-        context['bet_list'] = f.qs
+        context['bet_list'] = bet_list = f.qs
+
+        user = context['request'].user
+        if user.is_authenticated():
+            for bet in bet_list:
+                if user.betprofile.can_correct(bet):
+                    bet.can_correct = True
+                if user.betprofile.can_flag(bet):
+                    bet.can_flag = True
 
         if not hasattr(self, 'nodelist'):
             t = template.loader.select_template([

@@ -58,6 +58,61 @@ def ticket_add(request, form_class=TicketForm,
         context_instance=template.RequestContext(request))
 
 @login_required
+def bet_status_change(request, bet_pk, action):
+    bet = shortcuts.get_object_or_404(Bet, pk=bet_pk)
+    if action not in ('won', 'lost', 'flag', 'canceled'):
+        return http.HttpResponseBadRequest('Only won, lost, flag and canceled are OK for the action argument')
+    
+    if action in ('won', 'lost', 'canceled'):
+        if not request.user.betprofile.can_correct(bet):
+            return http.HttpResponseForbidden('you may not correct this bet')
+        
+        old_correction = bet.correction
+        if action == 'won':
+            new_correction = BET_CORRECTION_WON
+        elif action == 'lost':
+            new_correction = BET_CORRECTION_LOST
+        elif action == 'canceled':
+            new_correction = BET_CORRECTION_CANCELED
+       
+        # validate all corrections of this bet that match this one
+        bet.event_set.filter(correction=new_correction,
+                             kind=EVENT_KIND_CORRECTION).update(valid=True)
+
+        # invalidate all corrections of this bet that do not match this one
+        bet.event_set.exclude(correction=new_correction).filter(
+                             kind=EVENT_KIND_CORRECTION).update(valid=False)
+
+        # validate all reports of corrections that are different from this one
+        bet.event_set.exclude(correction=new_correction).filter(
+                             kind=EVENT_KIND_FLAG).update(valid=True)
+
+        # invalidate all reports of corrections that match the new correction
+        bet.event_set.filter(correction=new_correction,
+                             kind=EVENT_KIND_FLAG).update(valid=False)
+
+        event = Event(bet=bet, user=request.user, kind=EVENT_KIND_CORRECTION,
+                                                    correction=new_correction)
+        event.save()
+
+        bet.correction = new_correction
+        bet.status = BET_STATUS_CORRECTED
+        bet.save()
+
+    elif action == 'flag':
+        if not request.user.betprofile.can_flag(bet):
+            return http.HttpResponseForbidden('you may not flag this bet')
+
+        event = Event(user=request.user, bet=bet, kind=EVENT_KIND_FLAG,
+                      correction=bet.correction)
+        event.save()
+
+        bet.status = BET_STATUS_FLAG
+        bet.save()
+
+    return http.HttpResponse()
+
+@login_required
 def ticket_delete(request, ticket_pk):
     ticket = shortcuts.get_object_or_404(Ticket, pk=ticket_pk)
     if ticket.user != request.user and not request.user.is_staff:

@@ -170,6 +170,8 @@ body.activity.detail div.activity div.comments {
         </div>
         {% endblock %}
         
+        {% csrf_token %}
+
         <div id="footer">{% block footer %}{% endblock %}</div>
         
         <script src="{% block jquery_src %}{{ STATIC_URL }}js/jquery-1.5.1.min.js{% endblock %}" type="text/javascript"></script>
@@ -390,6 +392,36 @@ body.activity.detail div.activity div.comments {
                 if ($(window).scrollTop() == $(document).height() - $(window).height()) {
                     $("a.endless_more").click();
                 }  
+            });
+
+            $('td.correct a').click(function(e) {
+                e.preventDefault();
+                var link = $(this);
+                $.post(
+                    $(this).attr('href'), {
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                    }, function(data, textStatus, jqXHR) {
+                        link.parent().slideUp('fast', function() {
+                            if (link.hasClass('flag')) {
+                                link.parents('tr').find('td.flag div').slideDown();
+                            } else {
+                                link.parents('td').find('div.flag').slideDown();
+                            }
+                        });
+                        if (link.hasClass('lost')) {
+                            link.parents('tr').find('td.result div.lost').show('fast');
+                        }
+                        if (link.hasClass('canceled')) {
+                            link.parents('tr').find('td.result div.canceled').show('fast');
+                        }
+                        if (link.hasClass('won')) {
+                            link.parents('tr').find('td.result div.won').show('fast');
+                        }
+                        if (link.hasClass('flag')) {
+                            link.parents('tr').find('td.flag div').show('fast');
+                        }
+                    }
+                );
             });
 
             $('#ajaxload').fadeOut();

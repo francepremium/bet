@@ -29,4 +29,9 @@ urlpatterns = patterns('bet.views',
         'bet_form', {
         }, 'bet_form'
     ),
+    url(
+        r'(?P<bet_pk>[0-9]+)/(?P<action>[a-z]+)/$',
+        'bet_status_change', {
+        }, 'bet_status_change',
+    ),
 )

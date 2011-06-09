@@ -32,4 +32,4 @@ class BetFilter(filters.FilterSet):
 
     class Meta:
         model = Bet
-        fields = ['ticket__bookmaker', 'bettype', 'session__season__competition', 'session__sport', 'ticket__user']
+        fields = ['ticket__bookmaker', 'bettype', 'session__season__competition', 'session__sport', 'ticket__user', 'status']
