@@ -1,4 +1,4 @@
-{% load gsm_tags i18n %}
+{% load gsm_tags i18n pagination_tags %}
 
 <form action="" method="get">
     <table>
@@ -7,6 +7,10 @@
     <input type="submit" />
     <a href="{{ request.path }}">{% trans 'all' %}</a>
 </form>
+
+{% autopaginate bet_list 10 %}
+
+{% paginate %}
 
 <table>
     <thead>
@@ -26,7 +30,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for bet in filter.qs %}
+        {% for bet in bet_list %}
         <tr>
             <td>
                 <a href="{{ bet.ticket.user.get_absolute_url }}" title="{{ bet.ticket.user }}">{{ bet.ticket.user }}</a>
@@ -65,3 +69,5 @@
         {% endfor %}
     </tbody>
 </table>
+
+{% paginate %}

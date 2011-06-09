@@ -159,7 +159,10 @@ def add_bet_type(request, pk,
             bettype.save()
             if request.user.bookmaker:
                 request.user.bookmaker.bettype.add(bettype)
-                messages.success(request, _(u'bet type %s created and assigned to bookmaker %s' % (bettype, bookmaker)))
+                messages.success(request, _(u'bet type %(bettype)s created and assigned to bookmaker %(bookmaker)s') % {
+                    'bettype': bettype,
+                    'bookmaker': bookmaker,
+                })
             else:
                 messages.success(request, _(u'bet type %s created' % bettype))
             return shortcuts.redirect(urlresolvers.reverse(
@@ -232,25 +235,25 @@ def change_bet_type(request, pk):
             )
             status=409
         else:
-            msg = _('successfully added bet type %s to bookmaker %s') % (
-                bettype,
-                bookmaker
-            )
+            msg = _('successfully added bet type %(bettype)s to bookmaker %(bookmaker)s') % {
+                'bettype': bettype,
+                'bookmaker': bookmaker,
+            }
             bookmaker.bettype.add(bettype)
             status = 201
     else:
         if bookmaker.bettype.filter(pk=bettype.pk).count() > 0:
-            msg = _('successfully removed bet type %s from bookmaker %s') % (
-                bettype,
-                bookmaker
-            )
+            msg = _('successfully removed bet type %(bettype)s from bookmaker %(bookmaker)s') % {
+                'bettype': bettype,
+                'bookmaker': bookmaker,
+            }
             status = 201
             bookmaker.bettype.remove(bettype)
         else:
-            msg = _('bookmaker %s does not bet type %s: no need to remove') % (
-                bookmaker,
-                bettype
-            )
+            msg = _('bookmaker %(bookmaker)s does not bet type %(bettype)s: no need to remove') % {
+                'bookmaker': bookmaker,
+                'bettype': bettype
+            }
             status = 409
 
     return http.HttpResponse(msg, status=status)

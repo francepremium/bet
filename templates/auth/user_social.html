@@ -1,5 +1,25 @@
 {% extends 'auth/user_base.html' %}
 
+{% block extra_css %}
+div.follower {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 300px;
+    display: inline-block;
+}
+div.following {
+    position: relative;
+    top: 0;
+    right: 0;
+    width: 300px;
+    display: inline-block;
+}
+div.follower, div.following {
+    vertical-align: top;
+}
+{% endblock %}
+
 {% block body %}
-{% include page_template %}
+    {% include page_template %}
 {% endblock %}

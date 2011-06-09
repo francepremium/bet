@@ -81,7 +81,9 @@ class BetListNode(template.Node):
         for k,v in context['request'].GET.items():
             qd[k] = v
         qd.update(self.kwargs)
-        context['filter'] = BetFilter(qd, queryset=qs)
+        context['filter'] = f = BetFilter(qd, queryset=qs)
+
+        context['bet_list'] = f.qs
 
         if not hasattr(self, 'nodelist'):
             t = template.loader.select_template([

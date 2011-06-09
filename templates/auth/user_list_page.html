@@ -1,3 +1,12 @@
+{% load endless %}
+
+{% paginate 10 user_list %}
 {% for user in user_list %}
     {{ user }}
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
 {% endfor %}
+{% show_more %}

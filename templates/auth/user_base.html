@@ -8,6 +8,9 @@
         <a href="{% url user_detail_tab object.username 'activities' %}" title="{% trans 'activities of' %} {{ object }}">{% trans 'activities' %}</a>
     </li>
     <li>
+        <a href="{% url user_detail_tab object.username 'social' %}" title="{% trans 'relations with' %} {{ object }}">{% trans 'social' %}</a>
+    </li>
+    <li>
         <a href="{% url user_detail_tab object.username 'file' %}" title="{% trans 'file of' %} {{ object }}">{% trans 'file' %}</a>
     </li>
     <li>

@@ -1,0 +1,13 @@
+{% load avatar_tags i18n %}
+<table>
+    {% for user in user_list %}
+    <tr>
+        <td>
+            <a href="{{ user.get_absolute_url }}" title="{{ user }}">{% avatar user %}</a>
+        </td>
+        <td>
+            <a href="{{ user.get_absolute_url }}" title="{{ user }}">{{ user }}</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>

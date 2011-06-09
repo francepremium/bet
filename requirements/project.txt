@@ -31,4 +31,4 @@ django-uni-form==0.7.0
 -e git+https://github.com/justquick/django-activity-stream.git#egg=actstream
 -e git+https://github.com/HonzaKral/django-threadedcomments.git#egg=threadedcomments
 mercurial
--e hg+https://django-endless-pagination.googlecode.com/hg/#egg=endless
+-e hg+https://jamespic@jamespic-allow-empty-page.googlecode.com/hg/#egg=endless

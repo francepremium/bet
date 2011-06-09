@@ -1,0 +1,15 @@
+{% load endless scoobet_tags %}
+<div>
+    <div class="follower">
+        {% paginate 3 follower_list %}
+        {% render_user_list request follower_list %}
+    </div>
+
+    <div class="following">
+        {% paginate 3 following_list %}
+        {% render_user_list request following_list %}
+    </div>
+</div>
+    
+{% paginate 3 paginate_list %}
+{% show_more %}
