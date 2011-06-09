@@ -1,0 +1,57 @@
+{% extends 'auth/user_base.html' %}
+
+{% block body %}
+
+    <ul>
+        {% for bookmaker in object.bookmaker_set.all %}
+        <li>
+            <a href="{{ bookmaker.get_absolute_url }}" title="{{ bookmaker }}">{{ bookmaker }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <ul>
+        {% for sport in object.sport_set.all %}
+        <li>
+            <a href="{{ sport.get_absolute_url }}" title="{{ sport }}">{{ sport }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <ul>
+        {% for session in object.session_set.all %}
+        <li>
+            <a href="{{ session.get_absolute_url }}" title="{{ session }}">{{ session }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <ul>
+        {% for competition in object.competition_set.all %}
+        <li>
+            <a href="{{ competition.get_absolute_url }}" title="{{ competition }}">{{ competition }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <ul>
+        {% for entity in object.gsmentity_set.all %}
+            {% if entity.tag == 'team' %}
+            <li>
+                <a href="{{ entity.get_absolute_url }}" title="{{ entity }}">{{ entity }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    <ul>
+        {% for entity in object.gsmentity_set.all %}
+            {% if entity.tag == 'person' %}
+            <li>
+                <a href="{{ entity.get_absolute_url }}" title="{{ entity }}">{{ entity }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+{% endblock %}

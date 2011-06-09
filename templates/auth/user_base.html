@@ -1,0 +1,17 @@
+{% extends 'site_base.html' %}
+
+{% load i18n %}
+
+{% block subnav %}
+<ul>
+    <li>
+        <a href="{% url user_detail_tab object.username 'activities' %}" title="{% trans 'activities of' %} {{ object }}">{% trans 'activities' %}</a>
+    </li>
+    <li>
+        <a href="{% url user_detail_tab object.username 'file' %}" title="{% trans 'file of' %} {{ object }}">{% trans 'file' %}</a>
+    </li>
+    <li>
+        <a href="{% url user_detail_tab object.username 'prognostics' %}" title="{% trans 'prognostics of' %} {{ object }}">{% trans 'prognostics' %}</a>
+    </li>
+</ul>
+{% endblock %}

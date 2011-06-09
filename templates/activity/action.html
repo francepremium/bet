@@ -54,6 +54,11 @@
                 <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'created article' %} <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>
             </p>
         {% endif %}
+        {% if action.verb == 'started following' %}
+            <p class="phrase">
+                <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'started following' %} <a href="{{ action.target.get_absolute_url }}" title="{{ action.target }}">{{ action.target }}</a>
+            </p>
+        {% endif %}
     </div>
 
     <div class="bottom">
@@ -61,10 +66,12 @@
             {{ action.timestamp|timesince }} {% trans 'ago' %}
         </span>
         
+        {% if action.verb != 'commented' %}
         {% get_comment_count for action as comment_count %}
         <span class="comments">
             {% trans 'comment' %} ({{ comment_count }})
         </span>
+        {% endif %}
     </div>
 
     <div class="comments">

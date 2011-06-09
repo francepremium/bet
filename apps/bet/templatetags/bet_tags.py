@@ -11,6 +11,10 @@ def render_bet_list(parser, token):
     """
     Arguments:
     - sport=x: context['x'] is a sport instance or pk
+    - team=x: context['x'] is a team instance or pk
+    - session=x: context['x'] is a session instance or pk
+    - user=x: context['x'] is a user instance or pk
+    - bookmaker=x: context['x'] is a bookmaker instance or pk
     """
     kwargs = {}
     for arg in token.split_contents()[1:]:
@@ -57,6 +61,14 @@ class BetListNode(template.Node):
                 models.Q(session__oponnent_A=team) |
                 models.Q(session__oponnent_B=team)
             )
+
+        bookmaker = self.kwargs.pop('bookmaker', False)
+        if bookmaker:
+            qs = qs.filter(ticket__bookmaker=bookmaker)
+
+        user = self.kwargs.pop('user', False)
+        if user:
+            qs = qs.filter(ticket__user=user)
 
         session = self.kwargs.pop('session', False)
         if session:

@@ -84,11 +84,24 @@ def edit(request, pk, form_class=BookmakerForm,
     return shortcuts.render_to_response(template_name, context,
         context_instance=template.RequestContext(request))
 
+def detail(request, pk, tab='home',
+    template_name='bookmaker/%s.html', extra_context=None):
+    context = {}
+    context['bookmaker'] = bookmaker = shortcuts.get_object_or_404(Bookmaker, pk=pk)
+    if request.user.is_authenticated():
+        context['is_admin'] = request.user.bookmaker == bookmaker or request.user.is_staff
+    context['bookmaker'] = bookmaker
+
+    context.update(extra_context or {})
+    return shortcuts.render_to_response(template_name, context,
+        context_instance=template.RequestContext(request))
+
 def file(request, pk,
     template_name='bookmaker/file.html', extra_context=None):
     context = {}
     bookmaker = shortcuts.get_object_or_404(Bookmaker, pk=pk)
-    context['is_admin'] = request.user.bookmaker == bookmaker or request.user.is_staff
+    if request.user.is_authenticated():
+        context['is_admin'] = request.user.bookmaker == bookmaker or request.user.is_staff
     context['bookmaker'] = bookmaker
     context['bookmaker_bettypes_per_sport'] = []
     previous_sport = None

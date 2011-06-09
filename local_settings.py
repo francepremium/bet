@@ -72,6 +72,8 @@ INSTALLED_APPS = [
     'sentry.client',
     'avatar',
     'actstream',
+    'endless_pagination',
+    'autofixture',
     
     # Pinax
     

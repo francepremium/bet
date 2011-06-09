@@ -25,6 +25,7 @@ class Bookmaker(models.Model):
     live_bets = models.BooleanField()
     logo = models.ImageField(upload_to=logo_upload_to, null=True, blank=True)
     bettype = models.ManyToManyField('BetType', null=True, blank=True)
+    fans = models.ManyToManyField('auth.User', related_name='bookmaker_set')
 
     def __unicode__(self):
         return self.name
@@ -35,6 +36,9 @@ class Bookmaker(models.Model):
     def sports(self):
         return BetType.sport.field.rel.to.objects.filter(
             bettype__bookmaker=self).distinct()
+
+    def get_absolute_url(self):
+        return urlresolvers.reverse('bookmaker_file', args=(self.pk,))
 
 class BetType(models.Model):
     name = models.CharField(max_length=100)

@@ -24,6 +24,8 @@ urlpatterns = patterns("",
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r"^admin/", include(admin.site.urls)),
     url(r'^ajax_select/', include('ajax_select.urls')),
+    url(r"^users/(?P<username>[^/]+)/$", 'scoobet.views.user_detail', name='user_detail'),
+    url(r"^users/(?P<username>[^/]+)/(?P<tab>[^/]+)/$", 'scoobet.views.user_detail', name='user_detail_tab'),
 )
 
 

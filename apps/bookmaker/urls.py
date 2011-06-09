@@ -23,6 +23,11 @@ urlpatterns = patterns('bookmaker.views',
         }, 'bookmaker_file',
     ),
     url(
+        r'(?P<pk>[0-9]+)/(?P<tab>[a-z]+)/$',
+        'detail', {
+        }, 'bookmaker_detail',
+    ),
+    url(
         r'(?P<pk>[0-9]+)/bet_type/change/$',
         'change_bet_type', {
         }, 'bookmaker_change_bet_type',

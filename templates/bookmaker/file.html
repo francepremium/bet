@@ -4,6 +4,8 @@
 {% load i18n %}
 
 {% block body %}
+    {{ block.super }}
+
     {% if bookmaker.logo %}
         <img src="{{ bookmaker.logo.url }}" style="float:left" />
     {% endif %}

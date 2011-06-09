@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.contenttypes.models import ContentType
 
 from actstream import action
-from actstream.models import Action
+from actstream.models import Action, Follow
 
 def user_registered_activity(sender, **kwargs):
     if not kwargs.get('created', False):
@@ -52,5 +52,9 @@ def new_action_unicode(self):
             return u'%s %s %s on %s' % (self.actor, self.verb, self.action_object, self.target)
         else:
             return u'%s %s %s' % (self.actor, self.verb, self.target)
+
+    if self.action_object:
+        return u'%s %s %s' % (self.actor, self.verb, self.action_object)
+
     return u'%s %s' % (self.actor, self.verb)
 Action.__unicode__ = new_action_unicode

@@ -13,3 +13,12 @@
     <li><a href="{% url bookmaker_file bookmaker.pk %}">{% trans 'file' %}</a></li>
 </ul>
 {% endblock %}
+
+{% block body %}
+    {% if bookmaker in request.user.bookmaker_set.all %}
+        <a href="{% url gsm_fan_app 'unbecome' 'bookmaker' 'Bookmaker' bookmaker.pk %}">{% trans 'i do not bet on' %} {{ bookmaker }}</a>
+    {% else %}
+        <a href="{% url gsm_fan_app 'become' 'bookmaker' 'Bookmaker' bookmaker.pk %}">{% trans 'i bet on' %} {{ bookmaker }}</a>
+    {% endif %}
+
+{% endblock %}

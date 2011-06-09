@@ -1,0 +1,41 @@
+{% extends 'auth/user_base.html' %}
+
+{% load activity_tags %}
+
+{% block body %}
+
+    {% get_user_contenttype as user_ctype %}
+    {% if request.user != object and request.user.is_authenticated %}
+        <div>
+            <a href="{% url actstream_unfollow content_type_id=user_ctype.id  object_id=object.id %}" class="unfollow_button" style="display:none">UNFOLLOW</a>
+            <a href="{% url actstream_follow content_type_id=user_ctype.id  object_id=object.id %}" class="follow_button" >FOLLOW</a>
+        </div>
+        {% csrf_token %}
+    {% endif %}
+
+    <a href="{% url actstream_object_feed content_type_id=user_ctype.id  object_id=object.id %}">RSS</a>
+    <a href="{% url actstream_object_feed_atom content_type_id=user_ctype.id  object_id=object.id %}">ATOM</a>
+
+    {% include page_template %}
+
+{% endblock %}
+
+{% block extra_body %}
+<script>
+$(function () {
+    $(".follow_button, .unfollow_button").click(function () {
+        $.post(
+            $(this).attr("href"), 
+            {
+                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+            }
+        );
+        $(this).parent().find(".follow_button, .unfollow_button").toggle();
+        return false;
+    });
+});
+</script>
+{% endblock %}
+
+{% block title %}{% ifequal request.user object %}Your feed{% else %}{{ object }}{% endifequal %}{% endblock %}
+{% block content_title %}{% ifequal request.user object %}Your feed{% else %}{{ object }}{% endifequal %}{% endblock %}

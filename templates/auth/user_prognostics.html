@@ -1,0 +1,7 @@
+{% extends 'auth/user_base.html' %}
+
+{% load i18n bet_tags %}
+
+{% block body %}
+    {% render_bet_list user=object %}
+{% endblock %}

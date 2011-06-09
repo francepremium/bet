@@ -1,0 +1,7 @@
+{% load activity_tags endless %}
+
+{% paginate 3 activity_list %}
+{% for activity in activity_list %}
+    {% display_action activity %}
+{% endfor %}
+{% show_more %}

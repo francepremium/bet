@@ -135,25 +135,29 @@ body.activity.detail div.activity div.comments {
                         {% get_user_contenttype ctype %}
                         <a href="{% url actstream_actor content_type_id=ctype.id object_id=request.user.id %}">{% trans 'activities' %}</a>
                     </li>
+                    <li>
+                        <a href="{% url user_detail request.user.username %}">{% trans 'my profile' %}</a>
+                    </li>
                     {% endif %}
                 </ul>
             {% endblock %}</div>
         </div>
         <div id="subnav" class="clearfix">{% block subnav_base %}<div class="clearfix">{% block subnav %}&nbsp;{% endblock %}</div>{% endblock %}</div>
         
+        <ul id="messages">
+            {% if messages %}
+                {% for message in messages %}
+                <li id="message_{{ forloop.counter }}"{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                    <a href="#"><small>{% trans "clear" %}</small></a>
+                    {{ message }}
+                </li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+        
+
         {% block body_outer %}
         <div id="body">
-            <ul id="messages">
-                {% if messages %}
-                    {% for message in messages %}
-                    <li id="message_{{ forloop.counter }}"{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                        <a href="#"><small>{% trans "clear" %}</small></a>
-                        {{ message }}
-                    </li>
-                    {% endfor %}
-                {% endif %}
-            </ul>
-            
             {% block body_head %}
             {% endblock %}
             {% block body %}
@@ -358,6 +362,30 @@ body.activity.detail div.activity div.comments {
 
             $('div.activity div.bottom span.comments').click(function(e) {
                 $(this).parent().next().toggle('fast');
+            });
+
+            // initializes links for ajax requests
+            $("a.endless_more").live("click", function() {
+                var container = $(this).closest(".endless_container");
+                var loading = container.find(".endless_loading");
+                $(this).hide();
+                loading.show();
+                var data = "querystring_key=" + $(this).attr("rel").split(" ")[0];
+                $.get($(this).attr("href"), data, function(data) {
+                    container.before(data);
+                    container.remove();
+                });
+                return false;
+            });
+            $("a.endless_page_link").live("click", function() {
+                var data = "querystring_key=" + $(this).attr("rel").split(" ")[0];
+                $(this).closest(".endless_page_template").load($(this).attr("href"), data);
+                return false;
+            }); 
+            $(window).scroll(function(){
+                if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+                    $("a.endless_more").click();
+                }  
             });
 
             $('#ajaxload').fadeOut();
