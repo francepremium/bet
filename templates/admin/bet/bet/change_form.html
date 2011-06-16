@@ -1,0 +1,21 @@
+{% extends 'admin/change_form.html' %}
+
+{% block extrahead %}
+    {{ block.super }}
+
+    <script type="text/javascript">
+        (function($) {
+            $(document).ready(function($) {
+                $('textarea[name=text]').val($.trim($('#my_value').html()));
+            });
+        })(django.jQuery);
+    </script>
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+
+    <div style="display:none" id="my_value">
+    {{ myvalue }}
+    </div>
+{% endblock %}

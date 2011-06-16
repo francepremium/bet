@@ -56,7 +56,7 @@
     </div>
     <div class="session" {# if not show_all_fields %}style="display:none;"{% endif #}>
         {{ form.session.errors }}
-        {% trans 'match' %}*:
+        {% trans 'match (start typing a team name)' %}*:
         {{ form.session }}
     </div>
     <div class="bettype" {% if not show_all_fields %}style="display:none;"{% endif %}>

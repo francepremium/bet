@@ -1,6 +1,7 @@
 from django.db.models import signals
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import User
 
 from actstream import action
 from actstream.models import Action, Follow
@@ -58,3 +59,17 @@ def new_action_unicode(self):
 
     return u'%s %s' % (self.actor, self.verb)
 Action.__unicode__ = new_action_unicode
+
+def user_friends(user):
+    follows_users_ids = Follow.objects.filter(user=user,
+                                              content_type__app_label='auth',
+                                              content_type__model='user') \
+                                      .exclude(object_id=user.pk) \
+                                      .values_list('object_id', flat=True)
+    c = ContentType.objects.get_for_model(User)
+    target_choices_qs = User.objects.filter(
+        Q(follow__object_id=user.pk, follow__content_type=c) | 
+        Q(id__in=follows_users_ids)
+    ).select_related('playlistprofile')
+    return target_choices_qs
+User.friends = user_friends

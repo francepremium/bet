@@ -1,11 +1,16 @@
 {% load avatar_tags i18n comments bet_tags %}
+
+{% if activity.open %}
 <div class="activity">
     <div class="avatar">
         <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">
             {% avatar action.actor %}
         </a>
     </div>
+
     <div class="details">
+{% endif %}
+
         {% if action.verb == 'closed ticket' %}
             {% if action.action_object.bet_set.count > 1 %}
                 <p class="phrase">
@@ -59,6 +64,34 @@
                 <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'started following' %} <a href="{{ action.target.get_absolute_url }}" title="{{ action.target }}">{{ action.target }}</a>
             </p>
         {% endif %}
+        {% if action.verb == 'corrected' or action.verb == 'flagged' %}
+            {% if action.group|length > 1 %}
+                {% if action.open %}
+                    <p class="phrase">
+                        <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a>
+                        {% if action.verb == 'corrected' %}{% trans 'corrected' %}{% endif %}
+                        {% if action.verb == 'flagged' %}{% trans 'flagged' %}{% endif %}
+                        <span class="toggle_bet_list link">{{ action.group|length }} {% trans 'bets' %}</span>
+                    </p>
+                {% endif %}
+                {% if action.close %}
+                    <div class="bet_list" style="display:none">
+                        {% render_bet_list qs=action.action_object_group %}
+                    </div>
+                {% endif %}
+            {% endif %}
+
+            {% if action.group|length < 2 %}
+                <p class="phrase">
+                    <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a>
+                    {% if action.verb == 'corrected' %}{% trans 'corrected' %}{% endif %}
+                    {% if action.verb == 'flagged' %}{% trans 'flagged' %}{% endif %}
+                    <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>
+                </p>
+            {% endif %}
+        {% endif %}
+
+{% if activity.close %}
     </div>
 
     <div class="bottom">
@@ -66,21 +99,25 @@
             {{ action.timestamp|timesince }} {% trans 'ago' %}
         </span>
         
-        {% if action.verb != 'commented' %}
+        {% if action.verb != 'commented' and action.verb != 'flagged' and action.verb == 'corrected' %}
         {% get_comment_count for action as comment_count %}
-        <span class="comments">
+        <span class="comments link">
             {% trans 'comment' %} ({{ comment_count }})
         </span>
         {% endif %}
     </div>
 
+    {% if action.verb != 'commented' and action.verb != 'flagged' and action.verb == 'corrected' %}
     <div class="comments">
-        {% render_comment_list for action %}
+        {% render_comment_list for action.earliest_of_group %}
         <div class="comment_form_container">
-        {% render_comment_form for action %}
+        {% render_comment_form for action.earliest_of_group %}
         </div>
     </div>
+    {% endif %}
 </div>
+
+{% endif %}
 
 {% comment %}
             [default activity template, it's here for debugging purposes only]

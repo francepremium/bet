@@ -6,6 +6,10 @@ from bet.filters import BetFilter
 
 register = template.Library()
 
+@register.filter
+def as_list(value):
+    return list(value)
+
 @register.tag(name='render_bet_list')
 def render_bet_list(parser, token):
     """
@@ -51,7 +55,7 @@ class BetListNode(template.Node):
                 if isinstance(self.kwargs[k], models.Model):
                     self.kwargs[k] = str(self.kwargs[k].pk)
 
-        qs = self.kwargs.pop('qs', False)
+        qs = self.kwargs.get('qs', False)
         if not qs:
             qs = Bet.objects.all()
 
@@ -81,13 +85,16 @@ class BetListNode(template.Node):
         for k,v in context['request'].GET.items():
             qd[k] = v
         qd.update(self.kwargs)
-        context['filter'] = f = BetFilter(qd, queryset=qs)
 
-        context['bet_list'] = bet_list = f.qs
+        if isinstance(qs, list) or self.kwargs.get('qs', False):
+            context['bet_list'] = qs
+        else:
+            context['filter'] = f = BetFilter(qd, queryset=qs)
+            context['bet_list'] = bet_list = f.qs
 
         user = context['request'].user
         if user.is_authenticated():
-            for bet in bet_list:
+            for bet in context['bet_list']:
                 if user.betprofile.can_correct(bet):
                     bet.can_correct = True
                 if user.betprofile.can_flag(bet):

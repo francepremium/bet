@@ -8,8 +8,14 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from endless_pagination.decorators import page_template
+from django.core import urlresolvers
 
 from actstream.models import actor_stream, Follow
+
+@login_required
+def me(request):
+    return shortcuts.redirect(urlresolvers.reverse(
+        'user_detail', args=(request.user.username,)))
 
 def user_detail(request, username, tab='activities',
     template_name='auth/user_%s.html', extra_context=None):
@@ -32,8 +38,8 @@ def user_detail(request, username, tab='activities',
             context['paginate_list'] = context['follower_list']
         else:
             context['paginate_list'] = context['following_list']
-        context['page_template'] = 'auth/user_social_page.html'
-
+    
+    context['page_template'] = 'auth/user_social_page.html'
     if request.is_ajax() and 'page_template' in context.keys():
         template_name = context['page_template']
     else:

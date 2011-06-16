@@ -1,5 +1,6 @@
 {% load gsm_tags i18n pagination_tags %}
 
+{% if filter %}
 <form action="" method="get">
     <table>
         {{ filter.form.as_table }}
@@ -7,10 +8,12 @@
     <input type="submit" />
     <a href="{{ request.path }}">{% trans 'all' %}</a>
 </form>
+{% endif %}
 
-{% autopaginate bet_list 10 %}
-
-{% paginate %}
+{% if filter %}
+    {% autopaginate bet_list 10 %}
+    {% paginate %}
+{% endif %}
 
 <table>
     <thead>
@@ -24,6 +27,7 @@
             <th>{% trans 'match' %}</th>
             <th>{% trans 'bet' %}</th>
             <th>{% trans 'choice' %}</th>
+            <th>{% trans 'odds' %}</th>
             <th>{% trans 'stake' %}</th>
             <th>{% trans 'bookmaker' %}</th>
             <th>{% trans 'support' %}</th>
@@ -55,13 +59,22 @@
                 <a href="{{ bet.session.get_absolute_url }}" title="{{ bet.session }}">{{ bet.session }}</a>
             </td>
             <td>
-                {{ bet.bettype }}
+                <a href="{% url session_bettype_detail bet.session.pk bet.bettype.pk %}">{{ bet.bettype }}</a>
             </td>
             <td>
-                {{ bet.choice }}
+                <a href="{{ bet.get_absolute_url }}" title="{{ bet.choice }}">{{ bet.choice }}</a>
             </td>
             <td>
-                {{ bet.ticket.stake }}
+                {{ bet.odds }}
+            </td>
+            <td>
+                <a href="{{ bet.ticket.get_absolute_url }}" title="{{ bet.ticket }}">
+                    {% if bet.ticket.bet_set.count == 1 %}
+                        {{ bet.ticket.stake }}
+                    {% else %}
+                        {% trans 'combined ticket' %}
+                    {% endif %}
+                </a>
             </td>
             <td>
                 <a href="{{ bet.ticket.bookmaker.get_absolute_url }}" title="{{ bet.ticket.bookmaker }}">{{ bet.ticket.bookmaker }}</a>
@@ -104,4 +117,6 @@
     </tbody>
 </table>
 
-{% paginate %}
+{% if filter %}
+    {% paginate %}
+{% endif %}

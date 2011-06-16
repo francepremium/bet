@@ -5,8 +5,9 @@ from django.views.generic.simple import direct_to_template
 from django.contrib import admin
 admin.autodiscover()
 
-handler500 = "pinax.views.server_error"
+import views
 
+handler500 = "pinax.views.server_error"
 
 urlpatterns = patterns("",
     url(r"^$", direct_to_template, {
@@ -16,6 +17,7 @@ urlpatterns = patterns("",
     url(r"^clan/", include('clan.urls')),
     url(r'^avatar/', include('avatar.urls')),
     url(r"^bet/", include('bet.urls')),
+    url(r"^postman/", include('postman.urls')),
     url(r"^article/", include('article.urls')),
     url(r"^actstream/", include('actstream.urls')),
     url(r"^bookmaker/", include('bookmaker.urls')),
@@ -24,6 +26,12 @@ urlpatterns = patterns("",
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r"^admin/", include(admin.site.urls)),
     url(r'^ajax_select/', include('ajax_select.urls')),
+    url(r'^me/$', 'scoobet.views.me', name='me'),
+    url(
+        r'^(?P<session_pk>[0-9]+)/(?P<bettype_pk>[0-9]+)/$',
+        views.session_bettype_detail, {
+        }, 'session_bettype_detail',
+    ),
     url(r"^users/(?P<username>[^/]+)/$", 'scoobet.views.user_detail', name='user_detail'),
     url(r"^users/(?P<username>[^/]+)/(?P<tab>[^/]+)/$", 'scoobet.views.user_detail', name='user_detail_tab'),
 )

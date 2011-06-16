@@ -1,8 +1,21 @@
 {% extends 'site_base.html' %}
 
+{% load i18n %}
+
 {% block subnav %}
 <ul>
+    {% if request.user.is_authenticated %}
     <li>
+        <a href="{% url bet_list_tab 'mine' %}">{% trans 'mine' %}</a>
+    </li>
+    <li>
+        <a href="{% url bet_list_tab 'friends' %}">{% trans 'friends' %}</a>
+    </li>
+    {% endif %}
+    <li>
+        <a href="{% url bet_list %}">{% trans 'all' %}</a>
     </li>
 </ul>
 {% endblock %}
+
+

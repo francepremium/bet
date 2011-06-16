@@ -1,7 +1,7 @@
-{% load activity_tags endless %}
+{% load activity_tags endless scoobet_tags %}
 
 {% paginate 12 activity_list %}
-{% for activity in activity_list %}
+{% for activity in activity_list|group_activities %}
     {% display_action activity %}
 {% endfor %}
 {% show_more %}

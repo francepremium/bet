@@ -131,8 +131,8 @@
     <li class="news tab {% if tab == 'news' %}active{% endif %}">
         <a href="{{ session.get_news_absolute_url }}" title="{{ session.name }}">{% trans 'news' %}</a>
     </li>
-    <li class="prognostics tab {% if tab == 'prognostics' %}active{% endif %}">
-        <a href="{{ session.get_prognostics_absolute_url }}" title="{{ session.name }}">{% trans 'prognostics' %}</a>
+    <li class="picks tab {% if tab == 'picks' %}active{% endif %}">
+        <a href="{{ session.get_picks_absolute_url }}" title="{{ session.name }}">{% trans 'picks' %}</a>
     </li>
     <li class="live tab {% if tab == 'live' %}active{% endif %}">
         <a href="{{ session.get_live_absolute_url }}" title="{{ session.name }}">{% trans 'live' %}</a>

@@ -20,8 +20,8 @@
         <a href="{{ person.get_matches_absolute_url }}" title="{{ person.name }}">{% trans 'matches' %}</a>
     </li>
     {% endif %}
-    <li class="prognostics tab {% if tab == 'prognostics' %}active{% endif %}">
-        <a href="{{ person.get_prognostics_absolute_url }}" title="{{ person.name }}">{% trans 'prognostics' %}</a>
+    <li class="picks tab {% if tab == 'picks' %}active{% endif %}">
+        <a href="{{ person.get_picks_absolute_url }}" title="{{ person.name }}">{% trans 'picks' %}</a>
     </li>
 </ul>
 {% endblock %}

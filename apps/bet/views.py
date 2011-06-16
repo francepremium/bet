@@ -14,6 +14,14 @@ from models import *
 from forms import *
 from filters import *
 
+class BetDetailView(generic.DetailView):
+    model = Bet
+    context_object_name = 'bet'
+
+class TicketDetailView(generic.DetailView):
+    model = Ticket
+    context_object_name = 'ticket'
+
 class BetListView(generic.ListView):
     model = Bet
     context_object_name = 'bet_list'
@@ -26,6 +34,11 @@ class BetListView(generic.ListView):
         for k,v in self.request.GET.items():
             qd[k] = v
         qd.update(self.preset)
+
+        if self.kwargs.get('tab', False) == 'mine':
+            qs = qs.filter(ticket__user=self.request.user)
+        elif self.kwargs.get('tab', False) == 'friends':
+            qs = qs.filter(ticket__user__in=self.request.user.friends())
 
         self.filter = BetFilter(qd, queryset=qs)
         return self.filter.qs
@@ -74,7 +87,7 @@ def bet_status_change(request, bet_pk, action):
             new_correction = BET_CORRECTION_LOST
         elif action == 'canceled':
             new_correction = BET_CORRECTION_CANCELED
-       
+
         # validate all corrections of this bet that match this one
         bet.event_set.filter(correction=new_correction,
                              kind=EVENT_KIND_CORRECTION).update(valid=True)
@@ -95,9 +108,11 @@ def bet_status_change(request, bet_pk, action):
                                                     correction=new_correction)
         event.save()
 
-        bet.correction = new_correction
-        bet.status = BET_STATUS_CORRECTED
-        bet.save()
+        Bet.objects.filter(session=bet.session, bettype=bet.bettype, 
+            choice=bet.choice).update(correction=new_correction, 
+            status=BET_STATUS_CORRECTED)
+        
+        actstream.action.send(request.user, verb='corrected', action_object=bet)
 
     elif action == 'flag':
         if not request.user.betprofile.can_flag(bet):
@@ -109,6 +124,8 @@ def bet_status_change(request, bet_pk, action):
 
         bet.status = BET_STATUS_FLAG
         bet.save()
+        
+        actstream.action.send(request.user, verb='flagged', action_object=bet)
 
     return http.HttpResponse()
 

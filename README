@@ -1,0 +1,19 @@
+page suivante au login ok
+page de detail d'un ticket http://bet.yourlabs.org/fr/bet/ticket/1152/
+page de detail d'un prono http://bet.yourlabs.org/fr/bet/158/
+pronos de l'user: tableau de tickets
+l'onglet stats et competences de la fiche user
+page de detail d'un type de pari d'un match
+publication de débat, info et status
+messagerie
+support prono sur un joueur
+onglet social de la page user: faire les requettes pour afficher les following/followed
+pronostics de groupes
+onglet débats de la page de detail d'un groupe
+recherche/autocomplete
+bloc popularité : pages sport / compétition / club / sportif / match (aussi présent dans l'onglet informations)
+tableau de paris: cacher les colonnes possibles (ie. sport pour l'onglet prono de la page d'un sport)
+formulaire de paris: cacher les champs possibles (ie. sport pour l'onglet prono de la page sport)
+support des valeurs libres pour choix et type dans le formulaire d'ajout de pari
+wallpost ?
+inscription/profil à overloader

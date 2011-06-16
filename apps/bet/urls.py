@@ -10,9 +10,19 @@ urlpatterns = patterns('bet.views',
         }, 'bet_list'
     ),
     url(
+        r'list/(?P<tab>[a-z]+)/$',
+        views.BetListView.as_view(), {
+        }, 'bet_list_tab'
+    ),
+    url(
         r'ticket/(?P<ticket_pk>[^/]+)/delete/$',
         'ticket_delete', {
         }, 'bet_ticket_delete'
+    ),
+    url(
+        r'ticket/(?P<pk>[0-9]+)/$',
+        views.TicketDetailView.as_view(), {
+        }, 'ticket_detail',
     ),
     url(
         r'ticket/add/$',
@@ -34,4 +44,10 @@ urlpatterns = patterns('bet.views',
         'bet_status_change', {
         }, 'bet_status_change',
     ),
+    url(
+        r'(?P<pk>[0-9]+)/$',
+        views.BetDetailView.as_view(), {
+        }, 'bet_detail',
+    ),
+
 )

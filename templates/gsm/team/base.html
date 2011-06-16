@@ -31,8 +31,8 @@
     <li class="calendar tab {% if tab == 'calendar' %}active{% endif %}">
         <a href="{{ team.get_calendar_absolute_url }}" title="{{ team.name }}">{% trans 'calendar' %}</a>
     </li>
-    <li class="prognostics tab {% if tab == 'prognostics' %}active{% endif %}">
-        <a href="{{ team.get_prognostics_absolute_url }}" title="{{ team.name }}">{% trans 'prognostics' %}</a>
+    <li class="picks tab {% if tab == 'picks' %}active{% endif %}">
+        <a href="{{ team.get_picks_absolute_url }}" title="{{ team.name }}">{% trans 'picks' %}</a>
     </li>
 </ul>
 {% endblock %}

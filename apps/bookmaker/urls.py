@@ -13,21 +13,6 @@ urlpatterns = patterns('bookmaker.views',
         }, 'bookmaker_bet_types_for_bookmaker_and_sport',
     ),
     url(
-        r'(?P<pk>[0-9]+)/bet_type/list/$',
-        'list_bet_type', {
-        }, 'bookmaker_list_bet_type',
-    ),
-    url(
-        r'(?P<pk>[0-9]+)/file/$',
-        'file', {
-        }, 'bookmaker_file',
-    ),
-    url(
-        r'(?P<pk>[0-9]+)/(?P<tab>[a-z]+)/$',
-        'detail', {
-        }, 'bookmaker_detail',
-    ),
-    url(
         r'(?P<pk>[0-9]+)/bet_type/change/$',
         'change_bet_type', {
         }, 'bookmaker_change_bet_type',
@@ -43,8 +28,23 @@ urlpatterns = patterns('bookmaker.views',
         }, 'bookmaker_edit_bet_type',
     ),
     url(
+        r'(?P<pk>[0-9]+)/bet_type/list/$',
+        'list_bet_type', {
+        }, 'bookmaker_list_bet_type',
+    ),
+    url(
         r'(?P<pk>[0-9]+)/edit/$',
         'edit', {
         }, 'bookmaker_edit',
+    ),
+    url(
+        r'(?P<pk>[0-9]+)/file/$',
+        'file', {
+        }, 'bookmaker_file',
+    ),
+    url(
+        r'(?P<pk>[0-9]+)/(?P<tab>[a-z]+)/$',
+        'detail', {
+        }, 'bookmaker_detail',
     ),
 )

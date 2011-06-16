@@ -9,6 +9,7 @@ class BookmakerForm(forms.ModelForm):
         exclude = (
             'user',
             'bettype',
+            'fans',
         )
 
 class BetTypeForm(forms.ModelForm):

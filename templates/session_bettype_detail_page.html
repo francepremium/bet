@@ -1,0 +1,28 @@
+{% load endless avatar_tags i18n %}
+
+{% paginate 6 argumented_bets %}
+
+{% for bet in argumented_bets %}
+    <div class="{% cycle 'left_bet' 'right_bet' %} bet">
+        <div class="top">
+            <div class="head">
+                {% avatar bet.ticket.user %}
+            </div>
+            <div class="username">
+                <a href="{{ bet.ticket.user.get_absolute_url }}">{{ bet.ticket.user }}</a>
+            </div>
+            <div class="bet_detail">
+                <a href="{{ bet.get_absolute_url }}" title="{{ bet }}">{% trans 'read all' %}</a>
+            </div>
+        </div>
+        <div class="argumentation">
+            {% if bet.upload %}
+                <img src="{{ bet.upload.url }}" />
+            {% else %}
+                {{ bet.text }}
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}
+
+{% show_more %}

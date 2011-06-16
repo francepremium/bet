@@ -3,5 +3,9 @@
 {% load bet_tags %}
 
 {% block body %}
-    {% render_bet_list %}
+    {% if request.tab %}
+        {% render_bet_list qs=bet_list|as_list %}
+    {% else %}
+        {% render_bet_list %}
+    {% endif %}
 {% endblock %}

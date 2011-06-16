@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-09 14:45+0200\n"
-"PO-Revision-Date: 2011-05-16 16:33+0200\n"
+"POT-Creation-Date: 2011-06-15 11:28+0200\n"
+"PO-Revision-Date: 2011-06-15 10:20+0200\n"
 "Last-Translator: David <dav.bellaiche@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
-#: local_settings.py:92
+#: local_settings.py:93
 msgid "English"
 msgstr "anglais"
 
-#: local_settings.py:93
+#: local_settings.py:94
 msgid "French"
 msgstr "français"
 
@@ -31,7 +31,7 @@ msgid ""
 "choose another match"
 msgstr ""
 
-#: apps/_bet.back/views.py:41 apps/bet/views.py:80
+#: apps/_bet.back/views.py:41 apps/bet/views.py:146
 msgid "bet deleted"
 msgstr ""
 
@@ -58,40 +58,72 @@ msgstr ""
 msgid "Not your article, and you are not staff"
 msgstr ""
 
-#: apps/bet/models.py:21
+#: apps/bet/models.py:102
 msgid "incomplete"
 msgstr ""
 
-#: apps/bet/models.py:22
+#: apps/bet/models.py:103
 msgid "done"
 msgstr ""
 
-#: apps/bet/models.py:46
+#: apps/bet/models.py:131 apps/bet/models.py:137
 #, fuzzy
 msgid "new"
 msgstr "actualités"
 
-#: apps/bet/models.py:47
-msgid "verified"
+#: apps/bet/models.py:132 apps/bet/models.py:191
+#: templates/activity/action.html:72 templates/activity/action.html.py:87
+msgid "corrected"
 msgstr ""
 
-#: apps/bet/models.py:48
+#: apps/bet/models.py:133
 msgid "flagged for moderation"
 msgstr ""
 
-#: apps/bet/views.py:68
+#: apps/bet/models.py:138
+msgid "won"
+msgstr ""
+
+#: apps/bet/models.py:139 templates/gsm/_includes/resultstable.html:15
+#: templates/gsm/soccer/_includes/resultstable.html:15
+#: templates/gsm/team/statistics.html:25
+msgid "lost"
+msgstr "défaites"
+
+#: apps/bet/models.py:178
+#, fuzzy
+msgid "correction"
+msgstr "compétition"
+
+#: apps/bet/models.py:179
+msgid "flag"
+msgstr ""
+
+#: apps/bet/models.py:193 templates/activity/action.html:73
+#: templates/activity/action.html.py:88
+#: templates/bet/_includes/bet_list.html:37
+msgid "flagged"
+msgstr ""
+
+#: apps/bet/models.py:195
+#, python-format
+msgid ""
+"%(user)s %(verb)s %(bettype)s on match %(session)s, result: %(correction)s"
+msgstr ""
+
+#: apps/bet/views.py:134
 msgid "ticket deleted"
 msgstr ""
 
-#: apps/bet/views.py:82
+#: apps/bet/views.py:148
 msgid "bet deleted, ticket without bet deleted too"
 msgstr ""
 
-#: apps/bet/views.py:111
+#: apps/bet/views.py:177
 msgid "ticket closed"
 msgstr ""
 
-#: apps/bet/views.py:120
+#: apps/bet/views.py:186
 msgid "bet saved and ticket closed"
 msgstr ""
 
@@ -245,7 +277,7 @@ msgstr ""
 
 #: apps/clan/templates/clan/clan_detail.html:11
 #: templates/article/article_detail.html:9 templates/bet/bet_form.html:35
-#: templates/bet/ticket_detail.html:7 templates/bookmaker/base.html:8
+#: templates/bookmaker/base.html:8
 msgid "edit"
 msgstr ""
 
@@ -292,6 +324,459 @@ msgstr ""
 #: templates/article/article_form.html:8
 #: templates/bookmaker/edit_bet_type.html:29 templates/bookmaker/form.html:7
 msgid "save"
+msgstr ""
+
+#: apps/django-postman/postman/admin.py:22
+msgid "Sender and Recipient cannot be both undefined."
+msgstr ""
+
+#: apps/django-postman/postman/admin.py:29
+msgid "Visitor's email is in excess."
+msgstr ""
+
+#: apps/django-postman/postman/admin.py:34
+msgid "Visitor's email is missing."
+msgstr ""
+
+#: apps/django-postman/postman/admin.py:40
+msgid "Reading date must be later to sending date."
+msgstr ""
+
+#: apps/django-postman/postman/admin.py:45
+msgid "Deletion date by sender must be later to sending date."
+msgstr ""
+
+#: apps/django-postman/postman/admin.py:50
+msgid "Deletion date by recipient must be later to sending date."
+msgstr ""
+
+#: apps/django-postman/postman/admin.py:58
+msgid "Response date must be later to sending date."
+msgstr ""
+
+#: apps/django-postman/postman/admin.py:60
+msgid "The message cannot be replied without having been read."
+msgstr ""
+
+#: apps/django-postman/postman/admin.py:62
+msgid "Response date must be later to reading date."
+msgstr ""
+
+#: apps/django-postman/postman/admin.py:64
+msgid "Response date cannot be set without at least one reply."
+msgstr ""
+
+#: apps/django-postman/postman/admin.py:66
+msgid "The message cannot be replied without being in a conversation."
+msgstr ""
+
+#: apps/django-postman/postman/admin.py:88
+#: apps/django-postman/postman/admin.py:164
+#: apps/django-postman/postman/templates/postman/view.html:5
+msgid "Message"
+msgstr ""
+
+#: apps/django-postman/postman/admin.py:93
+msgid "Dates"
+msgstr ""
+
+#: apps/django-postman/postman/admin.py:98
+#: apps/django-postman/postman/admin.py:168
+#, fuzzy
+msgid "Moderation"
+msgstr "poste"
+
+#: apps/django-postman/postman/fields.py:22
+msgid "Some usernames are unknown or no more active: {users}."
+msgstr ""
+
+#: apps/django-postman/postman/fields.py:23
+msgid ""
+"Ensure this value has at most {limit_value} distinct items (it has "
+"{show_value})."
+msgstr ""
+
+#: apps/django-postman/postman/fields.py:24
+msgid ""
+"Ensure this value has at least {limit_value} distinct items (it has "
+"{show_value})."
+msgstr ""
+
+#: apps/django-postman/postman/fields.py:25
+msgid "Some usernames are rejected: {users}."
+msgstr ""
+
+#: apps/django-postman/postman/fields.py:26
+#: apps/django-postman/postman/forms.py:65
+msgid "{user.username}"
+msgstr ""
+
+#: apps/django-postman/postman/fields.py:27
+#: apps/django-postman/postman/forms.py:66
+msgid "{user.username} ({reason})"
+msgstr ""
+
+#: apps/django-postman/postman/forms.py:64
+msgid "Writing to some users is not possible: {users}."
+msgstr ""
+
+#: apps/django-postman/postman/forms.py:148
+#: apps/django-postman/postman/forms.py:160
+msgid "Recipients"
+msgstr ""
+
+#: apps/django-postman/postman/forms.py:148
+#: apps/django-postman/postman/forms.py:160
+#: apps/django-postman/postman/templates/postman/base_folder.html:26
+#: apps/django-postman/postman/templates/postman/reply.html:4
+msgid "Recipient"
+msgstr ""
+
+#: apps/django-postman/postman/forms.py:159
+msgid "Email"
+msgstr ""
+
+#: apps/django-postman/postman/forms.py:175
+msgid "Undefined recipient."
+msgstr ""
+
+#: apps/django-postman/postman/forms.py:194
+msgid "Additional recipients"
+msgstr ""
+
+#: apps/django-postman/postman/forms.py:194
+msgid "Additional recipient"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:19
+msgid "Pending"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:20
+msgid "Accepted"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:21
+#: apps/django-postman/postman/templates/postman/view.html:13
+msgid "Rejected"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:200
+msgid "subject"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:201
+msgid "body"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:202
+#: apps/django-postman/postman/models.py:284
+msgid "sender"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:203
+#: apps/django-postman/postman/models.py:308
+msgid "recipient"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:204
+msgid "visitor"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:205
+msgid "parent message"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:206
+msgid "root message"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:207
+msgid "sent at"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:208
+msgid "read at"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:209
+msgid "replied at"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:210
+msgid "archived by sender"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:211
+msgid "archived by recipient"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:212
+msgid "deleted by sender at"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:213
+msgid "deleted by recipient at"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:215
+#: templates/bet/ticket_detail.html:9
+#, fuzzy
+msgid "status"
+msgstr "statistiques"
+
+#: apps/django-postman/postman/models.py:217
+msgid "moderator"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:218
+msgid "moderated at"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:219
+msgid "rejection reason"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:224
+msgid "message"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:225
+msgid "messages"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:336
+msgid "Undefined sender."
+msgstr ""
+
+#: apps/django-postman/postman/models.py:476
+msgid "pending message"
+msgstr ""
+
+#: apps/django-postman/postman/models.py:477
+msgid "pending messages"
+msgstr ""
+
+#: apps/django-postman/postman/utils.py:32
+msgid "> "
+msgstr ""
+
+#: apps/django-postman/postman/utils.py:48
+msgid ""
+"\n"
+"\n"
+"{sender} wrote:\n"
+"{body}\n"
+msgstr ""
+
+#: apps/django-postman/postman/utils.py:57
+msgid "Re: {subject}"
+msgstr ""
+
+#: apps/django-postman/postman/views.py:129
+#: apps/django-postman/postman/views.py:189
+msgid "Message successfully sent."
+msgstr ""
+
+#: apps/django-postman/postman/views.py:131
+#: apps/django-postman/postman/views.py:191
+msgid "Message rejected for at least one recipient."
+msgstr ""
+
+#: apps/django-postman/postman/views.py:278
+msgid "Select at least one object."
+msgstr ""
+
+#: apps/django-postman/postman/views.py:284
+msgid "Messages or conversations successfully archived."
+msgstr ""
+
+#: apps/django-postman/postman/views.py:289
+msgid "Messages or conversations successfully deleted."
+msgstr ""
+
+#: apps/django-postman/postman/views.py:294
+msgid "Messages or conversations successfully recovered."
+msgstr ""
+
+#: apps/django-postman/postman/management/__init__.py:14
+msgid "Message Rejected"
+msgstr ""
+
+#: apps/django-postman/postman/management/__init__.py:14
+msgid "Your message has been rejected"
+msgstr ""
+
+#: apps/django-postman/postman/management/__init__.py:15
+msgid "Message Received"
+msgstr ""
+
+#: apps/django-postman/postman/management/__init__.py:15
+msgid "You have received a message"
+msgstr ""
+
+#: apps/django-postman/postman/management/__init__.py:16
+msgid "Reply Received"
+msgstr ""
+
+#: apps/django-postman/postman/management/__init__.py:16
+msgid "You have received a reply"
+msgstr ""
+
+#: apps/django-postman/postman/templates/admin/postman/pendingmessage/change_form.html:17
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+#: apps/django-postman/postman/templates/admin/postman/pendingmessage/submit_line.html:6
+msgid "Accept"
+msgstr ""
+
+#: apps/django-postman/postman/templates/admin/postman/pendingmessage/submit_line.html:7
+msgid "Reject"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/archives.html:3
+msgid "Archived Messages"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/archives.html:7
+msgid ""
+"Messages in this folder will never be removed. You can use this folder for "
+"long term storage."
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base.html:3
+#: templates/postman/base.html:5
+msgid "Messaging"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base.html:6
+#: templates/postman/base.html:9
+msgid "Inbox"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base.html:7
+#: apps/django-postman/postman/templates/postman/sent.html:3
+#: templates/postman/base.html:10
+msgid "Sent Messages"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base.html:8
+#: apps/django-postman/postman/templates/postman/write.html:3
+#: templates/postman/base.html:11
+msgid "Write"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base.html:9
+#: templates/postman/base.html:12
+msgid "Archives"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base.html:10
+#: templates/postman/base.html:13
+msgid "Trash"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base_folder.html:9
+msgid "Sorry, this page number is invalid."
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base_folder.html:12
+msgid "by conversation"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base_folder.html:13
+msgid "by message"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base_folder.html:17
+#: apps/django-postman/postman/templates/postman/view.html:22
+msgid "Delete"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base_folder.html:18
+#: apps/django-postman/postman/templates/postman/view.html:23
+msgid "Archive"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base_folder.html:19
+msgid "Undelete"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base_folder.html:24
+msgid "Action"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base_folder.html:25
+msgid "Sender"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base_folder.html:27
+msgid "Subject"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base_folder.html:28
+msgid "Date"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base_folder.html:43
+msgid "g:i A,M j,n/j/y"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base_folder.html:51
+msgid "No messages."
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/base_write.html:20
+msgid "Send"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/inbox.html:3
+msgid "Received Messages"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/inbox.html:6
+msgid "Received"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/reply.html:3
+#: apps/django-postman/postman/templates/postman/view.html:25
+#: apps/django-postman/postman/templates/postman/view.html:28
+#: apps/django-postman/postman/templates/postman/view.html:31
+msgid "Reply"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/sent.html:6
+msgid "Sent"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/trash.html:3
+msgid "Deleted Messages"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/trash.html:10
+msgid ""
+"Messages in this folder can be removed from time to time. For long term "
+"storage, use instead the archive folder."
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/view.html:5
+#, fuzzy
+msgid "Conversation"
+msgstr "poste"
+
+#: apps/django-postman/postman/templates/postman/view.html:13
+msgid ":"
+msgstr ""
+
+#: apps/django-postman/postman/templates/postman/view.html:20
+msgid "Back"
+msgstr ""
+
+#: apps/django-postman/postman/templatetags/postman_tags.py:35
+msgid "<me>"
 msgstr ""
 
 #: apps/gsm/filters.py:15
@@ -429,53 +914,53 @@ msgstr ""
 msgid "Welcome"
 msgstr "Bienvenue"
 
-#: templates/site_base.html:96
+#: templates/site_base.html:7
+msgid "don't loose your bets"
+msgstr ""
+
+#: templates/site_base.html:106
 msgid "Hide announcement"
 msgstr "masquer l'annonce"
 
-#: templates/site_base.html:119
+#: templates/site_base.html:129
 msgid "soccer"
 msgstr "football"
 
-#: templates/site_base.html:122
+#: templates/site_base.html:132
 msgid "tennis"
 msgstr "tennis"
 
-#: templates/site_base.html:125
+#: templates/site_base.html:135
 msgid "rugby"
 msgstr "rugby"
 
-#: templates/site_base.html:128
+#: templates/site_base.html:138
 msgid "basketball"
 msgstr "basketball"
 
-#: templates/site_base.html:131
+#: templates/site_base.html:141
 msgid "clans"
 msgstr ""
 
-#: templates/site_base.html:134
+#: templates/site_base.html:144
 msgid "articles"
 msgstr ""
 
-#: templates/site_base.html:140 templates/auth/user_base.html:8
-msgid "activities"
-msgstr ""
-
-#: templates/site_base.html:143
+#: templates/site_base.html:148
 msgid "my profile"
 msgstr ""
 
-#: templates/site_base.html:155 templates/site_base.html.py:199
+#: templates/site_base.html:160 templates/site_base.html.py:206
 msgid "clear"
 msgstr "effacer"
 
-#: templates/site_base.html:186
+#: templates/site_base.html:193
 msgid ""
 "Sorry, our program failed to process your request. Our techie has been "
 "notified by email and will take care of it soonish"
 msgstr ""
 
-#: templates/site_base.html:319
+#: templates/site_base.html:329
 msgid "Do you want to"
 msgstr ""
 
@@ -499,66 +984,113 @@ msgstr "Langage"
 msgid "Timezone"
 msgstr "Fuseau horairre"
 
-#: templates/activity/action.html:13 templates/activity/action.html.py:20
+#: templates/account/login.html:8
+msgid "Login"
+msgstr "Authentification"
+
+#: templates/account/login.html:16
+msgid "Log In"
+msgstr ""
+
+#: templates/account/login.html:20
+msgid "Note"
+msgstr ""
+
+#: templates/account/login.html:20
+#, python-format
+msgid "you are already logged in as %(user_display)s."
+msgstr ""
+
+#: templates/account/login.html:24
+#, python-format
+msgid "Don't have an account? <a href=\"%(signup_url)s\">Sign up</a>!"
+msgstr ""
+
+#: templates/account/login.html:33
+#, fuzzy
+msgid "Forgot password?"
+msgstr "Définir le mot de passe"
+
+#: templates/account/login.html:40 templates/account/login.html.py:66
+msgid "Log in &raquo;"
+msgstr ""
+
+#: templates/account/login.html:45
+msgid "Or sign in with your OpenID"
+msgstr ""
+
+#: templates/account/login.html:71
+#, python-format
+msgid ""
+"If you have any trouble logging in to your account, contact us at <a href="
+"\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+msgstr ""
+
+#: templates/activity/action.html:18 templates/activity/action.html.py:25
 msgid "published"
 msgstr ""
 
-#: templates/activity/action.html:14
+#: templates/activity/action.html:19 templates/bet/_includes/bet_list.html:77
 msgid "combined ticket"
 msgstr ""
 
-#: templates/activity/action.html:15
+#: templates/activity/action.html:20
 msgid "including"
 msgstr ""
 
-#: templates/activity/action.html:15 templates/gsm/person/base.html:20
-#: templates/gsm/person/matches.html:9 templates/gsm/sport/base.html:23
+#: templates/activity/action.html:20 templates/gsm/person/base.html:20
+#: templates/gsm/person/matches.html:9 templates/gsm/sport/base.html:32
 msgid "matches"
 msgstr "matchs"
 
-#: templates/activity/action.html:21
+#: templates/activity/action.html:26
 msgid "simple ticket"
 msgstr ""
 
-#: templates/activity/action.html:22
+#: templates/activity/action.html:27
 #, fuzzy
 msgid "on match"
 msgstr "prochains matchs"
 
-#: templates/activity/action.html:29
+#: templates/activity/action.html:34
 msgid "joined group"
 msgstr ""
 
-#: templates/activity/action.html:34
+#: templates/activity/action.html:39
 msgid "created group"
 msgstr ""
 
-#: templates/activity/action.html:39
+#: templates/activity/action.html:44
 msgid "bets on"
 msgstr ""
 
-#: templates/activity/action.html:44
+#: templates/activity/action.html:49
 msgid "commented"
 msgstr ""
 
-#: templates/activity/action.html:49
+#: templates/activity/action.html:54
 msgid "updated article"
 msgstr ""
 
-#: templates/activity/action.html:54
+#: templates/activity/action.html:59
 msgid "created article"
 msgstr ""
 
-#: templates/activity/action.html:59
+#: templates/activity/action.html:64
 msgid "started following"
 msgstr ""
 
-#: templates/activity/action.html:66
+#: templates/activity/action.html:74
+#, fuzzy
+msgid "bets"
+msgstr "live"
+
+#: templates/activity/action.html:99
 #, fuzzy
 msgid "ago"
 msgstr "Age"
 
-#: templates/activity/action.html:72 templates/comments/form.html:20
+#: templates/activity/action.html:105 templates/comments/form.html:20
 msgid "comment"
 msgstr ""
 
@@ -572,6 +1104,10 @@ msgstr ""
 
 #: templates/auth/user_base.html:8
 msgid "activities of"
+msgstr ""
+
+#: templates/auth/user_base.html:8
+msgid "activities"
 msgstr ""
 
 #: templates/auth/user_base.html:11
@@ -596,13 +1132,14 @@ msgstr "Profil"
 
 #: templates/auth/user_base.html:17
 #, fuzzy
-msgid "prognostics of"
+msgid "picks of"
 msgstr "pronostics en cours"
 
 #: templates/auth/user_base.html:17 templates/gsm/competition/base.html:30
 #: templates/gsm/person/base.html:24 templates/gsm/session/base.html:135
-#: templates/gsm/sport/base.html:26 templates/gsm/team/base.html:35
-msgid "prognostics"
+#: templates/gsm/sport/base.html:11 templates/gsm/sport/base.html.py:35
+#: templates/gsm/team/base.html:35
+msgid "picks"
 msgstr "pronostics en cours"
 
 #: templates/bet/bet_form.html:5
@@ -613,11 +1150,12 @@ msgstr ""
 msgid "delete the whole ticket"
 msgstr ""
 
-#: templates/bet/bet_form.html:8 templates/bet/_includes/bet_list.html:24
+#: templates/bet/bet_form.html:8 templates/bet/_includes/bet_list.html:32
 msgid "bookmaker"
 msgstr ""
 
-#: templates/bet/bet_form.html:11 templates/bet/_includes/bet_list.html:23
+#: templates/bet/bet_form.html:11 templates/bet/ticket_detail.html:8
+#: templates/bet/_includes/bet_list.html:31
 msgid "stake"
 msgstr ""
 
@@ -634,30 +1172,27 @@ msgid "combined"
 msgstr ""
 
 #: templates/bet/bet_form.html:22 templates/bet/bet_form.html.py:54
+#: templates/bet/_includes/bet_list.html:30
 msgid "odds"
 msgstr ""
 
-#: templates/bet/bet_form.html:40 templates/bet/ticket_detail.html:8
-#: templates/bet/ticket_detail.html:32
-#: templates/bookmaker/edit_bet_type.html:18
+#: templates/bet/bet_form.html:40 templates/bookmaker/edit_bet_type.html:18
 msgid "delete"
 msgstr ""
 
-#: templates/bet/bet_form.html:40 templates/bet/ticket_detail.html:32
+#: templates/bet/bet_form.html:40
 msgid "delete bet for match"
 msgstr ""
 
-#: templates/bet/bet_form.html:59 templates/bet/ticket_detail.html:3
-#: templates/bet/_includes/bet_list.html:20
-#, fuzzy
-msgid "match"
-msgstr "matchs"
+#: templates/bet/bet_form.html:59
+msgid "match (start typing a team name)"
+msgstr ""
 
 #: templates/bet/bet_form.html:64
 msgid "ticket type"
 msgstr ""
 
-#: templates/bet/bet_form.html:73 templates/bet/_includes/bet_list.html:22
+#: templates/bet/bet_form.html:73 templates/bet/_includes/bet_list.html:29
 msgid "choice"
 msgstr ""
 
@@ -666,7 +1201,7 @@ msgstr ""
 msgid "reason"
 msgstr "saison"
 
-#: templates/bet/bet_form.html:87 templates/bet/_includes/bet_list.html:62
+#: templates/bet/bet_form.html:87 templates/bet/_includes/bet_list.html:86
 msgid "image"
 msgstr ""
 
@@ -682,55 +1217,84 @@ msgstr ""
 msgid "close ticket"
 msgstr ""
 
-#: templates/bet/ticket_detail.html:4
-#, fuzzy
-msgid "question"
-msgstr "poste"
-
-#: templates/bet/ticket_detail.html:5
-msgid "answer"
+#: templates/bet/ticket_detail.html:6
+msgid "ticket"
 msgstr ""
 
-#: templates/bet/_includes/bet_list.html:8
+#: templates/bet/ticket_detail.html:6
+msgid "by"
+msgstr ""
+
+#: templates/bet/_includes/bet_list.html:9
 msgid "all"
 msgstr ""
 
-#: templates/bet/_includes/bet_list.html:14
+#: templates/bet/_includes/bet_list.html:21
 #, fuzzy
 msgid "nickname"
 msgstr "Nom"
 
-#: templates/bet/_includes/bet_list.html:15 templates/gsm/session/base.html:89
+#: templates/bet/_includes/bet_list.html:22 templates/gsm/session/base.html:89
 msgid "date"
 msgstr "date"
 
-#: templates/bet/_includes/bet_list.html:16
+#: templates/bet/_includes/bet_list.html:23
 msgid "time"
 msgstr ""
 
-#: templates/bet/_includes/bet_list.html:17
+#: templates/bet/_includes/bet_list.html:24
 msgid "sport"
 msgstr ""
 
-#: templates/bet/_includes/bet_list.html:18 templates/gsm/person/home.html:73
+#: templates/bet/_includes/bet_list.html:25 templates/gsm/person/home.html:73
 #: templates/gsm/session/base.html:84
 msgid "competition"
 msgstr "compétition"
 
-#: templates/bet/_includes/bet_list.html:19
+#: templates/bet/_includes/bet_list.html:26
 msgid "area"
 msgstr ""
 
-#: templates/bet/_includes/bet_list.html:21
+#: templates/bet/_includes/bet_list.html:27
+#, fuzzy
+msgid "match"
+msgstr "matchs"
+
+#: templates/bet/_includes/bet_list.html:28
 msgid "bet"
 msgstr ""
 
-#: templates/bet/_includes/bet_list.html:25
+#: templates/bet/_includes/bet_list.html:33
 msgid "support"
 msgstr ""
 
-#: templates/bet/_includes/bet_list.html:61
+#: templates/bet/_includes/bet_list.html:34
+#, fuzzy
+msgid "result"
+msgstr "Résultats"
+
+#: templates/bet/_includes/bet_list.html:36
+msgid "correct"
+msgstr ""
+
+#: templates/bet/_includes/bet_list.html:85
 msgid "text"
+msgstr ""
+
+#: templates/bet/_includes/bet_list.html:107
+msgid "this bet was won"
+msgstr ""
+
+#: templates/bet/_includes/bet_list.html:108
+msgid "this bet was lost"
+msgstr ""
+
+#: templates/bet/_includes/bet_list.html:109
+msgid "this bet was canceled"
+msgstr ""
+
+#: templates/bet/_includes/bet_list.html:113
+msgid "this bet result is invalid, it must be corrected by a Referee"
 msgstr ""
 
 #: templates/bookmaker/base.html:9
@@ -743,13 +1307,13 @@ msgstr ""
 
 #: templates/bookmaker/base.html:19 templates/gsm/competition/base.html:40
 #: templates/gsm/person/base.html:31 templates/gsm/session/base.html:145
-#: templates/gsm/sport/base.html:36 templates/gsm/team/base.html:42
+#: templates/gsm/sport/base.html:45 templates/gsm/team/base.html:42
 msgid "i do not bet on"
 msgstr ""
 
 #: templates/bookmaker/base.html:21 templates/gsm/competition/base.html:42
 #: templates/gsm/person/base.html:33 templates/gsm/session/base.html:147
-#: templates/gsm/sport/base.html:38 templates/gsm/team/base.html:44
+#: templates/gsm/sport/base.html:47 templates/gsm/team/base.html:44
 msgid "i bet on"
 msgstr ""
 
@@ -937,12 +1501,6 @@ msgstr "victoires"
 msgid "draw"
 msgstr "matchs nuls"
 
-#: templates/gsm/_includes/resultstable.html:15
-#: templates/gsm/soccer/_includes/resultstable.html:15
-#: templates/gsm/team/statistics.html:25
-msgid "lost"
-msgstr "défaites"
-
 #: templates/gsm/_includes/resultstable.html:17
 #: templates/gsm/soccer/_includes/resultstable.html:16
 #: templates/gsm/team/statistics.html:26
@@ -978,13 +1536,13 @@ msgstr "vs"
 msgid "no matches to display"
 msgstr "aucun match à afficher"
 
-#: templates/gsm/competition/base.html:13 templates/gsm/sport/base.html:8
+#: templates/gsm/competition/base.html:13 templates/gsm/sport/base.html:17
 #: templates/gsm/team/base.html:13
 msgid "home"
 msgstr "accueil"
 
 #: templates/gsm/competition/base.html:19 templates/gsm/person/base.html:16
-#: templates/gsm/session/base.html:132 templates/gsm/sport/base.html:11
+#: templates/gsm/session/base.html:132 templates/gsm/sport/base.html:20
 #: templates/gsm/team/base.html:24
 msgid "news"
 msgstr "actualités"
@@ -1000,7 +1558,7 @@ msgid "calendar"
 msgstr "calendrier"
 
 #: templates/gsm/competition/base.html:33 templates/gsm/session/base.html:138
-#: templates/gsm/sport/base.html:29
+#: templates/gsm/sport/base.html:38
 msgid "live"
 msgstr "live"
 
@@ -1187,15 +1745,60 @@ msgstr "poste"
 msgid "Lineups"
 msgstr "compositions d'équipes"
 
-#: templates/gsm/sport/base.html:14
+#: templates/gsm/sport/base.html:5
+msgid ""
+"Free betting picks, best tipser, live scores, news, results, rankings & "
+"fixtures"
+msgstr ""
+
+#: templates/gsm/sport/base.html:8
+#, python-format
+msgid ""
+"Don't loose your bets on %(sport)s! Everything to bet on %(sport)s like a "
+"pro! From news and stats to the free picks of the best %(sport)s tipsers."
+msgstr ""
+
+#: templates/gsm/sport/base.html:10
+msgid "Don't loose your bets on"
+msgstr ""
+
+#: templates/gsm/sport/base.html:10
+msgid "Everything to bet on"
+msgstr ""
+
+#: templates/gsm/sport/base.html:11
+msgid "betting"
+msgstr ""
+
+#: templates/gsm/sport/base.html:11
+#, fuzzy
+msgid "free picks"
+msgstr "pronostics en cours"
+
+#: templates/gsm/sport/base.html:11
+#, fuzzy
+msgid "pick"
+msgstr "pronostics en cours"
+
+#: templates/gsm/sport/base.html:11
+#, fuzzy
+msgid "predictions"
+msgstr "compétitions"
+
+#: templates/gsm/sport/base.html:11
+#, fuzzy
+msgid "prediction"
+msgstr "compétition"
+
+#: templates/gsm/sport/base.html:23
 msgid "competitions"
 msgstr "compétitions"
 
-#: templates/gsm/sport/base.html:17
+#: templates/gsm/sport/base.html:26
 msgid "informations"
 msgstr "informations"
 
-#: templates/gsm/sport/base.html:20
+#: templates/gsm/sport/base.html:29
 msgid "results"
 msgstr "Résultats"
 
@@ -1249,9 +1852,6 @@ msgstr "Tournois disputés"
 
 #~ msgid "Logout"
 #~ msgstr "Déconnection"
-
-#~ msgid "Login"
-#~ msgstr "Authentification"
 
 #~ msgid "or"
 #~ msgstr "ou"

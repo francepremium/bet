@@ -3,6 +3,13 @@
 {% load i18n %}
 {% load gsm_tags %}
 
+{% block head_title %}{{ competition|capfirst }}: {% trans 'Free betting picks, best tipser, live scores, news, results, rankings & fixtures' %}{% endblock %}
+
+{% block meta %}
+<meta name="Description" content="{% blocktrans %}Get everything to bet and win on {{ competition }} like a pro! From news and statistics to the free picks of best {{ competition }} tipsers.{% endblocktrans %}" />
+<meta name="keywords" content="{% trans 'betting' %}, {{ competition }} {% trans 'betting' %}, {{ competition }} {% trans 'free picks' %}, {{ competition }} {% trans 'picks' %}, {{ competition }} {% trans 'pick' %}, {{ competition }} {% trans 'predictions' %}, {{ competition }} {% trans 'prediction' %}" />
+{% endblock %}
+
 {% block body %}
 <h1>{{ competition }}</h1>
 {% endblock %}
@@ -26,8 +33,8 @@
     <li class="calendar tab {% if tab == 'calendar' %}active{% endif %}">
         <a href="{{ competition.get_calendar_absolute_url }}" title="{{ competition }}">{% trans 'calendar' %}</a>
     </li>
-    <li class="prognostics tab {% if tab == 'prognostics' %}active{% endif %}">
-        <a href="{{ competition.get_prognostics_absolute_url }}" title="{{ competition }}">{% trans 'prognostics' %}</a>
+    <li class="picks tab {% if tab == 'picks' %}active{% endif %}">
+        <a href="{{ competition.get_picks_absolute_url }}" title="{{ competition }}">{% trans 'picks' %}</a>
     </li>
     <li class="live tab {% if tab == 'live' %}active{% endif %}">
         <a href="{{ competition.get_live_absolute_url }}" title="{{ competition }}">{% trans 'live' %}</a>

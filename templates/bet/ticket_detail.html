@@ -1,39 +1,22 @@
-            <table>
-                <tr>
-                    <th>{% trans 'match' %}</th>
-                    <th>{% trans 'question' %}</th>
-                    <th>{% trans 'answer' %}</th>
-                    {% if action.actor == request.user %}
-                    <th>{% trans 'edit' %}</th>
-                    <th>{% trans 'delete' %}</th>
-                    {% endif %}
-                </tr>
-                {% for bet in action.action_object.bet_set.all %}
-                <tr>
-                    <td>
-                        <a href="{{ bet.session.get_absolute_url }}" title="{{ bet.session }}">{{ bet.session }}</a>
-                    </td>
-                    <td>
-                        {{ bet.bettype.name }}
-                    </td>
-                    <td>
-                        {{ bet.choice }}
-                    </td>
-                    {% if action.actor == request.user %}
-                    <td>
-                        <a href="{% url bet_form action.action_object.pk %}?bet={{ bet.pk }}">X</a>
+{% extends 'bet/base.html' %}
 
-                    </td>
-                    <td>
-                        <form action="{% url bet_delete bet.pk %}" method="post">
-                            {% csrf_token %}
-                            <input type="hidden" name="confirm" value="1" />
-                            <input type="hidden" name="noredirect" value="1" />
-                            <input type="submit" value="{% trans 'delete' %}" title="{% trans 'delete bet for match' %} {{ bet.session.name }}" class="confirm" />
-                        </form>
+{% load i18n bet_tags %}
 
-                    </td>
-                    {% endif %}
-                </tr>
-                {% endfor %}
-            </table>
+{% block head_title %}{% if ticket.bet_set.count > 1 %}{% trans 'Combined' %}{% else %}{% trans 'Simple' %}{% endif %} {% trans 'ticket ' %} #{{ ticket.pk }} {% trans 'by' %} {{ ticket.user }}{% endblock %}
+
+{% block meta %}
+<meta name="Deswcription" content="{% trans 'In this ticket' %}, {{ user }} {% trans 'shares his picks on matches' %} {% for bet in ticket.bet_set.all %}{{ bet.session }}{% if not forloop.last %}, {% endif %}{% endfor %}. {% trans 'Discover his free picks now' %}!" />
+<meta name="keywords" content="{% trans 'picks' %}, {% trans 'pick' %}, {% trans 'bet' %}, {% trans 'betting' %}, {% trans 'prediction' %}, {% for bet in ticket.bet_set.all %}{{ bet.session }}, {{ bet.session.sport }}, {{ bet.session.season.competition }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+{% endblock %}
+
+{% block body %}
+<h1>{% trans 'ticket' %} #{{ ticket.pk }} {% trans 'by' %} {{ ticket.user }}</h1>
+
+{% trans 'stake' %}: {{ ticket.stake }}
+{% trans 'status' %}: {{ ticket.get_status_display }}
+{% trans 'bet count' %}: {{ ticket.bet_set.count }}
+{% trans 'odds' %}: {{ ticket.odds }}
+
+{% render_bet_list qs=ticket.bet_set.all %}
+
+{% endblock %}

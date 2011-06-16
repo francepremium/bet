@@ -50,4 +50,5 @@ class BetForm(forms.ModelForm):
         exclude = (
             'ticket',
             'status',
+            'correction',
         )

@@ -1,0 +1,90 @@
+{% extends 'site_base.html' %}
+
+{% load i18n %}
+
+{% block head_title %}{{ sport|capfirst }}: {% trans 'Free betting picks, best tipser, live scores, news, results, rankings & fixtures' %}{% endblock %}
+
+{% block meta %}
+<meta name="Description" content="{% blocktrans %}Get everything to bet and win on {{ sport }} like a pro! From news and statistics to the free picks of best {{ sport }} tipsers.{% endblocktrans %}" />
+<meta name="keywords" content="{% trans 'picks' %}, {% trans 'pick' %}, {% trans 'bet' %}, {% trans 'betting' %}, {% trans 'prediction' %}, {{ session }}, {{ session.sport }}, {{ session.season.competition }}" />
+{% endblock %}
+
+{% block extra_body %}
+<script type="text/javascript" src="{{ STATIC_URL }}highcharts/js/highcharts.js"></script>
+<script type="text/javascript">
+
+    var chart;
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            tooltip: {
+                formatter: function() {
+                    return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: '{% trans 'choice share' %}',
+                data: [
+                    {% for choice, percent in choice_percents.items %}
+                        {% if percent %}
+                            ['{{ choice }}', {{ percent }}]{% if not forloop.last %},{% endif %}
+                        {% endif %}
+                    {% endfor %}
+                ]
+            }]
+        });
+    });
+        
+</script>
+{% endblock %}
+
+{% block body %}
+{{ bettype }}
+
+{{ session }}
+
+{% trans 'numbers of bets' %}: {{ bet_list.count }}
+<br />
+
+{% trans 'result' %}: {{ bet_list.0.get_correction_display }}
+
+<table>
+    {% if bet_list %}
+        <table>
+            <tr>
+                <th>{% trans 'choice' %}</th>
+                <th>{% trans 'count' %}</th>
+            </tr>
+        {% for choice, count in choice_counts.items %}
+            <tr>
+                <td>{{ choice }}</td>
+                <td>{{ count }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        <div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>
+    {% endif %}
+</table>
+
+    {% include page_template %}
+{% endblock %}

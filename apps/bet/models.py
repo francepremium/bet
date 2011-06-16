@@ -28,12 +28,45 @@ EVENT_KIND_FLAG = 2
 
 class BetProfile(models.Model):
     user = AutoOneToOneField(User, primary_key=True)
+    offside_on = models.DateTimeField(null=True, blank=True)
 
     def is_offside(self):
-        return False
+        if not hasattr(self, '_is_offside'):
+            if not self.offside_on:
+                self._is_offside = False
+            else:
+                delta = datetime.datetime.now() - self.offside_on
+                if delta.days <= 2:
+                    self._is_offside = True
+                else:
+                    self._is_offside = False
+
+                errors = self.event_set.filter(datetime__gte=datetime.timedelta(2))
+                errors = errors.filter(valid=False)
+                if errors.count():
+                    self.offside_on = datetime.datetime.now()
+                    self._is_offside = True
+                    self.save()
+        return self._is_offside
 
     def is_referee(self):
-        return False
+        if not hasattr(self, '_is_referee'):
+            if self.is_offside():
+                self._is_referee = False
+            elif self.get_event_set_percent(self.user.event_set.filter(valid=False)) > 5:
+                self._is_referee = False
+            elif self.user.event_set.filter(valid=True).count() < 50:
+                self._is_referee = False
+            else:
+                self._is_referee = True
+        return self._is_referee
+   
+    def get_event_set_percent(self, event_set):
+        total_events = self.user.event_set.all().count()
+        if total_events == 0:
+            return 0
+        percent = ( event_set.count() / total_events ) * 100
+        return percent
 
     def can_correct(self, bet):
         if self.is_offside():
@@ -64,7 +97,7 @@ class BetProfile(models.Model):
         return False
 
 class Ticket(models.Model):
-    TICKET_STAKE_CHOICES = [(x,x) for x in range(1,10)]
+    TICKET_STAKE_CHOICES = [(x,x) for x in range(1,11)]
     TICKET_STATUS_CHOICES = (
         (TICKET_STATUS_INCOMPLETE, _('incomplete')),
         (TICKET_STATUS_DONE, _('done')),
@@ -75,16 +108,21 @@ class Ticket(models.Model):
     stake = models.IntegerField(choices=TICKET_STAKE_CHOICES)
     status = models.IntegerField(choices=TICKET_STATUS_CHOICES, default=TICKET_STATUS_INCOMPLETE)
 
+    def get_absolute_url(self):
+        return urlresolvers.reverse('ticket_detail', args=(self.pk,))
+
     def __unicode__(self):
         return '#%s' % self.pk
 
     @property
     def odds(self):
-        odds = self.pronostic_set.all().values_list('odds', flat=True)
-        i = 1
-        for odd in odds:
-            i = i * odd
-        return i
+        if not hasattr(self, '_odds'):
+            odds = self.bet_set.all().values_list('odds', flat=True)
+            i = 1
+            for odd in odds:
+                i = i * odd
+            self._odds = i
+        return "%.2f" % self._odds
 
 def media_upload_to(instance, filename):
     return 'ticket/%s/%s' % (instance.ticket.pk, filename)
@@ -98,7 +136,7 @@ class Bet(models.Model):
     )
 
     BET_CORRECTION_CHOICES = (
-        (BET_CORRECTION_NEW, _('new')),
+        (BET_CORRECTION_NEW, _('waiting')),
         (BET_CORRECTION_WON, _('won')),
         (BET_CORRECTION_LOST, _('lost')),
     )
@@ -128,6 +166,9 @@ class Bet(models.Model):
         return self.correction == BET_CORRECTION_LOST
     def is_canceled(self):
         return self.correction == BET_CORRECTION_CANCELED
+    
+    def get_absolute_url(self):
+        return urlresolvers.reverse('bet_detail', args=(self.pk,))
 
 def delete_empty_ticket(sender, **kwargs):
     if kwargs['instance'].ticket.bet_set.count() == 0:

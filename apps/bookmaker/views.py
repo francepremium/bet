@@ -93,7 +93,7 @@ def detail(request, pk, tab='home',
     context['bookmaker'] = bookmaker
 
     context.update(extra_context or {})
-    return shortcuts.render_to_response(template_name, context,
+    return shortcuts.render_to_response(template_name % tab, context,
         context_instance=template.RequestContext(request))
 
 def file(request, pk,

@@ -79,8 +79,8 @@ class Sport(models.Model):
         return self.get_tab_absolute_url('results')
     def get_matches_absolute_url(self):
         return self.get_tab_absolute_url('matches')
-    def get_prognostics_absolute_url(self):
-        return self.get_tab_absolute_url('prognostics')
+    def get_picks_absolute_url(self):
+        return self.get_tab_absolute_url('picks')
     def get_live_absolute_url(self):
         return self.get_tab_absolute_url('live')
 
@@ -118,8 +118,8 @@ class AbstractGsmEntity(models.Model):
         return self.get_tab_absolute_url('statistics')
     def get_calendar_absolute_url(self):
         return self.get_tab_absolute_url('calendar')
-    def get_prognostics_absolute_url(self):
-        return self.get_tab_absolute_url('prognostics')
+    def get_picks_absolute_url(self):
+        return self.get_tab_absolute_url('picks')
 
     def get_absolute_url(self):
         try:

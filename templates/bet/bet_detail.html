@@ -1,0 +1,91 @@
+{% extends 'bet/base.html' %}
+
+{% load i18n gsm_tags %}
+
+{% block head_title %}{{ bet.session }} - {{ bet.ticket.user }} {% trans 'pick for' %} {{ bet.bettype }}{% endblock %}
+
+{% block meta %}
+<meta name="Description" content="{% blocktrans with user=bet.ticket.user session=bet.session sport=bet.session.sport %}{{ user }} bets on {{ sport }}. Discover the analysis and prediction of {{ session }} he shares now!{% endblocktrans %}" />
+<meta name="keywords" content="{% trans 'picks' %}, {% trans 'pick' %}, {% trans 'bet' %}, {% trans 'betting' %}, {% trans 'prediction' %}, {{ bet.session }}, {{ bet.session.sport }}, {{ bet.session.season.competition }}" />
+{% endblock %}
+
+{% block body %}
+    {% if bet.ticket.bet_set.count > 1 %}
+    {% trans 'this pick is part of' %} <a href="{{ bet.ticket.get_absolute_url }}" title="{% trans 'ticket' %} #{{ bet.ticket.pk }} {% trans 'by' %} {{ bet.ticket.user }}">{% trans 'ticket' %} #{{ bet.ticket.pk }}</a>
+    {% endif %}
+
+    <table>
+        <tr>
+            <th>{% trans 'sport' %}</th>
+            <td>
+                <a href="{{ bet.session.sport.get_absolute_url }}" title="{{ bet.session.sport }} {% trans 'picks' %}">{{ bet.session.sport }}</a>
+            </td>
+        </tr>
+        <tr>
+            <th>{% trans 'competition' %}</th>
+            <td>
+                <a href="{{ bet.session.season.competition.get_absolute_url }}" title="{{ bet.session.season.competition }} {% trans 'picks' %}">{{ bet.session.season.competition }}</a>
+            </td>
+        </tr>
+        <tr>
+            <th>{% trans 'match' %}</th>
+            <td>
+                <a href="{{ bet.session.get_absolute_url }}" title="{{ bet.session }} {% trans 'picks' %}">{{ bet.session }}</a>
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2"></th>
+        </tr>
+        <tr>
+            <th>{% trans 'date' %}</th>
+            <td>{{ bet.session.datetime_utc|display_date }}</td>
+        </tr>
+        <tr>
+            <th>{% trans 'time' %}</th>
+            <td>{{ bet.session.datetime_utc|display_time }}</td>
+        </tr>
+        <tr>
+            <th>{% trans 'result' %}</th>
+            <td>{{ bet.correction }}</td>
+        </tr>
+        <tr>
+            <th>{% trans 'bookmaker' %}</th>
+            <td>
+                <a href="{{ bet.ticket.bookmaker.get_absolute_url }}" title="{{ bet.ticket.bookmaker }} {% trans 'picks' %}">{{ bet.ticket.bookmaker }}</a>
+            </td>
+        </tr>
+        <tr>
+            <th>{% trans 'bet type' %}</th>
+            <td>
+                <a href="{% url session_bettype_detail bet.session.pk bet.bettype.pk %}">{{ bet.bettype }}</a>
+            </td>
+        </tr>
+        <tr>
+            <th>{% trans 'bet' %}</th>
+            <td>
+                <a href="{{ bet.get_absolute_url }}" rel="canonical">{{ bet.choice }}</a>
+            </td>
+        </tr>
+        <tr>
+            <th>{% trans 'stake' %}</th>
+            <td>
+                {% if bet.ticket.bet_set.count > 1 %}
+                    {% trans 'combined ticket' %}
+                {% else %}
+                    {{ bet.ticket.stake }}
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+
+    {% if bet.text %}
+    <p>
+        {{ bet.text }}
+    </p>
+    {% endif %}
+
+    {% if bet.upload %}
+    <img src="{{ bet.upload.url }}" />
+    {% endif %}
+
+{% endblock %}
