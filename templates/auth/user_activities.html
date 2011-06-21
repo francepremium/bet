@@ -1,5 +1,6 @@
 {% extends 'auth/user_base.html' %}
 
+{% load i18n %}
 {% load activity_tags %}
 
 {% block body %}
@@ -7,8 +8,8 @@
     {% get_user_contenttype as user_ctype %}
     {% if request.user != object and request.user.is_authenticated %}
         <div>
-            <a href="{% url actstream_unfollow content_type_id=user_ctype.id  object_id=object.id %}" class="unfollow_button" style="display:none">UNFOLLOW</a>
-            <a href="{% url actstream_follow content_type_id=user_ctype.id  object_id=object.id %}" class="follow_button" >FOLLOW</a>
+            <a href="{% url actstream_unfollow content_type_id=user_ctype.id  object_id=object.id %}" class="unfollow_button" style="{% if object not in request.user.follows %}display:none{% endif %}">{% trans 'following' %}</a>
+            <a href="{% url actstream_follow content_type_id=user_ctype.id  object_id=object.id %}" class="follow_button" style="{% if object in request.user.follows %}display:none{% endif %}">{% trans 'follow' %}</a>
         </div>
         {% csrf_token %}
     {% endif %}
