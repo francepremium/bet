@@ -46,7 +46,7 @@ class BetType(models.Model):
     creation_bookmaker = models.ForeignKey('Bookmaker', related_name='created_bettype', null=True)
 
     def __unicode__(self):
-        return '%s (%s)' % (self.name, self.sport)
+        return self.name
     
     class Meta:
         ordering = ['sport', 'name']

@@ -13,8 +13,7 @@ from filters import *
 from models import *
 from forms import *
 
-@login_required
-def bet_types_for_bookmaker_and_sport(request,
+def bet_types_json(request,
     qs=BetType.objects.all()):
     if request.GET.get('sport'):
         qs = qs.filter(sport__name__icontains=request.GET['sport'])

@@ -3,5 +3,6 @@
 {% load bet_tags %}
 
 {% block body %}
-    {% render_bet_list session=session %}
+    {{ bet_list_helper.render_form }}
+    {{ bet_list_helper.render_bet_table }}
 {% endblock %}

@@ -1,0 +1,23 @@
+{% load i18n %}
+
+<form action="" method="get">
+    {% if sport %}
+    <div style="display:none" class="force_sport">{{ sport.slug }}</div>
+    {% endif %}
+    <table>
+        {% for field in filter.form %}
+            {% if forloop.counter0|divisibleby:2 %}
+                <tr>
+            {% endif %}
+
+                    <th>{{ field.label }}</th>
+                    <td>{{ field }}</td>
+
+            {% if not forloop.counter0|divisibleby:2 %}
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    <input type="submit" />
+    <a href="{{ request.path }}">{% trans 'all' %}</a>
+</form>

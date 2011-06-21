@@ -9,8 +9,8 @@ urlpatterns = patterns('bookmaker.views',
     ),
     url(
         r'bet_type/for_bookmaker_and_sport/$',
-        'bet_types_for_bookmaker_and_sport', {
-        }, 'bookmaker_bet_types_for_bookmaker_and_sport',
+        'bet_types_json', {
+        }, 'bookmaker_bet_types_json',
     ),
     url(
         r'(?P<pk>[0-9]+)/bet_type/change/$',

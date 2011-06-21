@@ -449,6 +449,33 @@ body.activity.detail div.activity div.comments {
                 $(this).parents('div.details').find('div.bet_list').toggle('fast');
             });
 
+            $('select[name=ticket__bookmaker]').live('change', function() {
+                var sport_pk, bookmaker_pk, bettype;
+                try {
+                    sport_pk = $(this).parents('form').find('div.force_sport').html();
+                } catch(e) {
+                    alert('could not figure sport');
+                }
+
+                bookmaker_pk = $(this).val();
+                bettype = $(this).parents('form').find('select[name=bettype]');
+
+                if (sport_pk) {
+                    $.get(
+                        '{% url bookmaker_bet_types_json %}',
+                        {
+                            'sport': sport_pk, 
+                            'bookmaker': bookmaker_pk,
+                        },
+                        function(data, textStatus, jqXHR) {
+                            update_select(bettype, data);
+                        },
+                        'json'
+                    );
+                } else if (sport_pk) {
+                }
+            });
+
             $('#ajaxload').fadeOut();
         });
         </script>

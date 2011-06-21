@@ -27,7 +27,7 @@
             var bookmaker_pk = bookmaker.attr('class').match(/pk_([0-9]+)/)[1];
             var bettypes = $('#global_ticket_form select[name=bettype]');
             $.get(
-                '{% url bookmaker_bet_types_for_bookmaker_and_sport %}',
+                '{% url bookmaker_bet_types_json %}',
                 {
                     'sport': sport, 
                     'bookmaker': bookmaker_pk,
