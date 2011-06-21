@@ -70,6 +70,25 @@ def user_friends(user):
     target_choices_qs = User.objects.filter(
         Q(follow__object_id=user.pk, follow__content_type=c) | 
         Q(id__in=follows_users_ids)
-    ).select_related('playlistprofile')
+    ).select_related()
     return target_choices_qs
 User.friends = user_friends
+
+def user_follows(user):
+    c = ContentType.objects.get_for_model(User)
+
+    follows_users_ids = Follow.objects.filter(user=user,
+                                              content_type__app_label='auth',
+                                              content_type__model='user') \
+                                      .exclude(object_id=user.pk) \
+                                      .values_list('object_id', flat=True)
+    return User.objects.filter(pk__in=follows_users_ids).select_related()
+User.follows = user_follows
+
+def user_following(user):
+    c = ContentType.objects.get_for_model(User)
+
+    followers_qs = User.objects.filter(follow__object_id=user.pk, 
+                                        follow__content_type=c)
+    return followers_qs.select_related()
+User.following = user_following

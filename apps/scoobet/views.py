@@ -32,14 +32,14 @@ def user_detail(request, username, tab='activities',
         context['activity_list'] = actor_stream(user)
         context['page_template'] = 'auth/user_activities_page.html'
     elif tab == 'social':
-        context['follower_list'] = User.objects.all()[:5]
-        context['following_list'] = User.objects.all()
+        context['follower_list'] = user.follows()
+        context['following_list'] = user.following()
         if context['follower_list'].count() > context['following_list'].count():
             context['paginate_list'] = context['follower_list']
         else:
             context['paginate_list'] = context['following_list']
-    
-    context['page_template'] = 'auth/user_social_page.html'
+        context['page_template'] = 'auth/user_social_page.html'
+
     if request.is_ajax() and 'page_template' in context.keys():
         template_name = context['page_template']
     else:
