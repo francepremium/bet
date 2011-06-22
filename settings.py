@@ -87,10 +87,11 @@ ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
 SECRET_KEY = "!0!i2uocz=ks1yxvlx*x5o6sn$n_h6a5r5n8@k+qn$d4q+@pnq"
 
 # List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = [
-    "django.template.loaders.filesystem.load_template_source",
-    "django.template.loaders.app_directories.load_template_source",
-]
+#TEMPLATE_LOADERS = [
+    #'django.template.loaders.filesystem.Loader',
+    #'django.template.loaders.app_directories.Loader',
+#]
+
 
 MIDDLEWARE_CLASSES = [
     "django.middleware.common.CommonMiddleware",

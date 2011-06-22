@@ -1,4 +1,4 @@
-from django.db.models import Q
+from django.db.models import Q, Avg
 from django.utils.translation import ugettext as _
 from django import template
 from django import http
@@ -11,6 +11,9 @@ from endless_pagination.decorators import page_template
 from django.core import urlresolvers
 
 from actstream.models import actor_stream, Follow
+
+from bet.helpers import *
+from bet.models import *
 
 @login_required
 def me(request):
@@ -39,6 +42,49 @@ def user_detail(request, username, tab='activities',
         else:
             context['paginate_list'] = context['following_list']
         context['page_template'] = 'auth/user_social_page.html'
+    elif tab == 'picks':
+        context['bet_list_helper'] = BetListHelper(request, 
+            qs=Bet.objects.filter(ticket__user=user))
+    elif tab == 'stats':
+        context['bet_list_helper'] = BetListHelper(request, 
+            qs=Bet.objects.filter(ticket__user=user), exclude_filters=[
+            'bettype', 'sport', 'competition'], exclude=['user'])
+        tickets = context['bet_list_helper'].ticket_qs
+
+        total_odds = 0
+        balance = 0
+        balance_history = context['balance_history'] = []
+        context['won_ticket_count'] = 0
+        context['lost_ticket_count'] = 0
+        context['total_stake'] = 0
+        context['total_earnings'] = 0
+
+        for ticket in tickets:
+            balance += ticket.profit
+            balance_history.append({
+                'ticket': ticket,
+                'balance': balance,
+            })
+
+            total_odds += ticket.odds
+            context['total_stake'] += ticket.stake
+            
+            if ticket.correction == BET_CORRECTION_WON:
+                context['total_earnings'] += ticket.stake * ticket.odds
+                context['won_ticket_count'] += 1
+            elif ticket.correction == BET_CORRECTION_LOST:
+                context['lost_ticket_count'] += 1
+
+        context['average_odds'] = '%.2f' % (float(total_odds) / len(tickets))
+        context['won_ticket_percent'] = int(
+            (float(context['won_ticket_count']) / len(tickets)) * 100)
+        context['lost_ticket_percent'] = 100 - context['won_ticket_percent']
+        context['average_stake'] = '%.2f' % (float(context['total_stake']) / len(tickets))
+        context['profit'] = context['total_earnings'] - context['total_stake']
+        context['profitability'] = '%.2f' % ((
+            (context['total_earnings'] - context['total_stake']) / context['total_stake']
+        ) * 100)
+        int((context['total_stake'] / context['total_earnings'])*100)
 
     if request.is_ajax() and 'page_template' in context.keys():
         template_name = context['page_template']

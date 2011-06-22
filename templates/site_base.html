@@ -156,6 +156,9 @@ body.activity.detail div.activity div.comments {
                     <li>
                         <a href="{% url article_list %}">{% trans 'articles' %}</a>
                     </li>
+                    <li>
+                        <a href="{% url bet_list %}">{% trans 'bets' %}</a>
+                    </li>
                     {% if request.user.is_authenticated %}
                     <li>
                         <a href="{% url user_detail request.user.username %}">{% trans 'my profile' %}</a>

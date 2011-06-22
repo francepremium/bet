@@ -14,6 +14,9 @@
         <a href="{% url user_detail_tab object.username 'file' %}" title="{% trans 'file of' %} {{ object }}">{% trans 'file' %}</a>
     </li>
     <li>
+        <a href="{% url user_detail_tab object.username 'stats' %}" title="{% trans 'statistics of' %} {{ object }}">{% trans 'statistics' %}</a>
+    </li>
+    <li>
         <a href="{% url user_detail_tab object.username 'picks' %}" title="{% trans 'picks of' %} {{ object }}">{% trans 'picks' %}</a>
     </li>
 </ul>

@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     'endless_pagination',
     'autofixture',
     'postman',
+    'south',
     
     # Pinax
     

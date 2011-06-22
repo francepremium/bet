@@ -1,0 +1,8 @@
+{% extends 'auth/user_base.html' %}
+
+{% load i18n bet_tags %}
+
+{% block body %}
+    {{ bet_list_helper.render_form }}
+    {{ bet_list_helper.render_bet_list }}
+{% endblock %}

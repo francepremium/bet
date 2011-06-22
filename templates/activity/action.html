@@ -76,7 +76,9 @@
                 {% endif %}
                 {% if action.close %}
                     <div class="bet_list" style="display:none">
-                        {% render_bet_list qs=action.action_object_group %}
+                        {% with request|get_bet_list_helper:action.action_object_group as bet_list_helper %}
+                        {{ bet_list_helper.render_bet_table }}
+                        {% endwith %}
                     </div>
                 {% endif %}
             {% endif %}

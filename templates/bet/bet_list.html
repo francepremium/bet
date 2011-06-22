@@ -3,9 +3,6 @@
 {% load bet_tags %}
 
 {% block body %}
-    {% if request.tab %}
-        {% render_bet_list qs=bet_list|as_list %}
-    {% else %}
-        {% render_bet_list %}
-    {% endif %}
+    {{ bet_list_helper.render_form }}
+    {{ bet_list_helper.render_bet_table }}
 {% endblock %}

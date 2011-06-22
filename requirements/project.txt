@@ -33,3 +33,4 @@ django-uni-form==0.7.0
 mercurial
 -e hg+https://jamespic@jamespic-allow-empty-page.googlecode.com/hg/#egg=endless
 django-annoying
+south

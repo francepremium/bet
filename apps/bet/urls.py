@@ -22,7 +22,7 @@ urlpatterns = patterns('bet.views',
     url(
         r'ticket/(?P<pk>[0-9]+)/$',
         views.TicketDetailView.as_view(), {
-        }, 'ticket_detail',
+        }, 'bet_ticket_detail',
     ),
     url(
         r'ticket/add/$',

@@ -10,9 +10,8 @@
 {% endblock %}
 
 {% block extra_body %}
-<script type="text/javascript" src="{{ STATIC_URL }}highcharts/js/highcharts.js"></script>
+{% include 'highcharts.html' %}
 <script type="text/javascript">
-
     var chart;
     $(document).ready(function() {
         chart = new Highcharts.Chart({

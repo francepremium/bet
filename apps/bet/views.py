@@ -10,6 +10,7 @@ from django.views import generic
 
 import actstream
 
+from bet.helpers import *
 from models import *
 from forms import *
 from filters import *
@@ -30,23 +31,16 @@ class BetListView(generic.ListView):
     def get_queryset(self):
         qs = super(BetListView, self).get_queryset()
         
-        qd = {}
-        for k,v in self.request.GET.items():
-            qd[k] = v
-        qd.update(self.preset)
-
         if self.kwargs.get('tab', False) == 'mine':
             qs = qs.filter(ticket__user=self.request.user)
         elif self.kwargs.get('tab', False) == 'friends':
             qs = qs.filter(ticket__user__in=self.request.user.friends())
 
-        self.filter = BetFilter(qd, queryset=qs)
-        return self.filter.qs
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super(BetListView, self).get_context_data(**kwargs)
-        context['filter'] = self.filter
-        context['preset'] = self.preset
+        context['bet_list_helper'] = BetListHelper(self.request, context['bet_list'])
         return context
 
 @login_required

@@ -15,11 +15,11 @@ from django.db import models
 
 import actstream
 
+from bet.helpers import *
+import gsm
+
 from models import *
 from filters import *
-
-import bet
-import gsm
 
 def get_language_from_request(request):
     return 'fr'
@@ -86,7 +86,7 @@ def person_detail_tab(request, sport, gsm_id, tab, tag='person',
         person.save()
 
     if tab == 'picks':
-        context['bet_list_helper'] = bet.BetListHelper(request, **{tag:person})
+        context['bet_list_helper'] = BetListHelper(request, **{tag:person})
 
     template_name = [
         'gsm/%s/%s/%s.html' % (sport.slug, 'person', tab),
@@ -128,7 +128,7 @@ def session_detail_tab(request, sport, gsm_id, tab, tag='match',
         context['statistics'] = statistics = c
 
     if tab == 'picks':
-        context['bet_list_helper'] = bet.BetListHelper(request, session=session)
+        context['bet_list_helper'] = BetListHelper(request, session=session)
 
     template_name = [
         'gsm/%s/%s/%s.html' % (sport.slug, 'session', tab),
@@ -239,7 +239,7 @@ def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
                 })
 
     if tab == 'picks':
-        context['bet_list_helper'] = bet.BetListHelper(request, session__season__competition=competition)
+        context['bet_list_helper'] = BetListHelper(request, session__season__competition=competition)
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name, context,
         context_instance=template.RequestContext(request))
@@ -357,7 +357,7 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         context['reference_season'] = reference_season
         context['resultstable'] = get_resultstable_for_season(reference_season, team)
     elif tab == 'picks':
-        context['bet_list_helper'] = x= bet.BetListHelper(request, team=team)
+        context['bet_list_helper'] = x= BetListHelper(request, team=team)
 
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name, context,
@@ -492,7 +492,7 @@ def sport_detail_tab(request, sport, tab,
         f.filters['datetime_utc'].extra['choices'][2][1] = _('tomorrow')
         f.filters['datetime_utc'].extra['choices'][3][1] = _('next 7 days')
     elif tab == 'picks':
-        context['bet_list_helper'] = x= bet.BetListHelper(request, 
+        context['bet_list_helper'] = x= BetListHelper(request, 
                                                 session__sport=sport)
 
 

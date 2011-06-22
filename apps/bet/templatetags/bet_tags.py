@@ -1,6 +1,7 @@
 from django import template
 from django.db import models
 
+from bet.helpers import *
 from bet.models import Bet
 from bet.filters import BetFilter
 
@@ -9,6 +10,10 @@ register = template.Library()
 @register.filter
 def as_list(value):
     return list(value)
+
+@register.filter
+def get_bet_list_helper(request, qs):
+    return BetListHelper(request, qs=qs)
 
 @register.tag(name='render_bet_list')
 def render_bet_list(parser, token):

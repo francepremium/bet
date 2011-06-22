@@ -1,144 +1,69 @@
 {% load gsm_tags i18n pagination_tags %}
 
 {% if paginate %}
-    {% autopaginate bet_list 10 %}
+    {% autopaginate ticket_list 10 %}
     {% paginate %}
 {% endif %}
 
 <table>
     <thead>
         <tr>
-            {% if 'date' not in exclude %}
+            {% if 'date' not in exclude_columns %}
                 <th>{% trans 'date' %}</th>
             {% endif %}
-            {% if 'time' not in exclude %}
-                <th>{% trans 'time' %}</th>
+            {% if 'ticket type' not in exclude_columns %}
+                <th>{% trans 'ticket type' %}</th>
             {% endif %}
-            {% if 'user' not in exclude %}
-                <th>{% trans 'nickname' %}</th>
-            {% endif %}
-            {% if 'competition' not in exclude %}
-                <th>{% trans 'competition' %}</th>
-            {% endif %}
-            {% if 'session' not in exclude %}
-                <th>{% trans 'match' %}</th>
-            {% endif %}
-            {% if 'bettype' not in exclude %}
-                <th>{% trans 'bet' %}</th>
-            {% endif %}
-            {% if 'choice' not in exclude %}
-                <th>{% trans 'choice' %}</th>
-            {% endif %}
-            {% if 'odds' not in exclude %}
-                <th>{% trans 'odds' %}</th>
-            {% endif %}
-            {% if 'stake' not in exclude %}
+            {% if 'stake' not in exclude_columns %}
                 <th>{% trans 'stake' %}</th>
             {% endif %}
-            {% if 'bookmaker' not in exclude %}
+            {% if 'odds' not in exclude_columns %}
+                <th>{% trans 'odds' %}</th>
+            {% endif %}
+            {% if 'bookmaker' not in exclude_columns %}
                 <th>{% trans 'bookmaker' %}</th>
             {% endif %}
-            {% if 'support' not in exclude %}
-                <th>{% trans 'support' %}</th>
+            {% if 'ratio' not in exclude_columns %}
+                <th>{% trans 'growth' %}/{% trans 'loss' %}</th>
             {% endif %}
-                <th>{% trans 'result' %}</th>
-            {% if request.user.is_authenticated %}
-                <th>{% trans 'correct' %}</th>
-                <th>{% trans 'flagged' %}</th>
-            {% endif %}
+            <th>{% trans 'result' %}</th>
         </tr>
     </thead>
     <tbody>
-        {% for bet in bet_list %}
-        <tr>
-            {% if 'date' not in exclude %}
-                <td>{{ bet.session.datetime_utc|display_date }}</td>
-            {% endif %}
-            {% if 'time' not in exclude %}
-                <td>{{ bet.session.datetime_utc|display_time }}</td>
-            {% endif %}
-            {% if 'user' not in exclude %}
+        {% for ticket in ticket_list %}
+            <tr>
+                {% if 'date' not in exclude_columns %}
+                    <td>{{ ticket.creation_datetime|display_date }}</td>
+                {% endif %}
+                {% if 'ticket type' not in exclude_columns %}
+                    <td>
+                        <a href="{{ ticket.get_absolute_url }}" title="{{ ticket }}">
+                            {% if ticket.bet_set.count == 1 %}
+                                {% trans 'simple' %}
+                            {% else %}
+                                {% trans 'combined' %}
+                            {% endif %}
+                        </a>
+                    </td>
+                {% endif %}
+                {% if 'stake' not in exclude_columns %}
+                    <td>{{ ticket.stake }}</td>
+                {% endif %}
+                {% if 'odds' not in exclude_columns %}
+                    <td>{{ ticket.get_odds_display }}</td>
+                {% endif %}
+                {% if 'bookmaker' not in exclude_columns %}
+                    <td>
+                        <a href="{{ ticket.bookmaker.get_absolute_url }}" title="{{ ticket.bookmaker }}">{{ ticket.bookmaker }}</a>
+                    </td>
+                {% endif %}
+                {% if 'ratio' not in exclude_columns %}
+                    <td>{% if ticket.profit > 0 %}+{% endif %}{{ ticket.profit }}</td>
+                {% endif %}
                 <td>
-                    <a href="{{ bet.ticket.user.get_absolute_url }}" title="{{ bet.ticket.user }}">{{ bet.ticket.user }}</a>
+                    {{ ticket.get_correction_display }}
                 </td>
-            {% endif %}
-            {% if 'competition' not in exclude %}
-                <td>
-                    <a href="{{ bet.session.season.competition.get_absolute_url }}" title="{{ bet.session.season.competition.name }}">{{ bet.session.season.competition.name }}</a>
-                </td>
-            {% endif %}
-            {% if 'session' not in exclude %}
-                <td>
-                    <a href="{{ bet.session.get_absolute_url }}" title="{{ bet.session }}">{{ bet.session }}</a>
-                </td>
-            {% endif %}
-            {% if 'bettype' not in exclude %}
-                <td>
-                    <a href="{% url session_bettype_detail bet.session.pk bet.bettype.pk %}">{{ bet.bettype }}</a>
-                </td>
-            {% endif %}
-            {% if 'choice' not in exclude %}
-                <td>
-                    <a href="{{ bet.get_absolute_url }}" title="{{ bet.choice }}">{{ bet.choice }}</a>
-                </td>
-            {% endif %}
-            {% if 'odds' not in exclude %}
-                <td>
-                    {{ bet.odds }}
-                </td>
-            {% endif %}
-            {% if 'stake' not in exclude %}
-                <td>
-                    <a href="{{ bet.ticket.get_absolute_url }}" title="{{ bet.ticket }}">
-                        {% if bet.ticket.bet_set.count == 1 %}
-                            {{ bet.ticket.stake }}
-                        {% else %}
-                            {% trans 'combined ticket' %}
-                        {% endif %}
-                    </a>
-                </td>
-            {% endif %}
-            {% if 'bookmaker' not in exclude %}
-                <td>
-                    <a href="{{ bet.ticket.bookmaker.get_absolute_url }}" title="{{ bet.ticket.bookmaker }}">{{ bet.ticket.bookmaker }}</a>
-                </td>
-            {% endif %}
-            {% if 'support' not in exclude %}
-                <td>
-                    {% if bet.text %}{% trans 'text' %}{% endif %}
-                    {% if bet.upload %}{% trans 'image' %}{% endif %}
-                </td>
-            {% endif %}
-            <td class="result">
-                <div class="won" style="{% if not bet.is_won %}display:none;{% endif %}">
-                    ✔
-                </div>
-                <div class="lost" style="{% if not bet.is_lost %}display:none;{% endif %}">
-                    ✘
-                </div>
-                <div class="canceled" style="{% if not bet.is_canceled %}display:none{% endif %}">
-                    ☠
-                </div>
-            </td>
-            {% if request.user.is_authenticated %}
-            <td class="flag">
-                <div style="{% if not bet.is_flag %}display:none;{% endif %}">
-                    ☎
-                </div>
-            </td>
-            <td class="correct">
-                <div class="correct" style="{% if not bet.can_correct %}display: none;{% endif %}">
-                    <a href="{% url bet_status_change bet.pk 'won' %}" title="{% trans 'this bet was won' %}" class="won">✔</a>
-                    <a href="{% url bet_status_change bet.pk 'lost' %}" title="{% trans 'this bet was lost' %}" class="lost">✘</a>
-                    <a href="{% url bet_status_change bet.pk 'canceled' %}" title="{% trans 'this bet was canceled' %}" class="canceled">☠</a>
-                </div>
-
-                <div class="flag" style="{% if not bet.can_flag %}display:none;{% endif %}">
-                    <a class="flag" href="{% url bet_status_change bet.pk 'flag' %}" title="{% trans 'this bet result is invalid, it must be corrected by a Referee' %}">☎</a>
-                </div>
-            </td>
-            {% endif %}
-        </tr>
+            </tr>
         {% endfor %}
     </tbody>
 </table>

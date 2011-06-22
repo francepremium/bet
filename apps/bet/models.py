@@ -109,20 +109,53 @@ class Ticket(models.Model):
     status = models.IntegerField(choices=TICKET_STATUS_CHOICES, default=TICKET_STATUS_INCOMPLETE)
 
     def get_absolute_url(self):
-        return urlresolvers.reverse('ticket_detail', args=(self.pk,))
+        return urlresolvers.reverse('bet_ticket_detail', args=(self.pk,))
 
     def __unicode__(self):
         return '#%s' % self.pk
 
     @property
+    def correction(self):
+        if not hasattr(self, '_correction'):
+            # if any bet is "new"
+            if self.bet_set.filter(correction=BET_CORRECTION_NEW).count() > 1:
+                self._correction = BET_CORRECTION_NEW
+            if self.bet_set.filter(correction=BET_CORRECTION_LOST).count() > 1:
+                self._correction = BET_CORRECTION_LOST
+            else:
+                self._correction = BET_CORRECTION_WON
+        return self._correction
+
+    def get_correction_display(self):
+        if not hasattr(self, '_correction_display'):
+            for value, display in Bet.BET_CORRECTION_CHOICES:
+                if value == self.correction:
+                    self._correction_display = display
+                    break
+        return self._correction_display
+
+    @property
+    def get_odds_display(self):
+        return "%.2f" % self.odds
+
+    @property
     def odds(self):
         if not hasattr(self, '_odds'):
-            odds = self.bet_set.all().values_list('odds', flat=True)
             i = 1
-            for odd in odds:
-                i = i * odd
+            for bet in self.bet_set.all():
+                if bet.correction != BET_CORRECTION_CANCELED:
+                    i = i * bet.odds
             self._odds = i
-        return "%.2f" % self._odds
+        return self._odds
+
+    @property
+    def profit(self):
+        if not hasattr(self, '_profit'):
+            if self.correction == BET_CORRECTION_WON:
+                self._profit = ( self.odds * self.stake ) - self.stake
+            elif self.correction == BET_CORRECTION_LOST:
+                self._profit = self.stake * -1
+        return self._profit
 
 def media_upload_to(instance, filename):
     return 'ticket/%s/%s' % (instance.ticket.pk, filename)
