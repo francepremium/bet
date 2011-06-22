@@ -31,6 +31,12 @@ class BetForm(forms.ModelForm):
         
         return session
 
+    def clean_odds(self):
+        odds = self.cleaned_data['odds']
+        if odds < 1:
+            raise forms.ValidationError(_(u'odds must be at least equal to 1.00'))
+        return odds
+
     def __init__(self, *args, **kwargs):
         super(BetForm, self).__init__(*args, **kwargs)
 

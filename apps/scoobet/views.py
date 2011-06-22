@@ -48,7 +48,7 @@ def user_detail(request, username, tab='activities',
     elif tab == 'stats':
         context['bet_list_helper'] = BetListHelper(request, 
             qs=Bet.objects.filter(ticket__user=user), exclude_filters=[
-            'bettype', 'sport', 'competition'], exclude=['user'])
+            'bettype', 'sport', 'competition', 'has_text', 'has_upload'], exclude=['user'])
         tickets = context['bet_list_helper'].ticket_qs
 
         total_odds = 0

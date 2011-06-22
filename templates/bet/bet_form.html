@@ -18,9 +18,11 @@
         {% trans 'combined' %}
     {% endif %}
 </div>
+{% if ticket.bet_set.count > 1 %}
 <div class="odds">
-    {% trans 'odds' %}: {{ ticket.odds|floatformat:2 }}
+    {% trans 'current ticket odds' %}: {{ ticket.odds|floatformat:2 }}
 </div>
+{% endif %}
 
 <table class="bets">
     {% for bet in ticket.bet_set.all.select_related %}

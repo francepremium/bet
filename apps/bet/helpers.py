@@ -23,14 +23,14 @@ class BetListHelper(object):
     {{ bet_list_helper.render_form }}
     {{ bet_list_helper.render_list }}
     """
-    def __init__(self, request, qs=Bet.objects.all(), paginate=True, 
-                exclude_filters=[], exclude_columns=[], exclude=[], **kwargs):
+    def __init__(self, request, qs=None, paginate=True, 
+                exclude_filters=None, exclude_columns=None, exclude=None, **kwargs):
         self.request = request
         self.paginate = paginate
-        self.exclude = exclude
-        self.exclude_filters = exclude_filters
-        self.exclude_columns = exclude_columns
-        self.qs = qs
+        self.exclude = exclude or []
+        self.exclude_filters = exclude_filters or []
+        self.exclude_columns = exclude_columns or []
+        self.qs = qs or Bet.objects.all()
         self.sport = None
 
         # handling "magic" kwargs, to clean kwargs before 
@@ -54,7 +54,6 @@ class BetListHelper(object):
             self.exclude.append(exclude_key)
             if exclude_key == 'session':
                 self.exclude.append('sport')
-                self.exclude_columns.append('competition')
             if exclude_key == 'competition':
                 self.exclude.append('sport')
             if exclude_key in ('team', 'person', 'double'):
@@ -93,6 +92,14 @@ class BetListHelper(object):
                     self.filter.form.fields['bettype'].queryset = \
                         self.filter.form.fields['bettype'].queryset.filter(
                             sport=self.sport)
+
+        user = self.request.user
+        if user.is_authenticated():
+            for bet in self.qs:
+                if user.betprofile.can_correct(bet):
+                    bet.can_correct = True
+                if user.betprofile.can_flag(bet):
+                    bet.can_flag = True
 
     def render_form(self):
         context = template.Context()
