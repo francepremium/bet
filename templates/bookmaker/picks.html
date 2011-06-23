@@ -3,6 +3,7 @@
 {% load bet_tags %}
 
 {% block body %}
+    {{ block.super }}
     {{ bet_list_helper.render_form }}
     {{ bet_list_helper.render_ticket_table }}
 {% endblock %}

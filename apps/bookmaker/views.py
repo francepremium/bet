@@ -1,4 +1,4 @@
-from django.db.models import Q
+from django.db.models import Q, Sum
 from django.utils import simplejson
 from django.utils.translation import ugettext as _
 from django import template
@@ -92,7 +92,6 @@ def detail(request, pk, tab='home',
         context['is_admin'] = request.user.bookmaker == bookmaker or request.user.is_staff
     context['bookmaker'] = bookmaker
 
-
     if tab == 'picks':
         context['bet_list_helper'] = BetListHelper(request, ticket__bookmaker=bookmaker, exclude_filters=['sport', 'bettype', 'competition', 'has_text', 'has_upload'])
 
@@ -109,6 +108,7 @@ def file(request, pk,
     context['bookmaker'] = bookmaker
     context['bookmaker_bettypes_per_sport'] = []
     previous_sport = None
+
     for bettype in bookmaker.bettype.all():
         if previous_sport != bettype.sport:
             current = {

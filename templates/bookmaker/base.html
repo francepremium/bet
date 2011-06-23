@@ -1,5 +1,6 @@
 {% extends 'site_base.html' %}
 
+{% load scoobet_tags %}
 {% load i18n %}
 
 {% block subnav %}
@@ -22,4 +23,5 @@
         <a href="{% url gsm_fan_app 'become' 'bookmaker' 'Bookmaker' bookmaker.pk %}">{% trans 'i bet on' %} {{ bookmaker }}</a>
     {% endif %}
 
+    {% render_popularity_for_object request bookmaker %}
 {% endblock %}
