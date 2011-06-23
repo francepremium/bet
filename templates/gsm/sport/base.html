@@ -1,5 +1,6 @@
 {% extends 'gsm/base.html' %}
 
+{% load scoobet_tags %}
 {% load i18n %}
 
 {% block head_title %}{{ sport|capfirst }}: {% trans 'Free betting picks, best tipser, live scores, news, results, rankings & fixtures' %}{% endblock %}
@@ -44,4 +45,6 @@
     {% else %}
         <a href="{% url gsm_fan 'become' 'Sport' sport.pk %}">{% trans 'i bet on' %} {{ sport }}</a>
     {% endif %}
+    
+    {% render_popularity_for_object request sport %}
 {% endblock %}

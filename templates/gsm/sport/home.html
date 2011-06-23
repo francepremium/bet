@@ -2,7 +2,7 @@
 
 {% load i18n gsm_tags pagination_tags %}
 
-{% block body %}
+{% block body %}{{ block.super }}
     {% if next_sessions %}
         <h2 class="next_sessions">{% trans 'next matches' %}</h2>
         {% gsm_sessions_render next_sessions %}

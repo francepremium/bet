@@ -1,8 +1,8 @@
 {% extends 'gsm/competition/base.html' %}
 {% load i18n gsm_tags %}
 
-{% block body %}
-    {{ block.super }}
+{% block body %}{{ block.super }}
+    
 
     {% gsm_tree key='tables_tree' method='get_tables' type='season' id=competition.get_last_season.gsm_id %}
 

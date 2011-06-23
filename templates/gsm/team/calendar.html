@@ -2,8 +2,8 @@
 
 {% load i18n gsm_tags %}
 
-{% block body %}
-    {{ block.super }}
+{% block body %}{{ block.super }}
+    
 
     {% if team.get_sessions %}
         <h2 class="next_sessions">{% trans 'next sessions' %}</h2>

@@ -10,8 +10,8 @@ table.session.header {
 </style>
 {% endblock %}
 
-{% block body %}
-    {{ block.super }}
+{% block body %}{{ block.super }}
+    
 
     {% gsm_tree key='tables_tree' method='get_tables' type='season' id=session.season.competition.get_last_season.gsm_id %}
     {% gsm_render_tables_tree tables_tree %}

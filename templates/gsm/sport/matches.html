@@ -2,7 +2,7 @@
 
 {% load i18n gsm_tags pagination_tags %}
 
-{% block body %}
+{% block body %}{{ block.super }}
 <form action="" method="get">
     {{ filter.form.as_p }}
     <input type="submit" />

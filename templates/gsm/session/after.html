@@ -10,8 +10,8 @@ table.lineups {
 </style>
 {% endblock %}
 
-{% block body %}
-{{ block.super }}
+{% block body %}{{ block.super }}
+
 
 {% for child0 in session.element.getchildren %}
 {% if child0.tag == 'lineups' and child0.getchildren %}

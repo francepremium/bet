@@ -1,5 +1,6 @@
 {% extends 'site_base.html' %}
 
+{% load scoobet_tags %}
 {% load i18n %}
 
 {% block subnav %}
@@ -20,4 +21,8 @@
         <a href="{% url user_detail_tab object.username 'picks' %}" title="{% trans 'picks of' %} {{ object }}">{% trans 'picks' %}</a>
     </li>
 </ul>
+{% endblock %}
+
+{% block body %}
+    {% render_popularity_for_object request object %}
 {% endblock %}

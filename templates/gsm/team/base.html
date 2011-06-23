@@ -2,8 +2,9 @@
 
 {% load i18n %}
 {% load gsm_tags %}
+{% load scoobet_tags %}
 
-{% block body %}
+{% block body %}{{ block.super }}
 <h1>{{ team }}</h1>
 {% endblock %}
 
@@ -43,4 +44,6 @@
     {% else %}
         <a href="{% url gsm_fan 'become' 'GsmEntity' team.pk %}">{% trans 'i bet on' %} {{ team }}</a>
     {% endif %}
+    
+    {% render_popularity_for_object request team %}
 {% endblock %}

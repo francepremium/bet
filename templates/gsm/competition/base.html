@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load gsm_tags %}
+{% load scoobet_tags %}
 
 {% block head_title %}{{ competition|capfirst }}: {% trans 'Free betting picks, best tipser, live scores, news, results, rankings & fixtures' %}{% endblock %}
 
@@ -10,7 +11,7 @@
 <meta name="keywords" content="{% trans 'betting' %}, {{ competition }} {% trans 'betting' %}, {{ competition }} {% trans 'free picks' %}, {{ competition }} {% trans 'picks' %}, {{ competition }} {% trans 'pick' %}, {{ competition }} {% trans 'predictions' %}, {{ competition }} {% trans 'prediction' %}" />
 {% endblock %}
 
-{% block body %}
+{% block body %}{{ block.super }}
 <h1>{{ competition }}</h1>
 {% endblock %}
 
@@ -48,4 +49,6 @@
     {% else %}
         <a href="{% url gsm_fan 'become' 'Competition' competition.pk %}">{% trans 'i bet on' %} {{ competition }}</a>
     {% endif %}
+
+    {% render_popularity_for_object request competition %}
 {% endblock %}

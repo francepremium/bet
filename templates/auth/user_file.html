@@ -1,6 +1,7 @@
 {% extends 'auth/user_base.html' %}
 
 {% block body %}
+    {{ block.super }}
 
     <ul>
         {% for bookmaker in object.bookmaker_set.all %}

@@ -1,38 +1,20 @@
 {% load i18n %}
 
-{% if popularity %}{# if popularity is missing it shouldn't crash the whole page #}
+{% if blocks %}{# if blocks is missing it shouldn't crash the whole page #}
     <div class="popularity">
-        <div style="display: inline-block">
-            <p>
-                {{ popularity.user_count }} {% trans 'tipsters' %}
-            </p>
-
-            {% if 'friend_user_count' in popularity.keys %}
+        {% for block in blocks %}
+            <div class="popularity_block {{ block.plural_word }}">
                 <p>
-                    {% trans 'including' %} {{ popularity.friend_user_count }} {% trans 'friends' %}
+                    {{ block.html_all|safe }}
                 </p>
-            {% endif %}
-        </div>
-        <div style="display: inline-block">
-            <p>
-                {{ popularity.ticket_count }} {% trans 'tickets' %}
-            </p>
-            {% if 'friend_ticket_count' in popularity.keys %}
-                <p>
-                    {% trans 'including' %} {{ popularity.friend_ticket_count }} {% trans 'by friends' %}
-                </p>
-            {% endif %}
-        </div>
-        <div style="display: inline-block">
-            <p>
-                {{ popularity.stake_sum }} {% trans 'units' %}
-            </p>
-            {% if 'friend_stake_sum' in popularity.keys %}
-                <p>
-                    {% trans 'including' %} {{ popularity.friend_stake_sum }} {% trans 'by friends' %}
-                </p>
-            {% endif %}
-        </div>
+                
+                {% if 'html_friends' in block.keys %}
+                    <p>
+                        {{ block.html_friends|safe }}
+                    </p>
+                {% endif %}
+            </div>
+        {% endfor %}
     </div>
 {% endif %}
 

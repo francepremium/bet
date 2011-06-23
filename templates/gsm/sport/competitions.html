@@ -6,7 +6,7 @@
 </style>
 {% endblock %}
 
-{% block body %}
+{% block body %}{{ block.super }}
     {% for area in sport.get_competition_areas %}
     <div class="area tree {{ area.code }}">
         <h3>{{ area.name }}</h3>

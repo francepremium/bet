@@ -4,6 +4,7 @@
 {% load activity_tags %}
 
 {% block body %}
+    {{ block.super }}
 
     {% get_user_contenttype as user_ctype %}
     {% if request.user != object and request.user.is_authenticated %}
