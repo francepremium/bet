@@ -30,7 +30,10 @@ class BetListHelper(object):
         self.exclude = exclude or []
         self.exclude_filters = exclude_filters or []
         self.exclude_columns = exclude_columns or []
-        self.qs = qs or Bet.objects.all()
+        if qs is None:
+            self.qs = Bet.objects.all()
+        else:
+            self.qs = qs
         self.sport = None
 
         # handling "magic" kwargs, to clean kwargs before 
@@ -127,9 +130,14 @@ class BetListHelper(object):
             'bet/_includes/bet_list_table.html'])
         return t.nodelist.render(context)
  
+    def set_ticket_qs(self, ticket_qs):
+        self._ticket_qs = ticket_qs
+
     @property
     def ticket_qs(self):
-        return Ticket.objects.filter(bet__in=self.qs).distinct()
+        if not hasattr(self, '_ticket_qs'):
+            self._ticket_qs = Ticket.objects.filter(bet__in=self.qs).distinct()
+        return self._ticket_qs
  
     def render_ticket_table(self):
         context = template.Context()

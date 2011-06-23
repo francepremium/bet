@@ -23,6 +23,12 @@ class TicketDetailView(generic.DetailView):
     model = Ticket
     context_object_name = 'ticket'
 
+    def get_context_data(self, **kwargs):
+        context = super(TicketDetailView, self).get_context_data(**kwargs)
+        exclude_columns = ['stake', 'user']
+        context['bet_list_helper'] = BetListHelper(self.request, context['ticket'].bet_set.all(), exclude_columns=exclude_columns)
+        return context
+
 class BetListView(generic.ListView):
     model = Bet
     context_object_name = 'bet_list'
@@ -35,12 +41,15 @@ class BetListView(generic.ListView):
             qs = qs.filter(ticket__user=self.request.user)
         elif self.kwargs.get('tab', False) == 'friends':
             qs = qs.filter(ticket__user__in=self.request.user.friends())
+        elif self.kwargs.get('tab', False) == 'correct':
+            qs = qs.filter(status=BET_CORRECTION_NEW)
 
         return qs
 
     def get_context_data(self, **kwargs):
         context = super(BetListView, self).get_context_data(**kwargs)
-        context['bet_list_helper'] = BetListHelper(self.request, context['bet_list'])
+        exclude_columns = []
+        context['bet_list_helper'] = BetListHelper(self.request, context['bet_list'], exclude_columns=exclude_columns)
         return context
 
 @login_required

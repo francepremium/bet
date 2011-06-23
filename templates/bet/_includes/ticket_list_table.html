@@ -14,6 +14,9 @@
             {% if 'ticket type' not in exclude_columns %}
                 <th>{% trans 'ticket type' %}</th>
             {% endif %}
+            {% if 'user' not in exclude_columns %}
+                <th>{% trans 'nickname' %}</th>
+            {% endif %}
             {% if 'stake' not in exclude_columns %}
                 <th>{% trans 'stake' %}</th>
             {% endif %}
@@ -43,6 +46,13 @@
                             {% else %}
                                 {% trans 'combined' %}
                             {% endif %}
+                        </a>
+                    </td>
+                {% endif %}
+                {% if 'user' not in exclude_columns %}
+                    <td>
+                        <a href="{{ ticket.user.get_absolute_url }}" title="{{ ticket.user }}">
+                            {{ ticket.user }}
                         </a>
                     </td>
                 {% endif %}

@@ -11,6 +11,7 @@
     {% endif %}
 
     <li><a href="{% url bookmaker_file bookmaker.pk %}">{% trans 'file' %}</a></li>
+    <li><a href="{{ bookmaker.get_picks_absolute_url }}" title="{% trans 'picks' %}">{% trans 'picks' %}</a></li>
 </ul>
 {% endblock %}
 

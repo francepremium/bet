@@ -15,6 +15,9 @@
     <li>
         <a href="{% url bet_list %}">{% trans 'all' %}</a>
     </li>
+    <li>
+        <a href="{% url bet_list_tab 'correct' %}">{% trans 'to correct' %}</a>
+    </li>
 </ul>
 {% endblock %}
 

@@ -118,9 +118,9 @@ class Ticket(models.Model):
     def correction(self):
         if not hasattr(self, '_correction'):
             # if any bet is "new"
-            if self.bet_set.filter(correction=BET_CORRECTION_NEW).count() > 1:
+            if self.bet_set.filter(correction=BET_CORRECTION_NEW).count():
                 self._correction = BET_CORRECTION_NEW
-            if self.bet_set.filter(correction=BET_CORRECTION_LOST).count() > 1:
+            elif self.bet_set.filter(correction=BET_CORRECTION_LOST).count():
                 self._correction = BET_CORRECTION_LOST
             else:
                 self._correction = BET_CORRECTION_WON
@@ -172,6 +172,7 @@ class Bet(models.Model):
         (BET_CORRECTION_NEW, _('waiting')),
         (BET_CORRECTION_WON, _('won')),
         (BET_CORRECTION_LOST, _('lost')),
+        (BET_CORRECTION_CANCELED, _('canceled')),
     )
 
     bettype = models.ForeignKey('bookmaker.BetType')

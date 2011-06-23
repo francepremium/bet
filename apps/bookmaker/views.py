@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.forms.models import inlineformset_factory
 
+from bet.helpers import *
 from filters import *
 from models import *
 from forms import *
@@ -90,6 +91,10 @@ def detail(request, pk, tab='home',
     if request.user.is_authenticated():
         context['is_admin'] = request.user.bookmaker == bookmaker or request.user.is_staff
     context['bookmaker'] = bookmaker
+
+
+    if tab == 'picks':
+        context['bet_list_helper'] = BetListHelper(request, ticket__bookmaker=bookmaker, exclude_filters=['sport', 'bettype', 'competition', 'has_text', 'has_upload'])
 
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name % tab, context,

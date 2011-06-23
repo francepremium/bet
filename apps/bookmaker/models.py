@@ -40,6 +40,12 @@ class Bookmaker(models.Model):
     def get_absolute_url(self):
         return urlresolvers.reverse('bookmaker_file', args=(self.pk,))
 
+    def get_tab_absolute_url(self, tab):
+        return urlresolvers.reverse('bookmaker_detail', args=(self.pk, tab))
+
+    def get_picks_absolute_url(self):
+        return self.get_tab_absolute_url('picks')
+
 class BetType(models.Model):
     name = models.CharField(max_length=100)
     sport = models.ForeignKey('gsm.Sport')

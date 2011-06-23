@@ -16,7 +16,8 @@
 {% trans 'status' %}: {{ ticket.get_status_display }}
 {% trans 'bet count' %}: {{ ticket.bet_set.count }}
 {% trans 'odds' %}: {{ ticket.odds }}
+{% trans 'bookmaker' %}: <a href="{{ ticket.bookmaker.get_absolute_url }}" title="{{ ticket.bookmaker }}">{{ ticket.bookmaker }}</a>
 
-{% render_bet_list qs=ticket.bet_set.all %}
+{{ bet_list_helper.render_bet_table }}
 
 {% endblock %}
