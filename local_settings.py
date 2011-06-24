@@ -74,7 +74,7 @@ INSTALLED_APPS = [
     'actstream',
     'endless_pagination',
     'autofixture',
-    'postman',
+    # 'postman',
     'south',
     
     # Pinax
@@ -129,3 +129,8 @@ POSTMAN_AUTO_MODERATE_AS=True
 POSTMAN_AUTOCOMPLETER_APP={
     'arg_default': 'user',
 }
+
+try:
+    from personal_settings import *
+except ImportError:
+    pass

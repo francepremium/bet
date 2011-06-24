@@ -34,3 +34,7 @@ mercurial
 -e hg+https://jamespic@jamespic-allow-empty-page.googlecode.com/hg/#egg=endless
 django-annoying
 south
+django-autofixture
+django-localeurl
+django-sentry
+django_extensions
