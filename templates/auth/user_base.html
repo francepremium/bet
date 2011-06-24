@@ -1,5 +1,6 @@
 {% extends 'site_base.html' %}
 
+{% load comments %}
 {% load scoobet_tags %}
 {% load i18n %}
 
@@ -24,5 +25,7 @@
 {% endblock %}
 
 {% block body %}
+    <h1>{{ object }}</h1>
     {% render_popularity_for_object request object %}
+    {% render_comment_form for object %}
 {% endblock %}

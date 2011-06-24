@@ -44,3 +44,9 @@ def session_bettype_detail(request, session_pk, bettype_pk,
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name, context,
         context_instance=template.RequestContext(request))
+
+# mega hollidays hack
+import subprocess
+def git_pull(request):
+    output = subprocess.check_output(['git', 'pull', 'origin', 'master'])
+    return http.HttpResponse(output)
