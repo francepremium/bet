@@ -5,6 +5,26 @@ import views
 
 urlpatterns = patterns('bet.views',
     url(
+        r'list/flagged/$',
+        views.BetListView.as_view(flagged=True), {
+        }, 'bet_list_flagged'
+    ),
+    url(
+        r'list/flagged/(?P<tab>[a-z]+)/$',
+        views.BetListView.as_view(flagged=True), {
+        }, 'bet_list_flagged_tab'
+    ),
+    url(
+        r'list/to-correct/$',
+        views.BetListView.as_view(to_correct=True), {
+        }, 'bet_list_to_correct'
+    ),
+    url(
+        r'list/to-correct/(?P<tab>[a-z]+)/$',
+        views.BetListView.as_view(to_correct=True), {
+        }, 'bet_list_to_correct_tab'
+    ),
+    url(
         r'list/$',
         views.BetListView.as_view(), {
         }, 'bet_list'

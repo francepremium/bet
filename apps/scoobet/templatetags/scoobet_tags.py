@@ -139,7 +139,8 @@ def render_popularity_for_object(request, obj):
 
     for block in blocks:
         html(block, 'all')
-        html(block, 'friends')
+        if friends is not None:
+            html(block, 'friends')
 
     print blocks
     return {

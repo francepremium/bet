@@ -6,17 +6,14 @@
 <ul>
     {% if request.user.is_authenticated %}
     <li>
-        <a href="{% url bet_list_tab 'mine' %}">{% trans 'mine' %}</a>
+        <a href="{{ mine_url }}">{% trans 'mine' %}</a>
     </li>
     <li>
-        <a href="{% url bet_list_tab 'friends' %}">{% trans 'friends' %}</a>
+        <a href="{{ friends_url }}">{% trans 'friends' %}</a>
     </li>
     {% endif %}
     <li>
-        <a href="{% url bet_list %}">{% trans 'all' %}</a>
-    </li>
-    <li>
-        <a href="{% url bet_list_tab 'correct' %}">{% trans 'to correct' %}</a>
+        <a href="{{ all_url }}">{% trans 'all' %}</a>
     </li>
 </ul>
 {% endblock %}

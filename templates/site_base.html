@@ -162,6 +162,14 @@ body.activity.detail div.activity div.comments {
                     <li>
                         <a href="{% url bet_list %}">{% trans 'bets' %}</a>
                     </li>
+                    <li>
+                        <a href="{% url bet_list_to_correct %}">{% trans 'bets to correct' %}</a>
+                    </li>
+                    {% if request.user.is_authenticated and request.user.betprofile.is_referee %}
+                    <li>
+                        <a href="{% url bet_list_flagged %}">{% trans 'flagged bets' %}</a>
+                    </li>
+                    {% endif %}
                     {% if request.user.is_authenticated %}
                     <li>
                         <a href="{% url user_detail request.user.username %}">{% trans 'my profile' %}</a>

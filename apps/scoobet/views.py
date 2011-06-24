@@ -46,49 +46,52 @@ def user_detail(request, username, tab='activities',
         context['bet_list_helper'] = BetListHelper(request, ticket__user=user,
             exclude_filters=['bettype', 'sport', 'competition', 'has_text', 'has_upload'])
     elif tab == 'stats':
-        context['bet_list_helper'] = BetListHelper(request, exclude_filters=[
-            'bettype', 'sport', 'competition', 'has_text', 'has_upload'], 
-            ticket__user=user)
-        context['bet_list_helper'].set_ticket_qs(context['bet_list_helper'].ticket_qs.exclude(bet__correction=BET_CORRECTION_NEW))
-        tickets = context['bet_list_helper'].ticket_qs
+        if user.ticket_set.count():
+            context['bet_list_helper'] = BetListHelper(request, exclude_filters=[
+                'bettype', 'sport', 'competition', 'has_text', 'has_upload'], 
+                ticket__user=user)
+            context['bet_list_helper'].set_ticket_qs(context['bet_list_helper'].ticket_qs.exclude(bet__correction=BET_CORRECTION_NEW))
+            tickets = context['bet_list_helper'].ticket_qs
 
-        total_odds = 0
-        balance = 0
-        balance_history = context['balance_history'] = []
-        context['won_ticket_count'] = 0
-        context['lost_ticket_count'] = 0
-        context['total_stake'] = 0
-        context['total_earnings'] = 0
+            total_odds = 0
+            balance = 0
+            balance_history = context['balance_history'] = []
+            context['won_ticket_count'] = 0
+            context['lost_ticket_count'] = 0
+            context['total_stake'] = 0
+            context['total_earnings'] = 0
 
-        for ticket in tickets:
-            balance += ticket.profit
-            balance_history.append({
-                'ticket': ticket,
-                'balance': balance,
-            })
+            for ticket in tickets:
+                balance += ticket.profit
+                balance_history.append({
+                    'ticket': ticket,
+                    'balance': balance,
+                })
 
-            total_odds += ticket.odds
-            context['total_stake'] += ticket.stake
-            
-            if ticket.correction == BET_CORRECTION_WON:
-                context['total_earnings'] += ticket.stake * ticket.odds
-                context['won_ticket_count'] += 1
-            elif ticket.correction == BET_CORRECTION_LOST:
-                context['lost_ticket_count'] += 1
+                total_odds += ticket.odds
+                context['total_stake'] += ticket.stake
+                
+                if ticket.correction == BET_CORRECTION_WON:
+                    context['total_earnings'] += ticket.stake * ticket.odds
+                    context['won_ticket_count'] += 1
+                elif ticket.correction == BET_CORRECTION_LOST:
+                    context['lost_ticket_count'] += 1
 
-        context['average_odds'] = '%.2f' % (float(total_odds) / len(tickets))
-        context['won_ticket_percent'] = int(
-            (float(context['won_ticket_count']) / len(tickets)) * 100)
-        context['lost_ticket_percent'] = 100 - context['won_ticket_percent']
-        context['average_stake'] = '%.2f' % (float(context['total_stake']) / len(tickets))
-        context['profit'] = context['total_earnings'] - context['total_stake']
-        if context['total_earnings'] > 0:
-            context['profitability'] = '%.2f' % ((
-                (context['total_earnings'] - context['total_stake']) / context['total_stake']
-            ) * 100)
-            int((context['total_stake'] / context['total_earnings'])*100)
+            context['average_odds'] = '%.2f' % (float(total_odds) / len(tickets))
+            context['won_ticket_percent'] = int(
+                (float(context['won_ticket_count']) / len(tickets)) * 100)
+            context['lost_ticket_percent'] = 100 - context['won_ticket_percent']
+            context['average_stake'] = '%.2f' % (float(context['total_stake']) / len(tickets))
+            context['profit'] = context['total_earnings'] - context['total_stake']
+            if context['total_earnings'] > 0:
+                context['profitability'] = '%.2f' % ((
+                    (context['total_earnings'] - context['total_stake']) / context['total_stake']
+                ) * 100)
+                int((context['total_stake'] / context['total_earnings'])*100)
+            else:
+                context['profitability'] = 0
         else:
-            context['profitability'] = 0
+            context['empty'] = True
 
     if request.is_ajax() and 'page_template' in context.keys():
         template_name = context['page_template']

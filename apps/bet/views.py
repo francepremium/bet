@@ -32,6 +32,8 @@ class TicketDetailView(generic.DetailView):
 class BetListView(generic.ListView):
     model = Bet
     context_object_name = 'bet_list'
+    to_correct = False
+    flagged = False
     preset = {}
 
     def get_queryset(self):
@@ -41,15 +43,28 @@ class BetListView(generic.ListView):
             qs = qs.filter(ticket__user=self.request.user)
         elif self.kwargs.get('tab', False) == 'friends':
             qs = qs.filter(ticket__user__in=self.request.user.friends())
-        elif self.kwargs.get('tab', False) == 'correct':
-            qs = qs.filter(status=BET_CORRECTION_NEW)
+        
+        if self.to_correct:
+            qs = qs.filter(status=BET_STATUS_NEW)
+        elif self.flagged:
+            qs = qs.filter(status=BET_STATUS_FLAG)
 
         return qs
 
     def get_context_data(self, **kwargs):
         context = super(BetListView, self).get_context_data(**kwargs)
-        exclude_columns = []
-        context['bet_list_helper'] = BetListHelper(self.request, context['bet_list'], exclude_columns=exclude_columns)
+        context['bet_list_helper'] = BetListHelper(self.request, context['bet_list'], exclude_filters=['user'])
+
+        if self.to_correct:
+            urlname = 'bet_list_to_correct_tab'
+        elif self.flagged:
+            urlname = 'bet_list_flagged_tab'
+        else:
+            urlname = 'bet_list_tab'
+        
+        for tab in ('mine', 'friends', 'all'):
+            context['%s_url' % tab] = urlresolvers.reverse(urlname, args=(tab,))
+
         return context
 
 @login_required

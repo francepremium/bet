@@ -104,7 +104,10 @@ def file(request, pk,
     context = {}
     bookmaker = shortcuts.get_object_or_404(Bookmaker, pk=pk)
     if request.user.is_authenticated():
-        context['is_admin'] = request.user.bookmaker == bookmaker or request.user.is_staff
+        try:
+            context['is_admin'] = request.user.bookmaker == bookmaker
+        except Bookmaker.DoesNotExist:
+            context['is_admin'] = request.user.is_staff
     context['bookmaker'] = bookmaker
     context['bookmaker_bettypes_per_sport'] = []
     previous_sport = None
