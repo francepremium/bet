@@ -7,7 +7,7 @@ vcs = git
 requirements_file = requirements/project.txt
 
 ; this is a Python path and the default value maps to deploy/wsgi.py on disk
-wsgi_entry_point = deploy/wsgi
+wsgi_entry_point = deploy/wsgi.py
 
 ; can be either nashvegas, south or none
 migrations = none
