@@ -7,13 +7,13 @@
 # See http://pip-installer.org/requirement-format.html for more information.
 #
 
--e svn+http://django-modeltranslation.googlecode.com/svn/trunk/#egg=modeltranslation
+-e svn+http://django-modeltranslation.googlecode.com/svn/trunk/@111#egg=modeltranslation
 django-filter
 django-autoslug
--e git+https://github.com/ericflo/django-pagination.git#egg=pagination
+-e git+https://github.com/ericflo/django-pagination.git@47e7ec874cd7dddda5ed13ffb6993a64dced2537#egg=pagination
 
 # rrutil
-python-dateutil
+python-dateutil==1.5
 
 # imagefield
 pil
@@ -27,9 +27,8 @@ pytz==2010h
 django-openid==0.2.3.dev1
 python-openid==2.2.5
 django-uni-form==0.7.0
--e git+https://github.com/ericflo/django-avatar.git#egg=avatar
--e git+https://github.com/justquick/django-activity-stream.git#egg=actstream
--e git+https://github.com/HonzaKral/django-threadedcomments.git#egg=threadedcomments
+-e git+https://github.com/ericflo/django-avatar.git@bc0a34612c3539a604e640484616055c4e097ed8#egg=avatar
+-e git+https://github.com/justquick/django-activity-stream.git@a406951bedd479a7eff3ded9c4fa5b548f7dd515#egg=actstream
 mercurial
 -e hg+https://jamespic@jamespic-allow-empty-page.googlecode.com/hg/#egg=endless
 django-annoying
