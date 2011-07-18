@@ -4,5 +4,15 @@
 {% block title %}{% trans "Thanks for commenting" %}.{% endblock %}
 
 {% block content %}
-  <h1>{% trans "Thank you for your comment" %}.</h1>
+    {% if comment.content_object == comment.user %}
+        {% trans "Thank you for posting your status" %}
+    {% else %}
+        {% if comment.content_object.username %}
+            {% blocktrans with user=comment.content_object.username %}
+            Thank your for posting on {{ user }}'s wall
+            {% endblocktrans %}
+        {% else %}
+            {% trans "Thank you for your comment" %}
+        {% endif %}
+    {% endif %}
 {% endblock %}
