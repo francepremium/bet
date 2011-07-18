@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load localeurl_tags %}
+{% load comments %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}">
     <head>
@@ -314,12 +315,8 @@ body.activity.detail div.activity div.comments {
                 $(this).find('ul').slideDown();
             });
             
-            $('div.activity form').live('submit',function(e) {
+            $('form[action="{% comment_form_target %}"]').live('submit',function(e) {
                 var container;
-
-                if ($(this).find('textarea[name=comment]').length < 1) {
-                    return true;
-                }
                 
                 container = $(this).parents('div.comment_form_container')
                 if (!container) {

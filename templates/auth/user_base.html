@@ -27,5 +27,17 @@
 {% block body %}
     <h1>{{ object }}</h1>
     {% render_popularity_for_object request object %}
-    {% render_comment_form for object %}
+    {% if request.user.is_authenticated %}
+        {% get_comment_form for object as comment_form %}
+        <div class="comment_form_container">
+            <form action="{% comment_form_target %}" method="post">
+                {% csrf_token %}
+                {{ comment_form.comment }}
+                {% for field in comment_form %}
+                    {% if field.is_hidden %}{{ field }}{% endif %}
+                {% endfor %}
+                <input type="submit" name="post" class="submit-post" value="{% trans "Post" %}" />
+            </form>
+        </div>
+    {% endif %}
 {% endblock %}
