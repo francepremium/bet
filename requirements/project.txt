@@ -38,3 +38,4 @@ django-autofixture
 django-localeurl
 django-sentry
 django_extensions
+lxml
