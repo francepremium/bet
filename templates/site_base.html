@@ -8,7 +8,7 @@
         <title>{% block head_title_base %}{% block head_title %}{% endblock %} - {% trans "Don't loose your bets, thank Scoobet" %}!{% endblock %}</title>
         {% block meta %}
         {% endblock %}
-        <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/base.css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" />
         <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/tabs.css" />
         <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/facebox.css" />
         <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/announcements.css" />
@@ -80,6 +80,7 @@ table.bettype table.choices {
     left: 45%;
     position: fixed;
     top: 12px;
+	display:none;
 }
 ul#messages {
     position: fixed;
@@ -110,6 +111,69 @@ body.activity.detail div.activity div.comments {
     </head>
     
     <body class="{% block body_class %}{% endblock %}">
+
+		<div id="logo">
+			<a href="/"></a>
+		</div>
+
+		<div id="search">
+			<form class="search" method="get" action="/search/">
+				<input id="id_search_words" name="search_words" class="search_input" type="text" onclick="this.value='';" value="{% trans 'Rechercher : un match, un joueur, une équipe, un championnat / un ami, un groupe...' %}" />
+				<input class="search_submit" id="search_submit_1" type="submit" value="go" />
+			</form>
+		</div>
+
+		<div id="locale">
+			{% block locale_switcher %}
+			<ul>
+			 {% for lang in LANGUAGES %}
+				{% ifequal lang.0 LANGUAGE_CODE %}
+					<li class="selected">{{ lang.1 }}</li>
+				{% else %}
+					<li><a href="{{ request.path|chlocale:lang.0 }}">{{ lang.1 }}</a></li>
+				{% endifequal %}
+			{% endfor %}
+			</ul>
+			{% endblock %}
+		</div>
+
+		<div id="account">
+			{% block login %}{% include "_account_bar.html" %}{% endblock %}
+		</div>
+
+		<div id="navigation">
+			{% if request.user.is_authenticated %}
+			<ul>
+				<li><a href="{% url user_detail request.user.username %}">{% trans 'my profile' %}</a></li>
+				<li><a href="{% url clan_list %}">{% trans 'clans' %}</a></li>
+				<li><a href="{% url article_list %}">{% trans 'articles' %}</a></li>
+
+				<li><a href="{% url bet_list %}">{% trans 'bets' %}</a></li>
+				<li><a href="{% url bet_list_to_correct %}">{% trans 'bets to correct' %}</a></li>
+				{% if request.user.betprofile.is_referee %}
+				<li><a href="{% url bet_list_flagged %}">{% trans 'flagged bets' %}</a></li>
+				{% endif %}
+			</ul>
+			{% endif %}
+			<ul>
+				<li>
+					<a href="{% url gsm_sport_detail 'soccer' %}">{% trans "soccer" %}</a>
+					<ul>
+						<li><a href="{% url gsm_sport_detail 'soccer' %}">{% trans "Ligue 1" %}</a>
+						<li><a href="{% url gsm_sport_detail 'soccer' %}">{% trans "Ligue 2" %}</a>
+						<li><a href="{% url gsm_sport_detail_tab 'soccer' 'competitions' %}">{% trans "All competitions" %}</a>
+					</ul>
+				</li>
+				<li><a href="{% url gsm_sport_detail 'tennis' %}">{% trans "tennis" %}</a></li>
+				<li><a href="{% url gsm_sport_detail 'rugby' %}">{% trans "rugby" %}</a></li>
+				<li><a href="{% url gsm_sport_detail 'basketball' %}">{% trans "basketball" %}</a></li>
+			</ul>
+		</div>
+
+		<div id="aside">
+			{% block aside %}{% endblock %}
+		</div>
+
         <div id="ajaxload">
             <img src="{{ STATIC_URL }}img/ajax-loader.gif" />
         </div>
@@ -129,6 +193,7 @@ body.activity.detail div.activity div.comments {
 
         <div id="global_ticket_form"></div>
 
+		{% comment %}
         <div id="tabhead">
             <div class="logo" dir="ltr">
                 {% for lang in LANGUAGES %}
@@ -180,7 +245,7 @@ body.activity.detail div.activity div.comments {
             {% endblock %}</div>
         </div>
         <div id="subnav" class="clearfix">{% block subnav_base %}<div class="clearfix">{% block subnav %}&nbsp;{% endblock %}</div>{% endblock %}</div>
-        
+        {% endcomment %}
         <ul id="messages">
             {% if messages %}
                 {% for message in messages %}
@@ -197,6 +262,13 @@ body.activity.detail div.activity div.comments {
         <div id="body">
             {% block body_head %}
             {% endblock %}
+
+			<div class="clear">&nbsp;</div>
+
+			<div id="navigation_sub">{% block subnav %}{% endblock %}</div>
+
+			<div class="clear">&nbsp;</div>
+
             {% block body %}
                 {% block content %}
                 {% endblock %}
@@ -487,7 +559,8 @@ body.activity.detail div.activity div.comments {
                 }
             });
 
-            $('#ajaxload').fadeOut();
+			$('table').each(function(index){ $(this).find('tr:odd').addClass('odd'); });
+			$('table').each(function(index){ $(this).find('tr:even').addClass('even'); });
         });
         </script>
         {% block extra_body_base %}
