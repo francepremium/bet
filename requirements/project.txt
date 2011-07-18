@@ -8,8 +8,8 @@
 #
 
 -e svn+http://django-modeltranslation.googlecode.com/svn/trunk/@111#egg=modeltranslation
-django-filter
-django-autoslug
+django-filter==0.5.3
+django-autoslug==1.4.1
 -e git+https://github.com/ericflo/django-pagination.git@47e7ec874cd7dddda5ed13ffb6993a64dced2537#egg=pagination
 
 # rrutil
@@ -31,10 +31,10 @@ django-uni-form==0.7.0
 -e git+https://github.com/justquick/django-activity-stream.git@a406951bedd479a7eff3ded9c4fa5b548f7dd515#egg=actstream
 mercurial
 -e hg+https://jamespic@jamespic-allow-empty-page.googlecode.com/hg/#egg=endless
-django-annoying
+django-annoying==0.7.6
 south
 django-autofixture
-django-localeurl
+django-localeurl==1.4
 django-sentry
 django_extensions
 lxml
