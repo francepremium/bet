@@ -94,22 +94,14 @@ SECRET_KEY = "!0!i2uocz=ks1yxvlx*x5o6sn$n_h6a5r5n8@k+qn$d4q+@pnq"
 #]
 
 
-MIDDLEWARE_CLASSES = [
-    "django.middleware.common.CommonMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    #"pinax.middleware.security.HideSensistiveFieldsMiddleware",
-    #"debug_toolbar.middleware.DebugToolbarMiddleware",
-]
-
 ROOT_URLCONF = "urls"
 
 TEMPLATE_DIRS = [
     os.path.join(PROJECT_ROOT, "templates"),
     os.path.join(PINAX_ROOT, "templates", PINAX_THEME),
 ]
+
+#TEMPLATE_STRING_IF_INVALID = '[INVALID VARIABLE: {{ %s }}]'
 
 TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.auth",
@@ -158,12 +150,14 @@ DEBUG_TOOLBAR_CONFIG = {
 
 
 MIDDLEWARE_CLASSES = [
+    'middleware.ProfilerMiddleware',
     'localeurl.middleware.LocaleURLMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'pagination.middleware.PaginationMiddleware'
 ]
 
@@ -217,7 +211,7 @@ INSTALLED_APPS = [
     'autofixture',
     # 'postman',
     'south',
-    'devserver',
+    #'devserver',
     
     # Pinax
     
@@ -268,12 +262,12 @@ POSTMAN_AUTOCOMPLETER_APP={
 }
 
 DEVSERVER_MODULES = (
-    'devserver.modules.sql.SQLRealTimeModule',
-    'devserver.modules.sql.SQLSummaryModule',
+    #'devserver.modules.sql.SQLRealTimeModule',
+    #'devserver.modules.sql.SQLSummaryModule',
     'devserver.modules.profile.ProfileSummaryModule',
 
     # Modules not enabled by default
-    'devserver.modules.ajax.AjaxDumpModule',
+    #'devserver.modules.ajax.AjaxDumpModule',
     # commented out because it cases an exception: MemoryUseModule object has
     # not attribute heapy
     #'devserver.modules.profile.MemoryUseModule',

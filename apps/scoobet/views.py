@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from endless_pagination.decorators import page_template
 from django.core import urlresolvers
+from django import db
 
 from actstream.models import actor_stream, Follow
 
@@ -27,7 +28,6 @@ def user_detail(request, username, tab='activities',
 
     user = context['object'] = shortcuts.get_object_or_404(User, 
                                                         username=username)
-
     if request.user == user:
         context['is_me'] = True
     
@@ -99,5 +99,8 @@ def user_detail(request, username, tab='activities',
         template_name = template_name % tab
 
     context.update(extra_context or {})
-    return shortcuts.render_to_response(template_name, context,
+    print 'rendering', len(db.connection.queries), 'queries'
+    ret = shortcuts.render_to_response(template_name, context,
         context_instance=template.RequestContext(request))
+    print 'done rendering', len(db.connection.queries), 'queries'
+    return ret

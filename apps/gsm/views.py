@@ -71,6 +71,7 @@ def person_detail_tab(request, sport, gsm_id, tab, tag='person',
         'sport': sport,
         'language': get_language_from_request(request),
         'person': person,
+        'tab': tab,
     }
 
     if sport.slug == 'tennis':
@@ -110,6 +111,7 @@ def session_detail_tab(request, sport, gsm_id, tab, tag='match',
         'sport': sport,
         'language': get_language_from_request(request),
         'session': session,
+        'tab': tab,
     }
 
     t = gsm.get_tree(context['language'], sport, 'get_matches', 
@@ -146,11 +148,12 @@ def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
     gsm_entity_class = model_class_for_tag(tag)
     competition = shortcuts.get_object_or_404(gsm_entity_class,
         sport=sport, tag=tag, gsm_id=gsm_id)
-
+    
     context = {
         'sport': sport,
         'language': get_language_from_request(request),
         'competition': competition,
+        'tab': tab,
     }
 
     template_name = [
@@ -256,6 +259,7 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         'sport': sport,
         'language': get_language_from_request(request),
         'team': team,
+        'tab': tab,
     }
 
     tree = gsm.get_tree(context['language'], sport, 'get_teams', 
@@ -439,6 +443,7 @@ def sport_detail_tab(request, sport, tab,
     )
 
     context = {
+        'tab': tab,
         'sport': sport,
         'language': get_language_from_request(request),
     }
