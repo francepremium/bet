@@ -156,7 +156,7 @@ body.activity.detail div.activity div.comments {
 			</ul>
 			{% endif %}
 			<ul>
-				<li>
+				<li class="{% if sport.slug == 'soccer' %}active{% endif %}">
 					<a href="{% url gsm_sport_detail 'soccer' %}">{% trans "soccer" %}</a>
 					<ul>
 						<li><a href="{% url gsm_sport_detail 'soccer' %}">{% trans "Ligue 1" %}</a>
@@ -164,9 +164,15 @@ body.activity.detail div.activity div.comments {
 						<li><a href="{% url gsm_sport_detail_tab 'soccer' 'competitions' %}">{% trans "All competitions" %}</a>
 					</ul>
 				</li>
-				<li><a href="{% url gsm_sport_detail 'tennis' %}">{% trans "tennis" %}</a></li>
-				<li><a href="{% url gsm_sport_detail 'rugby' %}">{% trans "rugby" %}</a></li>
-				<li><a href="{% url gsm_sport_detail 'basketball' %}">{% trans "basketball" %}</a></li>
+				<li class="{% if sport.slug == 'tennis' %}active{% endif %}">
+					<a href="{% url gsm_sport_detail 'tennis' %}">{% trans "tennis" %}</a>
+				</li>
+				<li class="{% if sport.slug == 'rugby' %}active{% endif %}">
+					<a href="{% url gsm_sport_detail 'rugby' %}">{% trans "rugby" %}</a>
+				</li>
+				<li class="{% if sport.slug == 'basketball' %}active{% endif %}">
+					<a href="{% url gsm_sport_detail 'basketball' %}">{% trans "basketball" %}</a>
+				</li>
 			</ul>
 		</div>
 
