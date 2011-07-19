@@ -109,10 +109,7 @@ def group_activities(activities):
     group_verbs = ('flagged', 'corrected')
     for activity in activities:
         if previous and activity.verb == previous.verb and activity.verb in group_verbs and activity.actor == previous.actor:
-            if activity.verb == 'added track to playlist' and activity.target != previous.target:
-                do_group = False
-            else:
-                do_group = True
+            do_group = True
         else:
             do_group = False
 
