@@ -129,8 +129,8 @@ INSTALLED_APPS = [
     'actstream',
     'endless_pagination',
     'autofixture',
-    # 'postman',
     'south',
+    'django_messages',
     #'devserver',
     
     # Pinax
