@@ -41,10 +41,18 @@ signals.pre_delete.connect(delete_object_activities)
 def comment_posted_activity(sender, **kwargs):
     if not kwargs.get('created', False):
         return None
-    if not kwargs['instance'].user:
+
+    comment = kwargs['instance']
+    
+    if not comment.user:
         return None
-    action.send(kwargs['instance'].user, verb='commented',
-        action_object=kwargs['instance'].content_object)
+
+    if comment.user == comment.content_object:
+        action.send(comment.user, verb='updated his status', action_object=comment)
+    elif isinstance(comment.content_object, User):
+        action.send(comment.user, verb='wall posted', action_object=comment)
+    else:
+        action.send(comment.user, verb='commented', action_object=comment)
 signals.post_save.connect(comment_posted_activity, sender=models.get_model('comments', 'Comment'))
 
 def new_action_unicode(self):
