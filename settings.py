@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Django settings for main project.
+# https://docs.djangoproject.com/en/dev/ref/settings/
 
 import os.path
 import posixpath
@@ -9,14 +9,33 @@ gettext = lambda s: s
 PINAX_ROOT = os.path.abspath(os.path.dirname(pinax.__file__))
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
-# tells Pinax to use the default theme
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, "site_media", "media")
+# Examples: "http://media.lawrence.com", "http://example.com/media/"
+MEDIA_URL = "/site_media/media/"
+# Example: "/home/media/media.lawrence.com/apps/"
+STATIC_ROOT = os.path.join(PROJECT_ROOT, "site_media", "static")
+# Example: "http://media.lawrence.com"
+STATIC_URL = "/site_media/static/"
+
 PINAX_THEME = "default"
+# Additional directories which hold static files
+STATICFILES_DIRS = [
+    os.path.join(PROJECT_ROOT, "media"),
+    os.path.join(PINAX_ROOT, "media", PINAX_THEME),
+]
+TEMPLATE_DIRS = [
+    os.path.join(PROJECT_ROOT, "templates"),
+    os.path.join(PINAX_ROOT, "templates", PINAX_THEME),
+]
+
+# Examples: "http://foo.com/media/", "/media/".
+ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
+ROOT_URLCONF = "urls"
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
-# tells Pinax to serve media through the staticfiles app.
 SERVE_MEDIA = DEBUG
+#TEMPLATE_STRING_IF_INVALID = '[INVALID VARIABLE: {{ %s }}]'
 
 INTERNAL_IPS = [
     "127.0.0.1",
@@ -25,7 +44,6 @@ INTERNAL_IPS = [
 ADMINS = [
     # ("Your Name", "your_email@domain.com"),
 ]
-
 MANAGERS = ADMINS
 
 DATABASES = {
@@ -39,103 +57,8 @@ DATABASES = {
     }
 }
 
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
-TIME_ZONE = "US/Eastern"
-
-# Language code for this installation. All choices can be found here:
-# http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = "en-us"
-
 SITE_ID = 1
-
-# If you set this to False, Django will make some optimizations so as not
-# to load the internationalization machinery.
 USE_I18N = True
-
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, "site_media", "media")
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = "/site_media/media/"
-
-# Absolute path to the directory that holds static files like app media.
-# Example: "/home/media/media.lawrence.com/apps/"
-STATIC_ROOT = os.path.join(PROJECT_ROOT, "site_media", "static")
-
-# URL that handles the static files like app media.
-# Example: "http://media.lawrence.com"
-STATIC_URL = "/site_media/static/"
-
-# Additional directories which hold static files
-STATICFILES_DIRS = [
-    os.path.join(PROJECT_ROOT, "media"),
-    os.path.join(PINAX_ROOT, "media", PINAX_THEME),
-]
-
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = "!0!i2uocz=ks1yxvlx*x5o6sn$n_h6a5r5n8@k+qn$d4q+@pnq"
-
-# List of callables that know how to import templates from various sources.
-#TEMPLATE_LOADERS = [
-    #'django.template.loaders.filesystem.Loader',
-    #'django.template.loaders.app_directories.Loader',
-#]
-
-
-ROOT_URLCONF = "urls"
-
-TEMPLATE_DIRS = [
-    os.path.join(PROJECT_ROOT, "templates"),
-    os.path.join(PINAX_ROOT, "templates", PINAX_THEME),
-]
-
-#TEMPLATE_STRING_IF_INVALID = '[INVALID VARIABLE: {{ %s }}]'
-
-TEMPLATE_CONTEXT_PROCESSORS = [
-    "django.core.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.request",
-    "django.contrib.messages.context_processors.messages",
-    
-    "staticfiles.context_processors.static_url",
-    
-    "pinax.core.context_processors.pinax_settings",
-]
-
-INSTALLED_APPS = [
-    # Django
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.sites",
-    "django.contrib.messages",
-    "django.contrib.humanize",
-    
-    "pinax.templatetags",
-    
-    # external
-    "staticfiles",
-    "debug_toolbar",
-    
-    # Pinax
-    
-    # project
-]
 
 FIXTURE_DIRS = [
     os.path.join(PROJECT_ROOT, "fixtures"),
@@ -147,17 +70,14 @@ DEBUG_TOOLBAR_CONFIG = {
     "INTERCEPT_REDIRECTS": False,
 }
 
-
-
 MIDDLEWARE_CLASSES = [
-    'middleware.ProfilerMiddleware',
     'localeurl.middleware.LocaleURLMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'pagination.middleware.PaginationMiddleware'
 ]
 
@@ -209,8 +129,8 @@ INSTALLED_APPS = [
     'actstream',
     'endless_pagination',
     'autofixture',
-    # 'postman',
     'south',
+    'django_messages',
     #'devserver',
     
     # Pinax
@@ -252,14 +172,6 @@ AJAX_LOOKUP_CHANNELS = {
 
 ACCOUNT_EMAIL_VERIFICATION = False
 EMAIL_CONFIRMATION_DAYS = 3
-
-POSTMAN_DISALLOW_ANONYMOUS=True
-POSTMAN_DISALLOW_MULTIRECIPIENTS=True
-POSTMAN_DISALLOW_COPIES_ON_REPLY=False
-POSTMAN_AUTO_MODERATE_AS=True
-POSTMAN_AUTOCOMPLETER_APP={
-    'arg_default': 'user',
-}
 
 DEVSERVER_MODULES = (
     #'devserver.modules.sql.SQLRealTimeModule',
