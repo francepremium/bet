@@ -38,3 +38,6 @@ django-localeurl==1.4
 django-sentry
 django_extensions
 lxml
+-e git+git://github.com/dcramer/django-devserver#egg=django-devserver
+sqlparse
+werkzeug
