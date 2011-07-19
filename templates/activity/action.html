@@ -1,6 +1,6 @@
-{% load avatar_tags i18n comments bet_tags %}
+{% load avatar_tags i18n comments bet_tags ipdb %}
 
-{% if activity.open %}
+{% if action.open %}
 <div class="activity">
     <div class="avatar">
         <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">
@@ -11,112 +11,156 @@
     <div class="details">
 {% endif %}
 
-        {% if action.verb == 'closed ticket' %}
-            {% if action.action_object.bet_set.count > 1 %}
-                <p class="phrase">
-                    <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> 
-                    {% trans 'published' %} 
-                    <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{% trans 'combined ticket' %}</a> 
-                    {% trans 'including' %} {{ action.action_object.bet_set.count }} {% trans 'matches' %}
-                </p>
-            {% else %}
-                <p class="phrase">
-                    <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a>
-                    {% trans 'published' %} 
-                    <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{% trans 'simple ticket' %}</a>
-                    {% trans 'on match' %}
-                    <a href="{{ action.action_object.bet_set.all.0.session.get_absolute_url }}" title="{{ action.action_object.bet_set.all.0.session }}">{{ action.action_object.bet_set.all.0.session }}</a>
-                </p>
-            {% endif %}
-        {% endif %}
-        {% if action.verb == 'joined clan' %}
-            <p class="phrase">
-                <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'joined group' %} <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>
-            </p>
-        {% endif %}
-        {% if action.verb == 'created clan' %}
-            <p class="phrase">
-                <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'created group' %} <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>
-            </p>
-        {% endif %}
-        {% if action.verb == 'bets on' %}
-            <p class="phrase">
-                <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'bets on' %} <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>
-            </p>
-        {% endif %}
-        {% if action.verb == 'commented' %}
-            <p class="phrase">
-                <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'commented' %} <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>
-            </p>
-        {% endif %}
-        {% if action.verb == 'updated article' %}
-            <p class="phrase">
-                <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'updated article' %} <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>
-            </p>
-        {% endif %}
-        {% if action.verb == 'created article' %}
-            <p class="phrase">
-                <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'created article' %} <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>
-            </p>
-        {% endif %}
-        {% if action.verb == 'started following' %}
-            <p class="phrase">
-                <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'started following' %} <a href="{{ action.target.get_absolute_url }}" title="{{ action.target }}">{{ action.target }}</a>
-            </p>
-        {% endif %}
-        {% if action.verb == 'corrected' or action.verb == 'flagged' %}
-            {% if action.group|length > 1 %}
-                {% if action.open %}
-                    <p class="phrase">
-                        <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a>
-                        {% if action.verb == 'corrected' %}{% trans 'corrected' %}{% endif %}
-                        {% if action.verb == 'flagged' %}{% trans 'flagged' %}{% endif %}
-                        <span class="toggle_bet_list link">{{ action.group|length }} {% trans 'bets' %}</span>
-                    </p>
-                {% endif %}
-                {% if action.close %}
-                    <div class="bet_list" style="display:none">
-                        {% with request|get_bet_list_helper:action.action_object_group as bet_list_helper %}
-                        {{ bet_list_helper.render_bet_table }}
-                        {% endwith %}
-                    </div>
-                {% endif %}
-            {% endif %}
 
-            {% if action.group|length < 2 %}
-                <p class="phrase">
-                    <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a>
-                    {% if action.verb == 'corrected' %}{% trans 'corrected' %}{% endif %}
-                    {% if action.verb == 'flagged' %}{% trans 'flagged' %}{% endif %}
-                    <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>
-                </p>
-            {% endif %}
+{# big switch-on-verb block #}
+{% if action.verb == 'closed ticket' %}
+    {% if action.action_object.bet_set.count > 1 %}
+        <p class="phrase">
+            <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> 
+            {% trans 'published' %} 
+            <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{% trans 'combined ticket' %}</a> 
+            {% trans 'including' %} {{ action.action_object.bet_set.count }} {% trans 'matches' %}
+        </p>
+    {% else %}
+        <p class="phrase">
+            <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a>
+            {% trans 'published' %} 
+            <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{% trans 'simple ticket' %}</a>
+            {% trans 'on match' %}
+            <a href="{{ action.action_object.bet_set.all.0.session.get_absolute_url }}" title="{{ action.action_object.bet_set.all.0.session }}">{{ action.action_object.bet_set.all.0.session }}</a>
+        </p>
+    {% endif %}
+{% endif %}
+{% if action.verb == 'joined clan' %}
+    <p class="phrase">
+        <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'joined group' %} <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>
+    </p>
+{% endif %}
+{% if action.verb == 'created clan' %}
+    <p class="phrase">
+        <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'created group' %} <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>
+    </p>
+{% endif %}
+{% if action.verb == 'bets on' %}
+    <p class="phrase">
+        <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'bets on' %} <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>
+    </p>
+{% endif %}
+{% if action.verb == 'updated his status' %}
+    <p class="phrase">
+        <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'updated his status' %}:
+        <cite>
+             {{ action.action_object.comment }}
+        </cite>
+    </p>
+{% endif %}
+{% if action.verb == 'wall posted' %}
+    <p class="phrase">
+        <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'posted a message to' %} <a href="{{ action.action_object.content_object.get_absolute_url }}" title="{{ action.action_object.content_object.username }}">{{ action.action_object.content_object.username }}</a>: 
+        <cite>
+             {{ action.action_object.comment }}
+        </cite>
+    </p>
+{% endif %}
+{% if action.verb == 'commented' %}
+    <p class="phrase">
+        <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'commented' %}
+        {% if action.action_object.content_object.verb == 'wall posted' or action.action_object.content_object.verb == 'updated his status' %}
+            {% spaceless %}
+            <a href="{{ action.get_absolute_url }}" title="{{ action.action_object.content_object }}">
+                {% if action.action_object.content_object.verb == 'wall posted' %}
+                    {% trans 'wall post' %}
+                {% endif %}
+                {% if action.action_object.content_object.verb == 'updated his status' %}
+                    {% trans 'status update' %}
+                {% endif %} <span class="cite">"{{ action.action_object.content_object.action_object.comment }}"</span>
+            </a>
+            {% endspaceless %}
+        {% else %}
+            <a href="{{ action.action_object.content_object.get_absolute_url }}" title="{{ action.action_object.content_object }}">{{ action.action_object.content_object }}</a>
+        {% endif %} {% trans 'with' %}:
+        <cite>
+            {{ action.action_object.comment }}
+        </cite>
+    </p>
+{% endif %}
+{% if action.verb == 'updated article' %}
+    <p class="phrase">
+        <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'updated article' %} <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>
+    </p>
+{% endif %}
+{% if action.verb == 'created article' %}
+    <p class="phrase">
+        <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'created article' %} <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>
+    </p>
+{% endif %}
+{% if action.verb == 'started following' %}
+    <p class="phrase">
+        <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'started following' %} <a href="{{ action.target.get_absolute_url }}" title="{{ action.target }}">{{ action.target }}</a>
+    </p>
+{% endif %}
+{% if action.verb == 'corrected' or action.verb == 'flagged' %}
+    {% if action.group|length > 1 %}
+        {% if action.open %}
+            <p class="phrase">
+                <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a>
+                {% if action.verb == 'corrected' %}{% trans 'corrected' %}{% endif %}
+                {% if action.verb == 'flagged' %}{% trans 'flagged' %}{% endif %}
+                <span class="toggle_bet_list link">{{ action.group|length }} {% trans 'bets' %}</span>
+            </p>
         {% endif %}
+        {% if action.close %}
+            <div class="bet_list" style="display:none">
+                {% with request|get_bet_list_helper:action.action_object_group as bet_list_helper %}
+                {{ bet_list_helper.render_bet_table }}
+                {% endwith %}
+            </div>
+        {% endif %}
+    {% endif %}
 
-{% if activity.close %}
+    {% if action.group|length < 2 %}
+        <p class="phrase">
+            <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a>
+            {% if action.verb == 'corrected' %}{% trans 'corrected' %}{% endif %}
+            {% if action.verb == 'flagged' %}{% trans 'flagged' %}{% endif %}
+            <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>
+        </p>
+    {% endif %}
+{% endif %}
+
+
+
+
+{% if action.close %}
     </div>
+
+    {% if action.verb == 'commented' %}
+        {# here we must use the comment's original thread #}
+        {% get_comment_count for action.action_object.content_object as comment_count %}
+        {% get_comment_list for action.action_object.content_object as comment_list %}
+        {% get_comment_form for action.action_object.content_object as form %}
+    {% else %}
+        {% get_comment_count for action as comment_count %}
+        {% get_comment_list for action as comment_list %}
+        {% get_comment_form for action as form %}
+    {% endif %}
 
     <div class="bottom">
         <span class="date">
             {{ action.timestamp|timesince }} {% trans 'ago' %}
         </span>
         
-        {% if action.verb != 'commented' and action.verb != 'flagged' and action.verb == 'corrected' %}
-        {% get_comment_count for action as comment_count %}
         <span class="comments link">
             {% trans 'comment' %} ({{ comment_count }})
         </span>
-        {% endif %}
     </div>
 
-    {% if action.verb != 'commented' and action.verb != 'flagged' and action.verb == 'corrected' %}
     <div class="comments">
-        {% render_comment_list for action.earliest_of_group %}
+        {% include 'comments/list.html' %}
         <div class="comment_form_container">
-        {% render_comment_form for action.earliest_of_group %}
+            {% include 'comments/form.html' %}
         </div>
     </div>
-    {% endif %}
 </div>
 
 {% endif %}

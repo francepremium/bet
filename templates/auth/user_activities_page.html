@@ -1,7 +1,10 @@
 {% load activity_tags endless scoobet_tags %}
 
-{% paginate 12 activity_list %}
+{% paginate 5 activity_list %}
 {% for activity in activity_list|group_activities %}
-    {% display_action activity %}
+    {# display_action activity #}
+    {% with activity as action %}
+        {% include 'activity/action.html' %}
+    {% endwith %}
 {% endfor %}
 {% show_more %}
