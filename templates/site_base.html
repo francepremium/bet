@@ -144,24 +144,43 @@ body.activity.detail div.activity div.comments {
 		<div id="navigation">
 			{% if request.user.is_authenticated %}
 			<ul>
-				<li><a href="{% url user_detail request.user.username %}">{% trans 'my profile' %}</a></li>
-				<li><a href="{% url clan_list %}">{% trans 'clans' %}</a></li>
+				<li>
+					<a href="{% url user_detail request.user.username %}">{{ request.user.username }}</a>
+					<ul>
+						<li><a href="{% url user_detail_tab object.username 'activities' %}">{% trans 'activities'|capfirst %}</a></li>
+						<li><a href="{% url user_detail_tab object.username 'stats' %}">{% trans 'stats'|capfirst %}</a></li>
+						<li><a href="{% url bet_list %}">{% trans 'bets'|capfirst %}</a></li>
+						<li><a href="{% url bet_list_to_correct %}">{% trans 'bets to correct'|capfirst %}</a></li>
+						{% if request.user.betprofile.is_referee %}
+						<li><a href="{% url bet_list_flagged %}">{% trans 'flagged bets' %}</a></li>
+						{% endif %}
+					</ul>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<a href="{% url user_detail_tab object.username 'social' %}">{% trans 'social' %}</a>
+					<ul>
+						<li><a href="{% url user_detail_tab object.username 'activities' %}">{% trans 'activities'|capfirst %}</a></li>
+						<li><a href="{% url bet_list %}">{% trans 'bets'|capfirst %}</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="{% url clan_list %}">{% trans 'clans' %}</a>
+					<ul>
+						<li><a href="{% url bet_list %}">{% trans 'bets'|capfirst %}</a></li>
+					</ul>
+				</li>
 				<li><a href="{% url article_list %}">{% trans 'articles' %}</a></li>
-
-				<li><a href="{% url bet_list %}">{% trans 'bets' %}</a></li>
-				<li><a href="{% url bet_list_to_correct %}">{% trans 'bets to correct' %}</a></li>
-				{% if request.user.betprofile.is_referee %}
-				<li><a href="{% url bet_list_flagged %}">{% trans 'flagged bets' %}</a></li>
-				{% endif %}
 			</ul>
 			{% endif %}
 			<ul>
 				<li class="{% if sport.slug == 'soccer' %}active{% endif %}">
 					<a href="{% url gsm_sport_detail 'soccer' %}">{% trans "soccer" %}</a>
 					<ul>
-						<li><a href="{% url gsm_sport_detail 'soccer' %}">{% trans "Ligue 1" %}</a>
-						<li><a href="{% url gsm_sport_detail 'soccer' %}">{% trans "Ligue 2" %}</a>
-						<li><a href="{% url gsm_sport_detail_tab 'soccer' 'competitions' %}">{% trans "All competitions" %}</a>
+						<li><a href="{% url gsm_sport_detail 'soccer' %}">{% trans "ligue 1"|capfirst %}</a>
+						<li><a href="{% url gsm_sport_detail 'soccer' %}">{% trans "ligue 2"|capfirst %}</a>
+						<li><a href="{% url gsm_sport_detail_tab 'soccer' 'competitions' %}">{% trans "all competitions"|capfirst %}</a>
 					</ul>
 				</li>
 				<li class="{% if sport.slug == 'tennis' %}active{% endif %}">
