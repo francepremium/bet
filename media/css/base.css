@@ -47,11 +47,12 @@ body { position:relative; width:990px; margin:0px auto; }
 #navigation li li a { padding:0px 5px 1px 5px; color:#999999; text-transform:none; }
 #navigation li li a:hover,
 #navigation li li a.active { color:#ea4839; background-color:transparent; }
-#navigation_sub ul { height:37px; margin:15px 0px; background-color:#313645; }
-#navigation_sub li { float:left; }
-#navigation_sub li a { padding:8px; display:block; color:#ffffff; font-size:12px; text-transform:uppercase; text-decoration:none; }
-#navigation_sub li a:hover  { background-color:#474c5a; }
-#navigation_sub li a.active { background-color:#ea4839; }
+#navigation_sub ul { height:37px; margin:15px 0px; background-color:#313645; box-shadow:1px 1px 1px #cccccc; }
+#navigation_sub li { float:left; height:37px; }
+#navigation_sub li a { min-height:27px; max-height:27px; /* <= compatibility : height:27px; should/could be enough */ display:block; padding:8px; color:#ffffff; font-size:12px; text-transform:uppercase; text-decoration:none; }
+#navigation_sub li:hover { background-color:#474c5a; }
+#navigation_sub li.active { background-color:#ea4839; box-shadow:0px 1px 1px #cccccc, inset 0px 0px 1px #ffffff; }
+#navigation_sub li.active a { background-image:url('../img/navigation_sub_active.png'); background-repeat:no-repeat; background-position:center 36px; }
 
 /* Tables */
 table { border:1px solid #cccccc; margin-bottom:15px; }
