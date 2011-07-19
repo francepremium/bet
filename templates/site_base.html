@@ -147,8 +147,8 @@ body.activity.detail div.activity div.comments {
 				<li>
 					<a href="{% url user_detail request.user.username %}">{{ request.user.username }}</a>
 					<ul>
-						<li><a href="{% url user_detail_tab object.username 'activities' %}">{% trans 'activities'|capfirst %}</a></li>
-						<li><a href="{% url user_detail_tab object.username 'stats' %}">{% trans 'stats'|capfirst %}</a></li>
+						<li><a href="{% url user_detail_tab request.user.username 'activities' %}">{% trans 'activities'|capfirst %}</a></li>
+						<li><a href="{% url user_detail_tab request.user.username 'stats' %}">{% trans 'stats'|capfirst %}</a></li>
 						<li><a href="{% url bet_list %}">{% trans 'bets'|capfirst %}</a></li>
 						<li><a href="{% url bet_list_to_correct %}">{% trans 'bets to correct'|capfirst %}</a></li>
 						{% if request.user.betprofile.is_referee %}
@@ -159,9 +159,9 @@ body.activity.detail div.activity div.comments {
 			</ul>
 			<ul>
 				<li>
-					<a href="{% url user_detail_tab object.username 'social' %}">{% trans 'social' %}</a>
+					<a href="{% url user_detail_tab request.user.username 'social' %}">{% trans 'social' %}</a>
 					<ul>
-						<li><a href="{% url user_detail_tab object.username 'activities' %}">{% trans 'activities'|capfirst %}</a></li>
+						<li><a href="{% url user_detail_tab request.user.username 'activities' %}">{% trans 'activities'|capfirst %}</a></li>
 						<li><a href="{% url bet_list %}">{% trans 'bets'|capfirst %}</a></li>
 					</ul>
 				</li>
