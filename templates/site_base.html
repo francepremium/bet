@@ -343,10 +343,10 @@ body.activity.detail div.activity div.comments {
         });
 
         $('#ajaxload').ajaxStop(function() {
-            $(this).fadeOut();
+            $(this).hide();
         });
         $('#ajaxload').ajaxStart(function() {
-            $(this).fadeIn();
+            $(this).show();
         });
 
         function add_message(message) {
