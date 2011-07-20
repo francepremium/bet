@@ -4,10 +4,6 @@
 {% load gsm_tags %}
 {% load scoobet_tags %}
 
-{% block body %}{{ block.super }}
-<h1>{{ person }}</h1>
-{% endblock %}
-
 {% block subnav %}
 <ul>
     <li class="home tab {% if tab == 'home' %}active{% endif %}">
@@ -28,11 +24,21 @@
 {% endblock %}
 
 {% block body_head %}
+	<div class="image">
+		<img src="http://imagecache.soccerway.com/players/150x150/{{ person.gsm_id }}.jpg" />
+	</div>
+	
+	<div class="title">
+		<h1>{{ person }}</h1>
+	</div>
+	
+	<div class="fan">
     {% if person in request.user.gsmentity_set.all %}
-        <a href="{% url gsm_fan 'unbecome' 'GsmEntity' person.pk %}">{% trans 'i do not bet on' %} {{ person }}</a>
+        <div class="button"><a href="{% url gsm_fan 'unbecome' 'GsmEntity' person.pk %}">{% trans 'i do not bet on him' %}</a></div>
     {% else %}
-        <a href="{% url gsm_fan 'become' 'GsmEntity' person.pk %}">{% trans 'i bet on' %} {{ person }}</a>
+        <div class="button"><a href="{% url gsm_fan 'become' 'GsmEntity' person.pk %}">{% trans 'i bet on him' %}</a></div>
     {% endif %}
+	</div>
 
     {% render_popularity_for_object request person %}
 {% endblock %}

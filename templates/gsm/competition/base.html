@@ -11,9 +11,6 @@
 <meta name="keywords" content="{% trans 'betting' %}, {{ competition }} {% trans 'betting' %}, {{ competition }} {% trans 'free picks' %}, {{ competition }} {% trans 'picks' %}, {{ competition }} {% trans 'pick' %}, {{ competition }} {% trans 'predictions' %}, {{ competition }} {% trans 'prediction' %}" />
 {% endblock %}
 
-{% block body %}{{ block.super }}
-<h1>{{ competition }}</h1>
-{% endblock %}
 
 {% block subnav %}
 <ul>
@@ -44,11 +41,20 @@
 {% endblock %}
 
 {% block body_head %}
+	<div class="image">
+	</div>
+	
+	<div class="title">
+		<h1>{{ competition }}</h1>
+	</div>
+	
+	<div class="fan">
     {% if competition in request.user.competition_set.all %}
-        <a href="{% url gsm_fan 'unbecome' 'Competition' competition.pk %}">{% trans 'i do not bet on' %} {{ competition }}</a>
+		<div class="button"><a href="{% url gsm_fan 'unbecome' 'Competition' competition.pk %}">{% trans 'i do not bet on it' %}</a></div>
     {% else %}
-        <a href="{% url gsm_fan 'become' 'Competition' competition.pk %}">{% trans 'i bet on' %} {{ competition }}</a>
+        <div class="button"><a href="{% url gsm_fan 'become' 'Competition' competition.pk %}">{% trans 'i bet on it' %}</a></div>
     {% endif %}
+	</div>
 
     {% render_popularity_for_object request competition %}
 {% endblock %}

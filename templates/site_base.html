@@ -223,8 +223,6 @@ body.activity.detail div.activity div.comments {
             </div>
         {% endif %}
 
-        <div id="global_ticket_form"></div>
-
 		{% comment %}
         <div id="tabhead">
             <div class="logo" dir="ltr">
@@ -292,8 +290,23 @@ body.activity.detail div.activity div.comments {
 
         {% block body_outer %}
         <div id="body">
+			{% if user.is_authenticated %}
+			<div id="publication">
+				<div id="publication_head">
+					<span>{% trans 'publication:' %}</span>
+					<ul>
+						<li class="publication_ticket"><a href="{% url bet_ticket_add %}">{% trans 'ticket'|capfirst %}</a></li>
+						<li class="publication_status"><a href="{% url bet_ticket_add %}">{% trans 'status'|capfirst %}</a></li>
+					</ul>
+				</div>
+				<div id="global_ticket_form"></div>
+			</div>
+			{% endif %}
+		
+			<div id="body_head">
             {% block body_head %}
             {% endblock %}
+			</div>
 
 			<div class="clear">&nbsp;</div>
 
@@ -301,11 +314,12 @@ body.activity.detail div.activity div.comments {
 
 			<div class="clear">&nbsp;</div>
 
+			<div id="body_content">
             {% block body %}
                 {% block content %}
                 {% endblock %}
             {% endblock %}
-            
+			</div>            
         </div>
         {% endblock %}
         

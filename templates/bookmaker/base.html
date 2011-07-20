@@ -17,11 +17,20 @@
 {% endblock %}
 
 {% block body %}
+	<div class="image">
+	</div>
+	
+	<div class="title">
+		<h1>{{ bookmaker }}</h1>
+	</div>
+	
+	<div class="fan">
     {% if bookmaker in request.user.bookmaker_set.all %}
-        <a href="{% url gsm_fan_app 'unbecome' 'bookmaker' 'Bookmaker' bookmaker.pk %}">{% trans 'i do not bet on' %} {{ bookmaker }}</a>
+        <div class="button"><a href="{% url gsm_fan_app 'unbecome' 'bookmaker' 'Bookmaker' bookmaker.pk %}">{% trans 'i do not bet on it' %}</a></div>
     {% else %}
-        <a href="{% url gsm_fan_app 'become' 'bookmaker' 'Bookmaker' bookmaker.pk %}">{% trans 'i bet on' %} {{ bookmaker }}</a>
+        <div class="button"><a href="{% url gsm_fan_app 'become' 'bookmaker' 'Bookmaker' bookmaker.pk %}">{% trans 'i bet on it' %}</a></div>
     {% endif %}
+	</div>
 
     {% render_popularity_for_object request bookmaker %}
 {% endblock %}
