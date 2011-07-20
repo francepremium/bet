@@ -146,7 +146,7 @@
             if (current.length) {
                 if (way == 'up') {
                     console.log(current)
-                    target = current.prevAll('.option:last');
+                    target = current.prevAll('.option:first');
                     if (!target.length) {
                         target = last;
                     }

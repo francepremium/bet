@@ -1,0 +1,58 @@
+{% load i18n %}
+
+{% if teams %}
+    {% trans 'teams' %}
+    {% for team in teams %}
+    <div class="option">
+        {{ team }}
+        <a href="{{ team.get_absolute_url }}" style="display: none"></a>
+    </div>
+    {% endfor %}
+{% endif %}
+
+{% if sessions %}
+    {% trans 'matches' %}
+    {% for session in sessions %}
+    <div class="option">
+        {{ session }}
+        <a href="{{ session.get_absolute_url }}" style="display: none"></a>
+    </div>
+    {% endfor %}
+{% endif %}
+
+{% if users %}
+    {% trans 'users' %}
+    {% for user in users %}
+    <div class="option">
+        {{ user }}
+        <a href="{{ user.get_absolute_url }}" style="display: none"></a>
+    </div>
+    {% endfor %}
+{% endif %}
+
+{% if players %}
+    {% trans 'competitions' %}
+    {% for player in players %}
+    <div class="option">
+        {{ player }}
+        <a href="{{ player.get_absolute_url }}" style="display: none"></a>
+    </div>
+    {% endfor %}
+{% endif %}
+
+{% if competitions %}
+    {% trans 'competitions' %}
+    {% for competition in competitions %}
+    <div class="option">
+        {{ competition }}
+        <a href="{{ competition.get_absolute_url }}" style="display: none"></a>
+    </div>
+    {% endfor %}
+{% endif %}
+
+{% if not results %}
+<div class="option">
+    <p class="small">{% trans 'no results' %}</p>
+    <a href="">{% blocktrans %}Search for {{ q }} instead{% endblocktrans %}</a>
+</div>
+{% endif %}

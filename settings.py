@@ -132,8 +132,6 @@ INSTALLED_APPS = [
     'south',
     'django_messages',
     #'devserver',
-    
-    'yourlabs.autocomplete',
 
     # Pinax
     
