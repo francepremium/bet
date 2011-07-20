@@ -20,17 +20,26 @@ from gsm.models import Session, Competition, GsmEntity
 def autocomplete(request,
     template_name='scoobet/autocomplete.html', extra_context=None):
     q = request.GET['q'] # crash if q is not in the url
+    context = {
+        'q': q,
+    }
 
-    context = {}
-    context['sessions'] = Session.objects.filter(
+    queries = {}
+    queries['sessions'] = Session.objects.filter(
         Q(oponnent_A_name=q)|Q(oponnent_B_name__istartswith=q)).distinct()[:3]
-    context['users'] = User.objects.filter(username__icontains=q)[:3]
-    context['teams'] = GsmEntity.objects.filter(
+    queries['users'] = User.objects.filter(username__icontains=q)[:3]
+    queries['teams'] = GsmEntity.objects.filter(
         name__icontains=q, tag='team')[:3]
-    context['players'] = GsmEntity.objects.filter(
+    queries['players'] = GsmEntity.objects.filter(
         name__icontains=q, tag='person')[:3]
-    context['competitions'] = Competition.objects.filter(
+    queries['competitions'] = Competition.objects.filter(
         name__icontains=q)[:3]
+    context.update(queries)
+
+    results = 0
+    for query in queries.values():
+        results += len(query)
+    context['results'] = results
 
     return shortcuts.render_to_response(template_name, context,
         context_instance=template.RequestContext(request))
@@ -118,8 +127,6 @@ def user_detail(request, username, tab='activities',
         template_name = template_name % tab
 
     context.update(extra_context or {})
-    print 'rendering', len(db.connection.queries), 'queries'
     ret = shortcuts.render_to_response(template_name, context,
         context_instance=template.RequestContext(request))
-    print 'done rendering', len(db.connection.queries), 'queries'
     return ret
