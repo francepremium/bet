@@ -330,7 +330,7 @@ body.activity.detail div.activity div.comments {
         });
         $('input.search_input[name=search_words]').yourlabs_autocomplete({
             url: '{% url autocomplete %}',
-            defaultValue: "{% trans 'Rechercher : un match, un joueur, une équipe, un championnat / un ami, un groupe...' %}",
+            defaultValue: "{% trans 'Search : a match, a player, a team, a competition / a friend, a clan...' %}",
         });
 
         $.ajaxSetup({
