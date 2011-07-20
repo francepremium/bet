@@ -94,7 +94,6 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 .clear { clear:both; overflow:hidden; width:0px; height:0px; line-height:0px; }
 
 /* Buttons-like elements */
-.button { display:inline-block; padding:4px 12px; cursor:pointer; border:1px solid #cccccc; background-image:url('../img/button_background.png'); background-repeat:repeat-x; }
-.button:hover { box-shadow:inset 0 0 5px #999999; border-color:#959595 }
-.button a { display:block; margin-left:-7px; padding-left:20px; text-transform:uppercase; background-image:url('../img/button.png'); background-repeat:no-repeat; background-position:0px 1px;}
-.button a:hover { text-decoration:none; }
+.button { display:inline-block; background-image:url('../img/button_background.png'); background-repeat:repeat-x; background-position:0px 1px; /* compatibility => */ zoom:1; *display:inline; }
+.button a { display:block; padding:4px 12px 4px 25px; border:1px solid #cccccc; background-image:url('../img/button.png'); background-repeat:no-repeat; background-position:5px 5px; text-transform:uppercase; }
+.button a:hover { border-color:#959595; box-shadow:inset 0 0 5px #999999; text-decoration:none; }
