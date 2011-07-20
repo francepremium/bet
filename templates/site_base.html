@@ -300,6 +300,15 @@ body.activity.detail div.activity div.comments {
         <script src="{{ STATIC_URL }}yourlabs/autocomplete/jquery-implementation.js" type="text/javascript"></script>
         {% include "facebox_js.html" %}
         <script type="text/javascript">
+        $(document).bind('yourlabs_autocomplete.selectOption', function(e, autocomplete, option) {
+            link = $(option).find('a:first');
+            if (link.length && link.attr('href') != undefined) {
+                window.location.href = link.attr('href');
+                return false;
+            } else {
+                alert('sorry, i dunno what to do with your selection!!');
+            }
+        });
         $('input.search_input[name=search_words]').yourlabs_autocomplete({
             url: '{% url autocomplete %}',
             defaultValue: "{% trans 'Rechercher : un match, un joueur, une équipe, un championnat / un ami, un groupe...' %}",
