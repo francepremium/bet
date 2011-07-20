@@ -133,6 +133,8 @@ INSTALLED_APPS = [
     'django_messages',
     #'devserver',
     
+    'yourlabs.autocomplete',
+
     # Pinax
     
     # project
