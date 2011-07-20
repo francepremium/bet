@@ -1,0 +1,41 @@
+{% load i18n %}
+
+{% trans 'teams' %}
+{% for team in teams %}
+<div class="option">
+    {{ team }}
+    <a href="{{ team.get_absolute_url }}" style="display: none"></a>
+</div>
+{% endfor %}
+
+{% trans 'matches' %}
+{% for session in sessions %}
+<div class="option">
+    {{ session }}
+    <a href="{{ session.get_absolute_url }}" style="display: none"></a>
+</div>
+{% endfor %}
+
+{% trans 'users' %}
+{% for user in users %}
+<div class="option">
+    {{ user }}
+    <a href="{{ user.get_absolute_url }}" style="display: none"></a>
+</div>
+{% endfor %}
+
+{% for player in players %}
+<div class="option">
+    {{ player }}
+    <a href="{{ player.get_absolute_url }}" style="display: none"></a>
+</div>
+{% endfor %}
+
+{% for competition in competitions %}
+<div class="option">
+    {{ competition }}
+    <a href="{{ competition.get_absolute_url }}" style="display: none"></a>
+</div>
+{% endfor %}
+
+
