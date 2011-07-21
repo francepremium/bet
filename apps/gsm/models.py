@@ -1,3 +1,4 @@
+import unicodedata
 import re
 import htmlentitydefs
 import urllib
@@ -93,6 +94,7 @@ class AbstractGsmEntity(models.Model):
     tag = models.CharField(max_length=32)
     area = models.ForeignKey('Area',null=True, blank=True)
     name = models.CharField(max_length=150, null=True, blank=True)
+    ascii_name = models.CharField(max_length=150, null=True, blank=True)
     last_updated = models.DateTimeField(null=True, blank=True)
     fans = models.ManyToManyField('auth.User')
 
@@ -366,3 +368,11 @@ class Session(AbstractGsmEntity):
         return self.get_tab_absolute_url('after')
     def get_live_absolute_url(self):
         return self.get_tab_absolute_url('live')
+
+def ascii_name(sender, **kwargs):
+    model = kwargs.pop('instance')
+    if hasattr(model, 'ascii_name'):
+        model.ascii_name = unicodedata.normalize('NFKD', model.name or u'').encode('ascii', 'ignore')
+        model.ascii_name_fr = unicodedata.normalize('NFKD', model.name_fr or u'').encode('ascii', 'ignore')
+        model.ascii_name_en = unicodedata.normalize('NFKD', model.name_en or u'').encode('ascii', 'ignore')
+signals.pre_save.connect(ascii_name)

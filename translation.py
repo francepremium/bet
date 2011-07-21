@@ -4,13 +4,16 @@ from bookmaker.models import *
 from gsm.models import *
 
 class NameTranslation(TranslationOptions):
-    fields = ('name',)
-translator.register(GsmEntity, NameTranslation)
+    fields = ('name', )
+class AsciiNameTranslation(TranslationOptions):
+    fields = ('name', 'ascii_name')
+
+translator.register(GsmEntity, AsciiNameTranslation)
+translator.register(Championship, AsciiNameTranslation)
+translator.register(Competition, AsciiNameTranslation)
+translator.register(Season, AsciiNameTranslation)
+translator.register(Round, AsciiNameTranslation)
+translator.register(Session, AsciiNameTranslation)
 translator.register(Area, NameTranslation)
-translator.register(Championship, NameTranslation)
-translator.register(Competition, NameTranslation)
-translator.register(Season, NameTranslation)
-translator.register(Round, NameTranslation)
-translator.register(Session, NameTranslation)
 translator.register(BetType, NameTranslation)
 translator.register(BetChoice, NameTranslation)
