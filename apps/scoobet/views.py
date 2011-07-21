@@ -1,3 +1,5 @@
+import datetime
+
 from django.db.models import Q, Avg
 from django.utils.translation import ugettext as _
 from django import template
