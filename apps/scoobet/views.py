@@ -11,7 +11,7 @@ from endless_pagination.decorators import page_template
 from django.core import urlresolvers
 from django import db
 
-from actstream.models import actor_stream, Follow
+from actstream.models import actor_stream, user_stream, Follow, Action
 
 from bet.helpers import *
 from bet.models import *
