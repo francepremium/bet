@@ -187,6 +187,26 @@ DEVSERVER_MODULES = (
     'devserver.modules.profile.LineProfilerModule',
 )
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+    },
+}
+
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
 try:

@@ -1,3 +1,4 @@
+import logging
 import urllib
 from datetime import datetime, date, time
 import sys
@@ -10,6 +11,8 @@ from progressbar import ProgressBar
 
 from gsm.models import *
 import gsm
+
+logger = logging.getLogger(__name__)
 
 class UnexpectedChild(Exception):
     def __init__(self, parent, child):
@@ -30,7 +33,6 @@ class Command(BaseCommand):
                     self.save_area(code, element)
     
             for sport in Sport.objects.all().exclude(slug='rugby'):
-                print "Saving seasons for %s" % sport
                 properties = {}
 
                 root = gsm.get_tree(code, sport, 'get_seasons', **properties).getroot()
@@ -92,8 +94,15 @@ class Command(BaseCommand):
             for k in invalid:
                 setattr(model, k, None)
                 print "FIXED INVALID", changed[k], 'GSM_ID %s' % model.gsm_id
-            model.save()
+
+            try:
+                model.save()
+            except:
+                logger.error("Could not save %s" % self.entity_to_text(model))
         return model
+
+    def entity_to_text(self, entity):
+        return '%s, %s, %s' % (entity.sport, entity.tag, entity.gsm_id)
 
     def save_area(self, language, element, **properties):
         properties.update({
