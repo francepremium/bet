@@ -50,7 +50,7 @@ def comment_posted_activity(sender, **kwargs):
     if comment.user == comment.content_object:
         action.send(comment.user, verb='updated his status', action_object=comment)
     elif isinstance(comment.content_object, User):
-        action.send(comment.user, verb='wall posted', action_object=comment)
+        action.send(comment.user, verb='wall posted', action_object=comment, target=comment.content_object)
     else:
         action.send(comment.user, verb='commented', action_object=comment)
 signals.post_save.connect(comment_posted_activity, sender=models.get_model('comments', 'Comment'))

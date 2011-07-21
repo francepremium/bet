@@ -8,4 +8,9 @@ urlpatterns = patterns('scoobet.views',
         views.autocomplete,
         name='scoobet_autocomplete',
     ),
+    url(
+        r'feed/friends/$',
+        views.feed_friends,
+        name='scoobet_feed_friends',
+    ),
 )
