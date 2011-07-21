@@ -17,6 +17,15 @@ from bet.helpers import *
 from bet.models import *
 from gsm.models import Session, Competition, GsmEntity
 
+@login_required
+def status_add(request,
+    template_name='scoobet/status_add.html', extra_context=None):
+    context = {
+        'object': request.user,
+    }
+    return shortcuts.render_to_response(template_name, context,
+        context_instance=template.RequestContext(request))
+
 def autocomplete(request,
     template_name='scoobet/autocomplete.html', extra_context=None):
     q = request.GET['q'] # crash if q is not in the url
