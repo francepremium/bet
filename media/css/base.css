@@ -82,6 +82,8 @@ tr.odd td { background-color:#fbfbfb; }
 #publication_head ul { display:inline; }
 #publication_head li { display:inline; padding-right:15px; color:#999999; }
 #publication_head a { color:#999999; }
+.publication_ticket a { padding-left:19px; background-image:url('../img/publication_ticket.png'); background-repeat:no-repeat; }
+.publication_status a { padding-left:20px; background-image:url('../img/publication_status.png'); background-repeat:no-repeat; }
 #global_ticket_form { padding:15px; z-index:100; background-color:#f2f2f2; border-bottom:1px solid #999999; display:none; }
 
 /* Search */
