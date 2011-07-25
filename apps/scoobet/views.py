@@ -37,7 +37,9 @@ def autocomplete(request,
 
     queries = {}
     queries['sessions'] = Session.objects.filter(
-        Q(name_ascii__icontains=q)|Q(name__icontains=q)).distinct()[:3]
+        datetime_utc__gte=datetime.date.today()).filter(
+        Q(name_ascii__icontains=q)|Q(name__icontains=q)).order_by(
+            'datetime_utc').distinct()[:3]
     queries['users'] = User.objects.filter(username__icontains=q)[:3]
     queries['teams'] = GsmEntity.objects.filter(
         Q(name_ascii__icontains=q)|Q(name__icontains=q), tag='team')[:3]
