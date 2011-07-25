@@ -129,7 +129,7 @@ INSTALLED_APPS = [
     'actstream',
     'endless_pagination',
     'autofixture',
-    'south',
+    'nashvegas',
     'django_messages',
     #'devserver',
 
