@@ -16,7 +16,10 @@ table.session.header {
     {% gsm_tree key='tables_tree' method='get_tables' type='season' id=session.season.competition.get_last_season.gsm_id %}
     {% gsm_render_tables_tree tables_tree %}
 
-    {% gsm_tree key='h2h_tree' method='get_head_2_head_statistics' team_1_id=session.oponnent_A.gsm_id team_2_id=session.oponnent_B.gsm_id %}{# no available for basketball #}
+    {% if session.oponnent_A.gsm_id and session.oponnent_B.gsm_id %}
+        {# avoid cases where we don't know the oponnent yet, ie. tournament #}
+        {% gsm_tree key='h2h_tree' method='get_head_2_head_statistics' team_1_id=session.oponnent_A.gsm_id team_2_id=session.oponnent_B.gsm_id %}{# no available for basketball #}
+    {% endif %}
     {% if h2h_tree %}
         <h2>{% trans 'previous matches' %}</h2>
         <table>

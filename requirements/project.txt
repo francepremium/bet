@@ -32,7 +32,7 @@ django-uni-form==0.7.0
 mercurial
 -e hg+https://jamespic@jamespic-allow-empty-page.googlecode.com/hg/#egg=endless
 django-annoying==0.7.6
-south
+nashvegas
 django-autofixture
 django-localeurl==1.4
 django-sentry

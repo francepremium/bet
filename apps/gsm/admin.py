@@ -28,8 +28,8 @@ class CompetitionAdmin(TranslationAdmin):
 admin.site.register(Competition, CompetitionAdmin)
 
 class SessionAdmin(admin.ModelAdmin):
-    list_display = ('gsm_id', 'oponnent_A_name', 'oponnent_B_name', 'status', 'winner', 'datetime_utc')
-    search_fields = ('session_round__name', 'session_round__season__name', 'session_round__season__competition__name', 'oponnent_A_name', 'oponnent_B_name')
+    list_display = ('gsm_id', 'name', 'status', 'winner', 'datetime_utc')
+    search_fields = ('session_round__name', 'session_round__season__name', 'session_round__season__competition__name', 'name', 'name_ascii')
     list_filter = ('sport', )
     raw_id_fields = ('oponnent_A', 'oponnent_B', 'winner', 'season', 'session_round')
 

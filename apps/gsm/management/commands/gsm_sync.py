@@ -32,7 +32,8 @@ class Command(BaseCommand):
                 if element.tag == 'area':
                     self.save_area(code, element)
     
-            for sport in Sport.objects.all().exclude(slug='rugby'):
+            for sport in Sport.objects.all():
+                print "Saving seasons for %s" % sport
                 properties = {}
 
                 root = gsm.get_tree(code, sport, 'get_seasons', **properties).getroot()
@@ -71,7 +72,7 @@ class Command(BaseCommand):
             model = model_class.objects.get(**unique_properties)
         except model_class.DoesNotExist:
             model = model_class(**unique_properties)
-
+        
         for k, v in properties.items():
             if not hasattr(model_class, k):
                 if getattr(model, k) != getattr(model, '_meta').get_field(k).to_python(v):
@@ -106,7 +107,7 @@ class Command(BaseCommand):
 
     def save_area(self, language, element, **properties):
         properties.update({
-            'name_%s' % language: element.attrib['name'],
+            'name_%s' % language: unicode(element.attrib['name']),
             'country_code': element.attrib['countrycode'],
         })
 
@@ -126,7 +127,7 @@ class Command(BaseCommand):
 
     def save_championship(self, language, sport, element, **properties):
         properties.update({
-            'name_%s' % language: element.attrib['name'],
+            'name_%s' % language: unicode(element.attrib['name']),
             'last_updated': element.attrib['last_updated'],
         })
 
@@ -146,7 +147,7 @@ class Command(BaseCommand):
 
     def save_competition(self, language, sport, element, **properties):
         properties.update({
-            'name_%s' % language: element.attrib['name'],
+            'name_%s' % language: unicode(element.attrib['name']),
             'area': Area.objects.get(gsm_id=element.attrib['area_id']),
             'court_type': element.attrib.get('court', None),
             'team_type': element.attrib.get('teamtype', None),
@@ -177,7 +178,7 @@ class Command(BaseCommand):
 
     def save_season(self, language, sport, element, **properties):
         properties.update({
-            'name_%s' % language: element.attrib['name'],
+            'name_%s' % language: unicode(element.attrib['name']),
             'season_type': element.attrib.get('type', None) or None,
             'gender': element.attrib.get('gender', None) or None,
             'prize_money': element.attrib.get('prize_money', None) or None,
@@ -231,7 +232,7 @@ class Command(BaseCommand):
             area = None
 
         properties.update({
-            'name_%s' % language: element.attrib.get('official_name'),
+            'name_%s' % language: unicode(element.attrib.get('official_name')),
             'area': area,
         })
 
@@ -240,7 +241,7 @@ class Command(BaseCommand):
     def save_round(self, language, sport, element, **properties):
         has_outgroup_matches = element.attrib.get('has_outgroup_matches', 'no') == 'yes'
         properties.update({
-            'name_%s' % language: element.attrib.get('name', element.attrib.get('title')),
+            'name_%s' % language: unicode(element.attrib.get('name', element.attrib.get('title'))),
             'last_updated': element.attrib.get('last_updated', None) or None,
             'start_date': element.attrib.get('start_date', None) or None,
             'end_date': element.attrib.get('end_date', None) or None,
@@ -319,6 +320,10 @@ class Command(BaseCommand):
         if not element.attrib.get('time_utc') and not element.attrib.get('official_start_time'):
             properties['time_unknown'] = True
 
+        oponnent_names = {
+            'A': u'?',
+            'B': u'?',
+        }
         xml_map = (
             ('person_%s_name', 'person'),
             ('team_%s_name', 'team'),
@@ -328,17 +333,7 @@ class Command(BaseCommand):
                 xattr = attr % x
                 i = element.attrib.get(xattr, False)
                 if i:
-                    properties['oponnent_%s_name' % x] = element.attrib.get(xattr, False)
-            
-            if not properties.get('oponnent_%s_name' % x, ''):
-                if element.attrib.get('person_%s2_name' % x, ''):
-                    properties['oponnent_%s_name' % x] = '%s / %s' % (element.attrib['person_%s1_name' % x], element.attrib['person_%s2_name' % x])
-         
-        if not properties.get('oponnent_B_name'):
-            properties['oponnent_B_name'] = '?'
-
-        if not properties.get('oponnent_A_name'):
-            properties['oponnent_A_name'] = '?'
+                    oponnent_names[x] = unicode(i)
 
         xml_map = (
             ('person_%s_id', 'person'),
@@ -352,9 +347,9 @@ class Command(BaseCommand):
                 if i:
                     properties['oponnent_%s' % x], created = GsmEntity.objects.get_or_create(
                         sport=sport, gsm_id=i, tag=tag)
-                    name = properties.get('oponnent_%s_name' % x)
-                    if name != properties['oponnent_%s' % x].name:
-                        properties['oponnent_%s' % x].name = name
+                    name = oponnent_names[x]
+                    if name != getattr(properties['oponnent_%s' % x], 'name_%s' % language):
+                        setattr(properties['oponnent_%s' % x], 'name_%s' % language, name)
                         properties['oponnent_%s' % x].save()
 
         if 'A' in element.attrib.get('winner', ''):
@@ -416,8 +411,7 @@ class Command(BaseCommand):
                 else:
                     properties['penalty'] = 'B'
 
-        if not properties.get('name', False):
-            properties['name'] = '%s vs. %s' % (properties['oponnent_A_name'], properties['oponnent_B_name'])
+        properties['name_%s' % language] = u'%s vs. %s' % (oponnent_names['A'], oponnent_names['B'])
 
         session = self.update_model(
             Session,

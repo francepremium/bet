@@ -1,0 +1,42 @@
+ALTER TABLE "gsm_gsmentity"
+        ADD "name_ascii_en" varchar(150);
+ALTER TABLE "gsm_gsmentity"
+        ADD "name_ascii" varchar(150);
+ALTER TABLE "gsm_gsmentity"
+        ADD "name_ascii_fr" varchar(150);
+-- Model: Championship
+ALTER TABLE "gsm_championship"
+        ADD "name_ascii_en" varchar(150);
+ALTER TABLE "gsm_championship"
+        ADD "name_ascii" varchar(150);
+ALTER TABLE "gsm_championship"
+        ADD "name_ascii_fr" varchar(150);
+-- Model: Competition
+ALTER TABLE "gsm_competition"
+        ADD "name_ascii_en" varchar(150);
+ALTER TABLE "gsm_competition"
+        ADD "name_ascii" varchar(150);
+ALTER TABLE "gsm_competition"
+        ADD "name_ascii_fr" varchar(150);
+-- Model: Season
+ALTER TABLE "gsm_season"
+        ADD "name_ascii_en" varchar(150);
+ALTER TABLE "gsm_season"
+        ADD "name_ascii" varchar(150);
+ALTER TABLE "gsm_season"
+        ADD "name_ascii_fr" varchar(150);
+-- Model: Round
+ALTER TABLE "gsm_round"
+        ADD "name_ascii_en" varchar(150);
+ALTER TABLE "gsm_round"
+        ADD "name_ascii" varchar(150);
+ALTER TABLE "gsm_round"
+        ADD "name_ascii_fr" varchar(150);
+-- Model: Session
+ALTER TABLE "gsm_session"
+        ADD "name_ascii_fr" varchar(150);
+ALTER TABLE "gsm_session"
+        ADD "name_ascii_en" varchar(150);
+ALTER TABLE "gsm_session"
+        ADD "name_ascii" varchar(150);
+

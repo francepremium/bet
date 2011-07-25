@@ -71,6 +71,13 @@ class BetListView(generic.ListView):
 def ticket_add(request, form_class=TicketForm,
     template_name='bet/ticket_add.html', extra_context=None):
 
+
+    # if there is any pending ticket, force it
+    tickets = request.user.ticket_set.filter(status=TICKET_STATUS_INCOMPLETE).order_by('-pk')
+    if tickets:
+        return shortcuts.redirect(urlresolvers.reverse(
+            'bet_form', args=(tickets[0].pk,)) + '?forced=1')
+
     context = {}
     instance = Ticket(user=request.user)
     if request.method == 'POST':
