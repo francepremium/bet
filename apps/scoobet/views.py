@@ -11,7 +11,7 @@ from endless_pagination.decorators import page_template
 from django.core import urlresolvers
 from django import db
 
-from actstream.models import actor_stream, Follow
+from actstream.models import actor_stream, Follow, Action
 
 from bet.helpers import *
 from bet.models import *
@@ -49,6 +49,49 @@ def me(request):
     return shortcuts.redirect(urlresolvers.reverse(
         'user_detail', args=(request.user.username,)))
 
+@login_required
+def feed_friends(request,
+    template_name='scoobet/feed_friends.html', extra_context=None):
+    user = request.user
+
+    activities = Action.objects.filter(
+        Q(
+            action_object_content_type = ContentType.objects.get_for_model(User),
+            action_object_object_id = user.pk
+        ) | 
+        Q(
+            actor_content_type = ContentType.objects.get_for_model(User),
+            actor_object_id = user.pk
+        ) | 
+        Q(
+            target_content_type = ContentType.objects.get_for_model(User),
+            target_object_id = user.pk
+        ) |
+        Q(
+            action_object_content_type = ContentType.objects.get_for_model(User),
+            action_object_object_id__in = user.follows()
+        ) | 
+        Q(
+            actor_content_type = ContentType.objects.get_for_model(User),
+            actor_object_id__in = user.follows()
+        ) | 
+        Q(
+            target_content_type = ContentType.objects.get_for_model(User),
+            target_object_id__in = user.follows()
+        )
+    ).order_by('-timestamp').distinct()
+
+    context = {
+        'activity_list': activities,
+        'page_template': 'auth/user_activities_page.html',
+    }
+
+    if 'page' in request.GET: 
+        template_name = context['page_template']
+
+    return shortcuts.render_to_response(template_name, context,
+        context_instance=template.RequestContext(request))
+
 def user_detail(request, username, tab='activities',
     template_name='auth/user_%s.html', extra_context=None):
 
@@ -60,7 +103,20 @@ def user_detail(request, username, tab='activities',
         context['is_me'] = True
     
     if tab == 'activities':
-        context['activity_list'] = actor_stream(user)
+        context['activity_list'] = Action.objects.filter(
+            Q(
+                action_object_content_type = ContentType.objects.get_for_model(User),
+                action_object_object_id = user.pk
+            ) | 
+            Q(
+                actor_content_type = ContentType.objects.get_for_model(User),
+                actor_object_id = user.pk
+            ) | 
+            Q(
+                target_content_type = ContentType.objects.get_for_model(User),
+                target_object_id = user.pk
+            )
+        ).order_by('-timestamp').distinct()
         context['page_template'] = 'auth/user_activities_page.html'
     elif tab == 'social':
         context['follower_list'] = user.follows()
