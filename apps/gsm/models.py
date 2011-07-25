@@ -259,7 +259,7 @@ class Season(AbstractGsmEntity):
     prize_money = models.IntegerField(null=True, blank=True)
     prize_currency = models.CharField(max_length=3, null=True, blank=True)
     # type is a reserved word
-    season_type = models.CharField(max_length=12, null=True, blank=True)
+    season_type = models.CharField(max_length=20, null=True, blank=True)
 
     start_date = models.DateTimeField(null=True, blank=True)
     end_date = models.DateTimeField(null=True, blank=True)
