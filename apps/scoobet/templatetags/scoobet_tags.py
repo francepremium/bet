@@ -142,7 +142,6 @@ def render_popularity_for_object(request, obj):
         if friends is not None:
             html(block, 'friends')
 
-    print blocks
     return {
         'request': request,
         'blocks': blocks,
