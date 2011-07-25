@@ -35,14 +35,14 @@ def autocomplete(request,
 
     queries = {}
     queries['sessions'] = Session.objects.filter(
-        Q(oponnent_A_name=q)|Q(oponnent_B_name__istartswith=q)).distinct()[:3]
+        Q(name_ascii__icontains=q)|Q(name__icontains=q)).distinct()[:3]
     queries['users'] = User.objects.filter(username__icontains=q)[:3]
     queries['teams'] = GsmEntity.objects.filter(
-        name__icontains=q, tag='team')[:3]
+        Q(name_ascii__icontains=q)|Q(name__icontains=q), tag='team')[:3]
     queries['players'] = GsmEntity.objects.filter(
-        name__icontains=q, tag='person')[:3]
+        Q(name_ascii__icontains=q)|Q(name__icontains=q), tag='person')[:3]
     queries['competitions'] = Competition.objects.filter(
-        name__icontains=q)[:3]
+        Q(name_ascii__icontains=q)|Q(name__icontains=q))[:3]
     context.update(queries)
 
     results = 0

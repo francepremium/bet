@@ -1,4 +1,5 @@
 import re
+import unicodedata
 import htmlentitydefs
 import urllib
 import datetime
@@ -192,6 +193,11 @@ class GsmEntity(AbstractGsmEntity):
 
         return 'http://images.globalsportsmedia.com/%s/%s/150x150/%s.%s' % (self.sport.slug, tag, self.gsm_id, ext)
 
+    def oponnent_A_name(self):
+        raise Exception('oponnent_A_name has been deprecated. Use oponnent_A.name instead')
+    def oponnent_B_name(self):
+        raise Exception('oponnent_B_name has been deprecated. Use oponnent_B.name instead')
+
 class Championship(AbstractGsmEntity):
     pass
 
@@ -350,8 +356,6 @@ class Session(AbstractGsmEntity):
     winner = models.ForeignKey('GsmEntity', null=True, blank=True, related_name='won_sessions')
     oponnent_A = models.ForeignKey('GsmEntity', related_name='sessions_as_A', null=True, blank=True)
     oponnent_B = models.ForeignKey('GsmEntity', related_name='sessions_as_B', null=True, blank=True)
-    oponnent_A_name = models.CharField(max_length=60, null=True, blank=True)
-    oponnent_B_name = models.CharField(max_length=60, null=True, blank=True)
 
     class Meta:
         ordering = ['-datetime_utc']
@@ -367,3 +371,14 @@ class Session(AbstractGsmEntity):
         return self.get_tab_absolute_url('after')
     def get_live_absolute_url(self):
         return self.get_tab_absolute_url('live')
+
+def ensure_ascii_name(sender, **kwargs):
+    model = kwargs.pop('instance')
+    for code, language in settings.LANGUAGES:
+        if hasattr(model, 'name_ascii_%s' % code):
+            name = getattr(model, 'name_%s' % code, False)
+            if name:
+                name_ascii = unicodedata.normalize(
+                    'NFKD', name).encode('ascii','ignore')
+                setattr(model, 'name_ascii_%s' % code, name_ascii)
+signals.pre_save.connect(ensure_ascii_name)

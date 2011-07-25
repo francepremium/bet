@@ -153,8 +153,8 @@ LANGUAGES = (
 MODELTRANSLATION_DEFAULT_LANGUAGE='fr'
 MODELTRANSLATION_TRANSLATION_REGISTRY='translation'
 
-GSM_USERNAME = 'cportal'
-GSM_PASSWORD = 'client'
+GSM_USERNAME = 'betspire'
+GSM_PASSWORD = 'lixzw2c'
 GSM_LANGUAGE = 'fr'
 GSM_URL = 'http://%s:%s@webpull.globalsportsmedia.com' % (
     GSM_USERNAME,

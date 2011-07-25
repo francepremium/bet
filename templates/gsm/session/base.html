@@ -14,7 +14,13 @@
 <table class="soccer session header">
     <tr>
         <th>
-            <a rel="canonical" href="{{ session.oponnent_A.get_absolute_url }}" title="{{ sport }}: {{ session.oponnent_A_name }}">{{ session.oponnent_A_name }}</a>
+            {% if session.oponnent_A.gsm_id %}
+                <a rel="canonical" href="{{ session.oponnent_A.get_absolute_url }}" title="{{ sport }}: {{ session.oponnent_A.name }}">
+            {% endif %}
+            {{ session.oponnent_A.name }}
+            {% if session.oponnent_A.gsm_id %}
+                </a>
+            {% endif %}
         </th>
         <th colspan="2">
             {% if session.status == 'Fixture' %}
@@ -50,25 +56,35 @@
             {% endif %}
         </th>
         <th>
-            <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ sport }}: {{ session.oponnent_B_name }}" rel="canonical">{{ session.oponnent_B_name }}</a>
+            {% if session.oponnent_B.gsm_id %}
+                <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ sport }}: {{ session.oponnent_B.name }}" rel="canonical">
+            {% endif %}
+            {{ session.oponnent_B.name }}
+            {% if session.oponnent_B.gsm_id %}
+                </a>
+            {% endif %}
         </th>
     </tr>
     <tr>
         <td>
-            {% for data in session.oponnent_A|five_sessions_series %}
-                <a href="{{ data.entity.get_absolute_url }}" title="{{ data.entity.oponnent_A_name }} vs {{ data.entity.oponnent_A_name }}">
-                    {{ data.symbol }}
-                </a>
-            {% endfor %}
+            {% if session.oponnent_A.gsm_id %}
+                {% for data in session.oponnent_A|five_sessions_series %}
+                    <a href="{{ data.entity.get_absolute_url }}" title="{{ data.entity.oponnent_A_name }} vs {{ data.entity.oponnent_A_name }}">
+                        {{ data.symbol }}
+                    </a>
+                {% endfor %}
+            {% endif %}
         </td>
         <td colspan="2">
         </td>
         <td>
-            {% for data in session.oponnent_B|five_sessions_series %}
-                <a href="{{ data.entity.get_absolute_url }}" title="{{ data.entity.oponnent_A_name }} vs {{ data.entity.oponnent_B_name }}">
-                    {{ data.symbol }}
-                </a>
-            {% endfor %}
+            {% if session.oponnent_B.gsm_id %}
+                {% for data in session.oponnent_B|five_sessions_series %}
+                    <a href="{{ data.entity.get_absolute_url }}" title="{{ data.entity.oponnent_A_name }} vs {{ data.entity.oponnent_B_name }}">
+                        {{ data.symbol }}
+                    </a>
+                {% endfor %}
+            {% endif %}
         </td>
     </tr>
     <tr>
