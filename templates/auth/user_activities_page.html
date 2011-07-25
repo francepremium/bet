@@ -1,6 +1,6 @@
 {% load activity_tags endless scoobet_tags %}
 
-{% paginate 15 activity_list %}
+{% paginate 7 activity_list %}
 {% for activity in activity_list|group_activities %}
     {# display_action activity #}
     {% with activity as action %}

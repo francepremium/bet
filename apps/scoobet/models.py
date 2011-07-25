@@ -50,7 +50,7 @@ def comment_posted_activity(sender, **kwargs):
     if comment.user == comment.content_object:
         action.send(comment.user, verb='updated his status', action_object=comment)
     elif isinstance(comment.content_object, User):
-        action.send(comment.user, verb='wall posted', action_object=comment)
+        action.send(comment.user, verb='wall posted', action_object=comment, target=comment.content_object)
     else:
         action.send(comment.user, verb='commented', action_object=comment)
 signals.post_save.connect(comment_posted_activity, sender=models.get_model('comments', 'Comment'))
@@ -78,7 +78,7 @@ def user_friends(user):
     target_choices_qs = User.objects.filter(
         Q(follow__object_id=user.pk, follow__content_type=c) | 
         Q(id__in=follows_users_ids)
-    ).select_related()
+    )
     return target_choices_qs
 User.friends = user_friends
 
@@ -90,7 +90,7 @@ def user_follows(user):
                                               content_type__model='user') \
                                       .exclude(object_id=user.pk) \
                                       .values_list('object_id', flat=True)
-    return User.objects.filter(pk__in=follows_users_ids).select_related()
+    return User.objects.filter(pk__in=follows_users_ids)
 User.follows = user_follows
 
 def user_following(user):
@@ -98,5 +98,5 @@ def user_following(user):
 
     followers_qs = User.objects.filter(follow__object_id=user.pk, 
                                         follow__content_type=c)
-    return followers_qs.select_related()
+    return followers_qs
 User.following = user_following

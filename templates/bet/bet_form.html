@@ -1,4 +1,8 @@
 {% load i18n gsm_tags %}
+{% if request.GET.forced %}
+    {% trans 'You have an open ticket. Please delete or complete this ticket. Then you will be able to create another ticket.' %}
+{% endif %}
+
 <form method="post" action="{% url bet_ticket_delete ticket.pk %}">
     {% csrf_token %}
     <input type="hidden" name="confirm" value="1" />
