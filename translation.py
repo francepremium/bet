@@ -15,5 +15,5 @@ translator.register(Session, NameAsciiTranslation)
 class NameTranslation(TranslationOptions):
     fields = ('name', )
 translator.register(Area, NameTranslation)
-translator.register(BetType, NameTranslation)
 translator.register(BetChoice, NameTranslation)
+translator.register(BetType, NameTranslation)
