@@ -12,7 +12,8 @@ from progressbar import ProgressBar
 from gsm.models import *
 import gsm
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('gsm')
+logger.info('starting sync')
 
 class UnexpectedChild(Exception):
     def __init__(self, parent, child):
@@ -33,7 +34,7 @@ class Command(BaseCommand):
                     self.save_area(code, element)
     
             for sport in Sport.objects.all():
-                print "Saving seasons for %s" % sport
+                logger.debug("Saving seasons for %s" % sport)
                 properties = {}
 
                 root = gsm.get_tree(code, sport, 'get_seasons', **properties).getroot()
@@ -47,6 +48,8 @@ class Command(BaseCommand):
                         self.save_competition(code, sport, element)
                     else:
                         raise UnexpectedChild(root, element)
+
+        logger.info('done sync')
 
     def areas_country_code_2(self):
         tmpfile, message = urllib.urlretrieve('http://www.andrewpatton.com/countrylist.csv')
@@ -88,18 +91,23 @@ class Command(BaseCommand):
                     setattr(model, k, v)
 
         if changed:
+            logger.debug('- - - %s changed or created', self.entity_to_text(model))
+
             invalid = []
             for k, v in changed.items():
+                logger.debug(v)
                 if '4294967295' in v:
                     invalid.append(k)
             for k in invalid:
                 setattr(model, k, None)
-                print "FIXED INVALID", changed[k], 'GSM_ID %s' % model.gsm_id
+                logger.warning("  FIXED INVALID" +  changed[k] + ' GSM_ID %s' % model.gsm_id)
 
             try:
                 model.save()
+                logger.debug('- - - Saved %s' % self.entity_to_text(model))
             except:
-                logger.error("Could not save %s" % self.entity_to_text(model))
+                logger.error("- - - Could not save %s" % self.entity_to_text(model))
+        
         return model
 
     def entity_to_text(self, entity):

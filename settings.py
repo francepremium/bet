@@ -8,6 +8,8 @@ import pinax
 gettext = lambda s: s
 PINAX_ROOT = os.path.abspath(os.path.dirname(pinax.__file__))
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+VAR_ROOT = os.path.join(PROJECT_ROOT, 'var')
+LOG_ROOT = os.path.join(VAR_ROOT, 'log')
 
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, "site_media", "media")
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
@@ -160,7 +162,7 @@ GSM_URL = 'http://%s:%s@webpull.globalsportsmedia.com' % (
     GSM_USERNAME,
     GSM_PASSWORD,
 )
-GSM_CACHE = os.path.join(PROJECT_ROOT, 'cache', 'gsm')
+GSM_CACHE = os.path.join(VAR_ROOT, 'cache', 'gsm')
 
 ACCOUNT_OPEN_SIGNUP = True
 LOGIN_URL='/account/login/'
@@ -189,7 +191,6 @@ DEVSERVER_MODULES = (
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
@@ -204,8 +205,51 @@ LOGGING = {
             'class':'logging.StreamHandler',
             'formatter': 'simple'
         },
+        'gsm_log_file':{
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(LOG_ROOT, 'gsm.log'),
+            'maxBytes': '16777216', # 16megabytes
+            'formatter': 'verbose'
+        },
+        'log_file':{
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(LOG_ROOT, 'django.log'),
+            'maxBytes': '16777216', # 16megabytes
+            'formatter': 'verbose'
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': True,
+        },
+    },
+    'loggers': {
+        'gsm': {
+            'debug_handlers': ['console'],
+            'production_handlers': ['gsm_log_file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'apps': {
+            'production_handlers': ['log_file'],
+            'debug_handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
     },
 }
+
+for name, logger in LOGGING['loggers'].items(): 
+    if DEBUG:
+        LOGGING['loggers'][name]['handlers'] = LOGGING['loggers'][name]['debug_handlers']
+    else:
+        LOGGING['loggers'][name]['handlers'] = LOGGING['loggers'][name]['production_handlers']
+
+for path in [VAR_ROOT, GSM_CACHE, LOG_ROOT]:
+    if not os.path.isdir(path):
+        os.makedirs(path)
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.

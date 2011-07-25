@@ -1,3 +1,4 @@
+import logging
 import time
 import sha
 import urllib
@@ -9,6 +10,8 @@ from django.conf import settings
 
 # Prevent: XMLSyntaxError: Attempt to load network entity
 etree.set_default_parser(etree.XMLParser(no_network=False, recover=True))
+
+logger = logging.getLogger('gsm')
 
 def get_tree(lang, sport, method, update=False, **parameters):
     LANGUAGE_FAILS = (
@@ -37,7 +40,7 @@ def get_tree(lang, sport, method, update=False, **parameters):
     cache_filepath = os.path.join(settings.GSM_CACHE, cache_filename)
     cache_lockname = '%s.lock' % cache_filename
     cache_lockpath = os.path.join(settings.GSM_CACHE, cache_lockname)
-    print settings.GSM_URL + url
+    logger.debug('accessing %s' % settings.GSM_URL + url)
 
     # ensure cached version is not too old
     if not update and os.path.exists(cache_filepath):
