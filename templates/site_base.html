@@ -74,7 +74,7 @@ tr.Fixture td.score.left {
 tr.Fixture td.score.right {
     text-align: left;
 }
-#global_ticket_form .results_on_deck { display: none; }
+#global_form .results_on_deck { display: none; }
 div.tree ul, .tab_content { display: none; }
 table.bettype table.choices td,
 table.bettype table.choices tr,
@@ -296,10 +296,14 @@ body.activity.detail div.activity div.comments {
 					<span>{% trans 'publication:' %}</span>
 					<ul>
 						<li class="publication_ticket"><a href="{% url bet_ticket_add %}">{% trans 'ticket'|capfirst %}</a></li>
-						<li class="publication_status"><a href="{% url bet_ticket_add %}">{% trans 'status'|capfirst %}</a></li>
+						<li class="publication_status"><a href="{% url scoobet_status_add %}">{% trans 'status'|capfirst %}</a></li>
 					</ul>
 				</div>
-				<div id="global_ticket_form"></div>
+                <div id="global_form">
+                    {% if incomplete_ticket_url %}
+                    <p class="info delete on_ticket_close">{% trans 'You have an openned ticket. It will open automatically here. Please finish it and/or close it.' %}</p>
+                    {% endif %}
+                </div>
 			</div>
 			{% endif %}
 		
@@ -397,7 +401,7 @@ body.activity.detail div.activity div.comments {
             }
 
 
-            var container = $('div#global_ticket_form');
+            var container = $('div#global_form');
             if (container.css('display') != 'none') {
                 container.slideUp('fast', function() {
                     container.html(html);
@@ -409,7 +413,7 @@ body.activity.detail div.activity div.comments {
             }
         }
         function load_global_ticket_url(url) {
-            var container = $('div#global_ticket_form');
+            var container = $('div#global_form');
             container.slideUp();
             $.get(url, {}, function(data, textStatus, jqXHR) {
                 load_global_ticket_html(data);
@@ -474,11 +478,20 @@ body.activity.detail div.activity div.comments {
                     e.preventDefault();
                     load_global_ticket_url($(this).attr('href'));
                 }
+                else if ($(this).attr('href') == '{% url scoobet_status_add %}') {
+                    e.preventDefault();
+                    var container = $('div#global_form');
+                    container.slideUp();
+                    $.get('{% url scoobet_status_add %}', {}, function(data, textStatus, jqXHR) {
+                        container.html(data);
+                        container.slideDown();
+                    });
+                }
 
                 return true;
             });
 
-            $('#global_ticket_form input[name=action]').live('click', function(e) {
+            $('#global_form input[name=action]').live('click', function(e) {
                 $(this).parents('form').trigger('submit');
             });
 
@@ -492,31 +505,31 @@ body.activity.detail div.activity div.comments {
             - update choices select
             - show choices
             */
-            $('#global_ticket_form select[name=bettype]').live('change', function(e) {
+            $('#global_form select[name=bettype]').live('change', function(e) {
                 if ($(this).val() == null) {
-                    $('#global_ticket_form div.choice').fadeOut();
+                    $('#global_form div.choice').fadeOut();
                     return false;
                 }
                 $.get(
                     '{% url bookmaker_choices_for_bettype %}',
                     {
-                        'bettype': $('#global_ticket_form select[name=bettype]').val(),
+                        'bettype': $('#global_form select[name=bettype]').val(),
                     },
                     function(data, textStatus, jqXHR) {
-                        update_select($('#global_ticket_form select[name=choice]'), data);
-                        $('#global_ticket_form div.choice').fadeIn();
+                        update_select($('#global_form select[name=choice]'), data);
+                        $('#global_form div.choice').fadeIn();
                     },
                     'json'
                 );
             });
 
-            $('#global_ticket_form select[name=stake], #global_ticket_form select[name=bookmaker]').live('change', function(e) {
-                if ($('#global_ticket_form select[name=stake]').val() && $('#global_ticket_form select[name=bookmaker]').val()) {
+            $('#global_form select[name=stake], #global_form select[name=bookmaker]').live('change', function(e) {
+                if ($('#global_form select[name=stake]').val() && $('#global_form select[name=bookmaker]').val()) {
                     $(this).parents('form').trigger('submit');
                 }
             });
 
-            $('#global_ticket_form form').live('submit', function(e) {
+            $('#global_form form').live('submit', function(e) {
                 e.preventDefault();
 
                 $(this).ajaxSubmit({
