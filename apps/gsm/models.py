@@ -93,6 +93,7 @@ class AbstractGsmEntity(models.Model):
     tag = models.CharField(max_length=32)
     area = models.ForeignKey('Area',null=True, blank=True)
     name = models.CharField(max_length=150, null=True, blank=True)
+    name_ascii = models.CharField(max_length=150, null=True, blank=True)
     last_updated = models.DateTimeField(null=True, blank=True)
     fans = models.ManyToManyField('auth.User')
 
