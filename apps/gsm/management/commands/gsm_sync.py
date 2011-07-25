@@ -111,7 +111,10 @@ class Command(BaseCommand):
         return model
 
     def entity_to_text(self, entity):
-        return '%s, %s, %s' % (entity.sport, entity.tag, entity.gsm_id)
+        if isinstance(entity, Area):
+            return u'Area %s: %s' % (entity.pk, entity)
+        else:
+            return u'%s, %s, %s' % (entity.sport, entity.tag, entity.gsm_id)
 
     def save_area(self, language, element, **properties):
         properties.update({

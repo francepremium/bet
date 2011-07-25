@@ -48,10 +48,25 @@ class Area(models.Model):
         ordering = ('-name',)
         order_with_respect_to = 'parent'
 
+class SportManager(models.Manager):
+    def get_for_object(self, object):
+        return self.get_for_pk(object.sport_id)
+
+    def get_for_pk(self, pk):
+        key = 'sport #%s' % pk
+
+        sport = cache.get(key)
+        if not sport:
+            sport = self.get(pk=pk)
+            cache.set(key, sport)
+        return sport
+
 class Sport(models.Model):
     name = models.CharField(max_length=30)
     slug = models.CharField(max_length=20)
     fans = models.ManyToManyField('auth.User')
+
+    objects = SportManager()
 
     def __unicode__(self):
         return _(self.name)
@@ -103,9 +118,12 @@ class AbstractGsmEntity(models.Model):
         unique_together = ('sport', 'tag', 'gsm_id')
         abstract = True
 
+    def get_sport(self):
+        return Sport.objects.get_for_object(self)
+    
     def get_tab_absolute_url(self, tab):
         return urlresolvers.reverse('gsm_%s_detail_tab' % self.tag, args=(
-            self.sport.slug, self.gsm_id, tab))
+            self.get_sport().slug, self.gsm_id, tab))
 
     def get_home_absolute_url(self):
         return self.get_tab_absolute_url('home')
@@ -131,10 +149,10 @@ class AbstractGsmEntity(models.Model):
             else:
                 tag = self.tag
             return urlresolvers.reverse('gsm_%s_detail_tab' % tag, args=(
-                self.sport.slug, self.gsm_id, 'home'))
+                self.get_sport().slug, self.gsm_id, 'home'))
         except urlresolvers.NoReverseMatch:
             return urlresolvers.reverse('gsm_entity_detail', args=(
-                self.sport.slug, self.tag, self.gsm_id,))
+                self.get_sport().slug, self.tag, self.gsm_id,))
 
     def get_area(self):
         if self.area:
@@ -171,13 +189,13 @@ class AbstractGsmEntity(models.Model):
             if 'firstname' in self.attrib.keys():
                 return '%s %s' % (self.attrib['firstname'], self.attrib['lastname'])
         return self.name
-        return '%s (<%s> #%s %s)' % (self.name, self.tag, self.gsm_id, self.sport)
 
 class GsmEntity(AbstractGsmEntity):
     def get_sessions(self):
-        q = Session.objects.filter(sport=self.sport)
+        q = Session.objects.filter(sport=self.get_sport())
         q = q.filter(models.Q(oponnent_A=self)|models.Q(oponnent_B=self))
         q = q.order_by('-datetime_utc')
+        q = q.select_related('session_round', 'session_round__season', 'session_round__season__competition', 'session_round__season__competition__area', 'sport', 'oponnent_A', 'oponnent_A__sport', 'oponnent_B__sport')
         return q
 
     def get_large_image_url(self):
@@ -186,13 +204,13 @@ class GsmEntity(AbstractGsmEntity):
         if tag == 'person':
             tag = 'players'
         elif tag == 'team':
-            if self.sport.slug == 'soccer':
+            if self.get_sport().slug == 'soccer':
                 return 'http://imagecache.soccerway.com/new/teams/150x150/%s.gif' % self.gsm_id
             else:
                 tag = 'teams'
                 ext = 'gif'
 
-        return 'http://images.globalsportsmedia.com/%s/%s/150x150/%s.%s' % (self.sport.slug, tag, self.gsm_id, ext)
+        return 'http://images.globalsportsmedia.com/%s/%s/150x150/%s.%s' % (self.get_sport().slug, tag, self.gsm_id, ext)
 
     def oponnent_A_name(self):
         raise Exception('oponnent_A_name has been deprecated. Use oponnent_A.name instead')
@@ -366,7 +384,7 @@ class Session(AbstractGsmEntity):
 
     def get_tab_absolute_url(self, tab):
         return urlresolvers.reverse('gsm_%s_detail_tab' % 'session', args=(
-            self.sport.slug, self.gsm_id, tab))
+            self.get_sport().slug, self.gsm_id, tab))
     
     def get_after_absolute_url(self):
         return self.get_tab_absolute_url('after')

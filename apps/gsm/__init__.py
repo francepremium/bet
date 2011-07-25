@@ -63,7 +63,6 @@ def get_tree(lang, sport, method, update=False, **parameters):
 
     return tree
 
-
 class GsmException(Exception):
     """
     Parent exception for all exceptions thrown by this app code.
