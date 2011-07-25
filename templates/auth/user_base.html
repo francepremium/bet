@@ -27,7 +27,8 @@
 {% block body %}
     <h1>{{ object }}</h1>
     {% render_popularity_for_object request object %}
-    {% if request.user.is_authenticated %}
+
+    {% if request.user.is_authenticated and request.user != object %}
         {% get_comment_form for object as comment_form %}
         <div class="comment_form_container">
             <form action="{% comment_form_target %}" method="post">

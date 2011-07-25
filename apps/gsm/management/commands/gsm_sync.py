@@ -273,6 +273,10 @@ class Command(BaseCommand):
             element.attrib.get('actual_start_date', '') or '',
             element.attrib.get('actual_start_time', '') or '',
         )
+        
+        if actual_start_datetime[-1] == ' ': # no time, set to midnight
+            actual_start_datetime = actual_start_datetime + '00:00:00'
+
         if actual_start_datetime not in (' ', ' 00:00:00'):
             actual_start_datetime = converter.to_python(actual_start_datetime)
         else:
@@ -289,6 +293,8 @@ class Command(BaseCommand):
                 element.attrib.get('time_utc', '00:00:00') or '00:00:00',
             )
 
+        if official_start_datetime[-1] == ' ': # no time, set to midnight
+            official_start_datetime = official_start_datetime + '00:00:00'
         if official_start_datetime not in (' ', ' 00:00:00'):
             official_start_datetime = converter.to_python(official_start_datetime)
         else:

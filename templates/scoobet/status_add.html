@@ -1,0 +1,16 @@
+{% load comments %}
+{% load scoobet_tags %}
+{% load i18n %}
+
+{% get_comment_form for object as comment_form %}
+<div class="comment_form_container">
+    <form action="{% comment_form_target %}" method="post">
+        {% csrf_token %}
+        {{ comment_form.comment }}
+        {% for field in comment_form %}
+            {% if field.is_hidden %}{{ field }}{% endif %}
+        {% endfor %}
+        <input type="submit" name="post" class="submit-post" value="{% trans "Post" %}" />
+    </form>
+</div>
+
