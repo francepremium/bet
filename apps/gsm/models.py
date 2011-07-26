@@ -336,7 +336,6 @@ class SessionManager(models.Manager):
         Optimize for current templates/gsm/_includes/sessions.html
         """
         q = super(SessionManager, self).get_query_set()
-        q = q.order_by('-datetime_utc')
         q = q.select_related('oponnent_A', 'oponnent_B', 'session_round', 
             'session_round__season', 'session_round__season__competition', 
             'session_round__season__competition__area', 'sport', 'oponnent_A')
@@ -390,7 +389,7 @@ class Session(AbstractGsmEntity):
     objects = SessionManager()
 
     class Meta:
-        ordering = ['-datetime_utc']
+        ordering = ['datetime_utc']
 
     def __unicode__(self):
         return self.name
