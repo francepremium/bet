@@ -329,6 +329,8 @@ class Round(AbstractGsmEntity):
         return self._next_round
 
 class SessionManager(models.Manager):
+    use_for_related_fields = True
+
     def get_query_set(self):
         """
         Optimize for current templates/gsm/_includes/sessions.html
