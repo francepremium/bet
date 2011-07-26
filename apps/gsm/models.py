@@ -328,6 +328,19 @@ class Round(AbstractGsmEntity):
                 self._next_round = False
         return self._next_round
 
+class SessionManager(models.Manager):
+    def get_query_set(self):
+        """
+        Optimize for current templates/gsm/_includes/sessions.html
+        """
+        q = super(SessionManager, self).get_query_set()
+        q = q.order_by('-datetime_utc')
+        q = q.select_related('oponnent_A', 'oponnent_B', 'session_round', 
+            'session_round__season', 'session_round__season__competition', 
+            'session_round__season__competition__area', 'sport', 'oponnent_A')
+        return q
+
+
 class Session(AbstractGsmEntity):
     season = models.ForeignKey('Season', null=True, blank=True)
     session_round = models.ForeignKey('Round', null=True, blank=True)
@@ -371,6 +384,8 @@ class Session(AbstractGsmEntity):
     winner = models.ForeignKey('GsmEntity', null=True, blank=True, related_name='won_sessions')
     oponnent_A = models.ForeignKey('GsmEntity', related_name='sessions_as_A', null=True, blank=True)
     oponnent_B = models.ForeignKey('GsmEntity', related_name='sessions_as_B', null=True, blank=True)
+
+    objects = SessionManager()
 
     class Meta:
         ordering = ['-datetime_utc']

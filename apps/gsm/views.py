@@ -308,10 +308,6 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         q = Session.objects.filter(sport=sport)
         q = q.filter(Q(oponnent_A=team)|Q(oponnent_B=team))
         q = q.filter(datetime_utc__gte=datetime.date.today())
-        q = q.order_by('datetime_utc')
-        q = q.select_related('oponnent_A', 'oponnent_B', 'session_round', 
-            'session_round__season', 'session_round__season__competition', 
-            'session_round__season__competition__area', 'sport', 'oponnent_A')
         context['next_sessions'] = q[:7]
 
         reference_season = get_reference_season(team)
