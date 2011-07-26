@@ -239,8 +239,6 @@ class Competition(AbstractGsmEntity):
         return self._last_season
 
     def __unicode__(self):
-        if self.area_id:
-            return '%s: %s' % (self.area.name, self.name)
         if self.name:
             return self.name
         if hasattr(self, 'element'):
