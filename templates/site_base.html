@@ -338,6 +338,8 @@ body.activity.detail div.activity div.comments {
         {% include "facebox_js.html" %}
         <script type="text/javascript">
         $(document).bind('yourlabs_autocomplete.selectOption', function(e, autocomplete, option) {
+            autocomplete.hide();
+            autocomplete.el.val('{% trans 'loading page' %}: ' + $.trim(option.text()));
             link = $(option).find('a:first');
             if (link.length && link.attr('href') != undefined) {
                 window.location.href = link.attr('href');

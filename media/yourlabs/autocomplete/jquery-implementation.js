@@ -1,11 +1,9 @@
 (function($) {
     $(document).bind('yourlabs_autocomplete.activateOption', function(e, autocomplete, option) {
         option.addClass(autocomplete.options.activeClass);
-        autocomplete.show();
     });
     $(document).bind('yourlabs_autocomplete.deactivateOption', function(e, autocomplete, option) {
         option.removeClass(autocomplete.options.activeClass);
-        autocomplete.show();
     });
 
     function Autocomplete(el, options) {
@@ -21,6 +19,7 @@
             defaultValue: 'type your search here',
             activeClass: 'active',
             queryVariable: 'q',
+            blurTimeout: 500,
         };
         this.setOptions(options);
         this.initialize();
@@ -66,6 +65,9 @@
 
             $('.yourlabs_autocomplete.inner_container.id_'+this.options.id+' .option').live({
                 mouseenter: function(e) {
+                    $('.yourlabs_autocomplete.inner_container.id_'+autocomplete.options.id+' .option.' + autocomplete.options.activeClass).each(function() {
+                        $(document).trigger('yourlabs_autocomplete.deactivateOption', [autocomplete, $(this)]);
+                    });
                     $(document).trigger('yourlabs_autocomplete.activateOption', [autocomplete, $(this)]);
                 },
                 mouseleave: function(e) {
@@ -93,7 +95,12 @@
             } else {
                 this.el.keydown(function(e) { autocomplete.onKeyPress(e); });
             }
-            this.el.blur(function(e) { autocomplete.hide(); });
+            this.el.blur(function(e) { 
+                window.setTimeout(function() {
+                    autocomplete.hide(); 
+                }, autocomplete.options.blurTimeout);
+            });
+            this.el.dblclick(function(e) { autocomplete.show(); });
         },
         onKeyPress: function(e) {
             var option;
@@ -142,6 +149,8 @@
             current = this.innerContainer.find('.option.' + this.options.activeClass);
             first = this.innerContainer.find('.option:first');
             last = this.innerContainer.find('.option:last');
+
+            this.show();
 
             if (current.length) {
                 if (way == 'up') {
