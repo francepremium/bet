@@ -177,8 +177,6 @@ class AbstractGsmEntity(models.Model):
 
 
     def __unicode__(self):
-        if self.pk == 1100:
-            import ipdb; ipdb.set_trace()
         if hasattr(self, 'element'):
             if 'name' in self.attrib.keys():
                 return self.attrib['name']
