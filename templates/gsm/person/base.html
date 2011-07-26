@@ -9,9 +9,11 @@
     <li class="home tab {% if tab == 'home' %}active{% endif %}">
         <a href="{{ person.get_home_absolute_url }}" title="{{ person.name }}">{% trans 'file' %}</a>
     </li>
+	{% comment %}
     <li class="news tab {% if tab == 'news' %}active{% endif %}">
         <a href="{{ person.get_news_absolute_url }}" title="{{ person.name }}">{% trans 'news' %}</a>
     </li>
+	{% endcomment %}
     {% if sport.slug == 'tennis' %}
     <li class="matches tab {% if tab == 'matches' %}active{% endif %}">
         <a href="{{ person.get_matches_absolute_url }}" title="{{ person.name }}">{% trans 'matches' %}</a>
