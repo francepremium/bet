@@ -38,15 +38,19 @@ def autocomplete(request,
     queries = {}
     queries['sessions'] = Session.objects.filter(
         datetime_utc__gte=datetime.date.today()).filter(
-        Q(name_ascii__icontains=q)|Q(name__icontains=q)).order_by(
+        Q(name_ascii_fr__icontains=q)|Q(name_fr__icontains=q)|
+        Q(name_ascii_en__icontains=q)|Q(name_en__icontains=q)).order_by(
             'datetime_utc').distinct()[:3]
     queries['users'] = User.objects.filter(username__icontains=q)[:3]
     queries['teams'] = GsmEntity.objects.filter(
-        Q(name_ascii__icontains=q)|Q(name__icontains=q), tag='team')[:3]
+        Q(name_ascii_fr__icontains=q)|Q(name_fr__icontains=q)|
+        Q(name_ascii_en__icontains=q)|Q(name_en__icontains=q), tag='team')[:3]
     queries['players'] = GsmEntity.objects.filter(
-        Q(name_ascii__icontains=q)|Q(name__icontains=q), tag='person')[:3]
+        Q(name_ascii_en__icontains=q)|Q(name_en__icontains=q)|
+        Q(name_ascii_fr__icontains=q)|Q(name_fr__icontains=q), tag='person')[:3]
     queries['competitions'] = Competition.objects.filter(
-        Q(name_ascii__icontains=q)|Q(name__icontains=q))[:3]
+        Q(name_ascii_fr__icontains=q)|Q(name_fr__icontains=q)|
+        Q(name_ascii_en__icontains=q)|Q(name_en__icontains=q))[:3]
     context.update(queries)
 
     results = 0
