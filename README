@@ -3,3 +3,8 @@ Migrations:
         - remove project_root/cache folder (in favor of project_root/var/cache/)
         - use manage.py upgradedb --list and manage.py upgradedb --exec instead 
           of syncdb
+    2011-07-26, branch homepage:
+        - pip install celery django-celery djkombu or pip install -r project.txt
+        - manage.py upgradedb --exec
+        - in addition to runserver, run in a separate console: 
+          manage.py celeryd -l info

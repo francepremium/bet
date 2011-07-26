@@ -133,6 +133,8 @@ INSTALLED_APPS = [
     'autofixture',
     'nashvegas',
     'django_messages',
+    'djkombu',
+    'djcelery',
     #'devserver',
 
     # Pinax
@@ -154,6 +156,8 @@ LANGUAGES = (
 )
 MODELTRANSLATION_DEFAULT_LANGUAGE='fr'
 MODELTRANSLATION_TRANSLATION_REGISTRY='translation'
+
+BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
 
 GSM_USERNAME = 'betspire'
 GSM_PASSWORD = 'lixzw2c'
@@ -250,6 +254,9 @@ for name, logger in LOGGING['loggers'].items():
 for path in [VAR_ROOT, GSM_CACHE, LOG_ROOT]:
     if not os.path.isdir(path):
         os.makedirs(path)
+
+import djcelery
+djcelery.setup_loader()
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
