@@ -195,7 +195,7 @@ class GsmEntity(AbstractGsmEntity):
         q = Session.objects.filter(sport=self.get_sport())
         q = q.filter(models.Q(oponnent_A=self)|models.Q(oponnent_B=self))
         q = q.order_by('-datetime_utc')
-        q = q.select_related('session_round', 'session_round__season', 'session_round__season__competition', 'session_round__season__competition__area', 'sport', 'oponnent_A', 'oponnent_A__sport', 'oponnent_B__sport')
+        q = q.select_related('session_round', 'session_round__season', 'session_round__season__competition', 'session_round__season__competition__area', 'sport', 'oponnent_A')
         return q
 
     def get_large_image_url(self):
