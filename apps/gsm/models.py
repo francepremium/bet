@@ -190,11 +190,9 @@ class AbstractGsmEntity(models.Model):
 
 class GsmEntity(AbstractGsmEntity):
     def get_sessions(self):
-        q = Session.objects.filter(sport=self.get_sport())
-        q = q.filter(models.Q(oponnent_A=self)|models.Q(oponnent_B=self))
-        q = q.order_by('-datetime_utc')
-        q = q.select_related('session_round', 'session_round__season', 'session_round__season__competition', 'session_round__season__competition__area', 'sport', 'oponnent_A')
-        return q
+        if not hasattr(self, '_sessions'):
+            self._sessions = Session.objects.filter(models.Q(oponnent_A=self)|models.Q(oponnent_B=self))
+        return self._sessions
 
     def get_large_image_url(self):
         tag = self.tag
