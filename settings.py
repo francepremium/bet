@@ -178,14 +178,14 @@ EMAIL_CONFIRMATION_DAYS = 3
 DEVSERVER_MODULES = (
     #'devserver.modules.sql.SQLRealTimeModule',
     #'devserver.modules.sql.SQLSummaryModule',
-    'devserver.modules.profile.ProfileSummaryModule',
+    #'devserver.modules.profile.ProfileSummaryModule',
 
     # Modules not enabled by default
     #'devserver.modules.ajax.AjaxDumpModule',
     # commented out because it cases an exception: MemoryUseModule object has
     # not attribute heapy
     #'devserver.modules.profile.MemoryUseModule',
-    'devserver.modules.cache.CacheSummaryModule',
+    #'devserver.modules.cache.CacheSummaryModule',
     'devserver.modules.profile.LineProfilerModule',
 )
 
