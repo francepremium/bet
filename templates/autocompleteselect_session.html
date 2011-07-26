@@ -14,7 +14,6 @@
 			return false;
 		},
 		select: function(event, ui) {
-            console.log('SELECT', event,ui);
 			prev = $("#{{html_id}}").val();
 			if(prev) {
 				kill_{{ func_slug }}(prev);
@@ -23,9 +22,9 @@
 			$("#{{html_id}}").val(ui.item.pk);
 			$("#{{html_id}}_text").val(ui.item.label);
             var sport = ui.item.desc.match(/>([^<]+)<\/span>/)[1];
-            var bookmaker = $('#global_ticket_form div.bookmaker');
+            var bookmaker = $('#global_form div.bookmaker');
             var bookmaker_pk = bookmaker.attr('class').match(/pk_([0-9]+)/)[1];
-            var bettypes = $('#global_ticket_form select[name=bettype]');
+            var bettypes = $('#global_form select[name=bettype]');
             $.get(
                 '{% url bookmaker_bet_types_json %}',
                 {
@@ -34,7 +33,7 @@
                 },
                 function(data, textStatus, jqXHR) {
                     update_select(bettypes, data);
-                    $('#global_ticket_form div.bettype').fadeIn();
+                    $('#global_form div.bettype').fadeIn();
                 },
                 'json'
             );

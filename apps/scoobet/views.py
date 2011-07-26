@@ -108,7 +108,9 @@ def feed_friends(request,
 def user_detail(request, username, tab='activities',
     template_name='auth/user_%s.html', extra_context=None):
 
-    context = {}
+    context = {
+        'tab': tab,
+    }
 
     user = context['object'] = shortcuts.get_object_or_404(User, 
                                                         username=username)

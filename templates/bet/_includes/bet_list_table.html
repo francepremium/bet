@@ -67,7 +67,7 @@
                 {% endif %}
                 {% if 'sport' not in exclude_columns %}
                     <td>
-                        <a href="{{ bet.session.sport.get_absolute_url }}" title="{{ bet.session.sport }}">{{ bet.session.sport }}</a>
+                        <a href="{{ bet.session.get_sport.get_absolute_url }}" title="{{ bet.session.get_sport }}">{{ bet.session.get_sport }}</a>
                     </td>
                 {% endif %}
                 {% if 'competition' not in exclude_columns %}

@@ -165,6 +165,7 @@ GSM_URL = 'http://%s:%s@webpull.globalsportsmedia.com' % (
 GSM_CACHE = os.path.join(VAR_ROOT, 'cache', 'gsm')
 
 ACCOUNT_OPEN_SIGNUP = True
+ACCOUNT_EMAIL_VERIFICATION = True
 LOGIN_URL='/account/login/'
 
 AJAX_LOOKUP_CHANNELS = {

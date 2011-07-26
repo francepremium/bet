@@ -5,20 +5,21 @@
 {% load i18n %}
 
 {% block subnav %}
+{{ tab}}
 <ul>
-    <li>
+    <li class="{% if tab == 'activities' %}active{% endif %}">
         <a href="{% url user_detail_tab object.username 'activities' %}" title="{% trans 'activities of' %} {{ object }}">{% trans 'activities' %}</a>
     </li>
-    <li>
+    <li class="{% if tab == 'social' %}active{% endif %}">
         <a href="{% url user_detail_tab object.username 'social' %}" title="{% trans 'relations with' %} {{ object }}">{% trans 'social' %}</a>
     </li>
-    <li>
+    <li class="{% if tab == 'file' %}active{% endif %}">
         <a href="{% url user_detail_tab object.username 'file' %}" title="{% trans 'file of' %} {{ object }}">{% trans 'file' %}</a>
     </li>
-    <li>
+    <li class="{% if tab == 'statistics' %}active{% endif %}">
         <a href="{% url user_detail_tab object.username 'stats' %}" title="{% trans 'statistics of' %} {{ object }}">{% trans 'statistics' %}</a>
     </li>
-    <li>
+    <li class="{% if tab == 'picks' %}active{% endif %}">
         <a href="{% url user_detail_tab object.username 'picks' %}" title="{% trans 'picks of' %} {{ object }}">{% trans 'picks' %}</a>
     </li>
 </ul>
