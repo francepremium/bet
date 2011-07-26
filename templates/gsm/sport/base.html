@@ -15,15 +15,19 @@
     <li class="home tab {% if tab == 'home' %}active{% endif %}">
         <a href="{{ sport.get_home_absolute_url }}" title="{{ sport }}">{% trans 'home' %}</a>
     </li>
+	{% comment %}
     <li class="news tab {% if tab == 'news' %}active{% endif %}">
         <a href="{{ sport.get_news_absolute_url }}" title="{{ sport }} {% trans 'news' %}">{% trans 'news' %}</a>
     </li>
+	{% endcomment %}
     <li class="competitions tab {% if tab == 'competitions' %}active{% endif %}">
         <a href="{{ sport.get_competitions_absolute_url }}" title="{{ sport }} {% trans 'competitions' %}">{% trans 'competitions' %}</a>
     </li>
+	{% comment %}
     <li class="informations tab {% if tab == 'informations' %}active{% endif %}">
         <a href="{{ sport.get_informations_absolute_url }}" title="{{ sport }} {% trans 'informations' %}">{% trans 'informations' %}</a>
     </li>
+	{% endcomment %}
     <li class="results tab {% if tab == 'results' %}active{% endif %}">
         <a href="{{ sport.get_results_absolute_url }}" title="{{ sport }} {% trans 'results' %}">{% trans 'results' %}</a>
     </li>
