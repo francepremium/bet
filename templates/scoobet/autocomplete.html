@@ -1,54 +1,43 @@
 {% load i18n %}
 {% load humanize %}
-
-{% if teams %}
 	<ul>
+{% if teams %}
 		<li>{% trans 'teams'|capfirst %}</li>
     {% for team in teams %}
-        <li><a href="{{ team.get_absolute_url }}">{{ team }}</a></li>
+		<li><a href="{{ team.get_absolute_url }}">{{ team }}</a></li>
     {% endfor %}
-    </ul>
 {% endif %}
 
 {% if sessions %}
-    <ul>
 		<li>{% trans 'matches'|capfirst %}</li>
     {% for session in sessions %}
         <li><a href="{{ session.get_absolute_url }}">{{ session }} - {{ session.datetime_utc|naturalday }}</a></li>
     {% endfor %}
-	</ul>
 {% endif %}
 
 {% if users %}
-    <ul>
 		<li>{% trans 'users'|capfirst %}</li>
     {% for user in users %}
         <li><a href="{{ user.get_absolute_url }}">{{ user }}</a></li>
     {% endfor %}
-	</ul>
 {% endif %}
 
 {% if players %}
-    <ul>
 		<li>{% trans 'players'|capfirst %}</li>
     {% for player in players %}
         <li><a href="{{ player.get_absolute_url }}">{{ player }}</a></li>
     {% endfor %}
-	</ul>
 {% endif %}
 
 {% if competitions %}
-    <ul>
 		<li>{% trans 'competitions'|capfirst %}</li>
     {% for competition in competitions %}
         <li><a href="{{ competition.get_absolute_url }}">{{ competition }}</a></li>
     {% endfor %}
-	</ul>
 {% endif %}
 
 {% if not results %}
-	<ul>
 		<li>{% trans 'no results'|capfirst %}</li>
 		<li><a href="">{% blocktrans %}Search for {{ q }} instead{% endblocktrans %}</a></li>
-	</ul>
 {% endif %}
+	</ul>
