@@ -32,9 +32,10 @@ def fan(request, action, model_class, model_pk, app_name='gsm'):
         model.fans.add(request.user)
         actstream.action.send(request.user, verb='bets on',
             action_object=model)
+        message = _('you indicated that you bet on') + ' %s' % model
     else:
         model.fans.remove(request.user)
-    message = _('you indicated that you bet on %s') % model
+        message = _('you indicated that you do not bet anymore on') + ' %s' % model
     messages.success(request, message)
     return shortcuts.redirect(model.get_absolute_url())
 
