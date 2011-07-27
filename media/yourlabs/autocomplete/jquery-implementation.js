@@ -176,8 +176,13 @@
             $(document).trigger('yourlabs_autocomplete.activateOption', [this, target]);
         },
         fixPosition: function() {
-            var offset = this.el.offset();
-            this.outerContainer.css({ top: (offset.top + this.el.innerHeight()) + 'px', left: offset.left + 'px' });
+			var top = 0;
+			var left = 0;
+			this.el.parents().map(function(){
+				top += this.offsetTop + this.clientTop;
+				left += this.offsetLeft + this.clientLeft;
+			});
+            this.outerContainer.css({ top: (top + this.el.innerHeight()) + 'px', left: left + 'px' });
         },
         refresh: function() {
             var newValue;
