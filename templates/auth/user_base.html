@@ -3,31 +3,41 @@
 {% load comments %}
 {% load scoobet_tags %}
 {% load i18n %}
+{% load avatar_tags %}
 
 {% block subnav %}
 <ul>
-    <li>
+    <li class="{% if tab == 'activities' %}active{% endif %}">
         <a href="{% url user_detail_tab object.username 'activities' %}" title="{% trans 'activities of' %} {{ object }}">{% trans 'activities' %}</a>
     </li>
-    <li>
+    <li class="{% if tab == 'social' %}active{% endif %}">
         <a href="{% url user_detail_tab object.username 'social' %}" title="{% trans 'relations with' %} {{ object }}">{% trans 'social' %}</a>
     </li>
-    <li>
+    <li class="{% if tab == 'file' %}active{% endif %}">
         <a href="{% url user_detail_tab object.username 'file' %}" title="{% trans 'file of' %} {{ object }}">{% trans 'file' %}</a>
     </li>
-    <li>
+    <li class="{% if tab == 'statistics' %}active{% endif %}">
         <a href="{% url user_detail_tab object.username 'stats' %}" title="{% trans 'statistics of' %} {{ object }}">{% trans 'statistics' %}</a>
     </li>
-    <li>
+    <li class="{% if tab == 'picks' %}active{% endif %}">
         <a href="{% url user_detail_tab object.username 'picks' %}" title="{% trans 'picks of' %} {{ object }}">{% trans 'picks' %}</a>
     </li>
 </ul>
 {% endblock %}
 
-{% block body %}
-    <h1>{{ object }}</h1>
-    {% render_popularity_for_object request object %}
+{% block body_head %}
+    <div class="image">
+		{% avatar object %}
+	</div>
 
+	<div class="title">
+		<h1>{{ object }}</h1>
+	</div>
+
+    {% render_popularity_for_object request object %}
+{% endblock %}
+
+{% block body %}
     {% if request.user.is_authenticated and request.user != object %}
         {% get_comment_form for object as comment_form %}
         <div class="comment_form_container">

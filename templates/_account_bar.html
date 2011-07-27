@@ -5,6 +5,7 @@
 	{% if user.is_staff %}
 		<li><a href="/admin/">Admin</a></li>
 	{% endif %}
+        <li><a href="{% url acct_timezone_change %}">{% trans 'Account' %}</a></li>
 	{% if user.bookmaker %}
 		<li><a href="{% url bookmaker_edit user.bookmaker.pk %}">Bookmaker</a></li>
 	{% endif %}

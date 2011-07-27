@@ -1,5 +1,6 @@
 import datetime
 
+from django.utils import simplejson
 from django.db.models import Q, Avg
 from django.utils.translation import ugettext as _
 from django import template
@@ -28,6 +29,22 @@ def status_add(request,
     return shortcuts.render_to_response(template_name, context,
         context_instance=template.RequestContext(request))
 
+@login_required
+def friends_autocomplete(request):
+    term = request.GET['term']
+
+    q = request.user.friends().filter(
+        Q(username__icontains=term)
+    )
+    result = []
+    for user in q:
+        result.append({
+            'id': user.username,
+            'value': user.username,
+            'label': user.username,
+        })
+    return http.HttpResponse(simplejson.dumps(result))
+
 def autocomplete(request,
     template_name='scoobet/autocomplete.html', extra_context=None):
     q = request.GET['q'] # crash if q is not in the url
@@ -38,15 +55,19 @@ def autocomplete(request,
     queries = {}
     queries['sessions'] = Session.objects.filter(
         datetime_utc__gte=datetime.date.today()).filter(
-        Q(name_ascii__icontains=q)|Q(name__icontains=q)).order_by(
+        Q(name_ascii_fr__icontains=q)|Q(name_fr__icontains=q)|
+        Q(name_ascii_en__icontains=q)|Q(name_en__icontains=q)).order_by(
             'datetime_utc').distinct()[:3]
     queries['users'] = User.objects.filter(username__icontains=q)[:3]
     queries['teams'] = GsmEntity.objects.filter(
-        Q(name_ascii__icontains=q)|Q(name__icontains=q), tag='team')[:3]
+        Q(name_ascii_fr__icontains=q)|Q(name_fr__icontains=q)|
+        Q(name_ascii_en__icontains=q)|Q(name_en__icontains=q), tag='team')[:3]
     queries['players'] = GsmEntity.objects.filter(
-        Q(name_ascii__icontains=q)|Q(name__icontains=q), tag='person')[:3]
+        Q(name_ascii_en__icontains=q)|Q(name_en__icontains=q)|
+        Q(name_ascii_fr__icontains=q)|Q(name_fr__icontains=q), tag='person')[:3]
     queries['competitions'] = Competition.objects.filter(
-        Q(name_ascii__icontains=q)|Q(name__icontains=q))[:3]
+        Q(name_ascii_fr__icontains=q)|Q(name_fr__icontains=q)|
+        Q(name_ascii_en__icontains=q)|Q(name_en__icontains=q))[:3]
     context.update(queries)
 
     results = 0
@@ -108,7 +129,9 @@ def feed_friends(request,
 def user_detail(request, username, tab='activities',
     template_name='auth/user_%s.html', extra_context=None):
 
-    context = {}
+    context = {
+        'tab': tab,
+    }
 
     user = context['object'] = shortcuts.get_object_or_404(User, 
                                                         username=username)

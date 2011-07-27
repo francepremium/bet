@@ -1,59 +1,43 @@
 {% load i18n %}
 {% load humanize %}
-
+	<ul>
 {% if teams %}
-    {% trans 'teams' %}
+		<li>{% trans 'teams'|capfirst %}</li>
     {% for team in teams %}
-    <div class="option">
-        {{ team }}
-        <a href="{{ team.get_absolute_url }}" style="display: none"></a>
-    </div>
+		<li><a href="{{ team.get_absolute_url }}">{{ team }}</a></li>
     {% endfor %}
 {% endif %}
 
 {% if sessions %}
-    {% trans 'matches' %}
+		<li>{% trans 'matches'|capfirst %}</li>
     {% for session in sessions %}
-    <div class="option">
-        {{ session }} {{ session.datetime_utc|naturalday }}
-        <a href="{{ session.get_absolute_url }}" style="display: none"></a>
-    </div>
+        <li><a href="{{ session.get_absolute_url }}">{{ session }} - {{ session.datetime_utc|naturalday }}</a></li>
     {% endfor %}
 {% endif %}
 
 {% if users %}
-    {% trans 'users' %}
+		<li>{% trans 'users'|capfirst %}</li>
     {% for user in users %}
-    <div class="option">
-        {{ user }}
-        <a href="{{ user.get_absolute_url }}" style="display: none"></a>
-    </div>
+        <li><a href="{{ user.get_absolute_url }}">{{ user }}</a></li>
     {% endfor %}
 {% endif %}
 
 {% if players %}
-    {% trans 'players' %}
+		<li>{% trans 'players'|capfirst %}</li>
     {% for player in players %}
-    <div class="option">
-        {{ player }}
-        <a href="{{ player.get_absolute_url }}" style="display: none"></a>
-    </div>
+        <li><a href="{{ player.get_absolute_url }}">{{ player }}</a></li>
     {% endfor %}
 {% endif %}
 
 {% if competitions %}
-    {% trans 'competitions' %}
+		<li>{% trans 'competitions'|capfirst %}</li>
     {% for competition in competitions %}
-    <div class="option">
-        {{ competition }}
-        <a href="{{ competition.get_absolute_url }}" style="display: none"></a>
-    </div>
+        <li><a href="{{ competition.get_absolute_url }}">{{ competition }}</a></li>
     {% endfor %}
 {% endif %}
 
 {% if not results %}
-<div class="option">
-    <p class="small">{% trans 'no results' %}</p>
-    <a href="">{% blocktrans %}Search for {{ q }} instead{% endblocktrans %}</a>
-</div>
+		<li>{% trans 'no results'|capfirst %}</li>
+		<li><a href="">{% blocktrans %}Search for {{ q }} instead{% endblocktrans %}</a></li>
 {% endif %}
+	</ul>

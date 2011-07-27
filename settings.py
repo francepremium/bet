@@ -94,6 +94,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'staticfiles.context_processors.static_url',
     'pinax.core.context_processors.pinax_settings',
     'bet.context_processors.incomplete_ticket',
+    'scoobet.context_processors.inbox_count',
 ]
 
 INSTALLED_APPS = [
@@ -169,6 +170,7 @@ GSM_URL = 'http://%s:%s@webpull.globalsportsmedia.com' % (
 GSM_CACHE = os.path.join(VAR_ROOT, 'cache', 'gsm')
 
 ACCOUNT_OPEN_SIGNUP = True
+ACCOUNT_EMAIL_VERIFICATION = True
 LOGIN_URL='/account/login/'
 
 AJAX_LOOKUP_CHANNELS = {
