@@ -94,6 +94,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'staticfiles.context_processors.static_url',
     'pinax.core.context_processors.pinax_settings',
     'bet.context_processors.incomplete_ticket',
+    'scoobet.context_processors.inbox_count',
 ]
 
 INSTALLED_APPS = [

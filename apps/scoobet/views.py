@@ -1,5 +1,6 @@
 import datetime
 
+from django.utils import simplejson
 from django.db.models import Q, Avg
 from django.utils.translation import ugettext as _
 from django import template
@@ -27,6 +28,22 @@ def status_add(request,
     }
     return shortcuts.render_to_response(template_name, context,
         context_instance=template.RequestContext(request))
+
+@login_required
+def friends_autocomplete(request):
+    term = request.GET['term']
+
+    q = request.user.friends().filter(
+        Q(username__icontains=term)
+    )
+    result = []
+    for user in q:
+        result.append({
+            'id': user.username,
+            'value': user.username,
+            'label': user.username,
+        })
+    return http.HttpResponse(simplejson.dumps(result))
 
 def autocomplete(request,
     template_name='scoobet/autocomplete.html', extra_context=None):

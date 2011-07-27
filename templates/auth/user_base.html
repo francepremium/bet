@@ -5,7 +5,6 @@
 {% load i18n %}
 
 {% block subnav %}
-{{ tab}}
 <ul>
     <li class="{% if tab == 'activities' %}active{% endif %}">
         <a href="{% url user_detail_tab object.username 'activities' %}" title="{% trans 'activities of' %} {{ object }}">{% trans 'activities' %}</a>

@@ -161,6 +161,7 @@ body.activity.detail div.activity div.comments {
 						{% if request.user.betprofile.is_referee %}
 						<li><a href="{% url bet_list_flagged %}">{% trans 'flagged bets' %}</a></li>
 						{% endif %}
+						<li><a href="{% url messages_inbox %}">{% trans 'inbox'|capfirst %} {% if inbox_count %}[{{ inbox_count }}]{% endif %}</a></li>
 					</ul>
 				</li>
 			</ul>
