@@ -92,6 +92,8 @@ tr.odd td { background-color:#fbfbfb; }
 .publication_ticket a { padding-left:19px; background-image:url('../img/publication_ticket.png'); background-repeat:no-repeat; }
 .publication_status a { padding-left:20px; background-image:url('../img/publication_status.png'); background-repeat:no-repeat; }
 #global_form { padding:15px; z-index:100; background-color:#f2f2f2; border-bottom:1px solid #999999; display:none; }
+.comment_form_container textarea { width:628px; height:50px; margin-bottom:10px; }
+#publication .comment_form_container textarea { width:598px; }
 
 /* Search */
 input.search_input { float:left; width:260px; height:20px; line-height:18px; padding:4px 49px 5px 9px; font-size:11px; border:1px solid #999b9c; border-right-width:0px; color:#999999; background-color:#ffffff; }
