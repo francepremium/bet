@@ -16,7 +16,7 @@
     <li class="{% if tab == 'file' %}active{% endif %}">
         <a href="{% url user_detail_tab object.username 'file' %}" title="{% trans 'file of' %} {{ object }}">{% trans 'file' %}</a>
     </li>
-    <li class="{% if tab == 'statistics' %}active{% endif %}">
+    <li class="{% if tab == 'stats' %}active{% endif %}">
         <a href="{% url user_detail_tab object.username 'stats' %}" title="{% trans 'statistics of' %} {{ object }}">{% trans 'statistics' %}</a>
     </li>
     <li class="{% if tab == 'picks' %}active{% endif %}">
