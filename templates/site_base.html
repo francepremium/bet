@@ -160,7 +160,7 @@ body.activity.detail div.activity div.comments {
 					<ul>
 						<li><a href="{% url user_detail_tab request.user.username 'activities' %}">{% trans 'activities'|capfirst %}</a></li>
 						<li><a href="{% url user_detail_tab request.user.username 'stats' %}">{% trans 'stats'|capfirst %}</a></li>
-						<li><a href="{% url bet_list %}">{% trans 'bets'|capfirst %}</a></li>
+						<li><a href="{% url bet_list_tab 'mine' %}">{% trans 'bets'|capfirst %}</a></li>
 						<li><a href="{% url bet_list_to_correct %}">{% trans 'bets to correct'|capfirst %}</a></li>
 						{% if request.user.betprofile.is_referee %}
 						<li><a href="{% url bet_list_flagged %}">{% trans 'flagged bets' %}</a></li>
@@ -174,9 +174,10 @@ body.activity.detail div.activity div.comments {
 					<a href="{% url user_detail_tab request.user.username 'social' %}">{% trans 'social' %}</a>
 					<ul>
 						<li><a href="{% url user_detail_tab request.user.username 'activities' %}">{% trans 'activities'|capfirst %}</a></li>
-						<li><a href="{% url bet_list %}">{% trans 'bets'|capfirst %}</a></li>
+						<li><a href="{% url bet_list_tab 'friends' %}">{% trans 'bets'|capfirst %}</a></li>
 					</ul>
 				</li>
+				{% comment %}
 				<li>
 					<a href="{% url clan_list %}">{% trans 'clans' %}</a>
 					<ul>
@@ -184,6 +185,7 @@ body.activity.detail div.activity div.comments {
 					</ul>
 				</li>
 				<li><a href="{% url article_list %}">{% trans 'articles' %}</a></li>
+				{% endcomment %}
 			</ul>
 			{% endif %}
 			<ul>
