@@ -18,6 +18,7 @@
             minCharacters: 2,
             defaultValue: 'type your search here',
             activeClass: 'active',
+            iterablesSelector: 'li:has(a)',
             queryVariable: 'q',
             blurTimeout: 500,
         };
@@ -63,9 +64,9 @@
                 }
             });
 
-            $('.yourlabs_autocomplete.inner_container.id_'+this.options.id+' .option').live({
+            $('.yourlabs_autocomplete.inner_container.id_'+this.options.id+' ' + this.options.iterablesSelector).live({
                 mouseenter: function(e) {
-                    $('.yourlabs_autocomplete.inner_container.id_'+autocomplete.options.id+' .option.' + autocomplete.options.activeClass).each(function() {
+                    $('.yourlabs_autocomplete.inner_container.id_'+autocomplete.options.id+' ' + autocomplete.options.iterablesSelector + '.' + autocomplete.options.activeClass).each(function() {
                         $(document).trigger('yourlabs_autocomplete.deactivateOption', [autocomplete, $(this)]);
                     });
                     $(document).trigger('yourlabs_autocomplete.activateOption', [autocomplete, $(this)]);
@@ -113,7 +114,7 @@
                 case 9: //KEY_TAB:
                     break;
                 case 13: //KEY_RETURN:
-                    option = this.innerContainer.find('.option.' + this.options.activeClass);
+                    option = this.innerContainer.find(this.options.iterablesSelector + '.' + this.options.activeClass);
                     if (option) {
                         e.preventDefault();
                         e.stopPropagation();
@@ -146,21 +147,21 @@
         },
         move: function(way) {
             var current, target, first, last;
-            current = this.innerContainer.find('.option.' + this.options.activeClass);
-            first = this.innerContainer.find('.option:first');
-            last = this.innerContainer.find('.option:last');
+            current = this.innerContainer.find(this.options.iterablesSelector + '.' + this.options.activeClass);
+            first = this.innerContainer.find(this.options.iterablesSelector + ':first');
+            last = this.innerContainer.find(this.options.iterablesSelector + ':last');
 
             this.show();
 
             if (current.length) {
                 if (way == 'up') {
                     console.log(current)
-                    target = current.prevAll('.option:first');
+                    target = current.prevAll(this.options.iterablesSelector + ':first');
                     if (!target.length) {
                         target = last;
                     }
                 } else {
-                    target = current.nextAll('.option:first');
+                    target = current.nextAll(this.options.iterablesSelector + ':first');
                     if (!target.length) {
                         target = first;
                     }
