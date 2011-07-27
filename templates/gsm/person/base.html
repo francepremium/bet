@@ -36,9 +36,9 @@
 	
 	<div class="fan">
     {% if person in request.user.gsmentity_set.all %}
-        <div class="button"><a href="{% url gsm_fan 'unbecome' 'GsmEntity' person.pk %}">{% trans 'i do not bet on him' %}</a></div>
+        <a class="button" href="{% url gsm_fan 'unbecome' 'GsmEntity' person.pk %}">{% trans 'i do not bet on him' %}</a>
     {% else %}
-        <div class="button"><a href="{% url gsm_fan 'become' 'GsmEntity' person.pk %}">{% trans 'i bet on him' %}</a></div>
+        <a class="button" href="{% url gsm_fan 'become' 'GsmEntity' person.pk %}">{% trans 'i bet on him' %}</a>
     {% endif %}
 	</div>
 

@@ -64,7 +64,7 @@ body { position:relative; width:990px; margin:0px auto; }
 #body_head .fan,
 #body_head .popularity_block { display:inline-block; /* compatibility => */ zoom:1; *display:inline; }
 #body_head .fan { vertical-align:top; margin:1px 0px 0px 8px; }
-#body_head .fan .button a { background-image:url('../img/button_fan.png'); }
+#body_head .fan .button { background-image:url('../img/button_fan.png'); }
 #body_head .popularity_block { padding:0px 12px; margin:13px 0px 6px 0px; border-left:1px solid #cccccc; vertical-align:top; }
 #body_head .popularity_block:first-child { padding-left:0px; border-left-width:0px; }
 #body_head .popularity_block p { margin:-4px 0px; }
@@ -109,6 +109,5 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 .clear { clear:both; overflow:hidden; width:0px; height:0px; line-height:0px; }
 
 /* Buttons-like elements */
-.button { display:inline-block; background-color:#fcfcfc; box-shadow:inset 0px -40px 30px -40px #aaaaaa; border-radius:2px; /* compatibility => */ zoom:1; *display:inline; }
-.button a { display:block; padding:4px 12px 4px 25px; border:1px solid #cccccc; border-radius:2px; background-image:url('../img/button.png'); background-repeat:no-repeat; background-position:5px 5px; text-transform:uppercase; }
-.button a:hover { border-color:#959595; box-shadow:inset 0 0 5px #999999; text-decoration:none; }
+.button { display:block; padding:4px 12px 4px 25px; border:1px solid #cccccc; background-color:#fcfcfc; background-image:url('../img/button.png'); background-repeat:no-repeat; background-position:5px 5px; text-transform:uppercase; border-radius:2px; box-shadow:inset 0px -40px 30px -40px #aaaaaa;  }
+.button:hover { border-color:#959595; text-decoration:none; box-shadow:inset 0px -40px 30px -40px #aaaaaa, inset 0 0 5px #999999; }
