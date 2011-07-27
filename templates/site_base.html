@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load localeurl_tags %}
 {% load comments %}
+{% load avatar_tags %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}">
     <head>
@@ -151,6 +152,9 @@ body.activity.detail div.activity div.comments {
 		<div id="navigation">
 			{% if request.user.is_authenticated %}
 			<ul>
+				<li class="image">
+					<a href="{% url user_detail request.user.username %}">{% avatar user %}</a>
+				</li>
 				<li>
 					<a href="{% url user_detail request.user.username %}">{{ request.user.username }}</a>
 					<ul>

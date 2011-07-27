@@ -46,6 +46,7 @@ body { position:relative; width:990px; margin:0px auto; }
 #navigation li a { padding:2px 5px; color:#343a4a; display:block; text-transform:uppercase; text-align:right; text-decoration:none; }
 #navigation li a:hover,
 #navigation li.active a { color:#ffffff; background-color:#ea4839; }
+#navigation li.image a:hover { background-color:transparent; }
 #navigation li.active li a, /* <= compatibility : resetting previous line, which should/could have been #navigation > li.active a */
 #navigation li li a { padding:0px 5px 1px 5px; color:#999999; text-transform:none; background-color:transparent; }
 #navigation li li a:hover,
