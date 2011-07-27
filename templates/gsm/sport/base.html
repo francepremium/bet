@@ -51,7 +51,7 @@
 		<h1>{{ sport }}</h1>
 	</div>
 	
-	<div class="fan">
+	<div class="action">
     {% if sport in request.user.sport_set.all %}
         <a class="button" href="{% url gsm_fan 'unbecome' 'Sport' sport.pk %}">{% trans 'i do not bet on it' %}</a>
     {% else %}

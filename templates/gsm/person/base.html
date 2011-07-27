@@ -34,7 +34,7 @@
 		<h1>{{ person }}</h1>
 	</div>
 	
-	<div class="fan">
+	<div class="action">
     {% if person in request.user.gsmentity_set.all %}
         <a class="button" href="{% url gsm_fan 'unbecome' 'GsmEntity' person.pk %}">{% trans 'i do not bet on him' %}</a>
     {% else %}

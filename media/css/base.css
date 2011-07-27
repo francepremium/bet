@@ -61,10 +61,10 @@ body { position:relative; width:990px; margin:0px auto; }
 /* Body elements */
 #body_head .image img { float:left; margin:2px 10px 0px 0px; padding:5px; width:75px; height:75px; border:1px solid #d9d9d9; }
 #body_head .title,
-#body_head .fan,
+#body_head .action,
 #body_head .popularity_block { display:inline-block; /* compatibility => */ zoom:1; *display:inline; }
-#body_head .fan { vertical-align:top; margin:1px 0px 0px 8px; }
-#body_head .fan .button { background-image:url('../img/button_fan.png'); }
+#body_head .action { vertical-align:top; margin:1px 0px 0px 8px; }
+#body_head .action .button { background-image:url('../img/button_favorite.png'); }
 #body_head .popularity_block { padding:0px 12px; margin:13px 0px 6px 0px; border-left:1px solid #cccccc; vertical-align:top; }
 #body_head .popularity_block:first-child { padding-left:0px; border-left-width:0px; }
 #body_head .popularity_block p { margin:-4px 0px; }

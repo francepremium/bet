@@ -166,7 +166,7 @@
 		<h1>{{ session }}</h1>
 	</div>
 	
-	<div class="fan">
+	<div class="action">
     {% if session in request.user.session_set.all %}
         <a class="button" href="{% url gsm_fan 'unbecome' 'Session' session.pk %}">{% trans 'i do not bet on it' %}</a>
     {% else %}

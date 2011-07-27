@@ -24,7 +24,7 @@
 		<h1>{{ bookmaker }}</h1>
 	</div>
 	
-	<div class="fan">
+	<div class="action">
     {% if bookmaker in request.user.bookmaker_set.all %}
         <a class="button" href="{% url gsm_fan_app 'unbecome' 'bookmaker' 'Bookmaker' bookmaker.pk %}">{% trans 'i do not bet on it' %}</a>
     {% else %}
