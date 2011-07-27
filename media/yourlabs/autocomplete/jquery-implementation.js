@@ -18,7 +18,7 @@
             minCharacters: 2,
             defaultValue: 'type your search here',
             activeClass: 'active',
-			iterablesSelector: ' li:has(a)',
+			iterablesSelector: 'li:has(a)',
             queryVariable: 'q',
             blurTimeout: 500,
         };
