@@ -29,6 +29,8 @@ EVENT_KIND_FLAG = 2
 class BetProfile(models.Model):
     user = AutoOneToOneField(User, primary_key=True)
     offside_on = models.DateTimeField(null=True, blank=True)
+    profitability = models.FloatField(default=0)
+    profit = models.FloatField(default=0)
 
     def is_offside(self):
         if not hasattr(self, '_is_offside'):
