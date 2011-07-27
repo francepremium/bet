@@ -3,6 +3,7 @@
 {% load comments %}
 {% load scoobet_tags %}
 {% load i18n %}
+{% load avatar_tags %}
 
 {% block subnav %}
 <ul>
@@ -24,10 +25,19 @@
 </ul>
 {% endblock %}
 
-{% block body %}
-    <h1>{{ object }}</h1>
-    {% render_popularity_for_object request object %}
+{% block body_head %}
+    <div class="image">
+		{% avatar object %}
+	</div>
 
+	<div class="title">
+		<h1>{{ object }}</h1>
+	</div>
+
+    {% render_popularity_for_object request object %}
+{% endblock %}
+
+{% block body %}
     {% if request.user.is_authenticated and request.user != object %}
         {% get_comment_form for object as comment_form %}
         <div class="comment_form_container">
