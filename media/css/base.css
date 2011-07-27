@@ -113,3 +113,5 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 .button { display:block; padding:4px 12px 4px 25px; border:1px solid #cccccc; background-color:#fcfcfc; background-image:url('../img/button.png'); background-repeat:no-repeat; background-position:5px 5px; text-transform:uppercase; border-radius:2px; box-shadow:inset 0px -40px 30px -40px #aaaaaa;  }
 #body input[type=submit]:hover,
 .button:hover { border-color:#959595; text-decoration:none; box-shadow:inset 0px -40px 30px -40px #aaaaaa, inset 0 0 5px #999999; }
+#body input[type=submit] { float:right; margin-left:15px; }
+#body form { margin-bottom:25px; }
