@@ -9,6 +9,12 @@
 {% block body %}
     by profit
     <table>
+        <tr>
+            <th>{% trans 'picker' %}</th>
+            <th>{% trans 'profitability' %}</th>
+            <th>{% trans 'bets' %}</th>
+            <th>{% trans 'profit' %}</th>
+        </tr>
         {% for user in users_by_profit %}
         <tr>
             <td>
@@ -29,6 +35,12 @@
 
     by profitability
     <table>
+        <tr>
+            <th>{% trans 'picker' %}</th>
+            <th>{% trans 'profitability' %}</th>
+            <th>{% trans 'bets' %}</th>
+            <th>{% trans 'profit' %}</th>
+        </tr>
         {% for user in users_by_profitability %}
         <tr>
             <td>
