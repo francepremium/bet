@@ -76,9 +76,6 @@
                 },
                 click: function(e) {
                     var link, text;
-                    if (e.target != this) {
-                        return false;
-                    }
                     e.preventDefault();
                     e.stopPropagation();
                     $(document).trigger('yourlabs_autocomplete.selectOption', [autocomplete, $(this)]);
