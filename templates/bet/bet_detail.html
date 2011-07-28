@@ -38,11 +38,11 @@
         </tr>
         <tr>
             <th>{% trans 'date' %}</th>
-            <td>{{ bet.session.datetime_utc|display_date }}</td>
+            <td>{{ request|timezone_adjust:bet.session.datetime_utc|display_date }}</td>
         </tr>
         <tr>
             <th>{% trans 'time' %}</th>
-            <td>{{ bet.session.datetime_utc|display_time }}</td>
+            <td>{{ request|timezone_adjust:bet.session.datetime_utc|display_time }}</td>
         </tr>
         <tr>
             <th>{% trans 'result' %}</th>

@@ -136,7 +136,7 @@ INSTALLED_APPS = [
     'django_messages',
     'djkombu',
     'djcelery',
-    #'devserver',
+    'devserver',
     'djkombu',
     'djcelery',
 

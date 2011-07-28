@@ -3,6 +3,7 @@ import datetime
 from django import template
 from django.conf import settings
 from django.db.models import Q
+from timezones.utils import adjust_datetime_to_timezone
 
 import gsm
 from gsm.models import GsmEntity, Area, Session
@@ -12,6 +13,15 @@ register = template.Library()
 @register.filter
 def is_int(val):
     return val.__class__.__name__ == 'int'
+
+@register.filter
+def timezone_adjust(request, value):
+    timezone = 'UTC'
+    if request.user.is_authenticated():
+        timezone = request.user.account_set.all()[0].timezone
+    if 'timezone' in request.session.keys():
+        timezone = request.session['timezone']
+    return adjust_datetime_to_timezone(value, 'UTC', timezone)
 
 @register.filter
 def display_date(date):

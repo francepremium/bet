@@ -4,7 +4,7 @@
         <table>
             {% for session in sessions %}
             <tr class="{{ session.status }} {% if team %}{% if session.winner == team %}win{% endif %} {% if session.draw %}draw{% endif %} {% if session.winner != team and session.status = 'Played' %}lost{% endif %}{% endif %} session">
-                <td>{{ session.datetime_utc.date }}</td>
+                <td>{{ request|timezone_adjust:session.datetime_utc.date|display_date }}</td>
                 <td>{{ session.session_round.season.competition.area }}</td>
                 <td>
                     <a href="{{ session.session_round.season.competition.get_absolute_url }}" title="{{ session.session_round.season.competition }}">{{ session.session_round.season.competition.name }}</a>
@@ -49,7 +49,7 @@
                     <td class="score left">
                         {% if not session.time_unknown %}
                             <a href="{{ session.get_absolute_url }}" title="{{ session.name }}">
-                            {{ session.datetime_utc.hour|prepend_zero }}
+                            {{ request|timezone_adjust:session.datetime_utc.hour|prepend_zero }}
                             </a>
                         {% endif %}
                     </td>
@@ -65,7 +65,7 @@
                     <td class="score right">
                         {% if not session.time_unknown %}
                             <a href="{{ session.get_absolute_url }}" title="{{ session.name }}">
-                            {{ session.datetime_utc.minute|prepend_zero }}
+                            {{ request|timezone_adjust:session.datetime_utc.minute|prepend_zero }}
                             </a>
                         {% endif %}
                     </td>

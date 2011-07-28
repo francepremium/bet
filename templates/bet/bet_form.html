@@ -34,8 +34,8 @@
         <td class="session pk_{{ bet.session.pk }}">
             {{ bet.session }}
         </td>
-        <td>{{ bet.session.datetime_utc|display_date }}</td>
-        <td>{{ bet.session.datetime_utc|display_time }}</td>
+        <td>{{ request|timezone_adjust:bet.session.datetime_utc|display_date }}</td>
+        <td>{{ request|timezone_adjust:bet.session.datetime_utc|display_time }}</td>
         <td>{{ bet.bettype.name }}</td>
         <td>{{ bet.choice.name }}</td>
         <td><a href="{% url bet_form ticket.pk %}?bet={{ bet.pk }}">{% trans 'edit' %}</a></td>

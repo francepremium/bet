@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load humanize %}
+{% load gsm_tags %}
 	<ul>
 {% if teams %}
 		<li>{% trans 'teams'|capfirst %}</li>
@@ -11,7 +12,7 @@
 {% if sessions %}
 		<li>{% trans 'matches'|capfirst %}</li>
     {% for session in sessions %}
-        <li><a href="{{ session.get_absolute_url }}">{{ session }} - {{ session.datetime_utc|naturalday }}</a></li>
+        <li><a href="{{ session.get_absolute_url }}">{{ session }} - {{ request|timezone_adjust:session.datetime_utc|naturalday }}</a></li>
     {% endfor %}
 {% endif %}
 

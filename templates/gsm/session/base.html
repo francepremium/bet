@@ -25,9 +25,9 @@
         <th colspan="2">
             {% if session.status == 'Fixture' %}
                 {% if session.time_unknown %}
-                    {{ session.datetime_utc.date }}
+                    {{ request|timezone_adjust:session.datetime_utc|display_date }}
                 {% else %}
-                    {{ session.datetime_utc|display_time }}
+                    {{ request|timezone_adjust:session.datetime_utc|display_time }}
                 {% endif %}
             {% else %}
                 {% if sport.slug == 'tennis' %}
@@ -103,7 +103,7 @@
     <tr>
         {% if session.datetime_utc.date %}
             <td>{% trans 'date' %}</td>
-            <td>{{ session.datetime_utc.date }}</td>
+            <td>{{ request|timezone_adjust:session.datetime_utc|display_date }}</td>
         {% else %}
             <td colspan="2"></td>
         {% endif %}
@@ -123,7 +123,7 @@
             {% if session.time_unknown %}
                 {% trans 'yet unknown' %}
             {% else %}
-                {{ session.datetime_utc|display_time }}
+                {{ request|timezone_adjust:session.datetime_utc|display_time }}
             {% endif %}
         </td>
     </tr>

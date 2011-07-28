@@ -55,10 +55,12 @@
             {% for bet in bet_list %}
             <tr>
                 {% if 'date' not in exclude_columns %}
-                    <td>{{ bet.session.datetime_utc|display_date }}</td>
+                    <td>
+                    {{ request|timezone_adjust:bet.session.datetime_utc|display_date }}
+                    </td>
                 {% endif %}
                 {% if 'time' not in exclude_columns %}
-                    <td>{{ bet.session.datetime_utc|display_time }}</td>
+                    <td>{{ request|timezone_adjust:bet.session.datetime_utc|display_time }}</td>
                 {% endif %}
                 {% if 'user' not in exclude_columns %}
                     <td>
