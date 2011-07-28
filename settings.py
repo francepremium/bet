@@ -137,6 +137,8 @@ INSTALLED_APPS = [
     'djkombu',
     'djcelery',
     #'devserver',
+    'djkombu',
+    'djcelery',
 
     # Pinax
     

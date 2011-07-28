@@ -9,6 +9,7 @@ from django.core.cache import cache
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 
+from celery.task import task
 from annoying.fields import AutoOneToOneField
 
 TICKET_STATUS_INCOMPLETE = 0
@@ -98,6 +99,9 @@ class BetProfile(models.Model):
 
         return False
 
+    def refresh(self):
+        refresh_betprofile_for_user.delay(self.user)
+
 class Ticket(models.Model):
     TICKET_STAKE_CHOICES = [(x,x) for x in range(1,11)]
     TICKET_STATUS_CHOICES = (
@@ -157,7 +161,18 @@ class Ticket(models.Model):
                 self._profit = ( self.odds * self.stake ) - self.stake
             elif self.correction == BET_CORRECTION_LOST:
                 self._profit = self.stake * -1
+            else:
+                self._profit = 0
         return self._profit
+
+    @property
+    def ticket_bet_count(self):
+        if not hasattr(self, '_ticket_bet_count'):
+            if hasattr(self, 'ticket__bet__count'):
+                self._ticket_bet_count = self.ticket__bet__count
+            else:
+                self._ticket_bet_count = self.ticket.bet_set.count()
+        return self._ticket_bet_count
 
 def media_upload_to(instance, filename):
     return 'ticket/%s/%s' % (instance.ticket.pk, filename)
@@ -206,6 +221,17 @@ class Bet(models.Model):
     def get_absolute_url(self):
         return urlresolvers.reverse('bet_detail', args=(self.pk,))
 
+def refresh_ticket_user_betprofile(sender, **kwargs):
+    model = kwargs.get('instance')
+    if isinstance(model, Ticket):
+        ticket = model
+    if isinstance(model, Bet):
+        bet = model.ticket
+    if ticket.correction in (BET_CORRECTION_WON, BET_CORRECTION_LOST):
+        ticket.user.betprofile.refresh()
+signals.post_save.connect(refresh_ticket_user_betprofile, sender=Ticket)
+signals.post_save.connect(refresh_ticket_user_betprofile, sender=Bet)
+
 def delete_empty_ticket(sender, **kwargs):
     if kwargs['instance'].ticket.bet_set.count() == 0:
         kwargs['instance'].ticket.delete()
@@ -237,3 +263,51 @@ class Event(models.Model):
             'session': self.bet.session,
             'correction': self.correction,
         }
+
+
+@task(ignore_result=True)
+def do_refresh_betprofile_for_user(user):
+    if user.ticket_set.count():
+        tickets = user.ticket_set.all()
+
+        total_odds = 0
+        balance = 0
+        balance_history = balance_history = []
+        won_ticket_count = 0
+        lost_ticket_count = 0
+        total_stake = 0
+        total_earnings = 0
+
+        for ticket in tickets:
+            balance += ticket.profit
+            balance_history.append({
+                'ticket': ticket,
+                'balance': balance,
+            })
+
+            total_odds += ticket.odds
+            total_stake += ticket.stake
+            
+            if ticket.correction == BET_CORRECTION_WON:
+                total_earnings += ticket.stake * ticket.odds
+                won_ticket_count += 1
+            elif ticket.correction == BET_CORRECTION_LOST:
+                lost_ticket_count += 1
+
+        average_odds = '%.2f' % (float(total_odds) / len(tickets))
+        won_ticket_percent = int(
+            (float(won_ticket_count) / len(tickets)) * 100)
+        lost_ticket_percent = 100 - won_ticket_percent
+        average_stake = '%.2f' % (float(total_stake) / len(tickets))
+        profit = total_earnings - total_stake
+        if total_earnings > 0:
+            profitability = '%.2f' % ((
+                (total_earnings - total_stake) / total_stake
+            ) * 100)
+            int((total_stake / total_earnings)*100)
+        else:
+            profitability = 0
+
+        user.betprofile.profit = profit
+        user.betprofile.profitability = profitability
+        user.betprofile.save()
