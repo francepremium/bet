@@ -20,6 +20,16 @@ from bet.helpers import *
 from bet.models import *
 from gsm.models import Session, Competition, GsmEntity
 
+def homepage(request,
+    template_name='homepage.html', extra_context=None):
+    qs = User.objects.exclude(betprofile__profit=None).select_related('betprofile')
+    context = {
+        'users_by_profitability': qs.order_by('-betprofile__profitability')[:7],
+        'users_by_profit': qs.order_by('-betprofile__profit')[:7],
+    }
+    return shortcuts.render_to_response(template_name, context,
+        context_instance=template.RequestContext(request))
+
 @login_required
 def status_add(request,
     template_name='scoobet/status_add.html', extra_context=None):

@@ -7,7 +7,22 @@
 {% block body_class %}home{% endblock %}
 
 {% block body %}
-<a href="http://beta.yourlabs.org/kong/sites/scoobet/">URLs to test</a>
-<a href="{% url bet_form '1' %}">add bet to existing ticket example</a>
-<a href="{% url bet_form '49' %}">add bet to existing ticket example</a>
+    <table>
+        {% for user in users_by_profitability %}
+        <tr>
+            <td>
+                <a href="{{ user.get_absolute_url }}" title="{{ user }}">{{ user }}</a>
+            </td>
+            <td>
+                {{ user.betprofile.profitability }} %
+            </td>
+            <td>
+                {{ user.ticket_set.count }}
+            </td>
+            <td>
+                {{ user.betprofile.profit }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
