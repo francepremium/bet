@@ -3,6 +3,8 @@
 {% load comments %}
 {% load scoobet_tags %}
 {% load i18n %}
+{% load avatar_tags %}
+{% load activity_tags %}
 
 {% block subnav %}
 <ul>
@@ -15,7 +17,7 @@
     <li class="{% if tab == 'file' %}active{% endif %}">
         <a href="{% url user_detail_tab object.username 'file' %}" title="{% trans 'file of' %} {{ object }}">{% trans 'file' %}</a>
     </li>
-    <li class="{% if tab == 'statistics' %}active{% endif %}">
+    <li class="{% if tab == 'stats' %}active{% endif %}">
         <a href="{% url user_detail_tab object.username 'stats' %}" title="{% trans 'statistics of' %} {{ object }}">{% trans 'statistics' %}</a>
     </li>
     <li class="{% if tab == 'picks' %}active{% endif %}">
@@ -24,10 +26,37 @@
 </ul>
 {% endblock %}
 
-{% block body %}
-    <h1>{{ object }}</h1>
-    {% render_popularity_for_object request object %}
+{% block body_head %}
+    <div class="image">
+		{% avatar object %}
+	</div>
 
+	<div class="title">
+		<h1>{{ object }}</h1>
+	</div>
+
+	<div class="action">
+	{% get_user_contenttype as user_ctype %}
+    {% if request.user != object and request.user.is_authenticated %}
+        <a 
+		href="{% url actstream_unfollow content_type_id=user_ctype.id  object_id=object.id %}" 
+		class="button unfollow_button" 
+		style="{% if object not in request.user.follows %}display:none{% endif %}">
+			{% trans 'following' %}
+		</a>
+		<a 
+		href="{% url actstream_follow content_type_id=user_ctype.id  object_id=object.id %}" 
+		class="button follow_button" 
+		style="{% if object in request.user.follows %}display:none{% endif %}">
+			{% trans 'follow' %}
+		</a>
+    {% endif %}
+	</div>
+
+    {% render_popularity_for_object request object %}
+{% endblock %}
+
+{% block body %}
     {% if request.user.is_authenticated and request.user != object %}
         {% get_comment_form for object as comment_form %}
         <div class="comment_form_container">
