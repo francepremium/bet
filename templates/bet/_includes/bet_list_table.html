@@ -98,7 +98,7 @@
                 {% if 'stake' not in exclude_columns %}
                     <td>
                         <a href="{{ bet.ticket.get_absolute_url }}" title="{{ bet.ticket }}">
-                            {% if bet.ticket.bet_set.count == 1 %}
+                            {% if bet.ticket_bet_count == 1 %}
                                 {{ bet.ticket.stake }}
                             {% else %}
                                 {% trans 'combined ticket' %}
