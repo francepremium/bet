@@ -10,8 +10,7 @@ import views
 handler500 = "pinax.views.server_error"
 
 urlpatterns = patterns("",
-    url(r"^$", direct_to_template, {
-        "template": "homepage.html",
+    url(r"^$", 'scoobet.views.homepage', {
     }, name="home"),
     url(r"^gsm/", include('gsm.urls')),
     url(r"^clan/", include('clan.urls')),
