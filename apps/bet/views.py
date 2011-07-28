@@ -53,7 +53,7 @@ class BetListView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(BetListView, self).get_context_data(**kwargs)
-        context['bet_list_helper'] = BetListHelper(self.request, context['bet_list'], exclude_filters=['user'])
+        context['bet_list_helper'] = BetListHelper(self.request, context['bet_list'], exclude_filters=['user'], exclude_columns=['support', 'time', 'sport', 'competition'])
 
         if self.to_correct:
             urlname = 'bet_list_to_correct_tab'

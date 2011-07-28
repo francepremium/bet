@@ -1,5 +1,6 @@
 import copy
 
+from django.db.models import Avg, Max, Min, Count
 from django.db.models.query import QuerySet
 from django.db.models import Q
 from django import template
@@ -70,6 +71,8 @@ class BetListHelper(object):
         if isinstance(self.qs, QuerySet):
             self.filter = BetFilter(request.GET, queryset=self.qs)
             self.qs = self.filter.qs
+            self.qs = self.qs.annotate(Count('ticket__bet'))
+            self.qs = self.qs.select_related('session__season__competition', 'bettype', 'choice', 'ticket__user', 'ticket__bokmaker')
         else:
             self.filter = None
 
