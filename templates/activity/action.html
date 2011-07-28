@@ -147,7 +147,7 @@
 
     <div class="bottom">
         <span class="date">
-            {{ action.timestamp|timesince }} {% trans 'ago' %}
+            {{ request|timezone_adjust:action.timestamp }} {% trans 'ago' %}
         </span>
         
         <span class="comments link">
@@ -174,5 +174,5 @@
                 {% if action.target.get_absolute_url %}<a href="{{ action.target.get_absolute_url }}">{{ action.target }}</a>
                 {% else %}<a href="{{ action.target_url }}">{{ action.target }}</a>{% endif %}
             {% endif %}
-            {{ action.timestamp|timesince }} ago
+            {{ request|timezone_adjust:action.timestamp|timesince }} ago
 {% endcomment %}
