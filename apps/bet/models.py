@@ -266,13 +266,13 @@ class Event(models.Model):
 
 
 @task(ignore_result=True)
-def do_refresh_betprofile_for_user(user):
+def refresh_betprofile_for_user(user):
     if user.ticket_set.count():
-        tickets = user.ticket_set.all()
+        tickets = user.ticket_set.filter(
+            correction__in=(BET_CORRECTION_WON, BET_CORRECTION_LOST))
 
         total_odds = 0
         balance = 0
-        balance_history = balance_history = []
         won_ticket_count = 0
         lost_ticket_count = 0
         total_stake = 0
@@ -280,10 +280,6 @@ def do_refresh_betprofile_for_user(user):
 
         for ticket in tickets:
             balance += ticket.profit
-            balance_history.append({
-                'ticket': ticket,
-                'balance': balance,
-            })
 
             total_odds += ticket.odds
             total_stake += ticket.stake

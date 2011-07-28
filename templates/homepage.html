@@ -7,6 +7,27 @@
 {% block body_class %}home{% endblock %}
 
 {% block body %}
+    by profit
+    <table>
+        {% for user in users_by_profit %}
+        <tr>
+            <td>
+                <a href="{{ user.get_absolute_url }}" title="{{ user }}">{{ user }}</a>
+            </td>
+            <td>
+                {{ user.betprofile.profitability }} %
+            </td>
+            <td>
+                {{ user.ticket_set.count }}
+            </td>
+            <td>
+                {{ user.betprofile.profit }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    by profitability
     <table>
         {% for user in users_by_profitability %}
         <tr>
