@@ -1,10 +1,10 @@
-{% load avatar_tags i18n comments bet_tags ipdb %}
+{% load avatar_tags i18n comments bet_tags ipdb gsm_tags %}
 
 {% if action.open %}
 <div class="activity">
     <div class="avatar">
         <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">
-            {% avatar action.actor %}
+            {% avatar action.actor 36 %}
         </a>
     </div>
 
