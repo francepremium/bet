@@ -35,6 +35,8 @@ urlpatterns = patterns("",
     ),
     url(r"^users/(?P<username>[^/]+)/$", 'scoobet.views.user_detail', name='user_detail'),
     url(r"^users/(?P<username>[^/]+)/(?P<tab>[^/]+)/$", 'scoobet.views.user_detail', name='user_detail_tab'),
+    url(r'^robots.txt', direct_to_template, {
+        'template': 'robots.txt'}, name='robots_txt'),
 )
 
 

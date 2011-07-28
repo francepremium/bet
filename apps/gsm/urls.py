@@ -20,6 +20,11 @@ for tag in ('team', 'competition', 'session', 'person'):
 
 urlpatterns += patterns('gsm.views',
     url(
+        r'timezone/adjust/$',
+        'timezone_adjust',
+        name='gsm_timezone_adjust',
+    ),
+    url(
         r'(?P<sport>[a-z]+)/(?P<tag>[a-z_]+)/list/$',
         'entity_list', {
         }, 'gsm_entity_list'

@@ -14,3 +14,22 @@
 {% else %}
     <a href="{% url acct_login %}">Log in</a> or <a href="{% url acct_signup %}">Sign Up</a>
 {% endif %}
+
+<form method="post" action="{% url gsm_timezone_adjust %}">
+    {% csrf_token %}
+    <select name="timezone_offset" onchange="javascript: this.form.submit()">
+        {% for timezone in available_timezones %}
+        <option value="{{ timezone }}" {% if timezone == request.timezone.offset %}selected="selected"{% endif %}>
+            {% if timezone == 0 %}
+                GMT
+            {% endif %}
+            {% if timezone < 0 %}
+                GMT{{ timezone }}
+            {% endif %}
+            {% if timezone > 0 %}
+                GMT+{{ timezone }}
+            {% endif %}
+        </option>
+        {% endfor %}
+    </select>
+</form>

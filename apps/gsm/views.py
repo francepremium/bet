@@ -24,6 +24,13 @@ from filters import *
 def get_language_from_request(request):
     return 'fr'
 
+def timezone_adjust(request):
+    if not request.POST.get('timezone_offset', False):
+        return http.HttpResponseBadRequest('need POST timezone_offset')
+    request.timezone['offset'] = int(request.POST['timezone_offset'])
+    request.session['timezone'] = request.timezone
+    return shortcuts.redirect(request.META.get('HTTP_REFERER', '/'))
+
 @login_required
 def fan(request, action, model_class, model_pk, app_name='gsm'):
     model_class = models.get_model(app_name, model_class)

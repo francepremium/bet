@@ -80,7 +80,8 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'pagination.middleware.PaginationMiddleware'
+    'pagination.middleware.PaginationMiddleware',
+    'gsm.middleware.TimezoneMiddleware',
 ]
 
 
@@ -95,6 +96,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'pinax.core.context_processors.pinax_settings',
     'bet.context_processors.incomplete_ticket',
     'scoobet.context_processors.inbox_count',
+    'gsm.context_processors.available_timezones',
 ]
 
 INSTALLED_APPS = [
@@ -182,6 +184,11 @@ AJAX_LOOKUP_CHANNELS = {
 
 ACCOUNT_EMAIL_VERIFICATION = False
 EMAIL_CONFIRMATION_DAYS = 3
+
+import re
+LOCALE_INDEPENDENT_PATHS = (
+    re.compile('/robots.txt'),
+)
 
 DEVSERVER_MODULES = (
     #'devserver.modules.sql.SQLRealTimeModule',
