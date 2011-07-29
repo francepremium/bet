@@ -49,7 +49,9 @@
                     <td class="score left">
                         {% if not session.time_unknown %}
                             <a href="{{ session.get_absolute_url }}" title="{{ session.name }}">
-                            {{ request|timezone_adjust:session.datetime_utc.hour|prepend_zero }}
+                                {% with request|timezone_adjust:session.datetime_utc as datetime %}
+                                    {{ datetime.hour }}
+                                {% endwith %}
                             </a>
                         {% endif %}
                     </td>
@@ -65,7 +67,9 @@
                     <td class="score right">
                         {% if not session.time_unknown %}
                             <a href="{{ session.get_absolute_url }}" title="{{ session.name }}">
-                            {{ request|timezone_adjust:session.datetime_utc.minute|prepend_zero }}
+                                {% with request|timezone_adjust:session.datetime_utc as datetime %}
+                                    {{ datetime.minute }}
+                                {% endwith %}
                             </a>
                         {% endif %}
                     </td>
