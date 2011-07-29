@@ -51,6 +51,7 @@ body { position:relative; width:990px; margin:0px auto; }
 #navigation li li a { padding:0px 5px 1px 5px; color:#999999; text-transform:none; background-color:transparent; }
 #navigation li li a:hover,
 #navigation li li.active a { color:#ea4839; background-color:transparent; }
+#navigation ul:last-child li li a { text-transform:capitalize; }
 #navigation_sub ul { height:37px; margin:14px 0px 20px 0px; background-color:#313645; box-shadow:1px 1px 1px #cccccc; }
 #navigation_sub li { float:left; height:37px; }
 #navigation_sub li a { min-height:27px; max-height:27px; /* <= compatibility : height:27px; should/could be enough */ display:block; padding:8px; color:#ffffff; font-size:12px; text-transform:uppercase; text-decoration:none; }
