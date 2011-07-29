@@ -2,6 +2,13 @@
 {% load humanize %}
 {% load gsm_tags %}
 	<ul>
+{% if users %}
+		<li>{% trans 'users'|capfirst %}</li>
+    {% for user in users %}
+        <li><a href="{{ user.get_absolute_url }}">{{ user }}</a></li>
+    {% endfor %}
+{% endif %}
+
 {% if teams %}
 		<li>{% trans 'teams'|capfirst %}</li>
     {% for team in teams %}
@@ -13,13 +20,6 @@
 		<li>{% trans 'matches'|capfirst %}</li>
     {% for session in sessions %}
         <li><a href="{{ session.get_absolute_url }}">{{ session }} - {{ request|timezone_adjust:session.datetime_utc|naturalday }}</a></li>
-    {% endfor %}
-{% endif %}
-
-{% if users %}
-		<li>{% trans 'users'|capfirst %}</li>
-    {% for user in users %}
-        <li><a href="{{ user.get_absolute_url }}">{{ user }}</a></li>
     {% endfor %}
 {% endif %}
 
@@ -37,8 +37,16 @@
     {% endfor %}
 {% endif %}
 
+{% if bookmakers %}
+		<li>{% trans 'bookmakers'|capfirst %}</li>
+    {% for bookmaker in bookmakers %}
+        <li><a href="{{ bookmaker.get_absolute_url }}">{{ bookmaker }}</a></li>
+    {% endfor %}
+{% endif %}
+
 {% if not results %}
 		<li>{% trans 'no results'|capfirst %}</li>
 		<li><a href="">{% blocktrans %}Search for {{ q }} instead{% endblocktrans %}</a></li>
 {% endif %}
-	</ul>
+
+</ul>
