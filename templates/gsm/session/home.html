@@ -1,6 +1,6 @@
 {% extends 'gsm/session/base.html' %}
 
-{% load i18n gsm_tags %}
+{% load i18n gsm_tags comments %}
 
 {% block extra_head %}
 <style type="text/css">
@@ -60,4 +60,174 @@ table.session.header {
         {% endfor %}
         </table>
     {% endif %}
+
+    {% for child0 in session.element.getchildren %}
+    {% if child0.tag == 'lineups' and child0.getchildren %}
+    <h2>{% trans 'lineups' %}</h2>
+    <table class="lineups A">
+        {% for lineup in child0.getchildren %}
+            {% if lineup.attrib.team_id == session.oponnent_A.gsm_id|addslashes %}
+            <tr>
+                <td class="L">
+                    {% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
+                    <a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">{{ lineup_person.name }}</a>
+                </td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    <table class="lineups B">
+        {% for lineup in child0.getchildren %}
+            {% if lineup.attrib.team_id == session.oponnent_B.gsm_id|addslashes %}
+            <tr>
+                <td class="L">
+                    {% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
+                    <a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">{{ lineup_person.name }}</a>
+                </td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if child0.tag == 'substitutions' and child0.getchildren %}
+    <h2>{% trans 'substitutions' %}</h2>
+    <table class="substitutions">
+        <tr>
+            <th>{% trans 'in' %}</th>
+            <th>{% trans 'out' %}</th>
+            <th>{% trans 'minute' %}</th>
+            <th>{% trans 'in' %}</th>
+            <th>{% trans 'out' %}</th>
+        </tr>
+        {% for sub in child0.getchildren %}
+            <tr>
+            {% if sub.getchildren.0.attrib.team_id == session.oponnent_A.gsm_id|addslashes %}
+                {% for event in sub.getchildren %}
+                <td>
+                    {% if event.attrib.code == 'SI' %}
+                        {% gsm_entity key='person_in' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
+                        <a href="{{ person_in.get_absolute_url }}" title="{{ person_in.name }}">{{ person_in.name }}</a>
+                    {% endif %}
+                    {% if event.attrib.code == 'SO' %}
+                        {% gsm_entity key='person_out' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
+                        <a href="{{ person_out.get_absolute_url }}" title="{{ person_out.name }}">{{ person_out.name }}</a>
+                        </td>
+                        <td>
+                        {{ event.attrib.minute }}"
+                    {% endif %}
+                </td>
+                {% endfor %}
+                <td colspan="2"></td>
+            {% else %}
+                <td colspan="2"></td>
+                {% for event in sub.getchildren %}
+                <td>
+                    {% if event.attrib.code == 'SI' %}
+                        {{ event.attrib.minute }}"
+                        </td>
+                        <td>
+                        {% gsm_entity key='person_in' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
+                        <a href="{{ person_in.get_absolute_url }}" title="{{ person_in.name }}">{{ person_in.name }}</a>
+                    {% endif %}
+                    {% if event.attrib.code == 'SO' %}
+                        {% gsm_entity key='person_out' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
+                        <a href="{{ person_out.get_absolute_url }}" title="{{ person_out.name }}">{{ person_out.name }}</a>
+                    {% endif %}
+                </td>
+                {% endfor %}
+            {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if child0.tag == 'lineups_bench' and child0.getchildren %}
+    <h2>{% trans 'lineups bench' %}</h2>
+    <table class="lineups bench A">
+        {% for lineup in child0.getchildren %}
+            {% if lineup.attrib.team_id == session.oponnent_A.gsm_id|addslashes %}
+            <tr>
+                <td class="L">
+                    {% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
+                    <a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">{{ lineup_person.name }}</a>
+                </td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    <table class="lineups bench B">
+        {% for lineup in child0.getchildren %}
+            {% if lineup.attrib.team_id == session.oponnent_B.gsm_id|addslashes %}
+            <tr>
+                <td class="L">
+                    {% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
+                    <a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">{{ lineup_person.name }}</a>
+                </td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if child0.tag == 'goals' and child0.getchildren %}
+    <h2>{% trans 'goals' %}</h2>
+    <table class="goals">
+        {% for goal in child0.getchildren %}
+        <tr>
+            <td>
+                {% if goal.getchildren.0.attrib.team_id == session.oponnent_A.gsm_id|addslashes %}
+                    {% gsm_entity key='goal_person' tag='person' gsm_id=goal.getchildren.0.attrib.person_id name=goal.getchildren.0.attrib.person %}
+
+                    <span class="goal G"><a href="{{ goal_person.get_absolute_url }}" title="{{ goal_person.name }}">{{ goal_person.name }}</a></span>
+                    {% if goal.getchildren.1.attrib.code == 'AS' %}
+                        {% gsm_entity key='goal_assistant' tag='person' gsm_id=goal.getchildren.1.attrib.person_id name=goal.getchildren.1.attrib.person %}
+                        <span class="goal AS">{% trans 'assisted by' %} <a href="{{ goal_assistant.get_absolute_url }}" title="{{ goal_assistant.name }}">{{ goal_assistant.name }}</a></span>
+                    {% endif %}
+                {% endif %}
+
+            </td>
+            <td>
+                <span class="minute">{{ goal.getchildren.0.attrib.minute }}"</span>
+            </td>
+            <td>
+                {% if goal.getchildren.0.attrib.team_id == session.oponnent_B.gsm_id|addslashes %}
+                    {% gsm_entity key='goal_person' tag='person' gsm_id=goal.getchildren.0.attrib.person_id name=goal.getchildren.0.attrib.person %}
+
+                    <span class="goal G"><a href="{{ goal_person.get_absolute_url }}" title="{{ goal_person.name }}">{{ goal_person.name }}</a></span>
+                    {% if goal.getchildren.1.attrib.code == 'AS' %}
+                        {% gsm_entity key='goal_assistant' tag='person' gsm_id=goal.getchildren.1.attrib.person_id name=goal.getchildren.1.attrib.person %}
+                        <span class="goal AS">{% trans 'assisted by' %} <a href="{{ goal_assistant.get_absolute_url }}" title="{{ goal_assistant.name }}">{{ goal_assistant.name }}</a></span>
+                    {% endif %}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    {% endfor %}
+
+    {% if statistics.getchildren %}
+    <h2>{% trans 'statistics' %}</h2>
+    <table>
+        <tr>
+            <th></th>
+            <th>{{ session.oponnent_A.name }}</th>
+            <th>{{ session.oponnent_B.name }}</th>
+        </tr>
+        {% for data in statistics.getchildren %}
+        <tr>
+            <th>{% trans data.attrib.type %}</th>
+            <td>{{ data.attrib.value_team_A }}</td>
+            <td>{{ data.attrib.value_team_B }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% render_comment_form for session %}
+    {% render_comment_list for session %}
+
+
+
 {% endblock %}
