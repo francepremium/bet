@@ -347,6 +347,13 @@ body.activity.detail div.activity div.comments {
         $(document).bind('yourlabs_autocomplete.selectOption', function(e, autocomplete, option) {
             autocomplete.hide();
             autocomplete.el.val('{% trans 'loading page' %}: ' + $.trim(option.text()));
+            link = $(option).find('a:first');
+            if (link.length && link.attr('href') != undefined) {
+                window.location.href = link.attr('href');
+                return false;
+            } else {
+                alert('sorry, i dunno what to do with your selection!!');
+            }
         });
         $('input.search_input[name=search_words]').yourlabs_autocomplete({
             url: '{% url scoobet_autocomplete %}',

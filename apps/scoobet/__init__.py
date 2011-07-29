@@ -99,8 +99,6 @@ def group_activities(activities):
     if not activities:
         return activities
 
-    print 'GROUPING'
-
     activities = prefetch_relations(activities)
 
     previous = None
@@ -157,7 +155,5 @@ def group_activities(activities):
 
     activities[0].open = True
     activities[len(activities)-1].close = True
-
-    print 'DONE GROUPING'
 
     return activities
