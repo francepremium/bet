@@ -179,8 +179,11 @@ def bet_delete(request, bet_pk):
         messages.success(request, message)
         return shortcuts.redirect(request.META.get('HTTP_REFERER', '/'))
 
-    return shortcuts.redirect(urlresolvers.reverse(
-        'bet_form', args=(bet.ticket.pk,)))
+    if ticket.pk:
+        return shortcuts.redirect(urlresolvers.reverse(
+            'bet_form', args=(ticket_pk,)))
+    else:
+        return http.HttpResponse(_('ticket without bets deleted'))
 
 @login_required
 def bet_form(request, ticket_pk, form_class=BetForm,

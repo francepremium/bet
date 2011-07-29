@@ -226,7 +226,7 @@ def refresh_ticket_user_betprofile(sender, **kwargs):
     if isinstance(model, Ticket):
         ticket = model
     if isinstance(model, Bet):
-        bet = model.ticket
+        ticket = model.ticket
     if ticket.correction in (BET_CORRECTION_WON, BET_CORRECTION_LOST):
         ticket.user.betprofile.refresh()
 signals.post_save.connect(refresh_ticket_user_betprofile, sender=Ticket)
@@ -268,8 +268,7 @@ class Event(models.Model):
 @task(ignore_result=True)
 def refresh_betprofile_for_user(user):
     if user.ticket_set.count():
-        tickets = user.ticket_set.filter(
-            correction__in=(BET_CORRECTION_WON, BET_CORRECTION_LOST))
+        tickets = user.ticket_set.filter(status=TICKET_STATUS_DONE)
 
         total_odds = 0
         balance = 0
