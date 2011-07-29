@@ -137,6 +137,12 @@ def bet_status_change(request, bet_pk, action):
             choice=bet.choice).update(correction=new_correction, 
             status=BET_STATUS_CORRECTED)
         
+        users = User.objects.filter(ticket__bet__session=bet.session, 
+            ticket__bet__bettype=bet.bettype, ticket__bet__choice=bet.choice
+            ).distinct()
+        for u in users:
+            refresh_betprofile_for_user(u)
+
         actstream.action.send(request.user, verb='corrected', action_object=bet)
 
     elif action == 'flag':

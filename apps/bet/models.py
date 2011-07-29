@@ -267,7 +267,7 @@ class Event(models.Model):
 
 @task(ignore_result=True)
 def refresh_betprofile_for_user(user):
-    if user.ticket_set.count():
+    if user.ticket_set.filter(status=TICKET_STATUS_DONE).count():
         tickets = user.ticket_set.filter(status=TICKET_STATUS_DONE)
 
         total_odds = 0
