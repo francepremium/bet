@@ -75,6 +75,8 @@
                     $(document).trigger('yourlabs_autocomplete.deactivateOption', [autocomplete, $(this)]);
                 },
                 click: function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
                     $(document).trigger('yourlabs_autocomplete.selectOption', [autocomplete, $(this)]);
                 },
             });
