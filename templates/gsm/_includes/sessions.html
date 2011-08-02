@@ -47,31 +47,19 @@
                 {% endif %}
                 {% if session.status == 'Fixture' %}
                     <td class="score left">
-                        {% if not session.time_unknown %}
-                            <a href="{{ session.get_absolute_url }}" title="{{ session.name }}">
-                                {% with request|timezone_adjust:session.datetime_utc as datetime %}
-                                    {{ datetime.hour }}
-                                {% endwith %}
-                            </a>
-                        {% endif %}
                     </td>
                     <td class="score center">
                         <a href="{{ session.get_absolute_url }}" title="{{ session.name }}">
                             {% if session.time_unknown %}
                                 ?
                             {% else %}
-                                :
+                                {% with request|timezone_adjust:session.datetime_utc as datetime %}
+                                    {% if datetime.hour < 10 %}0{% endif %}{{ datetime.hour }}:{% if datetime.minute < 10 %}0{% endif %}{{ datetime.minute }}
+                                {% endwith %}
                             {% endif %}
                         </a>
                     </td>
                     <td class="score right">
-                        {% if not session.time_unknown %}
-                            <a href="{{ session.get_absolute_url }}" title="{{ session.name }}">
-                                {% with request|timezone_adjust:session.datetime_utc as datetime %}
-                                    {{ datetime.minute }}
-                                {% endwith %}
-                            </a>
-                        {% endif %}
                     </td>
                 {% endif %}
                 <td>
