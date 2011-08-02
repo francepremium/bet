@@ -107,7 +107,7 @@ ul#messages {
 			{% if request.user.is_authenticated %}
 			<ul>
 				<li class="image">
-					<a href="{% url user_detail request.user.username %}">{% avatar user %}</a>
+					<a href="{% url scoobet_feed_friends %}">{% avatar user %}</a>
 				</li>
 				<li>
 					<a href="{% url user_detail request.user.username %}">{{ request.user.username }}</a>
@@ -127,7 +127,7 @@ ul#messages {
 				<li>
 					<a href="{% url user_detail_tab request.user.username 'social' %}">{% trans 'social' %}</a>
 					<ul>
-						<li><a href="{% url user_detail_tab request.user.username 'activities' %}">{% trans 'activities'|capfirst %}</a></li>
+						<li><a href="{% url scoobet_feed_friends %}">{% trans 'activities'|capfirst %}</a></li>
 						<li><a href="{% url bet_list_tab 'friends' %}">{% trans 'bets'|capfirst %}</a></li>
 					</ul>
 				</li>
