@@ -5,14 +5,14 @@
 {% if teams %}
 		<li>{% trans 'teams'|capfirst %}</li>
     {% for team in teams %}
-		<li><a href="{{ team.get_absolute_url }}">{{ team }}</a></li>
+		<li class="{{ team.sport }}"><a href="{{ team.get_absolute_url }}">{{ team }}</a></li>
     {% endfor %}
 {% endif %}
 
 {% if sessions %}
 		<li>{% trans 'matches'|capfirst %}</li>
     {% for session in sessions %}
-        <li><a href="{{ session.get_absolute_url }}">{{ session }} - {{ request|timezone_adjust:session.datetime_utc|naturalday }}</a></li>
+        <li class="{{ session.sport }}"><a href="{{ session.get_absolute_url }}">{{ session }} - {{ request|timezone_adjust:session.datetime_utc|naturalday }}</a></li>
     {% endfor %}
 {% endif %}
 
@@ -26,14 +26,14 @@
 {% if players %}
 		<li>{% trans 'players'|capfirst %}</li>
     {% for player in players %}
-        <li><a href="{{ player.get_absolute_url }}">{{ player }}</a></li>
+        <li class="{{ player.sport }}"><a href="{{ player.get_absolute_url }}">{{ player }}</a></li>
     {% endfor %}
 {% endif %}
 
 {% if competitions %}
 		<li>{% trans 'competitions'|capfirst %}</li>
     {% for competition in competitions %}
-        <li><a href="{{ competition.get_absolute_url }}">{{ competition }}</a></li>
+        <li class="{{ competition.sport }}"><a href="{{ competition.get_absolute_url }}">{{ competition }}</a></li>
     {% endfor %}
 {% endif %}
 
