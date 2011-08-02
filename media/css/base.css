@@ -93,8 +93,7 @@ tr.odd td { background-color:#fbfbfb; }
 .publication_ticket a { padding-left:19px; background-image:url('../img/publication_ticket.png'); background-repeat:no-repeat; }
 .publication_status a { padding-left:20px; background-image:url('../img/publication_status.png'); background-repeat:no-repeat; }
 #global_form { padding:15px; z-index:100; background-color:#f2f2f2; border-bottom:1px solid #999999; display:none; }
-.comment_form_container textarea { width:628px; height:50px; }
-#publication .comment_form_container textarea { width:598px; }
+.comment_form_container textarea { width:98%; height:50px; padding:5px; }
 
 /* Search */
 input.search_input { float:left; width:260px; height:20px; line-height:18px; padding:4px 49px 5px 9px; font-size:11px; border:1px solid #999b9c; border-right-width:0px; color:#999999; background-color:#ffffff; }
@@ -107,6 +106,36 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 .yourlabs_autocomplete .option.active,
 .yourlabs_autocomplete a:hover,
 .yourlabs_autocomplete li.active a { color:#ffffff; background-color:#ea4839; }
+
+/* Activity */
+.activity { color:#000000; }
+.activity a { color:#343a4a; }
+.activity cite { color:#999999; }
+.activity .image { position:absolute; margin-top:2px; width:16px; height:16px; overflow:visible; background-repeat:no-repeat; }
+.activity .image a { margin-top:4px; }
+.activity .details { padding-left:47px; margin-bottom:5px; }
+.activity .date,
+.activity .comments_link { display:inline-block; font-size:10px; font-style:italic; color:#999999; /* compatibility => */ zoom:1; *display:inline; }
+.activity .comments_link { text-transform:capitalize; cursor:pointer; }
+.activity .comments_link:before { content:" - "; }
+.activity .comments { width:370px; margin-top:5px; padding:7px 15px 1px 15px; background-color:#f2f2f2; }
+.activity .comments,
+.activity .bet_list { display:none; }
+
+/* Activity icons */
+.activity.bets-on 					.image { background-image:url('../img/actions/bets-on.png'); }
+.activity.commented					.image { background-image:url('../img/actions/commented.png'); }
+.activity.wall-posted				.image { background-image:url('../img/actions/wall-posted.png'); }
+.activity.updated-his-status		.image { background-image:url('../img/actions/updated-his-status.png'); }
+.activity.closed-ticket				.image { background-image:url('../img/actions/closed-ticket.png'); }
+.activity.closed-ticket-combined	.image { background-image:url('../img/actions/closed-ticket-combined.png'); }
+.activity.started-following 		.image { background-image:url('../img/actions/started-following.png'); }
+
+/* Activity extended elements */
+.activity.extended .details { padding-bottom:10px; margin-bottom:10px; border-bottom:1px solid #f2f2f2; }
+.activity.extended a:first-child { display:inline-block; margin-bottom:3px; font-weight:bold; /* compatibility => */ zoom:1; *display:inline; }
+.activity.extended cite { display:block; margin-bottom:4px; line-height:13px; color:#000000; }
+.activity.extended .image { background-image:none; }
 
 /* Errors */
 .errorlist { color:#e20000; }

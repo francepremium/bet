@@ -568,10 +568,14 @@ body.activity.detail div.activity div.comments {
             load_global_ticket_url('{{ incomplete_ticket_url }}');
             {% endif %}
 
-            $('div.activity div.bottom span.comments').click(function(e) {
-                $(this).parent().next().toggle('fast');
+            $('div.activity .comments_link').live('click', function() {
+                $(this).next('.comments').toggle('fast');
             });
 
+			$('div.activity .bet_list_link').live('click', function() {
+				$(this).next('.bet_list').toggle('fast');
+            });
+			
             // initializes links for ajax requests
             $("a.endless_more").live("click", function() {
                 var container = $(this).closest(".endless_container");
@@ -624,10 +628,6 @@ body.activity.detail div.activity div.comments {
                         }
                     }
                 );
-            });
-
-            $('.toggle_bet_list').live('click', function() {
-                $(this).parents('div.details').find('div.bet_list').toggle('fast');
             });
 
             $('select[name=ticket__bookmaker]').live('change', function() {
