@@ -72,12 +72,19 @@ body { position:relative; width:990px; margin:0px auto; }
 #body_head .popularity_block p:first-child { margin-top:-6px; color:#343a4a; text-transform:uppercase; }
 #body_head .popularity_block p:last-child { margin-bottom:-6px; }
 
-/* Tables */
-table { border:1px solid #cccccc; margin-bottom:15px; }
-td,
-th { padding:2px 10px; }
-th { color:#ea4839; }
-tr.odd td { background-color:#fbfbfb; }
+/* Gsm tables */
+.gsm table { border:1px solid #cccccc; margin-bottom:15px; }
+.gsm td,
+.gsm th { padding:2px 10px; }
+.gsm th { color:#ea4839; }
+.gsm tr.odd td { background-color:#fbfbfb; }
+.gsm td.score { text-align:center; }
+.gsm .winner,
+.gsm tr.win 	td.score	{ background-color:green; }
+.gsm tr.lost 	td.score 	{ background-color:red; }
+.gsm tr.draw 	td.score 	{ background-color:orange; }
+.gsm tr.draw 				{ background-color:#dddddd; }
+.gsm tr.Fixture	td.score 	{ background-color:#dddddd; }
 
 /* Messages */
 #messages { background-color:#000000; color:#ffffff; }
