@@ -60,10 +60,9 @@ body { position:relative; width:990px; margin:0px auto; }
 #timezone .expandable li:first-child:after { content:"▼"; margin-left:4px; font-size:9px; }
 
 /* Settings button */
-#account { position:absolute; right:0px; overflow:hidden; }
-#account ul { margin-right:-8px; }
-#account li { float:left; padding:0px 7px; border-right:1px solid #ffffff; }
-#account a { color:#ffffff; }
+#settings { position:absolute; top:1px; right:0px; width:26px; height:21px; background-color:#3a3e49; }
+#settings a { display:block; width:100%; height:100%; background-image:url('../img/tool.png'); background-position:5px 3px; background-repeat:no-repeat; }
+#settings a:hover { background-color:#5a5e69; box-shadow:0px 0px 1px #9a9ea9; border-radius:1px; }
 
 /* Navigation */
 #navigation { position:absolute; width:135px; top:105px; }
