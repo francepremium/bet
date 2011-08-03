@@ -64,6 +64,11 @@ body { position:relative; width:990px; margin:0px auto; }
 #settings a { display:block; width:100%; height:100%; background-image:url('../img/tool.png'); background-position:5px 3px; background-repeat:no-repeat; }
 #settings a:hover { background-color:#5a5e69; box-shadow:0px 0px 1px #9a9ea9; border-radius:1px; }
 
+/* Signup button */
+#signup { position:absolute; top:0px; right:0px; height:70px; padding:30px 16px 0px 0px; border-right:1px solid #666666; }
+#signup a { display:block; width:143px; height:19px; line-height:19px; padding:10px 0px; background-color:#f23937; font-size:14px; color:#ffffff; text-align:center; text-transform:uppercase; text-decoration:none; border:1px solid #999999; background-image:url('../img/effects/reflection_300_15.png'); background-repeat:no-repeat; background-position:center -275px; border-radius:4px; }
+#signup a:hover { background-color:#f95047; }
+
 /* Navigation */
 #navigation { position:absolute; width:135px; top:105px; }
 #navigation ul { padding:10px 0px 7px 0px; border-bottom:1px solid #cccccc; }

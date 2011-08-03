@@ -116,6 +116,12 @@ ul#messages {
 			{% endif %}
 		</div>
 
+		<div id="signup">
+			{% if not request.user.is_authenticated %}
+			<a href="{% url acct_signup %}">{% trans 'sign up' %}</a>
+			{% endif %}
+		</div>
+
 		<div id="navigation">
 			{% if request.user.is_authenticated %}
 			<ul>
