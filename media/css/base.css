@@ -153,7 +153,7 @@ input.search_input { float:left; width:260px; height:20px; line-height:18px; pad
 input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:0px 0px 0px 0px; border:1px solid #5e626b; overflow:hidden; cursor:pointer; color:#ffffff; background-color:#2a2f3c; text-transform:uppercase; font-size:12px; border-radius:4px; }
 
 /* Search autocomplete */
-.yourlabs_autocomplete.outer_container { width:628px; margin-top:1px; background-color:#ffffff; border:1px solid #343a4a; border-top-width:0px; }
+.yourlabs_autocomplete.outer_container { top:-2px; width:628px; margin-top:1px; background-color:#ffffff; border:1px solid #343a4a; border-top-width:0px; }
 .yourlabs_autocomplete li { padding-left:10px; font-size:12px; color:#343a4a; background-color:#f2f2f2; }
 .yourlabs_autocomplete .option,
 .yourlabs_autocomplete a { display:block; padding:3px 15px 3px 32px; font-size:11px; background-color:#ffffff; text-decoration:none; cursor:pointer; background-position:10px 6px; background-repeat:no-repeat; }
