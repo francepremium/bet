@@ -161,6 +161,18 @@ ul#messages {
 				<li><a href="{% url article_list %}">{% trans 'articles' %}</a></li>
 				{% endcomment %}
 			</ul>
+			{% else %}
+			<form class="login" method="post" action="{% url acct_login %}">
+				<input type="hidden" name="next" value="{% url me %}"/>
+				{% csrf_token %}
+				<input type="text" name="username" defaultValue="{% trans 'user name'|capfirst %}" />
+				<input type="password" name="password" defaultValue="{% trans 'password'|capfirst %}" />
+				<input type="submit" class="button simple" value="{% trans "Log in" %}" />
+				<input type="checkbox" name="remember" id="login_remember" />
+				<label for="login_remember">{% trans 'remember me'|capfirst %}</label>
+				<a href="{% url acct_passwd_reset %}">{% trans "Forgot password?" %}</a>
+				<a href="{% url acct_signup %}">{% trans 'sign up'|capfirst %}</a>
+			</form>
 			{% endif %}
 			<ul>
 				<li class="{% if sport.slug == 'soccer' %}active{% endif %}">
@@ -555,6 +567,19 @@ ul#messages {
 				$(this).next('.bet_list').toggle('fast');
             });
 			
+			$('#navigation input[defaultValue]').map(function(){
+				if ($(this).val() == '')
+					$(this).val($(this).attr('defaultValue'));
+				$(this).focus(function() {
+					if ($(this).val() == $(this).attr('defaultValue'))
+						$(this).val('');
+				});
+				$(this).blur(function() {
+					if ($(this).val() == '')
+						$(this).val($(this).attr('defaultValue'));
+				});
+			});
+
             // initializes links for ajax requests
             $("a.endless_more").live("click", function() {
                 var container = $(this).closest(".endless_container");

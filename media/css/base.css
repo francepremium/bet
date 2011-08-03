@@ -84,6 +84,17 @@ body { position:relative; width:990px; margin:0px auto; }
 #navigation li li.active a { color:#ea4839; background-color:transparent; }
 #navigation ul:last-child li li a { text-transform:capitalize; }
 
+/* Login form inside navigation */
+#navigation form.login { line-height:20px; padding:13px 0px 7px 0px; text-align:right; border-bottom:1px solid #cccccc; }
+#navigation form.login a { display:inline-block; }
+#navigation form.login input[type=text],
+#navigation form.login input[type=password] { width:123px; padding:2px 5px; margin-bottom:10px; text-align:right; color:#999999; border-radius:2px; }
+#navigation form.login input[type=checkbox] { margin-bottom:4px; vertical-align:bottom; }
+#navigation form.login input[type=text]:focus,
+#navigation form.login input[type=password]:focus { color:#343a4a; }
+#navigation form.login label { padding-left:3px; }
+#navigation form.login .button { float:right; margin-bottom:7px; margin-left:90px; }
+
 /* Sub navigation */
 #navigation_sub ul { height:37px; margin:14px 0px 20px 0px; background-color:#313645; box-shadow:1px 1px 1px #cccccc; }
 #navigation_sub li { float:left; height:37px; }
@@ -200,6 +211,7 @@ ul.expandable:hover { z-index:5000; box-shadow:0px 1px 4px #999999; border-radiu
 .button { display:block; padding:4px 12px 4px 25px; border:1px solid #cccccc; background-color:#fcfcfc; background-image:url('../img/button.png'); background-repeat:no-repeat; background-position:5px 5px; text-transform:uppercase; border-radius:2px; box-shadow:inset 0px -40px 30px -40px #aaaaaa;  }
 #body input[type=submit]:hover,
 .button:hover { border-color:#959595; text-decoration:none; box-shadow:inset 0px -40px 30px -40px #aaaaaa, inset 0 0 5px #999999; }
+.button.simple { padding:4px 8px; background-image:none; }
 #body input[type=submit] { float:right; margin:10px 0px 0px 15px; }
 #body form { padding-bottom:40px; }
 #body_content form { margin-bottom:15px; }
