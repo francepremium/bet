@@ -508,11 +508,6 @@ ul#messages {
             $('input[type=submit].confirm').live('click', function(e) {
                 return confirm('{% trans 'Do you want to' %} ' + $(this).attr('title') + ' ?');
             });
-
-            $('#timezone li[timezone]').click(function() {
-				$(this).parent().next().find('input[name=timezone_offset]').val($(this).attr('timezone'));
-                $(this).parent().next().trigger('submit');
-            });
 			
             /*
             bettype select:
@@ -565,6 +560,11 @@ ul#messages {
 
 			$('div.activity .bet_list_link').live('click', function() {
 				$(this).next('.bet_list').toggle('fast');
+            });
+			
+            $('#timezone li[timezone]').click(function() {
+				$(this).parent().next().find('input[name=timezone_offset]').val($(this).attr('timezone'));
+                $(this).parent().next().trigger('submit');
             });
 			
 			$('#navigation input[defaultValue]').map(function(){
