@@ -85,22 +85,29 @@ ul#messages {
 			</form>
 		</div>
 
-		<div id="locale">
-			{% block locale_switcher %}
-			<ul>
+		<div id="language">
+			<ul class="expandable">
+				<li class="{{ LANGUAGE_CODE }}">{{ LANGUAGE_CODE }}</li>
 			 {% for lang in LANGUAGES %}
-				{% ifequal lang.0 LANGUAGE_CODE %}
-					<li class="selected">{{ lang.1 }}</li>
-				{% else %}
-					<li><a href="{{ request.path|chlocale:lang.0 }}">{{ lang.1 }}</a></li>
-				{% endifequal %}
+				{% ifnotequal lang.0 LANGUAGE_CODE %}
+				<li class="{{ lang.0 }}"><a href="{{ request.path|chlocale:lang.0 }}">{{ lang.0 }}</a></li>
+				{% endifnotequal %}
 			{% endfor %}
 			</ul>
-			{% endblock %}
 		</div>
 
-		<div id="account">
-			{% block login %}{% include "_account_bar.html" %}{% endblock %}
+		<div id="timezone">
+			<ul class="expandable">
+				<li>12:47 GMT{% if request.timezone.offset > 0 %}+{% endif %}{% ifnotequal request.timezone.offset 0 %}{{ request.timezone.offset }}{% endifnotequal %}</li>
+				{# @@@ insert real time here #}
+				{% for timezone in available_timezones %}
+				<li timezone="{{ timezone }}">{% if 12|add:timezone < 10 %}0{% endif %}{{ 12|add:timezone}}:47 GMT{% if timezone > 0 %}+{% endif %}{% ifnotequal timezone 0 %}{{ timezone }}{% endifnotequal %}</li>
+				{% endfor %}
+			</ul>
+			<form method="post" action="{% url gsm_timezone_adjust %}">
+				{% csrf_token %}
+				<input type="hidden" name="timezone_offset" />
+			</form>
 		</div>
 
 		<div id="navigation">
@@ -478,6 +485,11 @@ ul#messages {
                 return confirm('{% trans 'Do you want to' %} ' + $(this).attr('title') + ' ?');
             });
 
+            $('#timezone li[timezone]').click(function() {
+				$(this).parent().next().find('input[name=timezone_offset]').val($(this).attr('timezone'));
+                $(this).parent().next().trigger('submit');
+            });
+			
             /*
             bettype select:
             - empty choices

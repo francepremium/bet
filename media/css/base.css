@@ -36,9 +36,28 @@ body { position:relative; width:990px; margin:0px auto; }
 #search .search_submit { height:31px; font-size:18px; }
 
 /* Language selector */
-#locale { position:absolute; top:20px; right:0px; }
-#locale li { float:left; padding-left:7px; }
-#locale a { color:#ffffff; }
+#language { position:absolute; top:1px; right:127px; width:51px; z-index:50; }
+#language a { display:block; color:#ffffff; text-decoration:none; }
+#language .expandable a,
+#language .expandable li:first-child { padding:2px 5px 2px 24px; }
+#language .expandable li { background-position:5px 5px; background-repeat:no-repeat; }
+#language .expandable li.en { background-image:url('../flags/us.png'); }
+#language .expandable li.fr { background-image:url('../flags/fr.png'); }
+
+/* Timezone selector */
+#timezone { position:absolute; top:1px; right:26px; z-index:50; border-left:1px solid #5a5e69; border-right:1px solid #5a5e69; }
+#timezone .expandable { width:99px; }
+#timezone .expandable li { padding:2px 5px; }
+
+/* Language and timezone selectors shared styles */
+#language,
+#timezone { font-size:10px; color:#ffffff; text-transform:uppercase; background-color:#3a3e49; }
+#language .expandable li:hover,
+#timezone .expandable li:hover { background-color:#5a5e69; }
+#language .expandable li:first-child:hover,
+#timezone .expandable li:first-child:hover { background-color:transparent; }
+#language .expandable li:first-child:after,
+#timezone .expandable li:first-child:after { content:"▼"; margin-left:4px; font-size:9px; }
 
 /* Settings button */
 #account { position:absolute; right:0px; overflow:hidden; }
@@ -165,6 +184,12 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 
 /* Utilities */
 .clear { clear:both; overflow:hidden; width:0px; height:0px; line-height:0px; }
+
+/* Expandable ul on hover */
+ul.expandable li { display:none; cursor:pointer; }
+ul.expandable li:first-child { display:block; }
+ul.expandable:hover li { display:block; }
+ul.expandable:hover { z-index:5000; box-shadow:0px 1px 4px #999999; border-radius:1px; }
 
 /* Buttons-like elements */
 #body input[type=submit],
