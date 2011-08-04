@@ -67,7 +67,7 @@ table.bettype table.choices {
 		<div id="search">
 			<form class="search" method="get" action="/search/">
 				<input class="search_input" id="search_input_1" name="search_words" type="text" />
-				<input class="search_submit" id="search_submit_1" type="submit" value="go" />
+				<input class="search_submit button_naked" id="search_submit_1" type="submit" value="go" />
 			</form>
 		</div>
 
@@ -168,7 +168,7 @@ table.bettype table.choices {
 				{% csrf_token %}
 				<input type="text" name="username" defaultValue="{% trans 'user name'|capfirst %}" />
 				<input type="password" name="password" defaultValue="{% trans 'password'|capfirst %}" />
-				<input type="submit" class="button simple" value="{% trans 'Log in' %}" />
+				<input type="submit" class="button button_simple" value="{% trans 'Log in' %}" />
 				<label for="login_remember">{% trans 'remember me'|capfirst %}</label>
 				<input type="checkbox" name="remember" id="login_remember" />
 				<a href="{% url acct_passwd_reset %}">{% trans "Forgot password?" %}</a>
@@ -330,6 +330,7 @@ table.bettype table.choices {
         function load_global_ticket_html(html) {
 
             function do_load_global_ticket_html(html) {
+				inititialize_buttons();
                 var session_text = container.find('input[name=session_text]');
                 var session = container.find('div.session div.results_on_deck div');
                 var session_display = session.html()
@@ -362,6 +363,9 @@ table.bettype table.choices {
             });
         }
 
+		function inititialize_buttons(){
+			$('input[type=button]:not(.button_naked), input[type=submit]:not(.button_naked)').addClass('button');			
+		}
 
         $(document).ready(function() {
             $('.tab_link').live('click', function(e) {
@@ -426,6 +430,7 @@ table.bettype table.choices {
                     container.slideUp();
                     $.get('{% url scoobet_status_add %}', {}, function(data, textStatus, jqXHR) {
                         container.html('<div id="publication_status_form">' + data + '</div>');
+						inititialize_buttons();
                         container.slideDown();
                     });
                 }
@@ -595,6 +600,7 @@ table.bettype table.choices {
 
 			$('table').each(function(index){ $(this).find('tr:odd').addClass('odd'); });
 			$('table').each(function(index){ $(this).find('tr:even').addClass('even'); });
+			inititialize_buttons();
         });
         </script>
         {% block extra_body_base %}
