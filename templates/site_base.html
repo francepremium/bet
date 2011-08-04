@@ -120,7 +120,11 @@ table.bettype table.choices {
             {% endif %}
 			</ul>
         </div>
-		
+
+        <div id="ajaxload">
+            <img src="{{ STATIC_URL }}img/ajax-loader.gif" />
+        </div>
+
 		<div id="navigation">
 			{% if request.user.is_authenticated %}
 			<ul>
@@ -212,10 +216,6 @@ table.bettype table.choices {
 		<div id="aside">
 			{% block aside %}{% endblock %}
 		</div>
-
-        <div id="ajaxload">
-            <img src="{{ STATIC_URL }}img/ajax-loader.gif" />
-        </div>
 
         {% if site_wide_announcements %}
             <div id="site_wide_announcements">
