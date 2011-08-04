@@ -122,12 +122,13 @@ body { position:relative; width:990px; margin:0px auto; }
 #body_head .popularity_block p:last-child { margin-bottom:-6px; }
 
 /* Tables */
-table { border:1px solid #cccccc; margin-bottom:15px; }
+table { border:1px solid #cccccc; }
 td,
 th { padding:2px 10px; }
 tr.odd td { background-color:#fbfbfb; }
 
 /* Gsm tables */
+.gsm table { margin-bottom:15px; }
 .gsm th { color:#ea4839; }
 .gsm td.score { text-align:center; }
 .gsm .winner,
