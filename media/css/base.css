@@ -89,11 +89,11 @@ body { position:relative; width:990px; margin:0px auto; }
 #navigation form.login a { display:inline-block; }
 #navigation form.login input[type=text],
 #navigation form.login input[type=password] { width:123px; padding:2px 5px; margin-bottom:10px; text-align:right; color:#999999; border-radius:2px; }
-#navigation form.login input[type=checkbox] { margin-bottom:4px; vertical-align:bottom; }
+#navigation form.login input[type=checkbox] { float:right; margin-top:2px; }
 #navigation form.login input[type=text]:focus,
 #navigation form.login input[type=password]:focus { color:#343a4a; }
-#navigation form.login label { padding-left:3px; }
-#navigation form.login .button { float:right; margin-bottom:7px; margin-left:90px; }
+#navigation form.login label { float:right; padding-left:5px; }
+#navigation form.login .button { display:inline; margin-bottom:7px; }
 
 /* Sub navigation */
 #navigation_sub ul { height:37px; margin:14px 0px 20px 0px; background-color:#313645; box-shadow:1px 1px 1px #cccccc; }

@@ -181,8 +181,8 @@ ul#messages {
 				<input type="text" name="username" defaultValue="{% trans 'user name'|capfirst %}" />
 				<input type="password" name="password" defaultValue="{% trans 'password'|capfirst %}" />
 				<input type="submit" class="button simple" value="{% trans "Log in" %}" />
-				<input type="checkbox" name="remember" id="login_remember" />
 				<label for="login_remember">{% trans 'remember me'|capfirst %}</label>
+				<input type="checkbox" name="remember" id="login_remember" />
 				<a href="{% url acct_passwd_reset %}">{% trans "Forgot password?" %}</a>
 				<a href="{% url acct_signup %}">{% trans 'sign up'|capfirst %}</a>
 			</form>
