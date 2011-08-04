@@ -22,7 +22,7 @@ h2 { display:inline-block; padding:2px 10px; border:1px solid #cccccc; border-bo
 /* Layout */
 html { background-image:url('../img/background.png'); background-repeat:repeat-x; background-color:#f2f2f2; }
 body { position:relative; width:990px; margin:0px auto; }
-#body { position:absolute; width:630px; top:101px; left:150px; padding:15px; overflow:hidden; background-color:#ffffff; border:1px solid #cccccc; border-top-width:0px; }
+#body { position:absolute; top:101px; left:150px; width:630px; padding:15px; overflow:hidden; background-color:#ffffff; border:1px solid #cccccc; border-top-width:0px; }
 #aside { position:absolute; top:101px; right:0px; width:180px; overflow:hidden; }
 
 /* Logo */
@@ -171,7 +171,7 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 .activity { color:#000000; }
 .activity a { color:#343a4a; }
 .activity cite { color:#999999; }
-.activity .image { position:absolute; margin-top:2px; width:16px; height:16px; overflow:visible; background-repeat:no-repeat; }
+.activity .image { position:absolute; width:16px; height:16px; margin-top:2px; overflow:visible; background-repeat:no-repeat; }
 .activity .image a { margin-top:4px; }
 .activity .details { padding-left:47px; margin-bottom:5px; }
 .activity .date,
