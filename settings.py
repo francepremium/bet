@@ -136,11 +136,7 @@ INSTALLED_APPS = [
     'autofixture',
     'nashvegas',
     'django_messages',
-    'djkombu',
-    'djcelery',
     'devserver',
-    'djkombu',
-    'djcelery',
 
     # Pinax
     
@@ -201,7 +197,7 @@ DEVSERVER_MODULES = (
     # not attribute heapy
     #'devserver.modules.profile.MemoryUseModule',
     #'devserver.modules.cache.CacheSummaryModule',
-    'devserver.modules.profile.LineProfilerModule',
+    #'devserver.modules.profile.LineProfilerModule',
 )
 
 LOGGING = {
@@ -265,9 +261,6 @@ for name, logger in LOGGING['loggers'].items():
 for path in [VAR_ROOT, GSM_CACHE, LOG_ROOT]:
     if not os.path.isdir(path):
         os.makedirs(path)
-
-import djcelery
-djcelery.setup_loader()
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
