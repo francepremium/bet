@@ -47,3 +47,5 @@ ipdb
 djkombu
 celery
 django-celery
+-e git+https://github.com/toastdriven/django-haystack.git@v1.2.4#egg=haystack
+whoosh
