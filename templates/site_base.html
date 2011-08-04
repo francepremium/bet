@@ -346,11 +346,11 @@ table.bettype table.choices {
             var container = $('div#global_form');
             if (container.css('display') != 'none') {
                 container.slideUp('fast', function() {
-                    container.html(html);
+                    container.html('<div id="publication_ticket_form">' + html + '</div>');
                     do_load_global_ticket_html(html);
                 });
             } else {
-                container.html(html);
+                container.html('<div id="publication_ticket_form">' + html + '</div>');
                 do_load_global_ticket_html(html);
             }
         }
@@ -425,7 +425,7 @@ table.bettype table.choices {
                     var container = $('div#global_form');
                     container.slideUp();
                     $.get('{% url scoobet_status_add %}', {}, function(data, textStatus, jqXHR) {
-                        container.html(data);
+                        container.html('<div id="publication_status_form">' + data + '</div>');
                         container.slideDown();
                     });
                 }
