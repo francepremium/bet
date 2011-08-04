@@ -200,6 +200,9 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 /* Errors */
 .errorlist { color:#e20000; }
 
+/* Ajax load */
+#ajaxload { position:absolute; top:3px; left:793px;	display:none; }
+
 /* Utilities */
 .clear { clear:both; overflow:hidden; width:0px; height:0px; line-height:0px; }
 
