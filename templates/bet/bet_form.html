@@ -3,19 +3,18 @@
     {% trans 'You have an open ticket. Please delete or complete this ticket. Then you will be able to create another ticket.' %}
 {% endif %}
 
-<form method="post" action="{% url bet_ticket_delete ticket.pk %}">
-    {% csrf_token %}
-    <input type="hidden" name="confirm" value="1" />
-    <input type="submit" value="{% trans 'delete ticket' %}" title="{% trans 'delete the whole ticket' %}" class="confirm" />
-</form>
-<div class="bookmaker pk_{{ ticket.bookmaker.pk }}">
-    {% trans 'bookmaker' %}: {{ ticket.bookmaker }}
-</div>
-<div class="stake">
-    {% trans 'stake' %}: {{ bet.stake }}
+<div class="bookmaker_stake">
+	<div class="bookmaker pk_{{ ticket.bookmaker.pk }}">
+		<label>{% trans 'bookmaker'|capfirst %}:</label>
+		{{ ticket.bookmaker }}
+	</div>
+	<div class="stake">
+		<label>{% trans 'stake'|capfirst %}:</label>
+		{{ ticket.stake }}
+	</div>
 </div>
 <div class="type">
-    {% trans 'type' %}:
+    <label>{% trans 'type'|capfirst %}:</label>
     {% if ticket.bet_set.count < 2 %}
         {% trans 'simple' %}
     {% else %}
@@ -24,15 +23,17 @@
 </div>
 {% if ticket.bet_set.count > 1 %}
 <div class="odds">
-    {% trans 'current ticket odds' %}: {{ ticket.odds|floatformat:2 }}
+    <label>{% trans 'current ticket odds'|capfirst %}:</label>
+	{{ ticket.odds|floatformat:2 }}
 </div>
 {% endif %}
 
+{% if ticket.bet_set.all.select_related %}
 <table class="bets">
     {% for bet in ticket.bet_set.all.select_related %}
     <tr class="bet pk_{{ bet.pk }}">
         <td class="session pk_{{ bet.session.pk }}">
-            {{ bet.session }}
+            {{ forloop.counter }}. {{ bet.session }}
         </td>
         <td>{{ request|timezone_adjust:bet.session.datetime_utc|display_date }}</td>
         <td>{{ request|timezone_adjust:bet.session.datetime_utc|display_time }}</td>
@@ -43,31 +44,28 @@
             <form action="{% url bet_delete bet.pk %}" method="post">
                 {% csrf_token %}
                 <input type="hidden" name="confirm" value="1" />
-                <input type="submit" value="{% trans 'delete' %}" title="{% trans 'delete bet for match' %} {{ bet.session.name }}" class="confirm" />
+                <input type="submit" class="button_delete" value="{% trans 'delete' %}" title="{% trans 'delete bet for match' %} {{ bet.session.name }}" class="confirm" />
             </form>
         </td>
 
     </tr>
     {% endfor %}
 </table>
+{% endif %}
 
 <form method="post" action="{% url bet_form ticket.pk %}{% if form.instance.pk %}?bet={{ form.instance.pk }}{% endif %}" enctype="multipart/form-data" encoding="multipart/form-data">
     {% csrf_token %}
     {{ form.non_field_errors }}
 
-    <div class="odds" >
-        {{ form.odds.errors }}
-        {% trans 'odds' %}*:
-        {{ form.odds }}
-    </div>
     <div class="session" {# if not show_all_fields %}style="display:none;"{% endif #}>
         {{ form.session.errors }}
-        {% trans 'match (start typing a team name)' %}*:
+        <label>{% trans 'match'|capfirst %}<em>*</em>:</label>
         {{ form.session }}
+		 <span>({% trans 'start typing a team name' %})</span>
     </div>
     <div class="bettype" {% if not show_all_fields %}style="display:none;"{% endif %}>
         {{ form.bettype.errors }}
-        {% trans 'ticket type' %}*:
+        <label>{% trans 'ticket type'|capfirst %}<em>*</em>:</label>
         {% if show_all_fields or form.bettype.errors %}
             {{ form.bettype }}
         {% else %}
@@ -76,32 +74,45 @@
     </div>
     <div class="choice" {% if not show_all_fields %}style="display:none;"{% endif %}>
         {{ form.choice.errors }}
-        {% trans 'choice' %}*:
+        <label>{% trans 'choice'|capfirst %}<em>*</em>:</label>
         {% if show_all_fields or form.choice.errors %}
             {{ form.choice }}
         {% else %}
             <select name="choice"></select>
         {% endif %}
     </div>
+    <div class="odds" >
+        {{ form.odds.errors }}
+        <label>{% trans 'odds'|capfirst %}<em>*</em>:</label>
+        {{ form.odds }}
+    </div>
     <div class="text">
         {{ form.text.errors }}
-        {% trans 'reason' %}:
+        <label>{% trans 'reason'|capfirst %}:</label>
         {{ form.text }}
     </div>
     <div class="upload">
         {{ form.upload.errors }}
-        {% trans 'image' %}:
+        <label>{% trans 'image'|capfirst %}:</label>
         {{ form.upload }}
     </div>
 
     <div class="action">
-        <input type="radio" name="action" value="save_and_add_another" /> {% trans 'save and add another' %}
-        <br />
-        <input type="radio" name="action" value="save_and_close" /> {% trans 'save and close' %}
-        <br />
+        <input type="radio" name="action" value="save_and_close" id="ticket_radio_save_and_close" />
+		<label for="ticket_radio_save_and_close"><input type="button" value="{% trans 'save and close' %}" /></label>
+
+        <input type="radio" name="action" value="save_and_add_another" id="ticket_radio_save_and_add_another"  />
+		<label for="ticket_radio_save_and_add_another"><input type="button" class="button_add" value="{% trans 'save and add another' %}" /></label>
+
         {% if ticket.bet_set.count > 0 %}
-        <input type="radio" name="action" value="just_close" /> {% trans 'close ticket' %}
-        <br />
+        <input type="radio" name="action" value="just_close" id="ticket_radio_just_close" />
+		<label for="ticket_radio_just_close"><input type="button" value="{% trans 'close ticket' %}" /></label>
         {% endif %}
     </div>
 </form>
+<form method="post" action="{% url bet_ticket_delete ticket.pk %}">
+	{% csrf_token %}
+	<input type="hidden" name="confirm" value="1" />
+	<input type="submit" id="ticket_submit_delete" value="{% trans 'delete ticket' %}" title="{% trans 'delete the whole ticket' %}" class="confirm button_delete" />
+</form>
+<p class="clear"></p>

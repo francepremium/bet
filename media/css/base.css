@@ -147,7 +147,31 @@ tr.odd td { background-color:#fbfbfb; }
 #publication_head a { color:#999999; }
 .publication_ticket a { padding-left:19px; background-image:url('../img/publication_ticket.png'); background-repeat:no-repeat; }
 .publication_status a { padding-left:20px; background-image:url('../img/publication_status.png'); background-repeat:no-repeat; }
-#global_form { padding:15px; z-index:100; background-color:#f2f2f2; border-bottom:1px solid #999999; display:none; }
+
+/* Ticket form */
+#global_form { display:none; padding:15px; background-color:#f2f2f2; border-bottom:1px solid #999999; }
+#publication_ticket_form div { padding:8px 0px; }
+#publication_ticket_form select { width:312px; }
+#publication_ticket_form label{ display:inline-block; width:110px; color:#343a4a; /* compatibility => */ zoom:1; *display:inline; }
+#publication_ticket_form textarea,
+#publication_ticket_form input[type=text] { width:300px; padding:2px 5px; }
+#publication_ticket_form textarea { height:100px; }
+#publication_ticket_form table { margin:10px 0px 10px -15px; width:630px; background-color:#eaebed; }
+#publication_ticket_form table .session { color:#343a4a; }
+#publication_ticket_form table input[type=submit] { margin:5px 0px 5px auto; }
+#publication_ticket_form .type { margin:15px -15px 0px -15px; padding:15px 0px 8px 15px; border-top:1px solid #999999; }
+#publication_ticket_form .bookmaker_stake { padding:0px; }
+#publication_ticket_form .bookmaker_stake div { display:inline-block; padding:0px; margin-right:30px; color:#343a4a; }
+#publication_ticket_form .bookmaker_stake label { display:inline; margin-right:5px; }
+#publication_ticket_form .bookmaker_stake select { width:auto; }
+#publication_ticket_form .action { margin-top:15px; padding:0px; }
+#publication_ticket_form .action label { display:inline; }
+#publication_ticket_form .action input { float:right; }
+#publication_ticket_form .action input[type=button] { margin-left:10px; }
+#publication_ticket_form .action input[type=radio] { margin-top:6px; margin-left:-15px; }
+#publication_ticket_form #ticket_submit_delete { float:right; margin-top:0px; }
+
+/* Comments */
 .comment_form_container textarea { width:98%; height:50px; padding:5px; }
 
 /* Search generic style */

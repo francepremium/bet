@@ -4,16 +4,18 @@
 {% csrf_token %}
 {{ form.non_field_errors }}
 
-<div class="bookmaker">
-    bookmaker:
-    {{ form.bookmaker.errors }}
-    {{ form.bookmaker }}
-</div>
+<div class="bookmaker_stake">
+	<div class="bookmaker">
+		<label>{% trans 'bookmaker'|capfirst %}:</label>
+		{{ form.bookmaker.errors }}
+		{{ form.bookmaker }}
+	</div>
 
-<div class="stake">
-    stake:
-    {{ form.stake.errors }}
-    {{ form.stake }}
+	<div class="stake">
+		<label>{% trans 'stake'|capfirst %}:</label>
+		{{ form.stake.errors }}
+		{{ form.stake }}
+	</div>
 </div>
 
 </form>
