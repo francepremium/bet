@@ -141,6 +141,7 @@ INSTALLED_APPS = [
     'devserver',
     'djkombu',
     'djcelery',
+    'haystack',
 
     # Pinax
     
@@ -152,6 +153,10 @@ INSTALLED_APPS = [
     'scoobet',
     'article',
 ]
+
+HAYSTACK_SITECONF = 'search_sites'
+HAYSTACK_SEARCH_ENGINE = 'whoosh'
+HAYSTACK_WHOOSH_PATH = os.path.join(VAR_ROOT, 'whoosh')
 
 LANGUAGE_CODE = 'fr_FR'
 TIME_ZONE = 'Europe/Paris'

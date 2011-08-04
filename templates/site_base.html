@@ -126,7 +126,7 @@ body.activity.detail div.activity div.comments {
 
 		<div id="search">
 			<form class="search" method="get" action="/search/">
-				<input class="search_input" id="search_input_1" name="search_words" type="text" />
+				<input class="search_input" id="search_input_1" name="q" type="text" />
 				<input class="search_submit" id="search_submit_1" type="submit" value="go" />
 			</form>
 		</div>
@@ -192,9 +192,24 @@ body.activity.detail div.activity div.comments {
 				<li class="{% if sport.slug == 'soccer' %}active{% endif %}">
 					<a href="{% url gsm_sport_detail 'soccer' %}">{% trans "soccer" %}</a>
 					<ul>
-						<li><a href="{% url gsm_sport_detail 'soccer' %}">{% trans "ligue 1"|capfirst %}</a>
-						<li><a href="{% url gsm_sport_detail 'soccer' %}">{% trans "ligue 2"|capfirst %}</a>
-						<li><a href="{% url gsm_sport_detail_tab 'soccer' 'competitions' %}">{% trans "all competitions"|capfirst %}</a>
+						<li class="{% if sport.slug == 'soccer' and competition.gsm_id == 16 %}active{% endif %}">
+							<a href="{% url gsm_competition_detail 'soccer' '16' %}">{% trans "ligue 1" %}</a>
+						</li>
+						<li class="{% if sport.slug == 'soccer' and competition.gsm_id == 8 %}active{% endif %}">
+							<a href="{% url gsm_competition_detail 'soccer' '8' %}">{% trans "premier league" %}</a>
+						</li>
+						<li class="{% if sport.slug == 'soccer' and competition.gsm_id == 7 %}active{% endif %}">
+							<a href="{% url gsm_competition_detail 'soccer' '7' %}">{% trans "liga BBVA" %}</a>
+						</li>
+						<li class="{% if sport.slug == 'soccer' and competition.gsm_id == 13 %}active{% endif %}">
+							<a href="{% url gsm_competition_detail 'soccer' '13' %}">{% trans "serie A" %}</a>
+						</li>
+						<li class="{% if sport.slug == 'soccer' and competition.gsm_id == 9 %}active{% endif %}">
+							<a href="{% url gsm_competition_detail 'soccer' '9' %}">{% trans "sundesliga 1" %}</a>
+						</li>
+						<li class="{% if sport.slug == 'soccer' and tab == 'competitions' %}active{% endif %}">
+							<a href="{% url gsm_sport_detail_tab 'soccer' 'competitions' %}">{% trans "all competitions"|capfirst %}</a>
+						</li>
 					</ul>
 				</li>
 				<li class="{% if sport.slug == 'tennis' %}active{% endif %}">
@@ -345,10 +360,23 @@ body.activity.detail div.activity div.comments {
         {% include "facebox_js.html" %}
         <script type="text/javascript">
         $(document).bind('yourlabs_autocomplete.selectOption', function(e, autocomplete, option) {
-            autocomplete.hide();
-            autocomplete.el.val('{% trans 'loading page' %}: ' + $.trim(option.text()));
+            if (option.length) {
+                autocomplete.hide();
+                autocomplete.el.val('{% trans 'loading page' %}: ' + $.trim(option.text()));
+                link = $(option).find('a:first');
+                if (link.length && link.attr('href') != undefined) {
+                    window.location.href = link.attr('href');
+                    return false;
+                } else {
+                    alert('sorry, i dunno what to do with your selection!!');
+                }
+            } else {
+                autocomplete.hide();
+                autocomplete.el.parents('form').submit();
+                autocomplete.el.val('{% trans 'searching for' %}: ' + $.trim(autocomplete.el.val()));
+            }
         });
-        $('input.search_input[name=search_words]').yourlabs_autocomplete({
+        $('input.search_input[name=q]').yourlabs_autocomplete({
             url: '{% url scoobet_autocomplete %}',
             defaultValue: "{% trans 'Search : a match, a player, a team, a competition / a friend, a clan...' %}",
         });
@@ -356,7 +384,7 @@ body.activity.detail div.activity div.comments {
         $.ajaxSetup({
             beforeSend: function(req) {},
             error: function(req, textStatus, error) {
-                if (textStatus == 'error') {
+                if (textStatus == 'error' && error) {
                     add_message('{% trans 'Sorry, our program failed to process your request. Our techie has been notified by email and will take care of it soonish' %}');
                 }
             },

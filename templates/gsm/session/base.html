@@ -141,9 +141,6 @@
     <li class="home tab {% if tab == 'home' %}active{% endif %}">
         <a href="{{ session.get_home_absolute_url }}" title="{{ session.name }}">{% trans 'before' %}</a>
     </li>
-    <li class="after tab {% if tab == 'after' %}active{% endif %}">
-        <a href="{{ session.get_after_absolute_url }}" title="{{ session.name }}">{% trans 'after' %}</a>
-    </li>
 	{% comment %}
     <li class="news tab {% if tab == 'news' %}active{% endif %}">
         <a href="{{ session.get_news_absolute_url }}" title="{{ session.name }}">{% trans 'news' %}</a>
@@ -151,9 +148,6 @@
 	{% endcomment %}
     <li class="picks tab {% if tab == 'picks' %}active{% endif %}">
         <a href="{{ session.get_picks_absolute_url }}" title="{{ session.name }}">{% trans 'picks' %}</a>
-    </li>
-    <li class="live tab {% if tab == 'live' %}active{% endif %}">
-        <a href="{{ session.get_live_absolute_url }}" title="{{ session.name }}">{% trans 'live' %}</a>
     </li>
 </ul>
 {% endblock %}

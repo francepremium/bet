@@ -46,7 +46,7 @@
 
 {% if not results %}
 		<li>{% trans 'no results'|capfirst %}</li>
-		<li><a href="">{% blocktrans %}Search for {{ q }} instead{% endblocktrans %}</a></li>
+		<li><a href="{% url haystack_search %}?q={{ q|urlencode }}">{% blocktrans %}Search for {{ q }}{% endblocktrans %}</a></li>
 {% endif %}
 
 </ul>

@@ -75,6 +75,8 @@
                     $(document).trigger('yourlabs_autocomplete.deactivateOption', [autocomplete, $(this)]);
                 },
                 click: function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
                     $(document).trigger('yourlabs_autocomplete.selectOption', [autocomplete, $(this)]);
                 },
             });
@@ -149,7 +151,6 @@
 
             if (current.length) {
                 if (way == 'up') {
-                    console.log(current)
                     target = current.prevAll(this.options.iterablesSelector + ':first');
                     if (!target.length) {
                         target = last;
