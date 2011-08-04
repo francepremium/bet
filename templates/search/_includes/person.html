@@ -1,0 +1,3 @@
+{% load i18n %}
+<img src="{{ result.object.get_large_image_url }}" />
+<a href="{{ result.get_absolute_url }}" title="{{ result.object.name }}">{{ result.object.name }} ({{ result.object.sport }} {% trans 'person' %})</a>

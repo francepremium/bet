@@ -27,6 +27,7 @@ urlpatterns = patterns("",
     url(r"^admin/", include(admin.site.urls)),
     url(r'^ajax_select/', include('ajax_select.urls')),
     url(r'^me/$', 'scoobet.views.me', name='me'),
+    url(r'^search/', include('haystack.urls')),
     url(r'^update/tina/$', views.git_pull),
     url(
         r'^(?P<session_pk>[0-9]+)/(?P<bettype_pk>[0-9]+)/$',

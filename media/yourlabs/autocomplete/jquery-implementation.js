@@ -151,7 +151,6 @@
 
             if (current.length) {
                 if (way == 'up') {
-                    console.log(current)
                     target = current.prevAll(this.options.iterablesSelector + ':first');
                     if (!target.length) {
                         target = last;

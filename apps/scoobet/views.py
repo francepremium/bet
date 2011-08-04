@@ -16,6 +16,7 @@ from django import db
 
 from actstream.models import actor_stream, Follow, Action
 
+from bookmaker.models import *
 from bet.helpers import *
 from bet.models import *
 from gsm.models import Session, Competition, GsmEntity
@@ -78,6 +79,8 @@ def autocomplete(request,
     queries['competitions'] = Competition.objects.filter(
         Q(name_ascii_fr__icontains=q)|Q(name_fr__icontains=q)|
         Q(name_ascii_en__icontains=q)|Q(name_en__icontains=q))[:3]
+    queries['bookmakers'] = Bookmaker.objects.filter(
+        name__icontains=q)
     context.update(queries)
 
     results = 0

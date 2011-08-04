@@ -66,7 +66,7 @@ table.bettype table.choices {
 
 		<div id="search">
 			<form class="search" method="get" action="/search/">
-				<input class="search_input" id="search_input_1" name="search_words" type="text" />
+				<input class="search_input" id="search_input_1" name="q" type="text" />
 				<input class="search_submit button_naked" id="search_submit_1" type="submit" value="go" />
 			</form>
 		</div>
@@ -278,17 +278,23 @@ table.bettype table.choices {
         {% include "facebox_js.html" %}
         <script type="text/javascript">
         $(document).bind('yourlabs_autocomplete.selectOption', function(e, autocomplete, option) {
-            autocomplete.hide();
-            autocomplete.el.val('{% trans 'loading page' %}: ' + $.trim(option.text()));
-            link = $(option).find('a:first');
-            if (link.length && link.attr('href') != undefined) {
-                window.location.href = link.attr('href');
-                return false;
+            if (option.length) {
+                autocomplete.hide();
+                autocomplete.el.val('{% trans 'loading page' %}: ' + $.trim(option.text()));
+                link = $(option).find('a:first');
+                if (link.length && link.attr('href') != undefined) {
+                    window.location.href = link.attr('href');
+                    return false;
+                } else {
+                    alert('sorry, i dunno what to do with your selection!!');
+                }
             } else {
-                alert('sorry, i dunno what to do with your selection!!');
+                autocomplete.hide();
+                autocomplete.el.parents('form').submit();
+                autocomplete.el.val('{% trans 'searching for' %}: ' + $.trim(autocomplete.el.val()));
             }
         });
-        $('input.search_input[name=search_words]').yourlabs_autocomplete({
+        $('input.search_input[name=q]').yourlabs_autocomplete({
             url: '{% url scoobet_autocomplete %}',
             defaultValue: "{% trans 'Search : a match, a player, a team, a competition / a friend, a clan...' %}",
         });
@@ -296,7 +302,7 @@ table.bettype table.choices {
         $.ajaxSetup({
             beforeSend: function(req) {},
             error: function(req, textStatus, error) {
-                if (textStatus == 'error') {
+                if (textStatus == 'error' && error) {
                     add_message('{% trans 'Sorry, our program failed to process your request. Our techie has been notified by email and will take care of it soonish' %}');
                 }
             },
