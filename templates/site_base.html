@@ -230,60 +230,6 @@ table.bettype table.choices {
             </div>
         {% endif %}
 
-		{% comment %}
-        <div id="tabhead">
-            <div class="logo" dir="ltr">
-                {% for lang in LANGUAGES %}
-                    {% ifequal lang.0 LANGUAGE_CODE %}
-                        <li class="selected">{{ lang.1 }}</li>
-                    {% else %}
-                        <li><a href="{{ request.path|chlocale:lang.0 }}">{{ lang.1 }}</a></li>
-                    {% endifequal %}
-                {% endfor %}
-            </div>
-            <div class="login">{% block login %}{% include "_account_bar.html" %}{% endblock %}{% block locale_switcher %}{% endblock %}<div style="text-align: right;"></div></div>
-            <div id="right_tabs" >{% block right_tabs %}
-                <ul class="tabs">
-                    <li>
-                        <a href="{% url gsm_sport_detail 'soccer' %}">{% trans "soccer" %}</a>
-                    </li>
-                    <li>
-                        <a href="{% url gsm_sport_detail 'tennis' %}">{% trans "tennis" %}</a>
-                    </li>
-                    <li>
-                        <a href="{% url gsm_sport_detail 'rugby' %}">{% trans "rugby" %}</a>
-                    </li>
-                    <li>
-                        <a href="{% url gsm_sport_detail 'basketball' %}">{% trans "basketball" %}</a>
-                    </li>
-                    <li>
-                        <a href="{% url clan_list %}">{% trans 'clans' %}</a>
-                    </li>
-                    <li>
-                        <a href="{% url article_list %}">{% trans 'articles' %}</a>
-                    </li>
-                    <li>
-                        <a href="{% url bet_list %}">{% trans 'bets' %}</a>
-                    </li>
-                    <li>
-                        <a href="{% url bet_list_to_correct %}">{% trans 'bets to correct' %}</a>
-                    </li>
-                    {% if request.user.is_authenticated and request.user.betprofile.is_referee %}
-                    <li>
-                        <a href="{% url bet_list_flagged %}">{% trans 'flagged bets' %}</a>
-                    </li>
-                    {% endif %}
-                    {% if request.user.is_authenticated %}
-                    <li>
-                        <a href="{% url user_detail request.user.username %}">{% trans 'my profile' %}</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            {% endblock %}</div>
-        </div>
-        <div id="subnav" class="clearfix">{% block subnav_base %}<div class="clearfix">{% block subnav %}&nbsp;{% endblock %}</div>{% endblock %}</div>
-        {% endcomment %}
-
         {% block body_outer %}
         <div id="body">
 			{% if user.is_authenticated %}
