@@ -103,6 +103,11 @@ body { position:relative; width:990px; margin:0px auto; }
 #navigation_sub li.active { background-color:#ea4839; box-shadow:0px 1px 1px #cccccc, inset 0px 0px 1px #ffffff; }
 #navigation_sub li.active a { background-image:url('../img/navigation_sub_active.png'); background-repeat:no-repeat; background-position:center 36px; }
 
+/* Messages */
+#messages { position:absolute; top:1px; left:151px; width:660px; background-color:#3a3e49; color:#ffffff; }
+#messages li { padding:1px 5px; border-bottom:1px solid #5a5e69; }
+#messages a { color:#ea4839; }
+
 /* Body head elements */
 #body_head .image img { float:left; margin:2px 10px 0px 0px; padding:5px; width:75px; height:75px; border:1px solid #d9d9d9; }
 #body_head .title,
@@ -131,10 +136,6 @@ tr.odd td { background-color:#fbfbfb; }
 .gsm tr.draw 	td.score 	{ background-color:orange; }
 .gsm tr.draw 				{ background-color:#dddddd; }
 .gsm tr.Fixture	td.score 	{ background-color:#dddddd; }
-
-/* Messages */
-#messages { background-color:#000000; color:#ffffff; }
-#messages a { color:#ea4839; }
 
 /* Publication form */
 #publication { margin-bottom:12px; background-color:#f2f2f2; }

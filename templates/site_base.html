@@ -122,6 +122,19 @@ ul#messages {
 			{% endif %}
 		</div>
 
+		<div id="messages">
+			<ul>
+            {% if messages %}
+                {% for message in messages %}
+                <li id="message_{{ forloop.counter }}"{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                    <a href="#"><small>{% trans "clear" %}</small></a>
+                    {{ message }}
+                </li>
+                {% endfor %}
+            {% endif %}
+			</ul>
+        </div>
+		
 		<div id="navigation">
 			{% if request.user.is_authenticated %}
 			<ul>
@@ -284,17 +297,6 @@ ul#messages {
         </div>
         <div id="subnav" class="clearfix">{% block subnav_base %}<div class="clearfix">{% block subnav %}&nbsp;{% endblock %}</div>{% endblock %}</div>
         {% endcomment %}
-        <ul id="messages">
-            {% if messages %}
-                {% for message in messages %}
-                <li id="message_{{ forloop.counter }}"{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                    <a href="#"><small>{% trans "clear" %}</small></a>
-                    {{ message }}
-                </li>
-                {% endfor %}
-            {% endif %}
-        </ul>
-        
 
         {% block body_outer %}
         <div id="body">
@@ -380,7 +382,7 @@ ul#messages {
         function add_message(message) {
             var li = $('<li class="success">'+message+'<a href="#"><small>{% trans 'clear' %}</small></a></li>');
             li.attr('style', 'display:none');
-            $('ul#messages').append(li);
+            $('#messages ul').append(li);
             li.slideDown();
             window.setTimeout(function() {
                 li.slideUp();
