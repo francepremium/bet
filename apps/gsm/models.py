@@ -1,4 +1,6 @@
+import time
 import unicodedata
+import logging
 import re
 import unicodedata
 import htmlentitydefs
@@ -13,10 +15,30 @@ from django.core import urlresolvers
 from django.template import defaultfilters
 from django.conf import settings
 from django.core.cache import cache
+from django.core.management import call_command
+
+try:
+    import uwsgi
+    from uwsgidecorators import spool
+except ImportError:
+    print "MOCKING what we need of uwsgi"
+    class uwsgi(object):
+        SPOOL_RETRY = False
+    def spool(func):
+        return func
 
 from autoslug import AutoSlugField
 
 import gsm
+
+logger = logging.getLogger('gsm')
+
+@spool
+def gsm_sync(args):
+    call_command('gsm_sync')
+    # sleep 15 minutes before starting over again
+    time.sleep(3600*5)
+    return uwsgi.SPOOL_RETRY
 
 class GsmEntityNoLanguageException(gsm.GsmException):
     pass

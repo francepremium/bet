@@ -1,7 +1,6 @@
 {% load i18n ifsetting_tag account_tags openid_tags %}
 {% if user.is_authenticated %}
 	<ul>
-		<li>{% ifopenid %}<img src="{{ STATIC_URL }}images/openid-icon.png" alt="Logged in with OpenID" />{% endifopenid %}<b>{% user_display user %}</b></li>
 	{% if user.is_staff %}
 		<li><a href="/admin/">Admin</a></li>
 	{% endif %}
@@ -9,7 +8,6 @@
 	{% if user.bookmaker %}
 		<li><a href="{% url bookmaker_edit user.bookmaker.pk %}">Bookmaker</a></li>
 	{% endif %}
-		<li><a href="{% if request.openid %}/openid/logout/?next={% url acct_logout %}{% else %}{% url acct_logout %}{% endif %}">Logout</a></li>
 	</ul>
 {% else %}
     <a href="{% url acct_login %}">Log in</a> or <a href="{% url acct_signup %}">Sign Up</a>

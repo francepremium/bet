@@ -6,6 +6,9 @@
 # Put project-specific requirements here.
 # See http://pip-installer.org/requirement-format.html for more information.
 #
+# force pip upgrade to support hard coded git clones
+-e git+https://github.com/vbabiy/pip.git#egg=pip
+
 
 -e svn+http://django-modeltranslation.googlecode.com/svn/trunk/@111#egg=modeltranslation
 django-filter==0.5.3
@@ -38,14 +41,11 @@ django-localeurl==1.4
 django-sentry
 django_extensions
 lxml
--e git+git://github.com/dcramer/django-devserver#egg=django-devserver
+#-e git+git://github.com/dcramer/django-devserver#egg=django-devserver
 sqlparse
 werkzeug
 ipython
 ipdb
 -e git+https://github.com/mirumee/django-messages.git@eabb7e6c5ccb4b9c63eb6844bccad54751ecdf2f#egg=messages
-djkombu
-celery
-django-celery
 -e git+https://github.com/toastdriven/django-haystack.git@v1.2.4#egg=haystack
 whoosh

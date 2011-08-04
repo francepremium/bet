@@ -1,3 +1,5 @@
+import logging
+
 from django.db import connection, transaction
 from django.db import models
 from django.db.models import signals
@@ -9,8 +11,19 @@ from django.core.cache import cache
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 
-from celery.task import task
+try:
+    import uwsgi
+    from uwsgidecorators import spool
+except ImportError:
+    print "MOCKING what we need of uwsgi"
+    class uwsgi(object):
+        SPOOL_RETRY = False
+    def spool(func):
+        return func
+
 from annoying.fields import AutoOneToOneField
+
+logger = logging.getLogger('apps')
 
 TICKET_STATUS_INCOMPLETE = 0
 TICKET_STATUS_DONE = 1
@@ -100,7 +113,8 @@ class BetProfile(models.Model):
         return False
 
     def refresh(self):
-        refresh_betprofile_for_user.delay(self.user)
+        logger.debug('spooling user profile refresh %s' % self.user)
+        refresh_betprofile_for_user.spool(userpk=self.user.pk)
 
 class Ticket(models.Model):
     TICKET_STAKE_CHOICES = [(x,x) for x in range(1,11)]
@@ -221,17 +235,6 @@ class Bet(models.Model):
     def get_absolute_url(self):
         return urlresolvers.reverse('bet_detail', args=(self.pk,))
 
-def refresh_ticket_user_betprofile(sender, **kwargs):
-    model = kwargs.get('instance')
-    if isinstance(model, Ticket):
-        ticket = model
-    if isinstance(model, Bet):
-        ticket = model.ticket
-    if ticket.correction in (BET_CORRECTION_WON, BET_CORRECTION_LOST):
-        ticket.user.betprofile.refresh()
-signals.post_save.connect(refresh_ticket_user_betprofile, sender=Ticket)
-signals.post_save.connect(refresh_ticket_user_betprofile, sender=Bet)
-
 def delete_empty_ticket(sender, **kwargs):
     if kwargs['instance'].ticket.bet_set.count() == 0:
         kwargs['instance'].ticket.delete()
@@ -264,10 +267,13 @@ class Event(models.Model):
             'correction': self.correction,
         }
 
-
-@task(ignore_result=True)
-def refresh_betprofile_for_user(user):
+@spool
+def refresh_betprofile_for_user(arguments):
+    user = User.objects.get(pk=arguments['userpk'])
+    logger.debug('triggered profile refresh %s' % user)
+    print 'triggered profile refresh %s' % user
     if user.ticket_set.filter(status=TICKET_STATUS_DONE).count():
+        logger.debug('starting user profile refresh %s' % user)
         tickets = user.ticket_set.filter(status=TICKET_STATUS_DONE)
 
         total_odds = 0
@@ -306,3 +312,6 @@ def refresh_betprofile_for_user(user):
         user.betprofile.profit = profit
         user.betprofile.profitability = profitability
         user.betprofile.save()
+        logger.debug('ending user profile refresh %s' % user)
+    else:
+        logger.debug('user %s has no ticket' % user)

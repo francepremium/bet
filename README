@@ -10,3 +10,8 @@ Migrations:
           manage.py celeryd -l info
     2011-07-28 merged homepage:
         - apply 2011-07-26, branch homepage when pulling master
+    2011-08-03 got rid of celery in favor of uwsgi:
+        - pip uninstall celery django-celery djkombu
+        - pip install uwsgi
+        - manage.py upgradedb --exec
+        - note that uwsgi spooler arguments may only be dicts of strings

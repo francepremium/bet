@@ -129,6 +129,7 @@ def feed_friends(request,
     ).order_by('-timestamp').distinct()
 
     context = {
+        'object': user,
         'activity_list': activities,
         'page_template': 'auth/user_activities_page.html',
     }

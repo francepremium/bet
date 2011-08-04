@@ -7,10 +7,10 @@
     {{ block.super }}
 
     {% get_user_contenttype as user_ctype %}
-
+	{% comment %}
     <a href="{% url actstream_object_feed content_type_id=user_ctype.id  object_id=object.id %}">RSS</a>
     <a href="{% url actstream_object_feed_atom content_type_id=user_ctype.id  object_id=object.id %}">ATOM</a>
-
+	{% endcomment %}
     {% include page_template %}
 
 {% endblock %}

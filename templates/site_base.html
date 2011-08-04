@@ -27,13 +27,6 @@
             {% block extra_head %}{% endblock %}
         {% endblock %}
         <style type="text/css">
-.yourlabs_autocomplete.outer_container {
-    background-color: white;
-}
-.yourlabs_autocomplete .option.active {
-    background-color: gray;
-}
-
 div.left_bet {
     float: left;
     width: 45%;
@@ -42,38 +35,10 @@ div.left_bet {
 div.right_bet {
     margin-left: 55%;
 }
-.popularity .popularity_block {
-    display: inline-block;
-}
 div.bet div.top div.head, div.bet div.top div.username {
     float: left;
     width: 30%;
     padding-left: 8px;
-}
-.winner, .draw {
-    background-color: grey;
-}
-td.score.left, td.score.right {
-    text-align: center;
-    width: 32px;
-}
-tr.win td.score {
-    background-color: green;
-}
-tr.lost td.score {
-    background-color: red;
-}
-tr.draw td.score {
-    background-color: orange;
-}
-tr.Fixture td.score {
-    background-color: grey;
-}
-tr.Fixture td.score.left {
-    text-align: right;
-}
-tr.Fixture td.score.right {
-    text-align: left;
 }
 #global_form .results_on_deck { display: none; }
 div.tree ul, .tab_content { display: none; }
@@ -82,31 +47,6 @@ table.bettype table.choices tr,
 table.bettype table.choices {
     border-collapse: collapse;
     border: 1px solid black;
-}
-#ajaxload {
-    cursor: pointer;
-    left: 45%;
-    position: fixed;
-    top: 12px;
-	display:none;
-}
-ul#messages {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 2;
-}
-div.activity div.comments {
-    display: none;
-}
-body.activity.detail div.activity div.comments {
-    display: block;
-}
-.link {
-    color: blue;
-    text-decoration: underline;
-    cursor: pointer;
 }
         </style>
         <style type="text/css">
@@ -131,29 +71,63 @@ body.activity.detail div.activity div.comments {
 			</form>
 		</div>
 
-		<div id="locale">
-			{% block locale_switcher %}
-			<ul>
+		<div id="language">
+			<ul class="expandable">
+				<li class="{{ LANGUAGE_CODE }}">{{ LANGUAGE_CODE }}</li>
 			 {% for lang in LANGUAGES %}
-				{% ifequal lang.0 LANGUAGE_CODE %}
-					<li class="selected">{{ lang.1 }}</li>
-				{% else %}
-					<li><a href="{{ request.path|chlocale:lang.0 }}">{{ lang.1 }}</a></li>
-				{% endifequal %}
+				{% ifnotequal lang.0 LANGUAGE_CODE %}
+				<li class="{{ lang.0 }}"><a href="{{ request.path|chlocale:lang.0 }}">{{ lang.0 }}</a></li>
+				{% endifnotequal %}
 			{% endfor %}
 			</ul>
-			{% endblock %}
 		</div>
 
-		<div id="account">
-			{% block login %}{% include "_account_bar.html" %}{% endblock %}
+		<div id="timezone">
+			<ul class="expandable">
+				<li>12:47 GMT{% if request.timezone.offset > 0 %}+{% endif %}{% ifnotequal request.timezone.offset 0 %}{{ request.timezone.offset }}{% endifnotequal %}</li>
+				{# @@@ insert real time here #}
+				{% for timezone in available_timezones %}
+				<li timezone="{{ timezone }}">{% if 12|add:timezone < 10 %}0{% endif %}{{ 12|add:timezone}}:47 GMT{% if timezone > 0 %}+{% endif %}{% ifnotequal timezone 0 %}{{ timezone }}{% endifnotequal %}</li>
+				{% endfor %}
+			</ul>
+			<form method="post" action="{% url gsm_timezone_adjust %}">
+				{% csrf_token %}
+				<input type="hidden" name="timezone_offset" />
+			</form>
 		</div>
+
+		<div id="settings">
+			{% if request.user.is_authenticated %}
+			<a href="{% url acct_email %}"></a>
+			{% endif %}
+		</div>
+
+		<div id="signup">
+			{% if not request.user.is_authenticated %}
+			<a href="{% url acct_signup %}">{% trans 'sign up' %}</a>
+			{% endif %}
+		</div>
+
+		<div id="messages">
+			<ul>
+            {% if messages %}
+                {% for message in messages %}
+                <li id="message_{{ forloop.counter }}"{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                    <a href="#"><small>{% trans "clear" %}</small></a>
+                    {{ message }}
+                </li>
+                {% endfor %}
+            {% endif %}
+			</ul>
+        </div>
+
+        <div id="ajaxload"></div>
 
 		<div id="navigation">
 			{% if request.user.is_authenticated %}
 			<ul>
 				<li class="image">
-					<a href="{% url user_detail request.user.username %}">{% avatar user %}</a>
+					<a href="{% url scoobet_feed_friends %}">{% avatar user %}</a>
 				</li>
 				<li>
 					<a href="{% url user_detail request.user.username %}">{{ request.user.username }}</a>
@@ -166,6 +140,7 @@ body.activity.detail div.activity div.comments {
 						<li><a href="{% url bet_list_flagged %}">{% trans 'flagged bets' %}</a></li>
 						{% endif %}
 						<li><a href="{% url messages_inbox %}">{% trans 'inbox'|capfirst %} {% if inbox_count %}[{{ inbox_count }}]{% endif %}</a></li>
+						<li><a href="{% if request.openid %}/openid/logout/?next={% url acct_logout %}{% else %}{% url acct_logout %}{% endif %}">Logout</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -173,7 +148,7 @@ body.activity.detail div.activity div.comments {
 				<li>
 					<a href="{% url user_detail_tab request.user.username 'social' %}">{% trans 'social' %}</a>
 					<ul>
-						<li><a href="{% url user_detail_tab request.user.username 'activities' %}">{% trans 'activities'|capfirst %}</a></li>
+						<li><a href="{% url scoobet_feed_friends %}">{% trans 'activities'|capfirst %}</a></li>
 						<li><a href="{% url bet_list_tab 'friends' %}">{% trans 'bets'|capfirst %}</a></li>
 					</ul>
 				</li>
@@ -187,6 +162,18 @@ body.activity.detail div.activity div.comments {
 				<li><a href="{% url article_list %}">{% trans 'articles' %}</a></li>
 				{% endcomment %}
 			</ul>
+			{% else %}
+			<form class="login" method="post" action="{% url acct_login %}">
+				<input type="hidden" name="next" value="{% url me %}"/>
+				{% csrf_token %}
+				<input type="text" name="username" defaultValue="{% trans 'user name'|capfirst %}" />
+				<input type="password" name="password" defaultValue="{% trans 'password'|capfirst %}" />
+				<input type="submit" class="button simple" value="{% trans 'Log in' %}" />
+				<label for="login_remember">{% trans 'remember me'|capfirst %}</label>
+				<input type="checkbox" name="remember" id="login_remember" />
+				<a href="{% url acct_passwd_reset %}">{% trans "Forgot password?" %}</a>
+				<a href="{% url acct_signup %}">{% trans 'sign up'|capfirst %}</a>
+			</form>
 			{% endif %}
 			<ul>
 				<li class="{% if sport.slug == 'soccer' %}active{% endif %}">
@@ -228,10 +215,6 @@ body.activity.detail div.activity div.comments {
 			{% block aside %}{% endblock %}
 		</div>
 
-        <div id="ajaxload">
-            <img src="{{ STATIC_URL }}img/ajax-loader.gif" />
-        </div>
-
         {% if site_wide_announcements %}
             <div id="site_wide_announcements">
                 <ul>
@@ -244,71 +227,6 @@ body.activity.detail div.activity div.comments {
                 </ul>
             </div>
         {% endif %}
-
-		{% comment %}
-        <div id="tabhead">
-            <div class="logo" dir="ltr">
-                {% for lang in LANGUAGES %}
-                    {% ifequal lang.0 LANGUAGE_CODE %}
-                        <li class="selected">{{ lang.1 }}</li>
-                    {% else %}
-                        <li><a href="{{ request.path|chlocale:lang.0 }}">{{ lang.1 }}</a></li>
-                    {% endifequal %}
-                {% endfor %}
-            </div>
-            <div class="login">{% block login %}{% include "_account_bar.html" %}{% endblock %}{% block locale_switcher %}{% endblock %}<div style="text-align: right;"></div></div>
-            <div id="right_tabs" >{% block right_tabs %}
-                <ul class="tabs">
-                    <li>
-                        <a href="{% url gsm_sport_detail 'soccer' %}">{% trans "soccer" %}</a>
-                    </li>
-                    <li>
-                        <a href="{% url gsm_sport_detail 'tennis' %}">{% trans "tennis" %}</a>
-                    </li>
-                    <li>
-                        <a href="{% url gsm_sport_detail 'rugby' %}">{% trans "rugby" %}</a>
-                    </li>
-                    <li>
-                        <a href="{% url gsm_sport_detail 'basketball' %}">{% trans "basketball" %}</a>
-                    </li>
-                    <li>
-                        <a href="{% url clan_list %}">{% trans 'clans' %}</a>
-                    </li>
-                    <li>
-                        <a href="{% url article_list %}">{% trans 'articles' %}</a>
-                    </li>
-                    <li>
-                        <a href="{% url bet_list %}">{% trans 'bets' %}</a>
-                    </li>
-                    <li>
-                        <a href="{% url bet_list_to_correct %}">{% trans 'bets to correct' %}</a>
-                    </li>
-                    {% if request.user.is_authenticated and request.user.betprofile.is_referee %}
-                    <li>
-                        <a href="{% url bet_list_flagged %}">{% trans 'flagged bets' %}</a>
-                    </li>
-                    {% endif %}
-                    {% if request.user.is_authenticated %}
-                    <li>
-                        <a href="{% url user_detail request.user.username %}">{% trans 'my profile' %}</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            {% endblock %}</div>
-        </div>
-        <div id="subnav" class="clearfix">{% block subnav_base %}<div class="clearfix">{% block subnav %}&nbsp;{% endblock %}</div>{% endblock %}</div>
-        {% endcomment %}
-        <ul id="messages">
-            {% if messages %}
-                {% for message in messages %}
-                <li id="message_{{ forloop.counter }}"{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                    <a href="#"><small>{% trans "clear" %}</small></a>
-                    {{ message }}
-                </li>
-                {% endfor %}
-            {% endif %}
-        </ul>
-        
 
         {% block body_outer %}
         <div id="body">
@@ -400,7 +318,7 @@ body.activity.detail div.activity div.comments {
         function add_message(message) {
             var li = $('<li class="success">'+message+'<a href="#"><small>{% trans 'clear' %}</small></a></li>');
             li.attr('style', 'display:none');
-            $('ul#messages').append(li);
+            $('#messages ul').append(li);
             li.slideDown();
             window.setTimeout(function() {
                 li.slideUp();
@@ -528,7 +446,7 @@ body.activity.detail div.activity div.comments {
             $('input[type=submit].confirm').live('click', function(e) {
                 return confirm('{% trans 'Do you want to' %} ' + $(this).attr('title') + ' ?');
             });
-
+			
             /*
             bettype select:
             - empty choices
@@ -574,9 +492,31 @@ body.activity.detail div.activity div.comments {
             load_global_ticket_url('{{ incomplete_ticket_url }}');
             {% endif %}
 
-            $('div.activity div.bottom span.comments').click(function(e) {
-                $(this).parent().next().toggle('fast');
+            $('div.activity .comments_link').live('click', function() {
+                $(this).next('.comments').toggle('fast');
             });
+
+			$('div.activity .bet_list_link').live('click', function() {
+				$(this).next('.bet_list').toggle('fast');
+            });
+			
+            $('#timezone li[timezone]').click(function() {
+				$(this).parent().next().find('input[name=timezone_offset]').val($(this).attr('timezone'));
+                $(this).parent().next().trigger('submit');
+            });
+			
+			$('#navigation input[defaultValue]').map(function(){
+				if ($(this).val() == '')
+					$(this).val($(this).attr('defaultValue'));
+				$(this).focus(function() {
+					if ($(this).val() == $(this).attr('defaultValue'))
+						$(this).val('');
+				});
+				$(this).blur(function() {
+					if ($(this).val() == '')
+						$(this).val($(this).attr('defaultValue'));
+				});
+			});
 
             // initializes links for ajax requests
             $("a.endless_more").live("click", function() {
@@ -630,10 +570,6 @@ body.activity.detail div.activity div.comments {
                         }
                     }
                 );
-            });
-
-            $('.toggle_bet_list').live('click', function() {
-                $(this).parents('div.details').find('div.bet_list').toggle('fast');
             });
 
             $('select[name=ticket__bookmaker]').live('change', function() {
