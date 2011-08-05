@@ -27,9 +27,13 @@
         <h3>{{ position }}</h3>
         {% for person in persons %}
         <div class="person">
-            <a href="{{ person.get_absolute_url }}" title="{{ person.name }}">{{ person.name }}</a>
-            <img src="{{ person.get_large_image_url }}" />
-
+			<div class="title">
+				<a href="{{ person.get_absolute_url }}" title="{{ person.name }}">{{ person.name }}</a>
+			</div>
+            <div class="image">
+				<a href="{{ person.get_absolute_url }}" title="{{ person.name }}"><img src="{{ person.get_large_image_url }}" /></a>
+			</div>
+			<div class="content">
             {% if person.attrib.date_of_birth|age_from_date %}
             {{ person.attrib.date_of_birth|age_from_date }} {% trans 'years old' %}
             {% endif %}
@@ -37,58 +41,59 @@
             {% if person.attrib.getchildren.0.goals %}
                 {{ person.attrib.getchildren.0.goals }} goals
             {% endif %}
+			</div>
         </div>
         {% endfor %}
+		<div class="clear"></div>
     </div>
     {% endfor %}
 </div>
-
 {% if sport == 'soccer' %}
-    <div class="squad tab_content tab_id_statistics">
-        <table>
-            <tr>
-                <th colspan="2"></th>
-                <th>{% trans 'name' %}</th>
-                <th></th>
-                <th>{% trans 'age' %}</th>
-                <th><acronym title="{% trans 'Position' %}">P</acronym></th>
-                <th><img src="{{ STATIC_URL }}img/events/minute_played.png" alt="{% trans 'Minutes played' %}" title="{% trans 'Minutes played' %}" /></th>
-                <th><img src="{{ STATIC_URL }}img/events/appearance.png" alt="{% trans 'Appearances' %}" title="{% trans 'Appearances' %}" /></th>
-                <th><img src="{{ STATIC_URL }}img/events/L.png" alt="{% trans 'Lineups' %}" title="{% trans 'Lineups' %}" /></th>
-                <th><img src="{{ STATIC_URL }}img/events/SI.png" alt="{% trans 'Substitute in' %}" title="{% trans 'Substitute in' %}" /></th>
-                <th><img src="{{ STATIC_URL }}img/events/SO.png" alt="{% trans 'Substitute out' %}" title="{% trans 'Substitute out' %}" /></th>
-                <th><img src="{{ STATIC_URL }}img/events/bench.png" alt="{% trans 'Substitutes on the bench' %}" title="{% trans 'Substitutes on the bench' %}" /></th>
-                <th><img src="{{ STATIC_URL }}img/events/G.png" alt="{% trans 'Goal' %}" title="{% trans 'Goal' %}" /></th>
-                <th><img src="{{ STATIC_URL }}img/events/YC.png" alt="{% trans 'Yellow card' %}" title="{% trans 'Yellow card' %}" /></th>
-                <th><img src="{{ STATIC_URL }}img/events/Y2C.png" alt="{% trans 'Yellow 2nd/RC' %}" title="{% trans 'Yellow 2nd/RC' %}" /></th>
-                <th><img src="{{ STATIC_URL }}img/events/RC.png" alt="{% trans 'Red card' %}" title="{% trans 'Red card' %}" /></th>
-            </tr>
-        {% for person in persons %}
-            <tr>
-                <td>{{ person.element.getchildren.0.attrib.shirtnumber }}</td>
-                <td>photo</td>
-                <td>
-                    <a href="{{ person.get_absolute_url }}" title="{{ person.attrib.first_name }} {{ person.attrib.last_name }}">{{ person.attrib.first_name }} {{ person.attrib.last_name }}</a>
-                </td>
-                <td>
-                    <img src="{{ person.attrib.nationality_id|gsm_area_id_flag_url }}" alt="{{ person.attrib.nationality_name }}" title="{{ person.attrib.nationality_name }}" />
-                </td>
-                <td>{{ person.attrib.date_of_birth|age_from_date }}</td>
-                <td>{{ person.attrib.position.0|upper }}</td>
-                <td>?</td>
-                <td>{{ person.element.getchildren.0.attrib.appearances }}</td>
-                <td>?</td>
-                <td>{{ person.element.getchildren.0.attrib.substitute_in }}</td>
-                <td>{{ person.element.getchildren.0.attrib.substitute_out }}</td>
-                <td>?</td>
-                <td>{{ person.element.getchildren.0.attrib.goals }}</td>
-                <td>{{ person.element.getchildren.0.attrib.yellow_cards }}</td>
-                <td>{{ person.element.getchildren.0.attrib.second_yellow_cards }}</td>
-                <td>{{ person.element.getchildren.0.attrib.red_cards }}</td>
-            </tr>
-        {% endfor %}
-        </table>
-    </div>
+<div class="squad tab_content tab_id_statistics">
+	<table>
+		<tr>
+			<th colspan="2"></th>
+			<th>{% trans 'name' %}</th>
+			<th></th>
+			<th>{% trans 'age' %}</th>
+			<th><acronym title="{% trans 'Position' %}">P</acronym></th>
+			<th><img src="{{ STATIC_URL }}img/events/minute_played.png" alt="{% trans 'Minutes played' %}" title="{% trans 'Minutes played' %}" /></th>
+			<th><img src="{{ STATIC_URL }}img/events/appearance.png" alt="{% trans 'Appearances' %}" title="{% trans 'Appearances' %}" /></th>
+			<th><img src="{{ STATIC_URL }}img/events/L.png" alt="{% trans 'Lineups' %}" title="{% trans 'Lineups' %}" /></th>
+			<th><img src="{{ STATIC_URL }}img/events/SI.png" alt="{% trans 'Substitute in' %}" title="{% trans 'Substitute in' %}" /></th>
+			<th><img src="{{ STATIC_URL }}img/events/SO.png" alt="{% trans 'Substitute out' %}" title="{% trans 'Substitute out' %}" /></th>
+			<th><img src="{{ STATIC_URL }}img/events/bench.png" alt="{% trans 'Substitutes on the bench' %}" title="{% trans 'Substitutes on the bench' %}" /></th>
+			<th><img src="{{ STATIC_URL }}img/events/G.png" alt="{% trans 'Goal' %}" title="{% trans 'Goal' %}" /></th>
+			<th><img src="{{ STATIC_URL }}img/events/YC.png" alt="{% trans 'Yellow card' %}" title="{% trans 'Yellow card' %}" /></th>
+			<th><img src="{{ STATIC_URL }}img/events/Y2C.png" alt="{% trans 'Yellow 2nd/RC' %}" title="{% trans 'Yellow 2nd/RC' %}" /></th>
+			<th><img src="{{ STATIC_URL }}img/events/RC.png" alt="{% trans 'Red card' %}" title="{% trans 'Red card' %}" /></th>
+		</tr>
+	{% for person in persons %}
+		<tr>
+			<td>{{ person.element.getchildren.0.attrib.shirtnumber }}</td>
+			<td>photo</td>
+			<td>
+				<a href="{{ person.get_absolute_url }}" title="{{ person.attrib.first_name }} {{ person.attrib.last_name }}">{{ person.attrib.first_name }} {{ person.attrib.last_name }}</a>
+			</td>
+			<td>
+				<img src="{{ person.attrib.nationality_id|gsm_area_id_flag_url }}" alt="{{ person.attrib.nationality_name }}" title="{{ person.attrib.nationality_name }}" />
+			</td>
+			<td>{{ person.attrib.date_of_birth|age_from_date }}</td>
+			<td>{{ person.attrib.position.0|upper }}</td>
+			<td>?</td>
+			<td>{{ person.element.getchildren.0.attrib.appearances }}</td>
+			<td>?</td>
+			<td>{{ person.element.getchildren.0.attrib.substitute_in }}</td>
+			<td>{{ person.element.getchildren.0.attrib.substitute_out }}</td>
+			<td>?</td>
+			<td>{{ person.element.getchildren.0.attrib.goals }}</td>
+			<td>{{ person.element.getchildren.0.attrib.yellow_cards }}</td>
+			<td>{{ person.element.getchildren.0.attrib.second_yellow_cards }}</td>
+			<td>{{ person.element.getchildren.0.attrib.red_cards }}</td>
+		</tr>
+	{% endfor %}
+	</table>
+</div>
 {% endif %}
 
 {% endblock %}
