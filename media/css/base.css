@@ -154,6 +154,13 @@ tr.odd td { background-color:#f7f7f7; }
 .gsm .calendar h2 { float:left; }
 .gsm .calendar div.navigation { float:right; }
 
+/* Gsm squad */
+.gsm .squad h3 { clear:left; margin-top:20px; }
+.gsm .squad h3:first-child { margin-top:0px; }
+.gsm .squad .person { float:left; margin:5px 2px 15px 2px; }
+.gsm .squad .person .title { font-size:14px; }
+.gsm .squad .person .content { float:right; }
+
 /* Tabs (quickly themed) */
 .tab_link { display:inline-block; padding:3px 7px; background-color:#eaebed; cursor:pointer; }
 .tab_link.selected { background-color:#f9f9f9; }
