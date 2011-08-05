@@ -3,7 +3,7 @@
 
 {% block session_score %}
 {% if session.status == 'Played' %}
-<td>
+<td class="score" colspan="3">
 	<a href="{{ session.get_absolute_url }}" title="{{ session }}">
 		<table>
 			<tr>
@@ -23,15 +23,9 @@
 		</table>
 	</a>
 </td>
+{% else %}
+	{{ block.super }}
 {% endif %}
 {% endblock %}
 {% block session_oponnent_image_left %}{% endblock %}
 {% block session_oponnent_image_right %}{% endblock %}
-{% block session_score_left %}{% endblock %}
-{% block session_score_right %}{% endblock %}
-{% block session_fixture_left %}{% endblock %}
-{% block session_fixture_right %}{% endblock %}
-{% block session_retired_left %}{% endblock %}
-{% block session_retired_right %}{% endblock %}
-{% block session_walkover_left %}{% endblock %}
-{% block session_walkover_right %}{% endblock %}
