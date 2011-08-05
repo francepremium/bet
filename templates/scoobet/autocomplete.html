@@ -5,7 +5,7 @@
 {% if users %}
 		<li>{% trans 'users'|capfirst %}</li>
     {% for user in users %}
-        <li><a href="{{ user.get_absolute_url }}">{{ user }}</a></li>
+        <li class="user"><a href="{{ user.get_absolute_url }}">{{ user }}</a></li>
     {% endfor %}
 {% endif %}
 
@@ -40,7 +40,7 @@
 {% if bookmakers %}
 		<li>{% trans 'bookmakers'|capfirst %}</li>
     {% for bookmaker in bookmakers %}
-        <li><a href="{{ bookmaker.get_absolute_url }}">{{ bookmaker }}</a></li>
+        <li class="bookmaker"><a href="{{ bookmaker.get_absolute_url }}">{{ bookmaker }}</a></li>
     {% endfor %}
 {% endif %}
 
