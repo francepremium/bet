@@ -128,9 +128,8 @@ th { padding:5px 7px; }
 tr.odd td { background-color:#f7f7f7; }
 
 /* Gsm tables */
-.gsm table { margin-bottom:15px; }
+.gsm table { width:100%; margin-bottom:15px; }
 .gsm th { color:#ea4839; text-transform:capitalize; }
-.gsm .sessions table { width:100%; }
 .gsm .oponnent.left { text-align:right; }
 .gsm .oponnent.right { text-align:left; }
 .gsm td.score { text-align:center; }
@@ -147,7 +146,7 @@ tr.odd td { background-color:#f7f7f7; }
 .gsm tr.draw 		td.score	{ background-color:#e0e0e0; }
 .gsm tr.draw 					{ background-color:#dddddd; }
 .gsm tr.current					{ background-color:#cccccc; }
-.gsm h2.next_sessions { display:block; }
+.gsm h2 { display:block; }
 
 /* Publication form */
 #publication { margin-bottom:12px; background-color:#f2f2f2; }
