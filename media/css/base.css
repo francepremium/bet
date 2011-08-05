@@ -170,7 +170,8 @@ tr.odd td { background-color:#f7f7f7; }
 #body_content form table { width:100%; }
 #body_content form th { color:inherit; }
 #body_content form tr.odd td { background-color:transparent; }
-#body_content form select { width:180px; }
+#body_content form select { width:130px; margin-right:10px; }
+#body_content form p { display:inline; }
 
 /* Publication form */
 #publication { margin-bottom:12px; background-color:#f2f2f2; }
