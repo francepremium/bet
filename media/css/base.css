@@ -136,6 +136,7 @@ tr.odd td { background-color:#f7f7f7; }
 .gsm td.score.left { padding-right:0px; text-align:left; }
 .gsm td.score.right { padding-left:0px; text-align:right; }
 .gsm td.score.center { padding:0px; }
+.gsm td.score table { margin:0px; }
 .gsm td.score a,
 .gsm td.action a { display:block; color:#ea4839; }
 .gsm .winner,
