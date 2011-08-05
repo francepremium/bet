@@ -148,6 +148,8 @@ tr.odd td { background-color:#f7f7f7; }
 .gsm tr.draw 					{ background-color:#dddddd; }
 .gsm tr.current					{ background-color:#cccccc; }
 .gsm h2 { display:block; }
+.gsm .calendar h2 { float:left; }
+.gsm .calendar div.navigation { float:right; }
 
 /* Publication form */
 #publication { margin-bottom:12px; background-color:#f2f2f2; }

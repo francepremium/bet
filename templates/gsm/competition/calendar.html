@@ -2,33 +2,47 @@
 {% load i18n gsm_tags %}
 
 {% block body %}{{ block.super }}
-    
-
-    <h2 class="round">{{ round.name }}</h2>
+	<div class="calendar">
     {% if cup or round %}
-        {% if round.get_previous_round %}
-            <a href="?round={{ round.get_previous_round.pk }}" title="">prev</a>
-        {% endif %}
-        {% if round.get_next_round %}
-            <a href="?round={{ round.get_next_round.pk }}" title="">next</a>
-        {% endif %}
+		<div class="round">
+			<h2>{{ round.name }}</h2>
+			<div class="navigation">
+			{% if round.get_previous_round %}
+				<a class="button button_simple button_small button_backward" href="?round={{ round.get_previous_round.pk }}" title="">prev</a>
+			{% endif %}
+			{% if round.get_next_round %}
+				<a class="button button_simple button_small button_forward" href="?round={{ round.get_next_round.pk }}" title="">next</a>
+			{% endif %}
+			</div>
+		</div>
     {% else %}
         {% if gameweek %}
+		<div class="gameweek">
+			<h2>{% trans 'day' %} {{ gameweek }}</h2>
+			<div class="navigation">
             {% if gameweek > 1 %}
-                <a href="?gameweek={{ gameweek|sub:1 }}" title="">prev</a>
+                <a class="button button_simple button_small button_backward" href="?gameweek={{ gameweek|sub:1 }}" title="">prev</a>
             {% endif %}
             {% if gameweek < competition.get_last_season.get_last_gameweek %}
-                <a href="?gameweek={{ gameweek|add:1 }}" title="">next</a>
+                <a class="button button_simple button_small button_forward" href="?gameweek={{ gameweek|add:1 }}" title="">next</a>
             {% endif %}
+			</div>
+		</div>
         {% else %}
+		<div class="week">
+			<h2>{% trans 'week' %} {{ week }}</h2>
+			<div class="navigation">
             {% if previous_week %}
-                <a href="?week={{ previous_week }}">prev</a>
+                <a class="button button_simple button_small button_backward" href="?week={{ previous_week }}">prev</a>
             {% endif %}
             {% if next_week %}
-                <a href="?week={{ next_week }}">next</a>
+                <a class="button button_simple button_small button_forward" href="?week={{ next_week }}">next</a>
             {% endif %}
+			</div>
+		</div>
         {% endif %}
     {% endif %}
+	</div>
 
     {% gsm_sessions_render sessions %}
 
