@@ -29,7 +29,7 @@
         {% for person in persons %}
         <div class="person">
             <a href="{{ person.get_absolute_url }}" title="{{ person.name }}">{{ person.name }}</a>
-            <img src="http://imagecache.soccerway.com/players/150x150/{{ person.gsm_id }}.jpg" />
+            <img src="{{ person.get_large_image_url }}" />
             {{ person.attrib.date_of_birth|age_from_date }} {% trans 'years old' %}
             {{ person.attrib.getchildren.0.goals }} goals
         </div>

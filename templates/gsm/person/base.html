@@ -27,7 +27,7 @@
 
 {% block body_head %}
 	<div class="image">
-		<img src="http://imagecache.soccerway.com/players/150x150/{{ person.gsm_id }}.jpg" />
+		<img src="{{ person.get_large_image_url }}" />
 	</div>
 	
 	<div class="title">
