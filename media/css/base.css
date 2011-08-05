@@ -124,19 +124,30 @@ body { position:relative; width:990px; margin:0px auto; }
 /* Tables */
 table { border:1px solid #cccccc; }
 td,
-th { padding:2px 10px; }
-tr.odd td { background-color:#fbfbfb; }
+th { padding:5px 7px; }
+tr.odd td { background-color:#f7f7f7; }
 
 /* Gsm tables */
 .gsm table { margin-bottom:15px; }
-.gsm th { color:#ea4839; }
+.gsm th { color:#ea4839; text-transform:capitalize; }
+.gsm .sessions table { width:100%; }
+.gsm .oponnent.left { text-align:right; }
+.gsm .oponnent.right { text-align:left; }
 .gsm td.score { text-align:center; }
+.gsm td.score.left { padding-right:0px; text-align:left; }
+.gsm td.score.right { padding-left:0px; text-align:right; }
+.gsm td.score.center { padding:0px; }
+.gsm td.score a,
+.gsm td.action a { display:block; color:#ea4839; }
 .gsm .winner,
-.gsm tr.win 	td.score	{ background-color:green; }
-.gsm tr.lost 	td.score 	{ background-color:red; }
-.gsm tr.draw 	td.score 	{ background-color:orange; }
-.gsm tr.draw 				{ background-color:#dddddd; }
-.gsm tr.Fixture	td.score 	{ background-color:#dddddd; }
+.gsm tr.win 		td.score	{ background-color:#def5de; }
+.gsm tr.lost 		td.score	{ background-color:#f5dede; }
+.gsm tr.Fixture		td.score 	{ background-color:#f7f7f7; }
+.gsm tr.Fixture.odd	td.score 	{ background-color:#eeeeee; }
+.gsm tr.draw 		td.score	{ background-color:#e0e0e0; }
+.gsm tr.draw 					{ background-color:#dddddd; }
+.gsm tr.current					{ background-color:#cccccc; }
+.gsm h2.next_sessions { display:block; }
 
 /* Publication form */
 #publication { margin-bottom:12px; background-color:#f2f2f2; }
