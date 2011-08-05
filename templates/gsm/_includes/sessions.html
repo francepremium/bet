@@ -95,7 +95,7 @@
 			{% block session_action %}
 				<td class="action">
 				{% if session.status == 'Fixture' %}
-					<a href="{{ session.get_absolute_url }}" title="{{ session.name }}">{% trans 'bet'|capfirst %}</a>
+					<a href="{{ session.get_absolute_url }}" title="{{ session.name }}">{% trans 'info'|capfirst %}</a>
 				{% endif %}
 				{% if session.status == 'Played' %}
 					{% trans 'finished'|capfirst %}
