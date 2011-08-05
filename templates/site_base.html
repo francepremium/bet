@@ -192,7 +192,7 @@ table.bettype table.choices {
 							<a href="{% url gsm_competition_detail 'soccer' '13' %}">{% trans "serie A" %}</a>
 						</li>
 						<li class="{% if sport.slug == 'soccer' and competition.gsm_id == 9 %}active{% endif %}">
-							<a href="{% url gsm_competition_detail 'soccer' '9' %}">{% trans "sundesliga 1" %}</a>
+							<a href="{% url gsm_competition_detail 'soccer' '9' %}">{% trans "bundesliga 1" %}</a>
 						</li>
 						<li class="{% if sport.slug == 'soccer' and tab == 'competitions' %}active{% endif %}">
 							<a href="{% url gsm_sport_detail_tab 'soccer' 'competitions' %}">{% trans "all competitions"|capfirst %}</a>
