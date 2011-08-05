@@ -151,6 +151,12 @@ tr.odd td { background-color:#f7f7f7; }
 .gsm .calendar h2 { float:left; }
 .gsm .calendar div.navigation { float:right; }
 
+/* Quick and dirty form styles (for filters) */
+#body_content form table { width:100%; }
+#body_content form th { color:inherit; }
+#body_content form tr.odd td { background-color:transparent; }
+#body_content form select { width:180px; }
+
 /* Publication form */
 #publication { margin-bottom:12px; background-color:#f2f2f2; }
 #publication_head { padding:9px 15px; border-bottom:1px solid #cccccc; }
