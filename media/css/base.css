@@ -154,6 +154,11 @@ tr.odd td { background-color:#f7f7f7; }
 .gsm .calendar h2 { float:left; }
 .gsm .calendar div.navigation { float:right; }
 
+/* Tabs (quickly themed) */
+.tab_link { display:inline-block; padding:3px 7px; background-color:#eaebed; cursor:pointer; }
+.tab_link.selected { background-color:#f9f9f9; }
+.tab_content { padding:7px; background-color:#f9f9f9; }
+
 /* Quick and dirty form styles (for filters) */
 #body_content form table { width:100%; }
 #body_content form th { color:inherit; }

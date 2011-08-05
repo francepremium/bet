@@ -385,6 +385,8 @@ table.bettype table.choices {
                     $('.tab_content').hide().removeClass('selected');
                     $('.tab_content.tab_id_'+tabid).show().addClass('selected');
                 }
+                $('.tab_link').removeClass('selected');
+                $('.tab_link.tab_id_'+tabid).addClass('selected');
             });
             $('.tab_link:first').click();
 
