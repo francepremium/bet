@@ -4,14 +4,30 @@
         <table>
             {% for session in sessions %}
             <tr class="{{ session.status }} {% if team %}{% if session.winner == team %}win{% endif %} {% if session.draw %}draw{% endif %} {% if session.winner != team and session.status = 'Played' %}lost{% endif %}{% endif %} session">
-                <td>{{ request|timezone_adjust:session.datetime_utc.date|display_date }}</td>
-                <td>{{ session.session_round.season.competition.area }}</td>
-                <td>
+            {% block session_date %}
+				<td class="date">{{ request|timezone_adjust:session.datetime_utc.date|display_date }}</td>
+			{% endblock %}
+            {% block session_area %}
+				<td class="area">
+					<img src="{{ session.session_round.season.competition.area.gsm_id|gsm_area_id_flag_url }}" alt="{{ session.session_round.season.competition.area }}" />
+				</td>
+			{% endblock %}
+			{% block session_competition %}
+                <td class="competition">
                     <a href="{{ session.session_round.season.competition.get_absolute_url }}" title="{{ session.session_round.season.competition }}">{{ session.session_round.season.competition.name }}</a>
                 </td>
-                <td>
+			{% endblock %}
+			{% block session_oponnent_image_left %}
+                <td class="oponnent_image left">
+					<img src="{{ session.oponnent_A.get_tiny_image_url }}" />
+                </td>
+			{% endblock %}
+			{% block session_oponnent_left %}
+                <td class="oponnent left">
                     <a href="{{ session.oponnent_A.get_absolute_url }}" title="{{ session.oponnent_A.name }}">{{ session.oponnent_A.name }}</a>
                 </td>
+			{% endblock %}
+			{% block session_score_left %}
                 {% if session.status == 'Played' %}
                     <td class="score left">
                         <a href="{{ session.get_absolute_url }}" title="{{ session.name }}">
@@ -26,11 +42,19 @@
                         <span class="penalty">P</span>
                         {% endif %}
                     </td>
+				{% endif %}
+			{% endblock %}
+			{% block session_score %}
+				{% if session.status == 'Played' %}
                     <td class="score center">
                         <a href="{{ session.get_absolute_url }}" title="{{ session.name }}">
                         -
                         </a>
                     </td>
+				{% endif %}
+			{% endblock %}
+			{% block session_score_right %}
+				{% if session.status == 'Played' %}
                     <td class="score right">
                         <a href="{{ session.get_absolute_url }}" title="{{ session.name }}">
                         {% if session.B_score != None %}
@@ -45,9 +69,15 @@
                         {% endif %}
                     </td>
                 {% endif %}
+            {% endblock %}
+			{% block session_fixture_left %}
                 {% if session.status == 'Fixture' %}
                     <td class="score left">
                     </td>
+				{% endif %}
+			{% endblock %}
+			{% block session_fixture %}
+				{% if session.status == 'Fixture' %}
                     <td class="score center">
                         <a href="{{ session.get_absolute_url }}" title="{{ session.name }}">
                             {% if session.time_unknown %}
@@ -59,14 +89,68 @@
                             {% endif %}
                         </a>
                     </td>
+				{% endif %}
+			{% endblock %}
+			{% block session_fixture_right %}
+				{% if session.status == 'Fixture' %}
                     <td class="score right">
                     </td>
                 {% endif %}
-                <td>
+            {% endblock %}
+			{% block session_retired_left %}
+				{% if session.status == 'Retired' %}
+					<td class="retired left"></td>
+				{% endif %}
+			{% endblock %}
+			{% block session_retired %}
+				{% if session.status == 'Retired' %}
+					<td class="retired"></td>
+				{% endif %}
+			{% endblock %}
+			{% block session_retired_right %}
+				{% if session.status == 'Retired' %}
+					<td class="retired right"></td>
+				{% endif %}
+			{% endblock %}
+			{% block session_walkover_left %}
+				{% if session.status == 'Walkover' %}
+					<td class="walkover left"></td>
+				{% endif %}
+			{% endblock %}
+			{% block session_walkover %}
+				{% if session.status == 'Walkover' %}
+					<td class="walkover"></td>
+				{% endif %}
+			{% endblock %}
+			{% block session_walkover_right %}
+				{% if session.status == 'Walkover' %}
+					<td class="walkover right"></td>
+				{% endif %}
+			{% endblock %}
+			{% block session_oponnent_right %}
+                <td class="oponnent right">
                     <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ session.oponnent_B.name }}">{{ session.oponnent_B.name }}</a>
                 </td>
+			{% endblock %}
+			{% block session_oponnent_image_right %}
+                <td class="oponnent_image right">
+					<img src="{{ session.oponnent_B.get_tiny_image_url }}" />
+                </td>
+			{% endblock %}
+			{% block session_action %}
+				<td class="action">
+				{% if session.status == 'Fixture' %}
+					<a href="{{ session.get_absolute_url }}" title="{{ session.name }}">{% trans 'bet'|capfirst %}</a>
+				{% endif %}
+				{% if session.status == 'Played' %}
+					{% trans 'finished'|capfirst %}
+				{% endif %}
+				{% if session.status == 'Live' %}
+					<a href="{{ session.get_live_absolute_url }}" title="{{ session.name }}">{% trans 'live'|capfirst %}</a>
+				{% endif %}
+                </td>
+			{% endblock %}
             </tr>
-
             {% endfor %}
         </table>
     {% else %}
