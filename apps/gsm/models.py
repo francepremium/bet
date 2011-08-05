@@ -217,18 +217,30 @@ class GsmEntity(AbstractGsmEntity):
         return self._sessions
 
     def get_large_image_url(self):
+        return self.get_image_url('150x150')
+
+    def get_medium_image_url(self):
+        return self.get_image_url('75x75')
+
+    def get_small_image_url(self):
+        return self.get_image_url('30x30')
+
+    def get_tiny_image_url(self):
+        return self.get_image_url('15x15')
+
+    def get_image_url(self, size):
         tag = self.tag
         ext = 'jpg'
         if tag == 'person':
             tag = 'players'
         elif tag == 'team':
             if self.get_sport().slug == 'soccer':
-                return 'http://imagecache.soccerway.com/new/teams/150x150/%s.gif' % self.gsm_id
+                return 'http://imagecache.soccerway.com/new/teams/%s/%s.gif' % (size, self.gsm_id)
             else:
                 tag = 'teams'
                 ext = 'gif'
 
-        return 'http://images.globalsportsmedia.com/%s/%s/150x150/%s.%s' % (self.get_sport().slug, tag, self.gsm_id, ext)
+        return 'http://images.globalsportsmedia.com/%s/%s/%s/%s.%s' % (self.get_sport().slug, tag, size, self.gsm_id, ext)
 
     def oponnent_A_name(self):
         raise Exception('oponnent_A_name has been deprecated. Use oponnent_A.name instead')
