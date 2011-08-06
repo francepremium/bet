@@ -234,6 +234,7 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 .yourlabs_autocomplete li.rugby  a 		{ background-image:url('../img/sports/rugby_tiny.png'); }
 .yourlabs_autocomplete li.tennis a 		{ background-image:url('../img/sports/tennis_tiny.png'); }
 .yourlabs_autocomplete li.basketball a	{ background-image:url('../img/sports/basketball_tiny.png'); }
+.yourlabs_autocomplete li.volleyball a	{ background-image:url('../img/sports/volleyball_tiny.png'); }
 .yourlabs_autocomplete li.user a 		{ background-image:url('../img/entities/user_tiny.png'); }
 .yourlabs_autocomplete li.bookmaker a 	{ background-image:url('../img/entities/bookmaker_tiny.png'); }
 
