@@ -169,10 +169,10 @@ tr.odd td { background-color:#f7f7f7; }
 /* Bet list (quickly themed) */
 td.correct { width:55px; text-align:right; background-color:#f7f7f7; }
 .odd td.correct { background-color:#eeeeee; }
-.won 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/correction-won.png'); }
-.lost 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/correction-lost.png'); }
-.canceled 	{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/correction-canceled.png'); }
-.flag 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/correction-flag.png'); }
+.won 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-won.png'); }
+.lost 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-lost.png'); }
+.canceled 	{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-canceled.png'); }
+.flag 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-flag.png'); }
 
 /* Quick and dirty form styles (for filters) */
 #body_content form table { width:100%; }
@@ -230,12 +230,12 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 .yourlabs_autocomplete .option.active,
 .yourlabs_autocomplete a:hover,
 .yourlabs_autocomplete li.active a { color:#ffffff; background-color:#ea4839; }
-.yourlabs_autocomplete li.soccer a 		{ background-image:url('../img/sports/soccer-tiny.png'); }
-.yourlabs_autocomplete li.rugby  a 		{ background-image:url('../img/sports/rugby-tiny.png'); }
-.yourlabs_autocomplete li.tennis a 		{ background-image:url('../img/sports/tennis-tiny.png'); }
-.yourlabs_autocomplete li.basket a 		{ background-image:url('../img/sports/basket-tiny.png'); }
-.yourlabs_autocomplete li.user a 		{ background-image:url('../img/entities/user-tiny.png'); }
-.yourlabs_autocomplete li.bookmaker a 	{ background-image:url('../img/entities/bookmaker-tiny.png'); }
+.yourlabs_autocomplete li.soccer a 		{ background-image:url('../img/sports/soccer_tiny.png'); }
+.yourlabs_autocomplete li.rugby  a 		{ background-image:url('../img/sports/rugby_tiny.png'); }
+.yourlabs_autocomplete li.tennis a 		{ background-image:url('../img/sports/tennis_tiny.png'); }
+.yourlabs_autocomplete li.basket a 		{ background-image:url('../img/sports/basket_tiny.png'); }
+.yourlabs_autocomplete li.user a 		{ background-image:url('../img/entities/user_tiny.png'); }
+.yourlabs_autocomplete li.bookmaker a 	{ background-image:url('../img/entities/bookmaker_tiny.png'); }
 
 /* Activity */
 .activity { color:#000000; }
