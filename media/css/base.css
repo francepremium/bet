@@ -130,7 +130,7 @@ tr.odd td { background-color:#f7f7f7; }
 
 /* Gsm */
 .gsm h2 { display:block; }
-.gsm table { width:100%; margin-bottom:15px; }
+.gsm table { width:100%; margin-bottom:15px; clear:both; }
 .gsm th { color:#ea4839; text-transform:capitalize; }
 .gsm .oponnent.left { text-align:right; }
 .gsm .oponnent.right { text-align:left; }
