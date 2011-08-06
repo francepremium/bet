@@ -174,6 +174,10 @@ td.correct { width:55px; text-align:right; background-color:#f7f7f7; }
 .canceled 	{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-canceled.png'); }
 .flag 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-flag.png'); }
 
+/* Tree */
+div.tree ul { display:none; }
+div.tree h3 { cursor:pointer; }
+
 /* Quick and dirty form styles (for filters) */
 #body_content form table { width:100%; }
 #body_content form th { color:inherit; }

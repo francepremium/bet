@@ -41,7 +41,6 @@ div.bet div.top div.head, div.bet div.top div.username {
     padding-left: 8px;
 }
 #global_form .results_on_deck { display: none; }
-div.tree ul { display: none; }
 table.bettype table.choices td,
 table.bettype table.choices tr,
 table.bettype table.choices {
@@ -403,7 +402,7 @@ table.bettype table.choices {
                 if ($('div.tree ul:visible').length) {
                     $('div.tree ul').slideUp('fast');
                 }
-                $(this).find('ul').slideDown();
+                $(this).find('ul').slideDown('fast');
             });
             
             $('form[action="{% comment_form_target %}"]').live('submit',function(e) {
