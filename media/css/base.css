@@ -148,7 +148,7 @@ tr.odd td { background-color:#f7f7f7; }
 .gsm tr.Fixture.odd	td.score 	{ background-color:#eeeeee; }
 .gsm tr.draw 		td.score	{ background-color:#e0e0e0; }
 .gsm tr.draw 					{ background-color:#dddddd; }
-.gsm tr.current					{ background-color:#cccccc; }
+.gsm tr.current		td			{ background-color:#eaeef8; }
 
 /* Gsm calendar */
 .gsm .calendar h2 { float:left; }
