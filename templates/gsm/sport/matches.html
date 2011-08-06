@@ -5,7 +5,7 @@
 {% block body %}{{ block.super }}
 <form action="" method="get">
     {{ filter.form.as_p }}
-    <input type="submit" />
+    <input type="submit" class="button_naked" value="go" />
 </form>
 
 {% autopaginate filter.qs 15 as session_list %}

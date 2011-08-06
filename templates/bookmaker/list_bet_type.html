@@ -44,7 +44,7 @@ $(document).ready(function() {
     <form action="" method="get">
         {% csrf_token %}
         {{ filter.form.as_p }}
-        <input type="submit" />
+        <input type="submit" class="button_naked" value="go" />
     </form>
 
     {% autopaginate filter.qs 50 as bettype_list %}
