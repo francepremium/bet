@@ -164,7 +164,7 @@ tr.odd td { background-color:#f7f7f7; }
 /* Tabs (quickly themed) */
 .tab_link { display:inline-block; padding:3px 7px; background-color:#eaebed; cursor:pointer; }
 .tab_link.selected { background-color:#f7f7f7; }
-.tab_content { padding:7px; background-color:#f7f7f7; }
+.tab_content { display:none; padding:7px; background-color:#f7f7f7; }
 
 /* Bet list (quickly themed) */
 td.correct { width:55px; text-align:right; background-color:#f7f7f7; }
