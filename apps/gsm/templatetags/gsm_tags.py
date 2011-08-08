@@ -92,7 +92,7 @@ def gsm_area_id_flag_url(arg):
     if not arg:
         return False
 
-    if arg.isdigit():
+    if isinstance(arg, int) or (isinstance(arg, str) and arg.isdigit()):
         area = Area.objects.get(gsm_id=int(arg))
     elif isinstance(arg, str):
         area = Area.objects.get(country_code=arg)

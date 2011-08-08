@@ -41,7 +41,6 @@ div.bet div.top div.head, div.bet div.top div.username {
     padding-left: 8px;
 }
 #global_form .results_on_deck { display: none; }
-div.tree ul, .tab_content { display: none; }
 table.bettype table.choices td,
 table.bettype table.choices tr,
 table.bettype table.choices {
@@ -192,7 +191,7 @@ table.bettype table.choices {
 							<a href="{% url gsm_competition_detail 'soccer' '13' %}">{% trans "serie A" %}</a>
 						</li>
 						<li class="{% if sport.slug == 'soccer' and competition.gsm_id == 9 %}active{% endif %}">
-							<a href="{% url gsm_competition_detail 'soccer' '9' %}">{% trans "sundesliga 1" %}</a>
+							<a href="{% url gsm_competition_detail 'soccer' '9' %}">{% trans "bundesliga 1" %}</a>
 						</li>
 						<li class="{% if sport.slug == 'soccer' and tab == 'competitions' %}active{% endif %}">
 							<a href="{% url gsm_sport_detail_tab 'soccer' 'competitions' %}">{% trans "all competitions"|capfirst %}</a>
@@ -385,6 +384,8 @@ table.bettype table.choices {
                     $('.tab_content').hide().removeClass('selected');
                     $('.tab_content.tab_id_'+tabid).show().addClass('selected');
                 }
+                $('.tab_link').removeClass('selected');
+                $('.tab_link.tab_id_'+tabid).addClass('selected');
             });
             $('.tab_link:first').click();
 
@@ -401,7 +402,7 @@ table.bettype table.choices {
                 if ($('div.tree ul:visible').length) {
                     $('div.tree ul').slideUp('fast');
                 }
-                $(this).find('ul').slideDown();
+                $(this).find('ul').slideDown('fast');
             });
             
             $('form[action="{% comment_form_target %}"]').live('submit',function(e) {

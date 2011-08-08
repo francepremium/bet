@@ -1,72 +1,31 @@
+{% extends 'gsm/_includes/sessions.html' %}
 {% load i18n gsm_tags %}
-<div class="sessions">
-    {% if sessions %}
-        <table>
-            {% for session in sessions %}
-            <tr class="{{ session.status }} {% if session.winner == team %}win{% endif %} {% if session.draw %}draw{% endif %} {% if session.winner != team and session.status = 'Played' %}lost{% endif %}">
-                <td>{{ request|timezone_adjust:session.datetime_utc.date|display_date }}</td>
-                <td>{{ session.session_round.season.competition.area }}</td>
-                <td>
-                    <a href="{{ session.session_round.season.competition.get_absolute_url }}" title="{{ session.session_round.season.competition }}">{{ session.session_round.season.competition.name }}</a>
-                </td>
-                <td>
-                    <a href="{{ session.oponnent_A.get_absolute_url }}" title="{{ session.oponnent_A_name }}">{{ session.oponnent_A_name }}</a>
-                </td>
-                {% if session.status == 'Played' %}
-                <td>
-                    <a href="{{ session.get_absolute_url }}" title="{{ session }}">
-                        <table>
-                            <tr>
-                                <td>{% if session.A1_score|is_int %}{{ session.A1_score }}{% endif %}</td>
-                                <td>{% if session.A2_score|is_int %}{{ session.A2_score }}{% endif %}</td>
-                                <td>{% if session.A3_score|is_int %}{{ session.A3_score }}{% endif %}</td>
-                                <td>{% if session.A4_score|is_int %}{{ session.A4_score }}{% endif %}</td>
-                                <td>{% if session.A5_score|is_int %}{{ session.A5_score }}{% endif %}</td>
-                            </tr>
-                            <tr>
-                                <td>{% if session.B1_score|is_int %}{{ session.B1_score }}{% endif %}</td>
-                                <td>{% if session.B2_score|is_int %}{{ session.B2_score }}{% endif %}</td>
-                                <td>{% if session.B3_score|is_int %}{{ session.B3_score }}{% endif %}</td>
-                                <td>{% if session.B4_score|is_int %}{{ session.B4_score }}{% endif %}</td>
-                                <td>{% if session.B5_score|is_int %}{{ session.B5_score }}{% endif %}</td>
-                            </tr>
-                        </table>
-                    </a>
-                </td>
-                {% endif %}
-                {% if session.status == 'Fixture' %}
-                    <td class="score left">
-                        {% if not session.time_unknown %}
-                            <a href="{{ session.get_absolute_url }}" title="{{ session.oponnent_A_name }} {% trans 'vs' %} {{ session.oponnent_B_name }}">
-                            {{ request|timezone_adjust:session.datetime_utc.hour|prepend_zero }}
-                            </a>
-                        {% endif %}
-                    </td>
-                    <td class="score center">
-                        <a href="{{ session.get_absolute_url }}" title="{{ session.oponnent_A_name }} {% trans 'vs' %} {{ session.oponnent_B_name }}">
-                            {% if session.time_unknown %}
-                                ?
-                            {% else %}
-                                :
-                            {% endif %}
-                        </a>
-                    </td>
-                    <td class="score right">
-                        {% if not session.time_unknown %}
-                            <a href="{{ session.get_absolute_url }}" title="{{ session.oponnent_A_name }} {% trans 'vs' %} {{ session.oponnent_B_name }}">
-                            {{ request|timezone_adjust:session.datetime_utc.minute|prepend_zero }}
-                            </a>
-                        {% endif %}
-                    </td>
-                {% endif %}
-                <td>
-                    <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ session.oponnent_B_name }}">{{ session.oponnent_B_name }}</a>
-                </td>
-            </tr>
 
-            {% endfor %}
-        </table>
-    {% else %}
-        <p>{% trans 'no matches to display' %}</p>
-    {% endif %}
-</div>
+{% block session_score %}
+{% if session.status == 'Played' %}
+<td class="score" colspan="3">
+	<a href="{{ session.get_absolute_url }}" title="{{ session }}">
+		<table>
+			<tr>
+				<td>{% if session.A1_score|is_int %}{{ session.A1_score }}{% endif %}</td>
+				<td>{% if session.A2_score|is_int %}{{ session.A2_score }}{% endif %}</td>
+				<td>{% if session.A3_score|is_int %}{{ session.A3_score }}{% endif %}</td>
+				<td>{% if session.A4_score|is_int %}{{ session.A4_score }}{% endif %}</td>
+				<td>{% if session.A5_score|is_int %}{{ session.A5_score }}{% endif %}</td>
+			</tr>
+			<tr>
+				<td>{% if session.B1_score|is_int %}{{ session.B1_score }}{% endif %}</td>
+				<td>{% if session.B2_score|is_int %}{{ session.B2_score }}{% endif %}</td>
+				<td>{% if session.B3_score|is_int %}{{ session.B3_score }}{% endif %}</td>
+				<td>{% if session.B4_score|is_int %}{{ session.B4_score }}{% endif %}</td>
+				<td>{% if session.B5_score|is_int %}{{ session.B5_score }}{% endif %}</td>
+			</tr>
+		</table>
+	</a>
+</td>
+{% else %}
+	{{ block.super }}
+{% endif %}
+{% endblock %}
+{% block session_oponnent_image_left %}{% endblock %}
+{% block session_oponnent_image_right %}{% endblock %}

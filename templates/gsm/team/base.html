@@ -40,7 +40,7 @@
 
 {% block body_head %}
 	<div class="image">
-		<img src="http://imagecache.soccerway.com/new/teams/150x150/{{ team.gsm_id }}.gif" />
+		<img src="{{ team.get_large_image_url }}" />
 	</div>
 	
 	<div class="title">

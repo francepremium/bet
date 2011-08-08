@@ -117,31 +117,27 @@
                 {% if 'result' not in exclude_columns %}
                 <td class="result">
                     <div class="won" style="{% if not bet.is_won %}display:none;{% endif %}">
-                        ✔
                     </div>
                     <div class="lost" style="{% if not bet.is_lost %}display:none;{% endif %}">
-                        ✘
                     </div>
                     <div class="canceled" style="{% if not bet.is_canceled %}display:none{% endif %}">
-                        ☠
                     </div>
                 </td>
                 {% endif %}
                 {% if request.user.is_authenticated %}
-                <td class="flag">
-                    <div style="{% if not bet.is_flag %}display:none;{% endif %}">
-                        ☎
+                <td class="flagged">
+                    <div class="flag" style="{% if not bet.is_flag %}display:none;{% endif %}">
                     </div>
                 </td>
                 <td class="correct">
                     <div class="correct" style="{% if not bet.can_correct %}display: none;{% endif %}">
-                        <a href="{% url bet_status_change bet.pk 'won' %}" title="{% trans 'this bet was won' %}" class="won">✔</a>
-                        <a href="{% url bet_status_change bet.pk 'lost' %}" title="{% trans 'this bet was lost' %}" class="lost">✘</a>
-                        <a href="{% url bet_status_change bet.pk 'canceled' %}" title="{% trans 'this bet was canceled' %}" class="canceled">☠</a>
+                        <a href="{% url bet_status_change bet.pk 'won' %}" title="{% trans 'this bet was won' %}" class="won"></a>
+                        <a href="{% url bet_status_change bet.pk 'lost' %}" title="{% trans 'this bet was lost' %}" class="lost"></a>
+                        <a href="{% url bet_status_change bet.pk 'canceled' %}" title="{% trans 'this bet was canceled' %}" class="canceled"></a>
                     </div>
 
                     <div class="flag" style="{% if not bet.can_flag %}display:none;{% endif %}">
-                        <a class="flag" href="{% url bet_status_change bet.pk 'flag' %}" title="{% trans 'this bet result is invalid, it must be corrected by a Referee' %}">☎</a>
+                        <a class="flag" href="{% url bet_status_change bet.pk 'flag' %}" title="{% trans 'this bet result is invalid, it must be corrected by a Referee' %}"></a>
                     </div>
                 </td>
                 {% endif %}

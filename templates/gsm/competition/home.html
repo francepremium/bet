@@ -8,7 +8,7 @@
 
     {% if tables_tree.getroot.getchildren.1.getchildren.0.getchildren.0.getchildren.0.tag == 'group' %}
         {% for group in tables_tree.getroot.getchildren.1.getchildren.0.getchildren.0 %}
-            <h4>{{ group.attrib.title }}</h4>
+            <h2>{{ group.attrib.title }}</h2>
             {% gsm_resultstable_render group.getchildren.0 %}
         {% endfor %}
     {% endif %}

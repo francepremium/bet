@@ -143,6 +143,8 @@ def render_popularity_for_object(request, obj):
             html(block, 'friends')
 
     return {
+        'object': obj,
+        'object_type': obj.__class__.__name__,
         'request': request,
         'blocks': blocks,
     }

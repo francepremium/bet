@@ -7,8 +7,8 @@ The template uses a "team" variable to highlight a particular team.
 <div class="ranking">
     <table>
         <tr>
-            <th></th>
-            <th>{% trans 'club' %}</th>
+            <th>{% trans 'rank' %}</th>
+            <th colspan="2">{% trans 'team' %}</th>
             <th><acronym title="{% trans 'match played' %}">MP</acronym></th>
             <th><acronym title="{% trans 'wins' %}">W</acronym></th>
             <th><acronym title="{% trans 'draw' %}">D</acronym></th>
@@ -25,6 +25,11 @@ The template uses a "team" variable to highlight a particular team.
             {% gsm_entity tag='team' gsm_id=ranking.attrib.team_id key='ranked_team' %}
             <tr class="{% if ranking.attrib.team_id == team.gsm_id|addslashes %}current{% endif %}">
                 <td>{{ forloop.counter }}</td>
+				<td>
+					{% if ranked_team.get_tiny_image_url %}
+					<img src="{{ ranked_team.get_tiny_image_url }}" />
+					{% endif %}
+				</td>
                 <td>
                     <a href="{{ ranked_team.get_absolute_url }}" title="{{ ranking.attrib.club_name }}">{{ ranking.attrib.club_name }}</a>
                 </td>
@@ -39,7 +44,7 @@ The template uses a "team" variable to highlight a particular team.
                 {% if 'last5' in columns %}
                 <td>
                     {% for data in ranked_team|five_sessions_series %}
-                        <a href="{{ data.entity.get_absolute_url }}" title="{{ data.entity.oponnent_A_name }} vs {{ data.entity.oponnent_B_name }}">
+                        <a href="{{ data.entity.get_absolute_url }}" title="{{ data.entity.oponnent_A.name }} vs {{ data.entity.oponnent_B.name }}">
                             {{ data.symbol }}
                         </a>
                     {% endfor %}
