@@ -33,7 +33,9 @@
                 },
                 function(data, textStatus, jqXHR) {
                     update_select(bettypes, data);
-                    $('#global_form div.bettype').fadeIn();
+                    $('#global_form div.bettype').fadeIn(function() {
+                        bettypes.focus();
+                    });
                 },
                 'json'
             );
