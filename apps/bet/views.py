@@ -141,6 +141,7 @@ def bet_status_change(request, bet_pk, action):
             ticket__bet__bettype=bet.bettype, ticket__bet__choice=bet.choice
             ).values_list('pk', flat=True).distinct()
         for pk in users:
+            print "DOING", pk
             refresh_betprofile_for_user.spool(userpk=pk)
 
         actstream.action.send(request.user, verb='corrected', action_object=bet)

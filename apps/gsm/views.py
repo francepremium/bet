@@ -25,6 +25,7 @@ def get_language_from_request(request):
     return 'fr'
 
 def timezone_adjust(request):
+    gsm_sync()
     if not request.POST.get('timezone_offset', False):
         return http.HttpResponseBadRequest('need POST timezone_offset')
     request.timezone['offset'] = int(request.POST['timezone_offset'])
