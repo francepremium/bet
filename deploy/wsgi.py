@@ -13,9 +13,11 @@ os.environ["DJANGO_SETTINGS_MODULE"] = "settings"
 
 sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
 
-#need to be able to specify a spooler
-#from gsm.models import gsm_sync
-#gsm_sync.spool()
+from tasksconsumer import enqueue
+enqueue(queue='gsm_sync')
 
 from django.core.handlers.wsgi import WSGIHandler
+#class application(WSGIHandler):
+    #def __call__(self, environ, start_response):
+        #return super(application, self).__call__(environ, start_response)
 application = WSGIHandler()
