@@ -1,0 +1,205 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Betspire - Betspire, ce qui vous arrivera de mieux  depuis que vous pariez sur le sport !</title>
+<meta http-equiv="Content-type" value="text/html; charset=utf-8" />
+<meta name="title" content="Betspire - Betspire, ce qui vous arrivera de mieux  depuis que vous pariez sur le sport !" />
+<meta name="description" content="L'aventure Betspire va commencer prochainement et je suis l'un des premiers dans les starting-blocks ! Rejoins-moi ! #launch" />
+
+
+<script type='text/javascript'>
+
+function validateInviteEmail(){
+    var error;
+    if($("#email").val()==""){
+        error="Error sending e-mail: no sender address";
+        return false;
+    }
+    if($("#senderName").val()==""){
+        error="Error sending invites: no sender name";
+        return false;
+    }
+    if($("#emailList").html()==""){
+        error="Error sending invites: no addresses specified";
+        return false;
+    }
+    return true;
+}
+function slideUpEmail(data){
+    $("#sendmail").slideUp();
+    $("#pagesubmit").slideDown();
+}
+function populateTextarea(contacts){
+    var contact, name, email,emailstring,nameEmail;
+    var emails = [];
+    for (var i = 0; i < contacts.length; i++) {
+        contact = contacts[i];
+
+        name = contact.fullName();
+        email = contact.selectedEmail();
+        nameEmail=email;
+        $("#emailList").html($("#emailList").html() + nameEmail + "\n");
+    }
+    $("#pagesubmit").slideUp();
+    $("#sendmail").slideDown();
+  
+}
+</script>
+
+<link rel="image_src" href="/images/7505-21071163659bs-b.fbimage.png" />
+<link rel="stylesheet" href="/style_onetrue.css">
+
+<link  rel="icon" href="/images/7505-200711113739favicon.favicon.png" />
+<script src="http://launchrock.com/lr2.js"></script>
+
+
+ <style>
+#bannerAnnouncementWrapper { 
+ background: rgb(239, 51, 49);
+ } 
+    </style>
+</head>
+<body>
+<img src="/images/7505-200711113841fond..jpg" id="bgImage" alt="" />
+<div id="container">
+
+<div id="content">
+
+<img src="/images/7505-20071122500betspire-lr.logo.png" alt="Betspire - Betspire, ce qui vous arrivera de mieux  depuis que vous pariez sur le sport !" title="Betspire - Betspire, ce qui vous arrivera de mieux  depuis que vous pariez sur le sport !" />
+
+<div id="makea"><b>Betspire, ce qui vous arrivera de mieux  </br>depuis que vous pariez sur le sport !</b></div>
+
+<div id="description"><i>Grâce à Betspire, tout ce dont vous avez besoin pour parier et gagner se trouve désormais à portée de clic.</i></div>
+
+<div id="actionbox">
+<div class="pages" id="pagestart">
+
+<div id="emailbox">
+<p id="invitelist"><em>Entrez votre adresse e-mail pour faire partie de l'aventure.</em></p>
+<form id="signupform" action="">
+<div>
+<input type="text" id="email" data-initial="your@email.com" value="your@email.com" />
+<input type="hidden" id="refid" value="0" />
+<input type="hidden" id="siteId" value="7505" />
+<input type="hidden" id="apiKey" value="a2c6fcb4b122f0ef9868f2adabad47ac" />
+<input type="hidden" id="lrDomain" value="betspire.com" />
+<input type="image" style="vertical-align: middle;" name="submit" id="submit" src="http://launchrock.com/images/Submit-Button.png" />
+
+</div>
+</form>
+
+<div class="clear"></div>
+
+<div id="information"></div>
+<!-- /emailbox -->
+
+</div>
+<div class="pages hidden" id="pagesubmit"></div>
+    <div class="pages hidden" id="sendmail">
+    <form action="" id="emailForm" style="text-align:left">
+    <p>Your Name (required): <br/><input type="text" value="" id="senderName"></p>
+    <p>Send Invites To (required - one per line):<br/><textarea wrap='off' name="emailList" id="emailList"></textarea></p>
+    <p>Message (optional):<br/><textarea name="message" id="message"></textarea></p>
+<input type="image" style="vertical-align: middle;" name="submitEmail" id="submitEmail" src="http://launchrock.com/images/Submit-Button.png" />
+    
+    </form>
+    </div>
+<p id="learnmore" style="font-size:10px">powered by <a id="logolink" href="http://launchrock.com" target="_new"><img src="/images/Logo-small.png" alt="LaunchRock" title="LaunchRock"/></a></p>
+
+<!-- /actionbox -->
+</div>
+</div>
+<div class="clear"></div>
+<!-- /content -->
+</div>
+
+<div id="footer">
+<!-- <p>&copy; LaunchRock.com 2011 | <a href="http://twitter.com/#!/getlaunchrock">@getlaunchrock</a> | <a href="http://www.facebook.com/pages/LaunchRock/195055520506167">Facebook Fan Page</a></p> -->
+</div>
+
+</div>
+<script>
+
+$(document).ready(function(){
+
+        LR.cookieMan = new CookieManager({
+          host: 'betspire.com'
+        })
+
+        // Handles the resizing of background image:
+        LR.bgImage = new BackgroundImage('bgImage');
+
+        // Handles rendering the post submit content:
+        LR.postSubmit = new PostSignupForm('pagesubmit',{
+          twitterHandle: "betspire",
+          twitterMessage: "L'aventure Betspire va debuter et je suis l'un des premiers dans les starting-blocks! Rejoins-moi  #launch",
+          newUserHeaderText: "Merci ! Vous souhaitez être averti en premier ?",
+          newUserParagraphText: "Invitez des amis par l'intermédiaire des outils ci-dessous (Facebook, Twitter, URL). Plus vous envoyez d'invitations, plus vous ferez partie de l'aventure Betspire en premier !<br /><br />Pour partager avec vos amis, cliquez sur 'Recommend', 'Tweet' et 'Invite by e-mail'.",
+          returningUserHeaderText: "Welcome Back!",
+          returningUserParagraphText: "Invitez des amis par l'intermédiaire des outils ci-dessous (Facebook, Twitter, URL). Plus vous envoyez d'invitations, plus vous ferez partie de l'aventure Betspire en premier !<br /><br />Pour partager avec vos amis, cliquez sur 'Recommend', 'Tweet' et 'Invite by e-mail'.",
+          newUserParagraphText3: "Ou bien copiez-collez l'adresse suivante dans une discussion avec vos amis !",
+          returningUserParagraphText3: "Ou bien copiez-collez l'adresse suivante dans une discussion avec vos amis !",
+          statsPreText: "Your live stats: ",
+          betaSignUp: "  ",
+          footerLinks: "<a href='http://facebook.com/betspire'>Like Us on Facebook</a> | <a href='http://twitter.com/betspire'>Follow Us on Twitter</a>",
+          showStats: true
+        })
+
+// Handles events related to signup form, form validations
+// and submitting the form to the server:
+LR.signupForm = new SignupForm('signupform',{
+          wrapperId: "emailbox",
+          emailId: "email",
+          refId: "refid",
+          submitId: "submit",
+          errorDivId: "information",
+          siteId: "siteId"
+        });
+$("#submitEmail").click(function(){
+        if (validateInviteEmail()){
+            $.getJSON("http://launchrock.com/api/invite.0.2.php?callback=?", {
+                'fromEmail': $("#email").val(),
+                'senderName': $("#senderName").val(),
+                'apiKey': $("#apiKey").val(),
+                'lrDomain': $("#lrDomain").val(),
+                'refLink': $("#shareurl").val(),
+                'message': $("#message").val(),
+                'emailList' : $("#emailList").val()
+            },slideUpEmail(this));
+          
+        } else {
+            return false;
+        }  
+    
+        return false;
+    });
+
+});
+
+LR.csLoader = new CSLoader('Y52US3X5XQDSUSQBYTZ6');
+        
+
+
+</script>
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try{
+
+var lrPageTracker = _gat._getTracker("UA-21058689-4");
+lrPageTracker._setDomainName("betspire.com");
+lrPageTracker._trackPageview();
+
+
+} catch(err) {}</script>
+
+
+</body>
+</html>
+

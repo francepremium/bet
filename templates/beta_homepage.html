@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+{% load i18n %}
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}">
+    <head>
+        <title>Betspire - Betspire, ce qui vous arrivera de mieux  depuis que vous pariez sur le sport !</title>
+        <meta http-equiv="Content-type" value="text/html; charset=utf-8" />
+        <meta name="title" content="Betspire - Betspire, ce qui vous arrivera de mieux  depuis que vous pariez sur le sport !" />
+        <meta name="description" content="L'aventure Betspire va commencer prochainement et je suis l'un des premiers dans les starting-blocks ! Rejoins-moi ! #launch" />
+
+        <style type="text/css">
+        #container {
+            background-image: url({{ STATIC_URL }}launchrock/images/7505-200711113841fond..jpg);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            text-align: center;
+            overflow-y: auto;
+            overflow-x: hidden;
+            color: white;
+        }
+        #content {
+            margin: 110px auto 0 auto;
+            width: 340px;
+            background: transparent url('{{ STATIC_URL }}launchrock/content_bg.png') 0 0 repeat;
+            padding: 20px 20px 1px 20px;
+            position: relative;
+        }
+        #makea {
+            text-align: left;
+            color: white;
+            font-weight: bolder;
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+        #description {
+            text-align: left;
+            color: white;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            font-style: italic;
+        }
+        #help {
+            font-style: italic;
+            font-size: small;
+            color: white;
+            text-align: left;
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+        #email {
+            border: 0;
+            font: 14px bold helvetica, arial, sans-serif;
+            width: 255px;
+            float: left;
+            color: #333;
+            padding: 5px 10px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            outline: none;
+        }
+        #submit {
+            margin-top: 2px;
+        }
+        .errors {
+            text-align: left;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <div id="content">
+                <img src="{{ STATIC_URL }}launchrock/images/7505-20071122500betspire-lr.logo.png" alt="Betspire - Betspire, ce qui vous arrivera de mieux  depuis que vous pariez sur le sport !" title="Betspire - Betspire, ce qui vous arrivera de mieux  depuis que vous pariez sur le sport !">
+                <div id="makea">
+                    Betspire, ce qui vous arrivera de mieux<br />depuis que vous pariez sur le sport !
+                </div>
+                <div id="description">
+                    Grâce à Betspire, tout ce dont vous avez besoin pour parier et gagner se trouve désormais à portée de clic.
+                </div>
+                {% if lead %}
+                <div id="thanks">
+                    Merci de vous etre inscrit {{ lead.email }}. Vous pouvez maintenant inscrire vos amis.
+                </div>
+                {% endif %}
+                <div id="form">
+                    <form action="{% url beta_homepage %}" method="post">
+                        <div class="errors">
+                            {{ form.email.errors }}
+                        </div>
+                        <div>
+                            <input name="email" value="{% trans 'your@email.com' %}" onclick="this.value = ''" onblur="this.value = this.value == '' ? '{% trans 'your@email.com' %}' : this.value" id="email" />
+                            <input type="image" style="vertical-align: middle;" name="submit" id="submit" src="{{ STATIC_URL }}launchrock/images/Submit-Button.png">
+                        </div>
+                        {% csrf_token %}
+                    </form>
+                </div>
+                <div id="help">
+                    Entrez votre adresse e-mail ci-dessus pour faire partie de l'aventure.
+                    <br />
+                    <a href="{% url acct_login %}">Cliquez ici</a> si vous avez la chance d'avoir un compte en avant premiere !
+                    <br />
+                    <a href="{% url acct_passwd_reset %}">Et ici</a> si vous avez oublié votre mot de passe...
+                </div>
+            </div>
+            <div id="footer">
+            </div>
+        </div>
+    </body>
+</html>

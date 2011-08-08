@@ -1,0 +1,246 @@
+html {
+        color: #A0A0A0;
+        overflow:hidden;
+      }
+      a, a:link, a:hover, a:active {
+        color: #8498AC;
+        text-decoration: none;
+      }
+
+
+
+
+      body {
+        color: #A0A0A0;
+        font-family: arial, verdana, sans;
+        overflow:hidden;
+    
+      }
+
+      #bgImage {
+        position:absolute;
+        top:0;
+        left:0;
+      }
+
+      h1 span {
+        opacity:1.0 !important;
+        filter:alpha(opacity=100) !important;
+        color:#fff;
+        font-family:'CicleGordita','Helvetica','Arial',sans-serif !important;
+        font-weight:normal;
+        font-size:2em;
+      }
+
+
+      #container {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        text-align: center;
+        overflow-y:auto;
+        overflow-x:hidden;
+      }
+
+      #content {
+        margin: 110px auto 0 auto;
+        width: 340px;
+        background: transparent url('/content_bg.png') 0 0 repeat;
+        padding: 20px 20px 1px 20px;
+        position:relative;
+      }
+
+      #content p {
+        color: #FFF;
+        font-size:90%;
+      }
+
+
+      .hidden {
+        display: none;
+      }
+
+      #learnmore {
+        width: 100%;
+        color: #A0A0A0;
+        text-align: right;
+        font-size: .6em;
+        margin-top: 20px;
+      }
+      #content p#invitelist {
+        font-family: Georgia, Times, serif;
+        color: #E9E9E9;
+        text-align: left;
+        font-size: .78em;
+      }
+      #makea {
+        color: #FFF;
+        font-weight: bold;
+        width: 100%;
+        text-align: left;
+        margin: 15px 0 20px;
+      }
+
+      #submit {
+        margin: 6px 0px 0px 0px;
+        width: 50px;
+        height: 25px;
+        background:url(/images/Submit-Button.png) no-repeat center center fixed;
+        float:left;
+      }
+
+      #submit:hover {
+        background:url(/images/Submit-Button_Hover.png) no-repeat center center fixed;
+      }
+
+      .error {
+
+        clear: both;
+        color: #cc9999;
+      }
+
+      #shareurl {
+        font-size: 1.2em;
+        font-weight:bold;
+        width: 332px;
+        text-align: center;
+      }
+
+      #email {
+        border:0;
+        font: 14px bold helvetica, arial, sans-serif;
+        width: 255px;
+        float:left;
+        color:#333;
+        margin: 5px 7px 5px 0;
+        padding:5px 10px;
+        -moz-border-radius: 5px; /* FF1+ */
+        -webkit-border-radius: 5px; /* Saf3-4 */
+        border-radius: 5px; /* Opera 10.5, IE9, Saf5, Chrome */
+        outline:none;
+      }
+
+      #password {
+        border:0;
+        font: 14px bold helvetica, arial, sans-serif;
+        width: 300px;
+        float:left;
+        color:#333;
+        margin: 5px 10px 5px 0;
+        padding:5px 10px;
+        -moz-border-radius: 5px; /* FF1+ */
+        -webkit-border-radius: 5px; /* Saf3-4 */
+        border-radius: 5px; /* Opera 10.5, IE9, Saf5, Chrome */
+        outline:none;
+      }
+
+      #description {
+        text-align: left;
+      }
+
+      #sharebuttons {
+        width: 100%;
+        text-align: center;
+        vertical-align: top;
+      }
+
+      #facebook {
+        float: left;
+        margin: 0 0 10px 100px;
+      }
+      #twitter {
+        float: left;
+        margin-left: 40px;
+      }
+
+      .clear {
+
+        clear: both;
+      }
+
+      #corner-banner {
+        position: absolute;
+        left: -85px;
+        top: 50px;
+        display: block;
+        width: 300px;
+        background: #c00;
+        background: -moz-linear-gradient(top, #c00 0%, #600 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c00), color-stop(100%,#600));
+        text-align:center;
+        font-size:13px;
+        line-height:13px;
+        padding:3px 10px 4px 10px;
+        text-shadow: #000 1px 1px 0;
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        box-shadow: rgba(0,0,0, 0.2) 0px 0px 6px;
+        -moz-box-shadow: rgba(0,0,0, 0.2) 0px 0px 6px;
+        -webkit-box-shadow: rgba(0,0,0, 0.2) 0px 0px 6px;
+      }
+      #corner-banner a:link,#corner-banner a:visited  {color:#fff;text-decoration: none;}
+      #corner-banner a:hover,#corner-banner a:focus  {color:#ccc;text-decoration: none;}
+
+      #admin {
+        position: absolute;
+        top: 2px;
+        right: 4px;
+      }
+
+      #logolink img {
+        border: 0;
+        outline: 0;
+        margin-left: 2px;
+      }
+
+            #dnsInstructions {
+        background: #000;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 400px;
+        text-align: left;
+        padding: 15px;
+      }
+
+      #dnsInstructions li {
+        margin-bottom: 7px;
+      }
+
+      #closeDns {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+
+      #paragraph_text{
+          font-size:90%;
+      }
+      
+      #bannerAnnouncementWrapper {
+          position:absolute;
+          z-index:2;
+          top:0;
+          left:0;
+          width:100%;
+          height:25px;
+          background: #B8250B;
+          border-bottom: 2px solid white; 
+          padding-top:7px;
+          color:white;
+          text-align: center;
+          font-size: 90%;
+          font-family: Georgia,Times New Roman,Times,serif;
+      }
+      
+     #sendmail textarea{
+    width:100%;
+    height:80px;
+
+}
+#senderName {
+width:100%
+}

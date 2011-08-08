@@ -10,9 +10,16 @@ import views
 handler500 = "pinax.views.server_error"
 
 urlpatterns = patterns("",
-    url(r"^$", 'scoobet.views.homepage', {
-    }, name="home"),
+    url(
+        r'^$',
+        'django.views.generic.simple.redirect_to', {
+            'url': '/misc/feed/friends/',
+        }, name='home'
+    ),
+    #url(r"^$", 'scoobet.views.homepage', {
+    #}, name="home"),
     url(r"^gsm/", include('gsm.urls')),
+    url(r"^beta/", include('beta.urls')),
     url(r"^clan/", include('clan.urls')),
     url(r"^misc/", include('scoobet.urls')),
     url(r'^avatar/', include('avatar.urls')),

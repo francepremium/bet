@@ -78,8 +78,9 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'beta.middleware.LoginMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'pagination.middleware.PaginationMiddleware',
     'gsm.middleware.TimezoneMiddleware',
 ]
@@ -148,6 +149,7 @@ INSTALLED_APPS = [
     'clan',
     'scoobet',
     'article',
+    'beta',
 ]
 
 HAYSTACK_SITECONF = 'search_sites'
