@@ -169,9 +169,9 @@ tr.odd td { background-color:#f7f7f7; }
 /* Bet list (quickly themed) */
 td.correct { width:55px; text-align:right; background-color:#f7f7f7; }
 .odd td.correct { background-color:#eeeeee; }
-.won 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-won.png'); }
-.lost 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-lost.png'); }
-.canceled 	{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-canceled.png'); }
+td.correct .won 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-won.png'); }
+td.correct .lost 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-lost.png'); }
+td.correct .canceled 	{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-canceled.png'); }
 .flag 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-flag.png'); }
 
 /* Tree */
