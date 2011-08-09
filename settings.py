@@ -102,6 +102,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
 
 INSTALLED_APPS = [
     'localeurl',
+    'beta',
     # Django
     'django.contrib.admin',
     'django.contrib.auth',
@@ -117,6 +118,7 @@ INSTALLED_APPS = [
     'pinax.apps.account',
     
     # external
+    'haystack',
     'modeltranslation',
     'staticfiles',
     'debug_toolbar',
@@ -138,7 +140,6 @@ INSTALLED_APPS = [
     'nashvegas',
     'django_messages',
     'devserver',
-    'haystack',
     'djcelery',
     'djkombu',
 
@@ -151,7 +152,6 @@ INSTALLED_APPS = [
     'clan',
     'scoobet',
     'article',
-    'beta',
 ]
 
 HAYSTACK_SITECONF = 'search_sites'
