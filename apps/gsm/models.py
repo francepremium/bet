@@ -58,7 +58,7 @@ class SportManager(models.Manager):
         return self.get_for_pk(object.sport_id)
 
     def get_for_pk(self, pk):
-        key = 'sport #%s' % pk
+        key = 'sport%s' % pk
 
         sport = cache.get(key)
         if not sport:
