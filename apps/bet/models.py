@@ -10,7 +10,16 @@ from django.conf import settings
 from django.core.cache import cache
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from celery.task import task
+
+try:
+    import uwsgi
+    from uwsgidecorators import spool
+except ImportError:
+    print "MOCKING what we need of uwsgi"
+    class uwsgi(object):
+        SPOOL_RETRY = False
+    def spool(func):
+        return func
 
 from annoying.fields import AutoOneToOneField
 
@@ -104,7 +113,8 @@ class BetProfile(models.Model):
         return False
 
     def refresh(self):
-        refresh_betprofile_for_user.delay(self.user.pk)
+        logger.debug('spooling user profile refresh %s' % self.user)
+        refresh_betprofile_for_user.spool(userpk=self.user.pk)
 
 class Ticket(models.Model):
     TICKET_STAKE_CHOICES = [(x,x) for x in range(1,11)]
@@ -257,9 +267,9 @@ class Event(models.Model):
             'correction': self.correction,
         }
 
-@task
-def refresh_betprofile_for_user(user_pk):
-    user = User.objects.get(pk=user_pk)
+@spool
+def refresh_betprofile_for_user(arguments):
+    user = User.objects.get(pk=arguments['userpk'])
     logger.debug('triggered profile refresh %s' % user)
     print 'triggered profile refresh %s' % user
     if user.ticket_set.filter(status=TICKET_STATUS_DONE).count():
