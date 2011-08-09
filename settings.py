@@ -139,6 +139,8 @@ INSTALLED_APPS = [
     'django_messages',
     'devserver',
     'haystack',
+    'djcelery',
+    'djkombu',
 
     # Pinax
     
@@ -176,6 +178,15 @@ GSM_URL = 'http://%s:%s@webpull.globalsportsmedia.com' % (
 )
 GSM_CACHE = os.path.join(VAR_ROOT, 'cache', 'gsm')
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
+FORCE_SCRIPT_NAME=''
+
 ACCOUNT_OPEN_SIGNUP = True
 ACCOUNT_EMAIL_VERIFICATION = True
 LOGIN_URL='/account/login/'
@@ -192,6 +203,14 @@ import re
 LOCALE_INDEPENDENT_PATHS = (
     re.compile('/robots.txt'),
 )
+
+BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
+#celery
+BROKER_HOST = "localhost"
+BROKER_PORT = 5672
+BROKER_USER = "guest"
+BROKER_PASSWORD = "guest"
+BROKER_VHOST = "/"
 
 DEVSERVER_MODULES = (
     #'devserver.modules.sql.SQLRealTimeModule',
