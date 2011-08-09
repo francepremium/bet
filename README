@@ -15,3 +15,6 @@ Migrations:
         - pip install uwsgi
         - manage.py upgradedb --exec
         - note that uwsgi spooler arguments may only be dicts of strings
+    2011-08-09 Falling back to fastcgi, celery and kombu
+        - apply pip requirements change
+        - run upgradedb
