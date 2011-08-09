@@ -20,6 +20,7 @@ from bookmaker.models import *
 from bet.helpers import *
 from bet.models import *
 from gsm.models import Session, Competition, GsmEntity
+import search_sites
 
 def homepage(request,
     template_name='homepage.html', extra_context=None):
@@ -69,7 +70,8 @@ def autocomplete(request,
         Q(name_ascii_fr__icontains=q)|Q(name_fr__icontains=q)|
         Q(name_ascii_en__icontains=q)|Q(name_en__icontains=q)).order_by(
             'datetime_utc').distinct()[:3]
-    queries['users'] = User.objects.filter(username__icontains=q)[:3]
+    queries['users'] = User.objects.filter(username__icontains=q, 
+        bookmaker=None)[:3]
     queries['teams'] = GsmEntity.objects.filter(
         Q(name_ascii_fr__icontains=q)|Q(name_fr__icontains=q)|
         Q(name_ascii_en__icontains=q)|Q(name_en__icontains=q), tag='team')[:3]
@@ -80,7 +82,7 @@ def autocomplete(request,
         Q(name_ascii_fr__icontains=q)|Q(name_fr__icontains=q)|
         Q(name_ascii_en__icontains=q)|Q(name_en__icontains=q))[:3]
     queries['bookmakers'] = Bookmaker.objects.filter(
-        name__icontains=q)
+        name__icontains=q)[:3]
     context.update(queries)
 
     results = 0
