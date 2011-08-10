@@ -1,3 +1,4 @@
+from collections import OrderedDict
 import datetime
 from dateutil.rrule import rrule, WEEKLY
 
@@ -364,7 +365,22 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
             person.element = person_element
             positions[position].append(person)
             context['persons'].append(person)
-        context['positions'] = positions
+
+        order = (
+            'Goalkeeper',
+            'Defender',
+            'Midfielder',
+            'Attacker',
+        )
+        ordered_positions = OrderedDict()
+        for key in order:
+            if key in positions.keys():
+                ordered_positions[key] = positions.pop(key)
+        for key, value in positions.items():
+            # copy what's left
+            ordered_positions[key] = value
+
+        context['positions'] = ordered_positions
     elif tab == 'statistics':
         reference_season = get_reference_season(team)
         context['reference_season'] = reference_season
