@@ -316,7 +316,7 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         q = Session.objects.filter(sport=sport)
         q = q.filter(Q(oponnent_A=team)|Q(oponnent_B=team))
         q = q.filter(datetime_utc__gte=datetime.date.today())
-        context['next_sessions'] = q[:7]
+        context['next_sessions'] = q[:4]
 
         reference_season = get_reference_season(team)
         context['resultstable'] = get_resultstable_for_season(reference_season, team)
