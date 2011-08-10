@@ -266,6 +266,7 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 .activity.closed-ticket				.image { background-image:url('../img/actions/closed-ticket.png'); }
 .activity.closed-ticket-combined	.image { background-image:url('../img/actions/closed-ticket-combined.png'); }
 .activity.started-following 		.image { background-image:url('../img/actions/started-following.png'); }
+.activity.corrected 		        .image { background-image:url('../img/actions/corrected.png'); }
 
 /* Activity extended elements */
 .activity.extended .details { padding-bottom:10px; margin-bottom:10px; border-bottom:1px solid #f2f2f2; }
