@@ -7,7 +7,7 @@
 
 
 {% if next_sessions %}
-    <h2 class="next_matches">{% trans 'next matches' %}</h2>
+    <h2 class="next_matches"><a href="{{ team.get_calendar_absolute_url }}" title="{% trans 'Calendar for team' %} {{ team.name }}">{% trans 'calendar' %}</a></h2>
     {% gsm_sessions_render next_sessions %}
 {% endif %}
 
