@@ -25,8 +25,10 @@ class Command(BaseCommand):
     help = 'sync database against gsm'
 
     def handle(self, *args, **options):
+        cooldown = options.get('cooldown', False)
+
         self.areas_country_code_2()
-        
+
         for code, language in settings.LANGUAGES:
             root = gsm.get_tree(code, 'soccer', 'get_areas').getroot()
             for element in root.getchildren():
@@ -48,6 +50,9 @@ class Command(BaseCommand):
                         self.save_competition(code, sport, element)
                     else:
                         raise UnexpectedChild(root, element)
+                    
+                    if cooldown:
+                        time.sleep(cooldown)
 
         logger.info('done sync')
 

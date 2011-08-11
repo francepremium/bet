@@ -15,7 +15,7 @@ def send_mail(args={}):
 
 @queueconsumer('gsm_sync')
 def gsm_sync(args={}):
-    GsmSyncCommand().handle()
+    GsmSyncCommand().handle(cooldown=30)
     call_command('update_index')
     time.sleep(30)
     enqueue(queue='gsm_sync')
