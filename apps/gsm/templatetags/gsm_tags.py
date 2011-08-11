@@ -97,9 +97,19 @@ def gsm_area_id_flag_url(arg):
     elif isinstance(arg, str):
         area = Area.objects.get(country_code=arg)
 
+    filename = area.country_code_2
+    if area.name_en == u'Europe':
+        filename = 'europeanunion'
+    if area.name_en == u'England':
+        filename = 'england'
+    if area.name_en == u'Scotland':
+        filename = 'wales'
+    if area.name_en == u'World':
+        filename = 'world'
+
     return '%sflags/%s.png' % (
         settings.STATIC_URL,
-        area.country_code_2,
+        filename,
     )
 
 @register.filter
