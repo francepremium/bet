@@ -14,6 +14,11 @@ etree.set_default_parser(etree.XMLParser(no_network=False, recover=True))
 logger = logging.getLogger('gsm')
 
 def get_tree(lang, sport, method, update=False, **parameters):
+    def get_tree_and_root(filename):
+        tree = etree.parse(filename)
+        root = tree.getroot()
+        return tree, root
+
     LANGUAGE_FAILS = (
         'get_team_statistics',
         'get_squads',
@@ -40,26 +45,36 @@ def get_tree(lang, sport, method, update=False, **parameters):
     cache_filepath = os.path.join(settings.GSM_CACHE, cache_filename)
     cache_lockname = '%s.lock' % cache_filename
     cache_lockpath = os.path.join(settings.GSM_CACHE, cache_lockname)
+    cache_exists = os.path.exists(cache_filepath)
     logger.debug('accessing %s' % settings.GSM_URL + url)
 
     # ensure cached version is not too old
-    if not update and os.path.exists(cache_filepath):
+    if not update and cache_exists:
         last = os.path.getmtime(cache_filepath)
         if time.time()-last > 3600*1:
             update = True
 
-    if update or not os.path.exists(cache_filepath):
+    if update or not cache_exists:
         ld = os.open(cache_lockpath, os.O_WRONLY | os.O_EXCL | os.O_CREAT)
         os.close(ld)
-        tmp_filename, message = urllib.urlretrieve(settings.GSM_URL + url)
-        shutil.copyfile(tmp_filename, cache_filepath)
+        tmp_filepath, message = urllib.urlretrieve(settings.GSM_URL + url)
+        tree, root = get_tree_and_root(tmp_filepath)
+
+        if root is None:
+            if cache_exists:
+                tree, root = get_tree_and_root(cache_filepath)
+            else:
+                os.unlink(cache_lockpath)
+                raise ServerOverloaded(settings.GSM_URL + url)
+        else:
+            shutil.copyfile(tmp_filepath, cache_filepath)
+
         os.unlink(cache_lockpath)
+    else:
+        tree, root = get_tree_and_root(cache_filepath)
 
-    tree = etree.parse(cache_filepath)
-
-    if tree.getroot().tag == 'html':
-        # no permissions
-        return False
+    if root.tag == 'html':
+        raise HtmlInsteadOfXml(settings.GSM_URL + url)
 
     return tree
 
@@ -67,4 +82,10 @@ class GsmException(Exception):
     """
     Parent exception for all exceptions thrown by this app code.
     """
+    pass
+
+class HtmlInsteadOfXml(GsmException):
+    pass
+
+class ServerOverloaded(GsmException):
     pass

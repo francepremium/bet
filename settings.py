@@ -83,6 +83,7 @@ MIDDLEWARE_CLASSES = [
     #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'pagination.middleware.PaginationMiddleware',
     'gsm.middleware.TimezoneMiddleware',
+    'gsm.middleware.GsmExceptionMiddleware',
 ]
 
 
@@ -174,6 +175,8 @@ GSM_URL = 'http://%s:%s@webpull.globalsportsmedia.com' % (
     GSM_USERNAME,
     GSM_PASSWORD,
 )
+# for upstream server overload test
+#GSM_URL = 'http://localhost:8000'
 GSM_CACHE = os.path.join(VAR_ROOT, 'cache', 'gsm')
 
 ACCOUNT_OPEN_SIGNUP = True
