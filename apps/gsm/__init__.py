@@ -55,8 +55,25 @@ def get_tree(lang, sport, method, update=False, **parameters):
             update = True
 
     if update or not cache_exists:
-        ld = os.open(cache_lockpath, os.O_WRONLY | os.O_EXCL | os.O_CREAT)
-        os.close(ld)
+        try:
+            ld = os.open(cache_lockpath, os.O_WRONLY | os.O_EXCL | os.O_CREAT)
+            os.close(ld)
+        except:
+            waited = 0
+            while os.path.exists(cache_lockpath):
+                time.sleep(settings.GSM_LOCKFILE_POLLRATE)
+                waited += 1
+                if waited == settings.GSM_LOCKFILE_MAXPOLLS:
+                    # we've waited long enought
+                    break
+            if os.path.exists(cache_lockpath):
+                # delete the lockfile and use cached file
+                os.unlink(cache_lockpath)
+                tree, root = get_tree_and_root(cache_filepath)
+                if root.tag == 'html':
+                    raise HtmlInsteadOfXml(settings.GSM_URL + url)
+                return tree
+
         tmp_filepath, message = urllib.urlretrieve(settings.GSM_URL + url)
         tree, root = get_tree_and_root(tmp_filepath)
 
