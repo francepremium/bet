@@ -119,8 +119,6 @@ INSTALLED_APPS = [
     'pinax.apps.account',
     
     # external
-    'haystack',
-    'modeltranslation',
     'staticfiles',
     'debug_toolbar',
     'mailer',
@@ -151,8 +149,11 @@ INSTALLED_APPS = [
     'clan',
     'scoobet',
     'article',
+    'haystack',
+    'modeltranslation',
 ]
 
+HAYSTACK_ENABLE_REGISTRATIONS = False
 HAYSTACK_SITECONF = 'search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = os.path.join(VAR_ROOT, 'whoosh')
@@ -262,6 +263,14 @@ LOGGING = {
     },
 }
 
+# local_settings.py can be used to override environment-specific settings
+# like database and email that differ between development and production.
+try:
+    from local_settings import *
+except ImportError:
+    pass
+
+
 for name, logger in LOGGING['loggers'].items(): 
     if DEBUG:
         LOGGING['loggers'][name]['handlers'] = LOGGING['loggers'][name]['debug_handlers']
@@ -272,9 +281,4 @@ for path in [VAR_ROOT, GSM_CACHE, LOG_ROOT]:
     if not os.path.isdir(path):
         os.makedirs(path)
 
-# local_settings.py can be used to override environment-specific settings
-# like database and email that differ between development and production.
-try:
-    from local_settings import *
-except ImportError:
-    pass
+
