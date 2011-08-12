@@ -32,6 +32,9 @@ table.lineups {
             {% gsm_entity key='team_B' tag='team' gsm_id=element.attrib.team_B_id name=element.attrib.team_B %}
             {% gsm_entity key='match' tag='session' gsm_id=element.attrib.match_id name=element.attrib.team_B %}
             <tr>
+                <td>
+                    {{ element.attrib.date|display_date }}
+                </td>
                 <td class="{% if element.attrib.winner == 'team_A' %}winner{% endif %}">
                     <a href="{{ team_A.get_absolute_url }}" title="{{ team_A.name }}">{{ team_A.name }}</a>
                 </td>

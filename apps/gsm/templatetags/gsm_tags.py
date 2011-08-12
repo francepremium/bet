@@ -1,3 +1,4 @@
+import re
 import datetime
 
 from django import template
@@ -20,6 +21,16 @@ def timezone_adjust(request, value):
 
 @register.filter
 def display_date(date):
+    if isinstance(date, str):
+        m = re.match(r'(?P<year>[0-9]+)-(?P<month>[0-9]+)-(?P<day>[0-9]+)', 
+            date)
+        if m:
+            return '%s/%s/%s' % (
+                m.group('day'),
+                m.group('month'),
+                m.group('year'),
+            )
+
     if not hasattr(date, 'year'):
         return False
 
