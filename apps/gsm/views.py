@@ -251,7 +251,7 @@ def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
                 })
 
     if tab == 'picks':
-        context['bet_list_helper'] = BetListHelper(request, session__season__competition=competition)
+        context['bet_list_helper'] = BetListHelper(request, session__season__competition=competition, exclude_columns=['support'])
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name, context,
         context_instance=template.RequestContext(request))
