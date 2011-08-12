@@ -363,8 +363,13 @@ class Command(BaseCommand):
                 if i:
                     properties['oponnent_%s' % x], created = GsmEntity.objects.get_or_create(
                         sport=sport, gsm_id=i, tag=tag)
+                    changed = False
+                    area = Area.objects.get(country_code=element.attrib.get(xattr.replace('id', 'country')))
+                    if area != properties['oponnent_%s' % x].area:
+                        properties['oponnent_%s' % x].area = area
+                        changed = True
                     name = oponnent_names[x]
-                    if name != getattr(properties['oponnent_%s' % x], 'name_%s' % language):
+                    if name != getattr(properties['oponnent_%s' % x], 'name_%s' % language) or changed:
                         setattr(properties['oponnent_%s' % x], 'name_%s' % language, name)
                         properties['oponnent_%s' % x].save()
 
