@@ -25,7 +25,7 @@ class Command(BaseCommand):
     help = 'sync database against gsm'
 
     def handle(self, *args, **options):
-        cooldown = options.get('cooldown', False)
+        self.cooldown = options.get('cooldown', 0)
 
         self.areas_country_code_2()
 
@@ -51,8 +51,7 @@ class Command(BaseCommand):
                     else:
                         raise UnexpectedChild(root, element)
                     
-                    if cooldown:
-                        time.sleep(cooldown)
+                    time.sleep(self.cooldown)
 
         logger.info('done sync')
 
@@ -191,6 +190,8 @@ class Command(BaseCommand):
                 self.save_season(language, sport, child, competition=competition)
             else:
                 raise UnexpectedChild(element, child)
+                    
+            time.sleep(self.cooldown)
 
     def save_season(self, language, sport, element, **properties):
         properties.update({
@@ -226,6 +227,7 @@ class Command(BaseCommand):
                 type='season', id=season.gsm_id).getroot()
             for session_element in root.findall('championship/competition/season/session'):
                 self.save_session(language, sport, session_element, season=season)
+                time.sleep(self.cooldown)
         else: # handle rounds
             if sport.slug == 'tennis':
                 root = gsm.get_tree(language, sport, 'get_matches', 
@@ -240,6 +242,7 @@ class Command(BaseCommand):
 
             for round_element in rounds:
                 self.save_round(language, sport, round_element, season=season)
+                time.sleep(self.cooldown)
 
     def save_team(self, language, sport, element, **properties):
         if element.attrib.get('area_id', False):
@@ -282,16 +285,19 @@ class Command(BaseCommand):
         if matches:
             for match in matches:
                 self.save_session(language, sport, match, session_round=r, season=r.season)
+                time.sleep(self.cooldown)
 
         matches = element.findall('group/match')
         if matches:
             for match in matches:
                 self.save_session(language, sport, match, session_round=r, season=r.season)
+                time.sleep(self.cooldown)
 
         matches = element.findall('aggr/match')
         if matches:
             for match in matches:
                 self.save_session(language, sport, match, session_round=r, season=r.season)
+                time.sleep(self.cooldown)
 
     def save_session(self, language, sport, element, **properties):
         converter = Session._meta.get_field('actual_start_datetime')
