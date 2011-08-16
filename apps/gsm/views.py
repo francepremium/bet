@@ -102,7 +102,7 @@ def person_detail_tab(request, sport, gsm_id, tab, tag='person',
         person.save()
 
     if tab == 'picks':
-        context['bet_list_helper'] = BetListHelper(request, **{tag:person})
+        context['bet_list_helper'] = BetListHelper(request, exclude_columns=['support'], **{tag:person})
 
     template_name = [
         'gsm/%s/%s/%s.html' % (sport.slug, 'person', tab),
@@ -145,7 +145,7 @@ def session_detail_tab(request, sport, gsm_id, tab, tag='match',
         context['statistics'] = statistics = c
 
     if tab == 'picks':
-        context['bet_list_helper'] = BetListHelper(request, session=session)
+        context['bet_list_helper'] = BetListHelper(request, session=session, exclude_columns=['support'])
 
     template_name = [
         'gsm/%s/%s/%s.html' % (sport.slug, 'session', tab),
@@ -392,7 +392,7 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         context['reference_season'] = reference_season
         context['resultstable'] = get_resultstable_for_season(reference_season, team)
     elif tab == 'picks':
-        context['bet_list_helper'] = x= BetListHelper(request, team=team)
+        context['bet_list_helper'] = x= BetListHelper(request, team=team, exclude_columns=['support'])
 
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name, context,
@@ -529,7 +529,8 @@ def sport_detail_tab(request, sport, tab,
         f.filters['datetime_utc'].extra['choices'][3][1] = _('next 7 days')
     elif tab == 'picks':
         context['bet_list_helper'] = x= BetListHelper(request, 
-                                                session__sport=sport)
+                                                session__sport=sport, 
+                                                exclude_columns=['support'])
 
 
     if tab == 'home':
