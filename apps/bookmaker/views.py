@@ -88,8 +88,11 @@ def detail(request, pk, tab='home',
     template_name='bookmaker/%s.html', extra_context=None):
     context = {}
     context['bookmaker'] = bookmaker = shortcuts.get_object_or_404(Bookmaker, pk=pk)
-    if request.user.is_authenticated():
-        context['is_admin'] = request.user.bookmaker == bookmaker or request.user.is_staff
+    try:
+        if request.user.is_authenticated():
+            context['is_admin'] = request.user.bookmaker == bookmaker or request.user.is_staff
+    except Bookmaker.DoesNotExist:
+        context['is_admin'] = False
     context['bookmaker'] = bookmaker
 
     if tab == 'picks':
