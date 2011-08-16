@@ -510,7 +510,7 @@ class Session(AbstractGsmEntity):
     objects = SessionManager()
 
     class Meta:
-        ordering = ['datetime_utc']
+        ordering = ['-datetime_utc']
 
     def __unicode__(self):
         return self.name

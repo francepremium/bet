@@ -502,7 +502,7 @@ def sport_detail_tab(request, sport, tab,
             sessions_qs = sessions_qs.filter(datetime_utc__gte=today - week)
         order = '-datetime_utc'
     elif tab == 'matches':
-        sessions_qs = sessions_qs.filter(status='Fixture')
+        sessions_qs = sessions_qs.filter(status='Fixture', datetime_utc__gte=today)
         if datefilter == '3hours':
             sessions_qs = sessions_qs.filter(datetime_utc__lte=now + datetime.timedelta(0, 0, 0, 0, 0, 3))
         elif datefilter == 'today':
@@ -536,7 +536,7 @@ def sport_detail_tab(request, sport, tab,
     if tab == 'home':
         sessions_qs = Session.objects.filter(sport=sport, status='Fixture').order_by('datetime_utc')
 
-    context['next_sessions'] = sessions_qs[:7]
+    context['next_sessions'] = sessions_qs[:4]
 
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name, context,
