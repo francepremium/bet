@@ -70,6 +70,10 @@ class BetListHelper(object):
 
         if isinstance(self.qs, QuerySet):
             self.filter = BetFilter(request.GET, queryset=self.qs)
+            if request.user.is_authenticated():
+                self.filter.filters['population'].user = request.user
+            else:
+                del self.filter.filters['population']
             self.qs = self.filter.qs
             self.qs = self.qs.annotate(Count('ticket__bet'))
             self.qs = self.qs.select_related('session__season__competition', 'bettype', 'choice', 'ticket__user', 'ticket__bokmaker')
