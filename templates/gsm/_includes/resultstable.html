@@ -22,7 +22,7 @@ The template uses a "team" variable to highlight a particular team.
             {% endif %}
         </tr>
         {% for ranking in resultstable.getchildren %}
-            {% gsm_entity tag='team' gsm_id=ranking.attrib.team_id key='ranked_team' %}
+            {% gsm_entity tag='team' gsm_id=ranking.attrib.team_id key='ranked_team' name=ranking.attrib.club_name country_code=ranking.attrib.countrycode %}
             <tr class="{% if ranking.attrib.team_id == team.gsm_id|addslashes %}current{% endif %}">
                 <td>{{ forloop.counter }}</td>
 				<td>

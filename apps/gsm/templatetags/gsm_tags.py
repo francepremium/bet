@@ -6,7 +6,7 @@ from django.conf import settings
 from django.db.models import Q
 
 import gsm
-from gsm.models import GsmEntity, Area, Session
+from gsm.models import GsmEntity, Area, Session, AbstractGsmEntity
 
 register = template.Library()
 
@@ -104,18 +104,20 @@ def gsm_area_id_flag_url(arg):
         return False
 
     if isinstance(arg, int) or (isinstance(arg, str) and arg.isdigit()):
-        area = Area.objects.get(gsm_id=int(arg))
+        area = Area.objects.get_for_gsm_id(int(arg))
     elif isinstance(arg, str):
-        area = Area.objects.get(country_code=arg)
+        area = Area.objects.get_for_country_code_3(arg)
+    elif isinstance(arg, AbstractGsmEntity):
+        area = Area.objects.get_for_object(arg)
 
     filename = area.country_code_2
     if area.name_en == u'Europe':
         filename = 'europeanunion'
-    if area.name_en == u'England':
+    elif area.name_en == u'England':
         filename = 'england'
-    if area.name_en == u'Scotland':
+    elif area.name_en == u'Scotland':
         filename = 'wales'
-    if area.name_en == u'World':
+    elif area.name_en == u'World':
         filename = 'world'
 
     return '%sflags/%s.png' % (
@@ -377,6 +379,9 @@ class GsmEntityNode(template.Node):
                     entity.name = self.name.resolve(context)
                 else:
                     entity.name = self.name
+            country_code = getattr(self, 'country_code', None)
+            if country_code:
+                entity.country_code = country_code.resolve(context)
 
         if hasattr(self.key, 'resolve'):
             key = self.key.resolve(context)

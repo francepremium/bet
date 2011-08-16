@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+import os.path
 import time
 import unicodedata
 import logging
@@ -7,6 +9,7 @@ import htmlentitydefs
 import urllib
 import datetime
 
+from django.db.models import Q
 from django.db import connection, transaction
 from django.db import models
 from django.db.models import signals
@@ -39,12 +42,80 @@ def model_class_for_tag(tag):
         return Session
     return GsmEntity
 
+class CachedManager(models.Manager):
+    def __init__(self, *args, **kwargs):
+        super(CachedManager, self).__init__(*args, **kwargs)
+        self.attribute_name = self.get_attribute_name()
+
+    def get_for_object(self, object):
+        return self.get_for_pk(getattr(object, self.attribute_name + '_id'))
+    
+    def get_for_pk(self, pk):
+        key = '%s%s' % (self.attribute_name, pk)
+
+        value = cache.get(key)
+        if not value:
+            value = self.get(pk=pk)
+            cache.set(key, value, 99999)
+        return value
+
+class AreaManager(CachedManager):
+    def get_attribute_name(self):
+        return 'area'
+
+    def get_for_pk(self, pk, area=None):
+        key = '%s%s' % (self.attribute_name, pk)
+
+        value = cache.get(key)
+        if not value:
+            if area:
+                value = area
+            else:
+                value = self.get(pk=pk)
+            cache.set(key, value, 99999)
+        return value
+
+    def get_for_country_code_3(self, code):
+        key = '%s%s' % (self.attribute_name, code)
+        
+        value = cache.get(key)
+        area = None
+        if not value:
+            area = self.get(country_code=code)
+            value = area.pk
+            cache.set(key, value, 99999)
+        return self.get_for_pk(value, area)
+
+    def get_for_country_code_2(self, code):
+        key = '%s%s' % (self.attribute_name, code)
+        
+        value = cache.get(key)
+        area = None
+        if not value:
+            area = self.get(country_code_2=code)
+            value = area.pk
+            cache.set(key, value, 99999)
+        return self.get_for_pk(value, area)
+
+    def get_for_gsm_id(self, code):
+        key = '%s%s' % (self.attribute_name, code)
+
+        value = cache.get(key)
+        area = None
+        if not value:
+            area = self.get(gsm_id=code)
+            value = area.pk
+            cache.set(key, value, 99999)
+        return self.get_for_pk(value, area)
+
 class Area(models.Model):
     parent = models.ForeignKey('Area', null=True, blank=True)
     country_code = models.CharField(max_length=3)
     country_code_2 = models.CharField(max_length=2)
     gsm_id = models.IntegerField(unique=True)
     name = models.CharField(max_length=50)
+
+    objects = AreaManager()
 
     def __unicode__(self):
         return self.name
@@ -53,18 +124,20 @@ class Area(models.Model):
         ordering = ('-name',)
         order_with_respect_to = 'parent'
 
-class SportManager(models.Manager):
-    def get_for_object(self, object):
-        return self.get_for_pk(object.sport_id)
+class SportManager(CachedManager):
+    def get_attribute_name(self):
+        return 'sport'
 
-    def get_for_pk(self, pk):
-        key = 'sport%s' % pk
+    def get_for_slug(self, code):
+        key = '%s%s' % (self.attribute_name, code)
 
-        sport = cache.get(key)
-        if not sport:
-            sport = self.get(pk=pk)
-            cache.set(key, sport)
-        return sport
+        value = cache.get(key)
+        area = None
+        if not value:
+            area = self.get(slug=code)
+            value = area.pk
+            cache.set(key, value, 99999)
+        return self.get_for_pk(value)
 
 class Sport(models.Model):
     name = models.CharField(max_length=30)
@@ -169,7 +242,7 @@ class AbstractGsmEntity(models.Model):
         if 'area_id' not in self.element.attrib:
             return None
         else:
-            return Area.objects.get(gsm_id = self.element.attrib['area_id'])
+            return Area.objects.get_for_gsm_id(int(self.element.attrib['area_id']))
 
     @property
     def attrib(self):
@@ -219,11 +292,44 @@ class GsmEntity(AbstractGsmEntity):
         elif tag == 'team':
             if self.get_sport().slug == 'soccer':
                 return 'http://imagecache.soccerway.com/new/teams/%s/%s.gif' % (size, self.gsm_id)
-            else:
-                tag = 'teams'
-                ext = 'gif'
+            elif self.get_sport().slug != 'tennis':
+                if self.area:
+                    code2 = self.area.country_code_2
+                    code3 = self.area.country_code
+                elif getattr(self, 'country_code', None):
+                    code3 = getattr(self, 'country_code', None)
+                    code2 = Area.objects.get_for_country_code_3(code3).country_code_2
+                else:
+                    print "CANNOT FIND AREA"
 
-        return 'http://images.globalsportsmedia.com/%s/%s/%s/%s.%s' % (self.get_sport().slug, tag, size, self.gsm_id, ext)
+                if code3 == 'ENG':
+                    code2 = '_England'
+                elif code3 == 'SCO':
+                    code2 = '_Scotland'
+                elif code3 == 'WAL':
+                    code2 = '_Wales'
+
+                if size == '15x15':
+                    height = 16
+                elif size == '30x30':
+                    height = 24
+                elif size in ('75x75', '150x150'):
+                    height = 48
+
+                return '%sflags2/%s/%s.png' % (
+                    settings.STATIC_URL,
+                    height,
+                    code2.lower()
+                )
+
+        return 'http://images.globalsportsmedia.com/%s/%s/%s/%s.%s' % (
+            self.get_sport().slug, tag, size, self.gsm_id, ext)
+
+    def is_nationnal(self):
+        return Competition.objects.filter(
+                    Q(season__session__oponnent_A=self)|
+                    Q(season__session__oponnent_B=self)).filter(
+                        area=Area.objects.get_for_pk(1)).count() > 0
 
     def oponnent_A_name(self):
         raise Exception('oponnent_A_name has been deprecated. Use oponnent_A.name instead')

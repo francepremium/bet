@@ -22,14 +22,20 @@ import gsm
 from models import *
 from filters import *
 
-def get_language_from_request(request):
-    return 'fr'
+#def get_language_from_request(request):
+    #return 'fr'
+
+def get_sport_or_404(slug):
+    try:
+        return Sport.objects.get_for_slug(slug)
+    except Sport.DoesNotExist:
+        raise http.Http404(_('Could not find sport %s') % slug)
 
 def timezone_adjust(request):
     if not request.POST.get('timezone_offset', False):
         return http.HttpResponseBadRequest('need POST timezone_offset')
     request.timezone['offset'] = int(request.POST['timezone_offset'])
-    request.session['timezone'] = request.timezone
+    drequest.session['timezone'] = request.timezone
     return shortcuts.redirect(request.META.get('HTTP_REFERER', '/'))
 
 @login_required
@@ -68,7 +74,7 @@ def sport_json_sessions(request):
 def person_detail_tab(request, sport, gsm_id, tab, tag='person',
     update=False,
     template_name='', extra_context=None):
-    sport = shortcuts.get_object_or_404(Sport, slug=sport)
+    sport = get_sport_or_404(sport)
 
     gsm_entity_class = model_class_for_tag(tag)
     person, created = gsm_entity_class.objects.get_or_create(
@@ -110,7 +116,7 @@ def person_detail_tab(request, sport, gsm_id, tab, tag='person',
 def session_detail_tab(request, sport, gsm_id, tab, tag='match',
     update=False,
     template_name='', extra_context=None):
-    sport = shortcuts.get_object_or_404(Sport, slug=sport)
+    sport = get_sport_or_404(sport)
 
     gsm_entity_class = model_class_for_tag(tag)
     session = shortcuts.get_object_or_404(Session,
@@ -153,7 +159,7 @@ def session_detail_tab(request, sport, gsm_id, tab, tag='match',
 def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
     update=False,
     template_name='', extra_context=None):
-    sport = shortcuts.get_object_or_404(Sport, slug=sport)
+    sport = get_sport_or_404(sport)
     gsm_entity_class = model_class_for_tag(tag)
     competition = shortcuts.get_object_or_404(gsm_entity_class,
         sport=sport, tag=tag, gsm_id=gsm_id)
@@ -259,7 +265,7 @@ def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
 def team_detail_tab(request, sport, gsm_id, tab, tag='team',
     update=False,
     template_name='', extra_context=None):
-    sport = shortcuts.get_object_or_404(Sport, slug=sport)
+    sport = get_sport_or_404(sport)
     gsm_entity_class = model_class_for_tag(tag)
     team = shortcuts.get_object_or_404(gsm_entity_class,
         sport=sport, tag=tag, gsm_id=gsm_id)
@@ -396,7 +402,7 @@ def entity_list(request, sport, tag,
     update=False,
     template_name='', extra_context=None):
 
-    sport = shortcuts.get_object_or_404(Sport, slug=sport)
+    sport = get_sport_or_404(sport)
 
     template_name = (
         template_name,
@@ -424,7 +430,7 @@ def entity_detail(request, sport, tag, gsm_id,
     update=True,
     template_name='', extra_context=None):
 
-    sport = shortcuts.get_object_or_404(Sport, slug=sport)
+    sport = get_sport_or_404(sport)
 
     template_name = (
         template_name,
@@ -454,12 +460,12 @@ def entity_detail(request, sport, tag, gsm_id,
 
 def sport_detail(request, sport,
     template_name='', extra_context=None):
-    sport = shortcuts.get_object_or_404(Sport, slug=sport)
+    sport = get_sport_or_404(sport)
     return shortcuts.redirect(sport.get_matches_absolute_url())
 
 def sport_detail_tab(request, sport, tab,
     template_name='', extra_context=None):
-    sport = shortcuts.get_object_or_404(Sport, slug=sport)
+    sport = get_sport_or_404(sport)
 
     template_name = (
         template_name,

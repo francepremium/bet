@@ -9,8 +9,8 @@
 			{% endblock %}
             {% block session_area %}
 				<td class="area">
-					{% if session.session_round.season.competition.area.gsm_id|gsm_area_id_flag_url %}
-					<img src="{{ session.session_round.season.competition.area.gsm_id|gsm_area_id_flag_url }}" alt="{{ session.session_round.season.competition.area }}" />
+					{% if session.session_round.season.competition|gsm_area_id_flag_url %}
+					<img src="{{ session.session_round.season.competition|gsm_area_id_flag_url }}" alt="{{ session.session_round.season.competition.area }}" />
 					{% endif %}
 				</td>
 			{% endblock %}
