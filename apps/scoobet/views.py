@@ -182,12 +182,12 @@ def user_detail(request, username, tab='activities',
         context['bet_list_helper'] = BetListHelper(request, ticket__user=user,
             exclude_filters=['bettype', 'sport', 'competition', 'has_text', 'has_upload'])
     elif tab == 'stats':
-        if user.ticket_set.count():
-            context['bet_list_helper'] = BetListHelper(request, exclude_filters=[
-                'bettype', 'sport', 'competition', 'has_text', 'has_upload'], 
-                ticket__user=user)
-            context['bet_list_helper'].set_ticket_qs(context['bet_list_helper'].ticket_qs.exclude(bet__correction=BET_CORRECTION_NEW))
-            tickets = context['bet_list_helper'].ticket_qs
+        context['bet_list_helper'] = BetListHelper(request, exclude_filters=[
+            'bettype', 'sport', 'competition', 'has_text', 'has_upload'], 
+            ticket__user=user)
+        context['bet_list_helper'].set_ticket_qs(context['bet_list_helper'].ticket_qs.exclude(bet__correction=BET_CORRECTION_NEW))
+        tickets = context['bet_list_helper'].ticket_qs
+        if len(tickets):
 
             total_odds = 0
             balance = 0

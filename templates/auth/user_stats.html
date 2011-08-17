@@ -4,8 +4,8 @@
 {% block body %}
     {{ block.super }}
 
-    {% if not bet_list_helper %}
-        {% trans 'this user did not place any bet yet' %}
+    {% if empty %}
+        {{ object }} {% trans 'did not place any ticket that was fully corrected yet' %}
     {% else %}
         {{ bet_list_helper.render_form }}
 
