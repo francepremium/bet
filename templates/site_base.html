@@ -83,10 +83,10 @@ table.bettype table.choices {
 
 		<div id="timezone">
 			<ul class="expandable">
-				<li>12:47 GMT{% if request.timezone.offset > 0 %}+{% endif %}{% ifnotequal request.timezone.offset 0 %}{{ request.timezone.offset }}{% endifnotequal %}</li>
+				<li>{% if now.hour < 10 %}0{% endif %}{{ now.hour }}:{% if now.minute < 10 %}0{% endif %}{{ now.minute }} GMT{% if request.timezone.offset > 0 %}+{% endif %}{% ifnotequal request.timezone.offset 0 %}{{ request.timezone.offset }}{% endifnotequal %}</li>
 				{# @@@ insert real time here #}
 				{% for timezone in available_timezones %}
-				<li timezone="{{ timezone }}">{% if 12|add:timezone < 10 %}0{% endif %}{{ 12|add:timezone}}:47 GMT{% if timezone > 0 %}+{% endif %}{% ifnotequal timezone 0 %}{{ timezone }}{% endifnotequal %}</li>
+				<li timezone="{{ timezone.timezone }}">{% if timezone.hour < 10 %}0{% endif %}{{ timezone.hour }}:{% if now.minute < 10 %}0{% endif %}{{ now.minute }} GMT{% if timezone.timezone > 0 %}+{% endif %}{% ifnotequal timezone.timezone 0 %}{{ timezone.timezone }}{% endifnotequal %}</li>
 				{% endfor %}
 			</ul>
 			<form method="post" action="{% url gsm_timezone_adjust %}">

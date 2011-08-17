@@ -35,7 +35,7 @@ def timezone_adjust(request):
     if not request.POST.get('timezone_offset', False):
         return http.HttpResponseBadRequest('need POST timezone_offset')
     request.timezone['offset'] = int(request.POST['timezone_offset'])
-    drequest.session['timezone'] = request.timezone
+    request.session['timezone'] = request.timezone
     return shortcuts.redirect(request.META.get('HTTP_REFERER', '/'))
 
 @login_required
