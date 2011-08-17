@@ -561,6 +561,8 @@ table.bettype table.choices {
                             } else {
                                 link.parents('td').find('div.flag').slideDown();
                             }
+                            link.parents('tr').find('tr.result div:visible').show();
+
                         });
                         if (link.hasClass('lost')) {
                             link.parents('tr').find('td.result div.lost').show('fast');
@@ -572,8 +574,17 @@ table.bettype table.choices {
                             link.parents('tr').find('td.result div.won').show('fast');
                         }
                         if (link.hasClass('flag')) {
-                            link.parents('tr').find('td.flag div').show('fast');
+                            link.parents('tr').find('td.flagged div').show('fast');
+
+                        } else {
+                            link.parents('tr').find('td.flagged .flag:visible').hide('slow');
+                            link.parents('tr').find('td.result .initial').hide();
                         }
+
+                        {% if request.user.is_staff %}
+                        add_message('{% trans "Staff hack activated: flag and correct" %}');
+                        link.parents('tr').find('td.correct div.correct').show();
+                        {% endif %}
                     }
                 );
             });

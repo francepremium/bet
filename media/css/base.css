@@ -169,10 +169,14 @@ tr.odd td { background-color:#f7f7f7; }
 /* Bet list (quickly themed) */
 td.correct { width:55px; text-align:right; background-color:#f7f7f7; }
 .odd td.correct { background-color:#eeeeee; }
-td.correct .won 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-won.png'); }
-td.correct .lost 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-lost.png'); }
-td.correct .canceled 	{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-canceled.png'); }
+td.correct .won, td.result .won 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-won.png'); }
+td.correct .lost, td.result .lost 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-lost.png'); }
+td.correct .canceled, td.result .canceled 	{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-canceled.png'); }
 .flag 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-flag.png'); }
+
+tr.canceled { background-color: #ccdaf7; }
+tr.won { background-color: #ccf7de; }
+tr.lost { background-color: #f7d0cc; }
 
 /* Tree */
 div.tree ul { display:none; }

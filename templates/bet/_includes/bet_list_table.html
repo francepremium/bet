@@ -8,7 +8,7 @@
 
     <table>
         <thead>
-            <tr>
+            <tr class="{% if bet.is_won %}won{% endif %}{% if bet.is_lost %}lost{% endif %}{% if bet.is_canceled %}canceled{% endif %}">
                 {% if 'date' not in exclude_columns %}
                     <th>{% trans 'date' %}</th>
                 {% endif %}
@@ -31,22 +31,22 @@
                     <th>{% trans 'bet' %}</th>
                 {% endif %}
                 {% if 'choice' not in exclude_columns %}
-                    <th>{% trans 'choice' %}</th>
+                    <th><acronym title="{% trans 'choice' %}">C</acronym></th>
                 {% endif %}
                 {% if 'odds' not in exclude_columns %}
                     <th>{% trans 'odds' %}</th>
                 {% endif %}
                 {% if 'stake' not in exclude_columns %}
-                    <th>{% trans 'stake' %}</th>
+                    <th><acronym title="{% trans 'stake' %}">S</acronym></th>
                 {% endif %}
                 {% if 'support' not in exclude_columns %}
                     <th>{% trans 'support' %}</th>
                 {% endif %}
                 {% if 'result' not in exclude_columns %}
-                    <th>{% trans 'result' %}</th>
+                    <th><acronym title="{% trans 'result' %}">R</acronym></th>
                 {% endif %}
                 {% if request.user.is_authenticated %}
-                    <th>{% trans 'flagged' %}</th>
+                    <th><acronym title="{% trans 'flagged' %}">F</acronym></th>
                     <th>{% trans 'correct' %}</th>
                 {% endif %}
             </tr>
@@ -99,11 +99,11 @@
                 {% endif %}
                 {% if 'stake' not in exclude_columns %}
                     <td>
-                        <a href="{{ bet.ticket.get_absolute_url }}" title="{{ bet.ticket }}">
+                        <a href="{{ bet.ticket.get_absolute_url }}" title="{% if bet.ticket_bet_count >= 1 %}{% trans "Combined ticket" %} {% endif %}{{ bet.ticket }}">
                             {% if bet.ticket_bet_count == 1 %}
                                 {{ bet.ticket.stake }}
                             {% else %}
-                                {% trans 'combined ticket' %}
+                                C
                             {% endif %}
                         </a>
                     </td>
@@ -116,11 +116,11 @@
                 {% endif %}
                 {% if 'result' not in exclude_columns %}
                 <td class="result">
-                    <div class="won" style="{% if not bet.is_won %}display:none;{% endif %}">
+                    <div class="won {% if bet.is_won %}initial{% endif %}" style="{% if not bet.is_won %}display:none;{% endif %}">
                     </div>
-                    <div class="lost" style="{% if not bet.is_lost %}display:none;{% endif %}">
+                    <div class="lost {% if bet.is_lost %}initial{% endif %}" style="{% if not bet.is_lost %}display:none;{% endif %}">
                     </div>
-                    <div class="canceled" style="{% if not bet.is_canceled %}display:none{% endif %}">
+                    <div class="canceled {% if bet.is_canceled %}initial{% endif %}" style="{% if not bet.is_canceled %}display:none{% endif %}">
                     </div>
                 </td>
                 {% endif %}

@@ -142,7 +142,7 @@ def bet_status_change(request, bet_pk, action):
             ).values_list('pk', flat=True).distinct()
         for pk in users:
             print "DOING", pk
-            refresh_betprofile_for_user.spool(userpk=pk)
+            refresh_betprofile_for_user.spool(userpk=str(pk))
 
         actstream.action.send(request.user, verb='corrected', action_object=bet)
 

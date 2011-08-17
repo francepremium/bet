@@ -67,7 +67,9 @@ class BetProfile(models.Model):
 
     def is_referee(self):
         if not hasattr(self, '_is_referee'):
-            if self.is_offside():
+            if self.user.is_staff:
+                self._is_referee = True
+            elif self.is_offside():
                 self._is_referee = False
             elif self.get_event_set_percent(self.user.event_set.filter(valid=False)) > 5:
                 self._is_referee = False
@@ -106,15 +108,11 @@ class BetProfile(models.Model):
             # cannot flag an already flagged bet
             return False
 
-        if bet.is_won() or bet.is_lost():
-            # anyone can flag corrected bet
-            return True
-
-        return False
+        return True
 
     def refresh(self):
         logger.debug('spooling user profile refresh %s' % self.user)
-        refresh_betprofile_for_user.spool(userpk=self.user.pk)
+        refresh_betprofile_for_user.spool(userpk=str(self.user.pk))
 
 class Ticket(models.Model):
     TICKET_STAKE_CHOICES = [(x,x) for x in range(1,11)]
