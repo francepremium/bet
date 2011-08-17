@@ -235,8 +235,11 @@ class Bet(models.Model):
         return urlresolvers.reverse('bet_detail', args=(self.pk,))
 
 def delete_empty_ticket(sender, **kwargs):
-    if kwargs['instance'].ticket.bet_set.count() == 0:
-        kwargs['instance'].ticket.delete()
+    try:
+        if kwargs['instance'].ticket.bet_set.count() == 0:
+            kwargs['instance'].ticket.delete()
+    except Ticket.DoesNotExist:
+        pass
 signals.post_delete.connect(delete_empty_ticket, sender=Bet)
 
 class Event(models.Model):
