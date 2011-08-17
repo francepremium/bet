@@ -36,6 +36,9 @@
             <a href="{{ action.action_object.bet_set.all.0.session.get_absolute_url }}" title="{{ action.action_object.bet_set.all.0.session }}">{{ action.action_object.bet_set.all.0.session }}</a>
     {% endif %}
 {% endif %}
+{% if action.verb == 'registered' %}
+        <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'joined BetSpire' %} !
+{% endif %}
 {% if action.verb == 'joined clan' %}
         <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'joined group' %} <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{{ action.action_object }}</a>
 {% endif %}
