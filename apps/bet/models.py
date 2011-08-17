@@ -127,6 +127,7 @@ class Ticket(models.Model):
     user = models.ForeignKey('auth.User')
     stake = models.IntegerField(choices=TICKET_STAKE_CHOICES)
     status = models.IntegerField(choices=TICKET_STATUS_CHOICES, default=TICKET_STATUS_INCOMPLETE)
+    creation_datetime = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
         return urlresolvers.reverse('bet_ticket_detail', args=(self.pk,))
