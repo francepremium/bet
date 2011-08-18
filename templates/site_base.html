@@ -302,7 +302,7 @@ table.bettype table.choices {
             beforeSend: function(req) {},
             error: function(req, textStatus, error) {
                 if (textStatus == 'error' && error) {
-                    add_message('{% trans 'Sorry, our program failed to process your request. Our techie has been notified by email and will take care of it soonish' %}');
+                    add_message("{% trans 'Sorry, our program failed to process your request. Our techie has been notified by email and will take care of it soonish' %}");
                 }
             },
         });
