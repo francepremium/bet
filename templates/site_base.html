@@ -407,6 +407,11 @@ table.bettype table.choices {
             
             $('form[action="{% comment_form_target %}"]').live('submit',function(e) {
                 var container;
+
+                if ($(this).parents('#global_form').length) {
+                    // prevent double post in status
+                    return true;
+                }
                 
                 container = $(this).parents('div.comment_form_container')
                 if (!container) {
