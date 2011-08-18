@@ -1,4 +1,5 @@
 from django.db.models import signals, Q
+from django.utils.translation import ugettext as _
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
@@ -100,3 +101,9 @@ def user_following(user):
                                         follow__content_type=c)
     return followers_qs
 User.following = user_following
+
+def acstream_started_following_patch(sender, **kwargs):
+    action = kwargs['instance']
+    if action.verb == _('started following'):
+        action.verb = 'started following'
+signals.pre_save.connect(acstream_started_following_patch, sender=Action)
