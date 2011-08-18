@@ -198,7 +198,7 @@ import re
 LOCALE_INDEPENDENT_PATHS = (
     re.compile('/robots.txt'),
 )
-LOCALEURL_USE_ACCEPT_LANGUAGE = True
+LOCALEURL_USE_ACCEPT_LANGUAGE = False
 
 DEVSERVER_MODULES = (
     #'devserver.modules.sql.SQLRealTimeModule',
