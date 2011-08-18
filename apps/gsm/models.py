@@ -269,7 +269,7 @@ class AbstractGsmEntity(models.Model):
 class GsmEntity(AbstractGsmEntity):
     def get_sessions(self):
         if not hasattr(self, '_sessions'):
-            self._sessions = Session.objects.filter(models.Q(oponnent_A=self)|models.Q(oponnent_B=self))
+            self._sessions = Session.objects.filter(models.Q(oponnent_A=self)|models.Q(oponnent_B=self)).order_by('datetime_utc')
         return self._sessions
 
     def get_large_image_url(self):

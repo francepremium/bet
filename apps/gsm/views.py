@@ -322,8 +322,12 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         # find next sessions
         q = Session.objects.filter(sport=sport)
         q = q.filter(Q(oponnent_A=team)|Q(oponnent_B=team))
-        q = q.filter(datetime_utc__gte=datetime.date.today())
-        context['next_sessions'] = q[:4]
+
+        q_played = q.filter(status='Played').order_by(
+            '-datetime_utc').values_list('pk', flat=True).distinct()[:2]
+        q_next = q.filter(status__in=('Playing', 'Suspended', 'Fixture')).order_by(
+            'datetime_utc').filter(datetime_utc__gte=datetime.date.today()).distinct().values_list('pk', flat=True)[:2]
+        context['next_sessions'] = Session.objects.filter(pk__in=list(q_played)+list(q_next))
 
         reference_season = get_reference_season(team)
         context['resultstable'] = get_resultstable_for_season(reference_season, team)

@@ -99,7 +99,7 @@ def group_activities(activities):
     if not activities:
         return activities
 
-    activities = prefetch_relations(activities)
+    #activities = prefetch_relations(activities)
     activities = activities
 
     previous = None
