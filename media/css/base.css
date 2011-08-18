@@ -272,6 +272,7 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 .activity.started-following 		.image { background-image:url('../img/actions/started-following.png'); }
 .activity.corrected 		        .image { background-image:url('../img/actions/corrected.png'); }
 .activity.flagged 		        .image { background-image:url('../img/actions/flagged.png'); }
+.activity.registered 		        .image { background-image:url('../img/actions/registered.png'); }
 
 /* Activity extended elements */
 .activity.extended .details { padding-bottom:10px; margin-bottom:10px; border-bottom:1px solid #f2f2f2; }
