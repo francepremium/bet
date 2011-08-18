@@ -373,6 +373,12 @@ table.bettype table.choices {
 		}
 
         $(document).ready(function() {
+            var comments = $('div.comments');
+            if (comments.length == 1) {
+                // for activity detail
+                comments.slideDown();
+            }
+
             $('.tab_link').live('click', function(e) {
                 var tabid = $(this).attr('class').match(/tab_id_([a-z]*)/)[1];
                 var group = $(this).attr('class').match(/tab_group_([a-z]*)/);

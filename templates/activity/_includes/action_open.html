@@ -1,0 +1,18 @@
+{% load avatar_tags i18n comments bet_tags ipdb gsm_tags %}
+<div class="
+		activity 
+		{{ action.verb|slugify }}{% if action.verb == 'closed ticket' and action.action_object.bet_set.count > 1 %}-combined{% endif %}
+		{% if action.verb == 'wall posted' and action.target == object %} extended {% endif %}
+		{% if action.verb == 'updated his status' and action.actor == object %} extended {% endif %}		
+		" style="{% if activity.hide %}display: none;{% endif %}">
+
+    <div class="image">
+		{% if action.verb == 'wall posted' and action.target == object %}
+			<a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{% avatar action.actor 36 %}</a>
+		{% endif %}
+		{% if action.verb == 'updated his status' and action.actor == object %}	
+			<a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{% avatar action.actor 36 %}</a>
+		{% endif %}
+    </div>
+
+    <div class="details">

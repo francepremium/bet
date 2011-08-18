@@ -1,23 +1,7 @@
 {% load avatar_tags i18n comments bet_tags ipdb gsm_tags %}
 
 {% if action.open %}
-<div class="
-		activity 
-		{{ action.verb|slugify }}{% if action.verb == 'closed ticket' and action.action_object.bet_set.count > 1 %}-combined{% endif %}
-		{% if action.verb == 'wall posted' and action.target == object %} extended {% endif %}
-		{% if action.verb == 'updated his status' and action.actor == object %} extended {% endif %}		
-		" style="{% if activity.hide %}display: none;{% endif %}">
-
-    <div class="image">
-		{% if action.verb == 'wall posted' and action.target == object %}
-			<a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{% avatar action.actor 36 %}</a>
-		{% endif %}
-		{% if action.verb == 'updated his status' and action.actor == object %}	
-			<a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{% avatar action.actor 36 %}</a>
-		{% endif %}
-    </div>
-
-    <div class="details">
+    {% include 'activity/_includes/action_open.html' %}
 {% endif %}
 
 
@@ -120,38 +104,8 @@
 {% endif %}
 
 
-
-
 {% if action.close %}
-
-    {% if action.verb == 'commented' %}
-        {# here we must use the comment's original thread #}
-        {% get_comment_count for action.action_object.content_object as comment_count %}
-        {% get_comment_list for action.action_object.content_object as comment_list %}
-        {% get_comment_form for action.action_object.content_object as form %}
-    {% else %}
-        {% get_comment_count for action as comment_count %}
-        {% get_comment_list for action as comment_list %}
-        {% get_comment_form for action as form %}
-    {% endif %}
-
-		<div class="date">
-            {{ request|timezone_adjust:action.timestamp }} {% trans 'ago' %}
-        </div>
-        
-        <div class="comments_link">
-            {% trans 'comment' %} ({{ comment_count }})
-        </div>
-
-		<div class="comments">
-			{% include 'comments/list.html' %}
-			<div class="comment_form_container">
-				{% include 'comments/form.html' %}
-			</div>
-		</div>
-	</div>
-</div>
-
+    {% include 'activity/_includes/action_close.html' %}
 {% endif %}
 
 {% comment %}
