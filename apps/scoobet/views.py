@@ -201,7 +201,7 @@ def user_detail(request, username, tab='activities',
                 balance += ticket.profit
                 balance_history.append({
                     'ticket': ticket,
-                    'balance': balance,
+                    'balance': int(balance),
                 })
 
                 total_odds += ticket.odds
