@@ -5,16 +5,16 @@
         {% for block in blocks %}
             <div class="popularity_block {{ block.plural_word }}">
                 <p>
-				{% if object_type == 'User'%}
-                    <a href="{% url user_detail_tab object 'social' %}">{{ block.html_all|safe }}</a>
-				{% else %}
+                    {% if block.link_all %}<a href="{{ block.link_all }}">{% endif %}
                     {{ block.html_all|safe }}
-                {% endif %}
+                    {% if block.link_all %}</a>{% endif %}
 				</p>
                 
                 {% if 'html_friends' in block.keys %}
                     <p>
-                        {{ block.html_friends|safe }}
+                        {% if block.link_friends %}<a href="{{ block.link_friends }}">{% endif %}
+                            {{ block.html_friends|safe }}
+                        {% if block.link_all %}</a>{% endif %}
                     </p>
                 {% endif %}
             </div>

@@ -1,3 +1,4 @@
+from django.core import urlresolvers
 from django import template
 from django.utils.translation import ugettext as _
 from django.db.models import Sum, Q
@@ -39,9 +40,11 @@ def render_popularity_for_object(request, obj):
     """
 
     if obj.__class__.__name__ == 'User':
+        social_link = urlresolvers.reverse('user_detail_tab', args=(obj, 'social'))
         block = {
             'plural_all': '%s followers',
             'single_all': '%s follower',
+            'link_all': social_link,
             'plural_friends': 'including %s friends',
             'single_friends': 'including %s friend',
             'value_all': obj.following().count()
@@ -53,6 +56,7 @@ def render_popularity_for_object(request, obj):
         block = {
             'plural_all': '%s follow',
             'single_all': '%s follows',
+            'link_all': social_link,
             'plural_friends': 'including %s friends',
             'single_friends': 'including %s friend',
             'value_all': obj.follows().count()
@@ -64,8 +68,8 @@ def render_popularity_for_object(request, obj):
     else:
         user_list = obj.fans.all()
         block = {
-            'plural_all': '%s bet on it',
-            'single_all': '%s bet on it',
+            'plural_all': '%s likes',
+            'single_all': '%s like',
             'plural_friends': 'including %s friends',
             'single_friends': 'including %s friend',
             'value_all': user_list.count(),
@@ -123,6 +127,11 @@ def render_popularity_for_object(request, obj):
             }
             if friends is not None:
                 block['value_friends'] = bet_list.filter(ticket__user__in=friends).count()
+            if hasattr(obj, 'get_picks_absolute_url'):
+                picks_link = obj.get_picks_absolute_url()
+                block['link_all'] = picks_link
+                block['link_friends'] = picks_link + '?population=follow'
+
             blocks.append(block)
 
     # now to make html_all and html_friends
