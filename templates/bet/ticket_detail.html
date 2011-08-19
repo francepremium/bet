@@ -1,6 +1,6 @@
 {% extends 'bet/base.html' %}
 
-{% load i18n bet_tags %}
+{% load i18n bet_tags comments %}
 
 {% block head_title %}{% if ticket.bet_set.count > 1 %}{% trans 'Combined' %}{% else %}{% trans 'Simple' %}{% endif %} {% trans 'ticket ' %} #{{ ticket.pk }} {% trans 'by' %} {{ ticket.user }}{% endblock %}
 
@@ -20,4 +20,6 @@
 
 {{ bet_list_helper.render_bet_table }}
 
+{% render_comment_form for ticket %}
+{% render_comment_list for ticket %}
 {% endblock %}
