@@ -1,28 +1,23 @@
 {% load avatar_tags i18n comments bet_tags ipdb gsm_tags %}
-
-    {% if action.verb == 'commented' %}
-        {# here we must use the comment's original thread #}
-        {% get_comment_count for action.action_object.content_object as comment_count %}
-        {% get_comment_list for action.action_object.content_object as comment_list %}
-        {% get_comment_form for action.action_object.content_object as form %}
-    {% else %}
-        {% get_comment_count for action as comment_count %}
-        {% get_comment_list for action as comment_list %}
-        {% get_comment_form for action as form %}
-    {% endif %}
-
 		<div class="date">
             {{ request|timezone_adjust:action.timestamp }}
         </div>
-        
-        <div class="comments_link">
-            {% trans 'comment' %} ({{ comment_count }})
-        </div>
 
-		<div class="comments">
-			{% include 'comments/list.html' %}
-            {% include 'comments/form.html' %}
-		</div>
+        {% if action.verb != 'commented' %}
+            {% get_comment_count for action.earliest_of_group as comment_count %}
+            {% get_comment_list for action.earliest_of_group as comment_list %}
+            {% get_comment_form for action.earliest_of_group as form %}
+
+            <div class="comments_link">
+                {% trans 'comment' %} ({{ comment_count }})
+            </div>
+
+            <div class="comments">
+                {% include 'comments/list.html' %}
+                {% include 'comments/form.html' %}
+            </div>
+
+        {% endif %} 
 	</div>
 </div>
 

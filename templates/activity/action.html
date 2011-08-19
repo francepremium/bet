@@ -6,20 +6,6 @@
 
 
 {# big switch-on-verb block #}
-{% if action.verb == 'closed ticket' %}
-    {% if action.action_object.bet_set.count > 1 %}
-            <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> 
-            {% trans 'published' %} 
-            <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{% trans 'combined ticket' %}</a> 
-            {% trans 'including' %} {{ action.action_object.bet_set.count }} {% trans 'matches' %}
-    {% else %}
-            <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a>
-            {% trans 'published' %} 
-            <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{% trans 'simple ticket' %}</a>
-            {% trans 'on match' %}
-            <a href="{{ action.action_object.bet_set.all.0.session.get_absolute_url }}" title="{{ action.action_object.bet_set.all.0.session }}">{{ action.action_object.bet_set.all.0.session }}</a>
-    {% endif %}
-{% endif %}
 {% if action.verb == 'registered' %}
         <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'joined BetSpire' %} !
 {% endif %}
@@ -66,7 +52,14 @@
             </a>
             {% endspaceless %}
         {% else %}
-            <a href="{{ action.action_object.content_object.get_absolute_url }}" title="{{ action.action_object.content_object }}">{{ action.action_object.content_object }}</a>
+            {% if action.action_object.content_object.bookmaker %}
+                {# should be a ticket #}
+                <a href="{{ action.action_object.content_object.get_absolute_url }}" title="{{ action.action_object.content_object }}">{% trans 'ticket' %} {{ action.action_object.content_object }}</a>
+                {% trans 'of' %}
+                <a href="{{ action.action_object.content_object.user.get_absolute_url }}" title="{{ action.action_object.content_object.user }}">{{ action.action_object.content_object.user }}</a>
+            {% else %}
+                <a href="{{ action.action_object.content_object.get_absolute_url }}" title="{{ action.action_object.content_object }}">{{ action.action_object.content_object }}</a>
+            {% endif %}
         {% endif %}
 {% endif %}
 {% if action.verb == 'updated article' %}
@@ -77,6 +70,25 @@
 {% endif %}
 {% if action.verb == 'started following' %}
         <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'started following' %} <a href="{{ action.target.get_absolute_url }}" title="{{ action.target }}">{{ action.target }}</a>
+{% endif %}
+{% if action.verb == 'closed ticket' %}
+    {% if action.action_object.bet_set.count > 1 %}
+            <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> 
+            {% trans 'published' %} 
+            <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{% trans 'combined ticket' %}</a> 
+            {% trans 'including' %} <div class="bet_list_link">{{ action.action_object.bet_set.count }} {% trans 'matches' %}</div>
+            <div class="bet_list">
+                {% with request|get_bet_list_helper_for_activity:action.action_object.bet_set.all as bet_list_helper %}
+                {{ bet_list_helper.render_bet_table }}
+                {% endwith %}
+            </div>
+    {% else %}
+            <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a>
+            {% trans 'published' %} 
+            <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{% trans 'simple ticket' %}</a>
+            {% trans 'on match' %}
+            <a href="{{ action.action_object.bet_set.all.0.session.get_absolute_url }}" title="{{ action.action_object.bet_set.all.0.session }}">{{ action.action_object.bet_set.all.0.session }}</a>
+    {% endif %}
 {% endif %}
 {% if action.verb == 'corrected' or action.verb == 'flagged' %}
     {% if action.group|length > 1 %}
