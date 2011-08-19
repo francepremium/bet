@@ -1,37 +1,39 @@
 {% load comments i18n %}
-<form action="{% comment_form_target %}" method="post">{% csrf_token %}
-  {% if next %}<div><input type="hidden" name="next" value="{{ next }}" /></div>{% endif %}
+<div class="comment_form_container">
+    <form action="{% comment_form_target %}" method="post">{% csrf_token %}
+      {% if next %}<div><input type="hidden" name="next" value="{{ next }}" /></div>{% endif %}
 
-  {% if request.user.is_authenticated %}
-    <input type="hidden" name="name" value="{{ request.user }}" />
-  {% else %}
-    {% if form.name.errors %}{{ form.name.errors }}{% endif %}
-    {% trans 'your name' %}: {{ form.name }}
-  {% endif %}
+      {% if request.user.is_authenticated %}
+        <input type="hidden" name="name" value="{{ request.user }}" />
+      {% else %}
+        {% if form.name.errors %}{{ form.name.errors }}{% endif %}
+        {% trans 'your name' %}: {{ form.name }}
+      {% endif %}
 
-  {% if request.user.is_authenticated %}
-    <input type="hidden" email="email" value="{{ request.user }}" />
-  {% else %}
-    {% if form.email.errors %}{{ form.email.errors }}{% endif %}
-    {% trans 'your email' %}: {{ form.email }}
-  {% endif %}
-  
-  {% if form.comment.errors %}{{ form.comment.errors }}{% endif %}
-  {% trans 'comment' %}:
-  {{ form.comment }}
+      {% if request.user.is_authenticated %}
+        <input type="hidden" email="email" value="{{ request.user }}" />
+      {% else %}
+        {% if form.email.errors %}{{ form.email.errors }}{% endif %}
+        {% trans 'your email' %}: {{ form.email }}
+      {% endif %}
+      
+      {% if form.comment.errors %}{{ form.comment.errors }}{% endif %}
+      {% trans 'comment' %}:
+      {{ form.comment }}
 
-  {% if not request.user.is_authenticated %}
-  <br />
-  {{ form.honeypot.label_tag }}: {{ form.honeypot }}
-  {% endif %}
+      {% if not request.user.is_authenticated %}
+      <br />
+      {{ form.honeypot.label_tag }}: {{ form.honeypot }}
+      {% endif %}
 
-  {% for field in form %}
-    {% if field.is_hidden %}
-      <div>{{ field }}</div>
-    {% endif %}
-  {% endfor %}
-  <p class="submit">
-    <input type="submit" name="post" class="submit-post" value="{% trans "Post" %}" />
-    <!--<input type="submit" name="preview" class="submit-preview" value="{% trans "Preview" %}" />-->
-  </p>
-</form>
+      {% for field in form %}
+        {% if field.is_hidden %}
+          <div>{{ field }}</div>
+        {% endif %}
+      {% endfor %}
+      <p class="submit">
+        <input type="submit" name="post" class="submit-post" value="{% trans "Post" %}" />
+        <!--<input type="submit" name="preview" class="submit-preview" value="{% trans "Preview" %}" />-->
+      </p>
+    </form>
+</div>
