@@ -53,10 +53,10 @@
                 </tr>
             </table>
 
-            <div id="container_pie" style="display: inline-block; width: 300px; height: 300px; margin: 0 auto; "></div>
+            <div id="container_pie" style="display: inline-block; width: 600px; height: 300px; margin: 0 auto; "></div>
         </div>
 
-        <div id="container_lines" style="width: 800px; height: 400px; margin: 0 auto"></div>
+        <div id="container_lines" style="width: 700px; height: 400px; margin: 0 auto"></div>
 
         {{ bet_list_helper.render_ticket_table }}
     {% endif %}
@@ -75,8 +75,7 @@ $(document).ready(function() {
          marginBottom: 25
       },
       title: {
-         text: '{% trans 'balance' %}',
-         x: -20 //center
+         text: '',
       },
       xAxis: {
          categories: [{% for ticket in bet_list_helper.ticket_qs %}'{{ ticket }}'{% if not forloop.last %}, {% endif %}{% endfor %}]
@@ -105,8 +104,8 @@ $(document).ready(function() {
          borderWidth: 0
       },
       series: [{
-         name: '{% trans 'tickets by' %} {{ object }}',
-         data: [{% for balance in balance_history %}{{ balance.balance }}{% if not forloop.last %}, {% endif %}{% endfor %}]
+         data: [{% for balance in balance_history %}{{ balance.balance }}{% if not forloop.last %}, {% endif %}{% endfor %}],
+         showInLegend: false
       }]
    });
    
@@ -122,6 +121,9 @@ $(document).ready(function() {
            formatter: function() {
                return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
            }
+       },
+       title: {
+            text: '',
        },
        plotOptions: {
            pie: {
