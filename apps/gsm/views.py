@@ -15,6 +15,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import models
 
 import actstream
+from actstream.models import actor_stream, Follow, Action
 
 from bet.helpers import *
 import gsm
@@ -49,6 +50,16 @@ def fan(request, action, model_class, model_pk, app_name='gsm'):
         message = _('you indicated that you bet on') + ' %s' % model
     else:
         model.fans.remove(request.user)
+        actions = Action.objects.filter(
+            actor_content_type = ContentType.objects.get_for_model(User),
+            actor_object_id = request.user.pk,
+            verb='bets on',
+            action_object_content_type = ContentType.objects.get_for_model(model_class),
+            action_object_object_id = model_pk
+        )
+        # ensure triggering of *_delete signals
+        for action in actions:
+            action.delete()
         message = _('you indicated that you do not bet anymore on') + ' %s' % model
     messages.success(request, message)
     return shortcuts.redirect(model.get_absolute_url())
