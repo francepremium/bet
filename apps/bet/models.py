@@ -317,3 +317,5 @@ def refresh_betprofile_for_user(arguments):
         logger.debug('ending user profile refresh %s' % user)
     else:
         logger.debug('user %s has no ticket' % user)
+    
+    return uwsgi.SPOOL_OK
