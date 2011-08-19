@@ -107,11 +107,6 @@ def group_activities(activities):
     duplicates = []
     group_verbs = ('flagged', 'corrected')
     for activity in activities:
-        # prevent duplicates
-        if previous and activity.verb == previous.verb and activity.verb not in group_verbs and activity.actor == previous.actor and activity.target == previous.target and activity.action_object == previous.action_object:
-            # just ignore duplicates, ie. if user click follow/unfollow a lot
-            activity.hide = True
-
         if previous and activity.verb == previous.verb and activity.verb in group_verbs and activity.actor == previous.actor:
             do_group = True
         else:
