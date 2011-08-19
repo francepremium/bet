@@ -147,8 +147,9 @@ INSTALLED_APPS = [
     'bookmaker',
     'bet',
     'clan',
-    'scoobet',
     'article',
+    # this must be at the end because it monkey patches the admin
+    'scoobet',
     'haystack',
     'modeltranslation',
 ]

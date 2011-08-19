@@ -16,8 +16,10 @@ def get_bet_list_helper(request, qs):
     return BetListHelper(request, qs=qs)
 
 @register.filter
-def get_bet_list_helper_no_pagination(request, qs):
-    return BetListHelper(request, qs=qs, paginate=False)
+def get_bet_list_helper_for_activity(request, qs):
+    helper = BetListHelper(request, qs=qs, paginate=False, exclude_columns=[
+        'support', 'time'])
+    return helper
 
 @register.tag(name='render_bet_list')
 def render_bet_list(parser, token):

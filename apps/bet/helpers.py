@@ -23,6 +23,10 @@ class BetListHelper(object):
     # in sport detail template template
     {{ bet_list_helper.render_form }}
     {{ bet_list_helper.render_list }}
+
+
+    BIG FAT WARNING:
+    The feed will go crazy if you pass anything else than a LIST to exclude options.
     """
     def __init__(self, request, qs=None, paginate=True, 
                 exclude_filters=None, exclude_columns=None, exclude=None, **kwargs):

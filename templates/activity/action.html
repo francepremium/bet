@@ -88,7 +88,7 @@
         {% endif %}
         {% if action.close %}
             <div class="bet_list">
-                {% with request|get_bet_list_helper_no_pagination:action.action_object_group as bet_list_helper %}
+                {% with request|get_bet_list_helper_for_activity:action.action_object_group as bet_list_helper %}
                 {{ bet_list_helper.render_bet_table }}
                 {% endwith %}
             </div>
