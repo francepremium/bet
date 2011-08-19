@@ -56,6 +56,20 @@ def comment_posted_activity(sender, **kwargs):
         action.send(comment.user, verb='commented', action_object=comment)
 signals.post_save.connect(comment_posted_activity, sender=models.get_model('comments', 'Comment'))
 
+def unfollow_deletes_activity(sender, **kwargs):
+    instance = kwargs['instance']
+    actions = Action.objects.filter(
+        actor_object_id = instance.user.pk,
+        actor_content_type = instance.content_type,
+        verb='started following',
+        target_content_type = instance.content_type,
+        target_object_id = instance.object_id
+    )
+    # trigger *_delete
+    for a in actions:
+        a.delete()
+signals.pre_delete.connect(unfollow_deletes_activity, sender=Follow)
+
 def new_action_unicode(self):
     if self.target:
         if self.action_object:
