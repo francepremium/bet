@@ -261,6 +261,7 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 .activity .comments { width:370px; margin-top:5px; padding:7px 15px 1px 15px; background-color:#f2f2f2; }
 .activity .comments,
 .activity .bet_list { display:none; }
+.activity .bet_list_link { display:inline-block; }
 
 /* Activity icons */
 .activity.bets-on 					.image { background-image:url('../img/actions/bets-on.png'); }
