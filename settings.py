@@ -261,7 +261,7 @@ LOGGING = {
             'propagate': True,
         },
         'apps': {
-            'production_handlers': ['log_file'],
+            'production_handlers': ['log_file', 'console'],
             'debug_handlers': ['console'],
             'level': 'INFO',
             'propagate': True,
