@@ -136,7 +136,7 @@ table.bettype table.choices {
 						<li><a href="{% url bet_list_tab 'mine' %}">{% trans 'bets'|capfirst %}</a></li>
 						<li><a href="{% url bet_list_to_correct %}">{% trans 'bets to correct'|capfirst %}</a></li>
 						{% if request.user.betprofile.is_referee %}
-						<li><a href="{% url bet_list_flagged %}">{% trans 'flagged bets' %}</a></li>
+						<li><a href="{% url bet_list_flagged %}">{% trans 'Flagged bets' %}</a></li>
 						{% endif %}
 						<li><a href="{% url messages_inbox %}">{% trans 'inbox'|capfirst %} {% if inbox_count %}[{{ inbox_count }}]{% endif %}</a></li>
 						<li><a href="{% if request.openid %}/openid/logout/?next={% url acct_logout %}{% else %}{% url acct_logout %}{% endif %}">Logout</a></li>
