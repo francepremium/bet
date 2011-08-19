@@ -559,7 +559,8 @@ table.bettype table.choices {
                 }  
             });
 
-            $('td.correct a').click(function(e) {
+            $('td.correct a').live('click', function(e) {
+                console.log('clicked')
                 e.preventDefault();
                 var link = $(this);
                 $.post(
