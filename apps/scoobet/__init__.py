@@ -1,6 +1,8 @@
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
+from bet.models import Ticket
+
 def prefetch_relations(weak_queryset):
     """
     Consider such a model class::
@@ -144,15 +146,20 @@ def group_activities(activities):
             action_object_group = [a.action_object for a in group]
             # and given to the closer
             group[-1].action_object_group = action_object_group
-        # the earliest activity of the group is the one to comment
-        earliest = None
-        for activity in group:
-            if earliest is None:
-                earliest = activity
-            elif earliest.pk > activity.pk:
-                earliest = activity
-        for activity in group:
-            activity.earliest_of_group = earliest
+
+        # project-specific exception
+        if len(group) == 1 and isinstance(group[0].action_object, Ticket):
+            group[0].earliest_of_group = group[0].action_object
+        else:
+            # the earliest activity of the group is the one to comment
+            earliest = None
+            for activity in group:
+                if earliest is None:
+                    earliest = activity
+                elif earliest.pk > activity.pk:
+                    earliest = activity
+            for activity in group:
+                activity.earliest_of_group = earliest
 
     activities[0].open = True
     activities[len(activities)-1].close = True
