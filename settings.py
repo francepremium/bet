@@ -154,6 +154,8 @@ INSTALLED_APPS = [
     'modeltranslation',
 ]
 
+USE_L10N = True
+
 HAYSTACK_ENABLE_REGISTRATIONS = False
 HAYSTACK_SITECONF = 'search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'

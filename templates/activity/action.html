@@ -117,5 +117,5 @@
                 {% if action.target.get_absolute_url %}<a href="{{ action.target.get_absolute_url }}">{{ action.target }}</a>
                 {% else %}<a href="{{ action.target_url }}">{{ action.target }}</a>{% endif %}
             {% endif %}
-            {{ request|timezone_adjust:action.timestamp|timesince }} ago
+            {{ request|timezone_adjust:action.timestamp|timesince }}
 {% endcomment %}
