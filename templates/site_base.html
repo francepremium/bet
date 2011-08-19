@@ -207,7 +207,12 @@ table.bettype table.choices {
 				<li class="{% if sport.slug == 'basketball' %}active{% endif %}">
 					<a href="{% url gsm_sport_detail 'basketball' %}">{% trans "basketball" %}</a>
 				</li>
-			</ul>
+            </ul>
+            <ul>
+			    <li>
+                    <a href="{% url scoobet_leaderboard %}">{% trans 'leaderboard' %}</a>
+                </li>
+            </ul>
 		</div>
 
 		<div id="aside">

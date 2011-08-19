@@ -4,6 +4,11 @@ import views
 
 urlpatterns = patterns('scoobet.views',
     url(
+        r'leaderboard/$',
+        views.homepage,
+        name='scoobet_leaderboard',
+    ),
+    url(
         r'status/add/$',
         views.status_add,
         name='scoobet_status_add',
