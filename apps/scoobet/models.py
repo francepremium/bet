@@ -93,7 +93,7 @@ def user_friends(user):
     target_choices_qs = User.objects.filter(
         Q(follow__object_id=user.pk, follow__content_type=c) | 
         Q(id__in=follows_users_ids)
-    )
+    ).distinct()
     return target_choices_qs
 User.friends = user_friends
 
@@ -105,14 +105,14 @@ def user_follows(user):
                                               content_type__model='user') \
                                       .exclude(object_id=user.pk) \
                                       .values_list('object_id', flat=True)
-    return User.objects.filter(pk__in=follows_users_ids)
+    return User.objects.filter(pk__in=follows_users_ids).distinct()
 User.follows = user_follows
 
 def user_following(user):
     c = ContentType.objects.get_for_model(User)
 
     followers_qs = User.objects.filter(follow__object_id=user.pk, 
-                                        follow__content_type=c)
+                                        follow__content_type=c).distinct()
     return followers_qs
 User.following = user_following
 
