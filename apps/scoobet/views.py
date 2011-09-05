@@ -47,7 +47,7 @@ def friends_autocomplete(request):
 
     q = request.user.friends().filter(
         Q(username__icontains=term)
-    )
+    ).distinct()
     result = []
     for user in q:
         result.append({
