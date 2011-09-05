@@ -17,7 +17,7 @@
     {{ block.super }}
     <script type="text/javascript">
         $('input[name=recipient]').autocomplete({
-            source: '{% url scoobet_friends_autocomplete %}',
+            source: '{% url scoobet_following_autocomplete %}',
             minLength: 1,
         });
     </script>

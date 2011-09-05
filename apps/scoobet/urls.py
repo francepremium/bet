@@ -20,8 +20,8 @@ urlpatterns = patterns('scoobet.views',
     ),
     url(
         r'autocomplete/friends/$',
-        views.friends_autocomplete,
-        name='scoobet_friends_autocomplete',
+        views.following_autocomplete,
+        name='scoobet_following_autocomplete',
     ),
     url(
         r'feed/friends/$',

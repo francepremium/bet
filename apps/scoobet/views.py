@@ -42,12 +42,12 @@ def status_add(request,
         context_instance=template.RequestContext(request))
 
 @login_required
-def friends_autocomplete(request):
+def following_autocomplete(request):
     term = request.GET['term']
 
-    q = request.user.friends().filter(
+    q = request.user.following().filter(
         Q(username__icontains=term)
-    ).distinct()
+    )
     result = []
     for user in q:
         result.append({
