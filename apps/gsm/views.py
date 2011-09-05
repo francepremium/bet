@@ -303,8 +303,10 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         q = Competition.objects.filter(sport=sport)
         if 'country' in team.attrib.keys() and team.attrib['country']:
             q = q.filter(Q(area__name_fr=team.attrib['country'])|Q(area__name_en=team.attrib['country'])).distinct()
-        else:
+       
+        if q.filter(Q(season__session__oponnent_A=team)|Q(season__session__oponnent_B=team)).count():
             q = q.filter(Q(season__session__oponnent_A=team)|Q(season__session__oponnent_B=team))
+
         if q.filter(is_nationnal=True).count():
             q = q.filter(is_nationnal=True)
         reference_competition = q[q.count() - 1]
