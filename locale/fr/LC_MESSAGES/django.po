@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-17 16:17+0200\n"
-"PO-Revision-Date: 2011-08-19 18:28+0100\n"
+"PO-Revision-Date: 2011-08-22 17:22+0100\n"
 "Last-Translator: David <dav.bellaiche@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -104,7 +104,7 @@ msgstr "en attente"
 #: templates/auth/user_stats.html:19
 #: templates/auth/user_stats.html.py:144
 msgid "won"
-msgstr "gagné"
+msgstr "Gagné"
 
 #: apps/bet/models.py:204
 #: templates/auth/user_stats.html:23
@@ -112,11 +112,11 @@ msgstr "gagné"
 #: templates/gsm/_includes/resultstable.html:15
 #: templates/gsm/team/statistics.html:25
 msgid "lost"
-msgstr "défaites"
+msgstr "Perdu"
 
 #: apps/bet/models.py:205
 msgid "canceled"
-msgstr "annulé"
+msgstr "Annulé"
 
 #: apps/bet/models.py:247
 #, fuzzy
@@ -460,9 +460,8 @@ msgstr "Bienvenue"
 
 #: templates/homepage.html:13
 #: templates/homepage.html.py:39
-#, fuzzy
 msgid "picker"
-msgstr "pronostics en cours"
+msgstr "pronostics"
 
 #: templates/homepage.html:14
 #: templates/homepage.html.py:40
@@ -520,9 +519,8 @@ msgstr "pronostics en cours"
 #: templates/bet/ticket_detail.html:9
 #: templates/gsm/competition/base.html:11
 #: templates/gsm/sport/base.html:10
-#, fuzzy
 msgid "pick"
-msgstr "pronostics en cours"
+msgstr "pronostics"
 
 #: templates/session_bettype_detail.html:9
 #: templates/bet/bet_detail.html:9
@@ -612,9 +610,8 @@ msgid "bets to correct"
 msgstr "paris à corriger"
 
 #: templates/site_base.html:139
-#, fuzzy
 msgid "flagged bets"
-msgstr "live"
+msgstr "Corrections signalées"
 
 #: templates/site_base.html:141
 #, fuzzy
@@ -658,23 +655,23 @@ msgstr "football"
 
 #: templates/site_base.html:183
 msgid "ligue 1"
-msgstr "ligue 1"
+msgstr "Ligue 1 (FRA)"
 
 #: templates/site_base.html:186
 msgid "premier league"
-msgstr "premier league"
+msgstr "Premier league (ANG)"
 
 #: templates/site_base.html:189
 msgid "liga BBVA"
-msgstr "liga BBVA"
+msgstr "Liga BBVA (ESP)"
 
 #: templates/site_base.html:192
 msgid "serie A"
-msgstr "serie A"
+msgstr "Serie A (ITA)"
 
 #: templates/site_base.html:195
 msgid "bundesliga 1"
-msgstr "bundesliga 1"
+msgstr "Bundesliga 1 (ALL)"
 
 #: templates/site_base.html:198
 #, fuzzy
@@ -933,12 +930,11 @@ msgstr "statistiques"
 #: templates/gsm/team/base.html:31
 #: templates/gsm/team/squad.html:20
 msgid "statistics"
-msgstr "classement"
+msgstr "Statistiques"
 
 #: templates/auth/user_base.html:24
-#, fuzzy
 msgid "picks of"
-msgstr "pronostics en cours"
+msgstr "pronostics"
 
 #: templates/auth/user_base.html:45
 msgid "following"
