@@ -11,7 +11,7 @@ import scoobet
 
 def user_messaging_security(sender, **kwargs):
     m = kwargs['instance']
-    authorized = m.recipient.following().filter(pk=m.sender.pk).count() > 0
+    authorized = m.sender.following().filter(pk=m.recipient.pk).count() > 0
     if not authorized:
         raise scoobet.MessagingUnauthorizedUser(m)
 signals.pre_save.connect(user_messaging_security, 
