@@ -300,7 +300,11 @@ class GsmEntity(AbstractGsmEntity):
                     code3 = getattr(self, 'country_code', None)
                     code2 = Area.objects.get_for_country_code_3(code3).country_code_2
                 else:
-                    raise gsm.GsmException('Cannot find area for self: %s (%s)' % (self, self.__class__))
+                    return False
+                    # debug code
+                    raise gsm.CannotFindArea('for self: %s (%s)' % (self, self.__class__))
+
+                code2 = code2.lower()
 
                 if code3 == 'ENG':
                     code2 = '_England'
@@ -319,7 +323,7 @@ class GsmEntity(AbstractGsmEntity):
                 return '%sflags2/%s/%s.png' % (
                     settings.STATIC_URL,
                     height,
-                    code2.lower()
+                    code2
                 )
 
         return 'http://images.globalsportsmedia.com/%s/%s/%s/%s.%s' % (

@@ -101,6 +101,9 @@ class GsmException(Exception):
     """
     pass
 
+class CannotFindArea(GsmException):
+    pass
+
 class HtmlInsteadOfXml(GsmException):
     pass
 
