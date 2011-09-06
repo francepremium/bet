@@ -18,6 +18,10 @@ class BetAdmin(admin.ModelAdmin):
         context['myvalue'] = context['adminform'].form.instance
         return super(BetAdmin, self).render_change_form(request, context, add, change, form_url, obj)
 
+class BetProfileAdmin(admin.ModelAdmin):
+    list_display = ('user',)
+
 admin.site.register(Ticket, TicketAdmin)
 admin.site.register(Bet, BetAdmin)
 admin.site.register(Event)
+admin.site.register(BetProfile, BetProfileAdmin)
