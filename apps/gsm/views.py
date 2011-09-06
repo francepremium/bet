@@ -147,13 +147,16 @@ def session_detail_tab(request, sport, gsm_id, tab, tag='match',
         c = c.getchildren()[0]
     session.element = c
 
-    t = gsm.get_tree(context['language'], sport, 'get_match_statistics', 
-        id=session.gsm_id)
-    if t != False:
-        c = t.getroot().getchildren()[1]
-        while c.tag != 'match':
-            c = c.getchildren()[0]
-        context['statistics'] = statistics = c
+    try:
+        t = gsm.get_tree(context['language'], sport, 'get_match_statistics', 
+            id=session.gsm_id)
+        if t != False:
+            c = t.getroot().getchildren()[1]
+            while c.tag != 'match':
+                c = c.getchildren()[0]
+            context['statistics'] = statistics = c
+    except gsm.GsmException:
+        pass
 
     if tab == 'picks':
         context['bet_list_helper'] = BetListHelper(request, session=session, exclude_columns=['support'])
