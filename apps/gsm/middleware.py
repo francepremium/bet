@@ -33,6 +33,8 @@ class GsmExceptionMiddleware(object):
             context['error'] = 'html'
         elif isinstance(exception, gsm.ServerOverloaded):
             context['error'] = 'server'
+        else:
+            return None
 
         response = http.HttpResponse(
             loader.render_to_string(
