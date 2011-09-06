@@ -74,8 +74,9 @@ DEBUG_TOOLBAR_CONFIG = {
 
 MIDDLEWARE_CLASSES = [
     'localeurl.middleware.LocaleURLMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.transaction.TransactionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'beta.middleware.LoginMiddleware',
