@@ -355,8 +355,6 @@ class Competition(AbstractGsmEntity):
     team_type = models.CharField(max_length=12, null=True, blank=True)
     display_order = models.IntegerField(null=True, blank=True)
 
-    is_nationnal = models.BooleanField(verbose_name=_(u'nationnal league'), default=False)
-
     def get_sessions(self):
         return Session.objects.filter(session_round__season__competition=self).order_by('-datetime_utc')
 

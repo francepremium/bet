@@ -303,19 +303,28 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
 
     def get_reference_season(team):
         # find reference seasons for stats
-        q = Competition.objects.filter(sport=sport)
-        if 'country' in team.attrib.keys() and team.attrib['country']:
-            q = q.filter(Q(area__name_fr=team.attrib['country'])|Q(area__name_en=team.attrib['country'])).distinct()
-       
-        if q.filter(Q(season__session__oponnent_A=team)|Q(season__session__oponnent_B=team)).count():
-            q = q.filter(Q(season__session__oponnent_A=team)|Q(season__session__oponnent_B=team))
+        q = Season.objects.filter(sport=sport)
 
-        if q.filter(is_nationnal=True).count():
-            q = q.filter(is_nationnal=True)
-        reference_competition = q[q.count() - 1]
-        q = reference_competition.season_set.all().order_by('-gsm_id')
-        reference_season = q[q.count() - 1]
-        return reference_season
+        if 'type' in team.attrib.keys() and team.attrib['type']:
+            if team.attrib['type'] == 'club':
+                q = q.filter(competition__competition_type='club')
+                q = q.filter(competition__competition_format=u'Domestic league')
+            if team.attrib['type'] == 'national':
+                q = q.filter(competition__competition_type='international')
+
+        # exclude friendlies
+        q = q.exclude(competition__name_en='Friendlies')
+
+        # exclude seasons in which team is not participating
+        q = q.filter(Q(session__oponnent_A=team)|Q(session__oponnent_B=team)).distinct()
+
+        # any ongoing season ?
+        today = datetime.date.today()
+        ongoing = q.filter(end_date__gte=today, start_date__lte=today).count()
+        if ongoing == 1:
+            return q.get(end_date__gte=today, start_date__lte=today)
+        else:
+            return q.filter(end_date__lte=today).order_by('-end_date')[0]
 
     def get_resultstable_for_season(season, team):
         # get stats
@@ -345,7 +354,7 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
             'datetime_utc').filter(datetime_utc__gte=datetime.date.today()).distinct().values_list('pk', flat=True)[:2]
         context['next_sessions'] = Session.objects.filter(pk__in=list(q_played)+list(q_next)).order_by('datetime_utc')
 
-        reference_season = get_reference_season(team)
+        reference_season = context['reference_season'] = get_reference_season(team)
         context['resultstable'] = get_resultstable_for_season(reference_season, team)
 
     elif tab == 'squad':

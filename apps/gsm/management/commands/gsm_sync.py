@@ -172,9 +172,6 @@ class Command(BaseCommand):
             'display_order': element.attrib.get('display_order', None),
         })
 
-        if 'service_level' in element.attrib:
-            properties['is_nationnal'] = element.attrib['service_level'] == 1
-
         competition = self.update_model(
             Competition,
             {
