@@ -323,8 +323,10 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         ongoing = q.filter(end_date__gte=today, start_date__lte=today).count()
         if ongoing == 1:
             return q.get(end_date__gte=today, start_date__lte=today)
-        else:
+        elif q.filter(end_date__lte=today).order_by('-end_date').count():
             return q.filter(end_date__lte=today).order_by('-end_date')[0]
+        else:
+            return q.order_by('end_date')[0]
 
     def get_resultstable_for_season(season, team):
         # get stats
