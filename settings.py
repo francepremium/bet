@@ -84,9 +84,14 @@ MIDDLEWARE_CLASSES = [
     #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'pagination.middleware.PaginationMiddleware',
     'gsm.middleware.TimezoneMiddleware',
-    'gsm.middleware.GsmExceptionMiddleware',
+    'middleware.ExceptionMiddleware',
 ]
 
+EXCEPTION_MIDDLEWARE_HANDLES = [
+    'HtmlInsteadOfXml',
+    'ServerOverloaded',
+    'MessagingUnauthorizedUser',
+]
 
 TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.auth',

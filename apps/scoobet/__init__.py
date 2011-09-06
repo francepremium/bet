@@ -3,6 +3,14 @@ from django.contrib.contenttypes import generic
 
 from bet.models import Ticket
 
+class ScoobetException(Exception):
+    """ Base exception for all exceptions from this app """
+    pass
+
+class MessagingUnauthorizedUser(Exception):
+    def __init__(self, message):
+        self.message = message
+
 def prefetch_relations(weak_queryset):
     """
     Consider such a model class::

@@ -7,6 +7,16 @@ from django.contrib.auth.models import User
 from actstream import action
 from actstream.models import Action, Follow
 
+import scoobet
+
+def user_messaging_security(sender, **kwargs):
+    m = kwargs['instance']
+    authorized = m.recipient.following().filter(pk=m.sender.pk).count() > 0
+    if not authorized:
+        raise scoobet.MessagingUnauthorizedUser(m)
+signals.pre_save.connect(user_messaging_security, 
+    sender=models.get_model('django_messages', 'message'))
+
 def user_registered_activity(sender, **kwargs):
     if not kwargs.get('created', False):
         return None

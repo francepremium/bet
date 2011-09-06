@@ -5,12 +5,16 @@
     <h1>{% trans 'Oopsie' %} !</h1>
 
     <p>
-    {% if error == 'server' %}
+    {% if error == 'ServerOverloaded' %}
         {% blocktrans %}It's not your fault but our data provider is overloaded for the moment - and we don't have any cached version of the data you requested. Our techie has been notified but it's unlikely that he can do anything about it. Would you please try again later ?{% endblocktrans %}
     {% endif %}
 
-    {% if error = 'html' %}
+    {% if error = 'HtmlInsteadOfXml' %}
         {% blocktrans %}It's not your fault but it seems like we can't access to the data you're looking for ... Hopefully John has been notified and will see what's wrong with the provider.{% endblocktrans %}
+    {% endif %}
+
+    {% if error = 'MessagingUnauthorizedUser' %}
+        {{ exception.message.recipient }} {% blocktrans %}does not follow you. Therefore we cannot let you send him a private message.{% endblocktrans %}
     {% endif %}
     </p>
 
