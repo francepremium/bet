@@ -300,7 +300,7 @@ class GsmEntity(AbstractGsmEntity):
                     code3 = getattr(self, 'country_code', None)
                     code2 = Area.objects.get_for_country_code_3(code3).country_code_2
                 else:
-                    print "CANNOT FIND AREA"
+                    raise gsm.GsmException('Cannot find area for self: %s (%s)' % (self, self.__class__))
 
                 if code3 == 'ENG':
                     code2 = '_England'
