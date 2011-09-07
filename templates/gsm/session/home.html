@@ -183,13 +183,16 @@ table.lineups {
         {% for goal in child0.getchildren %}
         <tr>
             <td>
-                {% if goal.getchildren.0.attrib.team_id == session.oponnent_A.gsm_id|addslashes %}
+                {% if session|goal_column:goal == 'A' %}
                     {% gsm_entity key='goal_person' tag='person' gsm_id=goal.getchildren.0.attrib.person_id name=goal.getchildren.0.attrib.person %}
 
                     <span class="goal G"><a href="{{ goal_person.get_absolute_url }}" title="{{ goal_person.name }}">{{ goal_person.name }}</a></span>
                     {% if goal.getchildren.1.attrib.code == 'AS' %}
                         {% gsm_entity key='goal_assistant' tag='person' gsm_id=goal.getchildren.1.attrib.person_id name=goal.getchildren.1.attrib.person %}
                         <span class="goal AS">{% trans 'assisted by' %} <a href="{{ goal_assistant.get_absolute_url }}" title="{{ goal_assistant.name }}">{{ goal_assistant.name }}</a></span>
+                    {% endif %}
+                    {% if goal.getchildren.0.attrib.code == 'OG' %}
+                        ({% trans 'OG' %})
                     {% endif %}
                 {% endif %}
 
@@ -198,13 +201,16 @@ table.lineups {
                 <span class="minute">{{ goal.getchildren.0.attrib.minute }}"</span>
             </td>
             <td>
-                {% if goal.getchildren.0.attrib.team_id == session.oponnent_B.gsm_id|addslashes %}
+                {% if session|goal_column:goal == 'B' %}
                     {% gsm_entity key='goal_person' tag='person' gsm_id=goal.getchildren.0.attrib.person_id name=goal.getchildren.0.attrib.person %}
 
                     <span class="goal G"><a href="{{ goal_person.get_absolute_url }}" title="{{ goal_person.name }}">{{ goal_person.name }}</a></span>
                     {% if goal.getchildren.1.attrib.code == 'AS' %}
                         {% gsm_entity key='goal_assistant' tag='person' gsm_id=goal.getchildren.1.attrib.person_id name=goal.getchildren.1.attrib.person %}
                         <span class="goal AS">{% trans 'assisted by' %} <a href="{{ goal_assistant.get_absolute_url }}" title="{{ goal_assistant.name }}">{{ goal_assistant.name }}</a></span>
+                    {% endif %}
+                    {% if goal.getchildren.0.attrib.code == 'OG' %}
+                        ({% trans 'OG' %})
                     {% endif %}
                 {% endif %}
             </td>

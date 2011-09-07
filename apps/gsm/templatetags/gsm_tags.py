@@ -11,6 +11,15 @@ from gsm.models import GsmEntity, Area, Session, AbstractGsmEntity
 register = template.Library()
 
 @register.filter
+def goal_column(session, goal):
+    event = goal.getchildren()[0]
+    if event.attrib['team_id'] == str(session.oponnent_A.gsm_id):
+        return 'A'
+    elif event.attrib['code'] == 'OG':
+        return 'A'
+    return 'B'
+
+@register.filter
 def is_int(val):
     return val.__class__.__name__ == 'int'
 
