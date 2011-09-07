@@ -144,6 +144,7 @@ INSTALLED_APPS = [
     'autofixture',
     'nashvegas',
     'django_messages',
+    'taggit',
     'devserver',
 
     # Pinax
