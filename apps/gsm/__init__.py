@@ -7,11 +7,24 @@ import shutil
 from lxml import etree
 
 from django.conf import settings
+from django.db.models import get_model
 
 # Prevent: XMLSyntaxError: Attempt to load network entity
 etree.set_default_parser(etree.XMLParser(no_network=False, recover=True))
 
 logger = logging.getLogger('gsm')
+
+def get_object_from_url(url):
+    data = []
+    Sport = get_model('gsm', 'sport')
+    GsmEntity = get_model('gsm', 'gsmentity')
+    sports = Sport.objects.all().values_list('slug', flat=True)
+    for part in url.split('/'):
+        if part in sports:
+            data.append(part)
+        elif 1 <= len(data) and len(data) < 3:
+            data.append(part)
+    return GsmEntity.objects.get(sport__slug=data[0], tag=data[1], gsm_id=data[2])
 
 def get_tree(lang, sport, method, update=False, **parameters):
     def get_tree_and_root(filename):
