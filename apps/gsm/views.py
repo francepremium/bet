@@ -308,7 +308,10 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         if 'type' in team.attrib.keys() and team.attrib['type']:
             if team.attrib['type'] == 'club':
                 q = q.filter(competition__competition_type='club')
-                q = q.filter(competition__competition_format=u'Domestic league')
+                if q.filter(competition__competition_format=u'Domestic league').count():
+                    q = q.filter(competition__competition_format=u'Domestic league')
+                else:
+                    q = q.filter(competition__important=True)
             if team.attrib['type'] == 'national':
                 q = q.filter(competition__competition_type='international')
 
