@@ -20,9 +20,10 @@ class SeasonAdmin(TranslationAdmin):
 admin.site.register(Season, SeasonAdmin)
 
 class CompetitionAdmin(TranslationAdmin):
-    list_display = ('gsm_id', 'sport', 'area', 'championship', 'name')
+    list_display = ('gsm_id', 'sport', 'area', 'championship', 'name', 'important')
     list_filter = ('sport',)
     search_fields = ('area__name_fr', 'area__name_en', 'championship__name_fr', 'championship__name_en', 'name_fr', 'name_en')
+    list_editable = ('important', )
 
 admin.site.register(Competition, CompetitionAdmin)
 
