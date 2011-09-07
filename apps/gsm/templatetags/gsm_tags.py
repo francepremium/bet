@@ -124,7 +124,7 @@ def gsm_area_id_flag_url(arg):
         filename = 'europeanunion'
     elif area.name_en == u'England':
         filename = 'england'
-    elif area.name_en == u'Scotland':
+    elif area.name_en in (u'Scotland', u'Wales'):
         filename = 'wales'
     elif area.name_en == u'World':
         filename = 'world'
