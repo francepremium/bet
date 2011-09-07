@@ -49,3 +49,4 @@ ipdb
 -e git+https://github.com/mirumee/django-messages.git@eabb7e6c5ccb4b9c63eb6844bccad54751ecdf2f#egg=messages
 -e git+https://github.com/toastdriven/django-haystack.git@v1.2.4#egg=haystack
 whoosh
+progressbar
