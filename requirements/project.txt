@@ -50,3 +50,4 @@ ipdb
 -e git+https://github.com/toastdriven/django-haystack.git@v1.2.4#egg=haystack
 whoosh
 progressbar
+django-taggit
