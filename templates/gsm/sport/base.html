@@ -28,17 +28,11 @@
         <a href="{{ sport.get_informations_absolute_url }}" title="{{ sport }} {% trans 'informations' %}">{% trans 'informations' %}</a>
     </li>
 	{% endcomment %}
-    <li class="results tab {% if tab == 'results' %}active{% endif %}">
-        <a href="{{ sport.get_results_absolute_url }}" title="{{ sport }} {% trans 'results' %}">{% trans 'results' %}</a>
-    </li>
     <li class="matches tab {% if tab == 'matches' %}active{% endif %}">
         <a href="{{ sport.get_matches_absolute_url }}" title="{{ sport }} {% trans 'matches' %}">{% trans 'matches' %}</a>
     </li>
     <li class="picks tab {% if tab == 'picks' %}active{% endif %}">
         <a href="{{ sport.get_picks_absolute_url }}" title="{{ sport }} {% trans 'picks' %}">{% trans 'picks' %}</a>
-    </li>
-    <li class="live tab {% if tab == 'live' %}active{% endif %}">
-        <a href="{{ sport.get_live_absolute_url }}" title="{{ sport }} {% trans 'live' %}">{% trans 'live' %}</a>
     </li>
 </ul>
 {% endblock %}

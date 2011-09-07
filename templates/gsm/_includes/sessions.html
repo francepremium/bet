@@ -1,12 +1,32 @@
 {% load i18n gsm_tags %}
 <div class="sessions">
     {% if sessions %}
+        {% if not divide_by_season %}
         <table>
+        {% endif %}
             {% for session in sessions %}
+                {% if divide_by_season %}
+                    {% ifchanged session.season %}
+                        {% if forloop.counter0 %}
+                            {# not the first iteration #}
+                            </table>
+                        {% endif %}
+                        <h2>
+                            {% if session.session_round.season.competition|gsm_area_id_flag_url %}
+                            <img src="{{ session.session_round.season.competition|gsm_area_id_flag_url }}" alt="{{ session.session_round.season.competition.area }}" />
+                            {% endif %}
+                            <a href="{{ session.season.competition.get_absolute_url }}" title="{{ session.season.competition }}">
+                                {{ session.season.competition }}
+                            </a>
+                        </h2>
+                        <table>
+                    {% endifchanged %}
+                {% endif %}
             <tr class="{{ session.status }} {% if team %}{% if session.winner == team %}win{% endif %} {% if session.draw %}draw{% endif %} {% if session.winner != team and session.status = 'Played' %}lost{% endif %}{% endif %} session">
             {% block session_date %}
 				<td class="date">{{ request|timezone_adjust:session.datetime_utc.date|display_date }}</td>
 			{% endblock %}
+            {% if not divide_by_season %}
             {% block session_area %}
 				<td class="area">
 					{% if session.session_round.season.competition|gsm_area_id_flag_url %}
@@ -19,16 +39,18 @@
                     <a href="{{ session.session_round.season.competition.get_absolute_url }}" title="{{ session.session_round.season.competition }}">{{ session.session_round.season.competition.name }}</a>
                 </td>
 			{% endblock %}
-			{% block session_oponnent_image_left %}
-                <td class="oponnent_image left">
-					{% if session.oponnent_A.get_tiny_image_url %}
-					<img src="{{ session.oponnent_A.get_tiny_image_url }}" />
-					{% endif %}
-                </td>
-			{% endblock %}
+            {% endif %}
+
 			{% block session_oponnent_left %}
                 <td class="oponnent left">
                     <a href="{{ session.oponnent_A.get_absolute_url }}" title="{{ session.oponnent_A.name }}">{{ session.oponnent_A.name }}</a>
+                </td>
+			{% endblock %}
+			{% block session_oponnent_image_left %}
+                <td class="oponnent left">
+					{% if session.oponnent_A.get_tiny_image_url %}
+					<img src="{{ session.oponnent_A.get_tiny_image_url }}" />
+					{% endif %}
                 </td>
 			{% endblock %}
 			{% block session_score %}
@@ -68,7 +90,7 @@
 				<td class="score" colspan="3">
 					<a href="{{ session.get_absolute_url }}" title="{{ session.name }}">
 						{% if session.time_unknown %}
-							?
+							--:--
 						{% else %}
 							{% with request|timezone_adjust:session.datetime_utc as datetime %}
 								{% if datetime.hour < 10 %}0{% endif %}{{ datetime.hour }}:{% if datetime.minute < 10 %}0{% endif %}{{ datetime.minute }}
@@ -80,16 +102,16 @@
 				<td class="score" colspan="3"></td>
 				{% endif %}{% endif %}
 			{% endblock %}
-			{% block session_oponnent_right %}
-                <td class="oponnent right">
-                    <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ session.oponnent_B.name }}">{{ session.oponnent_B.name }}</a>
-                </td>
-			{% endblock %}
 			{% block session_oponnent_image_right %}
                 <td class="oponnent_image right">
 					{% if session.oponnent_B.get_tiny_image_url %}
 					<img src="{{ session.oponnent_B.get_tiny_image_url }}" />
 					{% endif %}
+                </td>
+			{% endblock %}
+			{% block session_oponnent_right %}
+                <td class="oponnent right">
+                    <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ session.oponnent_B.name }}">{{ session.oponnent_B.name }}</a>
                 </td>
 			{% endblock %}
 			{% block session_action %}
@@ -106,8 +128,10 @@
                 </td>
 			{% endblock %}
             </tr>
+            {% if forloop.last %}
+                </table>
+            {% endif %}
             {% endfor %}
-        </table>
     {% else %}
     <p>{% trans 'no matches to display' %}</p>
     {% endif %}

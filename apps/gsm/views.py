@@ -550,10 +550,9 @@ def sport_detail_tab(request, sport, tab,
             sessions_qs = sessions_qs.filter(datetime_utc__lte=tomorrow)
         elif datefilter == '7days':
             sessions_qs = sessions_qs.filter(datetime_utc__lte=today + week)
-        order = 'datetime_utc'
 
     if tab in ('matches', 'results'):
-        sessions_qs = sessions_qs.order_by(order)
+        sessions_qs = sessions_qs.order_by('datetime_utc', 'season')
         f = SessionFilter(sport, request.GET, sessions_qs)
         context['filter'] = f
 

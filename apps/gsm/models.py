@@ -170,8 +170,6 @@ class Sport(models.Model):
         return self.get_tab_absolute_url('informations')
     def get_news_absolute_url(self):
         return self.get_tab_absolute_url('news')
-    def get_results_absolute_url(self):
-        return self.get_tab_absolute_url('results')
     def get_matches_absolute_url(self):
         return self.get_tab_absolute_url('matches')
     def get_picks_absolute_url(self):
