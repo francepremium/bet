@@ -1,0 +1,18 @@
+-- Model: GsmEntity
+CREATE INDEX "gsm_gsmentity_tag_idx"
+        ON "gsm_gsmentity" ("tag");
+-- Model: Championship
+CREATE INDEX "gsm_championship_tag_idx"
+        ON "gsm_championship" ("tag");
+-- Model: Competition
+CREATE INDEX "gsm_competition_tag_idx"
+        ON "gsm_competition" ("tag");
+-- Model: Season
+CREATE INDEX "gsm_season_tag_idx"
+        ON "gsm_season" ("tag");
+-- Model: Round
+CREATE INDEX "gsm_round_tag_idx"
+        ON "gsm_round" ("tag");
+-- Model: Session
+CREATE INDEX "gsm_session_tag_idx"
+        ON "gsm_session" ("tag");

@@ -147,13 +147,17 @@ INSTALLED_APPS = [
     'devserver',
 
     # Pinax
-    
+   
+    # to open source
+    'clan',
+    'article',
+    'yourlabs.smoke',
+
     # project
     'gsm',
     'bookmaker',
     'bet',
-    'clan',
-    'article',
+
     # this must be at the end because it monkey patches the admin
     'scoobet',
     'haystack',
@@ -177,6 +181,9 @@ MODELTRANSLATION_DEFAULT_LANGUAGE='fr'
 MODELTRANSLATION_TRANSLATION_REGISTRY='translation'
 
 BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
+
+SMOKE_TEST_USERNAME='gsm_test'
+SMOKE_TEST_PASSWORD='()&*EUTOSHue()&*UESTNHlrch'
 
 GSM_LOCKFILE_POLLRATE = .1
 GSM_LOCKFILE_MAXPOLLS = 30
@@ -239,6 +246,13 @@ LOGGING = {
             'class':'logging.StreamHandler',
             'formatter': 'simple'
         },
+        'smoke_log_file':{
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(LOG_ROOT, 'smoke.log'),
+            'maxBytes': '16777216', # 16megabytes
+            'formatter': 'verbose'
+        },
         'gsm_log_file':{
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
@@ -263,12 +277,18 @@ LOGGING = {
         'gsm': {
             'debug_handlers': ['console'],
             'production_handlers': ['gsm_log_file'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': True,
         },
         'apps': {
             'production_handlers': ['log_file', 'console'],
             'debug_handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'smoke': {
+            'production_handlers': ['log_file', 'console'],
+            'debug_handlers': ['console', 'smoke_log_file'],
             'level': 'INFO',
             'propagate': True,
         },

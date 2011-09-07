@@ -19,6 +19,9 @@ def get_tree(lang, sport, method, update=False, **parameters):
         root = tree.getroot()
         return tree, root
 
+    # fix lang, sometimes fr_FR particularely in console/tests
+    lang = lang.split('_')[0]
+
     LANGUAGE_FAILS = (
         'get_team_statistics',
         'get_squads',

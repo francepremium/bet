@@ -185,7 +185,7 @@ class Sport(models.Model):
 class AbstractGsmEntity(models.Model):
     sport = models.ForeignKey('Sport')
     gsm_id = models.IntegerField()
-    tag = models.CharField(max_length=32)
+    tag = models.CharField(max_length=32, db_index=True)
     area = models.ForeignKey('Area',null=True, blank=True)
     name = models.CharField(max_length=150, null=True, blank=True)
     name_ascii = models.CharField(max_length=150, null=True, blank=True)
