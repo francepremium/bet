@@ -121,15 +121,13 @@ def gsm_area_id_flag_url(arg):
 
     filename = area.country_code_2
     if area.name_en == u'Europe':
-        filename = 'europeanunion'
-    elif area.name_en == u'England':
-        filename = 'england'
-    elif area.name_en in (u'Scotland', u'Wales'):
-        filename = 'wales'
+        filename = '_European%20Union'
+    elif area.name_en in ('England', 'Wales', 'Northern Ireland', 'Scotland'):
+        filename = '_' + area.name_en
     elif area.name_en == u'World':
         filename = 'world'
 
-    return '%sflags/%s.png' % (
+    return '%sflags2/16/%s.png' % (
         settings.STATIC_URL,
         filename,
     )
