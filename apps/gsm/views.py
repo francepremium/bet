@@ -325,8 +325,10 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
             return q.get(end_date__gte=today, start_date__lte=today)
         elif q.filter(end_date__lte=today).order_by('-end_date').count():
             return q.filter(end_date__lte=today).order_by('-end_date')[0]
-        else:
+        elif q.count():
             return q.order_by('end_date')[0]
+        else:
+            return False
 
     def get_resultstable_for_season(season, team):
         # get stats
@@ -357,7 +359,8 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         context['next_sessions'] = Session.objects.filter(pk__in=list(q_played)+list(q_next)).order_by('datetime_utc')
 
         reference_season = context['reference_season'] = get_reference_season(team)
-        context['resultstable'] = get_resultstable_for_season(reference_season, team)
+        if reference_season:
+            context['resultstable'] = get_resultstable_for_season(reference_season, team)
 
     elif tab == 'squad':
         # season filter
@@ -421,7 +424,8 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
     elif tab == 'statistics':
         reference_season = get_reference_season(team)
         context['reference_season'] = reference_season
-        context['resultstable'] = get_resultstable_for_season(reference_season, team)
+        if reference_season:
+            context['resultstable'] = get_resultstable_for_season(reference_season, team)
     elif tab == 'picks':
         context['bet_list_helper'] = x= BetListHelper(request, team=team, exclude_columns=['support'])
 
