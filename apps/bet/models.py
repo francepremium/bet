@@ -236,6 +236,9 @@ class Bet(models.Model):
     def get_absolute_url(self):
         return urlresolvers.reverse('bet_detail', args=(self.pk,))
 
+    class Meta:
+        ordering = ('-id',)
+
 def delete_empty_ticket(sender, **kwargs):
     try:
         if kwargs['instance'].ticket.bet_set.count() == 0:
