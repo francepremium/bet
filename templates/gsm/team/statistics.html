@@ -51,32 +51,36 @@
         {% endfor %}
     </table>
 
-    {% gsm_tree key='team_statistics' method='get_team_statistics' team_id=team.gsm_id season_id=reference_season.gsm_id %}
+    {% if sport.slug == 'soccer' %}
 
-    <table class="team_statistics">
-        {% for element in team_statistics.getroot.getchildren.1.getchildren %}
-            {% if forloop.counter == 1 %}
-            <tr>
+        {% gsm_tree key='team_statistics' method='get_team_statistics' team_id=team.gsm_id season_id=reference_season.gsm_id %}
+
+        <table class="team_statistics">
+            {% for element in team_statistics.getroot.getchildren.1.getchildren %}
+                {% if forloop.counter == 1 %}
+                <tr>
+                    {% for key, value in element.attrib.items %}
+                        {% if key != 'goals_strike_rate' and key != 'goals_concede_rate' %}
+                        <th class="{{ key }}">{% trans key %}</th>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                {% endif %}
+                <tr>
                 {% for key, value in element.attrib.items %}
                     {% if key != 'goals_strike_rate' and key != 'goals_concede_rate' %}
-                    <th class="{{ key }}">{% trans key %}</th>
+                    <td class="{{ key }}">
+                        {% if key == 'type' %}
+                            {% trans value %}
+                        {% else %}
+                            {{ value }}
+                        {% endif %}
+                    </td>
                     {% endif %}
                 {% endfor %}
-            </tr>
-            {% endif %}
-            <tr>
-            {% for key, value in element.attrib.items %}
-                {% if key != 'goals_strike_rate' and key != 'goals_concede_rate' %}
-                <td class="{{ key }}">
-                    {% if key == 'type' %}
-                        {% trans value %}
-                    {% else %}
-                        {{ value }}
-                    {% endif %}
-                </td>
-                {% endif %}
+                </tr>
             {% endfor %}
-            </tr>
-        {% endfor %}
-    </table>
+        </table>
+    
+    {% endif %}
 {% endblock %}
