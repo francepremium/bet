@@ -36,9 +36,6 @@
     <li class="picks tab {% if tab == 'picks' %}active{% endif %}">
         <a href="{{ competition.get_picks_absolute_url }}" title="{{ competition }}">{% trans 'picks' %}</a>
     </li>
-    <li class="live tab {% if tab == 'live' %}active{% endif %}">
-        <a href="{{ competition.get_live_absolute_url }}" title="{{ competition }}">{% trans 'live' %}</a>
-    </li>
 </ul>
 {% endblock %}
 
