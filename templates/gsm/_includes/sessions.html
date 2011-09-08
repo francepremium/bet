@@ -101,7 +101,20 @@
 					</a>
 				</td>
 				{% else %}{# Retired, Walkover, Postponed... #}
-				<td class="score" colspan="3"></td>
+				<td class="score" colspan="3">
+                    {% if session.status == 'Postponed' %}
+                        Psp.
+                    {% endif %}
+                    {% if session.status == 'Cancelled' %}
+                        Cl.
+                    {% endif %}
+                    {% if session.status == 'Retired' %}
+                        Rtd.
+                    {% endif %}
+                    {% if session.status == 'Walkover' %}
+                        Wo.
+                    {% endif %}
+                </td>
 				{% endif %}{% endif %}
 			{% endblock %}
 			{% block session_oponnent_image_right %}
@@ -122,11 +135,14 @@
 					<a href="{{ session.get_absolute_url }}" title="{{ session.name }}">{% trans 'info'|capfirst %}</a>
 				{% endif %}
 				{% if session.status == 'Played' %}
-					{% trans 'finished'|capfirst %}
+					<a href="{{ session.get_live_absolute_url }}" title="{{ session.name }}">{% trans 'finished'|capfirst %}</a>
 				{% endif %}
 				{% if session.status == 'Playing' %}
 					<a href="{{ session.get_live_absolute_url }}" title="{{ session.name }}">{% trans 'live'|capfirst %}</a>
 				{% endif %}
+                {% if session.status != 'Fixture' and session.status != 'Played' and session.status != 'Playing' %}
+					<a href="{{ session.get_live_absolute_url }}" title="{{ session.name }}">{% trans session.status %}</a>
+                {% endif %}
                 </td>
 			{% endblock %}
             </tr>
