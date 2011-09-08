@@ -226,11 +226,11 @@ def user_detail(request, username, tab='activities',
                 int((context['total_stake'] / context['total_earnings'])*100)
             else:
                 context['profitability'] = 0
+
+            context['total_earnings'] = float('%.2f' % context['total_earnings'])
+            context['profit'] = float('%.2f' % context['profit'])
         else:
             context['empty'] = True
-
-    context['total_earnings'] = float('%.2f' % context['total_earnings'])
-    context['profit'] = float('%.2f' % context['profit'])
 
     if request.is_ajax() and 'page_template' in context.keys():
         template_name = context['page_template']
