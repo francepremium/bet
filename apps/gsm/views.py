@@ -525,7 +525,7 @@ def sport_detail_tab(request, sport, tab,
         context['today'] = today = datetime.date.today()
         context['yesterday'] = today - oneday
         context['tomorrow'] = today + oneday
-        sessions_qs = sessions_qs.order_by('season', 'datetime_utc')
+        sessions_qs = sessions_qs.order_by('season__competition__display_order', 'datetime_utc')
         f = SessionFilter(request.GET, sessions_qs)
         context['filter'] = f
 
