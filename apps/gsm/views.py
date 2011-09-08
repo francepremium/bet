@@ -521,56 +521,38 @@ def sport_detail_tab(request, sport, tab,
     sessions_qs = sessions_qs.filter(sport=sport)
 
     datefilter = request.GET.get('datetime_utc', 'today')
+    oneday = datetime.timedelta(days=1)
     today = datetime.date.today()
-    now = datetime.datetime.now()
-    yesterday = datetime.date.today() - datetime.timedelta(1)
-    tomorrow = datetime.date.today() + datetime.timedelta(1)
-    week = datetime.timedelta(7)
+    yesterday = today - oneday
+    tomorrow = today + oneday
 
-    if tab == 'results':
-        sessions_qs = sessions_qs.filter(datetime_utc__lte=tomorrow)
-        sessions_qs = sessions_qs.exclude(status='Fixture')
-        if datefilter == '3hours':
-            sessions_qs = sessions_qs.filter(datetime_utc__gte=now - datetime.timedelta(0, 0, 0, 0, 0, 3))
+    if tab == 'matches':
+        if datefilter == 'yesterday':
+            sessions_qs = sessions_qs.filter(
+                datetime_utc__lte=today,
+                datetime_utc__gte=yesterday,
+            )
         elif datefilter == 'today':
-            sessions_qs = sessions_qs.filter(datetime_utc__gte=today)
-        elif datefilter == '1day':
-            sessions_qs = sessions_qs.filter(datetime_utc__gte=yesterday)
-        elif datefilter == '7days':
-            sessions_qs = sessions_qs.filter(datetime_utc__gte=today - week)
-        order = '-datetime_utc'
-    elif tab == 'matches':
-        sessions_qs = sessions_qs.filter(status='Fixture', datetime_utc__gte=today)
-        if datefilter == '3hours':
-            sessions_qs = sessions_qs.filter(datetime_utc__lte=now + datetime.timedelta(0, 0, 0, 0, 0, 3))
-        elif datefilter == 'today':
-            sessions_qs = sessions_qs.filter(datetime_utc__gte=today)
-            sessions_qs = sessions_qs.filter(datetime_utc__lte=tomorrow)
-        elif datefilter == '1day':
-            sessions_qs = sessions_qs.filter(datetime_utc__lte=tomorrow)
-        elif datefilter == '7days':
-            sessions_qs = sessions_qs.filter(datetime_utc__lte=today + week)
+            sessions_qs = sessions_qs.filter(
+                datetime_utc__gte=today,
+                datetime_utc__lte=tomorrow
+            )
+        elif datefilter == 'tomorrow':
+            sessions_qs = sessions_qs.filter(
+                datetime_utc__lte=today,
+                datetime_utc__gte=tomorrow,
+            )
 
-    if tab in ('matches', 'results'):
-        sessions_qs = sessions_qs.order_by('datetime_utc', 'season')
+        sessions_qs = sessions_qs.order_by('season', 'datetime_utc')
         f = SessionFilter(sport, request.GET, sessions_qs)
         context['filter'] = f
 
-    if tab == 'results':
-        f.filters['datetime_utc'].extra['choices'][1][1] = _('last 3 hours')
-        f.filters['datetime_utc'].extra['choices'][2][1] = _('yesterday')
-        f.filters['datetime_utc'].extra['choices'][3][1] = _('last 7 days')
-    elif tab == 'matches':
-        f.filters['datetime_utc'].extra['choices'][1][1] = _('next 3 hours')
-        f.filters['datetime_utc'].extra['choices'][2][1] = _('tomorrow')
-        f.filters['datetime_utc'].extra['choices'][3][1] = _('next 7 days')
     elif tab == 'picks':
         context['bet_list_helper'] = x= BetListHelper(request, 
                                                 session__sport=sport, 
                                                 exclude_columns=['support'])
 
-
-    if tab == 'home':
+    elif tab == 'home':
         sessions_qs = Session.objects.filter(sport=sport, status='Fixture').order_by('datetime_utc')
 
     context['next_sessions'] = sessions_qs[:4]
