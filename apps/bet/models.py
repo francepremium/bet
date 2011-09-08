@@ -164,7 +164,7 @@ class Ticket(models.Model):
             for bet in self.bet_set.all():
                 if bet.correction != BET_CORRECTION_CANCELED:
                     i = i * bet.odds
-            self._odds = i
+            self._odds = float('%.2f' % i)
         return self._odds
 
     @property
@@ -176,6 +176,8 @@ class Ticket(models.Model):
                 self._profit = self.stake * -1
             else:
                 self._profit = 0
+            
+            self._profit = float('%.2f' % self._profit)
         return self._profit
 
     @property

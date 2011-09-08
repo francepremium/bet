@@ -229,6 +229,9 @@ def user_detail(request, username, tab='activities',
         else:
             context['empty'] = True
 
+    context['total_earnings'] = float('%.2f' % context['total_earnings'])
+    context['profit'] = float('%.2f' % context['profit'])
+
     if request.is_ajax() and 'page_template' in context.keys():
         template_name = context['page_template']
     else:
