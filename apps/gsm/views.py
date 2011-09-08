@@ -526,7 +526,7 @@ def sport_detail_tab(request, sport, tab,
         context['yesterday'] = today - oneday
         context['tomorrow'] = today + oneday
         sessions_qs = sessions_qs.order_by('season', 'datetime_utc')
-        f = SessionFilter(sport, request.GET, sessions_qs)
+        f = SessionFilter(request.GET, sessions_qs)
         context['filter'] = f
 
     elif tab == 'picks':
