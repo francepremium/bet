@@ -3,17 +3,35 @@
 {% load i18n gsm_tags pagination_tags %}
 
 {% block body %}{{ block.super }}
-<form action="" method="get">
+<form class="filter" action="" method="get">
     {{ filter.form.as_p }}
     <input type="submit" class="button_naked" value="go" />
 </form>
 
-<a href="{{ request.path }}?datetime_utc=yesterday">{% trans 'yesterday' %}</a>
-<a href="{{ request.path }}?datetime_utc=today">{% trans 'today' %}</a>
-<a href="{{ request.path }}?datetime_utc=tomorrow">{% trans 'tomorrow' %}</a>
+
+<span class="filter_date yesterday">{% trans 'yesterday' %}</span>
+<span class="filter_date today">{% trans 'today' %}</span>
+<span class="filter_date tomorrow">{% trans 'tomorrow' %}</span>
 
 {% autopaginate filter.qs 15 as session_list %}
 
 {% gsm_sessions_render filter.qs 1 1 %}
 
+{% endblock %}
+
+{% block extra_body %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.filter_date').click(function() {
+        if ($(this).hasClass('yesterday'))
+            $('form.filter input[name=datetime_utc]').val('{{ yesterday|date:'Y-m-d' }}');
+        if ($(this).hasClass('today'))
+            $('form.filter input[name=datetime_utc]').val('{{ today|date:'Y-m-d' }}');
+        if ($(this).hasClass('tomorrow'))
+            $('form.filter input[name=datetime_utc]').val('{{ tomorrow|date:'Y-m-d' }}');
+        
+        $('form.filter').submit();
+    });
+});
+</script>
 {% endblock %}

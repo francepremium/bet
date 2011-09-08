@@ -520,29 +520,11 @@ def sport_detail_tab(request, sport, tab,
     sessions_qs = Session.objects.all()
     sessions_qs = sessions_qs.filter(sport=sport)
 
-    datefilter = request.GET.get('datetime_utc', 'today')
-    oneday = datetime.timedelta(days=1)
-    today = datetime.date.today()
-    yesterday = today - oneday
-    tomorrow = today + oneday
-
     if tab == 'matches':
-        if datefilter == 'yesterday':
-            sessions_qs = sessions_qs.filter(
-                datetime_utc__lte=today,
-                datetime_utc__gte=yesterday,
-            )
-        elif datefilter == 'today':
-            sessions_qs = sessions_qs.filter(
-                datetime_utc__gte=today,
-                datetime_utc__lte=tomorrow
-            )
-        elif datefilter == 'tomorrow':
-            sessions_qs = sessions_qs.filter(
-                datetime_utc__lte=today,
-                datetime_utc__gte=tomorrow,
-            )
-
+        oneday = datetime.timedelta(days=1)
+        context['today'] = today = datetime.date.today()
+        context['yesterday'] = today - oneday
+        context['tomorrow'] = today + oneday
         sessions_qs = sessions_qs.order_by('season', 'datetime_utc')
         f = SessionFilter(sport, request.GET, sessions_qs)
         context['filter'] = f
