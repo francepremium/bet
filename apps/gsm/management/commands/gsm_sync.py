@@ -169,7 +169,6 @@ class Command(BaseCommand):
             'competition_type': element.attrib.get('type', None),
             'competition_format': element.attrib.get('format', None),
             'last_updated': element.attrib['last_updated'],
-            'display_order': element.attrib.get('display_order', None),
         })
 
         competition = self.update_model(
