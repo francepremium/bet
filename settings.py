@@ -9,6 +9,7 @@ gettext = lambda s: s
 PINAX_ROOT = os.path.abspath(os.path.dirname(pinax.__file__))
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 VAR_ROOT = os.path.join(PROJECT_ROOT, 'var')
+RUN_ROOT = os.path.join(VAR_ROOT, 'run')
 LOG_ROOT = os.path.join(VAR_ROOT, 'log')
 
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, "site_media", "media")
@@ -45,6 +46,8 @@ INTERNAL_IPS = [
 
 ADMINS = [
     ('James Pic', 'jpic@yourlabs.org'),
+    ('James Pic', 'jamespic@gmail.com'),
+    ('David Bellaiche', 'contact@betspire.com'),
 ]
 MANAGERS = ADMINS
 
@@ -317,7 +320,7 @@ for name, logger in LOGGING['loggers'].items():
     else:
         LOGGING['loggers'][name]['handlers'] = LOGGING['loggers'][name]['production_handlers']
 
-for path in [VAR_ROOT, GSM_CACHE, LOG_ROOT]:
+for path in [VAR_ROOT, GSM_CACHE, LOG_ROOT, RUN_ROOT]:
     if not os.path.isdir(path):
         os.makedirs(path)
 
