@@ -16,7 +16,7 @@ sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
 from django.core.handlers.wsgi import WSGIHandler
 application = WSGIHandler()
 
-
-from tasksconsumer import enqueue
-enqueue(queue='gsm_sync')
-enqueue(queue='send_mail')
+#wait until upstream stabilizes it
+#from tasksconsumer import enqueue
+#enqueue(queue='gsm_sync')
+#enqueue(queue='send_mail')
