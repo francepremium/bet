@@ -11,5 +11,8 @@ def retry_deferred():
 def gsm_sync():
     GsmSyncCommand().handle(cooldown=3)
 
+def gsm_sync_live(args={}):
+    call_command('gsm_sync_live')
+
 def update_index():
     call_command('update_index')
