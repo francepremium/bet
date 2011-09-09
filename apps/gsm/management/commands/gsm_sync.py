@@ -33,8 +33,8 @@ class Command(BaseCommand):
     )
 
     def handle(self, *args, **options):
-        self.cooldown = options.get('cooldown', 0)
-        print self.cooldown
+        self.cooldown = int(options.get('cooldown', 0))
+        logger.info('starting sync with cooldown %s' % self.cooldown)
 
         self.areas_country_code_2()
 
