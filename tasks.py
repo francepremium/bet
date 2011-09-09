@@ -1,4 +1,4 @@
-import time.sleep()
+import time
 from yourlabs import runner
 
 from django.core.management import call_command
