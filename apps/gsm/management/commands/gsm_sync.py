@@ -2,6 +2,7 @@ import logging
 import urllib
 from datetime import datetime, date, time
 import sys
+from optparse import make_option
 
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
@@ -23,9 +24,17 @@ class UnexpectedChild(Exception):
 class Command(BaseCommand):
     args = 'n/a'
     help = 'sync database against gsm'
+    option_list = BaseCommand.option_list + (
+        make_option('--cooldown',
+            dest='cooldown',
+            default=False,
+            help='cooldown time between requests'
+        ),
+    )
 
     def handle(self, *args, **options):
         self.cooldown = options.get('cooldown', 0)
+        print self.cooldown
 
         self.areas_country_code_2()
 
