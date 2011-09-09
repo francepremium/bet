@@ -32,6 +32,12 @@ def get_tree(lang, sport, method, update=False, **parameters):
         root = tree.getroot()
         return tree, root
 
+    for k, v in parameters.items():
+        if v is True:
+            parameters[k] = 'yes'
+        elif v is False:
+            parameters[k] = 'no'
+
     # fix lang, sometimes fr_FR particularely in console/tests
     lang = lang.split('_')[0]
 
@@ -39,6 +45,7 @@ def get_tree(lang, sport, method, update=False, **parameters):
         'get_team_statistics',
         'get_squads',
         'get_career',
+        'get_matches_live',
     )
     parameters['lang'] = lang
     
