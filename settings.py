@@ -34,7 +34,7 @@ TEMPLATE_DIRS = [
 ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
 ROOT_URLCONF = "urls"
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 SERVE_MEDIA = DEBUG
 #TEMPLATE_STRING_IF_INVALID = '[INVALID VARIABLE: {{ %s }}]'
@@ -145,7 +145,7 @@ INSTALLED_APPS = [
     'nashvegas',
     'django_messages',
     'taggit',
-    'devserver',
+    #'devserver',
 
     # Pinax
    
@@ -279,7 +279,7 @@ LOGGING = {
         'gsm': {
             'debug_handlers': ['console'],
             'production_handlers': ['gsm_log_file'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             'propagate': True,
         },
         'apps': {
@@ -297,8 +297,8 @@ LOGGING = {
 
         'runner': {
             'debug_handlers': ['console'],
-            'production_handlers': ['console', 'gsm_log_file', 'mail_admins'],
-            'level': 'ERROR',
+            'production_handlers': ['console', 'gsm_log_file'],
+            'level': 'INFO',
         },
     },
 }
