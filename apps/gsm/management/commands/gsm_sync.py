@@ -14,7 +14,6 @@ from gsm.models import *
 import gsm
 
 logger = logging.getLogger('gsm')
-logger.info('starting sync')
 
 class UnexpectedChild(Exception):
     def __init__(self, parent, child):
