@@ -44,7 +44,7 @@ INTERNAL_IPS = [
 ]
 
 ADMINS = [
-    # ("Your Name", "your_email@domain.com"),
+    ('James Pic', 'jpic@yourlabs.org'),
 ]
 MANAGERS = ADMINS
 
@@ -153,6 +153,7 @@ INSTALLED_APPS = [
     'clan',
     'article',
     'yourlabs.smoke',
+    'yourlabs.runner',
 
     # project
     'gsm',
@@ -292,6 +293,12 @@ LOGGING = {
             'debug_handlers': ['console', 'smoke_log_file'],
             'level': 'INFO',
             'propagate': True,
+        },
+
+        'runner': {
+            'debug_handlers': ['console'],
+            'production_handlers': ['console', 'gsm_log_file', 'mail_admins'],
+            'level': 'ERROR',
         },
     },
 }
