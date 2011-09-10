@@ -1,20 +1,23 @@
 Migrations:
-    2011-07-25: 
-        - remove project_root/cache folder (in favor of project_root/var/cache/)
-        - use manage.py upgradedb --list and manage.py upgradedb --exec instead 
-          of syncdb
-    2011-07-26, branch homepage:
-        - pip install celery django-celery djkombu or pip install -r project.txt
-        - manage.py upgradedb --exec
-        - in addition to runserver, run in a separate console: 
-          manage.py celeryd -l info
-    2011-07-28 merged homepage:
-        - apply 2011-07-26, branch homepage when pulling master
+    2011-09-10 Moved apps/yourlabs to github.com/yourlabs/yourlabs and
+               yourlabs.rtfd.com
+        - apply pip requirements change
+    2011-08-09 Falling back to fastcgi, celery and kombu
+        - apply pip requirements change
+        - run upgradedb
     2011-08-03 got rid of celery in favor of uwsgi:
         - pip uninstall celery django-celery djkombu
         - pip install uwsgi
         - manage.py upgradedb --exec
         - note that uwsgi spooler arguments may only be dicts of strings
-    2011-08-09 Falling back to fastcgi, celery and kombu
-        - apply pip requirements change
-        - run upgradedb
+    2011-07-28 merged homepage:
+        - apply 2011-07-26, branch homepage when pulling master
+    2011-07-26, branch homepage:
+        - pip install celery django-celery djkombu or pip install -r project.txt
+        - manage.py upgradedb --exec
+        - in addition to runserver, run in a separate console: 
+          manage.py celeryd -l info
+    2011-07-25: 
+        - remove project_root/cache folder (in favor of project_root/var/cache/)
+        - use manage.py upgradedb --list and manage.py upgradedb --exec instead 
+          of syncdb
