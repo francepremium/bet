@@ -19,7 +19,7 @@ def gsm_sync():
 
 def gsm_sync_live():
     call_command('gsm_sync_live')
-    time.sleep(5)
+    time.sleep(3)
 
 def update_index():
     call_command('update_index')

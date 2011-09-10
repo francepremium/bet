@@ -258,6 +258,13 @@ LOGGING = {
             'maxBytes': '16777216', # 16megabytes
             'formatter': 'verbose'
         },
+        'runner_log_file':{
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(LOG_ROOT, 'runner.log'),
+            'maxBytes': '16777216', # 16megabytes
+            'formatter': 'verbose'
+        },
         'gsm_log_file':{
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
@@ -300,7 +307,7 @@ LOGGING = {
 
         'runner': {
             'debug_handlers': ['console'],
-            'production_handlers': ['console', 'gsm_log_file'],
+            'production_handlers': ['console', 'runner_log_file'],
             'level': 'INFO',
         },
     },

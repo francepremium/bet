@@ -15,16 +15,15 @@ def parse_element_for(parent, tag):
                 yield subelement
 
 copy_map = {
-    'soccer': (
-        'fs_A',
-        'fs_B',
-        'hts_A',
-        'hts_B',
-        'ets_A',
-        'ets_B',
-        'ps_A',
-        'ps_B',
-    )
+    'fs_%s': '%s_score',
+    'eps_%s': '%s_ets',
+    'eps_%s': '%s_eps',
+    'status': 'status',
+    'p1s_%s': '%s1_score',
+    'p2s_%s': '%s2_score',
+    'p3s_%s': '%s3_score',
+    'p4s_%s': '%s4_score',
+    'eps_%s': '%s5_score',
 }
 
 class Command(BaseCommand):
@@ -39,16 +38,34 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         now_playing = options.get('nowplaying', False)
+        now = datetime.datetime.now()
+        delta = datetime.timedelta(hours=4)
         sport = Sport.objects.get(slug='soccer')
-        tree = gsm.get_tree('en', sport, 'get_matches_live', now_playing=now_playing)
+        for sport in Sport.objects.all():
+            if sport.slug == 'soccer':
+                tree = gsm.get_tree('en', sport, 'get_matches_live', update=True, now_playing=now_playing)
+                self.update(tree, session, sport)
+            else:
+                sessions = Session.objects.filter(
+                    datetime_utc__gte=now - delta,
+                    datetime_utc__lte=now + delta,
+                    sport=sport
+                )
+                for session in sessions:
+                    tree = gsm.get_tree('en', sport, 'get_matches', update=True, type=session.tag, id=session.gsm_id)
+                    self.update(tree, session, sport)
+        
+    def update(self, tree, session, sport):
         root = tree.getroot()
         for element in parse_element_for(root, 'match'):
-            session = Session.objects.get(gsm_id=element.attrib['match_id'])
-            for src in copy_map[sport.slug]:
-                if src == 'status':
-                    dst = 'session_status'
+            session = Session.objects.get(gsm_id=element.attrib['match_id'], sport=sport)
+            for src, dst in copy_map.items():
+                if '%s' in src:
+                    for x in ('A', 'B'):
+                        val = element.attrib.get(src % x, None) or None
+                        setattr(session, dst % x, val)
                 else:
-                    dst = src
-                session.src = element.attrib[dst]
+                    val = element.attrib.get(src, None) or None
+                    setattr(session, dst, val)
 
             session.save()
