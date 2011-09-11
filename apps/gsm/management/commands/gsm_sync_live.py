@@ -44,7 +44,7 @@ class Command(BaseCommand):
         for sport in Sport.objects.all():
             if sport.slug == 'soccer':
                 tree = gsm.get_tree('en', sport, 'get_matches_live', update=True, now_playing=now_playing)
-                self.update(tree, session, sport)
+                self.update(tree, sport)
             else:
                 sessions = Session.objects.filter(
                     datetime_utc__gte=now - delta,
@@ -53,9 +53,9 @@ class Command(BaseCommand):
                 )
                 for session in sessions:
                     tree = gsm.get_tree('en', sport, 'get_matches', update=True, type=session.tag, id=session.gsm_id)
-                    self.update(tree, session, sport)
+                    self.update(tree, sport)
         
-    def update(self, tree, session, sport):
+    def update(self, tree, sport):
         root = tree.getroot()
         for element in parse_element_for(root, 'match'):
             session = Session.objects.get(gsm_id=element.attrib['match_id'], sport=sport)
