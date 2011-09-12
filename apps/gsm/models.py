@@ -174,8 +174,8 @@ class Sport(models.Model):
         return self.get_tab_absolute_url('matches')
     def get_picks_absolute_url(self):
         return self.get_tab_absolute_url('picks')
-    def get_live_absolute_url(self):
-        return self.get_tab_absolute_url('live')
+    def get_rankings_absolute_url(self):
+        return self.get_tab_absolute_url('rankings')
 
     def get_last_sessions(self):
         return Session.objects.filter(sport=self, status='Played').order_by('-datetime_utc')[:15]
@@ -217,6 +217,8 @@ class AbstractGsmEntity(models.Model):
         return self.get_tab_absolute_url('calendar')
     def get_picks_absolute_url(self):
         return self.get_tab_absolute_url('picks')
+    def get_rankings_absolute_url(self):
+        return self.get_tab_absolute_url('rankings')
 
     def get_absolute_url(self):
         try:

@@ -34,6 +34,9 @@
     <li class="picks tab {% if tab == 'picks' %}active{% endif %}">
         <a href="{{ sport.get_picks_absolute_url }}" title="{{ sport }} {% trans 'picks' %}">{% trans 'picks' %}</a>
     </li>
+    <li class="rankings tab {% if tab == 'rankings' %}active{% endif %}">
+        <a href="{{ sport.get_rankings_absolute_url }}" title="{{ sport }} {% trans 'rankings' %}">{% trans 'best tipsters' %}</a>
+    </li>
 </ul>
 {% endblock %}
 

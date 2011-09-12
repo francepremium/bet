@@ -1,0 +1,8 @@
+{% extends 'gsm/sport/base.html' %}
+
+{% load i18n scoobet_tags %}
+
+{% block body %}
+    {{ block.super }}
+    {% render_user_rankings request sport.get_rankings %}
+{% endblock %}

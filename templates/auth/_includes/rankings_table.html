@@ -1,0 +1,31 @@
+{% load i18n scoobet_tags %}
+
+<table>
+    <tr>
+        <th>{% trans 'tipster' %}</th>
+        <th>{% trans 'bets' %}</th>
+        <th>{% trans 'won' %}</th>
+        <th>%</th>
+        <th>{% trans 'avg. odds' %}</th>
+    </tr>
+    {% for user in user_list %}
+        <tr>
+            <td>
+                <a href="{{ user.get_absolute_url }}" title="{% trans 'more tips by tipster' %}: {{ user }}">{{ user }}</a>
+            </td>
+            <td>
+                {{ user.bet_count }}
+            </td>
+            <td>
+                {{ user.won_bet_count }}
+            </td>
+            <td>
+                {{ user.won_bet_count|percent_of:user.bet_count }}
+            </td>
+            <td>
+                {{ user.average_odds|floatformat:2 }}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+

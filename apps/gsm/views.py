@@ -18,6 +18,7 @@ import actstream
 from actstream.models import actor_stream, Follow, Action
 
 from bet.helpers import *
+from bet.models import Bet
 import gsm
 
 from models import *
@@ -535,9 +536,21 @@ def sport_detail_tab(request, sport, tab,
                                                 exclude_columns=['support'])
 
     elif tab == 'home':
-        sessions_qs = Session.objects.filter(sport=sport, status='Fixture').order_by('datetime_utc')
-
-    context['next_sessions'] = sessions_qs[:4]
+        context['bet_list_helper'] = BetListHelper(
+            request,
+            exclude_columns=['support', 'sport'], 
+            qs=Bet.objects.order_by('?')[:3]
+        )
+        context['next_sessions'] = Session.objects.filter(
+            sport=sport, status='Fixture',
+            datetime_utc__gte=datetime.datetime.now(),
+            season__competition__display_order__lte=100
+        )[:10]
+        context['last_sessions'] = Session.objects.filter(
+            sport=sport, status='Played',
+            datetime_utc__lte=datetime.datetime.now(),
+            season__competition__display_order__lte=100
+        ).order_by('-datetime_utc')[:10]
 
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name, context,

@@ -20,6 +20,21 @@ def render_user_list(request, user_list):
         'user_list': user_list,
     }
 
+@register.inclusion_tag('auth/_includes/rankings_table.html')
+def render_user_rankings(request, user_list):
+    return {
+        'request': request,
+        'user_list': user_list,
+    }
+
+@register.filter
+def percent_of(part, total):
+    return '%.2f' % ((float(part)/total) * 100.0)
+
+@register.filter
+def limit_qs(qs, num_rows):
+    return qs[:num_rows]
+
 @register.inclusion_tag('scoobet/_includes/popularity.html')
 def render_popularity_for_object(request, obj):
     ticket_list = None
