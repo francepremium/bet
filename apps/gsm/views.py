@@ -387,6 +387,12 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         if reference_season:
             context['resultstable'] = get_resultstable_for_season(reference_season, team)
 
+        context['bet_list_helper'] = BetListHelper(
+            request,
+            exclude_columns=['support', 'sport'], 
+            qs=Bet.objects.filter(Q(session__oponnent_A=team)|Q(session__oponnent_B=team)).order_by('?')[:3]
+        )
+
     elif tab == 'squad':
         # season filter
         context['team_seasons'] = Season.objects.filter(
