@@ -188,7 +188,7 @@ def bet_delete(request, bet_pk):
 
     if ticket.pk:
         return shortcuts.redirect(urlresolvers.reverse(
-            'bet_form', args=(ticket_pk,)))
+            'bet_form', args=(ticket.pk,)))
     else:
         return http.HttpResponse(_('ticket without bets deleted'))
 
