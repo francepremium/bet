@@ -273,6 +273,27 @@ def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
 
     if tab == 'picks':
         context['bet_list_helper'] = BetListHelper(request, session__season__competition=competition, exclude_columns=['support'])
+    elif tab == 'home':
+        context['bet_list_helper'] = BetListHelper(
+            request,
+            exclude_columns=['support', 'sport', 'competition'], 
+            qs=Bet.objects.filter(
+                session__season__competition=competition).order_by('?')[:3]
+        )
+
+        season = competition.get_last_season()
+        if cup or season.round_set.count() > 1:
+            context['round'] = season.get_current_round()
+            context['sessions'] = context['round'].session_set.all()
+        elif season.get_current_gameweek():
+            gameweek = context['gameweek'] = int(request.GET.get('gameweek', season.get_current_gameweek()))
+            context['sessions'] = season.session_set.filter(gameweek=gameweek)
+        elif season.session_set.count():
+            season_round = season.round_set.all()[0]
+            context['sessions'] = season_round.session_set.all()
+        else:
+            context['sessions'] = None
+
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name, context,
         context_instance=template.RequestContext(request))

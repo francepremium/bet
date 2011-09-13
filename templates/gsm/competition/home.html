@@ -1,9 +1,24 @@
 {% extends 'gsm/competition/base.html' %}
-{% load i18n gsm_tags %}
+{% load i18n scoobet_tags gsm_tags %}
 
 {% block body %}{{ block.super }}
-    
+    {% if sessions %}
+        <h2 class="next_sessions">{% trans 'next matches' %}</h2>
+        {% gsm_sessions_render sessions %}
+    {% endif %}
 
+    {% if sport.get_rankings.count %}
+        <h2>{% trans 'best tipsters' %}</h2>
+        {% with sport.get_rankings|limit_qs:5 as user_list %}
+            {% render_user_rankings request user_list %}
+        {% endwith %}
+    {% endif %}
+
+    {% if bet_list_helper.qs.count %}
+        <h2>{% trans 'random tips' %}</h2>
+        {{ bet_list_helper.render_bet_table }}
+    {% endif %}
+   
     {% gsm_tree key='tables_tree' method='get_tables' type='season' id=competition.get_last_season.gsm_id %}
 
     {% if tables_tree.getroot.getchildren.1.getchildren.0.getchildren.0.getchildren.0.tag == 'group' %}
