@@ -29,6 +29,8 @@ def render_user_rankings(request, user_list):
 
 @register.filter
 def percent_of(part, total):
+    if total == 0:
+        return 0
     return '%.2f' % ((float(part)/total) * 100.0)
 
 @register.filter

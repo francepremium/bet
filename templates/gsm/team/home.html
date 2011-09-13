@@ -12,7 +12,7 @@
     {% endif %}
 
     <h2>{% trans 'best tipsters' %}</h2>
-    {% with sport.get_rankings|limit_qs:5 as user_list %}
+    {% with team.get_rankings|limit_qs:5 as user_list %}
         {% render_user_rankings request user_list %}
     {% endwith %}
 
