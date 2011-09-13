@@ -1,48 +1,7 @@
 # -*- coding: utf-8 -*-
 # https://docs.djangoproject.com/en/dev/ref/settings/
 
-import os.path
-import posixpath
-import pinax
-
-gettext = lambda s: s
-PINAX_ROOT = os.path.abspath(os.path.dirname(pinax.__file__))
-PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-VAR_ROOT = os.path.join(PROJECT_ROOT, 'var')
-RUN_ROOT = os.path.join(VAR_ROOT, 'run')
-LOG_ROOT = os.path.join(VAR_ROOT, 'log')
-
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, "site_media", "media")
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = "/site_media/media/"
-# Example: "/home/media/media.lawrence.com/apps/"
-STATIC_ROOT = os.path.join(PROJECT_ROOT, "site_media", "static")
-# Example: "http://media.lawrence.com"
-STATIC_URL = "/site_media/static/"
-
-PINAX_THEME = "default"
-# Additional directories which hold static files
-STATICFILES_DIRS = [
-    os.path.join(PROJECT_ROOT, "media"),
-    os.path.join(PINAX_ROOT, "media", PINAX_THEME),
-]
-TEMPLATE_DIRS = [
-    os.path.join(PROJECT_ROOT, "templates"),
-    os.path.join(PINAX_ROOT, "templates", PINAX_THEME),
-]
-
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
-ROOT_URLCONF = "urls"
-
-DEBUG = False
-TEMPLATE_DEBUG = DEBUG
-SERVE_MEDIA = DEBUG
-#TEMPLATE_STRING_IF_INVALID = '[INVALID VARIABLE: {{ %s }}]'
-
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+import os
 
 ADMINS = [
     ('James Pic', 'jpic@yourlabs.org'),
@@ -51,29 +10,22 @@ ADMINS = [
 ]
 MANAGERS = ADMINS
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3", # Add "postgresql_psycopg2", "postgresql", "mysql", "sqlite3" or "oracle".
-        "NAME": "dev.db",                       # Or path to database file if using sqlite3.
-        "USER": "",                             # Not used with sqlite3.
-        "PASSWORD": "",                         # Not used with sqlite3.
-        "HOST": "",                             # Set to empty string for localhost. Not used with sqlite3.
-        "PORT": "",                             # Set to empty string for default. Not used with sqlite3.
-    }
-}
+LANGUAGE_CODE = 'fr_FR'
+TIME_ZONE = 'Europe/Paris'
 
-SITE_ID = 1
-USE_I18N = True
-
-FIXTURE_DIRS = [
-    os.path.join(PROJECT_ROOT, "fixtures"),
+TEMPLATE_CONTEXT_PROCESSORS = [
+    'django.core.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
+    'staticfiles.context_processors.static_url',
+    'pinax.core.context_processors.pinax_settings',
+    'bet.context_processors.incomplete_ticket',
+    'scoobet.context_processors.inbox_count',
+    'gsm.context_processors.available_timezones',
 ]
-
-MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
-
-DEBUG_TOOLBAR_CONFIG = {
-    "INTERCEPT_REDIRECTS": False,
-}
 
 MIDDLEWARE_CLASSES = [
     'localeurl.middleware.LocaleURLMiddleware',
@@ -94,20 +46,6 @@ EXCEPTION_MIDDLEWARE_HANDLES = [
     'HtmlInsteadOfXml',
     'ServerOverloaded',
     'MessagingUnauthorizedUser',
-]
-
-TEMPLATE_CONTEXT_PROCESSORS = [
-    'django.core.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.media',
-    'django.core.context_processors.request',
-    'django.contrib.messages.context_processors.messages',
-    'staticfiles.context_processors.static_url',
-    'pinax.core.context_processors.pinax_settings',
-    'bet.context_processors.incomplete_ticket',
-    'scoobet.context_processors.inbox_count',
-    'gsm.context_processors.available_timezones',
 ]
 
 INSTALLED_APPS = [
@@ -169,166 +107,47 @@ INSTALLED_APPS = [
     'modeltranslation',
 ]
 
-USE_L10N = True
-
-HAYSTACK_ENABLE_REGISTRATIONS = False
-HAYSTACK_SITECONF = 'search_sites'
-HAYSTACK_SEARCH_ENGINE = 'whoosh'
-HAYSTACK_WHOOSH_PATH = os.path.join(VAR_ROOT, 'whoosh')
-
-LANGUAGE_CODE = 'fr_FR'
-TIME_ZONE = 'Europe/Paris'
-LANGUAGES = (
-    ('en', gettext('English')),
-    ('fr', gettext('French')),
-)
-MODELTRANSLATION_DEFAULT_LANGUAGE='fr'
-MODELTRANSLATION_TRANSLATION_REGISTRY='translation'
-
-BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
-
-SMOKE_TEST_USERNAME='gsm_test'
-SMOKE_TEST_PASSWORD='()&*EUTOSHue()&*UESTNHlrch'
-
-GSM_LOCKFILE_POLLRATE = .1
-GSM_LOCKFILE_MAXPOLLS = 30
-GSM_USERNAME = 'betspire'
-GSM_PASSWORD = 'lixzw2c'
-GSM_LANGUAGE = 'fr'
-GSM_URL = 'http://%s:%s@webpull.globalsportsmedia.com' % (
-    GSM_USERNAME,
-    GSM_PASSWORD,
-)
-# for upstream server overload test
-#GSM_URL = 'http://localhost:8000'
-GSM_CACHE = os.path.join(VAR_ROOT, 'cache', 'gsm')
-
-ACCOUNT_OPEN_SIGNUP = True
-ACCOUNT_EMAIL_VERIFICATION = True
-LOGIN_URL='/account/login/'
-
-AJAX_LOOKUP_CHANNELS = {
-    'session': ('gsm.lookups', 'SessionLookup'),
-    'user': {'model': 'auth.User', 'search_field':'username'},
-}
-
-ACCOUNT_EMAIL_VERIFICATION = False
-EMAIL_CONFIRMATION_DAYS = 3
-
-import re
-LOCALE_INDEPENDENT_PATHS = (
-    re.compile('/robots.txt'),
-)
+# we have our own locale switcher
 LOCALEURL_USE_ACCEPT_LANGUAGE = False
 
-DEVSERVER_MODULES = (
-    #'devserver.modules.sql.SQLRealTimeModule',
-    #'devserver.modules.sql.SQLSummaryModule',
-    #'devserver.modules.profile.ProfileSummaryModule',
+USE_PINAX = True
 
-    # Modules not enabled by default
-    #'devserver.modules.ajax.AjaxDumpModule',
-    # commented out because it cases an exception: MemoryUseModule object has
-    # not attribute heapy
-    #'devserver.modules.profile.MemoryUseModule',
-    #'devserver.modules.cache.CacheSummaryModule',
-    #'devserver.modules.profile.LineProfilerModule',
-)
+from yourlabs.setup import Setup
+setup = Setup(globals())
+setup.debug(True)
+setup.full()
 
-LOGGING = {
-    'version': 1,
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
-        },
-    },
-    'handlers': {
-        'console':{
-            'level':'DEBUG',
-            'class':'logging.StreamHandler',
-            'formatter': 'simple'
-        },
-        'smoke_log_file':{
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(LOG_ROOT, 'smoke.log'),
-            'maxBytes': '16777216', # 16megabytes
-            'formatter': 'verbose'
-        },
-        'runner_log_file':{
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(LOG_ROOT, 'runner.log'),
-            'maxBytes': '16777216', # 16megabytes
-            'formatter': 'verbose'
-        },
-        'gsm_log_file':{
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(LOG_ROOT, 'gsm.log'),
-            'maxBytes': '16777216', # 16megabytes
-            'formatter': 'verbose'
-        },
-        'log_file':{
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(LOG_ROOT, 'django.log'),
-            'maxBytes': '16777216', # 16megabytes
-            'formatter': 'verbose'
-        },
-        'mail_admins': {
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
-            'include_html': True,
-        },
-    },
-    'loggers': {
-        'gsm': {
-            'debug_handlers': ['console'],
-            'production_handlers': ['gsm_log_file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-        'apps': {
-            'production_handlers': ['log_file', 'console'],
-            'debug_handlers': ['console'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-        'smoke': {
-            'production_handlers': ['log_file', 'console'],
-            'debug_handlers': ['console', 'smoke_log_file'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-
-        'runner': {
-            'debug_handlers': ['console'],
-            'production_handlers': ['console', 'runner_log_file'],
-            'level': 'INFO',
-        },
-    },
-}
-
-# local_settings.py can be used to override environment-specific settings
-# like database and email that differ between development and production.
-try:
-    from local_settings import *
-except ImportError:
-    pass
-
-
-for name, logger in LOGGING['loggers'].items(): 
-    if DEBUG:
-        LOGGING['loggers'][name]['handlers'] = LOGGING['loggers'][name]['debug_handlers']
-    else:
-        LOGGING['loggers'][name]['handlers'] = LOGGING['loggers'][name]['production_handlers']
-
-for path in [VAR_ROOT, GSM_CACHE, LOG_ROOT, RUN_ROOT]:
-    if not os.path.isdir(path):
-        os.makedirs(path)
-
-
+if setup.ready:
+    LANGUAGES = (
+        ('en', gettext('English')),
+        ('fr', gettext('French')),
+    )
+    
+    SMOKE_TEST_USERNAME='gsm_test'
+    SMOKE_TEST_PASSWORD='()&*EUTOSHue()&*UESTNHlrch'
+    
+    GSM_LOCKFILE_POLLRATE = .1
+    GSM_LOCKFILE_MAXPOLLS = 30
+    GSM_USERNAME = 'betspire'
+    GSM_PASSWORD = 'lixzw2c'
+    GSM_LANGUAGE = 'fr'
+    GSM_URL = 'http://%s:%s@webpull.globalsportsmedia.com' % (
+        GSM_USERNAME,
+        GSM_PASSWORD,
+    )
+    # for upstream server overload test
+    #GSM_URL = 'http://localhost:8000'
+    GSM_CACHE = os.path.join(VAR_ROOT, 'cache', 'gsm')
+    setup.add_logger('gsm')
+    
+    AJAX_LOOKUP_CHANNELS = {
+        'session': ('gsm.lookups', 'SessionLookup'),
+        'user': {'model': 'auth.User', 'search_field':'username'},
+    }
+   
+    # local_settings.py can be used to override environment-specific settings
+    # like database and email that differ between development and production.
+    try:
+        from local_settings import *
+    except ImportError:
+        pass
