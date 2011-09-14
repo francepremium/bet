@@ -340,6 +340,15 @@ class GsmEntity(AbstractGsmEntity):
     def oponnent_B_name(self):
         raise Exception('oponnent_B_name has been deprecated. Use oponnent_B.name instead')
 
+    def has_squad(self):
+        if not hasattr(self, '_has_squad'):
+            tree = gsm.get_tree('en', self.sport,
+                'get_squads', type='team', id=self.gsm_id, detailed='yes',
+                statistics='yes')
+            self._has_squad = len(tree.findall('team')) > 0
+        return self._has_squad
+
+
 class Championship(AbstractGsmEntity):
     pass
 

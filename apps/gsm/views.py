@@ -394,21 +394,11 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         )
 
     elif tab == 'squad':
-        # season filter
-        context['team_seasons'] = Season.objects.filter(
-            Q(round__session__in=team.sessions_as_A.all()) |
-            Q(round__session__in=team.sessions_as_B.all())
-        ).distinct().order_by('name')
-        if 'season_gsm_id' in request.GET and request.GET['season_gsm_id']:
-            season = shortcuts.get_object_or_404(Season, gsm_id=request.GET['season_gsm_id'], 
-                sport=sport)
-        else:
-            season = context['team_seasons'][0]
-        context['season'] = season
-
+        if not team.has_squad():
+            return http.HttpResponseNotFound()
         # squad finder
         tree = gsm.get_tree(context['language'], sport,
-            'get_squads', type='season', id=season.gsm_id, detailed='yes',
+            'get_squads', type='team', id=team.gsm_id, detailed='yes',
             statistics='yes')
         for team_element in tree.findall('team'):
             if str(team.gsm_id) == team_element.attrib['team_id']:
