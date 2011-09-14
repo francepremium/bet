@@ -5,4 +5,5 @@ cache
 dev.db
 *.swp
 var
+local_settings.py
 yourlabs
