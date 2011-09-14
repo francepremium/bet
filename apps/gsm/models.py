@@ -64,7 +64,7 @@ class AreaManager(CachedManager):
         return 'area'
 
     def get_for_pk(self, pk, area=None):
-        key = '%s%s' % (self.attribute_name, pk)
+        key = '%spk%s' % (self.attribute_name, pk)
 
         value = cache.get(key)
         if not value:
@@ -76,7 +76,7 @@ class AreaManager(CachedManager):
         return value
 
     def get_for_country_code_3(self, code):
-        key = '%s%s' % (self.attribute_name, code)
+        key = '%scc3%s' % (self.attribute_name, code)
         
         value = cache.get(key)
         area = None
@@ -87,7 +87,7 @@ class AreaManager(CachedManager):
         return self.get_for_pk(value, area)
 
     def get_for_country_code_2(self, code):
-        key = '%s%s' % (self.attribute_name, code)
+        key = '%scc2%s' % (self.attribute_name, code)
         
         value = cache.get(key)
         area = None
@@ -98,7 +98,7 @@ class AreaManager(CachedManager):
         return self.get_for_pk(value, area)
 
     def get_for_gsm_id(self, code):
-        key = '%s%s' % (self.attribute_name, code)
+        key = '%sgsmid%s' % (self.attribute_name, code)
 
         value = cache.get(key)
         area = None
