@@ -245,9 +245,6 @@ def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
                     week -= 1
                     context['previous_week'] -= 1
                     context['sessions'] = season.session_set.filter(datetime_utc__gte=dates[week]).filter(datetime_utc__lte=dates[week] + datetime.timedelta(7))
-
-                context['last_sessions'] = season.session_set.filter(datetime_utc__gte=datetime.date.today() - datetime.timedelta(7)).filter(status='Played')
-                context['next_sessions'] = season.session_set.filter(datetime_utc__lte=datetime.date.today() + datetime.timedelta(7)).filter(status='Fixture')
             else:
                 context['sessions'] = None
 
