@@ -18,11 +18,16 @@ class Smoke(smoke.Smoke):
             'person': [],
             'double': [],
         }
-        for entity in GsmEntity.objects.all():
+        for entity in GsmEntity.objects.all().select_related('sport'):
             for method in methods[entity.tag]:
+                if entity.sport.slug != 'soccer' and method == 'get_statistics_absolute_url':
+                    continue
+                if method == 'get_squad_absolute_url' and not entity.has_squad():
+                    continue
+                    
                 yield smoke.SmokeUrl(
                     getattr(entity, method)(),
-                    '%s, %s, %s' % (
+                    (
                         method,
                         entity.tag,
                         entity.sport.slug

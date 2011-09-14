@@ -245,9 +245,6 @@ def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
                     week -= 1
                     context['previous_week'] -= 1
                     context['sessions'] = season.session_set.filter(datetime_utc__gte=dates[week]).filter(datetime_utc__lte=dates[week] + datetime.timedelta(7))
-
-                context['last_sessions'] = season.session_set.filter(datetime_utc__gte=datetime.date.today() - datetime.timedelta(7)).filter(status='Played')
-                context['next_sessions'] = season.session_set.filter(datetime_utc__lte=datetime.date.today() + datetime.timedelta(7)).filter(status='Fixture')
             else:
                 context['sessions'] = None
 
@@ -394,21 +391,11 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         )
 
     elif tab == 'squad':
-        # season filter
-        context['team_seasons'] = Season.objects.filter(
-            Q(round__session__in=team.sessions_as_A.all()) |
-            Q(round__session__in=team.sessions_as_B.all())
-        ).distinct().order_by('name')
-        if 'season_gsm_id' in request.GET and request.GET['season_gsm_id']:
-            season = shortcuts.get_object_or_404(Season, gsm_id=request.GET['season_gsm_id'], 
-                sport=sport)
-        else:
-            season = context['team_seasons'][0]
-        context['season'] = season
-
+        if not team.has_squad():
+            return http.HttpResponseNotFound()
         # squad finder
         tree = gsm.get_tree(context['language'], sport,
-            'get_squads', type='season', id=season.gsm_id, detailed='yes',
+            'get_squads', type='team', id=team.gsm_id, detailed='yes',
             statistics='yes')
         for team_element in tree.findall('team'):
             if str(team.gsm_id) == team_element.attrib['team_id']:
@@ -459,6 +446,31 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
             context['resultstable'] = get_resultstable_for_season(reference_season, team)
     elif tab == 'picks':
         context['bet_list_helper'] = x= BetListHelper(request, team=team, exclude_columns=['support'])
+    elif tab == 'calendar':
+        context['next_page'] = context['previous_page'] = None
+        now = datetime.datetime.now()
+        past_sessions = team.get_sessions().filter(datetime_utc__lte=now)
+        next_sessions = team.get_sessions().filter(datetime_utc__gt=now)
+       
+        page = int(request.GET.get('page', 0))
+        if page == 0:
+            context['sessions'] = [s for s in reversed(past_sessions.order_by('-datetime_utc')[:5])]
+            context['sessions'] += [s for s in next_sessions.order_by('datetime_utc')[:5]]
+        elif page > 0:
+            minimum = 10*page-5
+            maximum = 10*page+5
+            context['sessions'] = next_sessions.order_by('datetime_utc')[minimum:maximum]
+        elif page < 0:
+            page = page * -1
+            minimum = 10*page-5
+            maximum = 10*page+5
+            context['sessions'] = [s for s in reversed(past_sessions.order_by('-datetime_utc')[minimum:maximum])]
+
+        if team.get_sessions().filter(datetime_utc__lt=context['sessions'][0].datetime_utc).count():
+            context['previous_page'] = page - 1 
+
+        if team.get_sessions().filter(datetime_utc__gt=context['sessions'][len(context['sessions'])-1].datetime_utc).count():
+            context['next_page'] = page + 1
 
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name, context,

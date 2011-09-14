@@ -6,7 +6,21 @@
     
 
     {% if team.get_sessions %}
-        <h2 class="next_sessions">{% trans 'next sessions' %}</h2>
-        {% gsm_sessions_render team.get_sessions %}
+        {% if previous_page != None %}
+            <a href="?page={{ previous_page }}">{% trans 'previous matches' %}</a>
+        {% endif %}
+        {% if next_page != None %}
+            <a href="?page={{ next_page }}">{% trans 'next matches' %}</a>
+        {% endif %}
+
+        {% gsm_sessions_render sessions %}
+
+        {% if previous_page != None %}
+            <a href="?page={{ previous_page }}">{% trans 'previous matches' %}</a>
+        {% endif %}
+        {% if next_page != None %}
+            <a href="?page={{ next_page }}">{% trans 'next matches' %}</a>
+        {% endif %}
     {% endif %}
+
 {% endblock %}

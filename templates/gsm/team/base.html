@@ -14,7 +14,7 @@
         <a href="{{ team.get_file_absolute_url }}" title="{{ team.name }}">{% trans 'file' %}</a>
     </li>
 	{% endcomment %}
-    {% if sport.slug != 'basketball' %}
+    {% if team.has_squad %}
     <li class="squad tab {% if tab == 'squad' %}active{% endif %}">
         <a href="{{ team.get_squad_absolute_url }}" title="{{ team.name }}">{% trans 'squad' %}</a>
     </li>

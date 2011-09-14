@@ -64,7 +64,7 @@ class AreaManager(CachedManager):
         return 'area'
 
     def get_for_pk(self, pk, area=None):
-        key = '%s%s' % (self.attribute_name, pk)
+        key = '%spk%s' % (self.attribute_name, pk)
 
         value = cache.get(key)
         if not value:
@@ -76,7 +76,7 @@ class AreaManager(CachedManager):
         return value
 
     def get_for_country_code_3(self, code):
-        key = '%s%s' % (self.attribute_name, code)
+        key = '%scc3%s' % (self.attribute_name, code)
         
         value = cache.get(key)
         area = None
@@ -87,7 +87,7 @@ class AreaManager(CachedManager):
         return self.get_for_pk(value, area)
 
     def get_for_country_code_2(self, code):
-        key = '%s%s' % (self.attribute_name, code)
+        key = '%scc2%s' % (self.attribute_name, code)
         
         value = cache.get(key)
         area = None
@@ -98,7 +98,7 @@ class AreaManager(CachedManager):
         return self.get_for_pk(value, area)
 
     def get_for_gsm_id(self, code):
-        key = '%s%s' % (self.attribute_name, code)
+        key = '%sgsmid%s' % (self.attribute_name, code)
 
         value = cache.get(key)
         area = None
@@ -339,6 +339,15 @@ class GsmEntity(AbstractGsmEntity):
         raise Exception('oponnent_A_name has been deprecated. Use oponnent_A.name instead')
     def oponnent_B_name(self):
         raise Exception('oponnent_B_name has been deprecated. Use oponnent_B.name instead')
+
+    def has_squad(self):
+        if not hasattr(self, '_has_squad'):
+            tree = gsm.get_tree('en', self.sport,
+                'get_squads', type='team', id=self.gsm_id, detailed='yes',
+                statistics='yes')
+            self._has_squad = len(tree.findall('team')) > 0
+        return self._has_squad
+
 
 class Championship(AbstractGsmEntity):
     pass
