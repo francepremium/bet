@@ -31,6 +31,10 @@ class Command(BaseCommand):
         ),
     )
 
+    def get_tree(self, *args, **kwargs):
+        kwargs['retry'] = 300
+        return gsm.get_tree(*args, **kwargs)
+
     def handle(self, *args, **options):
         self.cooldown = int(options.get('cooldown', 0))
         logger.info('starting sync with cooldown %s' % self.cooldown)
@@ -38,7 +42,7 @@ class Command(BaseCommand):
         self.areas_country_code_2()
 
         for code, language in settings.LANGUAGES:
-            root = gsm.get_tree(code, 'soccer', 'get_areas').getroot()
+            root = self.get_tree(code, 'soccer', 'get_areas').getroot()
             for element in root.getchildren():
                 if element.tag == 'area':
                     self.save_area(code, element)
@@ -47,7 +51,7 @@ class Command(BaseCommand):
                 logger.debug("Saving seasons for %s" % sport)
                 properties = {}
 
-                root = gsm.get_tree(code, sport, 'get_seasons', **properties).getroot()
+                root = self.get_tree(code, sport, 'get_seasons', **properties).getroot()
 
                 for element in root.getchildren():
                     if element.tag == 'method':
@@ -221,23 +225,23 @@ class Command(BaseCommand):
 
         # save teams: actually we ain't
         #if sport.slug in ('rugby', 'basketball', 'soccer'):
-            #root = gsm.get_tree(language, sport, 'get_teams', 
+            #root = self.get_tree(language, sport, 'get_teams', 
                 #detailed=True, type='saeson', id=season.gsm_id).getroot()
             #for team_element in root.findall('team'):
                 #self.save_team(language, sport, team_element)
 
         if sport.slug == 'motorsports': # directly handle sessions
-            root = gsm.get_tree(language, sport, 'get_sessions', 
+            root = self.get_tree(language, sport, 'get_sessions', 
                 type='season', id=season.gsm_id).getroot()
             for session_element in root.findall('championship/competition/season/session'):
                 self.save_session(language, sport, session_element, season=season)
                 time.sleep(self.cooldown)
         else: # handle rounds
             if sport.slug == 'tennis':
-                root = gsm.get_tree(language, sport, 'get_matches', 
+                root = self.get_tree(language, sport, 'get_matches', 
                     type='season', id=season.gsm_id, detailed='yes').getroot()
             else:
-                root = gsm.get_tree(language, sport, 'get_matches', 
+                root = self.get_tree(language, sport, 'get_matches', 
                     type='season', id=season.gsm_id).getroot()
 
             rounds = root.findall('competition/season/round')

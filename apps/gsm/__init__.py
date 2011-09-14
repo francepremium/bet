@@ -26,7 +26,7 @@ def get_object_from_url(url):
             data.append(part)
     return GsmEntity.objects.get(sport__slug=data[0], tag=data[1], gsm_id=data[2])
 
-def get_tree(lang, sport, method, update=False, **parameters):
+def get_tree(lang, sport, method, update=False, retry=False, **parameters):
     def get_tree_and_root(filename):
         tree = etree.parse(filename)
         root = tree.getroot()
@@ -97,7 +97,19 @@ def get_tree(lang, sport, method, update=False, **parameters):
                     raise HtmlInsteadOfXml(settings.GSM_URL + url)
                 return tree
 
-        tmp_filepath, message = urllib.urlretrieve(settings.GSM_URL + url)
+        if retry:
+            tmp_filepath = False
+            trycount = 0
+            while not tmp_filepath:
+                try:
+                    tmp_filepath, message = urllib.urlretrieve(settings.GSM_URL + url)
+                except IOError:
+                    trycount += 1
+                    if trycount > retry:
+                        raise
+                    time.sleep(3)
+        else:
+            tmp_filepath, message = urllib.urlretrieve(settings.GSM_URL + url)
         tree, root = get_tree_and_root(tmp_filepath)
 
         if root is None:
