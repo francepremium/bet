@@ -107,47 +107,49 @@ INSTALLED_APPS = [
     'modeltranslation',
 ]
 
+SMOKE_TEST_USERNAME='gsm_test'
+SMOKE_TEST_PASSWORD='()&*EUTOSHue()&*UESTNHlrch'
+
+GSM_LOCKFILE_POLLRATE = .1
+GSM_LOCKFILE_MAXPOLLS = 30
+GSM_USERNAME = 'betspire'
+GSM_PASSWORD = 'lixzw2c'
+GSM_LANGUAGE = 'fr'
+GSM_URL = 'http://%s:%s@webpull.globalsportsmedia.com' % (
+    GSM_USERNAME,
+    GSM_PASSWORD,
+)
+# for upstream server overload test
+#GSM_URL = 'http://localhost:8000'
+
 # we have our own locale switcher
 LOCALEURL_USE_ACCEPT_LANGUAGE = False
 
+gettext = lambda x: x
+LANGUAGES = (
+    ('en', gettext('English')),
+    ('fr', gettext('French')),
+)
+
 USE_PINAX = True
+
+AJAX_LOOKUP_CHANNELS = {
+    'session': ('gsm.lookups', 'SessionLookup'),
+    'user': {'model': 'auth.User', 'search_field':'username'},
+}
 
 from yourlabs.setup import Setup
 setup = Setup(globals())
 setup.debug(True)
-setup.full()
+setup.full() 
 
 if setup.ready:
-    LANGUAGES = (
-        ('en', gettext('English')),
-        ('fr', gettext('French')),
-    )
-    
-    SMOKE_TEST_USERNAME='gsm_test'
-    SMOKE_TEST_PASSWORD='()&*EUTOSHue()&*UESTNHlrch'
-    
-    GSM_LOCKFILE_POLLRATE = .1
-    GSM_LOCKFILE_MAXPOLLS = 30
-    GSM_USERNAME = 'betspire'
-    GSM_PASSWORD = 'lixzw2c'
-    GSM_LANGUAGE = 'fr'
-    GSM_URL = 'http://%s:%s@webpull.globalsportsmedia.com' % (
-        GSM_USERNAME,
-        GSM_PASSWORD,
-    )
-    # for upstream server overload test
-    #GSM_URL = 'http://localhost:8000'
-    GSM_CACHE = os.path.join(VAR_ROOT, 'cache', 'gsm')
     setup.add_logger('gsm')
-    
-    AJAX_LOOKUP_CHANNELS = {
-        'session': ('gsm.lookups', 'SessionLookup'),
-        'user': {'model': 'auth.User', 'search_field':'username'},
-    }
-   
-    # local_settings.py can be used to override environment-specific settings
-    # like database and email that differ between development and production.
-    try:
-        from local_settings import *
-    except ImportError:
-        pass
+    GSM_CACHE = os.path.join(VAR_ROOT, 'cache', 'gsm')
+
+# local_settings.py can be used to override environment-specific settings
+# like database and email that differ between development and production.
+try:
+    from local_settings import *
+except ImportError:
+    pass
