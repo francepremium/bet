@@ -3,9 +3,11 @@ from django.utils.translation import ugettext as _
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
+from django.contrib.comments.models import Comment
 
 from actstream import action
 from actstream.models import Action, Follow
+from django_messages.models import Message
 
 import scoobet
 # get_rankings monkey patch
@@ -17,14 +19,14 @@ def user_messaging_security(sender, **kwargs):
     if not authorized:
         raise scoobet.MessagingUnauthorizedUser(m)
 signals.pre_save.connect(user_messaging_security, 
-    sender=models.get_model('django_messages', 'message'))
+    sender=Message)
 
 def user_registered_activity(sender, **kwargs):
     if not kwargs.get('created', False):
         return None
     action.send(kwargs['instance'], verb='registered')
 signals.post_save.connect(user_registered_activity, 
-    sender=models.get_model('auth', 'user'))
+    sender=User)
 
 def delete_object_activities(sender, **kwargs):
     """
@@ -66,7 +68,7 @@ def comment_posted_activity(sender, **kwargs):
         action.send(comment.user, verb='wall posted', action_object=comment, target=comment.content_object)
     else:
         action.send(comment.user, verb='commented', action_object=comment)
-signals.post_save.connect(comment_posted_activity, sender=models.get_model('comments', 'Comment'))
+signals.post_save.connect(comment_posted_activity, sender=Comment)
 
 def unfollow_deletes_activity(sender, **kwargs):
     instance = kwargs['instance']
