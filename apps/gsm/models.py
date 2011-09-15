@@ -266,6 +266,46 @@ class AbstractGsmEntity(models.Model):
                 return '%s %s' % (self.attrib['firstname'], self.attrib['lastname'])
         return self.name
 
+    def resync(self, element=None):
+        if self.tag == 'match':
+            copy_map = {
+                'fs_%s': '%s_score',
+                'eps_%s': '%s_ets',
+                'eps_%s': '%s_eps',
+                'status': 'status',
+                'p1s_%s': '%s1_score',
+                'p2s_%s': '%s2_score',
+                'p3s_%s': '%s3_score',
+                'p4s_%s': '%s4_score',
+                'eps_%s': '%s5_score',
+            }
+
+            if not element:
+                tree = gsm.get_tree('en', self.sport, 'get_matches', 
+                    type='match', id=self.gsm_id, update=True, retry=True)
+                for e in gsm.parse_element_for(tree.getroot(), 'match'):
+                    element = e
+                    break
+
+            if 'A' in element.attrib.get('winner', ''):
+                self.winner = self.oponnent_A
+            elif 'B' in element.attrib.get('winner', ''):
+                self.winner = self.oponnent_A
+            elif element.attrib.get('status', False) == 'Played':
+                self.draw = True
+
+
+        for src, dst in copy_map.items():
+            if '%s' in src:
+                for x in ('A', 'B'):
+                    val = element.attrib.get(src % x, None) or None
+                    setattr(self, dst % x, val)
+            else:
+                val = element.attrib.get(src, None) or None
+                setattr(self, dst, val)
+
+        self.save()
+
 class GsmEntity(AbstractGsmEntity):
     def get_sessions(self):
         if not hasattr(self, '_sessions'):

@@ -6,14 +6,6 @@ from django.core.management.base import BaseCommand, CommandError
 import gsm
 from gsm.models import *
 
-def parse_element_for(parent, tag):
-    for element in parent.getchildren():
-        if element.tag == tag:
-            yield element
-        else:
-            for subelement in parse_element_for(element, tag):
-                yield subelement
-
 copy_map = {
     'fs_%s': '%s_score',
     'eps_%s': '%s_ets',
@@ -57,15 +49,6 @@ class Command(BaseCommand):
         
     def update(self, tree, sport):
         root = tree.getroot()
-        for element in parse_element_for(root, 'match'):
+        for element in gsm.parse_element_for(root, 'match'):
             session = Session.objects.get(gsm_id=element.attrib['match_id'], sport=sport)
-            for src, dst in copy_map.items():
-                if '%s' in src:
-                    for x in ('A', 'B'):
-                        val = element.attrib.get(src % x, None) or None
-                        setattr(session, dst % x, val)
-                else:
-                    val = element.attrib.get(src, None) or None
-                    setattr(session, dst, val)
-
-            session.save()
+            session.resync(element)
