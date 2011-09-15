@@ -274,7 +274,7 @@ def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
         context['bet_list_helper'] = BetListHelper(
             request,
             exclude_columns=['support', 'sport', 'competition'], 
-            qs=Bet.objects.filter(
+            qs=Bet.objects.filter(correction=0,
                 session__season__competition=competition).order_by('?')[:3]
         )
 
@@ -387,7 +387,9 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         context['bet_list_helper'] = BetListHelper(
             request,
             exclude_columns=['support', 'sport'], 
-            qs=Bet.objects.filter(Q(session__oponnent_A=team)|Q(session__oponnent_B=team)).order_by('?')[:3]
+            qs=Bet.objects.filter(
+                Q(session__oponnent_A=team)|Q(session__oponnent_B=team), 
+                correction=0).order_by('?')[:3]
         )
 
     elif tab == 'squad':
@@ -578,7 +580,8 @@ def sport_detail_tab(request, sport, tab,
         context['bet_list_helper'] = BetListHelper(
             request,
             exclude_columns=['support', 'sport'], 
-            qs=Bet.objects.order_by('?')[:3]
+            qs=Bet.objects.filter(session__sport=sport, correction=0
+                                ).order_by('?')[:3]
         )
         context['next_sessions'] = Session.objects.filter(
             sport=sport, status='Fixture',
