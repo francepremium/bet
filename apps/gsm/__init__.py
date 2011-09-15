@@ -26,6 +26,15 @@ def get_object_from_url(url):
             data.append(part)
     return GsmEntity.objects.get(sport__slug=data[0], tag=data[1], gsm_id=data[2])
 
+def parse_element_for(parent, tag):
+    # simple recursive findall
+    for element in parent.getchildren():
+        if element.tag == tag:
+            yield element
+        else:
+            for subelement in parse_element_for(element, tag):
+                yield subelement
+
 def get_tree(lang, sport, method, update=False, retry=False, **parameters):
     def get_tree_and_root(filename):
         tree = etree.parse(filename)
