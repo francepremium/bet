@@ -86,6 +86,7 @@ INSTALLED_APPS = [
     'nashvegas',
     'django_messages',
     'taggit',
+    'subscription',
     #'devserver',
 
     # Pinax
@@ -136,6 +137,10 @@ USE_PINAX = True
 AJAX_LOOKUP_CHANNELS = {
     'session': ('gsm.lookups', 'SessionLookup'),
     'user': {'model': 'auth.User', 'search_field':'username'},
+}
+
+SUBSCRIPTION_BACKENDS = {
+    'redis': 'subscription_backends.RedisBackend',
 }
 
 from yourlabs.setup import Setup

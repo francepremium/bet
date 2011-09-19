@@ -1,4 +1,11 @@
 Migrations:
+    2011-09-19 Added notifications base
+        - install redis (pacman -S redis)
+        - add redis to startup (/etc/rc.conf, array DAEMONS)
+        - start redis (/etc/rc.d/redis start)
+        - pip install -e git+git@github.com:yourlabs/django-subscription.git
+        - run upgradedb -e
+        - restart the website
     2011-09-10 Moved apps/yourlabs to github.com/yourlabs/yourlabs and
                yourlabs.rtfd.com
         - apply pip requirements change

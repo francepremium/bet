@@ -8,8 +8,10 @@ from django.contrib.comments.models import Comment
 from actstream import action
 from actstream.models import Action, Follow
 from django_messages.models import Message
+from subscription.models import Subscription
 
 import scoobet
+from scoobet import notifications
 # get_rankings monkey patch
 import scoobet.rankings
 
@@ -53,7 +55,7 @@ def delete_object_activities(sender, **kwargs):
         ).delete()
 signals.pre_delete.connect(delete_object_activities)
 
-def comment_posted_activity(sender, **kwargs):
+def comment_posted(sender, **kwargs):
     if not kwargs.get('created', False):
         return None
 
@@ -68,7 +70,8 @@ def comment_posted_activity(sender, **kwargs):
         action.send(comment.user, verb='wall posted', action_object=comment, target=comment.content_object)
     else:
         action.send(comment.user, verb='commented', action_object=comment)
-signals.post_save.connect(comment_posted_activity, sender=Comment)
+        notifications.emit_new_comment(comment)
+signals.post_save.connect(comment_posted, sender=Comment)
 
 def unfollow_deletes_activity(sender, **kwargs):
     instance = kwargs['instance']
