@@ -240,11 +240,10 @@ table.bettype table.choices {
                     display: none;
                 }
             </style>
-            <div class="subscription_notifications">
+            <div class="subscription">
                 <div class="comment">
                     <div class="count"></div>
                     <div class="list">
-                        
                     </div>
                 </div>
             </div>
@@ -296,7 +295,11 @@ table.bettype table.choices {
         <script src="{{ STATIC_URL }}yourlabs/subscription/jquery-implementation.js" type="text/javascript"></script>
         <script type="text/javascript">
         $(document).ready(function() {
-            Subscription.factory('{% url scoobet_feed_json %}');
+            Subscription.factory('{% url scoobet_feed_json %}', {
+                'queues': [
+                    'comment',
+                ]
+            });
         });
         </script>
         {% include "facebox_js.html" %}

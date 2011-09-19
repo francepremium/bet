@@ -26,6 +26,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'scoobet.context_processors.inbox_count',
     'gsm.context_processors.available_timezones',
     'context_processors.save_user_locale',
+    'scoobet.notifications.acknowledge',
 ]
 
 MIDDLEWARE_CLASSES = [

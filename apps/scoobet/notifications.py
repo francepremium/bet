@@ -11,26 +11,28 @@ from django.utils import simplejson
 from subscription.models import Subscription
 from subscription_backends import RedisBackend
 
+def acknowledge(request):
+    if not request.user.is_authenticated():
+        return {}
+    
+    if 'acknowledge' in request.GET.keys():
+        b = RedisBackend()
+        b.acknowledge(request.user, request.GET['acknowledge'])
+
+    return {}
+
 def user_stream_json(request):
     if not request.user.is_authenticated():
         return http.HttpResponseForbidden()
 
     b = RedisBackend()
-    context = b.user_fetch(request.user)
+    context = b.user_fetch(request.user, clear_undelivered=True)
     
-    def count(group):
-        for a in group:
-            key = '%s_count' % a['kwargs']['kind']
-
-            if key not in context.keys():
-                context[key] = 0
-            
-            context[key] += 1
-
-    for g in ('unacknowledged', 'undelivered'):
-        count(context[g])
+    for g in context.keys():
         for v  in context[g]:
-            v['datetime'] = time.mktime(datetime.datetime.now().timetuple())
+            del v['datetime']
+        # oldest first
+        context[g].reverse()
 
     return http.HttpResponse(simplejson.dumps(context))
 

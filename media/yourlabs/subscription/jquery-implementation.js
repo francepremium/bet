@@ -2,45 +2,39 @@ Subscription = function(url, override) {
     instance = $.extend({
         'delay': 3000,
         'url': url,
+        'states': ['undelivered', 'unacknowledged', 'acknowledged'],
         'refresh': function() {
             var url = Subscription.singleton.url + '?x=' + Math.round(new Date().getTime());
             $.getJSON(url, function(data, text_status, jq_xhr) {
-                $(document).trigger('subscription.refresh', [data, text_status, jq_xhr]);
-            });
-        },
-        'bind_refresh': function() {
-            $(document).bind('subscription.refresh', Subscription.singleton.process_all);
-            $(document).bind('subscription.refresh', Subscription.singleton.set_timeout);
+                for(var state in Subscription.singleton.states) {
+                    state = Subscription.singleton.states[state];
+                    for(var key in data[state]) {
+                        var notification = data[state][key];
+                        var el = $('.subscription .'+notification.kwargs.kind+' .list')
+                        if (! el.find('.' + notification.timestamp).length) {
+                            console.log('TS', notification.timestamp)
+                            var html = '<div class="'+notification.timestamp+' '+state+'">'+notification.text+'</div>';
+                            el.prepend(html);
+                            $('.'+notification.timestamp+'.'+state).find('a.acknowledge').each(function() {
+                                $(this).attr('href', $(this).attr('href') + '?acknowledge=' + notification.timestamp);
+                            });
+                        }
+                    }
+
+                    for(var queue in Subscription.singleton.queues) {
+                        queue = Subscription.singleton.queues[queue];
+                        var count = $('.subscription .' + queue + ' .list .undelivered').length + $('.subscription .' + queue + ' .list .unacknowledged').length;
+                        $('.subscription .' + queue + ' .count').html(count);
+                    }
+                }
+            }).fail(Subscription.singleton.set_timeout)
+              .done(Subscription.singleton.set_timeout);
         },
         'set_timeout': function() {
             setTimeout(function() {
                 Subscription.singleton.refresh()
             }, Subscription.singleton.delay);
         },
-        'process_all': function(e, data, text_status, jq_xhr) {
-            for(var key in data) {
-                $(document).trigger('subscription.process', [data, key]);
-            }
-        },
-
-        'bind_process': function() {
-            $(document).bind('subscription.process', Subscription.singleton.set_count);
-        },
-        'set_count': function(e, data, key) {
-            if (! key.match(/_count$/)) {
-                return;
-            }
-
-            var el = Subscription.singleton.get_count_selector(data, key);
-            if (el.length && data[key] > 0) {
-                el.html(data[key]);
-                el.addClass('hilight');
-            }
-        },
-        'get_count_selector': function(data, i) {
-            return $('.subscription_notifications .' + i.replace('_count', '') + ' .count');
-        },
-        'notifications': [],
     }, override);
 
     return instance
@@ -48,7 +42,5 @@ Subscription = function(url, override) {
 
 Subscription.factory = function(url, override) {
     Subscription.singleton = Subscription(url, override);
-    Subscription.singleton.bind_refresh();
-    Subscription.singleton.bind_process();
     Subscription.singleton.refresh();
 }
