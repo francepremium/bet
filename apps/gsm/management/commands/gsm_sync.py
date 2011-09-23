@@ -1,6 +1,6 @@
 import logging
 import urllib
-from datetime import datetime, date, time
+from datetime import datetime, date, time, timedelta
 import sys
 from optparse import make_option
 
@@ -91,8 +91,11 @@ class Command(BaseCommand):
             model = model_class.objects.get(**unique_properties)
         except model_class.DoesNotExist:
             model = model_class(**unique_properties)
-        
+
         for k, v in properties.items():
+            if v == '0000-00-00 00:00:00':
+                continue # fuck gsm newbies omfg
+
             if not hasattr(model_class, k):
                 if getattr(model, k) != getattr(model, '_meta').get_field(k).to_python(v):
                     changed[k] = 'normal val %s: %s != %s' % (k, getattr(model, k), getattr(model, '_meta').get_field(k).to_python(v))
@@ -212,6 +215,14 @@ class Command(BaseCommand):
             'start_date': element.attrib.get('start_date', None) or None,
             'end_date': element.attrib.get('end_date', None) or None,
         })
+
+        converter = Season._meta.get_field('last_updated')
+        if properties['last_updated']:
+            last_updated = converter.to_python(properties['last_updated'])
+            if last_updated < datetime.datetime.now() - timedelta(days=2):
+                return
+        else:
+            logger.warning('No end date for %s season %s' % (element.attrib['season_id'], sport))
 
         season = self.update_model(
             Season,
@@ -349,6 +360,8 @@ class Command(BaseCommand):
 
         if not element.attrib.get('time_utc') and not element.attrib.get('official_start_time'):
             properties['time_unknown'] = True
+        else:
+            properties['time_unknown'] = False
 
         oponnent_names = {
             'A': u'?',

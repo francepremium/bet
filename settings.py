@@ -157,11 +157,9 @@ AJAX_LOOKUP_CHANNELS = {
     'user': {'model': 'auth.User', 'search_field':'username'},
 }
 
-SUBSCRIPTION_BACKENDS = {
-    'redis': 'subscription_backends.RedisBackend',
-}
-
 USE_COMMENTS_AS_WALL = True
+
+HAYSTACK_ENABLE_REGISTRATION = False
 
 from yourlabs.setup import Setup
 setup = Setup(globals())
