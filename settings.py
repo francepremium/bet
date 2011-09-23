@@ -138,6 +138,8 @@ AJAX_LOOKUP_CHANNELS = {
     'user': {'model': 'auth.User', 'search_field':'username'},
 }
 
+HAYSTACK_ENABLE_REGISTRATION = False
+
 from yourlabs.setup import Setup
 setup = Setup(globals())
 setup.debug(True)
