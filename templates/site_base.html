@@ -546,6 +546,7 @@ table.bettype table.choices {
 				});
 			});
 
+            var endless_scrolltop = false;
             // initializes links for ajax requests
             $("a.endless_more").live("click", function() {
                 var container = $(this).closest(".endless_container");
@@ -575,7 +576,7 @@ table.bettype table.choices {
                 }  
             });
             if ($('a.endless_more').length) {
-                var scroll = $(window).height() + $(window).scrollTop() > $('#body_content').height();
+                var scroll = $(window).height() >= $('#body_content').height();
                 if (scroll) {
                     $("a.endless_more").click();
                 }
