@@ -1,7 +1,5 @@
 from django.conf.urls.defaults import *
 
-from notifications import user_stream_json
-
 import views
 
 urlpatterns = patterns('scoobet.views',
@@ -30,10 +28,4 @@ urlpatterns = patterns('scoobet.views',
         views.feed_friends,
         name='scoobet_feed_friends',
     ),
-    url(
-        r'feed/json/$',
-        user_stream_json,
-        name='scoobet_feed_json',
-    ),
-
 )

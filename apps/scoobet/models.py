@@ -11,7 +11,6 @@ from django_messages.models import Message
 from subscription.models import Subscription
 
 import scoobet
-from scoobet import notifications
 # get_rankings monkey patch
 import scoobet.rankings
 
@@ -70,7 +69,6 @@ def comment_posted(sender, **kwargs):
         action.send(comment.user, verb='wall posted', action_object=comment, target=comment.content_object)
     else:
         action.send(comment.user, verb='commented', action_object=comment)
-        notifications.emit_new_comment(comment)
 signals.post_save.connect(comment_posted, sender=Comment)
 
 def unfollow_deletes_activity(sender, **kwargs):

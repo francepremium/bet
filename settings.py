@@ -26,7 +26,6 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'scoobet.context_processors.inbox_count',
     'gsm.context_processors.available_timezones',
     'context_processors.save_user_locale',
-    'scoobet.notifications.acknowledge',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -88,6 +87,7 @@ INSTALLED_APPS = [
     'django_messages',
     'taggit',
     'subscription',
+    'subscription.examples.yourlabs',
     #'devserver',
 
     # Pinax
@@ -109,6 +109,17 @@ INSTALLED_APPS = [
     'modeltranslation',
 ]
 
+SUBSCRIPTION_NOTIFICATION_QUEUES = [
+    'chat',
+    'friends',
+]
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
+
 SMOKE_TEST_USERNAME='gsm_test'
 SMOKE_TEST_PASSWORD='()&*EUTOSHue()&*UESTNHlrch'
 
@@ -127,6 +138,12 @@ GSM_URL = 'http://%s:%s@webpull.globalsportsmedia.com' % (
 # we have our own locale switcher
 LOCALEURL_USE_ACCEPT_LANGUAGE = False
 
+import re
+LOCALE_INDEPENDENT_PATHS = [
+    re.compile('/notifications/json/'),
+    re.compile('/notifications/push/'),
+]
+
 gettext = lambda x: x
 LANGUAGES = (
     ('en', gettext('English')),
@@ -143,6 +160,8 @@ AJAX_LOOKUP_CHANNELS = {
 SUBSCRIPTION_BACKENDS = {
     'redis': 'subscription_backends.RedisBackend',
 }
+
+USE_COMMENTS_AS_WALL = True
 
 from yourlabs.setup import Setup
 setup = Setup(globals())

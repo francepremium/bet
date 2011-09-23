@@ -51,4 +51,4 @@ whoosh
 progressbar
 django-taggit
 -e git+git@github.com:yourlabs/yourlabs.git#egg=yourlabs
--e git+git@github.com:yourlabs/django-subscription.git
+-e git+git@github.com:yourlabs/django-subscription.git#egg=subscription
