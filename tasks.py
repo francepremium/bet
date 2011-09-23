@@ -5,6 +5,7 @@ from yourlabs import runner
 from django.core.management import call_command
 
 from gsm.management.commands.gsm_sync import Command as GsmSyncCommand
+from gsm.management.commands.gsm_sync_live import Command as GsmSyncLiveCommand
 
 @runner.task(
     success_cooldown=td(minutes=5), 
@@ -21,8 +22,8 @@ def retry_deferred():
     call_command('retry_deferred')
 
 @runner.task(
-    success_cooldown=td(hours=3), 
-    fail_cooldown=td(minutes=15),
+    success_cooldown=td(hours=12), 
+    fail_cooldown=td(minutes=30),
     non_recoverable_downtime=td(hours=24))
 def gsm_sync():
     GsmSyncCommand().handle(cooldown=3)
@@ -32,7 +33,7 @@ def gsm_sync():
     fail_cooldown=td(minutes=1),
     non_recoverable_downtime=td(hours=12))
 def gsm_sync_live():
-    call_command('gsm_sync_live')
+    GsmSyncLiveCommand().handle(cooldown=3)
 
 @runner.task(
     success_cooldown=td(minutes=5), 

@@ -18,6 +18,8 @@ copy_map = {
     'eps_%s': '%s5_score',
 }
 
+logger = logging.getLogger('gsm')
+
 class Command(BaseCommand):
     option_list = BaseCommand.option_list + (
         make_option('--nowplaying',
@@ -26,9 +28,16 @@ class Command(BaseCommand):
             action="store_true",
             help='set to call get_matches_live with nowplaying=yes'
         ),
+        make_option('--cooldown',
+            dest='cooldown',
+            default=False,
+            help='cooldown time between requests'
+        ),
     )
 
     def handle(self, *args, **options):
+        self.cooldown = int(options.get('cooldown', 1))
+
         now_playing = options.get('nowplaying', False)
         now = datetime.datetime.now()
         delta = datetime.timedelta(hours=4)
@@ -37,6 +46,7 @@ class Command(BaseCommand):
             if sport.slug == 'soccer':
                 tree = gsm.get_tree('en', sport, 'get_matches_live', update=True, now_playing=now_playing)
                 self.update(tree, sport)
+                time.sleep(self.cooldown)
             else:
                 sessions = Session.objects.filter(
                     datetime_utc__gte=now - delta,
@@ -46,9 +56,13 @@ class Command(BaseCommand):
                 for session in sessions:
                     tree = gsm.get_tree('en', sport, 'get_matches', update=True, type=session.tag, id=session.gsm_id)
                     self.update(tree, sport)
-        
+                    time.sleep(self.cooldown)
+
     def update(self, tree, sport):
         root = tree.getroot()
         for element in gsm.parse_element_for(root, 'match'):
-            session = Session.objects.get(gsm_id=element.attrib['match_id'], sport=sport)
-            session.resync(element)
+            try:
+                session = Session.objects.get(gsm_id=element.attrib['match_id'], sport=sport)
+                session.resync(element)
+            except Session.DoesNotExist:
+                logger.error('Could not sync session that does not exist: %s' % element.attrib['match_id'])

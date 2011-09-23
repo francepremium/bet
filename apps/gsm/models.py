@@ -266,6 +266,20 @@ class AbstractGsmEntity(models.Model):
                 return '%s %s' % (self.attrib['firstname'], self.attrib['lastname'])
         return self.name
 
+
+    def get_datetime(self, el, date_attr, time_attr):
+        datetime_str = '%s %s' % (
+            el.attrib.get(date_attr, False) or '',
+            el.attrib.get(time_attr, False) or '00:00:00',
+        )
+
+        if datetime_str[-1] == ' ': # no time, set to midnight
+            datetime_str = datetime_str + '00:00:00'
+
+        if datetime_str not in (' ', ' 00:00:00'):
+            converter = Session._meta.get_field('datetime_utc')
+            return converter.to_python(datetime_str)
+
     def resync(self, element=None):
         if self.tag == 'match':
             copy_map = {
@@ -294,6 +308,10 @@ class AbstractGsmEntity(models.Model):
             elif element.attrib.get('status', False) == 'Played':
                 self.draw = True
 
+            self.datetime_utc = self.get_datetime(
+                element, 'date_utc', 'time_utc')
+            if self.datetime_utc:
+                self.time_unknown = False
 
         for src, dst in copy_map.items():
             if '%s' in src:
