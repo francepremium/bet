@@ -47,9 +47,17 @@
                     {% trans 'wall post' %}
                 {% endif %}
                 {% if action.action_object.content_object.verb == 'updated his status' %}
+                    {% if action.action_object.content_object.action_object.user == action.action_object.user %}
+                        {% trans 'his' %}
+                    {% endif %}
                     {% trans 'status update' %}
                 {% endif %} <span class="cite">"{{ action.action_object.content_object.action_object.comment }}"</span>
             </a>
+
+                {% if action.action_object.content_object.action_object.user != action.action_object.user %}
+                    {% trans 'by' %}
+                    <a href="{{ action.action_object.content_object.action_object.user.get_absolute_url }}" title="{{ action.action_object.content_object.action_object.user }}">{{ action.action_object.content_object.action_object.user }}</a>
+                {% endif %}
             {% endspaceless %}
         {% else %}
             {% if action.action_object.content_object.bookmaker %}
