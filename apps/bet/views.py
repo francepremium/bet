@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.views import generic
 
 import actstream
+from subscription.examples.yourlabs.shortcuts import emit_static
 
 from bet.helpers import *
 from models import *
@@ -98,6 +99,9 @@ def ticket_add(request, form_class=TicketForm,
 @login_required
 def bet_status_change(request, bet_pk, action):
     bet = shortcuts.get_object_or_404(Bet, pk=bet_pk)
+
+    initial_ticket_correction = bet.ticket.correction
+
     if action not in ('won', 'lost', 'flag', 'canceled'):
         return http.HttpResponseBadRequest('Only won, lost, flag and canceled are OK for the action argument')
     
@@ -133,16 +137,35 @@ def bet_status_change(request, bet_pk, action):
                                                     correction=new_correction)
         event.save()
 
-        Bet.objects.filter(session=bet.session, bettype=bet.bettype, 
-            choice=bet.choice).update(correction=new_correction, 
-            status=BET_STATUS_CORRECTED)
+        bets = Bet.objects.filter(session=bet.session, bettype=bet.bettype, 
+            choice=bet.choice).select_related()
         
-        users = User.objects.filter(ticket__bet__session=bet.session, 
-            ticket__bet__bettype=bet.bettype, ticket__bet__choice=bet.choice
-            ).values_list('pk', flat=True).distinct()
-        for pk in users:
-            print "DOING", pk
+        users = []
+        for bet in bets:
+            bet.correction = new_correction
+            bet.status = BET_STATUS_CORRECTED
+            bet.save()
+ 
+            emit_static(
+                template='bet_corrected',
+                bet=bet,
+                queues=['dropdown=other,user=%s,unacknowledged' % bet.ticket.user.pk]
+            )
+
+            new_ticket_correction = bet.ticket.correction
+            if initial_ticket_correction == BET_CORRECTION_NEW and \
+                new_ticket_correction != BET_CORRECTION_NEW:
+                emit_static(
+                    template='ticket_corrected',
+                    ticket=bet.ticket,
+                    queues=['dropdown=other,user=%s,unacknowledged' % bet.ticket.user.pk]
+                )
+
+            if bet.ticket.user in users:
+                continue
+            
             refresh_betprofile_for_user.spool(userpk=str(pk))
+            users.append(bet.ticket.user)
 
         actstream.action.send(request.user, verb='corrected', action_object=bet)
 

@@ -313,3 +313,35 @@ div.button { display:inline-block; /* compatibility => */ zoom:1; *display:inlin
 /* Forms */
 #body input[type=submit] { margin:10px 0px 0px auto; }
 #body_content form { margin-bottom:15px; }
+
+/* Subscription */
+#subscription_outer div {
+    display: inline-block;
+}
+#subscription_outer .hidden {
+    display: none;
+}
+#subscription_outer .dropdown {
+    overflow: visible;
+    position: absolute;
+    z-index: 100;
+    background-color: white;
+}
+#subscription_outer .dropdown.inner {
+    width: 330px;
+}
+#subscription_outer .list .notification {
+    display: block;
+}
+#subscription_outer {
+    position: absolute;
+    top: 101px;
+    left: 151px;
+}
+#subscription_outer .dropdown.outer.other {
+    left: 150px;
+}
+#subscription_outer .dropdown.outer.messages {
+    left: 60px;
+}
+

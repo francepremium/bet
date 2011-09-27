@@ -2,6 +2,8 @@
 {% load localeurl_tags %}
 {% load comments %}
 {% load avatar_tags %}
+{% load subscription_yourlabs_tags %}
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}">
     <head>
@@ -233,11 +235,22 @@ table.bettype table.choices {
         {% endif %}
 
         {% block body_outer %}
+        {% if user.is_authenticated %}
+        <div class="subscription" id="subscription_outer">
+            what ?
+            <div class="dropdown outer friends" id="subscription_dropdown_friends">
+                {% subscription_yourlabs_dropdown request 'friends' 'undelivered,unacknowledged,acknowledged' 'undelivered,unacknowledged' 15 %}
+            </div>
+            <div class="dropdown outer messages" id="subscription_dropdown_messages">
+                {% subscription_yourlabs_dropdown request 'messages' 'undelivered,unacknowledged,acknowledged' 'undelivered,unacknowledged' 15 %}
+            </div>
+            <div class="dropdown outer other" id="subscription_dropdown_other">
+                {% subscription_yourlabs_dropdown request 'other' 'undelivered,unacknowledged,acknowledged' 'undelivered,unacknowledged' 15 %}
+            </div>
+        </div>
+        {% endif %}
         <div id="body">
-			{% if user.is_authenticated %}
-                {% load subscription_yourlabs_tags %}
-                {% subscription_yourlabs_widget request 4 %}
-
+        {% if user.is_authenticated %}
 			<div id="publication">
 				<div id="publication_head">
 					<span>{% trans 'publication:' %}</span>
@@ -381,7 +394,9 @@ table.bettype table.choices {
 		}
 
         $(document).ready(function() {
-            Subscription.factory('{% url subscription_json %}', '{% url subscription_push %}');
+            Subscription.factory('{% url subscription_dropdown_ajax %}', '{% url subscription_dropdown_open %}', {
+                'delay': 3500,
+            });
 
             var comments = $('div.comments');
             if (comments.length == 1) {

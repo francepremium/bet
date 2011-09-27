@@ -161,6 +161,10 @@ USE_COMMENTS_AS_WALL = True
 
 HAYSTACK_ENABLE_REGISTRATION = False
 
+SUBSCRIPTION_BACKENDS = {
+    'storage': 'subscription.examples.yourlabs.backends.RedisBackend',
+}
+
 from yourlabs.setup import Setup
 setup = Setup(globals())
 setup.debug(True)

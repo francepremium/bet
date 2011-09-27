@@ -1,0 +1,10 @@
+{% extends 'subscription/notifications/base.html' %}
+
+{% load i18n %}
+
+{% block story %}
+    {% trans 'Your bet' %}
+    <a href="{{ bet.get_absolute_url }}">{{ bet }}</a>
+    {% trans 'was corrected' %}:
+    {{ bet.get_correction_display }}
+{% endblock %}

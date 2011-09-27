@@ -8,11 +8,12 @@ from django.contrib.comments.models import Comment
 from actstream import action
 from actstream.models import Action, Follow
 from django_messages.models import Message
-from subscription.models import Subscription
 
 import scoobet
 # get_rankings monkey patch
 import scoobet.rankings
+# django-subscription configuration
+import scoobet_subscriptions
 
 def user_messaging_security(sender, **kwargs):
     m = kwargs['instance']

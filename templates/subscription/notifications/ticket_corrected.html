@@ -1,0 +1,10 @@
+{% extends 'subscription/notifications/base.html' %}
+
+{% load i18n %}
+
+{% block story %}
+    {% trans 'Your ticket' %}
+    <a href="{{ ticket.get_absolute_url }}">#{{ ticket.pk }}</a>
+    {% trans 'was corrected' %}:
+    {{ ticket.get_correction_display }}
+{% endblock %}
