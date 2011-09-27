@@ -17,8 +17,10 @@ table.lineups {
 {% block body %}{{ block.super }}
     
 
-    {% gsm_tree key='tables_tree' method='get_tables' type='season' id=session.season.competition.get_last_season.gsm_id %}
-    {% gsm_render_tables_tree tables_tree %}
+    {% if sport.slug != 'tennis' %}
+        {% gsm_tree key='tables_tree' method='get_tables' type='season' id=session.season.competition.get_last_season.gsm_id %}
+        {% gsm_render_tables_tree tables_tree %}
+    {% endif %}
 
     {% if session.oponnent_A.gsm_id and session.oponnent_B.gsm_id and sport.slug == 'soccer' %}
         {# avoid cases where we don't know the oponnent yet, ie. tournament #}
