@@ -135,15 +135,13 @@ class Ticket(models.Model):
 
     @property
     def correction(self):
-        if not hasattr(self, '_correction'):
-            # if any bet is "new"
-            if self.bet_set.filter(correction=BET_CORRECTION_NEW).count():
-                self._correction = BET_CORRECTION_NEW
-            elif self.bet_set.filter(correction=BET_CORRECTION_LOST).count():
-                self._correction = BET_CORRECTION_LOST
-            else:
-                self._correction = BET_CORRECTION_WON
-        return self._correction
+        # if any bet is "new"
+        if self.bet_set.filter(correction=BET_CORRECTION_NEW).count():
+            return BET_CORRECTION_NEW
+        elif self.bet_set.filter(correction=BET_CORRECTION_LOST).count():
+            return BET_CORRECTION_LOST
+        else:
+            return BET_CORRECTION_WON
 
     def get_correction_display(self):
         if not hasattr(self, '_correction_display'):
