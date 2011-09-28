@@ -11,6 +11,7 @@
     <li class="{% if tab == 'activities' %}active{% endif %}">
         <a href="{% url user_detail_tab object.username 'activities' %}" title="{% trans 'activities of' %} {{ object }}">{% trans 'activities' %}</a>
     </li>
+    {% if object.username != 'betspire' %}
     <li class="{% if tab == 'social' %}active{% endif %}">
         <a href="{% url user_detail_tab object.username 'social' %}" title="{% trans 'relations with' %} {{ object }}">{% trans 'social' %}</a>
     </li>
@@ -23,6 +24,7 @@
     <li class="{% if tab == 'picks' %}active{% endif %}">
         <a href="{% url user_detail_tab object.username 'picks' %}" title="{% trans 'picks of' %} {{ object }}">{% trans 'picks' %}</a>
     </li>
+    {% endif %}
 </ul>
 {% endblock %}
 
@@ -35,25 +37,32 @@
 		<h1>{{ object }}</h1>
 	</div>
 
-	<div class="action">
-	{% get_user_contenttype as user_ctype %}
+
+    <div class="action">
+    {% get_user_contenttype as user_ctype %}
     {% if request.user != object and request.user.is_authenticated %}
         <a 
-		href="{% url actstream_unfollow content_type_id=user_ctype.id  object_id=object.id %}" 
-		class="button unfollow_button" 
-		style="{% if object not in request.user.follows %}display:none{% endif %}">
-			{% trans 'following' %}
-		</a>
-		<a 
-		href="{% url actstream_follow content_type_id=user_ctype.id  object_id=object.id %}" 
-		class="button follow_button" 
-		style="{% if object in request.user.follows %}display:none{% endif %}">
-			{% trans 'follow' %}
-		</a>
+        href="{% url actstream_unfollow content_type_id=user_ctype.id  object_id=object.id %}" 
+        class="button unfollow_button" 
+        style="{% if object not in request.user.follows %}display:none{% endif %}">
+            {% trans 'following' %}
+        </a>
+        <a 
+        href="{% url actstream_follow content_type_id=user_ctype.id  object_id=object.id %}" 
+        class="button follow_button" 
+        style="{% if object in request.user.follows %}display:none{% endif %}">
+            {% trans 'follow' %}
+        </a>
     {% endif %}
-	</div>
+    </div>
 
-    {% render_popularity_for_object request object %}
+
+
+    {% if object.username != 'betspire' %}
+
+        {% render_popularity_for_object request object %}
+    
+    {% endif %}
 {% endblock %}
 
 {% block body %}

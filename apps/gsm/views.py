@@ -148,6 +148,10 @@ def session_detail_tab(request, sport, gsm_id, tab, tag='match',
         c = c.getchildren()[0]
     session.element = c
 
+    context['elements'] = {}
+    for child in c.getchildren():
+        context['elements'][child.tag] = child
+
     try:
         t = gsm.get_tree(context['language'], sport, 'get_match_statistics', 
             id=session.gsm_id)

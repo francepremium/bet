@@ -41,3 +41,10 @@ def gsm_sync_live():
     non_recoverable_downtime=td(hours=24))
 def update_index():
     call_command('update_index')
+
+@runner.task(
+    success_cooldown=td(hours=2), 
+    fail_cooldown=td(minutes=30),
+    non_recoverable_downtime=td(hours=6))
+def gsm_delete():
+    call_command('gsm_delete')

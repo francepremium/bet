@@ -66,6 +66,9 @@ def get_tree(lang, sport, method, update=False, retry=False, **parameters):
 
     if sport == 'soccer' and method in LANGUAGE_FAILS:
         parameters.pop('lang')
+    
+    if method == 'get_deleted':
+        parameters.pop('lang')
 
     url = '/%s/%s?%s' % (
         sport,

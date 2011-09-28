@@ -15,6 +15,18 @@ import scoobet.rankings
 # django-subscription configuration
 import scoobet_subscriptions
 
+def follow_betspire(sender, instance=None, **kwargs):
+    if not kwargs['created']: return
+
+    try:
+        betspire = User.objects.get(username='betspire')
+        follow = Follow(actor=betspire, user=instance)
+        follow.save()
+    except User.DoesNotExist:
+        pass
+
+signals.post_save.connect(follow_betspire, sender=User)
+
 def user_messaging_security(sender, **kwargs):
     m = kwargs['instance']
     authorized = m.sender.following().filter(pk=m.recipient.pk).count() > 0
