@@ -171,6 +171,7 @@ setup.debug(True)
 setup.full() 
 
 if setup.ready:
+    setup.add_logger('redis')
     setup.add_logger('gsm')
     setup.add_logger('gsm_bugs')
     setup.add_logger('gsm_delete')

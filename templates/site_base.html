@@ -141,7 +141,8 @@ table.bettype table.choices {
 						<li><a href="{% url bet_list_flagged %}">{% trans 'Flagged bets' %}</a></li>
 						{% endif %}
 						<li><a href="{% url messages_inbox %}">{% trans 'inbox'|capfirst %} {% if inbox_count %}[{{ inbox_count }}]{% endif %}</a></li>
-						<li><a href="{% url acct_logout %}">Logout</a></li>
+						<li><a href="{% url subscription_list %}">{% trans 'notifications' %}</a></li>
+						<li><a href="{% url acct_logout %}">{% trans 'logout' %}</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -237,7 +238,6 @@ table.bettype table.choices {
         {% block body_outer %}
         {% if user.is_authenticated %}
         <div class="subscription" id="subscription_outer">
-            what ?
             <div class="dropdown outer friends" id="subscription_dropdown_friends">
                 {% subscription_yourlabs_dropdown request 'friends' 'undelivered,unacknowledged,acknowledged' 'undelivered,unacknowledged' 15 %}
             </div>
