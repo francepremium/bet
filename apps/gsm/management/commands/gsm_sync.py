@@ -326,6 +326,10 @@ class Command(BaseCommand):
                 time.sleep(self.cooldown)
 
     def save_session(self, language, sport, element, **properties):
+        if 'double_A_id' in element.attrib.keys():
+            # doubles: GTFO
+            return
+
         converter = Session._meta.get_field('actual_start_datetime')
         actual_start_datetime = '%s %s' % (
             element.attrib.get('actual_start_date', '') or '',

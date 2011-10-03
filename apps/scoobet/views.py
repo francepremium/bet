@@ -22,6 +22,21 @@ from bet.models import *
 from gsm.models import Session, Competition, GsmEntity
 import search_sites
 
+def action_detail(request, action_id):
+    """
+    ``Action`` detail view (pretty boring, mainly used for get_absolute_url)
+    """
+    action = shortcuts.get_object_or_404(Action, pk=action_id)
+    try:
+        new_action = action.action_object.content_object
+        if new_action.__class__.__name__ == 'Action':
+            action = new_action
+    except:
+        pass
+    return shortcuts.render_to_response('activity/detail.html', {
+        'action': action,
+    }, context_instance=template.RequestContext(request))
+
 def homepage(request,
     template_name='homepage.html', extra_context=None):
     qs = User.objects.exclude(betprofile__profit=None).select_related('betprofile')
