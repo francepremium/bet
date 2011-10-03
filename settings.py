@@ -177,6 +177,9 @@ if setup.ready:
     setup.add_logger('gsm_delete')
     GSM_CACHE = os.path.join(VAR_ROOT, 'cache', 'gsm')
 
+    if not os.path.exists(GSM_CACHE):
+        os.makedirs(GSM_CACHE)
+
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
 from local_settings import *
