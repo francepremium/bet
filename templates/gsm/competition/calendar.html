@@ -1,57 +1,24 @@
 {% extends 'gsm/competition/base.html' %}
 {% load i18n gsm_tags %}
 
-{% block body %}{{ block.super }}
+{% block body %}
+    {{ block.super }}
+
 	<div class="calendar">
-    {% if cup or round %}
-		<div class="round">
-			<h2>{{ round.name }}</h2>
-			<div class="navigation">
-			{% if round.get_previous_round %}
-				<a class="button button_simple button_small button_backward" href="?round={{ round.get_previous_round.pk }}" title="">{% trans 'prev' %}</a>
-			{% endif %}
-			{% if round.get_next_round %}
-				<a class="button button_simple button_small button_forward" href="?round={{ round.get_next_round.pk }}" title="">{% trans 'next' %}</a>
-			{% endif %}
-			</div>
-		</div>
-    {% else %}
-        {% if gameweek %}
-		<div class="gameweek">
-			<h2>{% trans 'day' %} {{ gameweek }}</h2>
-			<div class="navigation">
-            {% if gameweek > 1 %}
-                <a class="button button_simple button_small button_backward" href="?gameweek={{ gameweek|sub:1 }}" title="">{% trans 'prev' %}</a>
-            {% endif %}
-            {% if gameweek < competition.get_last_season.get_last_gameweek %}
-                <a class="button button_simple button_small button_forward" href="?gameweek={{ gameweek|add:1 }}" title="">{% trans 'next' %}</a>
-            {% endif %}
-			</div>
-		</div>
-        {% else %}
-		<div class="week">
-			<h2>{% trans 'week' %} {{ week }}</h2>
-			<div class="navigation">
-            {% if previous_week %}
-                <a class="button button_simple button_small button_backward" href="?week={{ previous_week }}">{% trans 'prev' %}</a>
-            {% endif %}
-            {% if next_week %}
-                <a class="button button_simple button_small button_forward" href="?week={{ next_week }}">{% trans 'next' %}</a>
-            {% endif %}
-			</div>
-		</div>
+        {% if previous_page %}
+            <a href="{{ request.path }}?page={{ previous_page }}">{% trans 'previous' %}</a>
         {% endif %}
-    {% endif %}
-	</div>
+        {% if next_page %}
+            <a href="{{ request.path }}?page={{ next_page }}">{% trans 'next' %}</a>
+        {% endif %}
 
-    {% gsm_sessions_render sessions %}
+        {% gsm_sessions_render sessions %}
 
-    {% if last_sessions %}
-        <h2 class="last_sessions">{% trans 'last matches' %}</h2>
-        {% gsm_sessions_render last_sessions %}
-    {% endif %}
-    {% if next_sessions %}
-        <h2 class="next_sessions">{% trans 'next matches' %}</h2>
-        {% gsm_sessions_render next_sessions %}
-    {% endif %}
+        {% if previous_page %}
+            <a href="{{ request.path }}?page={{ previous_page }}">{% trans 'previous' %}</a>
+        {% endif %}
+        {% if next_page %}
+            <a href="{{ request.path }}?page={{ next_page }}">{% trans 'next' %}</a>
+        {% endif %}
+    </div>
 {% endblock %}

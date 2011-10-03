@@ -163,6 +163,15 @@ def session_detail_tab(request, sport, gsm_id, tab, tag='match',
     except gsm.GsmException:
         pass
 
+    now = datetime.datetime.now()
+    past_sessions_A = session.oponnent_A.get_sessions().exclude(pk=session.pk).filter(datetime_utc__lte=now)[:8]
+    next_sessions_A = session.oponnent_A.get_sessions().exclude(pk=session.pk).filter(datetime_utc__gt=now)[:2]
+    past_sessions_B = session.oponnent_B.get_sessions().exclude(pk=session.pk).filter(datetime_utc__lte=now)[:8]
+    next_sessions_B = session.oponnent_B.get_sessions().exclude(pk=session.pk).filter(datetime_utc__gt=now)[:2]
+
+    context['sessions_A'] = list(past_sessions_A) + list(next_sessions_A)
+    context['sessions_B'] = list(past_sessions_B) + list(next_sessions_B)
+
     if tab == 'picks':
         context['bet_list_helper'] = BetListHelper(request, session=session, exclude_columns=['support'])
 
@@ -200,57 +209,50 @@ def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
         cup = context['cup'] = True
 
     if tab == 'calendar':
-        season = competition.get_last_season()
-        if cup or season.round_set.count() > 1:
-            round_pk = request.GET.get('round', False)
-            if round_pk:
-                context['round'] = season.round_set.get(pk=round_pk)
-            else:
-                context['round'] = season.get_current_round()
-            context['sessions'] = context['round'].session_set.all()
-        elif season.get_current_gameweek():
-            gameweek = context['gameweek'] = int(request.GET.get('gameweek', season.get_current_gameweek()))
-            context['sessions'] = season.session_set.filter(gameweek=gameweek)
-        else:
-            if season.session_set.count():
-                season_round = season.round_set.all()[0]
+        context['season'] = season = competition.get_last_season()
 
-                this_week_monday = datetime.date.today() - datetime.timedelta(datetime.date.today().weekday())
-                # start_date should be a monday
-                start_date = season_round.start_date - datetime.timedelta(season_round.start_date.weekday())
-                dates = rrule(WEEKLY, dtstart=start_date, until=season_round.end_date)
+        page = int(request.GET.get('page', 0))
+        paginate_by = 15
+        center = 10
 
-                week = request.GET.get('week', False)
-                if not week:
-                    default_week = True
-                    week = 0
-                    for date in dates:
-                        if date == this_week_monday:
-                            break
-                        week += 1
-                    try:
-                        dates[week]
-                    except IndexError:
-                        week = week - 1
-                else:
-                    default_week = False
+        now = datetime.datetime.now()
+        next_sessions = season.session_set.filter(datetime_utc__gt=now)
+        last_sessions = season.session_set.filter(datetime_utc__lte=now).order_by('-datetime_utc')
 
-                week = int(week) 
-                try:
-                    dates[week+1]
-                    context['next_week'] = week + 1
-                except IndexError:
-                    pass
-                context['previous_week'] = week - 1
+        if page == 0:
+            context['sessions'] = list(reversed(last_sessions[:paginate_by-center])) + list(next_sessions[:center])
 
-                context['sessions'] = season.session_set.filter(datetime_utc__gte=dates[week]).filter(datetime_utc__lte=dates[week] + datetime.timedelta(7))
+            try:
+                next_sessions[center]
+                context['next_page'] = page + 1
+            except IndexError:
+                pass
+            try:
+                last_sessions[paginate_by-center]
+                context['previous_page'] = page - 1
+            except IndexError:
+                pass
+        elif page > 0:
+            start = paginate_by*page
+            end = start+paginate_by
+            context['sessions'] = next_sessions[start:end]
+            context['previous_page'] = str(page - 1)
 
-                if not context['sessions'].count() and default_week:
-                    week -= 1
-                    context['previous_week'] -= 1
-                    context['sessions'] = season.session_set.filter(datetime_utc__gte=dates[week]).filter(datetime_utc__lte=dates[week] + datetime.timedelta(7))
-            else:
-                context['sessions'] = None
+            try:
+                next_sessions[end+1]
+                context['next_page'] = page + 1
+            except IndexError:
+                pass
+        elif page < 0:
+            start = -paginate_by*page
+            end = start+paginate_by
+            context['sessions'] = reversed(last_sessions[start:end])
+            context['next_page'] = str(page + 1)
+            try:
+                last_sessions[end+1]
+                context['previous_page'] = page - 1
+            except IndexError:
+                pass
 
     if sport.slug == 'tennis':
         season = competition.get_last_season()
@@ -283,17 +285,11 @@ def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
         )
 
         season = competition.get_last_season()
-        if cup or season.round_set.count() > 1:
-            context['round'] = season.get_current_round()
-            context['sessions'] = context['round'].session_set.all()
-        elif season.get_current_gameweek():
+        if season.get_current_gameweek():
             gameweek = context['gameweek'] = int(request.GET.get('gameweek', season.get_current_gameweek()))
             context['sessions'] = season.session_set.filter(gameweek=gameweek)
-        elif season.session_set.count():
-            season_round = season.round_set.all()[0]
-            context['sessions'] = season_round.session_set.all()
         else:
-            context['sessions'] = None
+            context['sessions'] = season.session_set.filter(datetime_utc__gte=datetime.datetime.today())[:10]
 
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name, context,

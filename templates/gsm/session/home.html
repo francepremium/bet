@@ -189,6 +189,9 @@ table.lineups {
         {% gsm_render_tables_tree tables_tree %}
     {% endif %}
 
+    {% gsm_sessions_render sessions_A %}
+    {% gsm_sessions_render sessions_B %}
+
     {% if session.oponnent_A.gsm_id and session.oponnent_B.gsm_id and sport.slug == 'soccer' %}
         {# avoid cases where we don't know the oponnent yet, ie. tournament #}
         {% gsm_tree key='h2h_tree' method='get_head_2_head_statistics' team_1_id=session.oponnent_A.gsm_id team_2_id=session.oponnent_B.gsm_id %}{# no available for basketball #}

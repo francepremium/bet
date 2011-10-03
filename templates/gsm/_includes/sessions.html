@@ -25,7 +25,11 @@
             <tr class="{{ session.status }} {% if team %}{% if session.winner == team %}win{% endif %} {% if session.draw %}draw{% endif %} {% if session.winner != team and session.status = 'Played' %}lost{% endif %}{% endif %} session">
             {% block session_date %}
                 {% if not fixed_day %}
-				<td class="date">{{ request|timezone_adjust:session.datetime_utc.date|display_date }}</td>
+				<td class="date">
+                    {% ifchanged session.datetime_utc.date %}
+                        {{ request|timezone_adjust:session.datetime_utc.date|display_date }}
+                    {% endifchanged %}
+                </td>
                 {% endif %}
 			{% endblock %}
             {% if not divide_by_season %}
