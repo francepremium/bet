@@ -29,6 +29,11 @@ class Command(BaseCommand):
             default=False,
             help='cooldown time between requests'
         ),
+        make_option('--full',
+            dest='full',
+            default=False,
+            help='full time between requests'
+        ),
     )
 
     def get_tree(self, *args, **kwargs):
@@ -37,6 +42,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.cooldown = int(options.get('cooldown', 0))
+        self.full = options.get('full', False)
         logger.info('starting sync with cooldown %s' % self.cooldown)
 
         self.areas_country_code_2()
@@ -216,13 +222,14 @@ class Command(BaseCommand):
             'end_date': element.attrib.get('end_date', None) or None,
         })
 
-        converter = Season._meta.get_field('last_updated')
-        if properties['last_updated']:
-            last_updated = converter.to_python(properties['last_updated'])
-            if last_updated < datetime.datetime.now() - timedelta(days=2):
-                return
-        else:
-            logger.warning('No end date for %s season %s' % (element.attrib['season_id'], sport))
+        if not self.full:
+            converter = Season._meta.get_field('last_updated')
+            if properties['last_updated']:
+                last_updated = converter.to_python(properties['last_updated'])
+                if last_updated < datetime.datetime.now() - timedelta(days=2):
+                    return
+            else:
+                logger.warning('No end date for %s season %s' % (element.attrib['season_id'], sport))
 
         season = self.update_model(
             Season,
