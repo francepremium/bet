@@ -5,7 +5,7 @@ comments.signals.comment_was_posted.connect(
 
 from subscription.examples.yourlabs.apps import auth
 auth.signals.post_save.connect(auth.subscribe_user_to_himself, sender=auth.User)
-auth.subscribe_existing_users_to_themselves()
+auth.signals.post_syncdb.connect(auth.subscribe_existing_users_to_themselves)
 
 from subscription.examples.yourlabs.apps import actstream
 actstream.signals.post_save.connect(actstream.subscribe_user_to_his_action, 
