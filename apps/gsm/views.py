@@ -164,13 +164,16 @@ def session_detail_tab(request, sport, gsm_id, tab, tag='match',
         pass
 
     now = datetime.datetime.now()
-    past_sessions_A = session.oponnent_A.get_sessions().exclude(pk=session.pk).filter(datetime_utc__lte=now)[:8]
-    next_sessions_A = session.oponnent_A.get_sessions().exclude(pk=session.pk).filter(datetime_utc__gt=now)[:2]
-    past_sessions_B = session.oponnent_B.get_sessions().exclude(pk=session.pk).filter(datetime_utc__lte=now)[:8]
-    next_sessions_B = session.oponnent_B.get_sessions().exclude(pk=session.pk).filter(datetime_utc__gt=now)[:2]
+    past_sessions_A = list(session.oponnent_A.get_sessions().exclude(pk=session.pk).filter(datetime_utc__lte=now).order_by('-datetime_utc')[:8])
+    next_sessions_A = list(session.oponnent_A.get_sessions().exclude(pk=session.pk).filter(datetime_utc__gt=now)[:2])
+    past_sessions_B = list(session.oponnent_B.get_sessions().exclude(pk=session.pk).filter(datetime_utc__lte=now).order_by('-datetime_utc')[:8])
+    next_sessions_B = list(session.oponnent_B.get_sessions().exclude(pk=session.pk).filter(datetime_utc__gt=now)[:2])
 
-    context['sessions_A'] = list(past_sessions_A) + list(next_sessions_A)
-    context['sessions_B'] = list(past_sessions_B) + list(next_sessions_B)
+    past_sessions_A.reverse()
+    past_sessions_B.reverse()
+
+    context['sessions_A'] = past_sessions_A + next_sessions_A
+    context['sessions_B'] = past_sessions_B + next_sessions_B
 
     if tab == 'picks':
         context['bet_list_helper'] = BetListHelper(request, session=session, exclude_columns=['support'])
