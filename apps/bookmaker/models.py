@@ -61,7 +61,8 @@ class BetType(models.Model):
 class BetChoice(models.Model):
     bettype = models.ForeignKey('BetType')
     name = models.CharField(max_length=100)
-    
+    condition = models.TextField(null=True, blank=True)
+
     def __unicode__(self):
         return self.name
 

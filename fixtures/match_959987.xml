@@ -1,0 +1,121 @@
+
+<?xml version="1.0"?>
+
+<gsmrs version="2.0" sport="soccer" lang="en" last_generated="2011-10-11 16:15:26">
+<method method_id="2" name="get_matches">
+<parameter name="detailed" value="yes"/>
+<parameter name="id" value="959987"/>
+<parameter name="lang" value="en"/>
+<parameter name="type" value="match"/>
+</method>
+<competition competition_id="640" name="League Cup" teamtype="default" display_order="110" type="club" area_id="156" area_name="Portugal" last_updated="2011-10-10 12:25:14" soccertype="default">
+<season season_id="5260" name="2010/2011" start_date="2010-07-06" end_date="2011-05-06" service_level="2" last_updated="2011-09-29 15:30:56">
+<round round_id="12261" name="1st Group Stage" start_date="2010-08-07" end_date="2010-08-23" type="table" groups="4" has_outgroup_matches="no" last_updated="2011-09-29 15:30:56">
+<group group_id="3839" name="Group A" details="" winner="" last_updated="2011-08-30 12:20:45">
+<match match_id="959987" date_utc="2010-08-07" time_utc="16:00:00" date_london="2010-08-07" time_london="17:00:00" team_A_id="2572" team_A_name="Gil Vicente" team_A_country="PRT" team_B_id="1687" team_B_name="Moreirense" team_B_country="PRT" status="Played" gameweek="" winner="draw" fs_A="3" fs_B="3" hts_A="1" hts_B="2" ets_A="" ets_B="" ps_A="" ps_B="" last_updated="2011-08-30 12:20:45">
+<matchinfo>
+<venue venue_id="1545" name="Est&#xE1;dio Cidade de Barcelos" city="Barcelos" area_id="156"/>
+<referee person_id="92275" name="Hugo Miguel"/>
+<assistant_referee person_id="92278" name="Hern&#xE2;ni Fernandes"/>
+<assistant_referee person_id="139935" name="Nuno Roque"/>
+<fourth_official person_id="139936" name="H&#xE9;lder Malheiro"/>
+<attendance value="865"/>
+</matchinfo>
+<lineups>
+<event event_id="2641291" code="L" name="Line-up" person="Roberto Tigr&#xE3;o" person_id="9457" team_id="1687" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641283" code="L" name="Line-up" person="Andr&#xE9; " person_id="175417" team_id="1687" minute="0" minute_extra="" last_updated="2011-07-15 20:10:41"/>
+<event event_id="2641285" code="L" name="Line-up" person="Ciro J&#xFA;nior" person_id="73608" team_id="1687" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641286" code="L" name="Line-up" person="Edson Silva" person_id="140540" team_id="1687" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641288" code="L" name="Line-up" person="Jo&#xE3;o Vicente" person_id="140537" team_id="1687" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641284" code="L" name="Line-up" person="Castro" person_id="56802" team_id="1687" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641287" code="L" name="Line-up" person="Eriverton" person_id="51949" team_id="1687" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641289" code="L" name="Line-up" person="Lico" person_id="71866" team_id="1687" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641308" code="L" name="Line-up" person="Castanheira" person_id="89825" team_id="1687" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641290" code="L" name="Line-up" person="Lu&#xED;s Pinto" person_id="140533" team_id="1687" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641310" code="L" name="Line-up" person="H. Antchouet" person_id="66954" team_id="1687" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641835" code="L" name="Line-up" person="Murta" person_id="56729" team_id="2572" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641831" code="L" name="Line-up" person="Claudio" person_id="56731" team_id="2572" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641832" code="L" name="Line-up" person="Jo&#xE3;o Pedro" person_id="56772" team_id="2572" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641836" code="L" name="Line-up" person="Paulo Arantes" person_id="56775" team_id="2572" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641838" code="L" name="Line-up" person="Rodrigo Galo" person_id="32444" team_id="2572" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641839" code="L" name="Line-up" person="Sandro" person_id="56735" team_id="2572" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641828" code="L" name="Line-up" person="Andr&#xE9; Cunha" person_id="56767" team_id="2572" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641830" code="L" name="Line-up" person="Carlitos" person_id="17088" team_id="2572" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641833" code="L" name="Line-up" person="Joao Vilela" person_id="56780" team_id="2572" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641834" code="L" name="Line-up" person="Lu&#xED;s Manuel" person_id="90401" team_id="2572" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+<event event_id="2641837" code="L" name="Line-up" person="Rafael Ramazotti" person_id="73667" team_id="2572" minute="0" minute_extra="" last_updated="2011-02-01 09:26:41"/>
+</lineups>
+<lineups_bench>
+<event event_id="2641337" code="SUB" name="Substitution on bench" person="Ricardo Ribeiro" person_id="140284" team_id="1687" minute="0" minute_extra="" last_updated="2011-08-30 12:20:45"/>
+<event event_id="2641332" code="SUB" name="Substitution on bench" person="Anilton" person_id="56823" team_id="1687" minute="0" minute_extra="" last_updated="2011-08-30 12:20:45"/>
+<event event_id="2641334" code="SUB" name="Substitution on bench" person="Jos&#xE9; Alberto" person_id="56805" team_id="1687" minute="0" minute_extra="" last_updated="2011-08-30 12:20:45"/>
+<event event_id="2641333" code="SUB" name="Substitution on bench" person="Dionattan" person_id="32674" team_id="1687" minute="0" minute_extra="" last_updated="2011-08-30 12:20:45"/>
+<event event_id="2641336" code="SUB" name="Substitution on bench" person="Pintassilgo" person_id="140532" team_id="1687" minute="0" minute_extra="" last_updated="2011-08-30 12:20:45"/>
+<event event_id="2641331" code="SUB" name="Substitution on bench" person="Anderson Lob&#xE3;o" person_id="114573" team_id="1687" minute="0" minute_extra="" last_updated="2011-08-30 12:20:45"/>
+<event event_id="2641335" code="SUB" name="Substitution on bench" person="Bob&#xF4;" person_id="140287" team_id="1687" minute="0" minute_extra="" last_updated="2011-08-30 12:20:45"/>
+<event event_id="2641847" code="SUB" name="Substitution on bench" person="Cesar" person_id="76076" team_id="2572" minute="0" minute_extra="" last_updated="2011-08-30 12:20:45"/>
+<event event_id="2641848" code="SUB" name="Substitution on bench" person="Daniel" person_id="103359" team_id="2572" minute="0" minute_extra="" last_updated="2011-08-30 12:20:45"/>
+<event event_id="2641849" code="SUB" name="Substitution on bench" person="Junior Cai&#xE7;ara" person_id="80975" team_id="2572" minute="0" minute_extra="" last_updated="2011-08-30 12:20:45"/>
+<event event_id="2641845" code="SUB" name="Substitution on bench" person="Alexandre Camargo" person_id="72053" team_id="2572" minute="0" minute_extra="" last_updated="2011-08-30 12:20:45"/>
+<event event_id="2641850" code="SUB" name="Substitution on bench" person="Richard" person_id="114678" team_id="2572" minute="0" minute_extra="" last_updated="2011-08-30 12:20:45"/>
+<event event_id="2641846" code="SUB" name="Substitution on bench" person="Bruno Filipe" person_id="56790" team_id="2572" minute="0" minute_extra="" last_updated="2011-08-30 12:20:45"/>
+<event event_id="2641851" code="SUB" name="Substitution on bench" person="Z&#xE9; Lu&#xED;s" person_id="109730" team_id="2572" minute="0" minute_extra="" last_updated="2011-08-30 12:20:45"/>
+</lineups_bench>
+<substitutions>
+<sub>
+<event event_id="2641362" code="SI" name="Substitute in" person="Anilton" person_id="56823" team_id="1687" minute="43" minute_extra="" last_updated="2010-08-07 21:14:09"/>
+<event event_id="2641363" code="SO" name="Substitute out" person="Ciro J&#xFA;nior" person_id="73608" team_id="1687" minute="43" minute_extra="" last_updated="2010-08-07 21:14:18"/>
+</sub>
+<sub>
+<event event_id="2641869" code="SI" name="Substitute in" person="Junior Cai&#xE7;ara" person_id="80975" team_id="2572" minute="46" minute_extra="" last_updated="2010-08-07 21:45:44"/>
+<event event_id="2641874" code="SO" name="Substitute out" person="Paulo Arantes" person_id="56775" team_id="2572" minute="46" minute_extra="" last_updated="2010-08-07 21:45:53"/>
+</sub>
+<sub>
+<event event_id="2641866" code="SI" name="Substitute in" person="Richard" person_id="114678" team_id="2572" minute="46" minute_extra="" last_updated="2010-08-07 21:45:37"/>
+<event event_id="2641878" code="SO" name="Substitute out" person="Joao Vilela" person_id="56780" team_id="2572" minute="46" minute_extra="" last_updated="2010-08-07 21:46:03"/>
+</sub>
+<sub>
+<event event_id="2641882" code="SI" name="Substitute in" person="Z&#xE9; Lu&#xED;s" person_id="109730" team_id="2572" minute="62" minute_extra="" last_updated="2010-08-07 21:46:11"/>
+<event event_id="2641887" code="SO" name="Substitute out" person="Lu&#xED;s Manuel" person_id="90401" team_id="2572" minute="62" minute_extra="" last_updated="2010-08-07 21:46:25"/>
+</sub>
+<sub>
+<event event_id="2641340" code="SI" name="Substitute in" person="Pintassilgo" person_id="140532" team_id="1687" minute="65" minute_extra="" last_updated="2010-08-07 21:13:24"/>
+<event event_id="2641342" code="SO" name="Substitute out" person="Lico" person_id="71866" team_id="1687" minute="65" minute_extra="" last_updated="2010-08-07 21:13:34"/>
+</sub>
+<sub>
+<event event_id="2641356" code="SI" name="Substitute in" person="Jos&#xE9; Alberto" person_id="56805" team_id="1687" minute="76" minute_extra="" last_updated="2010-08-07 21:13:48"/>
+<event event_id="2641358" code="SO" name="Substitute out" person="Castanheira" person_id="89825" team_id="1687" minute="76" minute_extra="" last_updated="2010-08-07 21:13:59"/>
+</sub>
+</substitutions>
+<penalty_shootout/>
+<goals>
+<goal>
+<event event_id="2638815" code="G" name="Goal" person="Rodrigo Galo" person_id="32444" team_id="2572" minute="6" minute_extra="" last_updated="2010-08-07 18:21:05"/>
+</goal>
+<goal>
+<event event_id="2638833" code="PG" name="Penalty goal" person="Eriverton" person_id="51949" team_id="1687" minute="11" minute_extra="" last_updated="2010-08-07 18:23:32"/>
+</goal>
+<goal>
+<event event_id="2641252" code="G" name="Goal" person="Lu&#xED;s Pinto" person_id="140533" team_id="1687" minute="45" minute_extra="" last_updated="2010-08-07 21:07:27"/>
+</goal>
+<goal>
+<event event_id="2639368" code="G" name="Goal" person="Z&#xE9; Lu&#xED;s" person_id="109730" team_id="2572" minute="72" minute_extra="" last_updated="2010-08-07 19:45:17"/>
+</goal>
+<goal>
+<event event_id="2639642" code="G" name="Goal" person="Z&#xE9; Lu&#xED;s" person_id="109730" team_id="2572" minute="83" minute_extra="" last_updated="2010-08-07 19:57:09"/>
+</goal>
+<goal>
+<event event_id="2639744" code="G" name="Goal" person="Castro" person_id="56802" team_id="1687" minute="90" minute_extra="" last_updated="2010-08-07 20:02:23"/>
+</goal>
+</goals>
+<bookings>
+<event event_id="2641854" code="YC" name="Yellow card" person="Paulo Arantes" person_id="56775" team_id="2572" minute="10" minute_extra="" last_updated="2010-08-07 21:45:12"/>
+<event event_id="2641857" code="YC" name="Yellow card" person="Joao Vilela" person_id="56780" team_id="2572" minute="11" minute_extra="" last_updated="2010-08-07 21:45:20"/>
+</bookings>
+<extra/>
+</match>
+</group>
+</round>
+</season>
+</competition>
+</gsmrs>
