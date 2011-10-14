@@ -78,20 +78,26 @@ class Command(BaseCommand):
             Bet.objects.filter(session=session).update(correction=BET_CORRECTION_CANCELED, status=BET_STATUS_CORRECTED)
             return
 
-        TS_A = session.A_score
-        TS_B = session.B_score
+        rewrite = (
+            'fs_A',
+            'fs_B',
+            'ets_A',
+            'ets_B',
+        )
 
         to_correct = BetType.objects.filter(bet__session=session).distinct()
         for t in to_correct:
             for c in t.betchoice_set.all():
-                if not c.condition:
-                    continue
+                try:
+                    condition = c.condition
+                    for var in rewrite:
+                        condition = condition.rewrite(var, 'element.attrib["%s"]' % var)
+                    result = eval(condition)
+                    if result:
+                        correction = BET_CORRECTION_WON
+                    else:
+                        correction = BET_CORRECTION_LOST
 
-                result = eval(c.condition)
-                
-                if result:
-                    correction = BET_CORRECTION_WON
-                else:
-                    correction = BET_CORRECTION_LOST
-
-                Bet.objects.filter(session=session, bettype=t, choice=c).update(correction=correction, status=BET_STATUS_CORRECTED)
+                    Bet.objects.filter(session=session, bettype=t, choice=c).update(correction=correction)
+                except:
+                    Bet.objects.filter(session=session, bettype=t, choice=c).update(flagged=True)
