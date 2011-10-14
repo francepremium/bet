@@ -6,13 +6,13 @@
             "bettype": [
                 7, 
                 8, 
+                9, 
                 80, 
                 79, 
-                9, 
                 16, 
+                78, 
                 11, 
                 17, 
-                78, 
                 18, 
                 42, 
                 43, 
@@ -55,9 +55,12 @@
                 29, 
                 63, 
                 97, 
-                28, 
                 9, 
                 10, 
+                28, 
+                69, 
+                70, 
+                23, 
                 25, 
                 61, 
                 62, 
@@ -75,8 +78,6 @@
                 68, 
                 26, 
                 45, 
-                69, 
-                70, 
                 17, 
                 30, 
                 64, 
@@ -103,7 +104,6 @@
                 74, 
                 24, 
                 48, 
-                23, 
                 47, 
                 88, 
                 89, 
@@ -115,8 +115,8 @@
             "url": "https://www.bwin.fr/", 
             "creation_date": "2010", 
             "fans": [
-                6, 
-                22
+                22, 
+                6
             ], 
             "live_bets": true, 
             "user": 6, 
@@ -133,17 +133,18 @@
                 46, 
                 7, 
                 8, 
+                82, 
                 29, 
-                79, 
                 9, 
+                79, 
+                23, 
                 16, 
+                78, 
                 86, 
                 11, 
                 68, 
                 17, 
-                82, 
                 84, 
-                78, 
                 18, 
                 34, 
                 13, 
@@ -156,7 +157,6 @@
                 85, 
                 83, 
                 24, 
-                23, 
                 88, 
                 89, 
                 93, 
@@ -259,9 +259,9 @@
                 8, 
                 27, 
                 29, 
-                28, 
                 9, 
                 10, 
+                28, 
                 16, 
                 11, 
                 18, 
@@ -299,8 +299,8 @@
                 46, 
                 7, 
                 8, 
-                79, 
                 9, 
+                79, 
                 11, 
                 18, 
                 42, 
@@ -370,9 +370,12 @@
                 44, 
                 29, 
                 63, 
-                28, 
                 9, 
                 10, 
+                28, 
+                69, 
+                70, 
+                23, 
                 25, 
                 61, 
                 62, 
@@ -390,8 +393,6 @@
                 68, 
                 26, 
                 45, 
-                69, 
-                70, 
                 17, 
                 30, 
                 64, 
@@ -418,7 +419,6 @@
                 74, 
                 24, 
                 48, 
-                23, 
                 47, 
                 88, 
                 89, 
@@ -528,6 +528,17 @@
         }
     }, 
     {
+        "pk": 82, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "No goals conceded", 
+            "name_fr": "Aucun but conc\u00e9d\u00e9", 
+            "sport": 2, 
+            "name": "No goals conceded", 
+            "creation_bookmaker": 6
+        }
+    }, 
+    {
         "pk": 44, 
         "model": "bookmaker.bettype", 
         "fields": {
@@ -572,6 +583,28 @@
         }
     }, 
     {
+        "pk": 9, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Double chance", 
+            "name_fr": "Chance double", 
+            "sport": 2, 
+            "name": "Double chance", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Double chance HT", 
+            "name_fr": "Chance double MT", 
+            "sport": 2, 
+            "name": "Double chance HT", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
         "pk": 28, 
         "model": "bookmaker.bettype", 
         "fields": {
@@ -605,24 +638,35 @@
         }
     }, 
     {
-        "pk": 9, 
+        "pk": 69, 
         "model": "bookmaker.bettype", 
         "fields": {
-            "name_en": "Double chance", 
-            "name_fr": "Chance double", 
+            "name_en": "In which half will Team 1 score more goals?", 
+            "name_fr": "Durant quelle mi-temps l'\u00e9quipe 1 marquera-t-elle le plus de buts ?", 
             "sport": 2, 
-            "name": "Double chance", 
+            "name": "In which half will Team 1 score more goals?", 
             "creation_bookmaker": 3
         }
     }, 
     {
-        "pk": 10, 
+        "pk": 70, 
         "model": "bookmaker.bettype", 
         "fields": {
-            "name_en": "Double chance HT", 
-            "name_fr": "Chance double MT", 
+            "name_en": "In which half will team 2 score more goals?", 
+            "name_fr": "Durant quelle mi-temps l'\u00e9quipe 2 marquera-t-elle le plus de buts ?", 
             "sport": 2, 
-            "name": "Double chance HT", 
+            "name": "In which half will team 2 score more goals?", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Winning margin [Home / 2 goals]", 
+            "name_fr": "Ecart entre les \u00e9quipes [Domicile / 2 buts]", 
+            "sport": 2, 
+            "name": "Winning margin [Home / 2 goals]", 
             "creation_bookmaker": 3
         }
     }, 
@@ -759,6 +803,17 @@
         }
     }, 
     {
+        "pk": 78, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "To win to 0", 
+            "name_fr": "Gagner sans prendre de but", 
+            "sport": 2, 
+            "name": "To win to 0", 
+            "creation_bookmaker": 4
+        }
+    }, 
+    {
         "pk": 49, 
         "model": "bookmaker.bettype", 
         "fields": {
@@ -891,28 +946,6 @@
         }
     }, 
     {
-        "pk": 69, 
-        "model": "bookmaker.bettype", 
-        "fields": {
-            "name_en": "In which half will Team 1 score more goals?", 
-            "name_fr": "Durant quelle mi-temps l'\u00e9quipe 1 marquera-t-elle le plus de buts ?", 
-            "sport": 2, 
-            "name": "In which half will Team 1 score more goals?", 
-            "creation_bookmaker": 3
-        }
-    }, 
-    {
-        "pk": 70, 
-        "model": "bookmaker.bettype", 
-        "fields": {
-            "name_en": "In which half will team 2 score more goals?", 
-            "name_fr": "Durant quelle mi-temps l'\u00e9quipe 2 marquera-t-elle le plus de buts ?", 
-            "sport": 2, 
-            "name": "In which half will team 2 score more goals?", 
-            "creation_bookmaker": 3
-        }
-    }, 
-    {
         "pk": 17, 
         "model": "bookmaker.bettype", 
         "fields": {
@@ -921,17 +954,6 @@
             "sport": 2, 
             "name": "Last team to score (90')", 
             "creation_bookmaker": 4
-        }
-    }, 
-    {
-        "pk": 82, 
-        "model": "bookmaker.bettype", 
-        "fields": {
-            "name_en": "No goals conceded", 
-            "name_fr": "Aucun but conc\u00e9d\u00e9", 
-            "sport": 2, 
-            "name": "No goals conceded", 
-            "creation_bookmaker": 6
         }
     }, 
     {
@@ -987,17 +1009,6 @@
             "sport": 2, 
             "name": "Team 2 to score in both halves", 
             "creation_bookmaker": 3
-        }
-    }, 
-    {
-        "pk": 78, 
-        "model": "bookmaker.bettype", 
-        "fields": {
-            "name_en": "To win to 0", 
-            "name_fr": "Gagner sans prendre de but", 
-            "sport": 2, 
-            "name": "To win to 0", 
-            "creation_bookmaker": 4
         }
     }, 
     {
@@ -1309,17 +1320,6 @@
         }
     }, 
     {
-        "pk": 23, 
-        "model": "bookmaker.bettype", 
-        "fields": {
-            "name_en": "Winning margin [Home / 2 goals]", 
-            "name_fr": "Ecart entre les \u00e9quipes [Domicile / 2 buts]", 
-            "sport": 2, 
-            "name": "Winning margin [Home / 2 goals]", 
-            "creation_bookmaker": 3
-        }
-    }, 
-    {
         "pk": 47, 
         "model": "bookmaker.bettype", 
         "fields": {
@@ -1441,11 +1441,22 @@
         }
     }, 
     {
-        "pk": 211, 
+        "pk": 207, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "0", 
-            "bettype": 61, 
+            "bettype": 60, 
+            "name_fr": "0", 
+            "name": "0", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 195, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "0", 
+            "bettype": 57, 
             "name_fr": "0", 
             "name": "0", 
             "condition": null
@@ -1485,17 +1496,6 @@
         }
     }, 
     {
-        "pk": 195, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "0", 
-            "bettype": 57, 
-            "name_fr": "0", 
-            "name": "0", 
-            "condition": null
-        }
-    }, 
-    {
         "pk": 203, 
         "model": "bookmaker.betchoice", 
         "fields": {
@@ -1529,11 +1529,11 @@
         }
     }, 
     {
-        "pk": 207, 
+        "pk": 211, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "0", 
-            "bettype": 60, 
+            "bettype": 61, 
             "name_fr": "0", 
             "name": "0", 
             "condition": null
@@ -1584,17 +1584,6 @@
         }
     }, 
     {
-        "pk": 122, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "0-1", 
-            "bettype": 28, 
-            "name_fr": "0-1", 
-            "name": "0-1", 
-            "condition": null
-        }
-    }, 
-    {
         "pk": 289, 
         "model": "bookmaker.betchoice", 
         "fields": {
@@ -1639,6 +1628,17 @@
         }
     }, 
     {
+        "pk": 122, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "0-1", 
+            "bettype": 28, 
+            "name_fr": "0-1", 
+            "name": "0-1", 
+            "condition": null
+        }
+    }, 
+    {
         "pk": 313, 
         "model": "bookmaker.betchoice", 
         "fields": {
@@ -1650,22 +1650,22 @@
         }
     }, 
     {
-        "pk": 123, 
+        "pk": 350, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "0-2", 
-            "bettype": 28, 
+            "bettype": 86, 
             "name_fr": "0-2", 
             "name": "0-2", 
             "condition": null
         }
     }, 
     {
-        "pk": 350, 
+        "pk": 123, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "0-2", 
-            "bettype": 86, 
+            "bettype": 28, 
             "name_fr": "0-2", 
             "name": "0-2", 
             "condition": null
@@ -1881,11 +1881,11 @@
         }
     }, 
     {
-        "pk": 230, 
+        "pk": 216, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "1", 
-            "bettype": 67, 
+            "bettype": 62, 
             "name_fr": "1", 
             "name": "1", 
             "condition": null
@@ -1908,17 +1908,6 @@
         "fields": {
             "name_en": "1", 
             "bettype": 61, 
-            "name_fr": "1", 
-            "name": "1", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 22, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "1", 
-            "bettype": 8, 
             "name_fr": "1", 
             "name": "1", 
             "condition": null
@@ -2079,6 +2068,17 @@
         }
     }, 
     {
+        "pk": 230, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "1", 
+            "bettype": 67, 
+            "name_fr": "1", 
+            "name": "1", 
+            "condition": null
+        }
+    }, 
+    {
         "pk": 188, 
         "model": "bookmaker.betchoice", 
         "fields": {
@@ -2123,14 +2123,14 @@
         }
     }, 
     {
-        "pk": 216, 
+        "pk": 22, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "1", 
-            "bettype": 62, 
+            "bettype": 8, 
             "name_fr": "1", 
             "name": "1", 
-            "condition": null
+            "condition": "hts_A > hts_B"
         }
     }, 
     {
@@ -2164,17 +2164,6 @@
             "name_fr": "1", 
             "name": "1", 
             "condition": "TS_A > TS_B"
-        }
-    }, 
-    {
-        "pk": 315, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "1-0", 
-            "bettype": 80, 
-            "name_fr": "1-0", 
-            "name": "1-0", 
-            "condition": null
         }
     }, 
     {
@@ -2222,13 +2211,13 @@
         }
     }, 
     {
-        "pk": 324, 
+        "pk": 315, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "1-1", 
+            "name_en": "1-0", 
             "bettype": 80, 
-            "name_fr": "1-1", 
-            "name": "1-1", 
+            "name_fr": "1-0", 
+            "name": "1-0", 
             "condition": null
         }
     }, 
@@ -2277,13 +2266,13 @@
         }
     }, 
     {
-        "pk": 291, 
+        "pk": 324, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "1-2", 
-            "bettype": 79, 
-            "name_fr": "1-2", 
-            "name": "1-2", 
+            "name_en": "1-1", 
+            "bettype": 80, 
+            "name_fr": "1-1", 
+            "name": "1-1", 
             "condition": null
         }
     }, 
@@ -2304,6 +2293,17 @@
         "fields": {
             "name_en": "1-2", 
             "bettype": 27, 
+            "name_fr": "1-2", 
+            "name": "1-2", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 291, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "1-2", 
+            "bettype": 79, 
             "name_fr": "1-2", 
             "name": "1-2", 
             "condition": null
@@ -2343,22 +2343,22 @@
         }
     }, 
     {
-        "pk": 127, 
+        "pk": 329, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "1-3", 
-            "bettype": 28, 
+            "bettype": 80, 
             "name_fr": "1-3", 
             "name": "1-3", 
             "condition": null
         }
     }, 
     {
-        "pk": 329, 
+        "pk": 293, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "1-3", 
-            "bettype": 80, 
+            "bettype": 79, 
             "name_fr": "1-3", 
             "name": "1-3", 
             "condition": null
@@ -2387,13 +2387,24 @@
         }
     }, 
     {
-        "pk": 293, 
+        "pk": 127, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "1-3", 
-            "bettype": 79, 
+            "bettype": 28, 
             "name_fr": "1-3", 
             "name": "1-3", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 104, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "1-4", 
+            "bettype": 27, 
+            "name_fr": "1-4", 
+            "name": "1-4", 
             "condition": null
         }
     }, 
@@ -2414,17 +2425,6 @@
         "fields": {
             "name_en": "1-4", 
             "bettype": 80, 
-            "name_fr": "1-4", 
-            "name": "1-4", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 104, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "1-4", 
-            "bettype": 27, 
             "name_fr": "1-4", 
             "name": "1-4", 
             "condition": null
@@ -2453,22 +2453,22 @@
         }
     }, 
     {
-        "pk": 385, 
+        "pk": 305, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "1-6", 
-            "bettype": 96, 
+            "bettype": 79, 
             "name_fr": "1-6", 
             "name": "1-6", 
             "condition": null
         }
     }, 
     {
-        "pk": 305, 
+        "pk": 385, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "1-6", 
-            "bettype": 79, 
+            "bettype": 96, 
             "name_fr": "1-6", 
             "name": "1-6", 
             "condition": null
@@ -2548,7 +2548,7 @@
             "bettype": 10, 
             "name_fr": "12", 
             "name": "12", 
-            "condition": null
+            "condition": "hts_A != hts_B"
         }
     }, 
     {
@@ -2559,18 +2559,7 @@
             "bettype": 9, 
             "name_fr": "12", 
             "name": "12", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 25, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "1X", 
-            "bettype": 9, 
-            "name_fr": "1X", 
-            "name": "1X", 
-            "condition": null
+            "condition": "TS_A != TS_B"
         }
     }, 
     {
@@ -2581,6 +2570,28 @@
             "bettype": 10, 
             "name_fr": "1X", 
             "name": "1X", 
+            "condition": "hts_A == hts_B or hts_A > hts_B"
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "1X", 
+            "bettype": 9, 
+            "name_fr": "1X", 
+            "name": "1X", 
+            "condition": "TS_A == TS_B or TS_A > TS_B"
+        }
+    }, 
+    {
+        "pk": 233, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "1st half", 
+            "bettype": 68, 
+            "name_fr": "1\u00e8re mi-temps", 
+            "name": "1st half", 
             "condition": null
         }
     }, 
@@ -2592,7 +2603,7 @@
             "bettype": 69, 
             "name_fr": "1\u00e8re mi-temps", 
             "name": "1st half", 
-            "condition": null
+            "condition": "2*hts_A > fs_A"
         }
     }, 
     {
@@ -2603,17 +2614,39 @@
             "bettype": 70, 
             "name_fr": "1\u00e8re mi-temps", 
             "name": "1st half", 
+            "condition": "hts_B > fs_B - hts_B"
+        }
+    }, 
+    {
+        "pk": 56, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "2", 
+            "bettype": 19, 
+            "name_fr": "2", 
+            "name": "2", 
             "condition": null
         }
     }, 
     {
-        "pk": 233, 
+        "pk": 217, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "1st half", 
-            "bettype": 68, 
-            "name_fr": "1\u00e8re mi-temps", 
-            "name": "1st half", 
+            "name_en": "2", 
+            "bettype": 62, 
+            "name_fr": "2", 
+            "name": "2", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 193, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "2", 
+            "bettype": 56, 
+            "name_fr": "2", 
+            "name": "2", 
             "condition": null
         }
     }, 
@@ -2645,17 +2678,6 @@
         "fields": {
             "name_en": "2", 
             "bettype": 16, 
-            "name_fr": "2", 
-            "name": "2", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 189, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "2", 
-            "bettype": 55, 
             "name_fr": "2", 
             "name": "2", 
             "condition": null
@@ -2772,33 +2794,11 @@
         }
     }, 
     {
-        "pk": 24, 
+        "pk": 189, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "2", 
-            "bettype": 8, 
-            "name_fr": "2", 
-            "name": "2", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 21, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "2", 
-            "bettype": 7, 
-            "name_fr": "2", 
-            "name": "2", 
-            "condition": "TS_A == TS_B"
-        }
-    }, 
-    {
-        "pk": 254, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "2", 
-            "bettype": 76, 
+            "bettype": 55, 
             "name_fr": "2", 
             "name": "2", 
             "condition": null
@@ -2882,35 +2882,68 @@
         }
     }, 
     {
-        "pk": 56, 
+        "pk": 254, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "2", 
-            "bettype": 19, 
+            "bettype": 76, 
             "name_fr": "2", 
             "name": "2", 
             "condition": null
         }
     }, 
     {
-        "pk": 217, 
+        "pk": 21, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "2", 
-            "bettype": 62, 
+            "bettype": 7, 
             "name_fr": "2", 
             "name": "2", 
+            "condition": "TS_A < TS_B"
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "2", 
+            "bettype": 8, 
+            "name_fr": "2", 
+            "name": "2", 
+            "condition": "hts_A < hts_B"
+        }
+    }, 
+    {
+        "pk": 354, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "2-0", 
+            "bettype": 88, 
+            "name_fr": "2-0", 
+            "name": "2-0", 
             "condition": null
         }
     }, 
     {
-        "pk": 193, 
+        "pk": 316, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "2", 
-            "bettype": 56, 
-            "name_fr": "2", 
-            "name": "2", 
+            "name_en": "2-0", 
+            "bettype": 80, 
+            "name_fr": "2-0", 
+            "name": "2-0", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 83, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "2-0", 
+            "bettype": 27, 
+            "name_fr": "2-0", 
+            "name": "2-0", 
             "condition": null
         }
     }, 
@@ -2948,35 +2981,46 @@
         }
     }, 
     {
-        "pk": 354, 
+        "pk": 355, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "2-0", 
+            "name_en": "2-1", 
             "bettype": 88, 
-            "name_fr": "2-0", 
-            "name": "2-0", 
+            "name_fr": "2-1", 
+            "name": "2-1", 
             "condition": null
         }
     }, 
     {
-        "pk": 316, 
+        "pk": 86, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "2-0", 
-            "bettype": 80, 
-            "name_fr": "2-0", 
-            "name": "2-0", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 83, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "2-0", 
+            "name_en": "2-1", 
             "bettype": 27, 
-            "name_fr": "2-0", 
-            "name": "2-0", 
+            "name_fr": "2-1", 
+            "name": "2-1", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 317, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "2-1", 
+            "bettype": 80, 
+            "name_fr": "2-1", 
+            "name": "2-1", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 259, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "2-1", 
+            "bettype": 79, 
+            "name_fr": "2-1", 
+            "name": "2-1", 
             "condition": null
         }
     }, 
@@ -3003,77 +3047,11 @@
         }
     }, 
     {
-        "pk": 355, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "2-1", 
-            "bettype": 88, 
-            "name_fr": "2-1", 
-            "name": "2-1", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 317, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "2-1", 
-            "bettype": 80, 
-            "name_fr": "2-1", 
-            "name": "2-1", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 86, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "2-1", 
-            "bettype": 27, 
-            "name_fr": "2-1", 
-            "name": "2-1", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 259, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "2-1", 
-            "bettype": 79, 
-            "name_fr": "2-1", 
-            "name": "2-1", 
-            "condition": null
-        }
-    }, 
-    {
         "pk": 285, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "2-2", 
             "bettype": 79, 
-            "name_fr": "2-2", 
-            "name": "2-2", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 119, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "2-2", 
-            "bettype": 28, 
-            "name_fr": "2-2", 
-            "name": "2-2", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 94, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "2-2", 
-            "bettype": 27, 
             "name_fr": "2-2", 
             "name": "2-2", 
             "condition": null
@@ -3102,6 +3080,50 @@
         }
     }, 
     {
+        "pk": 119, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "2-2", 
+            "bettype": 28, 
+            "name_fr": "2-2", 
+            "name": "2-2", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 94, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "2-2", 
+            "bettype": 27, 
+            "name_fr": "2-2", 
+            "name": "2-2", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 128, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "2-3", 
+            "bettype": 28, 
+            "name_fr": "2-3", 
+            "name": "2-3", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 103, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "2-3", 
+            "bettype": 27, 
+            "name_fr": "2-3", 
+            "name": "2-3", 
+            "condition": null
+        }
+    }, 
+    {
         "pk": 294, 
         "model": "bookmaker.betchoice", 
         "fields": {
@@ -3124,17 +3146,6 @@
         }
     }, 
     {
-        "pk": 128, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "2-3", 
-            "bettype": 28, 
-            "name_fr": "2-3", 
-            "name": "2-3", 
-            "condition": null
-        }
-    }, 
-    {
         "pk": 330, 
         "model": "bookmaker.betchoice", 
         "fields": {
@@ -3146,22 +3157,11 @@
         }
     }, 
     {
-        "pk": 103, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "2-3", 
-            "bettype": 27, 
-            "name_fr": "2-3", 
-            "name": "2-3", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 105, 
+        "pk": 297, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "2-4", 
-            "bettype": 27, 
+            "bettype": 79, 
             "name_fr": "2-4", 
             "name": "2-4", 
             "condition": null
@@ -3179,11 +3179,11 @@
         }
     }, 
     {
-        "pk": 297, 
+        "pk": 105, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "2-4", 
-            "bettype": 79, 
+            "bettype": 27, 
             "name_fr": "2-4", 
             "name": "2-4", 
             "condition": null
@@ -3201,22 +3201,22 @@
         }
     }, 
     {
-        "pk": 386, 
+        "pk": 306, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "2-6", 
-            "bettype": 96, 
+            "bettype": 79, 
             "name_fr": "2-6", 
             "name": "2-6", 
             "condition": null
         }
     }, 
     {
-        "pk": 306, 
+        "pk": 386, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "2-6", 
-            "bettype": 79, 
+            "bettype": 96, 
             "name_fr": "2-6", 
             "name": "2-6", 
             "condition": null
@@ -3267,17 +3267,6 @@
         }
     }, 
     {
-        "pk": 240, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "2nd half", 
-            "bettype": 70, 
-            "name_fr": "2\u00e8me mi-temps", 
-            "name": "2nd half", 
-            "condition": null
-        }
-    }, 
-    {
         "pk": 237, 
         "model": "bookmaker.betchoice", 
         "fields": {
@@ -3285,18 +3274,18 @@
             "bettype": 69, 
             "name_fr": "2\u00e8me mi-temps", 
             "name": "2nd half", 
-            "condition": null
+            "condition": "2*(fs_A-hts_A) > hts_A"
         }
     }, 
     {
-        "pk": 75, 
+        "pk": 240, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "3", 
-            "bettype": 25, 
-            "name_fr": "3", 
-            "name": "3", 
-            "condition": null
+            "name_en": "2nd half", 
+            "bettype": 70, 
+            "name_fr": "2\u00e8me mi-temps", 
+            "name": "2nd half", 
+            "condition": "hts_B < fs_B - hts_B"
         }
     }, 
     {
@@ -3322,33 +3311,22 @@
         }
     }, 
     {
-        "pk": 218, 
+        "pk": 75, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "3 or more", 
-            "bettype": 62, 
-            "name_fr": "3 ou plus", 
-            "name": "3 or more", 
+            "name_en": "3", 
+            "bettype": 25, 
+            "name_fr": "3", 
+            "name": "3", 
             "condition": null
         }
     }, 
     {
-        "pk": 194, 
+        "pk": 190, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "3 or more", 
-            "bettype": 56, 
-            "name_fr": "3 ou plus", 
-            "name": "3 or more", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 198, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "3 or more", 
-            "bettype": 57, 
+            "bettype": 55, 
             "name_fr": "3 ou plus", 
             "name": "3 or more", 
             "condition": null
@@ -3366,33 +3344,33 @@
         }
     }, 
     {
-        "pk": 190, 
+        "pk": 198, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "3 or more", 
-            "bettype": 55, 
+            "bettype": 57, 
             "name_fr": "3 ou plus", 
             "name": "3 or more", 
             "condition": null
         }
     }, 
     {
-        "pk": 214, 
+        "pk": 194, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "3 or more", 
-            "bettype": 61, 
+            "bettype": 56, 
             "name_fr": "3 ou plus", 
             "name": "3 or more", 
             "condition": null
         }
     }, 
     {
-        "pk": 206, 
+        "pk": 218, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "3 or more", 
-            "bettype": 59, 
+            "bettype": 62, 
             "name_fr": "3 ou plus", 
             "name": "3 or more", 
             "condition": null
@@ -3410,11 +3388,33 @@
         }
     }, 
     {
-        "pk": 260, 
+        "pk": 206, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "3 or more", 
+            "bettype": 59, 
+            "name_fr": "3 ou plus", 
+            "name": "3 or more", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 214, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "3 or more", 
+            "bettype": 61, 
+            "name_fr": "3 ou plus", 
+            "name": "3 or more", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 109, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "3-0", 
-            "bettype": 79, 
+            "bettype": 28, 
             "name_fr": "3-0", 
             "name": "3-0", 
             "condition": null
@@ -3454,24 +3454,13 @@
         }
     }, 
     {
-        "pk": 109, 
+        "pk": 260, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "3-0", 
-            "bettype": 28, 
+            "bettype": 79, 
             "name_fr": "3-0", 
             "name": "3-0", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 112, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "3-1", 
-            "bettype": 28, 
-            "name_fr": "3-1", 
-            "name": "3-1", 
             "condition": null
         }
     }, 
@@ -3481,28 +3470,6 @@
         "fields": {
             "name_en": "3-1", 
             "bettype": 80, 
-            "name_fr": "3-1", 
-            "name": "3-1", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 261, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "3-1", 
-            "bettype": 79, 
-            "name_fr": "3-1", 
-            "name": "3-1", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 87, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "3-1", 
-            "bettype": 27, 
             "name_fr": "3-1", 
             "name": "3-1", 
             "condition": null
@@ -3520,24 +3487,35 @@
         }
     }, 
     {
-        "pk": 113, 
+        "pk": 112, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "3-2", 
+            "name_en": "3-1", 
             "bettype": 28, 
-            "name_fr": "3-2", 
-            "name": "3-2", 
+            "name_fr": "3-1", 
+            "name": "3-1", 
             "condition": null
         }
     }, 
     {
-        "pk": 88, 
+        "pk": 87, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "3-2", 
+            "name_en": "3-1", 
             "bettype": 27, 
-            "name_fr": "3-2", 
-            "name": "3-2", 
+            "name_fr": "3-1", 
+            "name": "3-1", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 261, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "3-1", 
+            "bettype": 79, 
+            "name_fr": "3-1", 
+            "name": "3-1", 
             "condition": null
         }
     }, 
@@ -3547,17 +3525,6 @@
         "fields": {
             "name_en": "3-2", 
             "bettype": 79, 
-            "name_fr": "3-2", 
-            "name": "3-2", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 320, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "3-2", 
-            "bettype": 80, 
             "name_fr": "3-2", 
             "name": "3-2", 
             "condition": null
@@ -3575,11 +3542,44 @@
         }
     }, 
     {
-        "pk": 120, 
+        "pk": 320, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "3-2", 
+            "bettype": 80, 
+            "name_fr": "3-2", 
+            "name": "3-2", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 88, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "3-2", 
+            "bettype": 27, 
+            "name_fr": "3-2", 
+            "name": "3-2", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 113, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "3-2", 
+            "bettype": 28, 
+            "name_fr": "3-2", 
+            "name": "3-2", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 286, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "3-3", 
-            "bettype": 28, 
+            "bettype": 79, 
             "name_fr": "3-3", 
             "name": "3-3", 
             "condition": null
@@ -3597,22 +3597,22 @@
         }
     }, 
     {
-        "pk": 286, 
+        "pk": 120, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "3-3", 
-            "bettype": 79, 
+            "bettype": 28, 
             "name_fr": "3-3", 
             "name": "3-3", 
             "condition": null
         }
     }, 
     {
-        "pk": 106, 
+        "pk": 131, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "3-4", 
-            "bettype": 27, 
+            "bettype": 28, 
             "name_fr": "3-4", 
             "name": "3-4", 
             "condition": null
@@ -3630,11 +3630,11 @@
         }
     }, 
     {
-        "pk": 131, 
+        "pk": 106, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "3-4", 
-            "bettype": 28, 
+            "bettype": 27, 
             "name_fr": "3-4", 
             "name": "3-4", 
             "condition": null
@@ -3707,6 +3707,17 @@
         }
     }, 
     {
+        "pk": 85, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "4-0", 
+            "bettype": 27, 
+            "name_fr": "4-0", 
+            "name": "4-0", 
+            "condition": null
+        }
+    }, 
+    {
         "pk": 321, 
         "model": "bookmaker.betchoice", 
         "fields": {
@@ -3729,22 +3740,11 @@
         }
     }, 
     {
-        "pk": 85, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "4-0", 
-            "bettype": 27, 
-            "name_fr": "4-0", 
-            "name": "4-0", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 114, 
+        "pk": 322, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "4-1", 
-            "bettype": 28, 
+            "bettype": 80, 
             "name_fr": "4-1", 
             "name": "4-1", 
             "condition": null
@@ -3762,17 +3762,6 @@
         }
     }, 
     {
-        "pk": 322, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "4-1", 
-            "bettype": 80, 
-            "name_fr": "4-1", 
-            "name": "4-1", 
-            "condition": null
-        }
-    }, 
-    {
         "pk": 89, 
         "model": "bookmaker.betchoice", 
         "fields": {
@@ -3784,11 +3773,22 @@
         }
     }, 
     {
-        "pk": 265, 
+        "pk": 114, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "4-1", 
+            "bettype": 28, 
+            "name_fr": "4-1", 
+            "name": "4-1", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 90, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "4-2", 
-            "bettype": 79, 
+            "bettype": 27, 
             "name_fr": "4-2", 
             "name": "4-2", 
             "condition": null
@@ -3806,11 +3806,11 @@
         }
     }, 
     {
-        "pk": 90, 
+        "pk": 265, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "4-2", 
-            "bettype": 27, 
+            "bettype": 79, 
             "name_fr": "4-2", 
             "name": "4-2", 
             "condition": null
@@ -3828,17 +3828,6 @@
         }
     }, 
     {
-        "pk": 91, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "4-3", 
-            "bettype": 27, 
-            "name_fr": "4-3", 
-            "name": "4-3", 
-            "condition": null
-        }
-    }, 
-    {
         "pk": 266, 
         "model": "bookmaker.betchoice", 
         "fields": {
@@ -3850,11 +3839,22 @@
         }
     }, 
     {
-        "pk": 121, 
+        "pk": 91, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "4-3", 
+            "bettype": 27, 
+            "name_fr": "4-3", 
+            "name": "4-3", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 287, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "4-4", 
-            "bettype": 28, 
+            "bettype": 79, 
             "name_fr": "4-4", 
             "name": "4-4", 
             "condition": null
@@ -3872,11 +3872,11 @@
         }
     }, 
     {
-        "pk": 287, 
+        "pk": 121, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "4-4", 
-            "bettype": 79, 
+            "bettype": 28, 
             "name_fr": "4-4", 
             "name": "4-4", 
             "condition": null
@@ -4004,6 +4004,17 @@
         }
     }, 
     {
+        "pk": 273, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "6-0", 
+            "bettype": 79, 
+            "name_fr": "6-0", 
+            "name": "6-0", 
+            "condition": null
+        }
+    }, 
+    {
         "pk": 272, 
         "model": "bookmaker.betchoice", 
         "fields": {
@@ -4026,13 +4037,13 @@
         }
     }, 
     {
-        "pk": 273, 
+        "pk": 378, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "6-0", 
-            "bettype": 79, 
-            "name_fr": "6-0", 
-            "name": "6-0", 
+            "name_en": "6-1", 
+            "bettype": 96, 
+            "name_fr": "6-1", 
+            "name": "6-1", 
             "condition": null
         }
     }, 
@@ -4042,17 +4053,6 @@
         "fields": {
             "name_en": "6-1", 
             "bettype": 79, 
-            "name_fr": "6-1", 
-            "name": "6-1", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 378, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "6-1", 
-            "bettype": 96, 
             "name_fr": "6-1", 
             "name": "6-1", 
             "condition": null
@@ -4202,17 +4202,6 @@
         }
     }, 
     {
-        "pk": 314, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Any other score", 
-            "bettype": 79, 
-            "name_fr": "Un autre score", 
-            "name": "Any other score", 
-            "condition": null
-        }
-    }, 
-    {
         "pk": 132, 
         "model": "bookmaker.betchoice", 
         "fields": {
@@ -4224,24 +4213,13 @@
         }
     }, 
     {
-        "pk": 238, 
+        "pk": 314, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "Equal number of goals", 
-            "bettype": 69, 
-            "name_fr": "M\u00eame nombre de buts", 
-            "name": "Equal number of goals", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 241, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Equal number of goals", 
-            "bettype": 70, 
-            "name_fr": "M\u00eame nombre de buts", 
-            "name": "Equal number of goals", 
+            "name_en": "Any other score", 
+            "bettype": 79, 
+            "name_fr": "Un autre score", 
+            "name": "Any other score", 
             "condition": null
         }
     }, 
@@ -4253,6 +4231,94 @@
             "bettype": 68, 
             "name_fr": "M\u00eame nombre de buts", 
             "name": "Equal number of goals", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 335, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Team 1", 
+            "bettype": 82, 
+            "name_fr": "Equipe 1", 
+            "name": "Team 1", 
+            "condition": "TS_A == 0"
+        }
+    }, 
+    {
+        "pk": 255, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Team 1", 
+            "bettype": 78, 
+            "name_fr": "Equipe 1", 
+            "name": "Team 1", 
+            "condition": "FS_B == 0 and FS_A > 0"
+        }
+    }, 
+    {
+        "pk": 66, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Team 1 to win by 2 goals or more", 
+            "bettype": 23, 
+            "name_fr": "Equipe 1 gagne avec 2 buts d'avance ou plus", 
+            "name": "Team 1 to win by 2 goals or more", 
+            "condition": "FS_A - FS_B >= 2"
+        }
+    }, 
+    {
+        "pk": 67, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Team 1 to win by exactly 1 goal", 
+            "bettype": 23, 
+            "name_fr": "Equipe 1 gagne avec exactement 1 but d'avance", 
+            "name": "Team 1 to win by exactly 1 goal", 
+            "condition": "FS_B - FS_A >= 2"
+        }
+    }, 
+    {
+        "pk": 336, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Team 2", 
+            "bettype": 82, 
+            "name_fr": "Equipe 2", 
+            "name": "Team 2", 
+            "condition": "TS_B == 0"
+        }
+    }, 
+    {
+        "pk": 256, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Team 2", 
+            "bettype": 78, 
+            "name_fr": "Equipe 2", 
+            "name": "Team 2", 
+            "condition": "FS_A == 0 and FS_B > 0"
+        }
+    }, 
+    {
+        "pk": 68, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Team 2 to win or draw", 
+            "bettype": 23, 
+            "name_fr": "Equipe 2 gagne ou fait match nul", 
+            "name": "Team 2 to win or draw", 
+            "condition": "FS_B >= FS_A"
+        }
+    }, 
+    {
+        "pk": 53, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Even", 
+            "bettype": 18, 
+            "name_fr": "Pair", 
+            "name": "Even", 
             "condition": null
         }
     }, 
@@ -4290,14 +4356,25 @@
         }
     }, 
     {
-        "pk": 53, 
+        "pk": 241, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "Even", 
-            "bettype": 18, 
-            "name_fr": "Pair", 
-            "name": "Even", 
-            "condition": null
+            "name_en": "Equal number of goals", 
+            "bettype": 70, 
+            "name_fr": "M\u00eame nombre de buts", 
+            "name": "Equal number of goals", 
+            "condition": "hts_B == fs_B - hts_B"
+        }
+    }, 
+    {
+        "pk": 238, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Equal number of goals", 
+            "bettype": 69, 
+            "name_fr": "M\u00eame nombre de buts", 
+            "name": "Equal number of goals", 
+            "condition": "2*hts_A == fs_A"
         }
     }, 
     {
@@ -4323,88 +4400,11 @@
         }
     }, 
     {
-        "pk": 247, 
+        "pk": 224, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "No", 
-            "bettype": 73, 
-            "name_fr": "Non", 
-            "name": "No", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 220, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "No", 
-            "bettype": 63, 
-            "name_fr": "Non", 
-            "name": "No", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 222, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "No", 
-            "bettype": 64, 
-            "name_fr": "Non", 
-            "name": "No", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 134, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "No", 
-            "bettype": 29, 
-            "name_fr": "Non", 
-            "name": "No", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 136, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "No", 
-            "bettype": 30, 
-            "name_fr": "Non", 
-            "name": "No", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 138, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "No", 
-            "bettype": 31, 
-            "name_fr": "Non", 
-            "name": "No", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 367, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "No", 
-            "bettype": 91, 
-            "name_fr": "Non", 
-            "name": "No", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 245, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "No", 
-            "bettype": 72, 
+            "bettype": 65, 
             "name_fr": "Non", 
             "name": "No", 
             "condition": null
@@ -4422,13 +4422,112 @@
         }
     }, 
     {
-        "pk": 224, 
+        "pk": 245, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "No", 
-            "bettype": 65, 
+            "bettype": 72, 
             "name_fr": "Non", 
             "name": "No", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 367, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "No", 
+            "bettype": 91, 
+            "name_fr": "Non", 
+            "name": "No", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 138, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "No", 
+            "bettype": 31, 
+            "name_fr": "Non", 
+            "name": "No", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 136, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "No", 
+            "bettype": 30, 
+            "name_fr": "Non", 
+            "name": "No", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 134, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "No", 
+            "bettype": 29, 
+            "name_fr": "Non", 
+            "name": "No", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 222, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "No", 
+            "bettype": 64, 
+            "name_fr": "Non", 
+            "name": "No", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 220, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "No", 
+            "bettype": 63, 
+            "name_fr": "Non", 
+            "name": "No", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 247, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "No", 
+            "bettype": 73, 
+            "name_fr": "Non", 
+            "name": "No", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 232, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "No goal", 
+            "bettype": 67, 
+            "name_fr": "Aucun but", 
+            "name": "No goal", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 229, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "No goal", 
+            "bettype": 66, 
+            "name_fr": "Aucun but", 
+            "name": "No goal", 
             "condition": null
         }
     }, 
@@ -4455,24 +4554,24 @@
         }
     }, 
     {
-        "pk": 229, 
+        "pk": 161, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "No goal", 
-            "bettype": 66, 
-            "name_fr": "Aucun but", 
-            "name": "No goal", 
+            "name_en": "Odd", 
+            "bettype": 43, 
+            "name_fr": "Impair", 
+            "name": "Odd", 
             "condition": null
         }
     }, 
     {
-        "pk": 232, 
+        "pk": 52, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "No goal", 
-            "bettype": 67, 
-            "name_fr": "Aucun but", 
-            "name": "No goal", 
+            "name_en": "Odd", 
+            "bettype": 18, 
+            "name_fr": "Impair", 
+            "name": "Odd", 
             "condition": null
         }
     }, 
@@ -4499,33 +4598,11 @@
         }
     }, 
     {
-        "pk": 52, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Odd", 
-            "bettype": 18, 
-            "name_fr": "Impair", 
-            "name": "Odd", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 161, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Odd", 
-            "bettype": 43, 
-            "name_fr": "Impair", 
-            "name": "Odd", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 144, 
+        "pk": 152, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Over 0.5 goal", 
-            "bettype": 34, 
+            "bettype": 38, 
             "name_fr": "Plus de 0.5 but", 
             "name": "Over 0.5 goal", 
             "condition": null
@@ -4543,24 +4620,13 @@
         }
     }, 
     {
-        "pk": 152, 
+        "pk": 144, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Over 0.5 goal", 
-            "bettype": 38, 
+            "bettype": 34, 
             "name_fr": "Plus de 0.5 but", 
             "name": "Over 0.5 goal", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 146, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Over 1.5 goal", 
-            "bettype": 35, 
-            "name_fr": "Plus de 1.5 but", 
-            "name": "Over 1.5 goal", 
             "condition": null
         }
     }, 
@@ -4570,6 +4636,17 @@
         "fields": {
             "name_en": "Over 1.5 goal", 
             "bettype": 52, 
+            "name_fr": "Plus de 1.5 but", 
+            "name": "Over 1.5 goal", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 146, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Over 1.5 goal", 
+            "bettype": 35, 
             "name_fr": "Plus de 1.5 but", 
             "name": "Over 1.5 goal", 
             "condition": null
@@ -4609,22 +4686,22 @@
         }
     }, 
     {
-        "pk": 184, 
+        "pk": 45, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Over 2.5 goals", 
-            "bettype": 53, 
+            "bettype": 14, 
             "name_fr": "Plus de 2.5 buts", 
             "name": "Over 2.5 goals", 
             "condition": null
         }
     }, 
     {
-        "pk": 178, 
+        "pk": 148, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Over 2.5 goals", 
-            "bettype": 50, 
+            "bettype": 36, 
             "name_fr": "Plus de 2.5 buts", 
             "name": "Over 2.5 goals", 
             "condition": null
@@ -4642,22 +4719,22 @@
         }
     }, 
     {
-        "pk": 45, 
+        "pk": 178, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Over 2.5 goals", 
-            "bettype": 14, 
+            "bettype": 50, 
             "name_fr": "Plus de 2.5 buts", 
             "name": "Over 2.5 goals", 
             "condition": null
         }
     }, 
     {
-        "pk": 148, 
+        "pk": 184, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Over 2.5 goals", 
-            "bettype": 36, 
+            "bettype": 53, 
             "name_fr": "Plus de 2.5 buts", 
             "name": "Over 2.5 goals", 
             "condition": null
@@ -4741,22 +4818,11 @@
         }
     }, 
     {
-        "pk": 337, 
+        "pk": 341, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Team 1", 
-            "bettype": 83, 
-            "name_fr": "Equipe 1", 
-            "name": "Team 1", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 255, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Team 1", 
-            "bettype": 78, 
+            "bettype": 85, 
             "name_fr": "Equipe 1", 
             "name": "Team 1", 
             "condition": null
@@ -4785,22 +4851,11 @@
         }
     }, 
     {
-        "pk": 335, 
+        "pk": 337, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Team 1", 
-            "bettype": 82, 
-            "name_fr": "Equipe 1", 
-            "name": "Team 1", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 341, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Team 1", 
-            "bettype": 85, 
+            "bettype": 83, 
             "name_fr": "Equipe 1", 
             "name": "Team 1", 
             "condition": null
@@ -4829,17 +4884,6 @@
         }
     }, 
     {
-        "pk": 66, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Team 1 to win by 2 goals or more", 
-            "bettype": 23, 
-            "name_fr": "Equipe 1 gagne avec 2 buts d'avance ou plus", 
-            "name": "Team 1 to win by 2 goals or more", 
-            "condition": null
-        }
-    }, 
-    {
         "pk": 169, 
         "model": "bookmaker.betchoice", 
         "fields": {
@@ -4847,17 +4891,6 @@
             "bettype": 47, 
             "name_fr": "Equipe 1 gagne avec 3 buts d'avance ou plus", 
             "name": "Team 1 to win by 3 goals or more", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 67, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Team 1 to win by exactly 1 goal", 
-            "bettype": 23, 
-            "name_fr": "Equipe 1 gagne avec exactement 1 but d'avance", 
-            "name": "Team 1 to win by exactly 1 goal", 
             "condition": null
         }
     }, 
@@ -4873,22 +4906,11 @@
         }
     }, 
     {
-        "pk": 336, 
+        "pk": 342, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Team 2", 
-            "bettype": 82, 
-            "name_fr": "Equipe 2", 
-            "name": "Team 2", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 338, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Team 2", 
-            "bettype": 83, 
+            "bettype": 85, 
             "name_fr": "Equipe 2", 
             "name": "Team 2", 
             "condition": null
@@ -4906,33 +4928,22 @@
         }
     }, 
     {
+        "pk": 338, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Team 2", 
+            "bettype": 83, 
+            "name_fr": "Equipe 2", 
+            "name": "Team 2", 
+            "condition": null
+        }
+    }, 
+    {
         "pk": 340, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Team 2", 
             "bettype": 84, 
-            "name_fr": "Equipe 2", 
-            "name": "Team 2", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 342, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Team 2", 
-            "bettype": 85, 
-            "name_fr": "Equipe 2", 
-            "name": "Team 2", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 256, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Team 2", 
-            "bettype": 78, 
             "name_fr": "Equipe 2", 
             "name": "Team 2", 
             "condition": null
@@ -4994,22 +5005,11 @@
         }
     }, 
     {
-        "pk": 68, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Team 2 to win or draw", 
-            "bettype": 23, 
-            "name_fr": "Equipe 2 gagne ou fait match nul", 
-            "name": "Team 2 to win or draw", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 143, 
+        "pk": 40, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Under 0.5 goal", 
-            "bettype": 34, 
+            "bettype": 12, 
             "name_fr": "Moins de 0.5 but", 
             "name": "Under 0.5 goal", 
             "condition": null
@@ -5027,35 +5027,13 @@
         }
     }, 
     {
-        "pk": 40, 
+        "pk": 143, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Under 0.5 goal", 
-            "bettype": 12, 
+            "bettype": 34, 
             "name_fr": "Moins de 0.5 but", 
             "name": "Under 0.5 goal", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 145, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Under 1.5 goal", 
-            "bettype": 35, 
-            "name_fr": "Moins de 1.5 but", 
-            "name": "Under 1.5 goal", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 153, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Under 1.5 goal", 
-            "bettype": 39, 
-            "name_fr": "Moins de 1.5 but", 
-            "name": "Under 1.5 goal", 
             "condition": null
         }
     }, 
@@ -5071,11 +5049,11 @@
         }
     }, 
     {
-        "pk": 42, 
+        "pk": 145, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Under 1.5 goal", 
-            "bettype": 13, 
+            "bettype": 35, 
             "name_fr": "Moins de 1.5 but", 
             "name": "Under 1.5 goal", 
             "condition": null
@@ -5093,24 +5071,24 @@
         }
     }, 
     {
-        "pk": 155, 
+        "pk": 153, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "Under 2.5 goals", 
-            "bettype": 40, 
-            "name_fr": "Moins de 2.5 buts", 
-            "name": "Under 2.5 goals", 
+            "name_en": "Under 1.5 goal", 
+            "bettype": 39, 
+            "name_fr": "Moins de 1.5 but", 
+            "name": "Under 1.5 goal", 
             "condition": null
         }
     }, 
     {
-        "pk": 44, 
+        "pk": 42, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "Under 2.5 goals", 
-            "bettype": 14, 
-            "name_fr": "Moins de 2.5 buts", 
-            "name": "Under 2.5 goals", 
+            "name_en": "Under 1.5 goal", 
+            "bettype": 13, 
+            "name_fr": "Moins de 1.5 but", 
+            "name": "Under 1.5 goal", 
             "condition": null
         }
     }, 
@@ -5126,11 +5104,11 @@
         }
     }, 
     {
-        "pk": 147, 
+        "pk": 155, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Under 2.5 goals", 
-            "bettype": 36, 
+            "bettype": 40, 
             "name_fr": "Moins de 2.5 buts", 
             "name": "Under 2.5 goals", 
             "condition": null
@@ -5148,22 +5126,33 @@
         }
     }, 
     {
-        "pk": 46, 
+        "pk": 44, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "Under 3.5 goals", 
-            "bettype": 15, 
-            "name_fr": "Moins de 3.5 buts", 
-            "name": "Under 3.5 goals", 
+            "name_en": "Under 2.5 goals", 
+            "bettype": 14, 
+            "name_fr": "Moins de 2.5 buts", 
+            "name": "Under 2.5 goals", 
             "condition": null
         }
     }, 
     {
-        "pk": 179, 
+        "pk": 147, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Under 2.5 goals", 
+            "bettype": 36, 
+            "name_fr": "Moins de 2.5 buts", 
+            "name": "Under 2.5 goals", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 185, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Under 3.5 goals", 
-            "bettype": 51, 
+            "bettype": 54, 
             "name_fr": "Moins de 3.5 buts", 
             "name": "Under 3.5 goals", 
             "condition": null
@@ -5181,11 +5170,11 @@
         }
     }, 
     {
-        "pk": 185, 
+        "pk": 179, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Under 3.5 goals", 
-            "bettype": 54, 
+            "bettype": 51, 
             "name_fr": "Moins de 3.5 buts", 
             "name": "Under 3.5 goals", 
             "condition": null
@@ -5197,6 +5186,17 @@
         "fields": {
             "name_en": "Under 3.5 goals", 
             "bettype": 41, 
+            "name_fr": "Moins de 3.5 buts", 
+            "name": "Under 3.5 goals", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 46, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Under 3.5 goals", 
+            "bettype": 15, 
             "name_fr": "Moins de 3.5 buts", 
             "name": "Under 3.5 goals", 
             "condition": null
@@ -5225,11 +5225,55 @@
         }
     }, 
     {
+        "pk": 20, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "X", 
+            "bettype": 7, 
+            "name_fr": "X", 
+            "name": "X", 
+            "condition": "TS_A == TS_B"
+        }
+    }, 
+    {
+        "pk": 61, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "X", 
+            "bettype": 21, 
+            "name_fr": "X", 
+            "name": "X", 
+            "condition": null
+        }
+    }, 
+    {
         "pk": 58, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "X", 
             "bettype": 20, 
+            "name_fr": "X", 
+            "name": "X", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 55, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "X", 
+            "bettype": 19, 
+            "name_fr": "X", 
+            "name": "X", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 253, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "X", 
+            "bettype": 76, 
             "name_fr": "X", 
             "name": "X", 
             "condition": null
@@ -5243,15 +5287,26 @@
             "bettype": 8, 
             "name_fr": "X", 
             "name": "X", 
+            "condition": "hts_A == hts_B"
+        }
+    }, 
+    {
+        "pk": 165, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "X", 
+            "bettype": 45, 
+            "name_fr": "X", 
+            "name": "X", 
             "condition": null
         }
     }, 
     {
-        "pk": 253, 
+        "pk": 164, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "X", 
-            "bettype": 76, 
+            "bettype": 44, 
             "name_fr": "X", 
             "name": "X", 
             "condition": null
@@ -5274,61 +5329,6 @@
         "fields": {
             "name_en": "X", 
             "bettype": 22, 
-            "name_fr": "X", 
-            "name": "X", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 61, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "X", 
-            "bettype": 21, 
-            "name_fr": "X", 
-            "name": "X", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 55, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "X", 
-            "bettype": 19, 
-            "name_fr": "X", 
-            "name": "X", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 20, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "X", 
-            "bettype": 7, 
-            "name_fr": "X", 
-            "name": "X", 
-            "condition": "TS_A < TS_B"
-        }
-    }, 
-    {
-        "pk": 164, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "X", 
-            "bettype": 44, 
-            "name_fr": "X", 
-            "name": "X", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 165, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "X", 
-            "bettype": 45, 
             "name_fr": "X", 
             "name": "X", 
             "condition": null
@@ -5368,17 +5368,6 @@
         }
     }, 
     {
-        "pk": 29, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "X2", 
-            "bettype": 10, 
-            "name_fr": "X2", 
-            "name": "X2", 
-            "condition": null
-        }
-    }, 
-    {
         "pk": 26, 
         "model": "bookmaker.betchoice", 
         "fields": {
@@ -5386,81 +5375,26 @@
             "bettype": 9, 
             "name_fr": "X2", 
             "name": "X2", 
-            "condition": null
+            "condition": "TS_A == TS_B or TS_A < TS_B"
         }
     }, 
     {
-        "pk": 221, 
+        "pk": 29, 
         "model": "bookmaker.betchoice", 
         "fields": {
-            "name_en": "Yes", 
-            "bettype": 64, 
-            "name_fr": "Oui", 
-            "name": "Yes", 
-            "condition": null
+            "name_en": "X2", 
+            "bettype": 10, 
+            "name_fr": "X2", 
+            "name": "X2", 
+            "condition": "hts_A == hts_B or hts_A < hts_B"
         }
     }, 
     {
-        "pk": 133, 
+        "pk": 219, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Yes", 
-            "bettype": 29, 
-            "name_fr": "Oui", 
-            "name": "Yes", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 248, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Yes", 
-            "bettype": 74, 
-            "name_fr": "Oui", 
-            "name": "Yes", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 135, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Yes", 
-            "bettype": 30, 
-            "name_fr": "Oui", 
-            "name": "Yes", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 250, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Yes", 
-            "bettype": 75, 
-            "name_fr": "Oui", 
-            "name": "Yes", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 137, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Yes", 
-            "bettype": 31, 
-            "name_fr": "Oui", 
-            "name": "Yes", 
-            "condition": null
-        }
-    }, 
-    {
-        "pk": 223, 
-        "model": "bookmaker.betchoice", 
-        "fields": {
-            "name_en": "Yes", 
-            "bettype": 65, 
+            "bettype": 63, 
             "name_fr": "Oui", 
             "name": "Yes", 
             "condition": null
@@ -5489,11 +5423,11 @@
         }
     }, 
     {
-        "pk": 219, 
+        "pk": 223, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Yes", 
-            "bettype": 63, 
+            "bettype": 65, 
             "name_fr": "Oui", 
             "name": "Yes", 
             "condition": null
@@ -5511,11 +5445,77 @@
         }
     }, 
     {
+        "pk": 221, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Yes", 
+            "bettype": 64, 
+            "name_fr": "Oui", 
+            "name": "Yes", 
+            "condition": null
+        }
+    }, 
+    {
         "pk": 246, 
         "model": "bookmaker.betchoice", 
         "fields": {
             "name_en": "Yes", 
             "bettype": 73, 
+            "name_fr": "Oui", 
+            "name": "Yes", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 248, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Yes", 
+            "bettype": 74, 
+            "name_fr": "Oui", 
+            "name": "Yes", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 135, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Yes", 
+            "bettype": 30, 
+            "name_fr": "Oui", 
+            "name": "Yes", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 133, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Yes", 
+            "bettype": 29, 
+            "name_fr": "Oui", 
+            "name": "Yes", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 137, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Yes", 
+            "bettype": 31, 
+            "name_fr": "Oui", 
+            "name": "Yes", 
+            "condition": null
+        }
+    }, 
+    {
+        "pk": 250, 
+        "model": "bookmaker.betchoice", 
+        "fields": {
+            "name_en": "Yes", 
+            "bettype": 75, 
             "name_fr": "Oui", 
             "name": "Yes", 
             "condition": null
