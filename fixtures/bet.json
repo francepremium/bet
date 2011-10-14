@@ -1,0 +1,580 @@
+[
+    {
+        "pk": 35, 
+        "model": "bet.betprofile", 
+        "fields": {
+            "offside_on": null, 
+            "profit": 0.0, 
+            "profitability": 0.0
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bet.betprofile", 
+        "fields": {
+            "offside_on": null, 
+            "profit": 0.0, 
+            "profitability": 0.0
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "bet.betprofile", 
+        "fields": {
+            "offside_on": null, 
+            "profit": 0.0, 
+            "profitability": 0.0
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "bet.betprofile", 
+        "fields": {
+            "offside_on": null, 
+            "profit": 0.0, 
+            "profitability": 0.0
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bet.ticket", 
+        "fields": {
+            "status": 1, 
+            "creation_datetime": "2011-10-14 10:44:17", 
+            "stake": 1, 
+            "bookmaker": 4, 
+            "user": 28
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "bet.ticket", 
+        "fields": {
+            "status": 1, 
+            "creation_datetime": "2011-10-14 10:48:38", 
+            "stake": 4, 
+            "bookmaker": 4, 
+            "user": 28
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "bet.ticket", 
+        "fields": {
+            "status": 1, 
+            "creation_datetime": "2011-10-14 10:50:06", 
+            "stake": 3, 
+            "bookmaker": 4, 
+            "user": 28
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "bet.ticket", 
+        "fields": {
+            "status": 1, 
+            "creation_datetime": "2011-10-14 10:57:42", 
+            "stake": 4, 
+            "bookmaker": 4, 
+            "user": 28
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "bet.ticket", 
+        "fields": {
+            "status": 1, 
+            "creation_datetime": "2011-10-14 11:02:50", 
+            "stake": 4, 
+            "bookmaker": 4, 
+            "user": 28
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "bet.ticket", 
+        "fields": {
+            "status": 1, 
+            "creation_datetime": "2011-10-14 11:09:02", 
+            "stake": 6, 
+            "bookmaker": 3, 
+            "user": 28
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "bet.ticket", 
+        "fields": {
+            "status": 1, 
+            "creation_datetime": "2011-10-14 11:10:37", 
+            "stake": 5, 
+            "bookmaker": 8, 
+            "user": 28
+        }
+    }, 
+    {
+        "pk": 31, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 7, 
+            "text": "", 
+            "odds": "1.20", 
+            "upload": "", 
+            "choice": 19, 
+            "session": 10153, 
+            "ticket": 7, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 7, 
+            "text": "", 
+            "odds": "1.20", 
+            "upload": "", 
+            "choice": 19, 
+            "session": 266473, 
+            "ticket": 7, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 7, 
+            "text": "", 
+            "odds": "1.40", 
+            "upload": "", 
+            "choice": 21, 
+            "session": 266436, 
+            "ticket": 7, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 7, 
+            "text": "", 
+            "odds": "1.20", 
+            "upload": "", 
+            "choice": 21, 
+            "session": 3764, 
+            "ticket": 7, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 7, 
+            "text": "", 
+            "odds": "1.40", 
+            "upload": "", 
+            "choice": 21, 
+            "session": 3763, 
+            "ticket": 7, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 7, 
+            "text": "", 
+            "odds": "1.40", 
+            "upload": "", 
+            "choice": 21, 
+            "session": 3765, 
+            "ticket": 7, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 7, 
+            "text": "", 
+            "odds": "1.80", 
+            "upload": "", 
+            "choice": 21, 
+            "session": 2285, 
+            "ticket": 6, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 76, 
+            "text": "", 
+            "odds": "1.20", 
+            "upload": "", 
+            "choice": 254, 
+            "session": 2282, 
+            "ticket": 6, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 42, 
+            "text": "", 
+            "odds": "1.30", 
+            "upload": "", 
+            "choice": 159, 
+            "session": 2285, 
+            "ticket": 5, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 38, 
+            "text": "", 
+            "odds": "1.10", 
+            "upload": "", 
+            "choice": 152, 
+            "session": 266448, 
+            "ticket": 5, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 79, 
+            "text": "", 
+            "odds": "1.30", 
+            "upload": "", 
+            "choice": 296, 
+            "session": 2282, 
+            "ticket": 5, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 14, 
+            "text": "", 
+            "odds": "1.40", 
+            "upload": "", 
+            "choice": 44, 
+            "session": 3785, 
+            "ticket": 5, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 42, 
+            "text": "", 
+            "odds": "1.40", 
+            "upload": "", 
+            "choice": 160, 
+            "session": 362607, 
+            "ticket": 5, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 8, 
+            "text": "", 
+            "odds": "1.20", 
+            "upload": "", 
+            "choice": 24, 
+            "session": 3763, 
+            "ticket": 5, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 11, 
+            "text": "", 
+            "odds": "1.20", 
+            "upload": "", 
+            "choice": 32, 
+            "session": 15905, 
+            "ticket": 5, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 13, 
+            "text": "", 
+            "odds": "1.30", 
+            "upload": "", 
+            "choice": 43, 
+            "session": 3764, 
+            "ticket": 4, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 9, 
+            "text": "", 
+            "odds": "1.40", 
+            "upload": "", 
+            "choice": 25, 
+            "session": 3763, 
+            "ticket": 4, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 7, 
+            "text": "", 
+            "odds": "1.40", 
+            "upload": "", 
+            "choice": 19, 
+            "session": 362607, 
+            "ticket": 3, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 16, 
+            "text": "", 
+            "odds": "1.40", 
+            "upload": "", 
+            "choice": 48, 
+            "session": 3785, 
+            "ticket": 3, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 8, 
+            "text": "", 
+            "odds": "1.40", 
+            "upload": "", 
+            "choice": 24, 
+            "session": 5704, 
+            "ticket": 3, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 80, 
+            "text": "", 
+            "odds": "1.65", 
+            "upload": "", 
+            "choice": 324, 
+            "session": 330068, 
+            "ticket": 3, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 80, 
+            "text": "", 
+            "odds": "1.80", 
+            "upload": "", 
+            "choice": 327, 
+            "session": 3765, 
+            "ticket": 3, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 8, 
+            "text": "", 
+            "odds": "1.30", 
+            "upload": "", 
+            "choice": 24, 
+            "session": 362607, 
+            "ticket": 2, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 7, 
+            "text": "", 
+            "odds": "1.30", 
+            "upload": "", 
+            "choice": 19, 
+            "session": 3765, 
+            "ticket": 2, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 8, 
+            "text": "", 
+            "odds": "1.20", 
+            "upload": "", 
+            "choice": 22, 
+            "session": 3763, 
+            "ticket": 2, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 79, 
+            "text": "", 
+            "odds": "1.60", 
+            "upload": "", 
+            "choice": 290, 
+            "session": 3763, 
+            "ticket": 1, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 16, 
+            "text": "", 
+            "odds": "1.20", 
+            "upload": "", 
+            "choice": 48, 
+            "session": 3765, 
+            "ticket": 1, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 7, 
+            "text": "", 
+            "odds": "1.20", 
+            "upload": "", 
+            "choice": 19, 
+            "session": 7791, 
+            "ticket": 1, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 7, 
+            "text": "", 
+            "odds": "1.20", 
+            "upload": "", 
+            "choice": 20, 
+            "session": 20747, 
+            "ticket": 1, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 8, 
+            "text": "", 
+            "odds": "1.10", 
+            "upload": "", 
+            "choice": 22, 
+            "session": 20743, 
+            "ticket": 1, 
+            "correction": 0
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bet.bet", 
+        "fields": {
+            "status": 0, 
+            "bettype": 7, 
+            "text": "", 
+            "odds": "1.40", 
+            "upload": "", 
+            "choice": 21, 
+            "session": 12200, 
+            "ticket": 1, 
+            "correction": 0
+        }
+    }
+]
