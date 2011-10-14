@@ -28,10 +28,6 @@ logger = logging.getLogger('apps')
 TICKET_STATUS_INCOMPLETE = 0
 TICKET_STATUS_DONE = 1
 
-BET_STATUS_NEW = 0
-BET_STATUS_CORRECTED = 1
-BET_STATUS_FLAG = 2
-
 BET_CORRECTION_NEW = 0
 BET_CORRECTION_WON = 1
 BET_CORRECTION_CANCELED = 2
@@ -45,70 +41,6 @@ class BetProfile(models.Model):
     offside_on = models.DateTimeField(null=True, blank=True)
     profitability = models.FloatField(default=0)
     profit = models.FloatField(default=0)
-
-    def is_offside(self):
-        if not hasattr(self, '_is_offside'):
-            if not self.offside_on:
-                self._is_offside = False
-            else:
-                delta = datetime.datetime.now() - self.offside_on
-                if delta.days <= 2:
-                    self._is_offside = True
-                else:
-                    self._is_offside = False
-
-                errors = self.event_set.filter(datetime__gte=datetime.timedelta(2))
-                errors = errors.filter(valid=False)
-                if errors.count():
-                    self.offside_on = datetime.datetime.now()
-                    self._is_offside = True
-                    self.save()
-        return self._is_offside
-
-    def is_referee(self):
-        if not hasattr(self, '_is_referee'):
-            if self.user.is_staff:
-                self._is_referee = True
-            elif self.is_offside():
-                self._is_referee = False
-            elif self.get_event_set_percent(self.user.event_set.filter(valid=False)) > 5:
-                self._is_referee = False
-            elif self.user.event_set.filter(valid=True).count() < 50:
-                self._is_referee = False
-            else:
-                self._is_referee = True
-        return self._is_referee
-   
-    def get_event_set_percent(self, event_set):
-        total_events = self.user.event_set.all().count()
-        if total_events == 0:
-            return 0
-        percent = ( event_set.count() / total_events ) * 100
-        return percent
-
-    def can_correct(self, bet):
-        if self.is_offside():
-            return False
-
-        if bet.is_new():
-            # anyone can correct any new bet
-            return True
-
-        if bet.is_flag() and self.is_referee():
-            # referees can correct flagged bets
-            return True
-
-        return False
-
-    def can_flag(self, bet):
-        if self.is_offside():
-            return False
-        
-        if bet.is_flag():
-            # cannot flag an already flagged bet
-            return False
-
-        return True
 
     def refresh(self):
         logger.debug('spooling user profile refresh %s' % self.user)
@@ -191,13 +123,6 @@ def media_upload_to(instance, filename):
     return 'ticket/%s/%s' % (instance.ticket.pk, filename)
 
 class Bet(models.Model):
-    BET_STATUS_CHOICES = (
-        (None, '---------'),
-        (BET_STATUS_NEW, _('new')),
-        (BET_STATUS_CORRECTED, _('corrected')),
-        (BET_STATUS_FLAG, _('flagged for moderation')),
-    )
-
     BET_CORRECTION_CHOICES = (
         (BET_CORRECTION_NEW, _('waiting')),
         (BET_CORRECTION_WON, _('won')),
@@ -212,7 +137,7 @@ class Bet(models.Model):
     odds = models.DecimalField(max_digits=4, decimal_places=2)
     text = models.TextField(blank=True, null=True)
     upload = models.FileField(upload_to=media_upload_to, null=True, blank=True)
-    status = models.IntegerField(choices=BET_STATUS_CHOICES, default=BET_STATUS_NEW)
+    flagged = models.BooleanField()
     correction = models.IntegerField(choices=BET_CORRECTION_CHOICES, default=BET_CORRECTION_NEW)
 
     def __unicode__(self):
@@ -244,33 +169,6 @@ def delete_empty_ticket(sender, **kwargs):
     except Ticket.DoesNotExist:
         pass
 signals.post_delete.connect(delete_empty_ticket, sender=Bet)
-
-class Event(models.Model):
-    EVENT_KIND_CHOICES = (
-        (EVENT_KIND_CORRECTION, _('correction')),
-        (EVENT_KIND_FLAG, _('flag')),
-    )
-
-    bet = models.ForeignKey('Bet')
-    user = models.ForeignKey('auth.User')
-    correction = models.IntegerField(choices=Bet.BET_CORRECTION_CHOICES, default=BET_CORRECTION_NEW)
-    datetime = models.DateTimeField(auto_now_add=True)
-    kind = models.IntegerField(choices=EVENT_KIND_CHOICES)
-    valid = models.BooleanField(default=True)
-
-    def __unicode__(self):
-        if self.kind == EVENT_KIND_CORRECTION:
-            verb = _(u'corrected')
-        elif self.kind == EVENT_KIND_FLAG:
-            verb = _(u'flagged')
-
-        return _(u'%(user)s %(verb)s %(bettype)s on match %(session)s, result: %(correction)s') % {
-            'user': self.user,
-            'verb': verb,
-            'bettype': self.bet.bettype,
-            'session': self.bet.session,
-            'correction': self.correction,
-        }
 
 @spool
 def refresh_betprofile_for_user(arguments):

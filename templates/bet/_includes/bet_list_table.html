@@ -47,7 +47,6 @@
                 {% endif %}
                 {% if request.user.is_authenticated %}
                     <th><acronym title="{% trans 'flagged' %}">F</acronym></th>
-                    <th>{% trans 'correct' %}</th>
                 {% endif %}
             </tr>
         </thead>
@@ -125,20 +124,9 @@
                 </td>
                 {% endif %}
                 {% if request.user.is_authenticated %}
-                <td class="flagged">
-                    <div class="flag" style="{% if not bet.is_flag %}display:none;{% endif %}">
-                    </div>
-                </td>
-                <td class="correct">
-                    <div class="correct" style="{% if not bet.can_correct %}display: none;{% endif %}">
-                        <a href="{% url bet_status_change bet.pk 'won' %}" title="{% trans 'this bet was won' %}" class="won"></a>
-                        <a href="{% url bet_status_change bet.pk 'lost' %}" title="{% trans 'this bet was lost' %}" class="lost"></a>
-                        <a href="{% url bet_status_change bet.pk 'canceled' %}" title="{% trans 'this bet was canceled' %}" class="canceled"></a>
-                    </div>
-
-                    <div class="flag" style="{% if not bet.can_flag %}display:none;{% endif %}">
-                        <a class="flag" href="{% url bet_status_change bet.pk 'flag' %}" title="{% trans 'this bet result is invalid, it must be corrected by a Referee' %}"></a>
-                    </div>
+                <td class="flag">
+                    <a class="flag" href="{% url bet_flag %}?bet_pk={{ bet.pk }}">
+                    </a>
                 </td>
                 {% endif %}
             </tr>

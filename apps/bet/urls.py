@@ -60,14 +60,13 @@ urlpatterns = patterns('bet.views',
         }, 'bet_form'
     ),
     url(
-        r'(?P<bet_pk>[0-9]+)/(?P<action>[a-z]+)/$',
-        'bet_status_change', {
-        }, 'bet_status_change',
-    ),
-    url(
         r'(?P<pk>[0-9]+)/$',
         views.BetDetailView.as_view(), {
         }, 'bet_detail',
     ),
-
+    url(
+        r'flag/$',
+        views.bet_flag, {
+        }, 'bet_flag'
+    ),
 )

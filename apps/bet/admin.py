@@ -23,5 +23,4 @@ class BetProfileAdmin(admin.ModelAdmin):
 
 admin.site.register(Ticket, TicketAdmin)
 admin.site.register(Bet, BetAdmin)
-admin.site.register(Event)
 admin.site.register(BetProfile, BetProfileAdmin)

@@ -107,14 +107,6 @@ class BetListHelper(object):
                         self.filter.form.fields['bettype'].queryset.filter(
                             sport=self.sport)
 
-        user = self.request.user
-        if user.is_authenticated():
-            for bet in self.qs:
-                if user.betprofile.can_correct(bet):
-                    bet.can_correct = True
-                if user.betprofile.can_flag(bet):
-                    bet.can_flag = True
-
     def render_form(self):
         context = template.Context()
         context.update({

@@ -46,9 +46,9 @@ class BetListView(generic.ListView):
             qs = qs.filter(ticket__user__in=self.request.user.friends())
         
         if self.to_correct:
-            qs = qs.filter(status=BET_STATUS_NEW)
+            qs = qs.filter(correction=BET_CORRECTION_NEW)
         elif self.flagged:
-            qs = qs.filter(status=BET_STATUS_FLAG)
+            qs = qs.filter(flagged=True)
 
         return qs
 
@@ -72,7 +72,6 @@ class BetListView(generic.ListView):
 def ticket_add(request, form_class=TicketForm,
     template_name='bet/ticket_add.html', extra_context=None):
 
-
     # if there is any pending ticket, force it
     tickets = request.user.ticket_set.filter(status=TICKET_STATUS_INCOMPLETE).order_by('-pk')
     if tickets:
@@ -95,94 +94,6 @@ def ticket_add(request, form_class=TicketForm,
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name, context,
         context_instance=template.RequestContext(request))
-
-@login_required
-def bet_status_change(request, bet_pk, action):
-    bet = shortcuts.get_object_or_404(Bet, pk=bet_pk)
-
-    initial_ticket_correction = bet.ticket.correction
-
-    if action not in ('won', 'lost', 'flag', 'canceled'):
-        return http.HttpResponseBadRequest('Only won, lost, flag and canceled are OK for the action argument')
-    
-    if action in ('won', 'lost', 'canceled'):
-        if not request.user.betprofile.can_correct(bet):
-            return http.HttpResponseForbidden('you may not correct this bet')
-        
-        old_correction = bet.correction
-        if action == 'won':
-            new_correction = BET_CORRECTION_WON
-        elif action == 'lost':
-            new_correction = BET_CORRECTION_LOST
-        elif action == 'canceled':
-            new_correction = BET_CORRECTION_CANCELED
-
-        # validate all corrections of this bet that match this one
-        bet.event_set.filter(correction=new_correction,
-                             kind=EVENT_KIND_CORRECTION).update(valid=True)
-
-        # invalidate all corrections of this bet that do not match this one
-        bet.event_set.exclude(correction=new_correction).filter(
-                             kind=EVENT_KIND_CORRECTION).update(valid=False)
-
-        # validate all reports of corrections that are different from this one
-        bet.event_set.exclude(correction=new_correction).filter(
-                             kind=EVENT_KIND_FLAG).update(valid=True)
-
-        # invalidate all reports of corrections that match the new correction
-        bet.event_set.filter(correction=new_correction,
-                             kind=EVENT_KIND_FLAG).update(valid=False)
-
-        event = Event(bet=bet, user=request.user, kind=EVENT_KIND_CORRECTION,
-                                                    correction=new_correction)
-        event.save()
-
-        bets = Bet.objects.filter(session=bet.session, bettype=bet.bettype, 
-            choice=bet.choice).select_related()
-        
-        users = []
-        for bet in bets:
-            bet.correction = new_correction
-            bet.status = BET_STATUS_CORRECTED
-            bet.save()
- 
-            emit_static(
-                template='bet_corrected',
-                bet=bet,
-                queues=['dropdown=other,user=%s,unacknowledged' % bet.ticket.user.pk]
-            )
-
-            new_ticket_correction = bet.ticket.correction
-            if initial_ticket_correction == BET_CORRECTION_NEW and \
-                new_ticket_correction != BET_CORRECTION_NEW:
-                emit_static(
-                    template='ticket_corrected',
-                    ticket=bet.ticket,
-                    queues=['dropdown=other,user=%s,unacknowledged' % bet.ticket.user.pk]
-                )
-
-            if bet.ticket.user in users:
-                continue
-            
-            refresh_betprofile_for_user.spool(userpk=str(pk))
-            users.append(bet.ticket.user)
-
-        actstream.action.send(request.user, verb='corrected', action_object=bet)
-
-    elif action == 'flag':
-        if not request.user.betprofile.can_flag(bet):
-            return http.HttpResponseForbidden('you may not flag this bet')
-
-        event = Event(user=request.user, bet=bet, kind=EVENT_KIND_FLAG,
-                      correction=bet.correction)
-        event.save()
-
-        bet.status = BET_STATUS_FLAG
-        bet.save()
-        
-        actstream.action.send(request.user, verb='flagged', action_object=bet)
-
-    return http.HttpResponse()
 
 @login_required
 def ticket_delete(request, ticket_pk):
@@ -214,6 +125,13 @@ def bet_delete(request, bet_pk):
             'bet_form', args=(ticket.pk,)))
     else:
         return http.HttpResponse(_('ticket without bets deleted'))
+
+@login_required
+def bet_flag(request):
+    bet = shortcuts.get_object_or_404(Bet, pk=request.GET.get('bet_pk'))
+    bet.flagged = True
+    bet.save()
+    return http.HttpResponse('OK', status=201)
 
 @login_required
 def bet_form(request, ticket_pk, form_class=BetForm,

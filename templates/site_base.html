@@ -597,44 +597,14 @@ table.bettype table.choices {
                 }
             }
 
-            $('td.correct a').live('click', function(e) {
-                console.log('clicked')
+            $('td.flag a').live('click', function(e) {
                 e.preventDefault();
                 var link = $(this);
                 $.post(
                     $(this).attr('href'), {
                         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
                     }, function(data, textStatus, jqXHR) {
-                        link.parent().slideUp('fast', function() {
-                            if (link.hasClass('flag')) {
-                                link.parents('tr').find('td.flag div').slideDown();
-                            } else {
-                                link.parents('td').find('div.flag').slideDown();
-                            }
-                            link.parents('tr').find('tr.result div:visible').show();
-
-                        });
-                        if (link.hasClass('lost')) {
-                            link.parents('tr').find('td.result div.lost').show('fast');
-                        }
-                        if (link.hasClass('canceled')) {
-                            link.parents('tr').find('td.result div.canceled').show('fast');
-                        }
-                        if (link.hasClass('won')) {
-                            link.parents('tr').find('td.result div.won').show('fast');
-                        }
-                        if (link.hasClass('flag')) {
-                            link.parents('tr').find('td.flagged div').show('fast');
-
-                        } else {
-                            link.parents('tr').find('td.flagged .flag:visible').hide('slow');
-                            link.parents('tr').find('td.result .initial').hide();
-                        }
-
-                        {% if request.user.is_staff %}
-                        add_message('{% trans "Staff hack activated: flag and correct" %}');
-                        link.parents('tr').find('td.correct div.correct').show();
-                        {% endif %}
+                        add_message('{% trans "Bet flagged" %}');
                     }
                 );
             });
