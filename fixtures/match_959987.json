@@ -1,0 +1,3469 @@
+[
+    {
+        "pk": 162, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Samoa am\u00e9ricaines", 
+            "name": "American Samoa", 
+            "parent": 161, 
+            "gsm_id": 11, 
+            "_order": 0, 
+            "country_code": "ASM", 
+            "name_en": "American Samoa", 
+            "country_code_2": "as"
+        }
+    }, 
+    {
+        "pk": 151, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Argentine", 
+            "name": "Argentina", 
+            "parent": 150, 
+            "gsm_id": 16, 
+            "_order": 0, 
+            "country_code": "ARG", 
+            "name_en": "Argentina", 
+            "country_code_2": "ar"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Monde", 
+            "name": "World", 
+            "parent": null, 
+            "gsm_id": 1, 
+            "_order": 0, 
+            "country_code": "", 
+            "name_en": "World", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Afghanistan", 
+            "name": "Afghanistan", 
+            "parent": 2, 
+            "gsm_id": 8, 
+            "_order": 0, 
+            "country_code": "AFG", 
+            "name_en": "Afghanistan", 
+            "country_code_2": "af"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Asie", 
+            "name": "Asia", 
+            "parent": 1, 
+            "gsm_id": 2, 
+            "_order": 0, 
+            "country_code": "", 
+            "name_en": "Asia", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 109, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Anguilla", 
+            "name": "Anguilla", 
+            "parent": 108, 
+            "gsm_id": 14, 
+            "_order": 0, 
+            "country_code": "AIA", 
+            "name_en": "Anguilla", 
+            "country_code_2": "ai"
+        }
+    }, 
+    {
+        "pk": 176, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Albanie", 
+            "name": "Albania", 
+            "parent": 175, 
+            "gsm_id": 9, 
+            "_order": 0, 
+            "country_code": "ALB", 
+            "name_en": "Albania", 
+            "country_code_2": "al"
+        }
+    }, 
+    {
+        "pk": 51, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Alg\u00e9rie", 
+            "name": "Algeria", 
+            "parent": 50, 
+            "gsm_id": 10, 
+            "_order": 0, 
+            "country_code": "ALG", 
+            "name_en": "Algeria", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 152, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Bolivie", 
+            "name": "Bolivia", 
+            "parent": 150, 
+            "gsm_id": 32, 
+            "_order": 1, 
+            "country_code": "BOL", 
+            "name_en": "Bolivia", 
+            "country_code_2": "bo"
+        }
+    }, 
+    {
+        "pk": 177, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Andorre", 
+            "name": "Andorra", 
+            "parent": 175, 
+            "gsm_id": 12, 
+            "_order": 1, 
+            "country_code": "AND", 
+            "name_en": "Andorra", 
+            "country_code_2": "ad"
+        }
+    }, 
+    {
+        "pk": 50, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Afrique", 
+            "name": "Africa", 
+            "parent": 1, 
+            "gsm_id": 3, 
+            "_order": 1, 
+            "country_code": "", 
+            "name_en": "Africa", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 163, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "\u00celes Cook", 
+            "name": "Cook Islands", 
+            "parent": 161, 
+            "gsm_id": 54, 
+            "_order": 1, 
+            "country_code": "COK", 
+            "name_en": "Cook Islands", 
+            "country_code_2": "ck"
+        }
+    }, 
+    {
+        "pk": 110, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Antigua-et-Barbuda", 
+            "name": "Antigua and Barbuda", 
+            "parent": 108, 
+            "gsm_id": 15, 
+            "_order": 1, 
+            "country_code": "ATG", 
+            "name_en": "Antigua and Barbuda", 
+            "country_code_2": "ag"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Australie", 
+            "name": "Australia", 
+            "parent": 2, 
+            "gsm_id": 19, 
+            "_order": 1, 
+            "country_code": "AUS", 
+            "name_en": "Australia", 
+            "country_code_2": "au"
+        }
+    }, 
+    {
+        "pk": 52, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Angola", 
+            "name": "Angola", 
+            "parent": 50, 
+            "gsm_id": 13, 
+            "_order": 1, 
+            "country_code": "ANG", 
+            "name_en": "Angola", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 178, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Arm\u00e9nie", 
+            "name": "Armenia", 
+            "parent": 175, 
+            "gsm_id": 17, 
+            "_order": 2, 
+            "country_code": "ARM", 
+            "name_en": "Armenia", 
+            "country_code_2": "am"
+        }
+    }, 
+    {
+        "pk": 153, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Br\u00e9sil", 
+            "name": "Brazil", 
+            "parent": 150, 
+            "gsm_id": 35, 
+            "_order": 2, 
+            "country_code": "BRA", 
+            "name_en": "Brazil", 
+            "country_code_2": "br"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Bahre\u00efn", 
+            "name": "Bahrain", 
+            "parent": 2, 
+            "gsm_id": 23, 
+            "_order": 2, 
+            "country_code": "BHR", 
+            "name_en": "Bahrain", 
+            "country_code_2": "bh"
+        }
+    }, 
+    {
+        "pk": 53, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "B\u00e9nin", 
+            "name": "Benin", 
+            "parent": 50, 
+            "gsm_id": 29, 
+            "_order": 2, 
+            "country_code": "BEN", 
+            "name_en": "Benin", 
+            "country_code_2": "bj"
+        }
+    }, 
+    {
+        "pk": 164, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Fidji", 
+            "name": "Fiji", 
+            "parent": 161, 
+            "gsm_id": 74, 
+            "_order": 2, 
+            "country_code": "FJI", 
+            "name_en": "Fiji", 
+            "country_code_2": "fj"
+        }
+    }, 
+    {
+        "pk": 111, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Aruba", 
+            "name": "Aruba", 
+            "parent": 108, 
+            "gsm_id": 18, 
+            "_order": 2, 
+            "country_code": "ABW", 
+            "name_en": "Aruba", 
+            "country_code_2": "aw"
+        }
+    }, 
+    {
+        "pk": 108, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Am\u00e9rique du Nord", 
+            "name": "N/C America", 
+            "parent": 1, 
+            "gsm_id": 4, 
+            "_order": 2, 
+            "country_code": "", 
+            "name_en": "N/C America", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 154, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Chili", 
+            "name": "Chile", 
+            "parent": 150, 
+            "gsm_id": 48, 
+            "_order": 3, 
+            "country_code": "CHL", 
+            "name_en": "Chile", 
+            "country_code_2": "cl"
+        }
+    }, 
+    {
+        "pk": 179, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Autriche", 
+            "name": "Austria", 
+            "parent": 175, 
+            "gsm_id": 20, 
+            "_order": 3, 
+            "country_code": "AUT", 
+            "name_en": "Austria", 
+            "country_code_2": "at"
+        }
+    }, 
+    {
+        "pk": 112, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Bahamas", 
+            "name": "Bahamas", 
+            "parent": 108, 
+            "gsm_id": 22, 
+            "_order": 3, 
+            "country_code": "BHS", 
+            "name_en": "Bahamas", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Bangladesh", 
+            "name": "Bangladesh", 
+            "parent": 2, 
+            "gsm_id": 24, 
+            "_order": 3, 
+            "country_code": "BAN", 
+            "name_en": "Bangladesh", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 54, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Botswana", 
+            "name": "Botswana", 
+            "parent": 50, 
+            "gsm_id": 34, 
+            "_order": 3, 
+            "country_code": "BOT", 
+            "name_en": "Botswana", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 150, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Am\u00e9rique du Sud", 
+            "name": "South America", 
+            "parent": 1, 
+            "gsm_id": 5, 
+            "_order": 3, 
+            "country_code": "", 
+            "name_en": "South America", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 165, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Nouvelle-Cal\u00e9donie", 
+            "name": "New Caledonia", 
+            "parent": 161, 
+            "gsm_id": 140, 
+            "_order": 3, 
+            "country_code": "NCL", 
+            "name_en": "New Caledonia", 
+            "country_code_2": "nc"
+        }
+    }, 
+    {
+        "pk": 166, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Nouvelle-Z\u00e9lande", 
+            "name": "New Zealand", 
+            "parent": 161, 
+            "gsm_id": 141, 
+            "_order": 4, 
+            "country_code": "NZL", 
+            "name_en": "New Zealand", 
+            "country_code_2": "nz"
+        }
+    }, 
+    {
+        "pk": 155, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Colombie", 
+            "name": "Colombia", 
+            "parent": 150, 
+            "gsm_id": 51, 
+            "_order": 4, 
+            "country_code": "COL", 
+            "name_en": "Colombia", 
+            "country_code_2": "co"
+        }
+    }, 
+    {
+        "pk": 113, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Barbade", 
+            "name": "Barbados", 
+            "parent": 108, 
+            "gsm_id": 25, 
+            "_order": 4, 
+            "country_code": "BRB", 
+            "name_en": "Barbados", 
+            "country_code_2": "bb"
+        }
+    }, 
+    {
+        "pk": 180, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Azerba\u00efdjan", 
+            "name": "Azerbaijan", 
+            "parent": 175, 
+            "gsm_id": 21, 
+            "_order": 4, 
+            "country_code": "AZE", 
+            "name_en": "Azerbaijan", 
+            "country_code_2": "az"
+        }
+    }, 
+    {
+        "pk": 55, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Burkina Faso", 
+            "name": "Burkina Faso", 
+            "parent": 50, 
+            "gsm_id": 39, 
+            "_order": 4, 
+            "country_code": "BFA", 
+            "name_en": "Burkina Faso", 
+            "country_code_2": "bf"
+        }
+    }, 
+    {
+        "pk": 161, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Oc\u00e9anie", 
+            "name": "Oceania", 
+            "parent": 1, 
+            "gsm_id": 6, 
+            "_order": 4, 
+            "country_code": "", 
+            "name_en": "Oceania", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Bhoutan", 
+            "name": "Bhutan", 
+            "parent": 2, 
+            "gsm_id": 31, 
+            "_order": 4, 
+            "country_code": "BHU", 
+            "name_en": "Bhutan", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 114, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Belize", 
+            "name": "Belize", 
+            "parent": 108, 
+            "gsm_id": 28, 
+            "_order": 5, 
+            "country_code": "BLZ", 
+            "name_en": "Belize", 
+            "country_code_2": "bz"
+        }
+    }, 
+    {
+        "pk": 167, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Papouasie-Nouvelle-Guin\u00e9e", 
+            "name": "Papua New Guinea", 
+            "parent": 161, 
+            "gsm_id": 151, 
+            "_order": 5, 
+            "country_code": "PNG", 
+            "name_en": "Papua New Guinea", 
+            "country_code_2": "pg"
+        }
+    }, 
+    {
+        "pk": 181, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "B\u00e9larus", 
+            "name": "Belarus", 
+            "parent": 175, 
+            "gsm_id": 26, 
+            "_order": 5, 
+            "country_code": "BLR", 
+            "name_en": "Belarus", 
+            "country_code_2": "by"
+        }
+    }, 
+    {
+        "pk": 175, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Europe", 
+            "name": "Europe", 
+            "parent": 1, 
+            "gsm_id": 7, 
+            "_order": 5, 
+            "country_code": "", 
+            "name_en": "Europe", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 56, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Burundi", 
+            "name": "Burundi", 
+            "parent": 50, 
+            "gsm_id": 40, 
+            "_order": 5, 
+            "country_code": "BDI", 
+            "name_en": "Burundi", 
+            "country_code_2": "bi"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Brunei", 
+            "name": "Brunei Darussalam", 
+            "parent": 2, 
+            "gsm_id": 37, 
+            "_order": 5, 
+            "country_code": "BRU", 
+            "name_en": "Brunei Darussalam", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 156, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "\u00c9quateur", 
+            "name": "Ecuador", 
+            "parent": 150, 
+            "gsm_id": 65, 
+            "_order": 5, 
+            "country_code": "ECU", 
+            "name_en": "Ecuador", 
+            "country_code_2": "ec"
+        }
+    }, 
+    {
+        "pk": 57, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Cameroun", 
+            "name": "Cameroon", 
+            "parent": 50, 
+            "gsm_id": 42, 
+            "_order": 6, 
+            "country_code": "CMR", 
+            "name_en": "Cameroon", 
+            "country_code_2": "cm"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Cambodge", 
+            "name": "Cambodia", 
+            "parent": 2, 
+            "gsm_id": 41, 
+            "_order": 6, 
+            "country_code": "CAM", 
+            "name_en": "Cambodia", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 168, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Samoa", 
+            "name": "Samoa", 
+            "parent": 161, 
+            "gsm_id": 162, 
+            "_order": 6, 
+            "country_code": "WSM", 
+            "name_en": "Samoa", 
+            "country_code_2": "ws"
+        }
+    }, 
+    {
+        "pk": 157, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Paraguay", 
+            "name": "Paraguay", 
+            "parent": 150, 
+            "gsm_id": 152, 
+            "_order": 6, 
+            "country_code": "PRY", 
+            "name_en": "Paraguay", 
+            "country_code_2": "py"
+        }
+    }, 
+    {
+        "pk": 115, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Bermudes", 
+            "name": "Bermuda", 
+            "parent": 108, 
+            "gsm_id": 30, 
+            "_order": 6, 
+            "country_code": "BMU", 
+            "name_en": "Bermuda", 
+            "country_code_2": "bm"
+        }
+    }, 
+    {
+        "pk": 182, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Belgique", 
+            "name": "Belgium", 
+            "parent": 175, 
+            "gsm_id": 27, 
+            "_order": 6, 
+            "country_code": "BEL", 
+            "name_en": "Belgium", 
+            "country_code_2": "be"
+        }
+    }, 
+    {
+        "pk": 158, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "P\u00e9rou", 
+            "name": "Peru", 
+            "parent": 150, 
+            "gsm_id": 153, 
+            "_order": 7, 
+            "country_code": "PER", 
+            "name_en": "Peru", 
+            "country_code_2": "pe"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Chine", 
+            "name": "China PR", 
+            "parent": 2, 
+            "gsm_id": 49, 
+            "_order": 7, 
+            "country_code": "CHN", 
+            "name_en": "China PR", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 58, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Cap-Vert", 
+            "name": "Cape Verde Islands", 
+            "parent": 50, 
+            "gsm_id": 44, 
+            "_order": 7, 
+            "country_code": "CPV", 
+            "name_en": "Cape Verde Islands", 
+            "country_code_2": "cv"
+        }
+    }, 
+    {
+        "pk": 169, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "\u00celes Salomon", 
+            "name": "Solomon Islands", 
+            "parent": 161, 
+            "gsm_id": 173, 
+            "_order": 7, 
+            "country_code": "SLB", 
+            "name_en": "Solomon Islands", 
+            "country_code_2": "sb"
+        }
+    }, 
+    {
+        "pk": 183, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Bosnie-Herz\u00e9govine", 
+            "name": "Bosnia-Herzegovina", 
+            "parent": 175, 
+            "gsm_id": 33, 
+            "_order": 7, 
+            "country_code": "BIH", 
+            "name_en": "Bosnia-Herzegovina", 
+            "country_code_2": "ba"
+        }
+    }, 
+    {
+        "pk": 116, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "\u00celes Vierges Britanniques", 
+            "name": "British Virgin Islands", 
+            "parent": 108, 
+            "gsm_id": 36, 
+            "_order": 7, 
+            "country_code": "BVI", 
+            "name_en": "British Virgin Islands", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 117, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Canada", 
+            "name": "Canada", 
+            "parent": 108, 
+            "gsm_id": 43, 
+            "_order": 8, 
+            "country_code": "CAN", 
+            "name_en": "Canada", 
+            "country_code_2": "ca"
+        }
+    }, 
+    {
+        "pk": 159, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Uruguay", 
+            "name": "Uruguay", 
+            "parent": 150, 
+            "gsm_id": 204, 
+            "_order": 8, 
+            "country_code": "URY", 
+            "name_en": "Uruguay", 
+            "country_code_2": "uy"
+        }
+    }, 
+    {
+        "pk": 170, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Tahiti", 
+            "name": "Tahiti", 
+            "parent": 161, 
+            "gsm_id": 188, 
+            "_order": 8, 
+            "country_code": "TAH", 
+            "name_en": "Tahiti", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 59, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "R\u00e9publique Centrafricaine", 
+            "name": "Central African Republic", 
+            "parent": 50, 
+            "gsm_id": 46, 
+            "_order": 8, 
+            "country_code": "CTA", 
+            "name_en": "Central African Republic", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Ta\u00efwan", 
+            "name": "Chinese Taipei", 
+            "parent": 2, 
+            "gsm_id": 50, 
+            "_order": 8, 
+            "country_code": "TPE", 
+            "name_en": "Chinese Taipei", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 184, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Bulgarie", 
+            "name": "Bulgaria", 
+            "parent": 175, 
+            "gsm_id": 38, 
+            "_order": 8, 
+            "country_code": "BGR", 
+            "name_en": "Bulgaria", 
+            "country_code_2": "bg"
+        }
+    }, 
+    {
+        "pk": 160, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Venezuela", 
+            "name": "Venezuela", 
+            "parent": 150, 
+            "gsm_id": 207, 
+            "_order": 9, 
+            "country_code": "VEN", 
+            "name_en": "Venezuela", 
+            "country_code_2": "ve"
+        }
+    }, 
+    {
+        "pk": 185, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Croatie", 
+            "name": "Croatia", 
+            "parent": 175, 
+            "gsm_id": 56, 
+            "_order": 9, 
+            "country_code": "HRV", 
+            "name_en": "Croatia", 
+            "country_code_2": "hr"
+        }
+    }, 
+    {
+        "pk": 171, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Tonga", 
+            "name": "Tonga", 
+            "parent": 161, 
+            "gsm_id": 193, 
+            "_order": 9, 
+            "country_code": "TON", 
+            "name_en": "Tonga", 
+            "country_code_2": "to"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Guam", 
+            "name": "Guam", 
+            "parent": 2, 
+            "gsm_id": 84, 
+            "_order": 9, 
+            "country_code": "GUM", 
+            "name_en": "Guam", 
+            "country_code_2": "gu"
+        }
+    }, 
+    {
+        "pk": 60, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Tchad", 
+            "name": "Chad", 
+            "parent": 50, 
+            "gsm_id": 47, 
+            "_order": 9, 
+            "country_code": "CHA", 
+            "name_en": "Chad", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 118, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "\u00celes Ca\u00efmans", 
+            "name": "Cayman Islands", 
+            "parent": 108, 
+            "gsm_id": 45, 
+            "_order": 9, 
+            "country_code": "CYM", 
+            "name_en": "Cayman Islands", 
+            "country_code_2": "ky"
+        }
+    }, 
+    {
+        "pk": 61, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Congo", 
+            "name": "Congo", 
+            "parent": 50, 
+            "gsm_id": 52, 
+            "_order": 10, 
+            "country_code": "CGO", 
+            "name_en": "Congo", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 119, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Costa Rica", 
+            "name": "Costa Rica", 
+            "parent": 108, 
+            "gsm_id": 55, 
+            "_order": 10, 
+            "country_code": "CRI", 
+            "name_en": "Costa Rica", 
+            "country_code_2": "cr"
+        }
+    }, 
+    {
+        "pk": 172, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Vanuatu", 
+            "name": "Vanuatu", 
+            "parent": 161, 
+            "gsm_id": 206, 
+            "_order": 10, 
+            "country_code": "VUT", 
+            "name_en": "Vanuatu", 
+            "country_code_2": "vu"
+        }
+    }, 
+    {
+        "pk": 186, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Chypre", 
+            "name": "Cyprus", 
+            "parent": 175, 
+            "gsm_id": 58, 
+            "_order": 10, 
+            "country_code": "CYP", 
+            "name_en": "Cyprus", 
+            "country_code_2": "cy"
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Hong Kong", 
+            "name": "Hong Kong", 
+            "parent": 2, 
+            "gsm_id": 91, 
+            "_order": 10, 
+            "country_code": "HKG", 
+            "name_en": "Hong Kong", 
+            "country_code_2": "hk"
+        }
+    }, 
+    {
+        "pk": 120, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Cuba", 
+            "name": "Cuba", 
+            "parent": 108, 
+            "gsm_id": 57, 
+            "_order": 11, 
+            "country_code": "CUB", 
+            "name_en": "Cuba", 
+            "country_code_2": "cu"
+        }
+    }, 
+    {
+        "pk": 173, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Tuvalu", 
+            "name": "Tuvalu", 
+            "parent": 161, 
+            "gsm_id": 233, 
+            "_order": 11, 
+            "country_code": "TVL", 
+            "name_en": "Tuvalu", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 62, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "R\u00e9publique D\u00e9mocrate du Congo", 
+            "name": "Congo DR", 
+            "parent": 50, 
+            "gsm_id": 53, 
+            "_order": 11, 
+            "country_code": "COD", 
+            "name_en": "Congo DR", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Inde", 
+            "name": "India", 
+            "parent": 2, 
+            "gsm_id": 94, 
+            "_order": 11, 
+            "country_code": "IND", 
+            "name_en": "India", 
+            "country_code_2": "in"
+        }
+    }, 
+    {
+        "pk": 187, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "R\u00e9publique Tch\u00e8que", 
+            "name": "Czech Republic", 
+            "parent": 175, 
+            "gsm_id": 59, 
+            "_order": 11, 
+            "country_code": "CZE", 
+            "name_en": "Czech Republic", 
+            "country_code_2": "cz"
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Indon\u00e9sie", 
+            "name": "Indonesia", 
+            "parent": 2, 
+            "gsm_id": 95, 
+            "_order": 12, 
+            "country_code": "IDN", 
+            "name_en": "Indonesia", 
+            "country_code_2": "id"
+        }
+    }, 
+    {
+        "pk": 63, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "C\u00f4te d'Ivoire", 
+            "name": "C\u00f4te d'Ivoire", 
+            "parent": 50, 
+            "gsm_id": 60, 
+            "_order": 12, 
+            "country_code": "CIV", 
+            "name_en": "C\u00f4te d'Ivoire", 
+            "country_code_2": "ci"
+        }
+    }, 
+    {
+        "pk": 121, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Dominique", 
+            "name": "Dominica", 
+            "parent": 108, 
+            "gsm_id": 63, 
+            "_order": 12, 
+            "country_code": "DMA", 
+            "name_en": "Dominica", 
+            "country_code_2": "dm"
+        }
+    }, 
+    {
+        "pk": 174, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Kiribati", 
+            "name": "Kiribati", 
+            "parent": 161, 
+            "gsm_id": 252, 
+            "_order": 12, 
+            "country_code": "KIR", 
+            "name_en": "Kiribati", 
+            "country_code_2": "ki"
+        }
+    }, 
+    {
+        "pk": 188, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Danemark", 
+            "name": "Denmark", 
+            "parent": 175, 
+            "gsm_id": 61, 
+            "_order": 12, 
+            "country_code": "DNK", 
+            "name_en": "Denmark", 
+            "country_code_2": "dk"
+        }
+    }, 
+    {
+        "pk": 122, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "R\u00e9publique Dominicaine", 
+            "name": "Dominican Republic", 
+            "parent": 108, 
+            "gsm_id": 64, 
+            "_order": 13, 
+            "country_code": "DOM", 
+            "name_en": "Dominican Republic", 
+            "country_code_2": "do"
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Iran", 
+            "name": "Iran", 
+            "parent": 2, 
+            "gsm_id": 96, 
+            "_order": 13, 
+            "country_code": "IRN", 
+            "name_en": "Iran", 
+            "country_code_2": "ir"
+        }
+    }, 
+    {
+        "pk": 64, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Djibouti", 
+            "name": "Djibouti", 
+            "parent": 50, 
+            "gsm_id": 62, 
+            "_order": 13, 
+            "country_code": "DJI", 
+            "name_en": "Djibouti", 
+            "country_code_2": "dj"
+        }
+    }, 
+    {
+        "pk": 189, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Angleterre", 
+            "name": "England", 
+            "parent": 175, 
+            "gsm_id": 68, 
+            "_order": 13, 
+            "country_code": "ENG", 
+            "name_en": "England", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 65, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "\u00c9gypte", 
+            "name": "Egypt", 
+            "parent": 50, 
+            "gsm_id": 66, 
+            "_order": 14, 
+            "country_code": "EGY", 
+            "name_en": "Egypt", 
+            "country_code_2": "eg"
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Iraq", 
+            "name": "Iraq", 
+            "parent": 2, 
+            "gsm_id": 97, 
+            "_order": 14, 
+            "country_code": "IRQ", 
+            "name_en": "Iraq", 
+            "country_code_2": "iq"
+        }
+    }, 
+    {
+        "pk": 190, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Estonie", 
+            "name": "Estonia", 
+            "parent": 175, 
+            "gsm_id": 71, 
+            "_order": 14, 
+            "country_code": "EST", 
+            "name_en": "Estonia", 
+            "country_code_2": "ee"
+        }
+    }, 
+    {
+        "pk": 123, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "El Salvador", 
+            "name": "El Salvador", 
+            "parent": 108, 
+            "gsm_id": 67, 
+            "_order": 14, 
+            "country_code": "SLV", 
+            "name_en": "El Salvador", 
+            "country_code_2": "sv"
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Japon", 
+            "name": "Japan", 
+            "parent": 2, 
+            "gsm_id": 102, 
+            "_order": 15, 
+            "country_code": "JPN", 
+            "name_en": "Japan", 
+            "country_code_2": "jp"
+        }
+    }, 
+    {
+        "pk": 66, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Guin\u00e9e \u00c9quatoriale", 
+            "name": "Equatorial Guinea", 
+            "parent": 50, 
+            "gsm_id": 69, 
+            "_order": 15, 
+            "country_code": "EQG", 
+            "name_en": "Equatorial Guinea", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 124, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Grenade", 
+            "name": "Grenada", 
+            "parent": 108, 
+            "gsm_id": 83, 
+            "_order": 15, 
+            "country_code": "GRD", 
+            "name_en": "Grenada", 
+            "country_code_2": "gd"
+        }
+    }, 
+    {
+        "pk": 191, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "\u00celes F\u00e9ro\u00e9", 
+            "name": "Faroe Islands", 
+            "parent": 175, 
+            "gsm_id": 73, 
+            "_order": 15, 
+            "country_code": "FRO", 
+            "name_en": "Faroe Islands", 
+            "country_code_2": "fo"
+        }
+    }, 
+    {
+        "pk": 125, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Guatemala", 
+            "name": "Guatemala", 
+            "parent": 108, 
+            "gsm_id": 85, 
+            "_order": 16, 
+            "country_code": "GTM", 
+            "name_en": "Guatemala", 
+            "country_code_2": "gt"
+        }
+    }, 
+    {
+        "pk": 192, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Finlande", 
+            "name": "Finland", 
+            "parent": 175, 
+            "gsm_id": 75, 
+            "_order": 16, 
+            "country_code": "FIN", 
+            "name_en": "Finland", 
+            "country_code_2": "fi"
+        }
+    }, 
+    {
+        "pk": 67, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "\u00c9rythr\u00e9e", 
+            "name": "Eritrea", 
+            "parent": 50, 
+            "gsm_id": 70, 
+            "_order": 16, 
+            "country_code": "ERI", 
+            "name_en": "Eritrea", 
+            "country_code_2": "er"
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Jordanie", 
+            "name": "Jordan", 
+            "parent": 2, 
+            "gsm_id": 103, 
+            "_order": 16, 
+            "country_code": "JOR", 
+            "name_en": "Jordan", 
+            "country_code_2": "jo"
+        }
+    }, 
+    {
+        "pk": 68, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "\u00c9thiopie", 
+            "name": "Ethiopia", 
+            "parent": 50, 
+            "gsm_id": 72, 
+            "_order": 17, 
+            "country_code": "ETH", 
+            "name_en": "Ethiopia", 
+            "country_code_2": "et"
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Cor\u00e9e du Nord", 
+            "name": "Korea DPR", 
+            "parent": 2, 
+            "gsm_id": 106, 
+            "_order": 17, 
+            "country_code": "PRK", 
+            "name_en": "Korea DPR", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 193, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "France", 
+            "name": "France", 
+            "parent": 175, 
+            "gsm_id": 76, 
+            "_order": 17, 
+            "country_code": "FRA", 
+            "name_en": "France", 
+            "country_code_2": "fr"
+        }
+    }, 
+    {
+        "pk": 126, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Guyana", 
+            "name": "Guyana", 
+            "parent": 108, 
+            "gsm_id": 88, 
+            "_order": 17, 
+            "country_code": "GUY", 
+            "name_en": "Guyana", 
+            "country_code_2": "gy"
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Cor\u00e9e du Sud", 
+            "name": "Korea Republic", 
+            "parent": 2, 
+            "gsm_id": 107, 
+            "_order": 18, 
+            "country_code": "KOR", 
+            "name_en": "Korea Republic", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 69, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Gabon", 
+            "name": "Gabon", 
+            "parent": 50, 
+            "gsm_id": 77, 
+            "_order": 18, 
+            "country_code": "GAB", 
+            "name_en": "Gabon", 
+            "country_code_2": "ga"
+        }
+    }, 
+    {
+        "pk": 127, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Ha\u00efti", 
+            "name": "Haiti", 
+            "parent": 108, 
+            "gsm_id": 89, 
+            "_order": 18, 
+            "country_code": "HTI", 
+            "name_en": "Haiti", 
+            "country_code_2": "ht"
+        }
+    }, 
+    {
+        "pk": 194, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "G\u00e9orgie", 
+            "name": "Georgia", 
+            "parent": 175, 
+            "gsm_id": 79, 
+            "_order": 18, 
+            "country_code": "GEO", 
+            "name_en": "Georgia", 
+            "country_code_2": "ge"
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Kowe\u00eft", 
+            "name": "Kuwait", 
+            "parent": 2, 
+            "gsm_id": 108, 
+            "_order": 19, 
+            "country_code": "KUW", 
+            "name_en": "Kuwait", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 195, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Allemagne", 
+            "name": "Germany", 
+            "parent": 175, 
+            "gsm_id": 80, 
+            "_order": 19, 
+            "country_code": "DEU", 
+            "name_en": "Germany", 
+            "country_code_2": "de"
+        }
+    }, 
+    {
+        "pk": 128, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Honduras", 
+            "name": "Honduras", 
+            "parent": 108, 
+            "gsm_id": 90, 
+            "_order": 19, 
+            "country_code": "HND", 
+            "name_en": "Honduras", 
+            "country_code_2": "hn"
+        }
+    }, 
+    {
+        "pk": 70, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Gambie", 
+            "name": "Gambia", 
+            "parent": 50, 
+            "gsm_id": 78, 
+            "_order": 19, 
+            "country_code": "GAM", 
+            "name_en": "Gambia", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 129, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Jama\u00efque", 
+            "name": "Jamaica", 
+            "parent": 108, 
+            "gsm_id": 101, 
+            "_order": 20, 
+            "country_code": "JAM", 
+            "name_en": "Jamaica", 
+            "country_code_2": "jm"
+        }
+    }, 
+    {
+        "pk": 196, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Gr\u00e8ce", 
+            "name": "Greece", 
+            "parent": 175, 
+            "gsm_id": 82, 
+            "_order": 20, 
+            "country_code": "GRC", 
+            "name_en": "Greece", 
+            "country_code_2": "gr"
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Kirghizistan", 
+            "name": "Kyrgyzstan", 
+            "parent": 2, 
+            "gsm_id": 109, 
+            "_order": 20, 
+            "country_code": "KGZ", 
+            "name_en": "Kyrgyzstan", 
+            "country_code_2": "kg"
+        }
+    }, 
+    {
+        "pk": 71, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Ghana", 
+            "name": "Ghana", 
+            "parent": 50, 
+            "gsm_id": 81, 
+            "_order": 20, 
+            "country_code": "GHA", 
+            "name_en": "Ghana", 
+            "country_code_2": "gh"
+        }
+    }, 
+    {
+        "pk": 72, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Guin\u00e9e", 
+            "name": "Guinea", 
+            "parent": 50, 
+            "gsm_id": 86, 
+            "_order": 21, 
+            "country_code": "GUI", 
+            "name_en": "Guinea", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 130, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Mexique", 
+            "name": "Mexico", 
+            "parent": 108, 
+            "gsm_id": 129, 
+            "_order": 21, 
+            "country_code": "MEX", 
+            "name_en": "Mexico", 
+            "country_code_2": "mx"
+        }
+    }, 
+    {
+        "pk": 197, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Hongrie", 
+            "name": "Hungary", 
+            "parent": 175, 
+            "gsm_id": 92, 
+            "_order": 21, 
+            "country_code": "HUN", 
+            "name_en": "Hungary", 
+            "country_code_2": "hu"
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Laos", 
+            "name": "Laos", 
+            "parent": 2, 
+            "gsm_id": 110, 
+            "_order": 21, 
+            "country_code": "LAO", 
+            "name_en": "Laos", 
+            "country_code_2": "la"
+        }
+    }, 
+    {
+        "pk": 131, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Montserrat", 
+            "name": "Montserrat", 
+            "parent": 108, 
+            "gsm_id": 132, 
+            "_order": 22, 
+            "country_code": "MSR", 
+            "name_en": "Montserrat", 
+            "country_code_2": "ms"
+        }
+    }, 
+    {
+        "pk": 198, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Islande", 
+            "name": "Iceland", 
+            "parent": 175, 
+            "gsm_id": 93, 
+            "_order": 22, 
+            "country_code": "ISL", 
+            "name_en": "Iceland", 
+            "country_code_2": "is"
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Liban", 
+            "name": "Lebanon", 
+            "parent": 2, 
+            "gsm_id": 112, 
+            "_order": 22, 
+            "country_code": "LIB", 
+            "name_en": "Lebanon", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 73, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Guin\u00e9e-Bissau", 
+            "name": "Guinea-Bissau", 
+            "parent": 50, 
+            "gsm_id": 87, 
+            "_order": 22, 
+            "country_code": "GNB", 
+            "name_en": "Guinea-Bissau", 
+            "country_code_2": "gw"
+        }
+    }, 
+    {
+        "pk": 199, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Irlande", 
+            "name": "Ireland Republic", 
+            "parent": 175, 
+            "gsm_id": 98, 
+            "_order": 23, 
+            "country_code": "IRL", 
+            "name_en": "Ireland Republic", 
+            "country_code_2": "ie"
+        }
+    }, 
+    {
+        "pk": 132, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Antilles N\u00e9erlandaises", 
+            "name": "Cura\u00e7ao", 
+            "parent": 108, 
+            "gsm_id": 139, 
+            "_order": 23, 
+            "country_code": "CUR", 
+            "name_en": "Cura\u00e7ao", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 74, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Kenya", 
+            "name": "Kenya", 
+            "parent": 50, 
+            "gsm_id": 105, 
+            "_order": 23, 
+            "country_code": "KEN", 
+            "name_en": "Kenya", 
+            "country_code_2": "ke"
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Macao", 
+            "name": "Macao", 
+            "parent": 2, 
+            "gsm_id": 119, 
+            "_order": 23, 
+            "country_code": "MAC", 
+            "name_en": "Macao", 
+            "country_code_2": "mo"
+        }
+    }, 
+    {
+        "pk": 75, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Lesotho", 
+            "name": "Lesotho", 
+            "parent": 50, 
+            "gsm_id": 113, 
+            "_order": 24, 
+            "country_code": "LES", 
+            "name_en": "Lesotho", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 200, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Isra\u00ebl", 
+            "name": "Israel", 
+            "parent": 175, 
+            "gsm_id": 99, 
+            "_order": 24, 
+            "country_code": "ISR", 
+            "name_en": "Israel", 
+            "country_code_2": "il"
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Malaisie", 
+            "name": "Malaysia", 
+            "parent": 2, 
+            "gsm_id": 123, 
+            "_order": 24, 
+            "country_code": "MAS", 
+            "name_en": "Malaysia", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 133, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Nicaragua", 
+            "name": "Nicaragua", 
+            "parent": 108, 
+            "gsm_id": 142, 
+            "_order": 24, 
+            "country_code": "NIC", 
+            "name_en": "Nicaragua", 
+            "country_code_2": "ni"
+        }
+    }, 
+    {
+        "pk": 201, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Italie", 
+            "name": "Italy", 
+            "parent": 175, 
+            "gsm_id": 100, 
+            "_order": 25, 
+            "country_code": "ITA", 
+            "name_en": "Italy", 
+            "country_code_2": "it"
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Maldives", 
+            "name": "Maldives", 
+            "parent": 2, 
+            "gsm_id": 124, 
+            "_order": 25, 
+            "country_code": "MDV", 
+            "name_en": "Maldives", 
+            "country_code_2": "mv"
+        }
+    }, 
+    {
+        "pk": 76, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Liberia", 
+            "name": "Liberia", 
+            "parent": 50, 
+            "gsm_id": 114, 
+            "_order": 25, 
+            "country_code": "LBR", 
+            "name_en": "Liberia", 
+            "country_code_2": "lr"
+        }
+    }, 
+    {
+        "pk": 134, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Panama", 
+            "name": "Panama", 
+            "parent": 108, 
+            "gsm_id": 150, 
+            "_order": 25, 
+            "country_code": "PAN", 
+            "name_en": "Panama", 
+            "country_code_2": "pa"
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Mongolie", 
+            "name": "Mongolia", 
+            "parent": 2, 
+            "gsm_id": 131, 
+            "_order": 26, 
+            "country_code": "MGL", 
+            "name_en": "Mongolia", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 135, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Porto Rico", 
+            "name": "Puerto Rico", 
+            "parent": 108, 
+            "gsm_id": 157, 
+            "_order": 26, 
+            "country_code": "PRI", 
+            "name_en": "Puerto Rico", 
+            "country_code_2": "pr"
+        }
+    }, 
+    {
+        "pk": 202, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Kazakhstan", 
+            "name": "Kazakhstan", 
+            "parent": 175, 
+            "gsm_id": 104, 
+            "_order": 26, 
+            "country_code": "KAZ", 
+            "name_en": "Kazakhstan", 
+            "country_code_2": "kz"
+        }
+    }, 
+    {
+        "pk": 77, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Libye", 
+            "name": "Libya", 
+            "parent": 50, 
+            "gsm_id": 115, 
+            "_order": 26, 
+            "country_code": "LBY", 
+            "name_en": "Libya", 
+            "country_code_2": "ly"
+        }
+    }, 
+    {
+        "pk": 136, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Saint-Kitts-et-Nevis", 
+            "name": "St. Kitts and Nevis", 
+            "parent": 108, 
+            "gsm_id": 178, 
+            "_order": 27, 
+            "country_code": "SKN", 
+            "name_en": "St. Kitts and Nevis", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Myanmar", 
+            "name": "Myanmar", 
+            "parent": 2, 
+            "gsm_id": 135, 
+            "_order": 27, 
+            "country_code": "MYA", 
+            "name_en": "Myanmar", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 203, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Lettonie", 
+            "name": "Latvia", 
+            "parent": 175, 
+            "gsm_id": 111, 
+            "_order": 27, 
+            "country_code": "LVA", 
+            "name_en": "Latvia", 
+            "country_code_2": "lv"
+        }
+    }, 
+    {
+        "pk": 78, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Madagascar", 
+            "name": "Madagascar", 
+            "parent": 50, 
+            "gsm_id": 121, 
+            "_order": 27, 
+            "country_code": "MAD", 
+            "name_en": "Madagascar", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 79, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Malawi", 
+            "name": "Malawi", 
+            "parent": 50, 
+            "gsm_id": 122, 
+            "_order": 28, 
+            "country_code": "MWI", 
+            "name_en": "Malawi", 
+            "country_code_2": "mw"
+        }
+    }, 
+    {
+        "pk": 31, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "N\u00e9pal", 
+            "name": "Nepal", 
+            "parent": 2, 
+            "gsm_id": 137, 
+            "_order": 28, 
+            "country_code": "NEP", 
+            "name_en": "Nepal", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 204, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Liechtenstein", 
+            "name": "Liechtenstein", 
+            "parent": 175, 
+            "gsm_id": 116, 
+            "_order": 28, 
+            "country_code": "LIE", 
+            "name_en": "Liechtenstein", 
+            "country_code_2": "li"
+        }
+    }, 
+    {
+        "pk": 137, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Sainte-Lucie", 
+            "name": "St. Lucia", 
+            "parent": 108, 
+            "gsm_id": 179, 
+            "_order": 28, 
+            "country_code": "STL", 
+            "name_en": "St. Lucia", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 205, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Lituanie", 
+            "name": "Lithuania", 
+            "parent": 175, 
+            "gsm_id": 117, 
+            "_order": 29, 
+            "country_code": "LTU", 
+            "name_en": "Lithuania", 
+            "country_code_2": "lt"
+        }
+    }, 
+    {
+        "pk": 32, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Oman", 
+            "name": "Oman", 
+            "parent": 2, 
+            "gsm_id": 147, 
+            "_order": 29, 
+            "country_code": "OMA", 
+            "name_en": "Oman", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 138, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Saint-Vincent-et-les-Grenadines", 
+            "name": "St. Vincent and the Grenadines", 
+            "parent": 108, 
+            "gsm_id": 180, 
+            "_order": 29, 
+            "country_code": "SVG", 
+            "name_en": "St. Vincent and the Grenadines", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 80, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Mali", 
+            "name": "Mali", 
+            "parent": 50, 
+            "gsm_id": 125, 
+            "_order": 29, 
+            "country_code": "MLI", 
+            "name_en": "Mali", 
+            "country_code_2": "ml"
+        }
+    }, 
+    {
+        "pk": 81, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Mauritanie", 
+            "name": "Mauritania", 
+            "parent": 50, 
+            "gsm_id": 127, 
+            "_order": 30, 
+            "country_code": "MTN", 
+            "name_en": "Mauritania", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 33, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Pakistan", 
+            "name": "Pakistan", 
+            "parent": 2, 
+            "gsm_id": 148, 
+            "_order": 30, 
+            "country_code": "PAK", 
+            "name_en": "Pakistan", 
+            "country_code_2": "pk"
+        }
+    }, 
+    {
+        "pk": 206, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Luxembourg", 
+            "name": "Luxembourg", 
+            "parent": 175, 
+            "gsm_id": 118, 
+            "_order": 30, 
+            "country_code": "LUX", 
+            "name_en": "Luxembourg", 
+            "country_code_2": "lu"
+        }
+    }, 
+    {
+        "pk": 139, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Suriname", 
+            "name": "Suriname", 
+            "parent": 108, 
+            "gsm_id": 182, 
+            "_order": 30, 
+            "country_code": "SUR", 
+            "name_en": "Suriname", 
+            "country_code_2": "sr"
+        }
+    }, 
+    {
+        "pk": 207, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "ARY Mac\u00e9doine", 
+            "name": "Macedonia FYR", 
+            "parent": 175, 
+            "gsm_id": 120, 
+            "_order": 31, 
+            "country_code": "MKD", 
+            "name_en": "Macedonia FYR", 
+            "country_code_2": "mk"
+        }
+    }, 
+    {
+        "pk": 34, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Palestine", 
+            "name": "Palestine", 
+            "parent": 2, 
+            "gsm_id": 149, 
+            "_order": 31, 
+            "country_code": "PAL", 
+            "name_en": "Palestine", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 140, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Trinit\u00e9-et-Tobago", 
+            "name": "Trinidad and Tobago", 
+            "parent": 108, 
+            "gsm_id": 194, 
+            "_order": 31, 
+            "country_code": "TTO", 
+            "name_en": "Trinidad and Tobago", 
+            "country_code_2": "tt"
+        }
+    }, 
+    {
+        "pk": 82, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Maurice", 
+            "name": "Mauritius", 
+            "parent": 50, 
+            "gsm_id": 128, 
+            "_order": 31, 
+            "country_code": "MRI", 
+            "name_en": "Mauritius", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 141, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Turks et Ca\u00efcos", 
+            "name": "Turks and Caicos Islands", 
+            "parent": 108, 
+            "gsm_id": 198, 
+            "_order": 32, 
+            "country_code": "TCA", 
+            "name_en": "Turks and Caicos Islands", 
+            "country_code_2": "tc"
+        }
+    }, 
+    {
+        "pk": 83, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Maroc", 
+            "name": "Morocco", 
+            "parent": 50, 
+            "gsm_id": 133, 
+            "_order": 32, 
+            "country_code": "MAR", 
+            "name_en": "Morocco", 
+            "country_code_2": "ma"
+        }
+    }, 
+    {
+        "pk": 208, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Malte", 
+            "name": "Malta", 
+            "parent": 175, 
+            "gsm_id": 126, 
+            "_order": 32, 
+            "country_code": "MLT", 
+            "name_en": "Malta", 
+            "country_code_2": "mt"
+        }
+    }, 
+    {
+        "pk": 35, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Philippines", 
+            "name": "Philippines", 
+            "parent": 2, 
+            "gsm_id": 154, 
+            "_order": 32, 
+            "country_code": "PHI", 
+            "name_en": "Philippines", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 84, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Mozambique", 
+            "name": "Mozambique", 
+            "parent": 50, 
+            "gsm_id": 134, 
+            "_order": 33, 
+            "country_code": "MOZ", 
+            "name_en": "Mozambique", 
+            "country_code_2": "mz"
+        }
+    }, 
+    {
+        "pk": 36, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Qatar", 
+            "name": "Qatar", 
+            "parent": 2, 
+            "gsm_id": 158, 
+            "_order": 33, 
+            "country_code": "QAT", 
+            "name_en": "Qatar", 
+            "country_code_2": "qa"
+        }
+    }, 
+    {
+        "pk": 142, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "\u00celes Vierges Am\u00e9ricaines", 
+            "name": "US Virgin Islands", 
+            "parent": 108, 
+            "gsm_id": 199, 
+            "_order": 33, 
+            "country_code": "USV", 
+            "name_en": "US Virgin Islands", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 209, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Moldavie", 
+            "name": "Moldova", 
+            "parent": 175, 
+            "gsm_id": 130, 
+            "_order": 33, 
+            "country_code": "MHL", 
+            "name_en": "Moldova", 
+            "country_code_2": "mh"
+        }
+    }, 
+    {
+        "pk": 37, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Arabie Saoudite", 
+            "name": "Saudi Arabia", 
+            "parent": 2, 
+            "gsm_id": 164, 
+            "_order": 34, 
+            "country_code": "KSA", 
+            "name_en": "Saudi Arabia", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 85, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Namibie", 
+            "name": "Namibia", 
+            "parent": 50, 
+            "gsm_id": 136, 
+            "_order": 34, 
+            "country_code": "NAM", 
+            "name_en": "Namibia", 
+            "country_code_2": "na"
+        }
+    }, 
+    {
+        "pk": 210, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Pays-Bas", 
+            "name": "Netherlands", 
+            "parent": 175, 
+            "gsm_id": 138, 
+            "_order": 34, 
+            "country_code": "NLD", 
+            "name_en": "Netherlands", 
+            "country_code_2": "nl"
+        }
+    }, 
+    {
+        "pk": 143, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Etats-Unis", 
+            "name": "United States", 
+            "parent": 108, 
+            "gsm_id": 203, 
+            "_order": 34, 
+            "country_code": "USA", 
+            "name_en": "United States", 
+            "country_code_2": "us"
+        }
+    }, 
+    {
+        "pk": 38, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Singapour", 
+            "name": "Singapore", 
+            "parent": 2, 
+            "gsm_id": 170, 
+            "_order": 35, 
+            "country_code": "SIN", 
+            "name_en": "Singapore", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 86, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Niger", 
+            "name": "Niger", 
+            "parent": 50, 
+            "gsm_id": 143, 
+            "_order": 35, 
+            "country_code": "NIG", 
+            "name_en": "Niger", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 211, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Irlande du Nord", 
+            "name": "Northern Ireland", 
+            "parent": 175, 
+            "gsm_id": 145, 
+            "_order": 35, 
+            "country_code": "NIR", 
+            "name_en": "Northern Ireland", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 144, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Guadeloupe", 
+            "name": "Guadeloupe", 
+            "parent": 108, 
+            "gsm_id": 227, 
+            "_order": 35, 
+            "country_code": "GDL", 
+            "name_en": "Guadeloupe", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 145, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Saint-Martin", 
+            "name": "Saint Martin", 
+            "parent": 108, 
+            "gsm_id": 228, 
+            "_order": 36, 
+            "country_code": "SMT", 
+            "name_en": "Saint Martin", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 212, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Norv\u00e8ge", 
+            "name": "Norway", 
+            "parent": 175, 
+            "gsm_id": 146, 
+            "_order": 36, 
+            "country_code": "NOR", 
+            "name_en": "Norway", 
+            "country_code_2": "no"
+        }
+    }, 
+    {
+        "pk": 39, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Sri Lanka", 
+            "name": "Sri Lanka", 
+            "parent": 2, 
+            "gsm_id": 177, 
+            "_order": 36, 
+            "country_code": "SRI", 
+            "name_en": "Sri Lanka", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 87, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Nigeria", 
+            "name": "Nigeria", 
+            "parent": 50, 
+            "gsm_id": 144, 
+            "_order": 36, 
+            "country_code": "NGA", 
+            "name_en": "Nigeria", 
+            "country_code_2": "ng"
+        }
+    }, 
+    {
+        "pk": 213, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Pologne", 
+            "name": "Poland", 
+            "parent": 175, 
+            "gsm_id": 155, 
+            "_order": 37, 
+            "country_code": "POL", 
+            "name_en": "Poland", 
+            "country_code_2": "pl"
+        }
+    }, 
+    {
+        "pk": 88, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Rwanda", 
+            "name": "Rwanda", 
+            "parent": 50, 
+            "gsm_id": 161, 
+            "_order": 37, 
+            "country_code": "RWA", 
+            "name_en": "Rwanda", 
+            "country_code_2": "rw"
+        }
+    }, 
+    {
+        "pk": 40, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Syrie", 
+            "name": "Syria", 
+            "parent": 2, 
+            "gsm_id": 186, 
+            "_order": 37, 
+            "country_code": "SYR", 
+            "name_en": "Syria", 
+            "country_code_2": "sy"
+        }
+    }, 
+    {
+        "pk": 146, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Martinique", 
+            "name": "Martinique", 
+            "parent": 108, 
+            "gsm_id": 229, 
+            "_order": 37, 
+            "country_code": "MTQ", 
+            "name_en": "Martinique", 
+            "country_code_2": "mq"
+        }
+    }, 
+    {
+        "pk": 147, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Sint-Maarten", 
+            "name": "Sint Maarten", 
+            "parent": 108, 
+            "gsm_id": 230, 
+            "_order": 38, 
+            "country_code": "SMA", 
+            "name_en": "Sint Maarten", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 89, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "S\u00e9n\u00e9gal", 
+            "name": "Senegal", 
+            "parent": 50, 
+            "gsm_id": 166, 
+            "_order": 38, 
+            "country_code": "SEN", 
+            "name_en": "Senegal", 
+            "country_code_2": "sn"
+        }
+    }, 
+    {
+        "pk": 214, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Portugal", 
+            "name": "Portugal", 
+            "parent": 175, 
+            "gsm_id": 156, 
+            "_order": 38, 
+            "country_code": "PRT", 
+            "name_en": "Portugal", 
+            "country_code_2": "pt"
+        }
+    }, 
+    {
+        "pk": 41, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Tadjikistan", 
+            "name": "Tajikistan", 
+            "parent": 2, 
+            "gsm_id": 189, 
+            "_order": 38, 
+            "country_code": "TJK", 
+            "name_en": "Tajikistan", 
+            "country_code_2": "tj"
+        }
+    }, 
+    {
+        "pk": 215, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Roumanie", 
+            "name": "Romania", 
+            "parent": 175, 
+            "gsm_id": 159, 
+            "_order": 39, 
+            "country_code": "ROU", 
+            "name_en": "Romania", 
+            "country_code_2": "ro"
+        }
+    }, 
+    {
+        "pk": 90, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Seychelles", 
+            "name": "Seychelles", 
+            "parent": 50, 
+            "gsm_id": 168, 
+            "_order": 39, 
+            "country_code": "SEY", 
+            "name_en": "Seychelles", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 148, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Guyane Fran\u00e7aise", 
+            "name": "French Guiana", 
+            "parent": 108, 
+            "gsm_id": 231, 
+            "_order": 39, 
+            "country_code": "FGU", 
+            "name_en": "French Guiana", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 42, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Tha\u00eflande", 
+            "name": "Thailand", 
+            "parent": 2, 
+            "gsm_id": 191, 
+            "_order": 39, 
+            "country_code": "THA", 
+            "name_en": "Thailand", 
+            "country_code_2": "th"
+        }
+    }, 
+    {
+        "pk": 149, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "L\u2019Am\u00e9rique du Nord", 
+            "name": "North America", 
+            "parent": 108, 
+            "gsm_id": 234, 
+            "_order": 40, 
+            "country_code": "", 
+            "name_en": "North America", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 91, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Sierra Leone", 
+            "name": "Sierra Leone", 
+            "parent": 50, 
+            "gsm_id": 169, 
+            "_order": 40, 
+            "country_code": "SLE", 
+            "name_en": "Sierra Leone", 
+            "country_code_2": "sl"
+        }
+    }, 
+    {
+        "pk": 43, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Turkm\u00e9nistan", 
+            "name": "Turkmenistan", 
+            "parent": 2, 
+            "gsm_id": 197, 
+            "_order": 40, 
+            "country_code": "TKM", 
+            "name_en": "Turkmenistan", 
+            "country_code_2": "tm"
+        }
+    }, 
+    {
+        "pk": 216, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Russie", 
+            "name": "Russia", 
+            "parent": 175, 
+            "gsm_id": 160, 
+            "_order": 40, 
+            "country_code": "RUS", 
+            "name_en": "Russia", 
+            "country_code_2": "ru"
+        }
+    }, 
+    {
+        "pk": 44, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "\u00c9mirats Arabes Unis", 
+            "name": "United Arab Emirates", 
+            "parent": 2, 
+            "gsm_id": 202, 
+            "_order": 41, 
+            "country_code": "UAE", 
+            "name_en": "United Arab Emirates", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 92, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Somalie", 
+            "name": "Somalia", 
+            "parent": 50, 
+            "gsm_id": 174, 
+            "_order": 41, 
+            "country_code": "SOM", 
+            "name_en": "Somalia", 
+            "country_code_2": "so"
+        }
+    }, 
+    {
+        "pk": 217, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Saint-Marin", 
+            "name": "San Marino", 
+            "parent": 175, 
+            "gsm_id": 163, 
+            "_order": 41, 
+            "country_code": "SMR", 
+            "name_en": "San Marino", 
+            "country_code_2": "sm"
+        }
+    }, 
+    {
+        "pk": 45, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Ouzb\u00e9kistan", 
+            "name": "Uzbekistan", 
+            "parent": 2, 
+            "gsm_id": 205, 
+            "_order": 42, 
+            "country_code": "UZB", 
+            "name_en": "Uzbekistan", 
+            "country_code_2": "uz"
+        }
+    }, 
+    {
+        "pk": 93, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Afrique du Sud", 
+            "name": "South Africa", 
+            "parent": 50, 
+            "gsm_id": 175, 
+            "_order": 42, 
+            "country_code": "RSA", 
+            "name_en": "South Africa", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 218, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "\u00c9cosse", 
+            "name": "Scotland", 
+            "parent": 175, 
+            "gsm_id": 165, 
+            "_order": 42, 
+            "country_code": "SCO", 
+            "name_en": "Scotland", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 219, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Serbie-Mont\u00e9n\u00e9gro", 
+            "name": "Serbia and Montenegro", 
+            "parent": 175, 
+            "gsm_id": 167, 
+            "_order": 43, 
+            "country_code": "SCG", 
+            "name_en": "Serbia and Montenegro", 
+            "country_code_2": "cs"
+        }
+    }, 
+    {
+        "pk": 94, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Soudan", 
+            "name": "Sudan", 
+            "parent": 50, 
+            "gsm_id": 181, 
+            "_order": 43, 
+            "country_code": "SUD", 
+            "name_en": "Sudan", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 46, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Vi\u00eat-Nam", 
+            "name": "Vietnam", 
+            "parent": 2, 
+            "gsm_id": 208, 
+            "_order": 43, 
+            "country_code": "VIE", 
+            "name_en": "Vietnam", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 47, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Y\u00e9men", 
+            "name": "Yemen", 
+            "parent": 2, 
+            "gsm_id": 210, 
+            "_order": 44, 
+            "country_code": "YEM", 
+            "name_en": "Yemen", 
+            "country_code_2": "ye"
+        }
+    }, 
+    {
+        "pk": 220, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Slovaquie", 
+            "name": "Slovakia", 
+            "parent": 175, 
+            "gsm_id": 171, 
+            "_order": 44, 
+            "country_code": "SVK", 
+            "name_en": "Slovakia", 
+            "country_code_2": "sk"
+        }
+    }, 
+    {
+        "pk": 95, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Swaziland", 
+            "name": "Swaziland", 
+            "parent": 50, 
+            "gsm_id": 183, 
+            "_order": 44, 
+            "country_code": "SWZ", 
+            "name_en": "Swaziland", 
+            "country_code_2": "sz"
+        }
+    }, 
+    {
+        "pk": 221, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Slov\u00e9nie", 
+            "name": "Slovenia", 
+            "parent": 175, 
+            "gsm_id": 172, 
+            "_order": 45, 
+            "country_code": "SVN", 
+            "name_en": "Slovenia", 
+            "country_code_2": "si"
+        }
+    }, 
+    {
+        "pk": 48, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Timor Oriental", 
+            "name": "East Timor", 
+            "parent": 2, 
+            "gsm_id": 221, 
+            "_order": 45, 
+            "country_code": "EAT", 
+            "name_en": "East Timor", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 96, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Sao Tom\u00e9 e Principe", 
+            "name": "S\u00e3o Tom\u00e9 e Pr\u00edncipe", 
+            "parent": 50, 
+            "gsm_id": 187, 
+            "_order": 45, 
+            "country_code": "STP", 
+            "name_en": "S\u00e3o Tom\u00e9 e Pr\u00edncipe", 
+            "country_code_2": "st"
+        }
+    }, 
+    {
+        "pk": 97, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Tanzanie", 
+            "name": "Tanzania", 
+            "parent": 50, 
+            "gsm_id": 190, 
+            "_order": 46, 
+            "country_code": "TAN", 
+            "name_en": "Tanzania", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 49, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "\u00celes Mariannes du Nord", 
+            "name": "Northern Mariana Islands", 
+            "parent": 2, 
+            "gsm_id": 251, 
+            "_order": 46, 
+            "country_code": "NMI", 
+            "name_en": "Northern Mariana Islands", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 222, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Espagne", 
+            "name": "Spain", 
+            "parent": 175, 
+            "gsm_id": 176, 
+            "_order": 46, 
+            "country_code": "ESP", 
+            "name_en": "Spain", 
+            "country_code_2": "es"
+        }
+    }, 
+    {
+        "pk": 223, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Su\u00e8de", 
+            "name": "Sweden", 
+            "parent": 175, 
+            "gsm_id": 184, 
+            "_order": 47, 
+            "country_code": "SWE", 
+            "name_en": "Sweden", 
+            "country_code_2": "se"
+        }
+    }, 
+    {
+        "pk": 98, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Togo", 
+            "name": "Togo", 
+            "parent": 50, 
+            "gsm_id": 192, 
+            "_order": 47, 
+            "country_code": "TOG", 
+            "name_en": "Togo", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 224, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Suisse", 
+            "name": "Switzerland", 
+            "parent": 175, 
+            "gsm_id": 185, 
+            "_order": 48, 
+            "country_code": "CHE", 
+            "name_en": "Switzerland", 
+            "country_code_2": "ch"
+        }
+    }, 
+    {
+        "pk": 99, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Tunisie", 
+            "name": "Tunisia", 
+            "parent": 50, 
+            "gsm_id": 195, 
+            "_order": 48, 
+            "country_code": "TUN", 
+            "name_en": "Tunisia", 
+            "country_code_2": "tn"
+        }
+    }, 
+    {
+        "pk": 225, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Turquie", 
+            "name": "Turkey", 
+            "parent": 175, 
+            "gsm_id": 196, 
+            "_order": 49, 
+            "country_code": "TUR", 
+            "name_en": "Turkey", 
+            "country_code_2": "tr"
+        }
+    }, 
+    {
+        "pk": 100, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Ouganda", 
+            "name": "Uganda", 
+            "parent": 50, 
+            "gsm_id": 200, 
+            "_order": 49, 
+            "country_code": "UGA", 
+            "name_en": "Uganda", 
+            "country_code_2": "ug"
+        }
+    }, 
+    {
+        "pk": 101, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Zambie", 
+            "name": "Zambia", 
+            "parent": 50, 
+            "gsm_id": 211, 
+            "_order": 50, 
+            "country_code": "ZAM", 
+            "name_en": "Zambia", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 226, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Ukraine", 
+            "name": "Ukraine", 
+            "parent": 175, 
+            "gsm_id": 201, 
+            "_order": 50, 
+            "country_code": "UKR", 
+            "name_en": "Ukraine", 
+            "country_code_2": "ua"
+        }
+    }, 
+    {
+        "pk": 102, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Zimbabwe", 
+            "name": "Zimbabwe", 
+            "parent": 50, 
+            "gsm_id": 212, 
+            "_order": 51, 
+            "country_code": "ZIM", 
+            "name_en": "Zimbabwe", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 227, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Pays de Galles", 
+            "name": "Wales", 
+            "parent": 175, 
+            "gsm_id": 209, 
+            "_order": 51, 
+            "country_code": "WAL", 
+            "name_en": "Wales", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 228, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Serbie", 
+            "name": "Serbia", 
+            "parent": 175, 
+            "gsm_id": 224, 
+            "_order": 52, 
+            "country_code": "SER", 
+            "name_en": "Serbia", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 103, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Zanzibar", 
+            "name": "Zanzibar", 
+            "parent": 50, 
+            "gsm_id": 220, 
+            "_order": 52, 
+            "country_code": "ZAN", 
+            "name_en": "Zanzibar", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 104, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "R\u00e9union", 
+            "name": "Reunion", 
+            "parent": 50, 
+            "gsm_id": 223, 
+            "_order": 53, 
+            "country_code": "REU", 
+            "name_en": "Reunion", 
+            "country_code_2": "re"
+        }
+    }, 
+    {
+        "pk": 229, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Mont\u00e9n\u00e9gro", 
+            "name": "Montenegro", 
+            "parent": 175, 
+            "gsm_id": 225, 
+            "_order": 53, 
+            "country_code": "MNE", 
+            "name_en": "Montenegro", 
+            "country_code_2": "me"
+        }
+    }, 
+    {
+        "pk": 230, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Gibraltar", 
+            "name": "Gibraltar", 
+            "parent": 175, 
+            "gsm_id": 226, 
+            "_order": 54, 
+            "country_code": "GIB", 
+            "name_en": "Gibraltar", 
+            "country_code_2": "gi"
+        }
+    }, 
+    {
+        "pk": 105, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Comores", 
+            "name": "Comoros", 
+            "parent": 50, 
+            "gsm_id": 232, 
+            "_order": 54, 
+            "country_code": "CMO", 
+            "name_en": "Comoros", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 231, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Kosovo", 
+            "name": "Kosovo", 
+            "parent": 175, 
+            "gsm_id": 249, 
+            "_order": 55, 
+            "country_code": "KSV", 
+            "name_en": "Kosovo", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 106, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Mayotte", 
+            "name": "Mayotte", 
+            "parent": 50, 
+            "gsm_id": 255, 
+            "_order": 55, 
+            "country_code": "MYT", 
+            "name_en": "Mayotte", 
+            "country_code_2": "yt"
+        }
+    }, 
+    {
+        "pk": 107, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Soudan du Sud", 
+            "name": "South Sudan", 
+            "parent": 50, 
+            "gsm_id": 256, 
+            "_order": 56, 
+            "country_code": "SSD", 
+            "name_en": "South Sudan", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 232, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Grande-Bretagne", 
+            "name": "Great Britain", 
+            "parent": 175, 
+            "gsm_id": 250, 
+            "_order": 56, 
+            "country_code": "GBR", 
+            "name_en": "Great Britain", 
+            "country_code_2": "gb"
+        }
+    }, 
+    {
+        "pk": 233, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Monaco", 
+            "name": "Monaco", 
+            "parent": 175, 
+            "gsm_id": 253, 
+            "_order": 57, 
+            "country_code": "MCO", 
+            "name_en": "Monaco", 
+            "country_code_2": "mc"
+        }
+    }, 
+    {
+        "pk": 234, 
+        "model": "gsm.area", 
+        "fields": {
+            "name_fr": "Guernsey", 
+            "name": "Guernsey", 
+            "parent": 175, 
+            "gsm_id": 254, 
+            "_order": 58, 
+            "country_code": "", 
+            "name_en": "Guernsey", 
+            "country_code_2": ""
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "gsm.sport", 
+        "fields": {
+            "fans": [], 
+            "name": "rugby", 
+            "slug": "rugby"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "gsm.sport", 
+        "fields": {
+            "fans": [], 
+            "name": "soccer", 
+            "slug": "soccer"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "gsm.sport", 
+        "fields": {
+            "fans": [], 
+            "name": "tennis", 
+            "slug": "tennis"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "gsm.sport", 
+        "fields": {
+            "fans": [], 
+            "name": "basketball", 
+            "slug": "basketball"
+        }
+    }, 
+    {
+        "pk": 552, 
+        "model": "gsm.gsmentity", 
+        "fields": {
+            "name_fr": "Gil Vicente", 
+            "last_updated": null, 
+            "name": "Gil Vicente", 
+            "area": 214, 
+            "gsm_id": 2572, 
+            "fans": [], 
+            "tag": "team", 
+            "name_ascii_en": "Gil Vicente", 
+            "name_ascii": "Gil Vicente", 
+            "name_en": "Gil Vicente", 
+            "sport": 2, 
+            "name_ascii_fr": null
+        }
+    }, 
+    {
+        "pk": 1197, 
+        "model": "gsm.gsmentity", 
+        "fields": {
+            "name_fr": "Moreirense", 
+            "last_updated": null, 
+            "name": "Moreirense", 
+            "area": 214, 
+            "gsm_id": 1687, 
+            "fans": [], 
+            "tag": "team", 
+            "name_ascii_en": "Moreirense", 
+            "name_ascii": "Moreirense", 
+            "name_en": "Moreirense", 
+            "sport": 2, 
+            "name_ascii_fr": null
+        }
+    }, 
+    {
+        "pk": 140, 
+        "model": "gsm.competition", 
+        "fields": {
+            "team_type": "default", 
+            "name_fr": "Coupe de la Ligue", 
+            "last_updated": "2011-10-10 12:25:14", 
+            "name": "League Cup", 
+            "area": 214, 
+            "important": false, 
+            "display_order": null, 
+            "competition_format": "Domestic cup", 
+            "gsm_id": 640, 
+            "fans": [], 
+            "tag": "competition", 
+            "name_ascii_en": "League Cup", 
+            "court_type": null, 
+            "name_ascii": "League Cup", 
+            "competition_type": "club", 
+            "name_en": "League Cup", 
+            "sport": 2, 
+            "championship": null, 
+            "name_ascii_fr": "Coupe de la Ligue"
+        }
+    }, 
+    {
+        "pk": 1568, 
+        "model": "gsm.season", 
+        "fields": {
+            "end_date": "2011-05-06 00:00:00", 
+            "name_fr": "2010/2011", 
+            "last_updated": "2011-09-29 15:30:56", 
+            "name": "2010/2011", 
+            "prize_money": null, 
+            "area": null, 
+            "gender": null, 
+            "competition": 140, 
+            "gsm_id": 5260, 
+            "fans": [], 
+            "tag": "season", 
+            "name_ascii_en": "2010/2011", 
+            "name_ascii": "2010/2011", 
+            "season_type": null, 
+            "prize_currency": null, 
+            "name_en": "2010/2011", 
+            "sport": 2, 
+            "start_date": "2010-07-06 00:00:00", 
+            "name_ascii_fr": null
+        }
+    }, 
+    {
+        "pk": 3578, 
+        "model": "gsm.round", 
+        "fields": {
+            "name_fr": "1st Group Stage", 
+            "last_updated": "2011-09-29 15:30:56", 
+            "name": "1st Group Stage", 
+            "end_date": "2010-08-23 00:00:00", 
+            "area": null, 
+            "season": 1568, 
+            "has_outgroup_matches": false, 
+            "gsm_id": 12261, 
+            "round_type": "table", 
+            "fans": [], 
+            "tag": "round", 
+            "name_ascii_en": "1st Group Stage", 
+            "scoring_system": null, 
+            "groups": 4, 
+            "name_ascii": "1st Group Stage", 
+            "name_en": "1st Group Stage", 
+            "sport": 2, 
+            "start_date": "2010-08-07 00:00:00", 
+            "name_ascii_fr": null
+        }
+    }, 
+    {
+        "pk": 374173, 
+        "model": "gsm.session", 
+        "fields": {
+            "A_ets": null, 
+            "A2_score": null, 
+            "name_fr": "Gil Vicente vs. Moreirense", 
+            "last_updated": "2011-08-30 12:20:45", 
+            "name_ascii_fr": null, 
+            "name_ascii": "Gil Vicente vs. Moreirense", 
+            "gameweek": null, 
+            "B5_score": null, 
+            "tag": "match", 
+            "sport": 2, 
+            "time_unknown": false, 
+            "session_round": 3578, 
+            "actual_start_datetime": null, 
+            "area": null, 
+            "winner": null, 
+            "B1_score": null, 
+            "penalty": null, 
+            "fans": [], 
+            "A1_score": null, 
+            "oponnent_A": 552, 
+            "A_score": 3, 
+            "status": "Played", 
+            "draw": true, 
+            "season": 1568, 
+            "oponnent_B": 1197, 
+            "B_ets": null, 
+            "gsm_id": 959987, 
+            "A5_score": null, 
+            "name_ascii_en": "Gil Vicente vs. Moreirense", 
+            "A3_score": null, 
+            "name_en": "Gil Vicente vs. Moreirense", 
+            "name": "Gil Vicente vs. Moreirense", 
+            "B_score": 3, 
+            "A4_score": null, 
+            "datetime_utc": "2010-08-07 16:00:00", 
+            "B2_score": null, 
+            "B4_score": null, 
+            "B3_score": null
+        }
+    }
+]

@@ -37,3 +37,4 @@ class BetTypeForm(forms.ModelForm):
 class BetChoiceForm(forms.ModelForm):
     class Meta:
         model = BetChoice
+        exclude = ('condition',)

@@ -5,6 +5,8 @@ from django.core.management.base import BaseCommand, CommandError
 
 import gsm
 from gsm.models import *
+from bet.models import *
+from bookmaker.models import *
 
 copy_map = {
     'fs_%s': '%s_score',
@@ -64,5 +66,29 @@ class Command(BaseCommand):
             try:
                 session = Session.objects.get(gsm_id=element.attrib['match_id'], sport=sport)
                 session.resync(element)
+                self.correct(element, session)
             except Session.DoesNotExist:
                 logger.error('Could not sync session that does not exist: %s' % element.attrib['match_id'])
+    
+    def correct(self, element, session):
+        if element.attrib['status'] in ('Fixture', 'Playing'):
+            return
+        
+        if element.attrib['status'] == 'Cancelled':
+            Bet.objects.filter(session=session).update(correction=BET_CORRECTION_CANCELED, status=BET_STATUS_CORRECTED)
+            return
+
+        TS_A = session.A_score
+        TS_B = session.B_score
+
+        to_correct = BetType.objects.filter(bet__session=session).distinct()
+        for t in to_correct:
+            for c in t.betchoice_set.all():
+                result = eval(c.condition)
+                
+                if result:
+                    correction = BET_CORRECTION_WON
+                else:
+                    correction = BET_CORRECTION_LOST
+
+                Bet.objects.filter(session=session, bettype=t, choice=c).update(correction=correction, status=BET_STATUS_CORRECTED)

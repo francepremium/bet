@@ -1,13 +1,5 @@
 [
     {
-        "pk": 1, 
-        "model": "sites.site", 
-        "fields": {
-            "domain": "bet.yourlabs.org", 
-            "name": "Scoobet alpha"
-        }
-    },
-    {
         "pk": 6, 
         "model": "auth.user", 
         "fields": {
@@ -635,38 +627,6 @@
             "password": "sha1$48962$6faf1866cb2cc2afe98a1e06607396104483d10c", 
             "email": "jamespic@gmail.com", 
             "date_joined": "2011-06-01 17:27:40"
-        }
-    }, 
-    {
-        "pk": 1, 
-        "model": "gsm.sport", 
-        "fields": {
-            "name": "rugby", 
-            "slug": "rugby"
-        }
-    }, 
-    {
-        "pk": 2, 
-        "model": "gsm.sport", 
-        "fields": {
-            "name": "soccer", 
-            "slug": "soccer"
-        }
-    }, 
-    {
-        "pk": 3, 
-        "model": "gsm.sport", 
-        "fields": {
-            "name": "tennis", 
-            "slug": "tennis"
-        }
-    }, 
-    {
-        "pk": 4, 
-        "model": "gsm.sport", 
-        "fields": {
-            "name": "basketball", 
-            "slug": "basketball"
         }
     }
 ]
