@@ -84,6 +84,9 @@ class Command(BaseCommand):
         to_correct = BetType.objects.filter(bet__session=session).distinct()
         for t in to_correct:
             for c in t.betchoice_set.all():
+                if not c.condition:
+                    continue
+
                 result = eval(c.condition)
                 
                 if result:
