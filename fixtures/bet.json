@@ -287,7 +287,7 @@
             "choice": 20, 
             "session": 15903, 
             "ticket": 10, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -302,7 +302,7 @@
             "choice": 21, 
             "session": 15905, 
             "ticket": 9, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -317,7 +317,7 @@
             "choice": 19, 
             "session": 3054, 
             "ticket": 8, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -332,7 +332,7 @@
             "choice": 19, 
             "session": 10153, 
             "ticket": 7, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -347,7 +347,7 @@
             "choice": 19, 
             "session": 266473, 
             "ticket": 7, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -362,7 +362,7 @@
             "choice": 21, 
             "session": 266436, 
             "ticket": 7, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -377,7 +377,7 @@
             "choice": 21, 
             "session": 3764, 
             "ticket": 7, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -392,7 +392,7 @@
             "choice": 21, 
             "session": 3763, 
             "ticket": 7, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -407,7 +407,7 @@
             "choice": 21, 
             "session": 3765, 
             "ticket": 7, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -422,7 +422,7 @@
             "choice": 21, 
             "session": 2285, 
             "ticket": 6, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -437,7 +437,7 @@
             "choice": 254, 
             "session": 2282, 
             "ticket": 6, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -452,7 +452,7 @@
             "choice": 159, 
             "session": 2285, 
             "ticket": 5, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -467,7 +467,7 @@
             "choice": 152, 
             "session": 266448, 
             "ticket": 5, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -482,7 +482,7 @@
             "choice": 296, 
             "session": 2282, 
             "ticket": 5, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -497,7 +497,7 @@
             "choice": 44, 
             "session": 3785, 
             "ticket": 5, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -512,7 +512,7 @@
             "choice": 160, 
             "session": 362607, 
             "ticket": 5, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -527,7 +527,7 @@
             "choice": 24, 
             "session": 3763, 
             "ticket": 5, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -542,7 +542,7 @@
             "choice": 32, 
             "session": 15905, 
             "ticket": 5, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -557,7 +557,7 @@
             "choice": 43, 
             "session": 3764, 
             "ticket": 4, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -572,7 +572,7 @@
             "choice": 25, 
             "session": 3763, 
             "ticket": 4, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -587,7 +587,7 @@
             "choice": 19, 
             "session": 362607, 
             "ticket": 3, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -602,7 +602,7 @@
             "choice": 48, 
             "session": 3785, 
             "ticket": 3, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -617,7 +617,7 @@
             "choice": 24, 
             "session": 5704, 
             "ticket": 3, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -632,7 +632,7 @@
             "choice": 324, 
             "session": 330068, 
             "ticket": 3, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -647,7 +647,7 @@
             "choice": 327, 
             "session": 3765, 
             "ticket": 3, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -662,7 +662,7 @@
             "choice": 24, 
             "session": 362607, 
             "ticket": 2, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -677,7 +677,7 @@
             "choice": 19, 
             "session": 3765, 
             "ticket": 2, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -692,7 +692,7 @@
             "choice": 22, 
             "session": 3763, 
             "ticket": 2, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -707,7 +707,7 @@
             "choice": 290, 
             "session": 3763, 
             "ticket": 1, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -722,7 +722,7 @@
             "choice": 48, 
             "session": 3765, 
             "ticket": 1, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -737,7 +737,7 @@
             "choice": 19, 
             "session": 7791, 
             "ticket": 1, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -752,7 +752,7 @@
             "choice": 20, 
             "session": 20747, 
             "ticket": 1, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -767,7 +767,7 @@
             "choice": 22, 
             "session": 20743, 
             "ticket": 1, 
-            "flagged": null
+            "flagged": false
         }
     }, 
     {
@@ -782,7 +782,7 @@
             "choice": 21, 
             "session": 12200, 
             "ticket": 1, 
-            "flagged": null
+            "flagged": false
         }
     }
 ]
