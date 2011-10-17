@@ -11,13 +11,17 @@
         {% gsm_sessions_render next_sessions %}
     {% endif %}
 
-    <h2>{% trans 'best tipsters' %}</h2>
-    {% with team.get_rankings|limit_qs:5 as user_list %}
-        {% render_user_rankings request user_list %}
-    {% endwith %}
+    {% if team.get_rankings %}
+        <h2>{% trans 'best tipsters' %}</h2>
+        {% with team.get_rankings|limit_qs:5 as user_list %}
+            {% render_user_rankings request user_list %}
+        {% endwith %}
+    {% endif %}
 
-    <h2>{% trans 'random tips' %}</h2>
-    {{ bet_list_helper.render_bet_table }}
+    {% if bet_list_helper.qs.count %}
+        <h2>{% trans 'random tips' %}</h2>
+        {{ bet_list_helper.render_bet_table }}
+    {% endif %}
 
     {% if resultstable %}
         <h2 class="results_table">{% trans 'results table' %}</h2>
