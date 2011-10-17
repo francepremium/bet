@@ -7,7 +7,7 @@
         {% gsm_sessions_render sessions %}
     {% endif %}
 
-    {% if sport.get_rankings.count %}
+    {% if competition.get_rankings.count %}
         <h2>{% trans 'best tipsters' %}</h2>
         {% with competition.get_rankings|limit_qs:5 as user_list %}
             {% render_user_rankings request user_list %}

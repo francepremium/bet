@@ -212,18 +212,19 @@ def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
         cup = context['cup'] = True
 
     if tab == 'calendar':
-        context['season'] = season = competition.get_last_season()
-
         page = int(request.GET.get('page', 0))
         paginate_by = 15
         center = 10
 
         now = datetime.datetime.now()
-        next_sessions = season.session_set.filter(datetime_utc__gt=now)
-        last_sessions = season.session_set.filter(datetime_utc__lte=now).order_by('-datetime_utc')
+        sessions = Session.objects.filter(season__competition=competition)
+        next_sessions = sessions.filter(datetime_utc__gt=now)
+        last_sessions = sessions.filter(datetime_utc__lte=now).order_by('-datetime_utc')
 
         if page == 0:
-            context['sessions'] = list(reversed(last_sessions[:paginate_by-center])) + list(next_sessions[:center])
+            tmp = list(last_sessions[:paginate_by-center])
+            tmp.reverse()
+            context['sessions'] = tmp + list(next_sessions[:center])
 
             try:
                 next_sessions[center]
