@@ -84,7 +84,7 @@
             <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> 
             {% trans 'published' %} 
             <a href="{{ action.action_object.get_absolute_url }}" title="{{ action.action_object }}">{% trans 'combined ticket' %}</a> 
-            {% trans 'including' %} <div class="bet_list_link">{{ action.action_object.bet_set.count }} {% trans 'matches' %}</div>
+            {% trans 'including' %} <div class="bet_list_link link">{{ action.action_object.bet_set.count }} {% trans 'matches' %}</div>
             <div class="bet_list">
                 {% with request|get_bet_list_helper_for_activity:action.action_object.bet_set.all as bet_list_helper %}
                 {{ bet_list_helper.render_bet_table }}
@@ -104,7 +104,7 @@
                 <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a>
                 {% if action.verb == 'corrected' %}{% trans 'corrected' %}{% endif %}
                 {% if action.verb == 'flagged' %}{% trans 'flagged' %}{% endif %}
-                <div class="bet_list_link">{{ action.group|length }} {% trans 'bets' %}</div>
+                <div class="bet_list_link link">{{ action.group|length }} {% trans 'bets' %}</div>
         {% endif %}
         {% if action.close %}
             <div class="bet_list">
