@@ -161,7 +161,7 @@ class Bet(models.Model):
         return urlresolvers.reverse('bet_detail', args=(self.pk,))
 
     class Meta:
-        ordering = ('-id',)
+        ordering = ('-session__datetime_utc', '-id')
 
 def delete_empty_ticket(sender, **kwargs):
     try:
