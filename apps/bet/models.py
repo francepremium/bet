@@ -18,6 +18,7 @@ except ImportError:
     print "MOCKING what we need of uwsgi"
     class uwsgi(object):
         SPOOL_RETRY = False
+        SPOOL_OK = True
     def spool(func):
         return func
 
