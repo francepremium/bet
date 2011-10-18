@@ -18,6 +18,7 @@ except ImportError:
     print "MOCKING what we need of uwsgi"
     class uwsgi(object):
         SPOOL_RETRY = False
+        SPOOL_OK = True
     def spool(func):
         return func
 
@@ -160,7 +161,7 @@ class Bet(models.Model):
         return urlresolvers.reverse('bet_detail', args=(self.pk,))
 
     class Meta:
-        ordering = ('-id',)
+        ordering = ('-session__datetime_utc', '-id')
 
 def delete_empty_ticket(sender, **kwargs):
     try:
