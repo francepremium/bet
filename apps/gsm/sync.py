@@ -1,5 +1,7 @@
 import datetime
 
+from django.db.models import Max
+
 import gsm
 
 from models import *
@@ -10,15 +12,21 @@ def datetime_to_string(dt):
     return dt.strftime(DATETIME_FORMAT)
 
 def string_to_datetime(s):
-    return datetime.strptime(s, DATETIME_FORMAT)
+    try:
+        return datetime.datetime.strptime(s, DATETIME_FORMAT)
+    except ValueError:
+        return datetime.datetime.strptime(s, '%Y-%m-%d')
 
 class Sync(object):
     def __init__(self, sport, last_updated, minimal_date, logger, 
-        language='en'):
+        cooldown=0, language='en', names_only=False, quiet=False):
         self.sport = sport
         self.minimal_date = minimal_date
         self.language = language
         self.logger = logger
+        self.cooldown = cooldown
+        self.names_only = names_only
+        self.quiet = quiet
 
         if isinstance(last_updated, str):
             self.last_updated = string_to_datetime(last_updated)
@@ -26,9 +34,9 @@ class Sync(object):
             self.last_updated = last_updated
 
         if self.sport.slug == 'tennis':
-            self.oponnent_prefix = 'person'
+            self.oponnent_tag = 'person'
         else:
-            self.oponnent_prefix = 'team'
+            self.oponnent_tag = 'team'
 
         self.autocopy = (
             'start_date',
@@ -39,7 +47,6 @@ class Sync(object):
             'competition': Competition,
             'tour': Championship,
             'season': Season,
-            'round': Round,
             'match': Session,
         }
 
@@ -47,36 +54,30 @@ class Sync(object):
             'competition': 'get_competitions',
             'tour': 'get_tours',
             'season': 'get_seasons',
-            'round': 'get_rounds',
             'match': 'get_matches',
         }
 
     def log(self, level, message):
-        message = '[%s] ' % self.sport.slug + message
-        self.logger.log(level, message)
+        if not self.quiet:
+            message = u'[%s] ' % self.sport.slug + message.decode('utf-8')
+            self.logger.log(getattr(logging, level.upper()), message)
 
     def get_tree(self, *args, **kwargs):
         kwargs['retry'] = 3000
-        if 'language' in kwargs.keys() and kwargs['language']:
-            language = kwargs.pop('language')
-        else:
-            language = self.language
+        kwargs['update'] = True
 
-        if self.last_updated:
-            kwargs['last_updated'] = datetime_to_string(self.last_updated)
-
-        return gsm.get_tree(language, self.sport, *args, **kwargs
+        return gsm.get_tree(self.language, self.sport, *args, **kwargs
             ).getroot()
 
     def skip(self, e):
         if e.tag not in self._tag_class_map.keys():
             self.log('debug', 'Skipping tag %s' % e.tag)
-            return
+            return True
 
         last_updated = string_to_datetime(e.attrib['last_updated'])
         if last_updated < self.last_updated:
-            self.log('debug', 'Update necessary for %s #%s' % (e.tag, 
-                e.attrib.get('%s_id' % e.tag))
+            self.log('debug', 'Skipping because no update %s #%s' % (e.tag, 
+                e.attrib.get('%s_id' % e.tag)))
             return True
         
         date_attrs = [
@@ -92,28 +93,23 @@ class Sync(object):
             except:
                 continue
 
-        if date and string_to_datetime(date) > self.minimal_date:
+        if date and string_to_datetime(date) < self.minimal_date:
+            self.log('debug', 'Skipping too old %s #%s' % (e.tag,
+                e.attrib.get('%s_id' % e.tag)))
             return True
 
-    def e_to_model(self, e):
-        obj, created = self._tag_class_map[e.tag].objects.get_or_create(
-            sport=self.sport, gsm_id=e.attrib[e.tag + '_id'],
-            tag=e.tag)
-        return obj
+        self.log('debug', 'Update necessary for %s #%s' % (e.tag,
+            e.attrib.get('%s_id' % e.tag)))
 
-    def sync_by_get_seasons(self, e=None):
-        root = self.get_tree('get_seasons')
-
-        if not root:
-            self.log('error', 'Did not get tree for get_seasons')
-            return
-        
-        for e in root.getchildren():
-            if e.tag == 'method' or self.skip(e):
-                continue
-
-            if e.tag in self._tag_class_map.keys():
-                self.update(e)
+    def element_to_model(self, e):
+        try:
+            return self._tag_class_map[e.tag].objects.get(
+                sport=self.sport, gsm_id=e.attrib[e.tag + '_id'],
+                tag=e.tag)
+        except self._tag_class_map[e.tag].DoesNotExist:
+            return self._tag_class_map[e.tag](
+                sport=self.sport, gsm_id=e.attrib[e.tag + '_id'],
+                tag=e.tag)
 
     def set_model_area(self, model, e):
         if not hasattr(model, 'area'):
@@ -133,7 +129,7 @@ class Sync(object):
             names = []
             for X in ('A', 'B'):
                 names.append(unicode(
-                    e.attrib['%s_%s_name' % self.oponnent_prefix, X]))
+                    e.attrib['%s_%s_name' % (self.oponnent_tag, X)]))
 
             setattr(model, 'name_%s' %  self.language, u' vs. '.join(names))
 
@@ -142,34 +138,27 @@ class Sync(object):
                 'Cannot find name for sport %s tag %s gsm_id %s' % (
                 self.sport.slug, model.tag, model.gsm_id))
 
-        for code, language in settings.LANGUAGES:
-            if code == self.language:
-                continue
+    def update(self, e, parent=None):
+        model = self.element_to_model(e)
+        self.log('debug', 'Updating %s:%s' % (model.tag, model.gsm_id))
 
-            tree = self.get_tree(self._tag_method_map[model.tag], 
-                language=code)
-
-            for e in gsm.parse_e_for(model.tag):
-                setattr(model, 'name_%s' % code, e.attrib['name'])
-
-    def update(self, e):
-        self.log('debug', 'Updating %s with %s' % (model, e.attrib))
-
-        model = self.get_or_create(e)
         self.set_model_name(model, e)
-        self.set_model_area(model, e)
 
-        for key in self.autocopy:
-            if key in e.attrib.keys() and hasattr(model, key):
-                self.copy_attr(model, e, key)
+        if not self.names_only:
+            self.set_model_area(model, e)
 
-        method = 'update_%s' % model.tag.lower()
-        if hasattr(self, method):
-            getattr(self, method)(self, model, e)
+            for key in self.autocopy:
+                if key in e.attrib.keys() and hasattr(model, key):
+                    self.copy_attr(model, e, key)
 
-        method = 'update_%s_%s' % (self.sport.slug, model.tag.lower())
-        if hasattr(self, method):
-            getattr(self, method)(self, model, e)
+            method_key = model.__class__.__name__.lower()
+            method = 'update_%s' % method_key
+            if hasattr(self, method):
+                getattr(self, method)(model, e, parent)
+
+            method = 'update_%s_%s' % (self.sport.slug, method_key)
+            if hasattr(self, method):
+                getattr(self, method)(model, e, parent)
 
         model.save()
 
@@ -180,8 +169,17 @@ class Sync(object):
 
                 if self.skip(child):
                     update_children(child)
-                
-                self.update(child, parent=model)
+                else:
+                    self.update(child, parent=model)
+        update_children(e)
+
+        if e.tag == 'season':
+            tree = self.get_tree('get_matches', type='season', id=model.gsm_id, detailed='yes')
+            for sube in gsm.parse_element_for(tree, 'match'):
+                if not self.skip(sube):
+                    if 'double_A_id' in sube.attrib.keys():
+                        continue # important !!
+                    self.update(sube, model)
 
         time.sleep(self.cooldown)
 
@@ -190,6 +188,11 @@ class Sync(object):
             destination = source
         
         value = e.attrib.get(source, None) or None
+
+        if str(value) == '4294967295':
+            # gsm screwd up again
+            return
+
         setattr(model, destination, value)
 
     def update_competition(self, model, e, parent=None):
@@ -199,6 +202,10 @@ class Sync(object):
         self.copy_attr(model, e, 'teamtype', 'team_type')
         self.copy_attr(model, e, 'type', 'competition_type')
         self.copy_attr(model, e, 'format', 'competition_format')
+
+        if not model.display_order:
+            model.display_order = Competition.objects.filter(sport=self.sport
+                ).aggregate(Max('display_order'))['display_order__max'] or 0 + 1
     
     def update_season(self, model, e, parent=None):
         model.competition = parent
@@ -207,16 +214,6 @@ class Sync(object):
         self.copy_attr(model, e, 'gender')
         self.copy_attr(model, e, 'prize_money')
         self.copy_attr(model, e, 'prize_currency')
-    
-    def update_round(self, model, e, parent=None):
-        model.season = parent
-
-        model.has_outgroup_matches = e.attrib.get(
-            'has_outgroup_matches', 'no') == 'yes'
-        
-        self.copy_attr(model, e, 'groups')
-        self.copy_attr(model, e, 'type', 'round_type')
-        self.copy_attr(model, e, 'scoringsystem', 'scoring_system')
     
     def update_session(self, model, e, parent=None):
         if isinstance(parent, Round):
@@ -230,7 +227,7 @@ class Sync(object):
         self.copy_attr(model, e, 'status')
         self.copy_attr(model, e, 'gameweek')
 
-        P = self.oponnent_prefix
+        P = self.oponnent_tag
         for X in ('A', 'B'):
             self.copy_attr(model, e, 'fs_%s' % X, '%s_score' % X)
             self.copy_attr(model, e, 'eps_%s' % X, '%s_ets' % X)
@@ -240,18 +237,18 @@ class Sync(object):
             self.copy_attr(model, e, 'p3s_%s' % X, '%s3_score' % X)
             self.copy_attr(model, e, 'p4s_%s' % X, '%s4_score' % X)
 
-            oponnent, created = GsmEntity.objects.get_or_create(
-                sport=self.sport,
-                gsm_id=e.attrib['%s_%s_id'] % (P, X),
-                tag='person')
+            if e.attrib['%s_%s_id' % (P, X)]:
+                oponnent, created = GsmEntity.objects.get_or_create(
+                    sport=self.sport,
+                    gsm_id=e.attrib['%s_%s_id' % (P, X)],
+                    tag=self.oponnent_tag)
 
-            if created:
-                code = e.attrib.get('%s_%s_country' % (P, X))
-                oponnent.area = Area.objects.get_for_country_code_3(code)
-                self.copy_attr(model, e, 
-                oponnent.name = e.attrib.get('%s_%s_name' % (P, X), None)
+                if created:
+                    code = e.attrib.get('%s_%s_country' % (P, X))
+                    oponnent.area = Area.objects.get_for_country_code_3(code)
+                    self.copy_attr(oponnent, e, '%s_%s_name' % (P, X), 'name')
 
-            setattr(model, 'oponnent_%s' % X, oponnent)
+                setattr(model, 'oponnent_%s' % X, oponnent)
 
         winner = e.attrib.get('winner', None)
         if winner in ('A', 'B'):
@@ -264,7 +261,7 @@ class Sync(object):
         for set_element in e.findall('set'):
             for X in ('A', 'B'):
                 self.copy_attr(model, set_element, 'score_%s' % X, 
-                    '%s%s_score' % (X, i)
+                    '%s%s_score' % (X, i))
 
             i += 1
             if i > 5:
