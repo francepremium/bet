@@ -429,7 +429,7 @@ class Competition(AbstractGsmEntity):
 
     def get_last_season(self):
         if not hasattr(self, '_last_season'):
-            self._last_season = self.season_set.all().order_by('-end_date')[0]
+            self._last_season = self.season_set.all().order_by('-start_date')[0]
         return self._last_season
 
     def __unicode__(self):
