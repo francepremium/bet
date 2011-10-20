@@ -12,8 +12,8 @@
                             </table>
                         {% endif %}
                         <h2>
-                            {% if session.session_round.season.competition|gsm_area_id_flag_url %}
-                            <img src="{{ session.session_round.season.competition|gsm_area_id_flag_url }}" alt="{{ session.session_round.season.competition.area }}" />
+                            {% if session.season.competition|gsm_area_id_flag_url %} 
+                            <img src="{{ session.season.competition|gsm_area_id_flag_url }}" alt="{{ session.season.competition.area }}" />
                             {% endif %}
                             <a href="{{ session.season.competition.get_absolute_url }}" title="{{ session.season.competition }}">
                                 {{ session.season.competition }}
@@ -35,14 +35,14 @@
             {% if not divide_by_season %}
             {% block session_area %}
 				<td class="area">
-					{% if session.session_round.season.competition|gsm_area_id_flag_url %}
-					<img src="{{ session.session_round.season.competition|gsm_area_id_flag_url }}" alt="{{ session.session_round.season.competition.area }}" />
+					{% if session.season.competition|gsm_area_id_flag_url %}
+					<img src="{{ session.season.competition|gsm_area_id_flag_url }}" alt="{{ session.season.competition.area }}" />
 					{% endif %}
 				</td>
 			{% endblock %}
 			{% block session_competition %}
                 <td class="competition">
-                    <a href="{{ session.session_round.season.competition.get_absolute_url }}" title="{{ session.session_round.season.competition }}">{{ session.session_round.season.competition.name }}</a>
+                    <a href="{{ session.season.competition.get_absolute_url }}" title="{{ session.season.competition }}">{{ session.season.competition.name }}</a>
                 </td>
 			{% endblock %}
             {% endif %}
