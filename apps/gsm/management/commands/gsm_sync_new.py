@@ -4,6 +4,11 @@ from optparse import make_option
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 
+try:
+    import cPickle as pickle
+except:
+    import pickle
+
 import gsm
 from gsm.sync import *
 from gsm.models import *
