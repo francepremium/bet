@@ -12,6 +12,9 @@ def datetime_to_string(dt):
     return dt.strftime(DATETIME_FORMAT)
 
 def string_to_datetime(s):
+    if s == '0000-00-00 00:00:00':
+        return
+
     try:
         return datetime.datetime.strptime(s, DATETIME_FORMAT)
     except ValueError:
@@ -75,7 +78,7 @@ class Sync(object):
             return True
 
         last_updated = string_to_datetime(e.attrib['last_updated'])
-        if last_updated < self.last_updated:
+        if last_updated and last_updated < self.last_updated:
             self.log('debug', 'Skipping because no update %s #%s' % (e.tag, 
                 e.attrib.get('%s_id' % e.tag)))
             return True
@@ -189,7 +192,7 @@ class Sync(object):
         
         value = e.attrib.get(source, None) or None
 
-        if str(value) == '4294967295':
+        if unicode(value) == u'4294967295':
             # gsm screwd up again
             return
 
