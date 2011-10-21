@@ -1,12 +1,17 @@
 import datetime
 
+import pytz
+from pytz import timezone
 from django.db.models import Max
+from django.conf import settings
 
 import gsm
 
 from models import *
 
 DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
+local = timezone(settings.TIME_ZONE)
+london = timezone('Europe/London')
 
 def datetime_to_string(dt):
     return dt.strftime(DATETIME_FORMAT)
@@ -35,6 +40,11 @@ class Sync(object):
             self.last_updated = string_to_datetime(last_updated)
         else:
             self.last_updated = last_updated
+        if not self.last_updated.tzinfo:
+            self.last_updated = local.localize(self.last_updated)
+
+        if not self.minimal_date.tzinfo:
+            self.minimal_date = local.localize(self.minimal_date)
 
         if self.sport.slug == 'tennis':
             self.oponnent_tag = 'person'
@@ -69,6 +79,10 @@ class Sync(object):
         kwargs['retry'] = 3000
         kwargs['update'] = True
 
+        for k, v in kwargs.items():
+            if isinstance(v, datetime.datetime):
+                kwargs[k] = datetime_to_string(v.astimezone(london))
+
         return gsm.get_tree(self.language, self.sport, *args, **kwargs
             ).getroot()
 
@@ -78,10 +92,12 @@ class Sync(object):
             return True
 
         last_updated = string_to_datetime(e.attrib['last_updated'])
-        if last_updated and last_updated < self.last_updated:
-            self.log('debug', 'Skipping because no update %s #%s' % (e.tag, 
-                e.attrib.get('%s_id' % e.tag)))
-            return True
+        if last_updated:
+            last_updated = london.localize(last_updated)
+            if last_updated < self.last_updated:
+                self.log('debug', 'Skipping because no update %s #%s' % (e.tag, 
+                    e.attrib.get('%s_id' % e.tag)))
+                return True
         
         date_attrs = [
             'start_date',
@@ -96,10 +112,13 @@ class Sync(object):
             except:
                 continue
 
-        if date and string_to_datetime(date) < self.minimal_date:
-            self.log('debug', 'Skipping too old %s #%s' % (e.tag,
-                e.attrib.get('%s_id' % e.tag)))
-            return True
+        if date:
+            date = string_to_datetime(date)
+            date = london.localize(date)
+            if date < self.minimal_date:
+                self.log('debug', 'Skipping too old %s #%s' % (e.tag,
+                    e.attrib.get('%s_id' % e.tag)))
+                return True
 
         self.log('debug', 'Update necessary for %s #%s' % (e.tag,
             e.attrib.get('%s_id' % e.tag)))
@@ -225,9 +244,13 @@ class Sync(object):
         elif isinstance(parent, Season):
             model.season = parent
 
-        model.datetime_utc = self.get_session_datetime_utc(e)
+        model.start_datetime = self.get_session_start_datetime(e)
 
+        old_status = model.status
         self.copy_attr(model, e, 'status')
+        if model.status != old_status:
+            session_played.send(sender=self, session=model)
+        
         self.copy_attr(model, e, 'gameweek')
 
         P = self.oponnent_tag
@@ -288,8 +311,8 @@ class Sync(object):
             else:
                 model.penalty = 'B'
     
-    def get_session_datetime_utc(self, e):
-        # OMFG GSM SUCKS at datetime consistency !!
+    def get_session_start_datetime(self, e):
+        # Welcome to GSM's vision of hell
         converter = Session._meta.get_field('actual_start_datetime')
         actual_start_datetime = '%s %s' % (
             e.attrib.get('actual_start_date', '') or '',
@@ -311,8 +334,8 @@ class Sync(object):
             )
         else:
             official_start_datetime = '%s %s' % (
-                e.attrib.get('date_utc', '') or '',
-                e.attrib.get('time_utc', '00:00:00') or '00:00:00',
+                e.attrib.get('date_london', '') or '',
+                e.attrib.get('time_london', '00:00:00') or '00:00:00',
             )
 
         if official_start_datetime[-1] == ' ': # no time, set to midnight
@@ -322,4 +345,7 @@ class Sync(object):
         else:
             official_start_datetime = None
 
-        return actual_start_datetime or official_start_datetime
+        dt = actual_start_datetime or official_start_datetime
+        dt = london.localize(dt)
+
+        return dt

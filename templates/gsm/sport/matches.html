@@ -24,11 +24,11 @@
 $(document).ready(function() {
     $('.filter_date').click(function() {
         if ($(this).hasClass('yesterday'))
-            $('form.filter input[name=datetime_utc]').val('{{ yesterday|date:'Y-m-d' }}');
+            $('form.filter input[name=start_datetime]').val('{{ yesterday|date:'Y-m-d' }}');
         if ($(this).hasClass('today'))
-            $('form.filter input[name=datetime_utc]').val('{{ today|date:'Y-m-d' }}');
+            $('form.filter input[name=start_datetime]').val('{{ today|date:'Y-m-d' }}');
         if ($(this).hasClass('tomorrow'))
-            $('form.filter input[name=datetime_utc]').val('{{ tomorrow|date:'Y-m-d' }}');
+            $('form.filter input[name=start_datetime]').val('{{ tomorrow|date:'Y-m-d' }}');
         
         $('form.filter').submit();
     });

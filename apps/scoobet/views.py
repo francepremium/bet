@@ -81,10 +81,10 @@ def autocomplete(request,
 
     queries = {}
     queries['sessions'] = Session.objects.filter(
-        datetime_utc__gte=datetime.date.today()).filter(
+        start_datetime__gte=datetime.date.today()).filter(
         Q(name_ascii_fr__icontains=q)|Q(name_fr__icontains=q)|
         Q(name_ascii_en__icontains=q)|Q(name_en__icontains=q)).order_by(
-            'datetime_utc').distinct()[:3]
+            'start_datetime').distinct()[:3]
     queries['users'] = User.objects.filter(username__icontains=q, 
         bookmaker=None)[:3]
     queries['teams'] = GsmEntity.objects.filter(

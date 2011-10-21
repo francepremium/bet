@@ -2114,7 +2114,7 @@
             "name": "Eintracht Trier vs. Verl", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-14 17:00:00", 
+            "start_datetime": "2011-10-14 17:00:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2158,7 +2158,7 @@
             "name": "Tours vs. Reims", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-14 18:00:00", 
+            "start_datetime": "2011-10-14 18:00:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2202,7 +2202,7 @@
             "name": "Metz vs. Le Havre", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-14 18:00:00", 
+            "start_datetime": "2011-10-14 18:00:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2246,7 +2246,7 @@
             "name": "Werder Bremen vs. Borussia Dortmund", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-14 18:30:00", 
+            "start_datetime": "2011-10-14 18:30:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2290,7 +2290,7 @@
             "name": "Sloboda Tuzla vs. Zvijezda", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-15 00:00:00", 
+            "start_datetime": "2011-10-15 00:00:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2334,7 +2334,7 @@
             "name": "Fortuna D\u00fcsseldorf II vs. Fortuna K\u00f6ln", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-15 12:00:00", 
+            "start_datetime": "2011-10-15 12:00:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2378,7 +2378,7 @@
             "name": "Nitra vs. Dukla", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-15 15:30:00", 
+            "start_datetime": "2011-10-15 15:30:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2422,7 +2422,7 @@
             "name": "Mallorca vs. Valencia", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-15 16:00:00", 
+            "start_datetime": "2011-10-15 16:00:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2466,7 +2466,7 @@
             "name": "Toulouse vs. Olympique Marseille", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-15 17:00:00", 
+            "start_datetime": "2011-10-15 17:00:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2510,7 +2510,7 @@
             "name": "AEK Athens vs. Olympiakos Piraeus", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-15 17:30:00", 
+            "start_datetime": "2011-10-15 17:30:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2554,7 +2554,7 @@
             "name": "Barcelona vs. Racing Santander", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-15 18:00:00", 
+            "start_datetime": "2011-10-15 18:00:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2598,7 +2598,7 @@
             "name": "Nice vs. Bordeaux", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-15 19:00:00", 
+            "start_datetime": "2011-10-15 19:00:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2642,7 +2642,7 @@
             "name": "Novara vs. Bologna", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-16 13:00:00", 
+            "start_datetime": "2011-10-16 13:00:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2686,7 +2686,7 @@
             "name": "Chievo vs. Juventus", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-16 13:00:00", 
+            "start_datetime": "2011-10-16 13:00:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2730,7 +2730,7 @@
             "name": "Ajaccio vs. PSG", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-16 15:00:00", 
+            "start_datetime": "2011-10-16 15:00:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2774,7 +2774,7 @@
             "name": "Sarpsborg 08 vs. Troms\u00f8", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-16 16:00:00", 
+            "start_datetime": "2011-10-16 16:00:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2818,7 +2818,7 @@
             "name": "Stade Rennes vs. Lorient", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-16 19:00:00", 
+            "start_datetime": "2011-10-16 19:00:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2862,7 +2862,7 @@
             "name": "Barcelona vs. Viktoria Plze\u0148", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-19 18:45:00", 
+            "start_datetime": "2011-10-19 18:45:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2906,7 +2906,7 @@
             "name": "Bayer Leverkusen vs. Valencia", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-19 18:45:00", 
+            "start_datetime": "2011-10-19 18:45:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2950,7 +2950,7 @@
             "name": "Olympique Marseille vs. Arsenal", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-19 18:45:00", 
+            "start_datetime": "2011-10-19 18:45:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -2994,7 +2994,7 @@
             "name": "Slovan Bratislava vs. PSG", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-20 19:05:00", 
+            "start_datetime": "2011-10-20 19:05:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -3038,7 +3038,7 @@
             "name": "Dijon vs. PSG", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-26 15:00:00", 
+            "start_datetime": "2011-10-26 15:00:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null
@@ -3082,7 +3082,7 @@
             "name": "PSG vs. Caen", 
             "B_score": null, 
             "A4_score": null, 
-            "datetime_utc": "2011-10-29 17:00:00", 
+            "start_datetime": "2011-10-29 17:00:00", 
             "B2_score": null, 
             "B4_score": null, 
             "B3_score": null

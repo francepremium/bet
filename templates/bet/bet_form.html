@@ -35,8 +35,8 @@
         <td class="session pk_{{ bet.session.pk }}">
             {{ forloop.counter }}. {{ bet.session }}
         </td>
-        <td>{{ request|timezone_adjust:bet.session.datetime_utc|display_date }}</td>
-        <td>{{ request|timezone_adjust:bet.session.datetime_utc|display_time }}</td>
+        <td>{{ request|timezone_adjust:bet.session.start_datetime|display_date }}</td>
+        <td>{{ request|timezone_adjust:bet.session.start_datetime|display_time }}</td>
         <td>{{ bet.bettype.name }}</td>
         <td>{{ bet.choice.name }}</td>
         <td><a href="{% url bet_form ticket.pk %}?bet={{ bet.pk }}">{% trans 'edit' %}</a></td>

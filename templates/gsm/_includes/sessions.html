@@ -26,8 +26,8 @@
             {% block session_date %}
                 {% if not fixed_day %}
 				<td class="date">
-                    {% ifchanged session.datetime_utc.date %}
-                        {{ request|timezone_adjust:session.datetime_utc.date|display_date }}
+                    {% ifchanged session.start_datetime.date %}
+                        {{ request|timezone_adjust:session.start_datetime|display_date }}
                     {% endifchanged %}
                 </td>
                 {% endif %}
@@ -98,7 +98,7 @@
 						{% if session.time_unknown %}
 							--:--
 						{% else %}
-							{% with request|timezone_adjust:session.datetime_utc as datetime %}
+							{% with request|timezone_adjust:session.start_datetime as datetime %}
 								{% if datetime.hour < 10 %}0{% endif %}{{ datetime.hour }}:{% if datetime.minute < 10 %}0{% endif %}{{ datetime.minute }}
 							{% endwith %}
 						{% endif %}

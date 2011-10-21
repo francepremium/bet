@@ -55,11 +55,11 @@
             <tr>
                 {% if 'date' not in exclude_columns %}
                     <td>
-                    {{ request|timezone_adjust:bet.session.datetime_utc|display_date }}
+                    {{ request|timezone_adjust:bet.session.start_datetime|display_date }}
                     </td>
                 {% endif %}
                 {% if 'time' not in exclude_columns %}
-                    <td>{{ request|timezone_adjust:bet.session.datetime_utc|display_time }}</td>
+                    <td>{{ request|timezone_adjust:bet.session.start_datetime|display_time }}</td>
                 {% endif %}
                 {% if 'user' not in exclude_columns %}
                     <td>
