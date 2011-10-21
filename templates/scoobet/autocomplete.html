@@ -19,7 +19,7 @@
 {% if sessions %}
 		<li>{% trans 'matches'|capfirst %}</li>
     {% for session in sessions %}
-        <li class="{{ session.sport.slug }}"><a href="{{ session.get_absolute_url }}">{{ session }} - {{ request|timezone_adjust:session.datetime_utc|naturalday }}</a></li>
+        <li class="{{ session.sport.slug }}"><a href="{{ session.get_absolute_url }}">{{ session }} - {{ request|timezone_adjust:session.start_datetime|naturalday }}</a></li>
     {% endfor %}
 {% endif %}
 

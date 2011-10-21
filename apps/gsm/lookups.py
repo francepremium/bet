@@ -7,11 +7,10 @@ from models import *
 class SessionLookup(object):
     def get_query(self, q, request):
         qs = Session.objects.filter(
-            datetime_utc__gte=datetime.datetime.now(),
-            datetime_utc__lte=datetime.datetime.now() + datetime.timedelta(20)
+            start_datetime__gt=datetime.datetime.now()
         ).filter(
             Q(name_ascii__icontains=q)
-        )
+        ).order_by('start_datetime')
         if 'sport' in request.GET:
             qs = qs.filter(sport__pk=request.GET['sport'])
         return qs

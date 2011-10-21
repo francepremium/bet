@@ -18,8 +18,8 @@ class DateFilter(filters.Filter):
             
         next_day = value + datetime.timedelta(days=1)
         qs = qs.filter(
-            datetime_utc__gte=value,
-            datetime_utc__lte=next_day
+            start_datetime__gte=value,
+            start_datetime__lte=next_day
         )
         return qs
 
@@ -32,4 +32,4 @@ class SessionFilter(filters.FilterSet):
 
     class Meta:
         model = Session
-        fields = ['datetime_utc']
+        fields = ['start_datetime']

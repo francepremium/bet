@@ -10,6 +10,9 @@ BET_CORRECTION_WON = 1
 BET_CORRECTION_CANCELED = 2
 BET_CORRECTION_LOST = 3
 
+EVENT_KIND_CORRECTION = 1
+EVENT_KIND_FLAG = 2
+
 def correct_for_session(session, element=None):
     if element is None:
         tree = gsm.get_tree('en', session.sport, 'get_matches', retry=30,
@@ -38,26 +41,42 @@ def correct_for_session(session, element=None):
         'ets_B',
     )
 
+    attrib = {}
+    for k, v in element.attrib.items():
+        if v.isdigit():
+            attrib[k] = float(v)
+        else:
+            attrib[k] = v
+
     to_update = User.objects.filter(ticket__bet__session=session).distinct()
     to_correct = BetType.objects.filter(bet__session=session).distinct()
+    print to_correct, [t.pk for t in to_correct]
     for t in to_correct:
         for c in t.betchoice_set.all():
+            bets = Bet.objects.filter(session=session, bettype=t, choice=c)
+
             try:
                 condition = c.condition
                 if condition is None:
                     raise
                 for var in rewrite:
-                    condition = condition.replace(var, 'element.attrib["%s"]' % var)
+                    condition = condition.replace(var, 'attrib["%s"]' % var)
+                
+                set = []
+                for child in element.getchildren():
+                    if child.tag == 'set':
+                        set.append(element.attrib)
+
                 result = eval(condition)
                 if result:
                     correction = BET_CORRECTION_WON
                 else:
                     correction = BET_CORRECTION_LOST
 
-                Bet.objects.filter(session=session, bettype=t, choice=c).update(correction=correction)
+                bets.update(correction=correction)
             except:
-                Bet.objects.filter(session=session, bettype=t, choice=c).update(flagged=True)
-    
+                bets.update(flagged=True)
+
     for u in to_update.values_list('pk', flat=True):
         print 'refreshing', u
         refresh_betprofile_for_user({'userpk': u})

@@ -76,7 +76,7 @@ def sport_json_sessions(request):
     if not request.GET.get('sport', False):
         return http.HttpResponseBadRequest()
     sport = shortcuts.get_object_or_404(Sport, pk=request.GET['sport'])
-    qs = Session.objects.filter(datetime_utc__gte=datetime.date.today())
+    qs = Session.objects.filter(start_datetime__gte=datetime.date.today())
     competition = request.GET.get('competition', False)
     if competition:
         qs = qs.filter(season__competition__pk=competition)
@@ -164,10 +164,10 @@ def session_detail_tab(request, sport, gsm_id, tab, tag='match',
         pass
 
     now = datetime.datetime.now()
-    past_sessions_A = list(session.oponnent_A.get_sessions().exclude(pk=session.pk).filter(datetime_utc__lte=now).order_by('-datetime_utc')[:8])
-    next_sessions_A = list(session.oponnent_A.get_sessions().exclude(pk=session.pk).filter(datetime_utc__gt=now)[:2])
-    past_sessions_B = list(session.oponnent_B.get_sessions().exclude(pk=session.pk).filter(datetime_utc__lte=now).order_by('-datetime_utc')[:8])
-    next_sessions_B = list(session.oponnent_B.get_sessions().exclude(pk=session.pk).filter(datetime_utc__gt=now)[:2])
+    past_sessions_A = list(session.oponnent_A.get_sessions().exclude(pk=session.pk).filter(start_datetime__lte=now).order_by('-start_datetime')[:8])
+    next_sessions_A = list(session.oponnent_A.get_sessions().exclude(pk=session.pk).filter(start_datetime__gt=now)[:2])
+    past_sessions_B = list(session.oponnent_B.get_sessions().exclude(pk=session.pk).filter(start_datetime__lte=now).order_by('-start_datetime')[:8])
+    next_sessions_B = list(session.oponnent_B.get_sessions().exclude(pk=session.pk).filter(start_datetime__gt=now)[:2])
 
     past_sessions_A.reverse()
     past_sessions_B.reverse()
@@ -218,8 +218,8 @@ def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
 
         now = datetime.datetime.now()
         sessions = Session.objects.filter(season__competition=competition)
-        next_sessions = sessions.filter(datetime_utc__gt=now)
-        last_sessions = sessions.filter(datetime_utc__lte=now).order_by('-datetime_utc')
+        next_sessions = sessions.filter(start_datetime__gt=now)
+        last_sessions = sessions.filter(start_datetime__lte=now).order_by('-start_datetime')
 
         if page == 0:
             tmp = list(last_sessions[:paginate_by-center])
@@ -293,7 +293,7 @@ def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
             gameweek = context['gameweek'] = int(request.GET.get('gameweek', season.get_current_gameweek()))
             context['sessions'] = season.session_set.filter(gameweek=gameweek)
         else:
-            context['sessions'] = season.session_set.filter(datetime_utc__gte=datetime.datetime.today())[:10]
+            context['sessions'] = season.session_set.filter(start_datetime__gte=datetime.datetime.today())[:10]
 
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name, context,
@@ -379,10 +379,10 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
         q = q.filter(Q(oponnent_A=team)|Q(oponnent_B=team))
 
         q_played = q.filter(status='Played').order_by(
-            '-datetime_utc').values_list('pk', flat=True).distinct()[:2]
+            '-start_datetime').values_list('pk', flat=True).distinct()[:2]
         q_next = q.filter(status__in=('Playing', 'Suspended', 'Fixture')).order_by(
-            'datetime_utc').filter(datetime_utc__gte=datetime.date.today()).distinct().values_list('pk', flat=True)[:2]
-        context['next_sessions'] = Session.objects.filter(pk__in=list(q_played)+list(q_next)).order_by('datetime_utc')
+            'start_datetime').filter(start_datetime__gte=datetime.date.today()).distinct().values_list('pk', flat=True)[:2]
+        context['next_sessions'] = Session.objects.filter(pk__in=list(q_played)+list(q_next)).order_by('start_datetime')
 
         reference_season = context['reference_season'] = get_reference_season(team)
         if reference_season:
@@ -455,27 +455,27 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
     elif tab == 'calendar':
         context['next_page'] = context['previous_page'] = None
         now = datetime.datetime.now()
-        past_sessions = team.get_sessions().filter(datetime_utc__lte=now)
-        next_sessions = team.get_sessions().filter(datetime_utc__gt=now)
+        past_sessions = team.get_sessions().filter(start_datetime__lte=now)
+        next_sessions = team.get_sessions().filter(start_datetime__gt=now)
        
         page = int(request.GET.get('page', 0))
         if page == 0:
-            context['sessions'] = [s for s in reversed(past_sessions.order_by('-datetime_utc')[:5])]
-            context['sessions'] += [s for s in next_sessions.order_by('datetime_utc')[:5]]
+            context['sessions'] = [s for s in reversed(past_sessions.order_by('-start_datetime')[:5])]
+            context['sessions'] += [s for s in next_sessions.order_by('start_datetime')[:5]]
         elif page > 0:
             minimum = 10*page-5
             maximum = 10*page+5
-            context['sessions'] = next_sessions.order_by('datetime_utc')[minimum:maximum]
+            context['sessions'] = next_sessions.order_by('start_datetime')[minimum:maximum]
         elif page < 0:
             page = page * -1
             minimum = 10*page-5
             maximum = 10*page+5
-            context['sessions'] = [s for s in reversed(past_sessions.order_by('-datetime_utc')[minimum:maximum])]
+            context['sessions'] = [s for s in reversed(past_sessions.order_by('-start_datetime')[minimum:maximum])]
 
-        if team.get_sessions().filter(datetime_utc__lt=context['sessions'][0].datetime_utc).count():
+        if team.get_sessions().filter(start_datetime__lt=context['sessions'][0].start_datetime).count():
             context['previous_page'] = page - 1 
 
-        if team.get_sessions().filter(datetime_utc__gt=context['sessions'][len(context['sessions'])-1].datetime_utc).count():
+        if team.get_sessions().filter(start_datetime__gt=context['sessions'][len(context['sessions'])-1].start_datetime).count():
             context['next_page'] = page + 1
 
     context.update(extra_context or {})
@@ -571,7 +571,7 @@ def sport_detail_tab(request, sport, tab,
         context['today'] = today = datetime.date.today()
         context['yesterday'] = today - oneday
         context['tomorrow'] = today + oneday
-        sessions_qs = sessions_qs.order_by('season__competition__display_order', 'datetime_utc')
+        sessions_qs = sessions_qs.order_by('season__competition__display_order', 'start_datetime')
         f = SessionFilter(request.GET, sessions_qs)
         context['filter'] = f
 
@@ -589,14 +589,14 @@ def sport_detail_tab(request, sport, tab,
         )
         context['next_sessions'] = Session.objects.filter(
             sport=sport, status='Fixture',
-            datetime_utc__gte=datetime.datetime.now(),
+            start_datetime__gte=datetime.datetime.now(),
             season__competition__display_order__lte=100
         )[:10]
         context['last_sessions'] = Session.objects.filter(
             sport=sport, status='Played',
-            datetime_utc__lte=datetime.datetime.now(),
+            start_datetime__lte=datetime.datetime.now(),
             season__competition__display_order__lte=100
-        ).order_by('-datetime_utc')[:10]
+        ).order_by('-start_datetime')[:10]
 
     context.update(extra_context or {})
     return shortcuts.render_to_response(template_name, context,
