@@ -450,7 +450,7 @@ CREATE TABLE "gsm_session" (
     "B_ets" integer,
     "penalty" varchar(1),
     "actual_start_datetime" timestamp with time zone,
-    "datetime_utc" timestamp with time zone,
+    "start_datetime" timestamp with time zone,
     "time_unknown" boolean NOT NULL,
     "status" varchar(12) NOT NULL,
     "gameweek" integer,
