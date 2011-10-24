@@ -571,6 +571,7 @@ table.bettype table.choices {
                 var data = "querystring_key=" + $(this).attr("rel").split(" ")[0];
                 $.get($(this).attr("href"), data, function(data) {
                     container.before(data);
+					inititialize_buttons();
                     container.remove();
 
                     var scroll = $(window).height() + $(window).scrollTop() > $('#body_content').height();
