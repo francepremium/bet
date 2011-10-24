@@ -254,23 +254,24 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 .yourlabs_autocomplete li.bookmaker a 	{ background-image:url('../img/entities/bookmaker_tiny.png'); }
 
 /* Activity */
-.activity { color:#000000; }
+.activity { color:#666666; }
 .activity a,
-.activity .link { color:#343a4a; }
+.activity .link { color:#3b5998; }
 .activity cite { color:#999999; }
-.activity .image { position:absolute; width:16px; height:16px; margin-top:2px; overflow:visible; background-repeat:no-repeat; }
-.activity .image a { margin-top:4px; }
-.activity .details { padding-left:47px; margin-bottom:5px; }
+.activity .details { margin-left:47px; margin-bottom:8px; padding-bottom:12px; border-bottom:1px solid #f2f2f2; }
+.activity .action a,
+.activity .action .link { font-weight:bold; }
 .activity .date,
-.activity .comments_link { display:inline-block; font-size:10px; font-style:italic; color:#999999; /* compatibility => */ zoom:1; *display:inline; }
-.activity .comments_link { text-transform:capitalize; cursor:pointer; }
-.activity .comments_link:before { content:" - "; }
-.activity .comments { width:370px; margin-top:5px; padding:7px 15px 1px 15px; background-color:#f2f2f2; }
+.activity .comments_link,
+.activity .bet_list_link { display:inline-block; /* compatibility => */ zoom:1; *display:inline; }
+.activity .date { color:#999999; }
+.activity .comments_link { text-transform:capitalize; }
 .activity .comments,
 .activity .bet_list { display:none; }
-.activity .bet_list_link { display:inline-block; }
 
 /* Activity icons */
+.activity .image { position:absolute; width:16px; height:16px; margin-top:2px; overflow:visible; background-repeat:no-repeat; }
+.activity .image a { margin-top:4px; }
 .activity.bets-on 					.image { background-image:url('../img/actions/bets-on.png'); }
 .activity.commented					.image { background-image:url('../img/actions/commented.png'); }
 .activity.wall-posted				.image { background-image:url('../img/actions/wall-posted.png'); }
