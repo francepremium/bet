@@ -7,7 +7,7 @@
 		" style="{% if activity.hide %}display: none;{% endif %}">
 
     <div class="image">
-		{% if action.verb == 'wall posted' and action.target == object %}
+		{% if action.actor != object %}
 			<a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{% avatar action.actor 36 %}</a>
 		{% endif %}
 		{% if action.verb == 'updated his status' and action.actor == object %}	
