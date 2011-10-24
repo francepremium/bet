@@ -171,10 +171,13 @@ tr.odd td { background-color:#f7f7f7; }
 /* Bet list (quickly themed) */
 td.correct { width:55px; text-align:right; background-color:#f7f7f7; }
 .odd td.correct { background-color:#eeeeee; }
-td.correct .won, td.result .won 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-won.png'); }
-td.correct .lost, td.result .lost 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-lost.png'); }
-td.correct .canceled, td.result .canceled 	{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-canceled.png'); }
-.flag 		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-flag.png'); }
+td.correct .won,
+td.result .won		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-won.png'); }
+td.correct .lost, 
+td.result .lost		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-lost.png'); }
+td.correct .canceled, 
+td.result .canceled	{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-canceled.png'); }
+.flag 				{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-flag.png'); }
 
 tr.canceled { background-color: #ccdaf7; }
 tr.won { background-color: #ccf7de; }
@@ -241,7 +244,7 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 .yourlabs_autocomplete a { margin-left:-10px; }
 .yourlabs_autocomplete .option.active,
 .yourlabs_autocomplete a:hover,
-.yourlabs_autocomplete li.active a { color:#ffffff; background-color:#ea4839; }
+.yourlabs_autocomplete li.active a 		{ color:#ffffff; background-color:#ea4839; }
 .yourlabs_autocomplete li.soccer a 		{ background-image:url('../img/sports/soccer_tiny.png'); }
 .yourlabs_autocomplete li.rugby  a 		{ background-image:url('../img/sports/rugby_tiny.png'); }
 .yourlabs_autocomplete li.tennis a 		{ background-image:url('../img/sports/tennis_tiny.png'); }
@@ -276,7 +279,7 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 .activity.closed-ticket-combined	.image { background-image:url('../img/actions/closed-ticket-combined.png'); }
 .activity.started-following 		.image { background-image:url('../img/actions/started-following.png'); }
 .activity.corrected 		        .image { background-image:url('../img/actions/corrected.png'); }
-.activity.flagged 		        .image { background-image:url('../img/actions/flagged.png'); }
+.activity.flagged 		        	.image { background-image:url('../img/actions/flagged.png'); }
 .activity.registered 		        .image { background-image:url('../img/actions/registered.png'); }
 
 /* Activity extended elements */
