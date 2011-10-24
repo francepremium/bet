@@ -226,6 +226,7 @@ div.tree h3 { cursor:pointer; }
 #publication_ticket_form #ticket_submit_delete { float:right; margin-top:0px; }
 
 /* Comments */
+#body_content > .comment_form_container { margin-bottom:15px; }
 .comment_form_container textarea { width:98%; height:50px; padding:5px; }
 
 /* Search generic style */
@@ -315,7 +316,6 @@ div.button { display:inline-block; /* compatibility => */ zoom:1; *display:inlin
 
 /* Forms */
 #body input[type=submit] { margin:10px 0px 0px auto; }
-#body_content form { margin-bottom:15px; }
 
 /* Subscription */
 #subscription_outer div {
