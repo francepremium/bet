@@ -269,6 +269,15 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 .activity .comments,
 .activity .bet_list { display:none; }
 
+/* Activity comments */
+.activity .comments { margin-top:5px; padding:10px; background-color:#f2f2f2; }
+.activity .comments img { float:left; margin:5px 10px 5px 0px; }
+.activity .comments dt,
+.activity .comments dd { display:table-row; }
+.activity .comments dt { color:#999999; }
+.activity .comments dt a { font-weight:bold; }
+.activity .comments dd p { margin:0px 0px 5px -50px; padding:0px 0px 8px 50px; border-bottom:1px solid #ffffff; }
+
 /* Activity icons */
 .activity .image { position:absolute; width:16px; height:16px; margin-top:2px; overflow:visible; background-repeat:no-repeat; }
 .activity .image a { margin-top:4px; }

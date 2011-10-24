@@ -1,7 +1,10 @@
+{% load avatar_tags %}
 <dl id="comments">
   {% for comment in comment_list %}
-    <dt id="c{{ comment.id }}">
-        {{ comment.submit_date }} - {{ comment.name }}
+	
+	{% avatar comment.name 36 %}
+	<dt id="c{{ comment.id }}">
+		<a href="{{ comment.user.get_absolute_url }}">{{ comment.name }}</a>, {{ comment.submit_date }}
     </dt>
     <dd>
         <p>{{ comment.comment }}</p>
