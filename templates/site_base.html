@@ -236,19 +236,47 @@ table.bettype table.choices {
         {% endif %}
 
         {% block body_outer %}
+		<div id="navigation_aside">
         {% if user.is_authenticated %}
-        <div class="subscription" id="subscription_outer">
-            <div class="dropdown outer friends" id="subscription_dropdown_friends">
-                {% subscription_yourlabs_dropdown request 'friends' 'undelivered,unacknowledged,acknowledged' 'undelivered,unacknowledged' 15 %}
-            </div>
-            <div class="dropdown outer messages" id="subscription_dropdown_messages">
-                {% subscription_yourlabs_dropdown request 'messages' 'undelivered,unacknowledged,acknowledged' 'undelivered,unacknowledged' 15 %}
-            </div>
-            <div class="dropdown outer other" id="subscription_dropdown_other">
-                {% subscription_yourlabs_dropdown request 'other' 'undelivered,unacknowledged,acknowledged' 'undelivered,unacknowledged' 15 %}
-            </div>
-        </div>
+			<ul>
+				<li class="bets">
+					<a href="{% url bet_list_tab 'mine' %}">{% trans 'my bets' %}</a>
+				</li>
+				<li class="friends_bets">
+					<a href="{% url bet_list_tab 'friends' %}">{% trans "friend's bets" %}</a>
+				</li>
+				{% if request.user.betprofile.is_referee %}
+				<li class="flagded_bets">
+					<a href="{% url bet_list_flagged %}">{% trans 'Flagged bets' %}</a>
+				</li>
+				{% endif %}
+				<li class="subscription other">
+					<div class="dropdown outer other" id="subscription_dropdown_other">
+						{% subscription_yourlabs_dropdown request 'other' 'undelivered,unacknowledged,acknowledged' 'undelivered,unacknowledged' 15 %}
+					</div>
+				</li>
+				<li class="statistics">
+					<a href="{% url user_detail_tab request.user.username 'stats' %}">{% trans 'stats' %}</a>
+				</li>
+				<li class="subscription friends">
+					<div class="dropdown outer friends" id="subscription_dropdown_friends">
+						{% subscription_yourlabs_dropdown request 'friends' 'undelivered,unacknowledged,acknowledged' 'undelivered,unacknowledged' 15 %}
+					</div>
+				</li>
+				<li class="subscription messages">
+					<div class="dropdown outer messages" id="subscription_dropdown_messages">
+						{% subscription_yourlabs_dropdown request 'messages' 'undelivered,unacknowledged,acknowledged' 'undelivered,unacknowledged' 15 %}
+					</div>
+				</li>
+				<li class="settings">
+					<a href="{% url acct_email %}">{% trans 'settings' %}</a>
+				</li>
+				<li class="logout">
+					<a href="{% url acct_logout %}">{% trans 'logout' %}</a>
+				</li>
+			</ul>
         {% endif %}
+        </div>
         <div id="body">
         {% if user.is_authenticated %}
 			<div id="publication">

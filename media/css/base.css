@@ -25,8 +25,8 @@ h3 { margin:7px 0px; font-size:15px; color:#343a4a; border-bottom:1px solid #ccc
 /* Layout */
 html { background-image:url('../img/background.png'); background-repeat:repeat-x; background-color:#f2f2f2; }
 body { position:relative; width:990px; margin:0px auto; }
-#body { position:absolute; top:101px; left:150px; width:630px; padding:15px; overflow:hidden; background-color:#ffffff; border:1px solid #cccccc; border-top-width:0px; }
-#aside { position:absolute; top:101px; right:0px; width:180px; overflow:hidden; }
+#body { position:absolute; top:132px; left:150px; width:630px; padding:15px; overflow:hidden; background-color:#ffffff; border:1px solid #cccccc; border-top-width:0px; }
+#aside { position:absolute; top:132px; right:0px; width:180px; overflow:hidden; }
 
 /* Logo */
 #logo { position:absolute; top:26px; left:-31px; }
@@ -73,7 +73,7 @@ body { position:relative; width:990px; margin:0px auto; }
 #signup a:hover { background-color:#f95047; }
 
 /* Navigation */
-#navigation { position:absolute; width:135px; top:105px; }
+#navigation { position:absolute; width:135px; top:136px; }
 #navigation ul { padding:10px 0px 7px 0px; border-bottom:1px solid #cccccc; }
 #navigation ul ul { padding:0; border-bottom-width:0px; } /* <= compatibility : resetting previous line, which should/could have been #navigation > ul */
 #navigation li { /* compatibility => */ display:inline; }
@@ -105,6 +105,33 @@ body { position:relative; width:990px; margin:0px auto; }
 #navigation_sub li:hover { background-color:#474c5a; }
 #navigation_sub li.active { background-color:#ea4839; box-shadow:0px 1px 1px #cccccc, inset 0px 0px 1px #ffffff; }
 #navigation_sub li.active a { background-image:url('../img/navigation_sub_active.png'); background-repeat:no-repeat; background-position:center 36px; }
+
+/* Navigation aside (subscription) */
+#navigation_aside { position:absolute; top:101px; left:150px; width:660px; height:30px; border-left:1px solid #cccccc; border-right:1px solid #cccccc; }
+#navigation_aside ul { position:relative; z-index:300; float:right; height:30px; margin-right:-1px; }
+#navigation_aside li { float:left; height:28px; margin:1px 0px; border-right:1px solid #cccccc; background-position:7px 7px; background-repeat:no-repeat; }
+#navigation_aside li:hover,
+#navigation_aside li.active { margin:-1px 0px 0px -1px; padding:1px 0px 2px 0px; background-position:7px 8px; background-color:#ffffff; border:1px solid #313a48; border-bottom-width:0px; }
+#navigation_aside li.bets a,
+#navigation_aside li.flagged_bets a,
+#navigation_aside li.friends_bets a { width:auto; height:0px; padding:14px 5px 24px 5px; overflow:visible; /* compatibility => */ _width:0; }
+#navigation_aside li.other		{ background-image:url('../img/navigation_aside/notifications.png'); }
+#navigation_aside li.statistics	{ background-image:url('../img/navigation_aside/statistics.png'); }
+#navigation_aside li.friends	{ background-image:url('../img/navigation_aside/friends.png'); }
+#navigation_aside li.messages	{ background-image:url('../img/navigation_aside/messages.png'); }
+#navigation_aside li.settings	{ background-image:url('../img/navigation_aside/settings.png'); }
+#navigation_aside li.logout		{ background-image:url('../img/navigation_aside/logout.png'); }
+#navigation_aside li > a:first-letter { text-transform:uppercase; /* compatibility => */ letter-spacing:-0.5px; }
+#navigation_aside li > a:hover { text-decoration:none; }
+#navigation_aside li > a,
+#navigation_aside .toggler { position:relative; width:30px; height:0px; display:block; padding-top:38px; margin-top:-10px; overflow:hidden; color:#666666; }
+#navigation_aside .counter { position:absolute; top:0px; right:1px; width:16px; height:16px; line-height:16px; font-size:8px; color:#ffffff; text-align:center; background-color:#f54c4a; border-radius:8px; box-shadow:inset 0px 1px 1px #dddddd, 0px 1px 1px #999999; }
+#navigation_aside .dropdown.inner { position:absolute; z-index:-1; top:30px; right:-1px; width:300px; background-color:#ffffff; border:1px solid #313a48; }
+#navigation_aside .dropdown.inner .empty,
+#navigation_aside .dropdown.inner .list .notification { padding:8px 13px; border-bottom:1px solid #ececec; }
+#navigation_aside .dropdown.inner .list img { vertical-align:middle; }
+#navigation_aside .dropdown.inner .more { padding:2px 0px; text-align:center; background-color:#f2f2f2; }
+#navigation_aside .hidden { display:none; }
 
 /* Messages */
 #messages { position:absolute; top:1px; left:151px; width:660px; background-color:#3a3e49; color:#ffffff; }
@@ -329,35 +356,3 @@ div.button { display:inline-block; /* compatibility => */ zoom:1; *display:inlin
 
 /* Forms */
 #body input[type=submit] { margin:10px 0px 0px auto; }
-
-/* Subscription */
-#subscription_outer div {
-    display: inline-block;
-}
-#subscription_outer .hidden {
-    display: none;
-}
-#subscription_outer .dropdown {
-    overflow: visible;
-    position: absolute;
-    z-index: 100;
-    background-color: white;
-}
-#subscription_outer .dropdown.inner {
-    width: 330px;
-}
-#subscription_outer .list .notification {
-    display: block;
-}
-#subscription_outer {
-    position: absolute;
-    top: 101px;
-    left: 151px;
-}
-#subscription_outer .dropdown.outer.other {
-    left: 150px;
-}
-#subscription_outer .dropdown.outer.messages {
-    left: 60px;
-}
-
