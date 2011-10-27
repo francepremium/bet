@@ -60,40 +60,30 @@
                 </td>
 			{% endblock %}
 			{% block session_score %}
+				<td class="score">
 				{% if session.status == 'Played' or session.status == 'Playing' %}
-				<td class="score left">
 					<a href="{{ session.get_absolute_url }}" title="{{ session.name }}">
 					{% if session.A_score != None %}
 						{{ session.A_score }}
 					{% endif %}
-					</a>
 					{% if session.A_ets and session.A_ets > session.B_ets and session.winner == session.oponnent_A and not session.penalty %}
 					<span class="extratimescore">E</span>
 					{% endif %}
 					{% if session.penalty == 'A' %}
 					<span class="penalty">P</span>
 					{% endif %}
-				</td>
-				<td class="score center">
-					<a href="{{ session.get_absolute_url }}" title="{{ session.name }}">
 					-
-					</a>
-				</td>
-				<td class="score right">
-					<a href="{{ session.get_absolute_url }}" title="{{ session.name }}">
 					{% if session.B_score != None %}
 						{{ session.B_score }}
 					{% endif %}
-					</a>
 					{% if session.B_ets and session.B_ets > session.A_ets and session.winner == session.oponnent_B and not session.penalty %}
 					<span class="extratimescore">E</span>
 					{% endif %}
 					{% if session.penalty == 'B' %}
 					<span class="penalty">P</span>
 					{% endif %}
-				</td>
+					</a>
 				{% else %}{% if session.status == 'Fixture' %}
-				<td class="score" colspan="3">
 					<a href="{{ session.get_absolute_url }}" title="{{ session.name }}">
 						{% if session.time_unknown %}
 							--:--
@@ -103,9 +93,7 @@
 							{% endwith %}
 						{% endif %}
 					</a>
-				</td>
 				{% else %}{# Retired, Walkover, Postponed... #}
-				<td class="score" colspan="3">
                     {% if session.status == 'Postponed' %}
                         Psp.
                     {% endif %}
@@ -118,8 +106,8 @@
                     {% if session.status == 'Walkover' %}
                         Wo.
                     {% endif %}
-                </td>
 				{% endif %}{% endif %}
+                </td>
 			{% endblock %}
 			{% block session_oponnent_image_right %}
                 <td class="oponnent_image right">
