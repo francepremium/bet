@@ -25,9 +25,9 @@
         <th colspan="2">
             {% if session.status == 'Fixture' %}
                 {% if session.time_unknown %}
-                    {{ request|timezone_adjust:session.datetime_utc|display_date }}
+                    {{ request|timezone_adjust:session.start_datetime|display_date }}
                 {% else %}
-                    {{ request|timezone_adjust:session.datetime_utc|display_time }}
+                    {{ request|timezone_adjust:session.start_datetime|display_time }}
                 {% endif %}
             {% else %}
                 {% if sport.slug == 'tennis' %}
@@ -101,9 +101,9 @@
         <td><a href="{{ session.season.competition.get_absolute_url }}" title="{{ session.season.competition }}" rel="canonical">{{ session.season.competition }}</a></td>
     </tr>
     <tr>
-        {% if session.datetime_utc.date %}
+        {% if session.start_datetime.date %}
             <td>{% trans 'date' %}</td>
-            <td>{{ request|timezone_adjust:session.datetime_utc|display_date }}</td>
+            <td>{{ request|timezone_adjust:session.start_datetime|display_date }}</td>
         {% else %}
             <td colspan="2"></td>
         {% endif %}
@@ -116,14 +116,14 @@
         <td colspan="2"></td>
         {% endif %}
     </tr>
-    {% if session.datetime_utc %}
+    {% if session.start_datetime %}
     <tr>
         <td>{% trans 'kickoff' %}</td>
         <td>
             {% if session.time_unknown %}
                 {% trans 'yet unknown' %}
             {% else %}
-                {{ request|timezone_adjust:session.datetime_utc|display_time }}
+                {{ request|timezone_adjust:session.start_datetime|display_time }}
             {% endif %}
         </td>
     </tr>

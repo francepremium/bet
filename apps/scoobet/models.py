@@ -14,6 +14,7 @@ import scoobet
 import scoobet.rankings
 # django-subscription configuration
 import scoobet_subscriptions
+import search_sites
 
 def follow_betspire(sender, instance=None, **kwargs):
     if not kwargs['created']: return

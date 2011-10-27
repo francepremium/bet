@@ -18,23 +18,20 @@ except ImportError:
     print "MOCKING what we need of uwsgi"
     class uwsgi(object):
         SPOOL_RETRY = False
+        SPOOL_OK = True
     def spool(func):
         return func
 
 from annoying.fields import AutoOneToOneField
 
+from bet import *
+from gsm.models import session_played
+
 logger = logging.getLogger('apps')
 
-TICKET_STATUS_INCOMPLETE = 0
-TICKET_STATUS_DONE = 1
-
-BET_CORRECTION_NEW = 0
-BET_CORRECTION_WON = 1
-BET_CORRECTION_CANCELED = 2
-BET_CORRECTION_LOST = 3
-
-EVENT_KIND_CORRECTION = 1
-EVENT_KIND_FLAG = 2
+def bet_correct(sender, session, **kwargs):
+    correct_for_session(session)
+session_played.connect(bet_correct)
 
 class BetProfile(models.Model):
     user = AutoOneToOneField(User, primary_key=True)
@@ -160,7 +157,7 @@ class Bet(models.Model):
         return urlresolvers.reverse('bet_detail', args=(self.pk,))
 
     class Meta:
-        ordering = ('-id',)
+        ordering = ('-session__start_datetime', '-id')
 
 def delete_empty_ticket(sender, **kwargs):
     try:

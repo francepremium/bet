@@ -39,13 +39,10 @@ class LiveCorrectTestCase(TestCase):
 
         for element in gsm.parse_element_for(root.getroot(), 'match'):
             GsmSyncLive().correct(element, self.session)
-         
+        
         b1 = Bet.objects.get(pk=b1.pk)
-        self.assertEqual(b1.status, BET_STATUS_CORRECTED)
         self.assertEqual(b1.correction, BET_CORRECTION_LOST)        
         bx = Bet.objects.get(pk=bx.pk)
-        self.assertEqual(bx.status, BET_STATUS_CORRECTED)
-        self.assertEqual(bx.correction, BET_CORRECTION_LOST)       
+        self.assertEqual(bx.correction, BET_CORRECTION_WON)       
         b2 = Bet.objects.get(pk=b2.pk)
-        self.assertEqual(b2.status, BET_STATUS_CORRECTED)
-        self.assertEqual(b2.correction, BET_CORRECTION_WON)
+        self.assertEqual(b2.correction, BET_CORRECTION_LOST)

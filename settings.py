@@ -167,7 +167,7 @@ SUBSCRIPTION_BACKENDS = {
 
 from yourlabs.setup import Setup
 setup = Setup(globals())
-setup.debug(True)
+setup.debug(False)
 setup.full() 
 
 if setup.ready:

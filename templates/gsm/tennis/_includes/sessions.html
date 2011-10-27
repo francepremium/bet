@@ -2,7 +2,7 @@
 {% load i18n gsm_tags %}
 
 {% block session_score %}
-{% if session.status == 'Played' %}
+{% if session.status == 'Played' or session.status == 'Playing' %}
 <td class="score" colspan="3">
 	<a href="{{ session.get_absolute_url }}" title="{{ session }}">
 		<table>

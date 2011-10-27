@@ -133,7 +133,10 @@ def get_tree(lang, sport, method, update=False, retry=False, **parameters):
         else:
             shutil.copyfile(tmp_filepath, cache_filepath)
 
-        os.unlink(cache_lockpath)
+        try:
+            os.unlink(cache_lockpath)
+        except:
+            pass
     else:
         tree, root = get_tree_and_root(cache_filepath)
 

@@ -38,9 +38,9 @@ class BetFilter(filters.FilterSet):
         ('friends', _('friends')),
         ('follow', _('who I follow')),
     )
-    min_date = filters.DateFilter(lookup_type='gte', name='session__datetime_utc')
-    max_date = filters.DateFilter(lookup_type='lte', name='session__datetime_utc')
-    session__datetime_utc = filters.DateRangeFilter()
+    min_date = filters.DateFilter(lookup_type='gte', name='session__start_datetime')
+    max_date = filters.DateFilter(lookup_type='lte', name='session__start_datetime')
+    session__start_datetime = filters.DateRangeFilter()
     has_text = BetHasTextFilter()
     has_upload = BetHasUploadFilter()
     population = PopulationChoiceFilter(choices=POPULATION_CHOICES)

@@ -19,10 +19,14 @@ from django.template import defaultfilters
 from django.conf import settings
 from django.core.cache import cache
 from django.core.management import call_command
+import django.dispatch
 
 from autoslug import AutoSlugField
 
 import gsm
+import sync
+
+session_played = django.dispatch.Signal(providing_args=['session'])
 
 logger = logging.getLogger('gsm')
 
@@ -153,7 +157,7 @@ class Sport(models.Model):
         ordering = ('id',)
 
     def get_active_competitions(self):
-        return self.competition_set.filter(season__session__datetime_utc__gte=datetime.datetime.today()).distinct()
+        return self.competition_set.filter(season__session__start_datetime__gte=datetime.datetime.today()).distinct()
 
     def get_competition_areas(self):
         return Area.objects.filter(competition__sport=self).order_by('name').distinct()
@@ -178,7 +182,7 @@ class Sport(models.Model):
         return self.get_tab_absolute_url('rankings')
 
     def get_last_sessions(self):
-        return Session.objects.filter(sport=self, status='Played').order_by('-datetime_utc')[:15]
+        return Session.objects.filter(sport=self, status='Played').order_by('-start_datetime')[:15]
 
 class AbstractGsmEntity(models.Model):
     sport = models.ForeignKey('Sport')
@@ -277,7 +281,7 @@ class AbstractGsmEntity(models.Model):
             datetime_str = datetime_str + '00:00:00'
 
         if datetime_str not in (' ', ' 00:00:00'):
-            converter = Session._meta.get_field('datetime_utc')
+            converter = Session._meta.get_field('start_datetime')
             return converter.to_python(datetime_str)
 
     def resync(self, element=None):
@@ -308,9 +312,9 @@ class AbstractGsmEntity(models.Model):
             elif element.attrib.get('status', False) == 'Played':
                 self.draw = True
 
-            self.datetime_utc = self.get_datetime(
+            self.start_datetime = self.get_datetime(
                 element, 'date_utc', 'time_utc')
-            if self.datetime_utc:
+            if self.start_datetime:
                 self.time_unknown = False
 
         for src, dst in copy_map.items():
@@ -327,7 +331,7 @@ class AbstractGsmEntity(models.Model):
 class GsmEntity(AbstractGsmEntity):
     def get_sessions(self):
         if not hasattr(self, '_sessions'):
-            self._sessions = Session.objects.filter(models.Q(oponnent_A=self)|models.Q(oponnent_B=self)).order_by('datetime_utc')
+            self._sessions = Session.objects.filter(models.Q(oponnent_A=self)|models.Q(oponnent_B=self)).order_by('start_datetime')
         return self._sessions
 
     def get_large_image_url(self):
@@ -425,11 +429,11 @@ class Competition(AbstractGsmEntity):
     important = models.BooleanField()
 
     def get_sessions(self):
-        return Session.objects.filter(session_round__season__competition=self).order_by('-datetime_utc')
+        return Session.objects.filter(session_round__season__competition=self).order_by('-start_datetime')
 
     def get_last_season(self):
         if not hasattr(self, '_last_season'):
-            self._last_season = self.season_set.all().order_by('-end_date')[0]
+            self._last_season = self.season_set.all().order_by('-start_date')[0]
         return self._last_season
 
     def __unicode__(self):
@@ -455,7 +459,7 @@ class Season(AbstractGsmEntity):
     def get_gameweeks(self):
         if not hasattr(self, '_gameweeks'):
             self._gameweeks = []
-            sql = 'select distinct on (gameweek) gameweek, datetime_utc from gsm_session where season_id = %s'
+            sql = 'select distinct on (gameweek) gameweek, start_datetime from gsm_session where season_id = %s'
             cursor = connection.cursor()
             cursor.execute(sql, (self.pk,))
             self._gameweeks = cursor.fetchall()
@@ -468,7 +472,7 @@ class Season(AbstractGsmEntity):
 
     def get_current_gameweek(self):
         if not hasattr(self, '_current_gameweek'):
-            sessions = self.session_set.filter(status='Fixture', datetime_utc__gte=datetime.date.today()).order_by('datetime_utc')
+            sessions = self.session_set.filter(status='Fixture', start_datetime__gte=datetime.date.today()).order_by('start_datetime')
             if sessions.count() and sessions[0].gameweek:
                 self._current_gameweek = int(sessions[0].gameweek)
             else:
@@ -487,7 +491,7 @@ class Season(AbstractGsmEntity):
 
     def get_sessions_for_current_gameweek(self):
         if not hasattr(self, '_sessions_for_current_gameweek'):
-            self._sessions_for_current_gameweek = self.session_set.filter(gameweek=self.get_current_gameweek).order_by('datetime_utc')
+            self._sessions_for_current_gameweek = self.session_set.filter(gameweek=self.get_current_gameweek).order_by('start_datetime')
         return self._sessions_for_current_gameweek
 
 class Round(AbstractGsmEntity):
@@ -569,7 +573,7 @@ class Session(AbstractGsmEntity):
     penalty = models.CharField(null=True, blank=True, max_length=1)
 
     actual_start_datetime = models.DateTimeField(null=True, blank=True)
-    datetime_utc = models.DateTimeField(null=True, blank=True)
+    start_datetime = models.DateTimeField(null=True, blank=True)
     time_unknown = models.BooleanField()
     status = models.CharField(max_length=12, choices=STATUS_CHOICES)
     gameweek = models.IntegerField(null=True, blank=True)
@@ -581,7 +585,7 @@ class Session(AbstractGsmEntity):
     objects = SessionManager()
 
     class Meta:
-        ordering = ['datetime_utc']
+        ordering = ['start_datetime']
 
     def __unicode__(self):
         return self.name

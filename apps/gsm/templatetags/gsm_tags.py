@@ -1,6 +1,9 @@
 import re
 import datetime
 
+import pytz
+from pytz import timezone
+
 from django import template
 from django.conf import settings
 from django.db.models import Q
@@ -25,8 +28,16 @@ def is_int(val):
 
 @register.filter
 def timezone_adjust(request, value):
-    delta = datetime.timedelta(hours=request.timezone.get('offset', 0))
-    return value + delta
+    #value = datetime.datetime(value.year, value.month, value.day)
+    if hasattr(value, 'tzinfo'):
+        local = timezone(settings.TIME_ZONE)
+        utc = timezone('UTC')
+        value = local.localize(value)
+        value = value.astimezone(utc)
+        delta = datetime.timedelta(hours=request.timezone.get('offset', 0))
+        return value + delta
+    else:
+        return value
 
 @register.filter
 def display_date(date):
@@ -70,7 +81,7 @@ def five_sessions_series(team):
     sessions = Session.objects.filter(status='Played').filter(
         Q(oponnent_A=team) |
         Q(oponnent_B=team)
-    ).distinct().order_by('datetime_utc')[:5]
+    ).distinct().order_by('start_datetime')[:5]
 
     serie = []
     for session in sessions:
