@@ -173,7 +173,7 @@ tr.odd td { background-color:#f7f7f7; }
 .gsm tr.lost 		td.score	{ background-color:#e2c5c6; }
 .gsm tr.draw 		td			{ background-color:#fffccc; }
 .gsm tr.draw 		td.score	{ background-color:#ededbe; }
-.gsm tr.current		td			{ background-color:#eaeef8; }
+.gsm tr.current		td			{ background-color:#bce9fd; }
 .gsm tr.Fixture		td.score 	{ background-color:#f7f7f7; }
 .gsm tr.Fixture.odd	td.score 	{ background-color:#eeeeee; }
 
