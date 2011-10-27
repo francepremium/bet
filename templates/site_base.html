@@ -126,37 +126,7 @@ table.bettype table.choices {
 				</li>
 				<li>
 					<a href="{% url user_detail request.user.username %}">{{ request.user.username }}</a>
-					<ul>
-						<li><a href="{% url user_detail_tab request.user.username 'activities' %}">{% trans 'activities'|capfirst %}</a></li>
-						<li><a href="{% url user_detail_tab request.user.username 'stats' %}">{% trans 'stats'|capfirst %}</a></li>
-						<li><a href="{% url bet_list_tab 'mine' %}">{% trans 'bets'|capfirst %}</a></li>
-						<li><a href="{% url bet_list_to_correct %}">{% trans 'bets to correct'|capfirst %}</a></li>
-						{% if request.user.betprofile.is_referee %}
-						<li><a href="{% url bet_list_flagged %}">{% trans 'Flagged bets' %}</a></li>
-						{% endif %}
-						<li><a href="{% url messages_inbox %}">{% trans 'inbox'|capfirst %} {% if inbox_count %}[{{ inbox_count }}]{% endif %}</a></li>
-						<li><a href="{% url subscription_list %}">{% trans 'notifications' %}</a></li>
-						<li><a href="{% url acct_logout %}">{% trans 'logout' %}</a></li>
-					</ul>
 				</li>
-			</ul>
-			<ul>
-				<li>
-					<a href="{% url user_detail_tab request.user.username 'social' %}">{% trans 'social' %}</a>
-					<ul>
-						<li><a href="{% url scoobet_feed_friends %}">{% trans 'activities'|capfirst %}</a></li>
-						<li><a href="{% url bet_list_tab 'friends' %}">{% trans 'bets'|capfirst %}</a></li>
-					</ul>
-				</li>
-				{% comment %}
-				<li>
-					<a href="{% url clan_list %}">{% trans 'clans' %}</a>
-					<ul>
-						<li><a href="{% url bet_list %}">{% trans 'bets'|capfirst %}</a></li>
-					</ul>
-				</li>
-				<li><a href="{% url article_list %}">{% trans 'articles' %}</a></li>
-				{% endcomment %}
 			</ul>
 			{% else %}
 			<form class="login" method="post" action="{% url acct_login %}">
