@@ -281,7 +281,7 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 .yourlabs_autocomplete li.bookmaker a 	{ background-image:url('../img/entities/bookmaker_tiny.png'); }
 
 /* Activity */
-.activity { color:#666666; }
+.activity { width:583px; color:#666666; }
 .activity a,
 .activity .link { color:#3b5998; }
 .activity cite { color:#999999; }
