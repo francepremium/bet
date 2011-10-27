@@ -97,12 +97,6 @@ table.bettype table.choices {
 			</form>
 		</div>
 
-		<div id="settings">
-			{% if request.user.is_authenticated %}
-			<a href="{% url acct_email %}"></a>
-			{% endif %}
-		</div>
-
 		<div id="signup">
 			{% if not request.user.is_authenticated %}
 			<a href="{% url acct_signup %}">{% trans 'sign up' %}</a>
