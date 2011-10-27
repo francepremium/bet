@@ -132,13 +132,13 @@ table.bettype table.choices {
 			<form class="login" method="post" action="{% url acct_login %}">
 				<input type="hidden" name="next" value="{% url me %}"/>
 				{% csrf_token %}
-				<input type="text" name="username" defaultValue="{% trans 'user name'|capfirst %}" />
-				<input type="password" name="password" defaultValue="{% trans 'password'|capfirst %}" />
+				<input type="text" name="username" defaultValue="{% trans 'user name' %}" />
+				<input type="password" name="password" defaultValue="{% trans 'password' %}" />
 				<input type="submit" class="button button_simple" value="{% trans 'Log in' %}" />
-				<label for="login_remember">{% trans 'remember me'|capfirst %}</label>
+				<label for="login_remember">{% trans 'remember me' %}</label>
 				<input type="checkbox" name="remember" id="login_remember" />
-				<a href="{% url acct_passwd_reset %}">{% trans "Forgot password?" %}</a>
-				<a href="{% url acct_signup %}">{% trans 'sign up'|capfirst %}</a>
+				<a href="{% url acct_passwd_reset %}">{% trans "forgot password?" %}</a>
+				<a href="{% url acct_signup %}">{% trans 'sign up' %}</a>
 			</form>
 			{% endif %}
 			<ul>
@@ -161,7 +161,7 @@ table.bettype table.choices {
 							<a href="{% url gsm_competition_detail 'soccer' '9' %}">{% trans "bundesliga 1" %}</a>
 						</li>
 						<li class="{% if sport.slug == 'soccer' and tab == 'competitions' %}active{% endif %}">
-							<a href="{% url gsm_sport_detail_tab 'soccer' 'competitions' %}">{% trans "all competitions"|capfirst %}</a>
+							<a href="{% url gsm_sport_detail_tab 'soccer' 'competitions' %}">{% trans "all competitions" %}</a>
 						</li>
 					</ul>
 				</li>
@@ -247,8 +247,8 @@ table.bettype table.choices {
 				<div id="publication_head">
 					<span>{% trans 'publication:' %}</span>
 					<ul>
-						<li class="publication_ticket"><a href="{% url bet_ticket_add %}">{% trans 'ticket'|capfirst %}</a></li>
-						<li class="publication_status"><a href="{% url scoobet_status_add %}">{% trans 'status'|capfirst %}</a></li>
+						<li class="publication_ticket"><a href="{% url bet_ticket_add %}">{% trans 'ticket' %}</a></li>
+						<li class="publication_status"><a href="{% url scoobet_status_add %}">{% trans 'status' %}</a></li>
 					</ul>
 				</div>
                 <div id="global_form">
@@ -258,7 +258,7 @@ table.bettype table.choices {
                 </div>
 			</div>
 			{% endif %}
-		
+
 			<div id="body_head">
             {% block body_head %}
             {% endblock %}
