@@ -167,13 +167,15 @@ tr.odd td { background-color:#f7f7f7; }
 .gsm td.score a,
 .gsm td.action a { display:block; color:#ea4839; }
 .gsm .winner,
-.gsm tr.win 		td.score	{ background-color:#def5de; }
-.gsm tr.lost 		td.score	{ background-color:#f5dede; }
+.gsm tr.win			td			{ background-color:#d6efda; }
+.gsm tr.win 		td.score	{ background-color:#c8dfcc; }
+.gsm tr.lost		td			{ background-color:#f2d4d5; }
+.gsm tr.lost 		td.score	{ background-color:#e2c5c6; }
+.gsm tr.draw 		td			{ background-color:#fffccc; }
+.gsm tr.draw 		td.score	{ background-color:#ededbe; }
+.gsm tr.current		td			{ background-color:#eaeef8; }
 .gsm tr.Fixture		td.score 	{ background-color:#f7f7f7; }
 .gsm tr.Fixture.odd	td.score 	{ background-color:#eeeeee; }
-.gsm tr.draw 		td.score	{ background-color:#e0e0e0; }
-.gsm tr.draw 					{ background-color:#dddddd; }
-.gsm tr.current		td			{ background-color:#eaeef8; }
 
 /* Gsm calendar */
 .gsm .calendar h2 { float:left; }
