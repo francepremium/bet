@@ -306,8 +306,7 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 .activity .comments dd p { margin:0px 0px 5px -50px; padding:0px 0px 8px 50px; border-bottom:1px solid #ffffff; }
 
 /* Activity icons */
-.activity .image { position:absolute; width:16px; height:16px; margin-top:2px; overflow:visible; background-repeat:no-repeat; }
-.activity .image a { margin-top:4px; }
+.activity .image { position:absolute; width:36px; height:36px; left:15px; margin-top:4px; background-repeat:no-repeat; background-position:top center; }
 .activity.bets-on 					.image { background-image:url('../img/actions/bets-on.png'); }
 .activity.commented					.image { background-image:url('../img/actions/commented.png'); }
 .activity.wall-posted				.image { background-image:url('../img/actions/wall-posted.png'); }
