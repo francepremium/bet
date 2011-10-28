@@ -6,19 +6,19 @@
 
 	<div class="calendar">
         {% if previous_page %}
-            <a href="{{ request.path }}?page={{ previous_page }}">{% trans 'previous' %}</a>
+            <a class="button button_simple button_small button_backward" href="{{ request.path }}?page={{ previous_page }}">{% trans 'previous' %}</a>
         {% endif %}
         {% if next_page %}
-            <a href="{{ request.path }}?page={{ next_page }}">{% trans 'next' %}</a>
+            <a class="button button_simple button_small button_forward" href="{{ request.path }}?page={{ next_page }}">{% trans 'next' %}</a>
         {% endif %}
 
         {% gsm_sessions_render sessions %}
 
         {% if previous_page %}
-            <a href="{{ request.path }}?page={{ previous_page }}">{% trans 'previous' %}</a>
+            <a class="button button_simple button_small button_backward" href="{{ request.path }}?page={{ previous_page }}">{% trans 'previous' %}</a>
         {% endif %}
         {% if next_page %}
-            <a href="{{ request.path }}?page={{ next_page }}">{% trans 'next' %}</a>
+            <a class="button button_simple button_small button_forward" href="{{ request.path }}?page={{ next_page }}">{% trans 'next' %}</a>
         {% endif %}
     </div>
 {% endblock %}

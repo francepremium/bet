@@ -7,19 +7,19 @@
 
     {% if team.get_sessions %}
         {% if previous_page != None %}
-            <a href="?page={{ previous_page }}">{% trans 'previous matches' %}</a>
+            <a class="button button_simple button_small button_backward" href="?page={{ previous_page }}">{% trans 'previous matches' %}</a>
         {% endif %}
         {% if next_page != None %}
-            <a href="?page={{ next_page }}">{% trans 'next matches' %}</a>
+            <a class="button button_simple button_small button_forward" href="?page={{ next_page }}">{% trans 'next matches' %}</a>
         {% endif %}
 
         {% gsm_sessions_render sessions %}
 
         {% if previous_page != None %}
-            <a href="?page={{ previous_page }}">{% trans 'previous matches' %}</a>
+            <a class="button button_simple button_small button_backward" href="?page={{ previous_page }}">{% trans 'previous matches' %}</a>
         {% endif %}
         {% if next_page != None %}
-            <a href="?page={{ next_page }}">{% trans 'next matches' %}</a>
+            <a class="button button_simple button_small button_forward" href="?page={{ next_page }}">{% trans 'next matches' %}</a>
         {% endif %}
     {% endif %}
 

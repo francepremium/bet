@@ -9,9 +9,9 @@
 </form>
 
 
-<span class="link filter_date yesterday">{% trans 'yesterday' %}</span>
-<span class="link filter_date today">{% trans 'today' %}</span>
-<span class="link filter_date tomorrow">{% trans 'tomorrow' %}</span>
+<span class="link filter_date yesterday button button_simple button_small button_backward">{% trans 'yesterday' %}</span>
+<span class="link filter_date today 	button button_simple button_small">{% trans 'today' %}</span>
+<span class="link filter_date tomorrow	button button_simple button_small button_forward">{% trans 'tomorrow' %}</span>
 
 {% autopaginate filter.qs 15 as session_list %}
 
