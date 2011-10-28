@@ -229,7 +229,9 @@ div.tree h3 { cursor:pointer; }
 #body_content form tr.odd td { background-color:transparent; }
 #body_content form select { width:130px; margin-right:5px; }
 #body_content form p { display:inline; }
-#body_content form input[type=submit].button_naked { display:inline; padding:2px 5px; text-transform:uppercase; }
+#body_content form input[type=submit].button_naked { display:inline; margin:0px; padding:2px 5px; text-transform:uppercase; }
+#body_content form.filter { margin-bottom:10px; }
+#body_content form.filter table { margin-bottom:0px; }
 
 /* Publication form */
 #publication { margin-bottom:12px; background-color:#f2f2f2; }
