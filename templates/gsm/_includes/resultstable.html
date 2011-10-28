@@ -44,7 +44,7 @@ The template uses a "team" variable to highlight a particular team.
                 {% if 'last5' in columns %}
                 <td>
                     {% for data in ranked_team|five_sessions_series %}
-                        <a href="{{ data.entity.get_absolute_url }}" title="{{ data.entity.oponnent_A.name }} vs {{ data.entity.oponnent_B.name }}">
+                        <a class="last5 {{ data.symbol }}" href="{{ data.entity.get_absolute_url }}" title="{{ data.entity.oponnent_A.name }} vs {{ data.entity.oponnent_B.name }}">
                             {{ data.symbol }}
                         </a>
                     {% endfor %}

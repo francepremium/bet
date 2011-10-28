@@ -192,6 +192,13 @@ tr.odd td { background-color:#f7f7f7; }
 .gsm .squad .person .title { font-size:14px; }
 .gsm .squad .person .content { float:right; }
 
+/* Last 5 sessions */
+.last5 { display:inline-block; width:15px; height:15px; line-height:15px; text-align:center; font-size:10px; text-transform:uppercase; color:#ffffff; }
+.last5:hover { text-decoration:none; }
+.last5.W { background-color:#47920a; }
+.last5.D { background-color:#e2ba00; }
+.last5.L { background-color:#e50000; }
+
 /* Tabs (quickly themed) */
 .tab_link { display:inline-block; padding:3px 7px; background-color:#eaebed; cursor:pointer; /* compatibility => */ zoom:1; *display:inline; }
 .tab_link.selected { background-color:#f7f7f7; }
