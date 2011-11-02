@@ -341,6 +341,9 @@ class GsmEntity(AbstractGsmEntity):
         return self.get_image_url('75x75')
 
     def get_small_image_url(self):
+        return self.get_image_url('50x50')
+
+    def get_extra_small_image_url(self):
         return self.get_image_url('30x30')
 
     def get_tiny_image_url(self):
