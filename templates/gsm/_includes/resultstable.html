@@ -25,7 +25,7 @@ The template uses a "team" variable to highlight a particular team.
             {% gsm_entity tag='team' gsm_id=ranking.attrib.team_id key='ranked_team' name=ranking.attrib.club_name country_code=ranking.attrib.countrycode %}
             <tr class="{% if ranking.attrib.team_id == team.gsm_id|addslashes %}current{% endif %}">
                 <td>{{ forloop.counter }}</td>
-				<td>
+				<td class="banner">
 					{% if ranked_team.get_tiny_image_url %}
 					<img src="{{ ranked_team.get_tiny_image_url }}" />
 					{% endif %}
