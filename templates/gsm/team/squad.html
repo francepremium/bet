@@ -31,7 +31,9 @@
 				<a href="{{ person.get_absolute_url }}" title="{{ person.name }}">{{ person.name }}</a>
 			</div>
             <div class="image">
+				{% if person.get_large_image_url %}
 				<a href="{{ person.get_absolute_url }}" title="{{ person.name }}"><img src="{{ person.get_large_image_url }}" /></a>
+				{% endif %}
 			</div>
 			<div class="content">
             {% if person.attrib.date_of_birth|age_from_date %}
@@ -71,11 +73,15 @@
 	{% for person in persons %}
 		<tr>
 			<td>{{ person.element.getchildren.0.attrib.shirtnumber }}</td>
-			<td>photo</td>
+			<td>
+				{% if person.get_small_image_url %}
+				<a href="{{ person.get_absolute_url }}" title="{{ person.name }}"><img src="{{ person.get_small_image_url }}" /></a>
+				{% endif %}
+			</td>
 			<td>
 				<a href="{{ person.get_absolute_url }}" title="{{ person.attrib.first_name }} {{ person.attrib.last_name }}">{{ person.attrib.first_name }} {{ person.attrib.last_name }}</a>
 			</td>
-			<td>
+			<td class="banner">
 				<img src="{{ person.attrib.nationality_id|gsm_area_id_flag_url }}" alt="{{ person.attrib.nationality_name }}" title="{{ person.attrib.nationality_name }}" />
 			</td>
 			<td>{{ person.attrib.date_of_birth|age_from_date }}</td>

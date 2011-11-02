@@ -193,6 +193,7 @@ tr.odd td { background-color:#f7f7f7; }
 .gsm .squad .person { float:left; margin:5px 2px 15px 2px; }
 .gsm .squad .person .title { font-size:14px; }
 .gsm .squad .person .content { float:right; }
+.gsm .squad.tab_content table { border-width:0px; }
 
 /* Gsm person */
 .identity th { color:#999999; }
@@ -207,9 +208,11 @@ tr.odd td { background-color:#f7f7f7; }
 .last5.L { background-color:#e50000; }
 
 /* Tabs (quickly themed) */
-.tab_link { display:inline-block; padding:3px 7px; background-color:#eaebed; cursor:pointer; /* compatibility => */ zoom:1; *display:inline; }
-.tab_link.selected { background-color:#f7f7f7; }
-.tab_content { display:none; padding:7px; background-color:#f7f7f7; }
+.tab_link { display:inline-block; padding:3px 7px; background-color:#cccccc; cursor:pointer; /* compatibility => */ zoom:1; *display:inline; }
+.tab_link:hover,
+.tab_link.selected { background-color:#eeeeee; }
+.tab_link.selected { color:#666666; }
+.tab_content { display:none; padding:5px; border:1px solid #eeeeee; background-color:#ffffff; }
 
 /* Bet list (quickly themed) */
 td.correct { width:55px; text-align:right; background-color:#f7f7f7; }
