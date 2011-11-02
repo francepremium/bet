@@ -194,6 +194,11 @@ tr.odd td { background-color:#f7f7f7; }
 .gsm .squad .person .title { font-size:14px; }
 .gsm .squad .person .content { float:right; }
 
+/* Gsm person */
+.identity th { color:#999999; }
+.identity td { color:#666666; }
+.identity tr.odd td { background-color:transparent; }
+
 /* Last 5 sessions */
 .last5 { display:inline-block; width:15px; height:15px; line-height:15px; text-align:center; font-size:10px; text-transform:uppercase; color:#ffffff; }
 .last5:hover { text-decoration:none; }

@@ -4,8 +4,16 @@
 
 {% block body %}{{ block.super }}
 
-
-<table>
+<h2>{% trans 'identity' %}</h2>
+<table class="identity">
+	<tr>
+        <td colspan="2" style="padding:0px;"></td>
+		<td rowspan="9">
+			{% if person.get_large_image_url %}
+			<img src="{{ person.get_large_image_url }}" />
+			{% endif %}			
+		</td>
+	</tr>
     {% if person.attrib.first_name %}
     <tr>
         <th>{% trans 'first name' %}</th>
@@ -22,12 +30,6 @@
     <tr>
         <th>{% trans 'last name' %}</th>
         <td>{{ person.attrib.last_name }}</td>
-    </tr>
-    {% endif %}
-    {% if person.attrib.position %}
-    <tr>
-        <th>{% trans 'position' %}</th>
-        <td>{{ person.attrib.position }}</td>
     </tr>
     {% endif %}
     {% if person.attrib.nationality %}
@@ -48,6 +50,12 @@
         <td>{{ person.attrib.country_of_birth }}</td>
     </tr>
     {% endif %}
+	{% if person.attrib.position %}
+    <tr>
+        <th>{% trans 'position' %}</th>
+        <td>{{ person.attrib.position }}</td>
+    </tr>
+    {% endif %}
     {% if person.attrib.height %}
     <tr>
         <th>{% trans 'height' %}</th>
@@ -60,10 +68,7 @@
         <td>{{ person.attrib.weight }} kg</td>
     </tr>
     {% endif %}
-
 </table>
-
-<img src="{{ person.get_large_image_url }}" />
 
 {% if sport.slug == 'soccer' %}
     <h2>{% trans 'career' %}</h2>
