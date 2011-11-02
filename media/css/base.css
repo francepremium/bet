@@ -364,8 +364,8 @@ span.button { display:inline-block; /* compatibility => */ zoom:1; *display:inli
 .button_comment 	{ background-image:url('../img/button_comment.png'); }
 .button_favorite 	{ background-image:url('../img/button_favorite.png'); }
 .button_small 			{ padding-top:1px; padding-bottom:1px; background-position:5px 3px; }
-.button_backward:before { font-family:arial; content:'◄ '; font-size:12px; color:#ea4839; }
-.button_forward:after 	{ font-family:arial; content:' ►'; font-size:12px; color:#ea4839; }
+.button_backward:before { font-family:arial; content:'◄ '; font-size:12px; line-height:10px; color:#ea4839; }
+.button_forward:after 	{ font-family:arial; content:' ►'; font-size:12px; line-height:10px; color:#ea4839; }
 
 /* Forms */
 #body input[type=submit] { margin:10px 0px 0px auto; }
