@@ -230,8 +230,9 @@ tr.won { background-color: #ccf7de; }
 tr.lost { background-color: #f7d0cc; }
 
 /* Tree */
-div.tree ul { display:none; }
-div.tree h3 { cursor:pointer; }
+div.tree ul { display:none; margin:3px 0px 0px 20px; }
+div.tree li a { color:#666666; }
+div.tree h4 { text-transform:uppercase; color:#333333; cursor:pointer; }
 
 /* Quick and dirty form styles (for filters) */
 #body_content form table { width:100%; }

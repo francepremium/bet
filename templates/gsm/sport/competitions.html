@@ -1,24 +1,30 @@
 {% extends 'gsm/sport/base.html' %}
-
-{% block extra_head %}
-<style type="text/css">
-
-</style>
-{% endblock %}
+{% load i18n gsm_tags %}
 
 {% block body %}{{ block.super }}
+<table>
     {% for area in sport.get_competition_areas %}
-    <div class="area tree {{ area.code }}">
-        <h3>{{ area.name }}</h3>
-        <ul>
-        {% for competition in area.competition_set.all.select_related %}
-            {% if competition.sport == sport %}
-                <li>
-                    <a href="{{ competition.get_absolute_url }}" title="{{ competition }}">{{ competition.name }}</a>
-                </li>
-            {% endif %}
-        {% endfor %}
-        </ul>
-    </div>
+	<tr><td>
+		<div class="area tree">
+			<h4>			
+				{% if area.gsm_id|gsm_area_id_flag_url %}
+				<span class="tiny_image">
+					<img src="{{ area.gsm_id|gsm_area_id_flag_url }}" />
+				</span>
+				{% endif %}
+				{{ area.name }}
+			</h4>
+			<ul>
+			{% for competition in area.competition_set.all.select_related %}
+				{% if competition.sport == sport %}
+					<li>
+						<a href="{{ competition.get_absolute_url }}" title="{{ competition }}">{{ competition.name }}</a>
+					</li>
+				{% endif %}
+			{% endfor %}
+			</ul>
+		</div>
+	</td></tr>
     {% endfor %}
+</table>
 {% endblock %}
