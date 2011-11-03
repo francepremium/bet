@@ -81,7 +81,7 @@
 			<td>
 				<a href="{{ person.get_absolute_url }}" title="{{ person.attrib.first_name }} {{ person.attrib.last_name }}">{{ person.attrib.first_name }} {{ person.attrib.last_name }}</a>
 			</td>
-			<td class="banner">
+			<td class="tiny_image">
 				<img src="{{ person.attrib.nationality_id|gsm_area_id_flag_url }}" alt="{{ person.attrib.nationality_name }}" title="{{ person.attrib.nationality_name }}" />
 			</td>
 			<td>{{ person.attrib.date_of_birth|age_from_date }}</td>

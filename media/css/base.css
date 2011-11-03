@@ -180,8 +180,8 @@ tr.odd td { background-color:#f7f7f7; }
 .gsm tr.current		td			{ background-color:#bce9fd; }
 .gsm tr.Fixture		td.score 	{ background-color:#f7f7f7; }
 .gsm tr.Fixture.odd	td.score 	{ background-color:#eeeeee; }
-.gsm td.banner { width:16px; }
-.gsm .banner img { vertical-align:middle; }
+.gsm td.tiny_image { width:16px; }
+.gsm .tiny_image img { vertical-align:middle; }
 
 /* Gsm calendar */
 .gsm .calendar h2 { float:left; }

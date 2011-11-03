@@ -53,7 +53,7 @@
                 </td>
 			{% endblock %}
 			{% block session_oponnent_image_left %}
-                <td class="oponnent_image left banner">
+                <td class="oponnent_image left tiny_image">
 					{% if session.oponnent_A.get_tiny_image_url %}
 					<img src="{{ session.oponnent_A.get_tiny_image_url }}" />
 					{% endif %}
@@ -110,7 +110,7 @@
                 </td>
 			{% endblock %}
 			{% block session_oponnent_image_right %}
-                <td class="oponnent_image right banner">
+                <td class="oponnent_image right tiny_image">
 					{% if session.oponnent_B.get_tiny_image_url %}
 					<img src="{{ session.oponnent_B.get_tiny_image_url }}" />
 					{% endif %}
