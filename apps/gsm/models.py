@@ -357,6 +357,11 @@ class GsmEntity(AbstractGsmEntity):
         elif tag == 'team':
             if self.get_sport().slug == 'soccer':
                 return 'http://imagecache.soccerway.com/new/teams/%s/%s.gif' % (size, self.gsm_id)
+            elif self.get_sport().slug == 'rugby':
+                tag = 'teams'
+                ext = 'png'
+                if size not in ('75x75', '150x150'):
+                    size = '75x75'
             elif self.get_sport().slug != 'tennis':
                 if self.area:
                     code2 = self.area.country_code_2
