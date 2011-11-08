@@ -47,13 +47,13 @@
 			{% endblock %}
             {% endif %}
 
-			{% block session_oponnent_left %}
-                <td class="oponnent left">
+			{% block session_oponnent_A %}
+                <td class="oponnent A">
                     <a href="{{ session.oponnent_A.get_absolute_url }}" title="{{ session.oponnent_A.name }}">{{ session.oponnent_A.name }}</a>
                 </td>
 			{% endblock %}
-			{% block session_oponnent_image_left %}
-                <td class="oponnent_image left tiny_image">
+			{% block session_oponnent_image_A %}
+                <td class="oponnent_image A tiny_image">
 					{% if session.oponnent_A.get_tiny_image_url %}
 					<img src="{{ session.oponnent_A.get_tiny_image_url }}" />
 					{% endif %}
@@ -109,15 +109,15 @@
 				{% endif %}{% endif %}
                 </td>
 			{% endblock %}
-			{% block session_oponnent_image_right %}
-                <td class="oponnent_image right tiny_image">
+			{% block session_oponnent_image_B %}
+                <td class="oponnent_image B tiny_image">
 					{% if session.oponnent_B.get_tiny_image_url %}
 					<img src="{{ session.oponnent_B.get_tiny_image_url }}" />
 					{% endif %}
                 </td>
 			{% endblock %}
-			{% block session_oponnent_right %}
-                <td class="oponnent right">
+			{% block session_oponnent_B %}
+                <td class="oponnent B">
                     <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ session.oponnent_B.name }}">{{ session.oponnent_B.name }}</a>
                 </td>
 			{% endblock %}

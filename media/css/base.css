@@ -164,8 +164,8 @@ tr.odd td { background-color:#f7f7f7; }
 .gsm h2 { display:block; clear:both; }
 .gsm table { width:100%; margin-bottom:15px; clear:both; }
 .gsm th { color:#ea4839; text-transform:capitalize; }
-.gsm .oponnent.left { text-align:right; }
-.gsm .oponnent.right { text-align:left; }
+.gsm .oponnent.A { text-align:right; }
+.gsm .oponnent.B { text-align:left; }
 .gsm td.score { text-align:center; }
 .gsm td.score table { margin:0px; }
 .gsm td.score a,
