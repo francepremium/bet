@@ -1,0 +1,1003 @@
+[
+    {
+        "pk": 46, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "(Stake returned if game ends in a draw)", 
+            "name_fr": "Pari sp\u00e9cial 1 2 (rembours\u00e9 si match nul)", 
+            "sport": 2, 
+            "name": "(Stake returned if game ends in a draw)", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "1X2", 
+            "name_fr": "1X2", 
+            "sport": 2, 
+            "name": "1X2", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "1X2 HC [0-1]", 
+            "name_fr": "1X2 HC [0-1]", 
+            "sport": 2, 
+            "name": "1X2 HC [0-1]", 
+            "creation_bookmaker": 7
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "1X2 HC [0-2]", 
+            "name_fr": "1X2 HC [0-2]", 
+            "sport": 2, 
+            "name": "1X2 HC [0-2]", 
+            "creation_bookmaker": 7
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "1X2 HC [1-0]", 
+            "name_fr": "1X2 HC [1-0]", 
+            "sport": 2, 
+            "name": "1X2 HC [1-0]", 
+            "creation_bookmaker": 7
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "1X2 HC [2-0]", 
+            "name_fr": "1X2 HC [2-0]", 
+            "sport": 2, 
+            "name": "1X2 HC [2-0]", 
+            "creation_bookmaker": 7
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "1X2 HT", 
+            "name_fr": "1X2 MT", 
+            "sport": 2, 
+            "name": "1X2 HT", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "1st half correct score", 
+            "name_fr": "R\u00e9sultat exact \u00e0 la mi-temps", 
+            "sport": 2, 
+            "name": "1st half correct score", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 44, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Away no bet (Stake returned if game ends in an away win)", 
+            "name_fr": "Pari sp\u00e9cial 1 X (rembours\u00e9 si victoire \u00e0 l'ext\u00e9rieur)", 
+            "sport": 2, 
+            "name": "Away no bet (Stake returned if game ends in an away win)", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Both teams to score", 
+            "name_fr": "Les deux \u00e9quipes marqueront-elles ?", 
+            "sport": 2, 
+            "name": "Both teams to score", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 63, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Both teams to score during 1st half", 
+            "name_fr": "Les deux \u00e9quipes marqueront-elles en 1\u00e8re mi-temps ?", 
+            "sport": 2, 
+            "name": "Both teams to score during 1st half", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 97, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Buteur au cours du match", 
+            "name_fr": "Buteur au cours du match", 
+            "sport": 2, 
+            "name": "Buteur au cours du match", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Correct score", 
+            "name_fr": "R\u00e9sultat exact", 
+            "sport": 2, 
+            "name": "Correct score", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 80, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Correct score (45')", 
+            "name_fr": "Score exact \u00e0 la mi-temps", 
+            "sport": 2, 
+            "name": "Correct score (45')", 
+            "creation_bookmaker": 4
+        }
+    }, 
+    {
+        "pk": 79, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Correct score (90')", 
+            "name_fr": "Score exact", 
+            "sport": 2, 
+            "name": "Correct score (90')", 
+            "creation_bookmaker": 4
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Double chance", 
+            "name_fr": "Chance double", 
+            "sport": 2, 
+            "name": "Double chance", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Double chance HT", 
+            "name_fr": "Chance double MT", 
+            "sport": 2, 
+            "name": "Double chance HT", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Exact number of goals scored", 
+            "name_fr": "Nombre exact de buts marqu\u00e9s", 
+            "sport": 2, 
+            "name": "Exact number of goals scored", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 61, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Exact number of goals scored [1st half]", 
+            "name_fr": "Nombre exact de buts marqu\u00e9s [1\u00e8re mi-temps]", 
+            "sport": 2, 
+            "name": "Exact number of goals scored [1st half]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 62, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Exact number of goals scored [2ndhalf]", 
+            "name_fr": "Nombre exact de buts marqu\u00e9s [2\u00e8me mi-temps]", 
+            "sport": 2, 
+            "name": "Exact number of goals scored [2ndhalf]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 55, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Exact number of goals scored by team 1", 
+            "name_fr": "Nombre exact de buts marqu\u00e9s par l'\u00e9quipe 1", 
+            "sport": 2, 
+            "name": "Exact number of goals scored by team 1", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 57, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Exact number of goals scored by team 1 [1st half]", 
+            "name_fr": "Nombre exact de buts marqu\u00e9s par l'\u00e9quipe 1 [1\u00e8re mi-temps]", 
+            "sport": 2, 
+            "name": "Exact number of goals scored by team 1 [1st half]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 58, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Exact number of goals scored by team 1 [2nd half]", 
+            "name_fr": "Nombre exact de buts marqu\u00e9s par l'\u00e9quipe 1 [2\u00e8me mi-temps]", 
+            "sport": 2, 
+            "name": "Exact number of goals scored by team 1 [2nd half]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 56, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Exact number of goals scored by team 2", 
+            "name_fr": "Nombre exact de buts marqu\u00e9s par l'\u00e9quipe 2", 
+            "sport": 2, 
+            "name": "Exact number of goals scored by team 2", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 59, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Exact number of goals scored by team 2 [1st half]", 
+            "name_fr": "Nombre exact de buts marqu\u00e9s par l'\u00e9quipe 2 [1\u00e8re mi-temps]", 
+            "sport": 2, 
+            "name": "Exact number of goals scored by team 2 [1st half]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 60, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Exact number of goals scored by team 2 [2nd half]", 
+            "name_fr": "Nombre exact de buts marqu\u00e9s par l'\u00e9quipe 2 [2\u00e8me mi-temps]", 
+            "sport": 2, 
+            "name": "Exact number of goals scored by team 2 [2nd half]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "First team to score (90')", 
+            "name_fr": "Premi\u00e8re \u00e9quipe \u00e0 marquer dans le match", 
+            "sport": 2, 
+            "name": "First team to score (90')", 
+            "creation_bookmaker": 4
+        }
+    }, 
+    {
+        "pk": 66, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "First team to score during 1st half", 
+            "name_fr": "Quelle \u00e9quipe va marquer le 1er but de la 1\u00e8re mi-temps ?", 
+            "sport": 2, 
+            "name": "First team to score during 1st half", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 67, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "First team to score during 2nd half", 
+            "name_fr": "Quelle \u00e9quipe va marquer le 1er but de la 2\u00e8me mi-temps ?", 
+            "sport": 2, 
+            "name": "First team to score during 2nd half", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 49, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Goal(s) scored by team 1 [1.5]", 
+            "name_fr": "Nombre de buts marqu\u00e9s par l'\u00e9quipe 1 [1.5]", 
+            "sport": 2, 
+            "name": "Goal(s) scored by team 1 [1.5]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 50, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Goal(s) scored by team 1 [2.5]", 
+            "name_fr": "Nombre de buts marqu\u00e9s par l'\u00e9quipe 1 [2.5]", 
+            "sport": 2, 
+            "name": "Goal(s) scored by team 1 [2.5]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 51, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Goal(s) scored by team 1 [3.5]", 
+            "name_fr": "Nombre de buts marqu\u00e9s par l'\u00e9quipe 1 [3.5]", 
+            "sport": 2, 
+            "name": "Goal(s) scored by team 1 [3.5]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 52, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Goal(s) scored by team 2 [1.5]", 
+            "name_fr": "Nombre de buts marqu\u00e9s par l'\u00e9quipe 2 [1.5]", 
+            "sport": 2, 
+            "name": "Goal(s) scored by team 2 [1.5]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 53, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Goal(s) scored by team 2 [2.5]", 
+            "name_fr": "Nombre de buts marqu\u00e9s par l'\u00e9quipe 2 [2.5]", 
+            "sport": 2, 
+            "name": "Goal(s) scored by team 2 [2.5]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 54, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Goal(s) scored by team 2 [3.5]", 
+            "name_fr": "Nombre de buts marqu\u00e9s par l'\u00e9quipe 2 [3.5]", 
+            "sport": 2, 
+            "name": "Goal(s) scored by team 2 [3.5]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 77, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Goalscorer", 
+            "name_fr": "Quel joueur va marquer un but au cours du match ?", 
+            "sport": 2, 
+            "name": "Goalscorer", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 86, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Half time - Exact score", 
+            "name_fr": "Mi-Temps - Score exact", 
+            "sport": 2, 
+            "name": "Half time - Exact score", 
+            "creation_bookmaker": 6
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Half time / Full time", 
+            "name_fr": "Mi-temps / Fin de match", 
+            "sport": 2, 
+            "name": "Half time / Full time", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 68, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Half with most goals", 
+            "name_fr": "Mi-temps avec le plus de buts", 
+            "sport": 2, 
+            "name": "Half with most goals", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Halftime or Fulltime", 
+            "name_fr": "Mi-temps OU Match entier", 
+            "sport": 2, 
+            "name": "Halftime or Fulltime", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 45, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Home no bet (Stake returned if game ends in a home win)", 
+            "name_fr": "Pari sp\u00e9cial X 2 (rembours\u00e9 si victoire \u00e0 domicile)", 
+            "sport": 2, 
+            "name": "Home no bet (Stake returned if game ends in a home win)", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 69, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "In which half will Team 1 score more goals?", 
+            "name_fr": "Durant quelle mi-temps l'\u00e9quipe 1 marquera-t-elle le plus de buts ?", 
+            "sport": 2, 
+            "name": "In which half will Team 1 score more goals?", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 70, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "In which half will team 2 score more goals?", 
+            "name_fr": "Durant quelle mi-temps l'\u00e9quipe 2 marquera-t-elle le plus de buts ?", 
+            "sport": 2, 
+            "name": "In which half will team 2 score more goals?", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Last team to score (90')", 
+            "name_fr": "Derni\u00e8re \u00e9quipe \u00e0 marquer dans le match", 
+            "sport": 2, 
+            "name": "Last team to score (90')", 
+            "creation_bookmaker": 4
+        }
+    }, 
+    {
+        "pk": 38, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Under/Over 0.5 goal [2nd half]", 
+            "name_fr": "Moins/Plus de 0.5 but [2\u00e8me mi-temps]", 
+            "sport": 2, 
+            "name": "Under/Over 0.5 goal [2nd half]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 82, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "No goals conceded", 
+            "name_fr": "Aucun but conc\u00e9d\u00e9", 
+            "sport": 2, 
+            "name": "No goals conceded", 
+            "creation_bookmaker": 6
+        }
+    }, 
+    {
+        "pk": 84, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Score in both halves", 
+            "name_fr": "Marque dans les 2 mi-temps", 
+            "sport": 2, 
+            "name": "Score in both halves", 
+            "creation_bookmaker": 6
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Team 1 to score", 
+            "name_fr": "L'\u00e9quipe 1 marquera t-elle ?", 
+            "sport": 2, 
+            "name": "Team 1 to score", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 64, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Team 1 to score in both halves", 
+            "name_fr": "L'\u00e9quipe 1 marquera-t-elle lors de chaque mi-temps ?", 
+            "sport": 2, 
+            "name": "Team 1 to score in both halves", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 31, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Team 2 to score", 
+            "name_fr": "L'\u00e9quipe 2 marquera t-elle ?", 
+            "sport": 2, 
+            "name": "Team 2 to score", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 65, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Team 2 to score in both halves", 
+            "name_fr": "L'\u00e9quipe 2 marquera-t-elle lors de chaque mi-temps ?", 
+            "sport": 2, 
+            "name": "Team 2 to score in both halves", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 78, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "To win to 0", 
+            "name_fr": "Gagner sans prendre de but", 
+            "sport": 2, 
+            "name": "To win to 0", 
+            "creation_bookmaker": 4
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Total goals odd/even", 
+            "name_fr": "Total de buts pair/impair", 
+            "sport": 2, 
+            "name": "Total goals odd/even", 
+            "creation_bookmaker": 4
+        }
+    }, 
+    {
+        "pk": 42, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Total goals odd/even [1st half]", 
+            "name_fr": "Total de buts pair/impair [1\u00e8re mi-temps]", 
+            "sport": 2, 
+            "name": "Total goals odd/even [1st half]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 43, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Total goals odd/even [2nd half]", 
+            "name_fr": "Total de buts pair/impair [2\u00e8me mi-temps]", 
+            "sport": 2, 
+            "name": "Total goals odd/even [2nd half]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Under/Over 0.5 goal", 
+            "name_fr": "Moins/Plus de 0.5 buts", 
+            "sport": 2, 
+            "name": "Under/Over 0.5 goal", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 34, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Under/Over 0.5 goal [1st half]", 
+            "name_fr": "Moins/Plus de 0.5 but [1\u00e8re mi-temps]", 
+            "sport": 2, 
+            "name": "Under/Over 0.5 goal [1st half]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Under/Over 1.5 goal", 
+            "name_fr": "Moins/Plus de 1.5 buts", 
+            "sport": 2, 
+            "name": "Under/Over 1.5 goal", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 35, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Under/Over 1.5 goal [1st half]", 
+            "name_fr": "Moins/Plus de 1.5 but [1\u00e8re mi-temps]", 
+            "sport": 2, 
+            "name": "Under/Over 1.5 goal [1st half]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 39, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Under/Over 1.5 goal [2nd half]", 
+            "name_fr": "Moins/Plus de 1.5 but [2\u00e8me mi-temps]", 
+            "sport": 2, 
+            "name": "Under/Over 1.5 goal [2nd half]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Under/Over 2.5 goals", 
+            "name_fr": "Moins/Plus de 2.5 buts", 
+            "sport": 2, 
+            "name": "Under/Over 2.5 goals", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 36, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Under/Over 2.5 goals [1st half]", 
+            "name_fr": "Moins/Plus de 2.5 buts [1\u00e8re mi-temps]", 
+            "sport": 2, 
+            "name": "Under/Over 2.5 goals [1st half]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 40, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Under/Over 2.5 goals [2nd half]", 
+            "name_fr": "Moins/Plus de 2.5 buts [2\u00e8me mi-temps]", 
+            "sport": 2, 
+            "name": "Under/Over 2.5 goals [2nd half]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Under/Over 3.5 goals", 
+            "name_fr": "Moins/Plus de 3.5 buts", 
+            "sport": 2, 
+            "name": "Under/Over 3.5 goals", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 37, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Under/Over 3.5 goals [1st half]", 
+            "name_fr": "Moins/Plus de 3.5 buts [1\u00e8re mi-temps]", 
+            "sport": 2, 
+            "name": "Under/Over 3.5 goals [1st half]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 41, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Under/Over 3.5 goals [2nd half]", 
+            "name_fr": "Moins/Plus de 3.5 buts [2\u00e8me mi-temps]", 
+            "sport": 2, 
+            "name": "Under/Over 3.5 goals [2nd half]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 32, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Under/Over 4.5 goals", 
+            "name_fr": "Moins/Plus de 4.5 buts", 
+            "sport": 2, 
+            "name": "Under/Over 4.5 goals", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 33, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Under/Over 5.5 goals", 
+            "name_fr": "Moins/Plus de 5.5 buts", 
+            "sport": 2, 
+            "name": "Under/Over 5.5 goals", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 76, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Which team will win the 2nd half ?", 
+            "name_fr": "Quelle \u00e9quipe va gagner la 2\u00e8me mi-temps ?", 
+            "sport": 2, 
+            "name": "Which team will win the 2nd half ?", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 71, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Will Team 1 win to 0 ?", 
+            "name_fr": "L'\u00e9quipe 1 gagnera-t-elle sans encaisser de but ?", 
+            "sport": 2, 
+            "name": "Will Team 1 win to 0 ?", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 72, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Will Team 2 win to 0 ?", 
+            "name_fr": "L'\u00e9quipe 2 gagnera-t-elle sans encaisser de buts ?", 
+            "sport": 2, 
+            "name": "Will Team 2 win to 0 ?", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 75, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Will any team win by exactly 1 goal difference ?", 
+            "name_fr": "Une \u00e9quipe gagnera-t-elle avec exactement 1 but de diff\u00e9rence ?", 
+            "sport": 2, 
+            "name": "Will any team win by exactly 1 goal difference ?", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 73, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Will any team win by exactly 2 goals difference ?", 
+            "name_fr": "Une \u00e9quipe gagnera-t-elle avec exactement 2 buts de diff\u00e9rence ?", 
+            "sport": 2, 
+            "name": "Will any team win by exactly 2 goals difference ?", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 74, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Will any team win by exactly 3 goals difference ?", 
+            "name_fr": "Une \u00e9quipe gagnera-t-elle avec exactement 3 buts de diff\u00e9rence ?", 
+            "sport": 2, 
+            "name": "Will any team win by exactly 3 goals difference ?", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 81, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Will win to 0", 
+            "name_fr": "Gagnera en ne conc\u00e9dant aucun but", 
+            "sport": 2, 
+            "name": "Will win to 0", 
+            "creation_bookmaker": 6
+        }
+    }, 
+    {
+        "pk": 85, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Win both halves", 
+            "name_fr": "Remporte les 2 mi-temps", 
+            "sport": 2, 
+            "name": "Win both halves", 
+            "creation_bookmaker": 6
+        }
+    }, 
+    {
+        "pk": 83, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Win one of both halves", 
+            "name_fr": "Remporte l'une des mi-temps", 
+            "sport": 2, 
+            "name": "Win one of both halves", 
+            "creation_bookmaker": 6
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Winning margin [Away / 2 goals]", 
+            "name_fr": "Ecart entre les \u00e9quipes [Ext\u00e9rieur / 2 buts]", 
+            "sport": 2, 
+            "name": "Winning margin [Away / 2 goals]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 48, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Winning margin [Away / 3 goals]", 
+            "name_fr": "Ecart entre les \u00e9quipes [Exterieur / 3 buts]", 
+            "sport": 2, 
+            "name": "Winning margin [Away / 3 goals]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Winning margin [Home / 2 goals]", 
+            "name_fr": "Ecart entre les \u00e9quipes [Domicile / 2 buts]", 
+            "sport": 2, 
+            "name": "Winning margin [Home / 2 goals]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 47, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Winning margin [Home / 3 goals]", 
+            "name_fr": "Ecart entre les \u00e9quipes [Domicile / 3 buts]", 
+            "sport": 2, 
+            "name": "Winning margin [Home / 3 goals]", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 96, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "1st set exact score", 
+            "name_fr": "Score exact du 1er set", 
+            "sport": 3, 
+            "name": "1st set exact score", 
+            "creation_bookmaker": 10
+        }
+    }, 
+    {
+        "pk": 88, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Set bet (3 sets)", 
+            "name_fr": "Pari sur les sets (3 sets)", 
+            "sport": 3, 
+            "name": "Set bet (3 sets)", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 89, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Set bet (5 sets)", 
+            "name_fr": "Pari sur les sets (5 sets)", 
+            "sport": 3, 
+            "name": "Set bet (5 sets)", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 93, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Set played (3 sets)", 
+            "name_fr": "Nombre de sets jou\u00e9s (3 sets)", 
+            "sport": 3, 
+            "name": "Set played (3 sets)", 
+            "creation_bookmaker": 6
+        }
+    }, 
+    {
+        "pk": 94, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Set played (5 sets)", 
+            "name_fr": "Nombre de sets jou\u00e9s (5 sets)", 
+            "sport": 3, 
+            "name": "Set played (5 sets)", 
+            "creation_bookmaker": 6
+        }
+    }, 
+    {
+        "pk": 95, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Total games odd/even", 
+            "name_fr": "Total de jeux pair/impair", 
+            "sport": 3, 
+            "name": "Total games odd/even", 
+            "creation_bookmaker": 10
+        }
+    }, 
+    {
+        "pk": 90, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Who will win the first set ?", 
+            "name_fr": "Qui va gagner le 1er set ?", 
+            "sport": 3, 
+            "name": "Who will win the first set ?", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 92, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Who will win the second set ?", 
+            "name_fr": "Qui va gagner le 2\u00e8me set ?", 
+            "sport": 3, 
+            "name": "Who will win the second set ?", 
+            "creation_bookmaker": 4
+        }
+    }, 
+    {
+        "pk": 91, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Will there be a tie-break in the match?", 
+            "name_fr": "Y aura-t-il un tie-break durant le match ?", 
+            "sport": 3, 
+            "name": "Will there be a tie-break in the match?", 
+            "creation_bookmaker": 3
+        }
+    }, 
+    {
+        "pk": 87, 
+        "model": "bookmaker.bettype", 
+        "fields": {
+            "name_en": "Winner", 
+            "name_fr": "Vainqueur du match", 
+            "sport": 3, 
+            "name": "Winner", 
+            "creation_bookmaker": 3
+        }
+    }
+]
