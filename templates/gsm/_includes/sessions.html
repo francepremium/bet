@@ -34,7 +34,7 @@
 			{% endblock %}
             {% if not divide_by_season %}
             {% block session_area %}
-				<td class="area">
+				<td class="area tiny_image">
 					{% if session.season.competition|gsm_area_id_flag_url %}
 					<img src="{{ session.season.competition|gsm_area_id_flag_url }}" alt="{{ session.season.competition.area }}" />
 					{% endif %}
