@@ -20,6 +20,9 @@
 
 {{ bet_list_helper.render_bet_table }}
 
+<h3>{% trans 'add new comment' %}</h3>
 {% render_comment_form for ticket %}
+
+<h3>{% trans 'all comments' %}</h3>
 {% render_comment_list for ticket %}
 {% endblock %}
