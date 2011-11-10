@@ -397,7 +397,17 @@
 
     {% endif %}
 
-    {% render_comment_form for session %}
-    {% render_comment_list for session %}
+	<h2>{% trans 'comments' %}</h2>
+	<table class="session comments">
+        <tr>
+			<td>
+			<h3>{% trans 'add new comment' %}</h3>
+			{% render_comment_form for session %}
+			
+			<h3>{% trans 'all comments' %}</h3>
+			{% render_comment_list for session %}
+			</td>
+		</tr>
+	</table>
 
 {% endblock %}

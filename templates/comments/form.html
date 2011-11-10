@@ -1,4 +1,5 @@
 {% load comments i18n %}
+{% load avatar_tags %}
 <div class="comment_form_container">
     <form action="{% comment_form_target %}" method="post">{% csrf_token %}
       {% if next %}<div><input type="hidden" name="next" value="{{ next }}" /></div>{% endif %}
@@ -18,7 +19,8 @@
       {% endif %}
       
       {% if form.comment.errors %}{{ form.comment.errors }}{% endif %}
-      {% trans 'comment' %}:
+
+	  {% if request.user %}{% avatar request.user 60 %}{% endif %}
       {{ form.comment }}
 
       {% if not request.user.is_authenticated %}

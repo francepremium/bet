@@ -234,6 +234,8 @@ tr.odd td { background-color:#f7f7f7; }
 .session.lineups { float:left; width:49%; clear:none; }
 .session.lineups.B { float:right; }
 .session.lineups img.event { margin-left:2px; }
+.session.comments td { padding:10px 20px; }
+.session.comments textarea { width:505px; }
 
 /* Tabs (quickly themed) */
 .tab_link { display:inline-block; padding:3px 7px; background-color:#cccccc; cursor:pointer; /* compatibility => */ zoom:1; *display:inline; }
@@ -305,9 +307,20 @@ div.tree h4 { text-transform:uppercase; color:#333333; cursor:pointer; }
 #publication_ticket_form .action input[type=radio] { margin-top:6px; margin-left:-15px; }
 #publication_ticket_form #ticket_submit_delete { float:right; margin-top:0px; }
 
+/* Status form */
+#publication_status_form .comment_form_container textarea { width:588px; }
+
 /* Comments */
+.comment_form_container textarea { width:530px; height:50px; margin-top:10px; padding:5px; }
+.comment_form_container img { float:left; margin:10px 10px 10px 0px; }
 #body_content > .comment_form_container { margin-bottom:15px; }
-.comment_form_container textarea { width:98%; height:50px; padding:5px; }
+#body_content > .comment_form_container textarea { width:548px; }
+dl#comments img { clear:left; float:left; margin:6px 10px 8px 0px; }
+dl#comments dt,
+dl#comments dd { display:table-row; }
+dl#comments dt { color:#999999; }
+dl#comments dt a { font-weight:bold; }
+dl#comments dd p { margin:0px 0px 5px -46px; padding:0px 0px 12px 46px; border-bottom:1px solid #e6e6e6; }
 
 /* Search generic style */
 input.search_input { float:left; width:260px; height:20px; line-height:18px; padding:4px 49px 5px 9px; font-size:11px; border:1px solid #999b9c; border-right-width:0px; color:#999999; background-color:#ffffff; }
@@ -348,12 +361,8 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 
 /* Activity comments */
 .activity .comments { margin-top:5px; padding:10px; background-color:#f2f2f2; }
-.activity .comments img { float:left; margin:5px 10px 5px 0px; }
-.activity .comments dt,
-.activity .comments dd { display:table-row; }
-.activity .comments dt { color:#999999; }
-.activity .comments dt a { font-weight:bold; }
-.activity .comments dd p { margin:0px 0px 5px -50px; padding:0px 0px 8px 50px; border-bottom:1px solid #ffffff; }
+.activity dl#comments dd p { width:465px; border-bottom-color:#ffffff; }
+.activity .comment_form_container textarea { width:434px; }
 
 /* Activity icons */
 .activity .image { position:absolute; width:36px; height:36px; left:15px; margin-top:4px; background-repeat:no-repeat; background-position:top center; }
