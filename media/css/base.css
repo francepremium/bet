@@ -166,7 +166,7 @@ tr.odd td { background-color:#f7f7f7; }
 .gsm th { color:#ea4839; text-transform:capitalize; }
 .gsm .oponnent.A { text-align:right; }
 .gsm .oponnent.B { text-align:left; }
-.gsm td.score { text-align:center; }
+.gsm td.score { text-align:center; white-space:nowrap; }
 .gsm td.score table { margin:0px; }
 .gsm td.score a,
 .gsm td.action a { display:block; color:#ea4839; }
