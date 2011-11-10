@@ -248,7 +248,7 @@ tr.odd td { background-color:#f7f7f7; }
 td.result .won		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-won.png'); }
 td.result .lost		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-lost.png'); }
 td.result .canceled	{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-canceled.png'); }
-.flag 				{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-flag.png'); }
+td.action .flag		{ display:inline-block; width:16px; height:16px; background-image:url('../img/actions/bet-flag.png'); }
 tr.canceled { background-color:#ccdaf7; }
 tr.won 		{ background-color:#ccf7de; }
 tr.lost		{ background-color:#f7d0cc; }

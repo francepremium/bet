@@ -124,7 +124,7 @@
                 </td>
                 {% endif %}
                 {% if request.user.is_authenticated %}
-                <td class="flag">
+                <td class="action">
                     <a class="flag" href="{% url bet_flag %}?bet_pk={{ bet.pk }}">
                     </a>
                 </td>
