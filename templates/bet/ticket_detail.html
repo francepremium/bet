@@ -5,7 +5,7 @@
 {% block head_title %}{% if ticket.bet_set.count > 1 %}{% trans 'Combined' %}{% else %}{% trans 'Simple' %}{% endif %} {% trans 'ticket ' %} #{{ ticket.pk }} {% trans 'by' %} {{ ticket.user }}{% endblock %}
 
 {% block meta %}
-<meta name="Deswcription" content="{% trans 'In this ticket' %}, {{ user }} {% trans 'shares his picks on matches' %} {% for bet in ticket.bet_set.all %}{{ bet.session }}{% if not forloop.last %}, {% endif %}{% endfor %}. {% trans 'Discover his free picks now' %}!" />
+<meta name="Description" content="{% trans 'In this ticket' %}, {{ user }} {% trans 'shares his picks on matches' %} {% for bet in ticket.bet_set.all %}{{ bet.session }}{% if not forloop.last %}, {% endif %}{% endfor %}. {% trans 'Discover his free picks now' %}!" />
 <meta name="keywords" content="{% trans 'picks' %}, {% trans 'pick' %}, {% trans 'bet' %}, {% trans 'betting' %}, {% trans 'prediction' %}, {% for bet in ticket.bet_set.all %}{{ bet.session }}, {{ bet.session.sport }}, {{ bet.session.season.competition }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
 {% endblock %}
 
