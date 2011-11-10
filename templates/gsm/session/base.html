@@ -11,19 +11,36 @@
 {% endif %}
 {% endcomment %}
 
-<table class="soccer session header">
-    <tr>
-        <th>
-            {% if session.oponnent_A.gsm_id %}
+<h2>{% trans 'presentation' %}</h2>
+<table class="session header">
+	<tr>
+        <td class="oponnent A">
+			{% if session.oponnent_A.gsm_id %}
                 <a rel="canonical" href="{{ session.oponnent_A.get_absolute_url }}" title="{{ sport }}: {{ session.oponnent_A.name }}">
             {% endif %}
             {{ session.oponnent_A.name }}
             {% if session.oponnent_A.gsm_id %}
                 </a>
             {% endif %}
-        </th>
-        <th colspan="2">
-            {% if session.status == 'Fixture' %}
+		</td>
+        <td></td>
+        <td class="oponnent B">
+			{% if session.oponnent_B.gsm_id %}
+                <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ sport }}: {{ session.oponnent_B.name }}" rel="canonical">
+            {% endif %}
+            {{ session.oponnent_B.name }}
+            {% if session.oponnent_B.gsm_id %}
+                </a>
+            {% endif %}
+		</td>
+	</tr>
+	<tr>
+		<td class="oponnent_image A">
+			<img src="{{ session.oponnent_A.get_large_image_url }}" />
+		</td>
+		<td class="information">
+			<div class="score">
+			{% if session.status == 'Fixture' %}
                 {% if session.time_unknown %}
                     {{ request|timezone_adjust:session.start_datetime|display_date }}
                 {% else %}
@@ -54,86 +71,53 @@
                 {{ session.B_score|add:session.B_ets }}
                 {% endif %}
             {% endif %}
-        </th>
-        <th>
-            {% if session.oponnent_B.gsm_id %}
-                <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ sport }}: {{ session.oponnent_B.name }}" rel="canonical">
-            {% endif %}
-            {{ session.oponnent_B.name }}
-            {% if session.oponnent_B.gsm_id %}
-                </a>
-            {% endif %}
-        </th>
-    </tr>
-    <tr>
-        <td>
-            {% if session.oponnent_A.gsm_id %}
+			</div>
+			<div class="sport">
+				{{ session.sport }}
+			</div>
+			<div class="competition">
+				<a href="{{ session.season.competition.get_absolute_url }}" title="{{ session.season.competition }}" rel="canonical">{{ session.season.competition }}</a>
+			</div>
+			<div class="gameweek">
+				{% trans 'gameweek' %} {{ session.gameweek }}
+			</div>
+			<div class="date">
+				{% if session.start_datetime.date %}
+					{{ request|timezone_adjust:session.start_datetime|display_date }}
+				{% endif %}
+			</div>
+			<div class="time">
+				{% if session.start_datetime %}
+					{{ request|timezone_adjust:session.start_datetime|display_time }}
+				{% endif %}
+			</div>
+		</td>
+		<td class="oponnent_image B">
+			<img src="{{ session.oponnent_B.get_large_image_url }}" />
+		</td>
+	</tr>
+	<tr>
+		<td class="oponnent_last5 A">
+			{% if session.oponnent_A.gsm_id %}
                 {% for data in session.oponnent_A|five_sessions_series %}
-                    <a href="{{ data.entity.get_absolute_url }}" title="{{ data.entity.oponnent_A_name }} vs {{ data.entity.oponnent_A_name }}">
+                    <a class="last5 {{ data.symbol }}" href="{{ data.entity.get_absolute_url }}" title="{{ data.entity.oponnent_A_name }} vs {{ data.entity.oponnent_B_name }}">
                         {{ data.symbol }}
                     </a>
                 {% endfor %}
             {% endif %}
-        </td>
-        <td colspan="2">
-        </td>
-        <td>
-            {% if session.oponnent_B.gsm_id %}
+		</td>
+		<td></td>
+		<td class="oponnent_last5 B">
+			{% if session.oponnent_B.gsm_id %}
                 {% for data in session.oponnent_B|five_sessions_series %}
-                    <a href="{{ data.entity.get_absolute_url }}" title="{{ data.entity.oponnent_A_name }} vs {{ data.entity.oponnent_B_name }}">
+                    <a class="last5 {{ data.symbol }}" href="{{ data.entity.get_absolute_url }}" title="{{ data.entity.oponnent_A_name }} vs {{ data.entity.oponnent_B_name }}">
                         {{ data.symbol }}
                     </a>
                 {% endfor %}
             {% endif %}
-        </td>
-    </tr>
-    <tr>
-        <td rowspan="5">
-            <img src="{{ session.oponnent_A.get_large_image_url }}" />
-        </td>
-        <td colspan="2"></td>
-        <td rowspan="5">
-            <img src="{{ session.oponnent_B.get_large_image_url }}" />
-        </td>
-    </tr>
-    <tr>
-        <td>{% trans 'competition' %}</td>
-        <td><a href="{{ session.season.competition.get_absolute_url }}" title="{{ session.season.competition }}" rel="canonical">{{ session.season.competition }}</a></td>
-    </tr>
-    <tr>
-        {% if session.start_datetime.date %}
-            <td>{% trans 'date' %}</td>
-            <td>{{ request|timezone_adjust:session.start_datetime|display_date }}</td>
-        {% else %}
-            <td colspan="2"></td>
-        {% endif %}
-    </tr>
-    <tr>
-        {% if session.gameweek %}
-        <td>{% trans 'gameweek' %}</td>
-        <td>{{ session.gameweek }}</td>
-        {% else %}
-        <td colspan="2"></td>
-        {% endif %}
-    </tr>
-    {% if session.start_datetime %}
-    <tr>
-        <td>{% trans 'kickoff' %}</td>
-        <td>
-            {% if session.time_unknown %}
-                {% trans 'yet unknown' %}
-            {% else %}
-                {{ request|timezone_adjust:session.start_datetime|display_time }}
-            {% endif %}
-        </td>
-    </tr>
-    {% else %}
-    <tr>
-        <td colspan="2"></td>
-    </tr>
-    {% endif %}
+		</td>
+	</tr>
 </table>
-
 {% endblock %}
 
 {% block subnav %}
@@ -155,9 +139,9 @@
 {% block body_head %}
 	<div class="image">
 	</div>
-	
+
 	<div class="title">
 		<h1>{{ session }}</h1>
 	</div>
-	
+
 {% endblock %}

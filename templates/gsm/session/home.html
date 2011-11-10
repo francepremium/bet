@@ -2,170 +2,309 @@
 
 {% load i18n gsm_tags comments %}
 
-{% block extra_head %}
-<style type="text/css">
-table.session.header {
-    width: 100%;
-}
-table.lineups {
-    display: inline-block;
-}
-
-</style>
-{% endblock %}
-
 {% block body %}{{ block.super }}
-    
+
     {% if elements.goals.getchildren %}
     <h2>{% trans 'goals' %}</h2>
-    <table class="goals">
+    <table class="session goals">
         {% for goal in elements.goals.getchildren %}
         <tr>
-            <td>
-                {% if session|goal_column:goal == 'A' %}
-                    {% gsm_entity key='goal_person' tag='person' gsm_id=goal.getchildren.0.attrib.person_id name=goal.getchildren.0.attrib.person %}
+            {% if session|goal_column:goal == 'A' %}
+			<td class="goal A">
+				{% gsm_entity key='goal_person' tag='person' gsm_id=goal.getchildren.0.attrib.person_id name=goal.getchildren.0.attrib.person %}
+				<span class="goal G"><a href="{{ goal_person.get_absolute_url }}" title="{{ goal_person.name }}">{{ goal_person.name }}</a></span>
+				{% if goal.getchildren.0.attrib.code == 'OG' %}
+					({% trans 'OG' %})
+				{% endif %}
+				<img class="event" src="{{ STATIC_URL }}img/events/G.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
 
-                    <span class="goal G"><a href="{{ goal_person.get_absolute_url }}" title="{{ goal_person.name }}">{{ goal_person.name }}</a></span>
-                    {% if goal.getchildren.1.attrib.code == 'AS' %}
-                        {% gsm_entity key='goal_assistant' tag='person' gsm_id=goal.getchildren.1.attrib.person_id name=goal.getchildren.1.attrib.person %}
-                        <span class="goal AS">{% trans 'assisted by' %} <a href="{{ goal_assistant.get_absolute_url }}" title="{{ goal_assistant.name }}">{{ goal_assistant.name }}</a></span>
-                    {% endif %}
-                    {% if goal.getchildren.0.attrib.code == 'OG' %}
-                        ({% trans 'OG' %})
-                    {% endif %}
-                {% endif %}
+				{% comment %}
+				{% if goal.getchildren.1.attrib.code == 'AS' %}
+					{% gsm_entity key='goal_assistant' tag='person' gsm_id=goal.getchildren.1.attrib.person_id name=goal.getchildren.1.attrib.person %}
+					<span class="goal AS">{% trans 'assisted by' %} <a href="{{ goal_assistant.get_absolute_url }}" title="{{ goal_assistant.name }}">{{ goal_assistant.name }}</a></span>
+				{% endif %}
+				{% endcomment %}
+            </td>
+			{% else %}<td></td>{% endif %}
+            <td class="minute">
+                {{ goal.getchildren.0.attrib.minute }}'
+            </td>
+            {% if session|goal_column:goal == 'B' %}
+            <td class="goal B">
+                {% gsm_entity key='goal_person' tag='person' gsm_id=goal.getchildren.0.attrib.person_id name=goal.getchildren.0.attrib.person %}
+				<img class="event" src="{{ STATIC_URL }}img/events/G.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
+				<span class="goal G"><a href="{{ goal_person.get_absolute_url }}" title="{{ goal_person.name }}">{{ goal_person.name }}</a></span>
+				{% if goal.getchildren.0.attrib.code == 'OG' %}
+					({% trans 'OG' %})
+				{% endif %}
 
+				{% comment %}
+				{% if goal.getchildren.1.attrib.code == 'AS' %}
+					{% gsm_entity key='goal_assistant' tag='person' gsm_id=goal.getchildren.1.attrib.person_id name=goal.getchildren.1.attrib.person %}
+					<span class="goal AS">{% trans 'assisted by' %} <a href="{{ goal_assistant.get_absolute_url }}" title="{{ goal_assistant.name }}">{{ goal_assistant.name }}</a></span>
+				{% endif %}
+				{% endcomment %}
             </td>
-            <td>
-                <span class="minute">{{ goal.getchildren.0.attrib.minute }}"</span>
-            </td>
-            <td>
-                {% if session|goal_column:goal == 'B' %}
-                    {% gsm_entity key='goal_person' tag='person' gsm_id=goal.getchildren.0.attrib.person_id name=goal.getchildren.0.attrib.person %}
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
 
-                    <span class="goal G"><a href="{{ goal_person.get_absolute_url }}" title="{{ goal_person.name }}">{{ goal_person.name }}</a></span>
-                    {% if goal.getchildren.1.attrib.code == 'AS' %}
-                        {% gsm_entity key='goal_assistant' tag='person' gsm_id=goal.getchildren.1.attrib.person_id name=goal.getchildren.1.attrib.person %}
-                        <span class="goal AS">{% trans 'assisted by' %} <a href="{{ goal_assistant.get_absolute_url }}" title="{{ goal_assistant.name }}">{{ goal_assistant.name }}</a></span>
-                    {% endif %}
-                    {% if goal.getchildren.0.attrib.code == 'OG' %}
-                        ({% trans 'OG' %})
-                    {% endif %}
-                {% endif %}
+	{% if elements.bookings.getchildren %}
+    <h2>{% trans 'warnings' %}</h2>
+    <table class="session warnings">
+        {% for warning in elements.bookings.getchildren %}
+        <tr>
+			{% if warning.attrib.team_id == session.oponnent_A.gsm_id|addslashes %}
+            <td class="warning A">
+				{% gsm_entity key='warned_person' tag='person' gsm_id=warning.attrib.person_id name=warning.attrib.person %}
+				<a href="{{ warned_person.get_absolute_url }}" title="{{ warned_person.name }}">{{ warned_person.name }}</a>
+				<img class="event" src="{{ STATIC_URL }}img/events/{{ warning.attrib.code }}.png" alt="{% trans warning.attrib.name %}" title="{% trans warning.attrib.name %}" />
             </td>
+           {% else %}<td></td>{% endif %}
+            <td class="minute">
+                {{ warning.attrib.minute }}'
+            </td>
+			{% if warning.attrib.team_id == session.oponnent_B.gsm_id|addslashes %}
+			<td class="warning B">
+				<img class="event" src="{{ STATIC_URL }}img/events/{{ warning.attrib.code }}.png" alt="{% trans warning.attrib.name %}" title="{% trans warning.attrib.name %}" />
+				{% gsm_entity key='warned_person' tag='person' gsm_id=warning.attrib.person_id name=warning.attrib.person %}
+				<a href="{{ warned_person.get_absolute_url }}" title="{{ warned_person.name }}">{{ warned_person.name }}</a>
+            </td>
+            {% else %}<td></td>{% endif %}
         </tr>
         {% endfor %}
     </table>
     {% endif %}
 
     {% if elements.lineups.getchildren %}
-    <h2>{% trans 'lineups' %}</h2>
-    <table class="lineups A">
-        {% for lineup in elements.lineups.getchildren %}
-            {% if lineup.attrib.team_id == session.oponnent_A.gsm_id|addslashes %}
-            <tr>
-                <td class="L">
-                    {% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
-                    <a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">{{ lineup_person.name }}</a>
-                </td>
-            </tr>
-            {% endif %}
-        {% endfor %}
-    </table>
-    <table class="lineups B">
-        {% for lineup in elements.lineups.getchildren %}
-            {% if lineup.attrib.team_id == session.oponnent_B.gsm_id|addslashes %}
-            <tr>
-                <td class="L">
-                    {% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
-                    <a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">{{ lineup_person.name }}</a>
-                </td>
-            </tr>
-            {% endif %}
-        {% endfor %}
-    </table>
+    <div class="session lineups A">
+		<h2>
+			{% if session.oponnent_A.get_tiny_image_url %}
+			<span class="tiny_image">
+				<img src="{{ session.oponnent_A.get_tiny_image_url }}" />
+			</span>
+			{% endif %}
+			{% trans 'lineups' %} {{ session.oponnent_A.name }}
+		</h2>
+		<table>
+			{% for lineup in elements.lineups.getchildren %}
+				{% if lineup.attrib.team_id == session.oponnent_A.gsm_id|addslashes %}
+				<tr>
+					<td class="L">
+						{% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
+						<a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">{{ lineup_person.name }}</a>
+					</td>
+					<td>
+						{% for goal in elements.goals.getchildren %}
+							{% if goal.getchildren.1.attrib.person_id == lineup.attrib.person_id %}
+								{{ goal.getchildren.1.attrib.minute }}'
+								<img class="event" src="{{ STATIC_URL }}img/events/G.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
+							{% endif %}
+						{% endfor %}
+						{% for substitution in elements.substitutions.getchildren %}
+							{% if substitution.getchildren.1.attrib.person_id == lineup.attrib.person_id %}
+								{{ substitution.getchildren.1.attrib.minute }}'
+								<img class="event" src="{{ STATIC_URL }}img/events/SO.png" alt="{% trans 'substitution' %}" title="{% trans 'substitution' %}" />
+							{% endif %}
+						{% endfor %}
+						{% for booking in elements.bookings.getchildren %}
+							{% if booking.attrib.person_id == lineup.attrib.person_id %}
+								{{ booking.attrib.minute }}'
+								<img class="event" src="{{ STATIC_URL }}img/events/{{ booking.attrib.code }}.png" alt="{% trans booking.attrib.name %}" title="{% trans booking.attrib.name %}" />
+							{% endif %}
+						{% endfor %}
+					</td>
+				</tr>
+				{% endif %}
+			{% endfor %}
+		</table>
+	</div>
+
+    <div class="session lineups B">
+		<h2>
+			{% if session.oponnent_B.get_tiny_image_url %}
+			<span class="tiny_image">
+				<img src="{{ session.oponnent_B.get_tiny_image_url }}" />
+			</span>
+			{% endif %}
+			{% trans 'lineups' %} {{ session.oponnent_B.name }}
+		</h2>
+		<table>
+			{% for lineup in elements.lineups.getchildren %}
+				{% if lineup.attrib.team_id == session.oponnent_B.gsm_id|addslashes %}
+				<tr>
+					<td class="L">
+						{% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
+						<a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">{{ lineup_person.name }}</a>
+					</td>
+					<td>
+						{% for goal in elements.goals.getchildren %}
+							{% if goal.getchildren.1.attrib.person_id == lineup.attrib.person_id %}
+								{{ goal.getchildren.1.attrib.minute }}'
+								<img class="event" src="{{ STATIC_URL }}img/events/G.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
+							{% endif %}
+						{% endfor %}
+						{% for substitution in elements.substitutions.getchildren %}
+							{% if substitution.getchildren.1.attrib.person_id == lineup.attrib.person_id %}
+								{{ substitution.getchildren.1.attrib.minute }}'
+								<img class="event" src="{{ STATIC_URL }}img/events/SO.png" alt="{% trans 'substitution' %}" title="{% trans 'substitution' %}" />
+							{% endif %}
+						{% endfor %}
+						{% for booking in elements.bookings.getchildren %}
+							{% if booking.attrib.person_id == lineup.attrib.person_id %}
+								{{ booking.attrib.minute }}'
+								<img class="event" src="{{ STATIC_URL }}img/events/{{ booking.attrib.code }}.png" alt="{% trans booking.attrib.name %}" title="{% trans booking.attrib.name %}" />
+							{% endif %}
+						{% endfor %}
+					</td>
+				</tr>
+				{% endif %}
+			{% endfor %}
+		</table>
+	</div>
+    {% endif %}
+
+	{% if elements.lineups_bench.tag == 'lineups_bench' and elements.lineups_bench.getchildren %}
+	<div class="session lineups bench A">
+		<h2>
+			{% if session.oponnent_A.get_tiny_image_url %}
+			<span class="tiny_image">
+				<img src="{{ session.oponnent_A.get_tiny_image_url }}" />
+			</span>
+			{% endif %}
+			{% trans 'lineups bench' %} {{ session.oponnent_A.name }}
+		</h2>
+		<table>
+			{% for lineup in elements.lineups_bench.getchildren %}
+				{% if lineup.attrib.team_id == session.oponnent_A.gsm_id|addslashes %}
+				<tr>
+					<td class="L">
+						{% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
+						<a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">{{ lineup_person.name }}</a>
+					</td>
+					<td>
+						{% for goal in elements.goals.getchildren %}
+							{% if goal.getchildren.0.attrib.person_id == lineup.attrib.person_id %}
+								{{ goal.getchildren.0.attrib.minute }}'
+								<img class="event" src="{{ STATIC_URL }}img/events/G.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
+							{% endif %}
+						{% endfor %}
+						{% for substitution in elements.substitutions.getchildren %}
+							{% if substitution.getchildren.0.attrib.person_id == lineup.attrib.person_id %}
+								{{ substitution.getchildren.0.attrib.minute }}'
+								<img class="event" src="{{ STATIC_URL }}img/events/SI.png" alt="{% trans 'substitution' %}" title="{% trans 'substitution' %}" />
+							{% endif %}
+						{% endfor %}
+						{% for booking in elements.bookings.getchildren %}
+							{% if booking.attrib.person_id == lineup.attrib.person_id %}
+								{{ booking.attrib.minute }}'
+								<img class="event" src="{{ STATIC_URL }}img/events/{{ booking.attrib.code }}.png" alt="{% trans booking.attrib.name %}" title="{% trans booking.attrib.name %}" />
+							{% endif %}
+						{% endfor %}
+					</td>
+				</tr>
+				{% endif %}
+			{% endfor %}
+		</table>
+	</div>
+
+    <div class="session lineups bench B">
+		<h2>
+			{% if session.oponnent_B.get_tiny_image_url %}
+			<span class="tiny_image">
+				<img src="{{ session.oponnent_B.get_tiny_image_url }}" />
+			</span>
+			{% endif %}
+			{% trans 'lineups bench' %} {{ session.oponnent_B.name }}
+		</h2>
+		<table>
+			{% for lineup in elements.lineups_bench.getchildren %}
+				{% if lineup.attrib.team_id == session.oponnent_B.gsm_id|addslashes %}
+				<tr>
+					<td class="L">
+						{% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
+						<a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">{{ lineup_person.name }}</a>
+					</td>
+					<td>
+						{% for goal in elements.goals.getchildren %}
+							{% if goal.getchildren.0.attrib.person_id == lineup.attrib.person_id %}
+								{{ goal.getchildren.0.attrib.minute }}'
+								<img class="event" src="{{ STATIC_URL }}img/events/G.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
+							{% endif %}
+						{% endfor %}
+						{% for substitution in elements.substitutions.getchildren %}
+							{% if substitution.getchildren.0.attrib.person_id == lineup.attrib.person_id %}
+								{{ substitution.getchildren.0.attrib.minute }}'
+								<img class="event" src="{{ STATIC_URL }}img/events/SI.png" alt="{% trans 'substitution' %}" title="{% trans 'substitution' %}" />
+							{% endif %}
+						{% endfor %}
+						{% for booking in elements.bookings.getchildren %}
+							{% if booking.attrib.person_id == lineup.attrib.person_id %}
+								{{ booking.attrib.minute }}'
+								<img class="event" src="{{ STATIC_URL }}img/events/{{ booking.attrib.code }}.png" alt="{% trans booking.attrib.name %}" title="{% trans booking.attrib.name %}" />
+							{% endif %}
+						{% endfor %}
+					</td>
+				</tr>
+				{% endif %}
+			{% endfor %}
+		</table>
+	</div>
     {% endif %}
 
     {% if elements.substitutions.getchildren %}
     <h2>{% trans 'substitutions' %}</h2>
-    <table class="substitutions">
-        <tr>
-            <th>{% trans 'in' %}</th>
-            <th>{% trans 'out' %}</th>
-            <th>{% trans 'minute' %}</th>
-            <th>{% trans 'in' %}</th>
-            <th>{% trans 'out' %}</th>
+    <table class="session substitutions">
+        {% for substitution in elements.substitutions.getchildren %}
+		<tr>
+			{% if substitution.getchildren.0.attrib.team_id == session.oponnent_A.gsm_id|addslashes %}
+            <td class="substitution A">
+				<p>
+				{% for event in substitution.getchildren %}
+					{% if event.attrib.code == 'SI' %}
+						{% gsm_entity key='person_in' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
+						<span class="substitution SI"><a href="{{ person_in.get_absolute_url }}" title="{{ person_in.name }}">{{ person_in.name }}</a></span>
+					{% endif %}
+					{% if event.attrib.code == 'SO' %}
+						<br />
+						{% gsm_entity key='person_out' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
+						<span class="substitution SO">for <a href="{{ person_out.get_absolute_url }}" title="{{ person_out.name }}">{{ person_out.name }}</a></span>
+					{% endif %}
+				{% endfor %}
+				</p>
+				<img class="event" src="{{ STATIC_URL }}img/events/SI.png" alt="{% trans 'substitution' %}" title="{% trans 'substitution' %}" />
+            </td>
+           {% else %}<td></td>{% endif %}
+            <td class="minute">
+                {{ substitution.getchildren.0.attrib.minute }}'
+            </td>
+			{% if substitution.getchildren.0.attrib.team_id == session.oponnent_B.gsm_id|addslashes %}
+            <td class="substitution B">
+				<img class="event" src="{{ STATIC_URL }}img/events/SI.png" alt="{% trans 'substitution' %}" title="{% trans 'substitution' %}" />
+				<p>
+				{% for event in substitution.getchildren %}
+					{% if event.attrib.code == 'SI' %}
+						{% gsm_entity key='person_in' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
+						<span class="substitution SI"><a href="{{ person_in.get_absolute_url }}" title="{{ person_in.name }}">{{ person_in.name }}</a></span>
+					{% endif %}
+					{% if event.attrib.code == 'SO' %}
+						<br />
+						{% gsm_entity key='person_out' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
+						<span class="substitution SO">for <a href="{{ person_out.get_absolute_url }}" title="{{ person_out.name }}">{{ person_out.name }}</a></span>
+					{% endif %}
+				{% endfor %}
+				</p>
+            </td>
+           {% else %}<td></td>{% endif %}
         </tr>
-        {% for sub in elements.substitutions.getchildren %}
-            <tr>
-            {% if sub.getchildren.0.attrib.team_id == session.oponnent_A.gsm_id|addslashes %}
-                {% for event in sub.getchildren %}
-                <td>
-                    {% if event.attrib.code == 'SI' %}
-                        {% gsm_entity key='person_in' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
-                        <a href="{{ person_in.get_absolute_url }}" title="{{ person_in.name }}">{{ person_in.name }}</a>
-                    {% endif %}
-                    {% if event.attrib.code == 'SO' %}
-                        {% gsm_entity key='person_out' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
-                        <a href="{{ person_out.get_absolute_url }}" title="{{ person_out.name }}">{{ person_out.name }}</a>
-                        </td>
-                        <td>
-                        {{ event.attrib.minute }}"
-                    {% endif %}
-                </td>
-                {% endfor %}
-                <td colspan="2"></td>
-            {% else %}
-                <td colspan="2"></td>
-                {% for event in sub.getchildren %}
-                <td>
-                    {% if event.attrib.code == 'SI' %}
-                        {{ event.attrib.minute }}"
-                        </td>
-                        <td>
-                        {% gsm_entity key='person_in' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
-                        <a href="{{ person_in.get_absolute_url }}" title="{{ person_in.name }}">{{ person_in.name }}</a>
-                    {% endif %}
-                    {% if event.attrib.code == 'SO' %}
-                        {% gsm_entity key='person_out' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
-                        <a href="{{ person_out.get_absolute_url }}" title="{{ person_out.name }}">{{ person_out.name }}</a>
-                    {% endif %}
-                </td>
-                {% endfor %}
-            {% endif %}
-            </tr>
-        {% endfor %}
+		{% endfor %}
     </table>
     {% endif %}
 
-    {% if elements.lineups_bench.tag == 'lineups_bench' and elements.lineups_bench.getchildren %}
-    <h2>{% trans 'lineups bench' %}</h2>
-    <table class="lineups bench A">
-        {% for lineup in elements.lineups_bench.getchildren %}
-            {% if lineup.attrib.team_id == session.oponnent_A.gsm_id|addslashes %}
-            <tr>
-                <td class="L">
-                    {% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
-                    <a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">{{ lineup_person.name }}</a>
-                </td>
-            </tr>
-            {% endif %}
-        {% endfor %}
-    </table>
-    <table class="lineups bench B">
-        {% for lineup in elements.lineups_bench.getchildren %}
-            {% if lineup.attrib.team_id == session.oponnent_B.gsm_id|addslashes %}
-            <tr>
-                <td class="L">
-                    {% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
-                    <a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">{{ lineup_person.name }}</a>
-                </td>
-            </tr>
-            {% endif %}
-        {% endfor %}
-    </table>
-    {% endif %}
-
+	{# TODO #}
+	{% comment %}
     {% if statistics.getchildren %}
     <h2>{% trans 'statistics' %}</h2>
     <table>
@@ -183,13 +322,17 @@ table.lineups {
         {% endfor %}
     </table>
     {% endif %}
+	{% endcomment %}
 
     {% if sport.slug != 'tennis' %}
         {% gsm_tree key='tables_tree' method='get_tables' type='season' id=session.season.competition.get_last_season.gsm_id %}
         {% gsm_render_tables_tree tables_tree %}
     {% endif %}
 
+	<h2>{% trans 'calendar' %} {{ session.oponnent_A.name }}</h2>
     {% gsm_sessions_render sessions_A %}
+
+	<h2>{% trans 'calendar' %} {{ session.oponnent_B.name }}</h2>
     {% gsm_sessions_render sessions_B %}
 
     {% if session.oponnent_A.gsm_id and session.oponnent_B.gsm_id and sport.slug == 'soccer' %}
@@ -197,6 +340,7 @@ table.lineups {
         {% gsm_tree key='h2h_tree' method='get_head_2_head_statistics' team_1_id=session.oponnent_A.gsm_id team_2_id=session.oponnent_B.gsm_id %}{# no available for basketball #}
     {% endif %}
     {% if h2h_tree %}
+	<div class="session sessions">
         <h2>{% trans 'previous matches' %}</h2>
         <table>
         {% for element in h2h_tree.getroot|findall:'head2head/match' %}
@@ -204,29 +348,40 @@ table.lineups {
             {% gsm_entity key='team_B' tag='team' gsm_id=element.attrib.team_B_id name=element.attrib.team_B %}
             {% gsm_entity key='match' tag='session' gsm_id=element.attrib.match_id name=element.attrib.team_B %}
             <tr>
-                <td>
+                <td class="date">
                     {{ element.attrib.date|display_date }}
                 </td>
-                <td class="{% if element.attrib.winner == 'team_A' %}winner{% endif %}">
+                <td class="oponnent A {% if element.attrib.winner == 'team_A' %}winner{% endif %}">
                     <a href="{{ team_A.get_absolute_url }}" title="{{ team_A.name }}">{{ team_A.name }}</a>
                 </td>
-                <td>
-                    <a href="{{ match.get_absolute_url }}">{{ element.attrib.fs_A|add:element.attrib.ets_A }}</a>
+				<td class="oponnent_image A tiny_image">
+					{% if team_A.get_tiny_image_url %}
+					<img src="{{ team_A.get_tiny_image_url }}" />
+					{% endif %}
                 </td>
-                <td>
-                    <a href="{{ match.get_absolute_url }}">-</a>
+                <td class="score">
+                    <a href="{{ match.get_absolute_url }}">
+						{{ element.attrib.fs_A|add:element.attrib.ets_A }}
+						-
+						{{ element.attrib.fs_B|add:element.attrib.ets_B }}
+					</a>
                 </td>
-                <td>
-                    <a href="{{ match.get_absolute_url }}">{{ element.attrib.fs_B|add:element.attrib.ets_B }}</a>
+				<td class="oponnent_image B tiny_image">
+					{% if team_B.get_tiny_image_url %}
+					<img src="{{ team_B.get_tiny_image_url }}" />
+					{% endif %}
                 </td>
-                <td class="{% if element.attrib.winner == 'team_B' %}winner{% endif %}">
+                <td class="oponnent B {% if element.attrib.winner == 'team_B' %}winner{% endif %}">
                     <a href="{{ team_B.get_absolute_url }}" title="{{ team_B.name }}">{{ team_B.name }}</a>
                 </td>
             </tr>
         {% endfor %}
         </table>
+	</div>
 
-        <h2>{% trans 'head to head' %}</h2>
+	{# TODO #}
+	{% comment %}
+	    <h2>{% trans 'head to head' %}</h2>
         <table>
         {% for element in h2h_tree.getroot|findall:'head2head/data' %}
             <tr>
@@ -238,6 +393,8 @@ table.lineups {
             </tr>
         {% endfor %}
         </table>
+    {% endcomment %}
+
     {% endif %}
 
     {% render_comment_form for session %}
