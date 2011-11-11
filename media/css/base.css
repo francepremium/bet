@@ -182,7 +182,7 @@ tr.odd td { background-color:#f7f7f7; }
 .gsm tr.Fixture.odd	td.score 	{ background-color:#eeeeee; }
 .gsm td.tiny_image { width:16px; }
 .gsm .tiny_image img { width:15px; height:15px; vertical-align:middle; margin-top:-2px; }
-.gsm .sessions table { margin-top:15px; }
+.gsm .button { margin-bottom:15px; }
 
 /* Gsm calendar */
 .gsm .calendar h2 { float:left; }
