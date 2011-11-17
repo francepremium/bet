@@ -3,7 +3,12 @@
 {% load i18n %}
 {% load gsm_tags %}
 
-{% block body %}{{ block.super }}
+{% block body %}
+{% if request.user.is_staff %}
+<a href="{% url admin:gsm_session_change session.pk %}">admin</a>
+{% endif %}
+
+{{ block.super }}
 {% comment %}
 <h1><a rel="canonical" href="{{ session.oponnent_A.get_absolute_url }}" title="{{ sport }}: {{ session.oponnent_A_name }}">{{ session.oponnent_A_name }}</a> {% trans 'vs' %} <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ sport }}: {{ session.oponnent_B_name }}" rel="canonical">{{ session.oponnent_B_name }}</a></h1>
 {% if session.season %}
