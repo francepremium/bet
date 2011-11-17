@@ -467,9 +467,8 @@ def team_detail_tab(request, sport, gsm_id, tab, tag='team',
             maximum = 10*page+5
             context['sessions'] = next_sessions.order_by('start_datetime')[minimum:maximum]
         elif page < 0:
-            page = page * -1
-            minimum = 10*page-5
-            maximum = 10*page+5
+            minimum = 10*page*-1-5
+            maximum = 10*page*-1+5
             context['sessions'] = [s for s in reversed(past_sessions.order_by('-start_datetime')[minimum:maximum])]
 
         if team.get_sessions().filter(start_datetime__lt=context['sessions'][0].start_datetime).count():

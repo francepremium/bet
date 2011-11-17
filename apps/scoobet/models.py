@@ -50,22 +50,21 @@ def delete_object_activities(sender, **kwargs):
     """
     if sender.__name__ == 'Session':
         return None
+    
+    ctype = ContentType.objects.get_for_model(kwargs['instance'])
 
     Action.objects.filter(
-        action_object_object_id=kwargs['instance'].pk,
-        action_object_content_type=ContentType.objects.get_for_model(
-                                                        kwargs['instance'])
-        ).delete()
-    Action.objects.filter(
-        actor_object_id=kwargs['instance'].pk,
-        actor_content_type=ContentType.objects.get_for_model(
-                                                        kwargs['instance'])
-        ).delete()
-    Action.objects.filter(
-        target_object_id=kwargs['instance'].pk,
-        target_content_type=ContentType.objects.get_for_model(
-                                                        kwargs['instance'])
-        ).delete()
+        Q(
+            action_object_object_id=kwargs['instance'].pk,
+            action_object_content_type=ctype
+        ) | Q(
+            actor_object_id=kwargs['instance'].pk,
+            actor_content_type=ctype
+        ) | Q(
+            target_object_id=kwargs['instance'].pk,
+            target_content_type=ctype
+        )
+    ).delete()
 signals.pre_delete.connect(delete_object_activities)
 
 def comment_posted(sender, **kwargs):

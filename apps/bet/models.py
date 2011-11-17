@@ -159,6 +159,12 @@ class Bet(models.Model):
     class Meta:
         ordering = ('-session__start_datetime', '-id')
 
+def bet_security(sender, instance=None, **kwargs):
+    if instance.session.start_datetime > datetime.datetime.now():
+        instance.delete()
+        raise BetTooLateException(instance)
+signals.pre_save.connect(bet_security, sender=Bet)
+
 def delete_empty_ticket(sender, **kwargs):
     try:
         if kwargs['instance'].ticket.bet_set.count() == 0:
