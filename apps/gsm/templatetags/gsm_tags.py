@@ -172,14 +172,20 @@ def do_gsm_sessions_render(parser, token):
     return GsmSessionsTableNode(*split)
 
 class GsmSessionsTableNode(template.Node):
-    def __init__(self, tagname, sessions, divide_by_season=False, fixed_day=False):
+    def __init__(self, tagname, sessions, divide_by_season=False, fixed_day=False, team=False):
         self.sessions = template.Variable(sessions)
+        if team:
+            self.team = template.Variable(team)
+        else:
+            self.team = False
         if divide_by_season:
             self.divide_by_season = template.Variable(divide_by_season)
         if fixed_day:
             self.fixed_day = template.Variable(fixed_day)
     def render(self, context):
         context['sessions'] = self.sessions.resolve(context)
+        if hasattr(self.team, 'resolve'):
+            context['team'] = self.team.resolve(context)
         if hasattr(self, 'divide_by_season'):
             context['divide_by_season'] = self.divide_by_season.resolve(context)
         if hasattr(self, 'fixed_day'):

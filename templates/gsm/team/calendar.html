@@ -13,7 +13,7 @@
             <a class="button button_simple button_small button_forward" href="?page={{ next_page }}">{% trans 'next matches' %}</a>
         {% endif %}
 
-        {% gsm_sessions_render sessions %}
+        {% gsm_sessions_render sessions '' '' team %}
 
         {% if previous_page != None %}
             <a class="button button_simple button_small button_backward" href="?page={{ previous_page }}">{% trans 'previous matches' %}</a>
