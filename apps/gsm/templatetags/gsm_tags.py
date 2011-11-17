@@ -81,7 +81,9 @@ def five_sessions_series(team):
     sessions = Session.objects.filter(status='Played').filter(
         Q(oponnent_A=team) |
         Q(oponnent_B=team)
-    ).distinct().order_by('start_datetime')[:5]
+    ).distinct().order_by('-start_datetime')[:5]
+    sessions = list(sessions)
+    sessions.reverse()
 
     serie = []
     for session in sessions:
