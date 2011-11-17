@@ -10,7 +10,6 @@ except:
     import pickle
 
 import gsm
-from gsm.sync import *
 from gsm.models import *
 
 logger = logging.getLogger('gsm')
@@ -50,8 +49,8 @@ class Command(BaseCommand):
             sync = Sync(sport, last_updated, minimal_date, logger, 
                 language='en')
 
-            if last_updated < now - datetime.timedelta(hours=24):
-                start_date = now - datetime.timedelta(hours=23)
+            if last_updated < now - datetime.timedelta(hours=23):
+                start_date = now - datetime.timedelta(hours=22)
             else:
                 start_date = last_updated
             root = sync.get_tree('get_deleted', start_date=start_date)
@@ -86,6 +85,7 @@ class Command(BaseCommand):
 
                     if e.tag in sync._tag_class_map.keys():
                         sync.update(e)
-        
-        status['last_updated'] = now - datetime.timedelta(minutes=4)
+
+        delta = local.localize(datetime.datetime.now()) + datetime.timedelta(minutes=7) - now
+        status['last_updated'] = now - delta
         self.store_status(status)

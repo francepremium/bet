@@ -10,10 +10,11 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 
 import gsm
-from gsm.sync import *
 from gsm.models import *
 
 logger = logging.getLogger('gsm')
+
+session_played.disconnect()
 
 class Command(BaseCommand):
     def store_status(self, status):
