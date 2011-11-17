@@ -9,13 +9,19 @@
         {% blocktrans %}It's not your fault but our data provider is overloaded for the moment - and we don't have any cached version of the data you requested. Our techie has been notified but it's unlikely that he can do anything about it. Would you please try again later ?{% endblocktrans %}
     {% endif %}
 
-    {% if error = 'HtmlInsteadOfXml' %}
+    {% if error == 'HtmlInsteadOfXml' %}
         {% blocktrans %}It's not your fault but it seems like we can't access to the data you're looking for ... Hopefully John has been notified and will see what's wrong with the provider.{% endblocktrans %}
     {% endif %}
 
-    {% if error = 'MessagingUnauthorizedUser' %}
+    {% if error == 'MessagingUnauthorizedUser' %}
         {{ exception.message.recipient }} {% blocktrans %}does not follow you. Therefore we cannot let you send him a private message.{% endblocktrans %}
     {% endif %}
     </p>
+
+    {% if error == 'BetTooLateException' %}
+        {% with exception.bet.session as session %}
+        {% blocktrans %}You may not bet on {{ session }} because it has already started.{% endblocktrans %}
+        {% endwith %}
+    {% endif %}
 
 {% endblock %}

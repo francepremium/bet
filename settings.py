@@ -47,6 +47,7 @@ EXCEPTION_MIDDLEWARE_HANDLES = [
     'HtmlInsteadOfXml',
     'ServerOverloaded',
     'MessagingUnauthorizedUser',
+    'BetTooLateException',
 ]
 
 INSTALLED_APPS = [

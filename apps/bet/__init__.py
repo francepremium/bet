@@ -80,3 +80,7 @@ def correct_for_session(session, element=None):
     for u in to_update.values_list('pk', flat=True):
         print 'refreshing', u
         refresh_betprofile_for_user({'userpk': u})
+
+class BetTooLateException(Exception):
+    def __init__(self, bet):
+        self.bet = bet
