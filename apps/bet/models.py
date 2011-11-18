@@ -1,3 +1,4 @@
+import datetime
 import logging
 
 from django.db import connection, transaction
@@ -160,8 +161,11 @@ class Bet(models.Model):
         ordering = ('-session__start_datetime', '-id')
 
 def bet_security(sender, instance=None, **kwargs):
-    if instance.session.start_datetime > datetime.datetime.now():
-        instance.delete()
+    if instance.session.start_datetime < datetime.datetime.now():
+        try:
+            instance.delete()
+        except:
+            pass
         raise BetTooLateException(instance)
 signals.pre_save.connect(bet_security, sender=Bet)
 
