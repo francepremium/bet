@@ -25,4 +25,4 @@ def retry_deferred():
     fail_cooldown=td(minutes=2),
     non_recoverable_downtime=td(hours=3))
 def gsm_sync():
-    GsmSyncNewCommand().handle()
+    call_command('gsm_sync_new', noreload=True)

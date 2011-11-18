@@ -7,7 +7,7 @@ from django.conf import settings
 
 import gsm
 
-from models import *
+from gsm.models import *
 
 DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 local = timezone(settings.TIME_ZONE)
@@ -40,10 +40,10 @@ class Sync(object):
             self.last_updated = string_to_datetime(last_updated)
         else:
             self.last_updated = last_updated
-        if not self.last_updated.tzinfo:
+        if self.last_updated and not self.last_updated.tzinfo:
             self.last_updated = local.localize(self.last_updated)
 
-        if not self.minimal_date.tzinfo:
+        if self.minimal_date and not self.minimal_date.tzinfo:
             self.minimal_date = local.localize(self.minimal_date)
 
         if self.sport.slug == 'tennis':
@@ -94,7 +94,7 @@ class Sync(object):
         last_updated = string_to_datetime(e.attrib['last_updated'])
         if last_updated:
             last_updated = london.localize(last_updated)
-            if last_updated < self.last_updated:
+            if self.last_updated and last_updated < self.last_updated:
                 self.log('debug', 'Skipping because no update %s #%s' % (e.tag, 
                     e.attrib.get('%s_id' % e.tag)))
                 return True
@@ -115,7 +115,7 @@ class Sync(object):
         if date:
             date = string_to_datetime(date)
             date = london.localize(date)
-            if date < self.minimal_date:
+            if self.minimal_date and date < self.minimal_date:
                 self.log('debug', 'Skipping too old %s #%s' % (e.tag,
                     e.attrib.get('%s_id' % e.tag)))
                 return True
@@ -181,7 +181,6 @@ class Sync(object):
             method = 'update_%s_%s' % (self.sport.slug, method_key)
             if hasattr(self, method):
                 getattr(self, method)(model, e, parent)
-
         model.save()
 
         def update_children(e):
