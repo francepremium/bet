@@ -161,6 +161,9 @@ class Bet(models.Model):
         ordering = ('-session__start_datetime', '-id')
 
 def bet_security(sender, instance=None, **kwargs):
+    if not kwargs.get('created', False):
+        return
+
     if instance.session.start_datetime < datetime.datetime.now():
         try:
             instance.delete()
