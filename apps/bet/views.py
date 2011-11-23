@@ -158,7 +158,10 @@ def bet_form(request, ticket_pk, form_class=BetForm,
             return http.HttpResponse(_('ticket closed'), status=201)
         form = form_class(request.POST, request.FILES, instance=instance)
         if form.is_valid():
-            bet = form.save()
+            bet = form.save(commit=False)
+            if bet.session.start_datetime < datetime.datetime.now():
+                raise BetTooLateException(instance)
+            bet.save()
             if action == 'save_and_close':
                 ticket.status = TICKET_STATUS_DONE
                 ticket.save()
