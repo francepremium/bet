@@ -856,8 +856,10 @@ class Sync(object):
                 setattr(model, 'oponnent_%s' % X, oponnent)
 
         winner = e.attrib.get('winner', None)
-        if winner in ('A', 'B'):
-            model.winner = getattr(model, 'oponnent_%s' % e.attrib['winner'])
+        if 'A' in winner:
+            model.winner = model.oponnent_A
+        elif 'B' in winner:
+            model.winner = model.oponnent_B
         elif winner == 'draw':
             model.draw = True
 
