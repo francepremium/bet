@@ -145,7 +145,7 @@ class BetListHelper(object):
     def render_ticket_table(self):
         context = template.Context()
         context.update({
-            'ticket_list': self.ticket_qs,
+            'ticket_list': self.ticket_qs.order_by('-pk'),
             'request': self.request,
             'paginate': self.paginate,
             'exclude_filters': self.exclude_filters,

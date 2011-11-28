@@ -200,7 +200,7 @@ def user_detail(request, username, tab='activities',
         context['bet_list_helper'] = BetListHelper(request, exclude_filters=[
             'bettype', 'sport', 'competition', 'has_text', 'has_upload'], 
             ticket__user=user)
-        context['bet_list_helper'].set_ticket_qs(context['bet_list_helper'].ticket_qs.exclude(bet__correction=BET_CORRECTION_NEW))
+        context['bet_list_helper'].set_ticket_qs(context['bet_list_helper'].ticket_qs.exclude(bet__correction=BET_CORRECTION_NEW).order_by('pk'))
         tickets = context['bet_list_helper'].ticket_qs
         if len(tickets):
 
