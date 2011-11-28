@@ -48,7 +48,7 @@ def fan(request, action, model_class, model_pk, app_name='gsm'):
         model.fans.add(request.user)
         actstream.action.send(request.user, verb='bets on',
             action_object=model)
-        message = _('you indicated that you bet on') + ' %s' % model
+        message = u'%s %s' % (_(u'you indicated that you bet on'), model)
     else:
         model.fans.remove(request.user)
         actions = Action.objects.filter(
@@ -61,7 +61,7 @@ def fan(request, action, model_class, model_pk, app_name='gsm'):
         # ensure triggering of *_delete signals
         for action in actions:
             action.delete()
-        message = _('you indicated that you do not bet anymore on') + ' %s' % model
+        message = u'%s %s' % (_('you indicated that you do not bet anymore on'), model)
     messages.success(request, message)
     return shortcuts.redirect(model.get_absolute_url())
 
