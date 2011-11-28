@@ -155,6 +155,7 @@ def bet_form(request, ticket_pk, form_class=BetForm,
         if action == 'just_close':
             ticket.status = TICKET_STATUS_DONE
             ticket.save()
+            actstream.action.send(request.user, verb='closed ticket', action_object=ticket)
             return http.HttpResponse(_('ticket closed'), status=201)
         form = form_class(request.POST, request.FILES, instance=instance)
         if form.is_valid():
