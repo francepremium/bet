@@ -45,7 +45,12 @@ class Command(BaseCommand):
         now = datetime.datetime.now()
         last_updated = minimal_date = now - datetime.timedelta(days=365*5)
 
-        for sport in Sport.objects.all():
+        if args:
+            sports = Sport.objects.filter(slug__in=args)
+        else:
+            sports = Sport.objects.all()
+
+        for sport in sports:
             if sport.slug in status['sports']:
                 logger.debug('Skipping sport ' + sport.slug)
                 continue
