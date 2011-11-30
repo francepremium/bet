@@ -593,11 +593,15 @@ table.bettype table.choices {
             $('td.action a.flag').live('click', function(e) {
                 e.preventDefault();
                 var link = $(this);
+                if (!confirm('{% trans 'Are you sure you want to report an error either in the odds or correction of this bet ?' %}')) {
+                    return;
+                }
+
                 $.post(
                     $(this).attr('href'), {
                         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
                     }, function(data, textStatus, jqXHR) {
-                        add_message('{% trans "Bet flagged" %}');
+                        add_message('{% trans 'Thanks for reporting an error in this bet. Our staff will check both the odds and the correction of this bet. If you want to report another error, please contact us.' %}');
                     }
                 );
             });
