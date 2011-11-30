@@ -12,7 +12,7 @@ try:
 except:
     BYPASS_URLS = []
 
-for test in ['acct_passwd_reset', 'acct_passwd_reset_done', 'acct_passwd_reset_key']:
+for test in ['acct_passwd_reset', 'acct_passwd_reset_done', 'acct_passwd_reset_key', 'acct_signup']:
     try:
         BYPASS_URLS.append(urlresolvers.reverse(test))
     except:
@@ -36,6 +36,9 @@ class LoginMiddleware(object):
         if not BETA_URL in BYPASS_URLS:
             BYPASS_URLS.append(BETA_URL)
 
+        if '/account/confirm_email/' in request.path:
+            return None
+    
         for url in BYPASS_URLS:
             if path.find(url) == 0:
                 return None

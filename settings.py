@@ -121,6 +121,8 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+ACCOUNT_EMAIL_VERIFICATION = True
+
 SMOKE_TEST_USERNAME='gsm_test'
 SMOKE_TEST_PASSWORD='()&*EUTOSHue()&*UESTNHlrch'
 
