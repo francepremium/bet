@@ -98,8 +98,8 @@
 					</td>
 					<td>
 						{% for goal in elements.goals.getchildren %}
-							{% if goal.getchildren.1.attrib.person_id == lineup.attrib.person_id %}
-								{{ goal.getchildren.1.attrib.minute }}'
+							{% if goal.getchildren.0.attrib.person_id == lineup.attrib.person_id %}
+								{{ goal.getchildren.0.attrib.minute }}'
 								<img class="event" src="{{ STATIC_URL }}img/events/G.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
 							{% endif %}
 						{% endfor %}
@@ -141,8 +141,8 @@
 					</td>
 					<td>
 						{% for goal in elements.goals.getchildren %}
-							{% if goal.getchildren.1.attrib.person_id == lineup.attrib.person_id %}
-								{{ goal.getchildren.1.attrib.minute }}'
+							{% if goal.getchildren.0.attrib.person_id == lineup.attrib.person_id %}
+								{{ goal.getchildren.0.attrib.minute }}'
 								<img class="event" src="{{ STATIC_URL }}img/events/G.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
 							{% endif %}
 						{% endfor %}
