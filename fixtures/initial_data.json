@@ -3,8 +3,8 @@
         "pk": 1, 
         "model": "sites.site", 
         "fields": {
-            "domain": "bet.yourlabs.org", 
-            "name": "Scoobet alpha"
+            "domain": "betspire.com", 
+            "name": "BetSpire Beta"
         }
     },
     {
