@@ -80,7 +80,7 @@ INSTALLED_APPS = [
     # external
     'staticfiles',
     'debug_toolbar',
-    'mailer',
+    #'mailer',
     'uni_form',
     'ajax_validation',
     'timezones',
