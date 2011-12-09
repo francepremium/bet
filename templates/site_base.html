@@ -102,7 +102,7 @@ h1 {
 
 		<div id="signup">
 			{% if not request.user.is_authenticated %}
-			<a href="{% url acct_signup %}">{% trans 'sign up' %}</a>
+			{#<a href="{% url acct_signup %}">{% trans 'sign up' %}</a>#}
 			{% endif %}
 		</div>
 
