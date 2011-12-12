@@ -46,6 +46,9 @@ class Command(BaseCommand):
             minimal_date = local.localize(minimal_date)
 
         for sport in Sport.objects.all():
+            if args and sport.slug not in args:
+                continue
+
             sync = Sync(sport, last_updated, minimal_date, logger, 
                 language='en')
 
