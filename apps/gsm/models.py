@@ -569,11 +569,6 @@ class Session(AbstractGsmEntity):
     def get_tab_absolute_url(self, tab):
         return urlresolvers.reverse('gsm_%s_detail_tab' % 'session', args=(
             self.get_sport().slug, self.gsm_id, tab))
-    
-    def get_after_absolute_url(self):
-        return self.get_tab_absolute_url('after')
-    def get_live_absolute_url(self):
-        return self.get_tab_absolute_url('live')
 
 def ensure_ascii_name(sender, **kwargs):
     model = kwargs.pop('instance')

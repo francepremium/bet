@@ -127,13 +127,13 @@
 					<a href="{{ session.get_absolute_url }}" title="{{ session.name }}">{% trans 'info'|capfirst %}</a>
 				{% endif %}
 				{% if session.status == 'Played' %}
-					<a href="{{ session.get_live_absolute_url }}" title="{{ session.name }}">{% trans 'finished'|capfirst %}</a>
+					<a href="{{ session.get_absolute_url }}" title="{{ session.name }}">{% trans 'finished'|capfirst %}</a>
 				{% endif %}
 				{% if session.status == 'Playing' %}
-					<a href="{{ session.get_live_absolute_url }}" title="{{ session.name }}">{% trans 'live'|capfirst %}</a>
+					<a href="{{ session.get_absolute_url }}" title="{{ session.name }}">{% trans 'live'|capfirst %}</a>
 				{% endif %}
                 {% if session.status != 'Fixture' and session.status != 'Played' and session.status != 'Playing' %}
-					<a href="{{ session.get_live_absolute_url }}" title="{{ session.name }}">{% trans session.status %}</a>
+					<a href="{{ session.get_absolute_url }}" title="{{ session.name }}">{% trans session.status %}</a>
                 {% endif %}
                 </td>
 			{% endblock %}
