@@ -687,6 +687,11 @@ class Sync(object):
             except:
                 continue
 
+        if date == '0000-00-00':
+            self.log('error', 'Has 0000-00-00 %s #%s' % (e.tag,
+                e.attrib.get('%s_id' % e.tag)))
+            return True
+
         if date:
             date = string_to_datetime(date)
             date = london.localize(date)
