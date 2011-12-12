@@ -91,4 +91,8 @@ class Command(BaseCommand):
 
         delta = local.localize(datetime.datetime.now()) + datetime.timedelta(minutes=7) - now
         status['last_updated'] = now - delta
-        self.store_status(status)
+        
+        if not args:
+            self.store_status(status)
+        
+        print "DONE UPDATING", status
