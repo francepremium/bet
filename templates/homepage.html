@@ -7,55 +7,64 @@
 {% block body_class %}home{% endblock %}
 
 {% block body %}
-    by profit
-    <table>
-        <tr>
-            <th>{% trans 'picker' %}</th>
-            <th>{% trans 'profitability' %}</th>
-            <th>{% trans 'bets' %}</th>
-            <th>{% trans 'profit' %}</th>
-        </tr>
-        {% for user in users_by_profit %}
-        <tr>
-            <td>
-                <a href="{{ user.get_absolute_url }}" title="{{ user }}">{{ user }}</a>
-            </td>
-            <td>
-                {{ user.betprofile.profitability }} %
-            </td>
-            <td>
-                {{ user.ticket_set.count }}
-            </td>
-            <td>
-                {{ user.betprofile.profit }}
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-
-    by profitability
-    <table>
-        <tr>
-            <th>{% trans 'picker' %}</th>
-            <th>{% trans 'profitability' %}</th>
-            <th>{% trans 'bets' %}</th>
-            <th>{% trans 'profit' %}</th>
-        </tr>
-        {% for user in users_by_profitability %}
-        <tr>
-            <td>
-                <a href="{{ user.get_absolute_url }}" title="{{ user }}">{{ user }}</a>
-            </td>
-            <td>
-                {{ user.betprofile.profitability }} %
-            </td>
-            <td>
-                {{ user.ticket_set.count }}
-            </td>
-            <td>
-                {{ user.betprofile.profit }}
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+    <div style="display: inline-block">
+        <h2>{% trans 'by profit' %}</h2>
+        <table>
+            <tr>
+                <th>{% trans 'picker' %}</th>
+                <th>{% trans 'profitability' %}</th>
+                <th>{% trans 'bets' %}</th>
+                <th>{% trans 'profit' %}</th>
+            </tr>
+            {% for user in users_by_profit %}
+            <tr>
+                <td>
+                    <a href="{{ user.get_absolute_url }}" title="{{ user }}">{{ user }}</a>
+                </td>
+                <td>
+                    {{ user.betprofile.profitability }} %
+                </td>
+                <td>
+                    {{ user.ticket_set.count }}
+                </td>
+                <td>
+                    {{ user.betprofile.profit }}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% if request.user.is_staff %}
+            {% trans 'user count' %}: {{ user_count }}
+        {% endif %}
+    </div>
+    <div style="display: inline-block">
+        <h2>{% trans 'by profitability' %}</h2>
+        <table>
+            <tr>
+                <th>{% trans 'picker' %}</th>
+                <th>{% trans 'profitability' %}</th>
+                <th>{% trans 'bets' %}</th>
+                <th>{% trans 'profit' %}</th>
+            </tr>
+            {% for user in users_by_profitability %}
+            <tr>
+                <td>
+                    <a href="{{ user.get_absolute_url }}" title="{{ user }}">{{ user }}</a>
+                </td>
+                <td>
+                    {{ user.betprofile.profitability }} %
+                </td>
+                <td>
+                    {{ user.ticket_set.count }}
+                </td>
+                <td>
+                    {{ user.betprofile.profit }}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% if request.user.is_staff %}
+            {% trans 'pending email confirmations' %}: {{ pending_confirmation_count }}
+        {% endif %}
+    </div>
 {% endblock %}

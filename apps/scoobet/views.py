@@ -14,6 +14,7 @@ from endless_pagination.decorators import page_template
 from django.core import urlresolvers
 from django import db
 
+from emailconfirmation.models import EmailConfirmation
 from actstream.models import actor_stream, Follow, Action
 
 from bookmaker.models import *
@@ -43,6 +44,8 @@ def homepage(request,
     context = {
         'users_by_profitability': qs.order_by('-betprofile__profitability')[:7],
         'users_by_profit': qs.order_by('-betprofile__profit')[:7],
+        'user_count': User.objects.all().count(),
+        'pending_confirmation_count': EmailConfirmation.objects.all().count(),
     }
     return shortcuts.render_to_response(template_name, context,
         context_instance=template.RequestContext(request))
