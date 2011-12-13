@@ -1,0 +1,18 @@
+{% load i18n %}{% blocktrans with current_site.name as site_name %}
+Cher pronostiqueur,
+
+Vous n’êtes plus qu’à un clic de Betspire, le site qui fera de vous un
+meilleur pronostiqueur !
+
+IMPORTANT: Une fois votre inscription confirmée, vous devrez utiliser
+l’adresse suivante pour accéder à la version Beta de Betspire :
+http://betspire.com/fr/account/login/
+
+Pour confirmer votre inscription, veuillez cliquer sur le lien suivant : 
+{{ activate_url }}
+
+A très bientôt sur Betspire, 
+
+---
+L’Equipe Betspire
+{% endblocktrans %}
