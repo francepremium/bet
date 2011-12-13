@@ -51,7 +51,6 @@ urlpatterns = patterns("",
         'template': 'terms.html'}, name='terms'),
     url(r'^robots.txt', direct_to_template, {
         'template': 'robots.txt'}, name='robots_txt'),
-    (r'^pages/', include('gnocchi.cms.urls')),
 )
 
 

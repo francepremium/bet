@@ -1,0 +1,16 @@
+{% extends 'site_base.html' %}
+
+{% load markup %}
+
+{% block head_title %}{{ flatpage.title }}{% endblock %}
+
+{% block extra_head %}
+{{ block.super }}
+{{ flatpage.extra_style|safe }}
+{{ flatpage.extra_head|safe }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ flatpage.title }}</h1>
+    {{ flatpage.content|markdown }}
+{% endblock %}

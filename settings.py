@@ -14,10 +14,6 @@ LANGUAGE_CODE = 'fr'
 TIME_ZONE = 'Europe/Paris'
 
 
-TEMPLATE_LOADERS = ('django.template.loaders.filesystem.Loader',
- 'django.template.loaders.app_directories.Loader',
- 'gnocchi.cms.loaders.Loader',)
-
 TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.auth',
     'django.core.context_processors.debug',
@@ -30,7 +26,6 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'bet.context_processors.incomplete_ticket',
     'scoobet.context_processors.inbox_count',
     'gsm.context_processors.available_timezones',
-    'gnocchi.cms.context.context_variables',
     'context_processors.save_user_locale',
 ]
 
@@ -47,10 +42,13 @@ MIDDLEWARE_CLASSES = [
     'beta.middleware.LoginMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     #'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'pagination.middleware.PaginationMiddleware',
     'gsm.middleware.TimezoneMiddleware',
     'middleware.ExceptionMiddleware',
 ]
+
+APPEND_SLASH = True
 
 EXCEPTION_MIDDLEWARE_HANDLES = [
     'HtmlInsteadOfXml',
@@ -72,6 +70,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'django.contrib.comments',
     'django.contrib.markup',
+    'django.contrib.flatpages',
     
     'pinax.templatetags',
     'emailconfirmation',
@@ -114,9 +113,6 @@ INSTALLED_APPS = [
     'bookmaker',
     'bet',
 
-    #cms
-    'gnocchi.tools',
-    'gnocchi.cms',
 
     # this must be at the end because it monkey patches the admin
     'scoobet',

@@ -1,4 +1,5 @@
 from modeltranslation.translator import translator, TranslationOptions
+from django.contrib.flatpages.models import FlatPage
 
 from bookmaker.models import *
 from gsm.models import *
@@ -17,3 +18,7 @@ class NameTranslation(TranslationOptions):
 translator.register(Area, NameTranslation)
 translator.register(BetChoice, NameTranslation)
 translator.register(BetType, NameTranslation)
+
+class FlatPageTranslation(TranslationOptions):
+    fields = ('title', 'content')
+translator.register(FlatPage, FlatPageTranslation)
