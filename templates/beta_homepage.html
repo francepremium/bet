@@ -33,9 +33,10 @@
                     <p>
                         Si vous avez la chance d'avoir reçu une invitation, merci d'entrer vos identifiants ci-dessous:
                     </p>
-                    <form method="post" url="{% url acct_login %}">
+                    <form method="post" action="{% url acct_login %}">
                         {% csrf_token %}
-                        <input type="text" value="Nom d'utilisateur" id="username_fr"/><input type="text" value="Votre mot de passe" id="password_fr"/><input type="submit" value="ok" class="submit" />
+                        <input name="username" type="text" value="Nom d'utilisateur" id="username_fr" /><input name="password" type="text" value="Votre mot de passe" id="password_fr" /><input type="submit" value="ok" class="submit" />
+                        <input type="hidden" name="next" value="/" />
                     </form>
                 </fieldset>
             </div>
@@ -44,13 +45,21 @@
                     <legend>
                         Envie d'être invité?
                     </legend>
+                    {% if lead %}
+                    <p>Merci d'avoir soumis votre email. Vous receverez une invitation prochainement</p>
+                    {% else %}
                     <p>
                         Si vous souhaitez recevoir une invitation, merci de renseigner votre adresse e-mail ci-dessous:
                     </p>
                     <form method="post" action="{% url beta_homepage %}">
                         {% csrf_token %}
-                        <input type="mail" value="Adresse e-mail" id="email_fr" /><input type="submit" value="ok" class="submit" />
+                        <div class="errors">
+                            {{ form.email.errors }}
+                        </div>
+
+                        <input type="text" value="Adresse e-mail" id="email_fr" name="email" /><input type="submit" value="ok" class="submit" />
                     </form>
+                    {% endif %}
                 </fieldset>
             </div><hr/>
             <div class="en_title">
@@ -67,9 +76,10 @@
                     <p>
                         If you were lucky to get an invite, please enter your username and password below:
                     </p>
-                    <form method="post" url="{% url acct_login %}">
+                    <form method="post" action="{% url acct_login %}">
                         {% csrf_token %}
-                         <input type="text" value="Username" id="username_en"/><input type="text" value="Password" id="password_en" /><input type="submit" value="ok" class="submit" />
+                        <input type="hidden" name="next" value="/" />
+                         <input type="text" value="Username" id="username_en" name="username" /><input name="password" type="text" value="Password" id="password_en" /><input type="submit" value="ok" class="submit" />
                     </form>
                 </fieldset>
             </div>
@@ -78,13 +88,21 @@
                     <legend>
                         Want to be invited?
                     </legend>
+                    {% if lead %}
+                    <p>Thanks for submiting your email. You will receive an invitation shortly</p>
+                    {% else %}
                     <p>
                         If you wanted to receive an invite, please enter your e-mail address below:
                     </p>
                     <form method="post" action="{% url beta_homepage %}">
+                        <div class="errors">
+                            {{ form.email.errors }}
+                        </div>
+
                         {% csrf_token %}
-                        <input type="mail" value="E-mail address" id="password_en" /><input type="submit" value="ok" class="submit" />
+                        <input type="text" value="E-mail address" name="email" id="email_en" /><input type="submit" value="ok" class="submit" />
                     </form>
+                    {% endif %}
                 </fieldset>
             </div>
             <div class="clear">
