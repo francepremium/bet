@@ -187,6 +187,7 @@ def user_detail(request, username, tab='activities',
                 target_object_id = user.pk
             )
         ).order_by('-timestamp').distinct()
+        context['page_template'] = 'auth/user_activities_page.html'
     elif tab == 'social':
         context['follower_list'] = user.follows()
         context['following_list'] = user.following()
@@ -194,7 +195,6 @@ def user_detail(request, username, tab='activities',
             context['paginate_list'] = context['follower_list']
         else:
             context['paginate_list'] = context['following_list']
-        context['page_template'] = 'auth/user_social_page.html'
     elif tab == 'picks':
         context['bet_list_helper'] = BetListHelper(request, ticket__user=user,
             exclude_filters=['bettype', 'sport', 'competition', 'has_text', 'has_upload'])
