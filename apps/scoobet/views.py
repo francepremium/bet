@@ -187,7 +187,6 @@ def user_detail(request, username, tab='activities',
                 target_object_id = user.pk
             )
         ).order_by('-timestamp').distinct()
-        context['page_template'] = 'auth/user_activities_page.html'
     elif tab == 'social':
         context['follower_list'] = user.follows()
         context['following_list'] = user.following()

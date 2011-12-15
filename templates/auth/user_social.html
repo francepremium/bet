@@ -1,4 +1,5 @@
 {% extends 'auth/user_base.html' %}
+{% load i18n scoobet_tags %}
 
 {% block extra_css %}
 div.follower {
@@ -22,5 +23,9 @@ div.follower, div.following {
 
 {% block body %}
     {{ block.super }}
-    {% include page_template %}
+
+    <h2>{% trans 'following' %}</h2>
+    {% render_user_list request following_list %}
+    <h2>{% trans 'follows' %}</h2>
+    {% render_user_list request follower_list %}
 {% endblock %}

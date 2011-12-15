@@ -97,7 +97,7 @@
         </div>
         <script type="text/javascript">
         var default_values = {};
-        $('input').each(function() {
+        $('input[type=text]').each(function() {
             default_values[$(this).attr('id')] = $(this).val();
             $(this).click(function() {
                 if ($(this).val() == default_values[$(this).attr('id')]) {
