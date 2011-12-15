@@ -7,7 +7,10 @@
 {% block body_class %}home{% endblock %}
 
 {% block body %}
-    <div style="display: inline-block">
+	<div class="title">
+		<h1>titre public</h1>
+	</div>
+    <div class="leaderboard">
         <h2>{% trans 'by profit' %}</h2>
         <table>
             <tr>
@@ -37,7 +40,7 @@
             {% trans 'user count' %}: {{ user_count }}
         {% endif %}
     </div>
-    <div style="display: inline-block">
+    <div class="leaderboard last">
         <h2>{% trans 'by profitability' %}</h2>
         <table>
             <tr>
