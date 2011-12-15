@@ -176,6 +176,8 @@ tr.odd td { background-color:#f7f7f7; }
 .log_gen div.forms form input.submit{text-transform:uppercase;width:30px;background:#2e3747;border:1px solid #1f2328;color:#fff;cursor:pointer;margin:0;}
 .log_gen fieldset{padding:10px;margin:10px 0 0 0;}
 .log_gen legend{color:#394250;font-size:16px;font-weight:bold;}
+.log_gen p.forgot{clear:both;padding:5px 0 0 0}
+.log_gen p.forgot a{text-decoration:underline;font-size:10px; color:#666}
 
 /* Home */
 .home div.leaderboard{display:inline-block;width:310px;padding:0 5px 0 0}

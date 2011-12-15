@@ -35,9 +35,10 @@
                     </p>
                     <form method="post" action="{% url acct_login %}">
                         {% csrf_token %}
-                        <input name="username" type="text" value="Nom d'utilisateur" id="username_fr" /><input name="password" type="text" value="Votre mot de passe" id="password_fr" /><input type="submit" value="ok" class="submit" />
+                        <input name="username" type="text" value="Nom d'utilisateur" id="username_fr" /><input name="password" type="password" value="Votre mot de passe" id="password_fr" /><input type="submit" value="ok" class="submit" />
                         <input type="hidden" name="next" value="/" />
                     </form>
+                    <p  class="forgot"><a href="{% url acct_passwd_reset %}">Mot de passe oublié ?</a></p>
                 </fieldset>
             </div>
             <div class="forms last">
@@ -79,8 +80,9 @@
                     <form method="post" action="{% url acct_login %}">
                         {% csrf_token %}
                         <input type="hidden" name="next" value="/" />
-                         <input type="text" value="Username" id="username_en" name="username" /><input name="password" type="text" value="Password" id="password_en" /><input type="submit" value="ok" class="submit" />
+                         <input type="text" value="Username" id="username_en" name="username" /><input name="password" type="password" value="Password" id="password_en" /><input type="submit" value="ok" class="submit" />
                     </form>
+                    <p  class="forgot"><a href="{% url acct_passwd_reset %}" >Forgot your password ?</a></p>
                 </fieldset>
             </div>
             <div class="forms last">
@@ -120,10 +122,16 @@
             $(this).click(function() {
                 if ($(this).val() == default_values[$(this).attr('id')]) {
                     $(this).val('')
+                    if ($(this).attr('name') == 'password') {
+                        this.type = 'password'
+                    }
                 }
             });
             $(this).blur(function() {
                 if ($(this).val() == '') {
+                    if ($(this).attr('type') == 'password') {
+                        this.type = 'text'
+                    }
                     $(this).val(default_values[$(this).attr('id')]);
                 }
             });
