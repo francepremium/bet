@@ -97,7 +97,9 @@ table.bettype table.choices {
 				<input type="hidden" name="timezone_offset" />
 			</form>
 		</div>
-
+		<div id="logout">
+			<a href="{% url acct_logout %}">{% trans 'logout' %}</a>
+		</div>
 		<div id="signup">
 			{% if not request.user.is_authenticated %}
 			{#<a href="{% url acct_signup %}">{% trans 'sign up' %}</a>#}
@@ -241,9 +243,9 @@ table.bettype table.choices {
 				<li class="settings">
 					<a href="{% url acct_email %}">{% trans 'settings' %}</a>
 				</li>
-				<li class="logout">
+				<!--<li class="logout">
 					<a href="{% url acct_logout %}">{% trans 'logout' %}</a>
-				</li>
+				</li>-->
 			</ul>
         {% endif %}
         </div>

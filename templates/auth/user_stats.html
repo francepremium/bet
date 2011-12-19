@@ -1,154 +1,151 @@
 {% extends 'auth/user_base.html' %}
 {% load i18n %}
-
 {% block body %}
-    {{ block.super }}
-
-    {% if empty %}
-        {{ object }} {% trans 'did not place any ticket that was fully corrected yet' %}
-    {% else %}
-        {{ bet_list_helper.render_form }}
-
-        <div>
-            <table style="display: inline-block">
-                <tr>
-                    <th>{% trans 'total ticket count for your search' %}</th>
-                    <td>{{ bet_list_helper.ticket_qs|length }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans 'won' %}</th>
-                    <td>{{ won_ticket_count }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans 'lost' %}</th>
-                    <td>{{ lost_ticket_count }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans 'won percent' %}</th>
-                    <td>{{ won_ticket_percent }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans 'average odds' %}</th>
-                    <td>{{ average_odds }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans 'average stake' %}</th>
-                    <td>{{ average_stake }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans 'total engaged units' %}</th>
-                    <td>{{ total_stake }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans 'total earnings' %}</th>
-                    <td>{{ total_earnings }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans 'profit/loss' %}</th>
-                    <td>{{ profit }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans 'profitability' %}</th>
-                    <td>{{ profitability }}%</td>
-                </tr>
-            </table>
-
-            <div id="container_pie" style="display: inline-block; width: 600px; height: 300px; margin: 0 auto; "></div>
-        </div>
-
-        <div id="container_lines" style="width: 700px; height: 400px; margin: 0 auto"></div>
-
-        {{ bet_list_helper.render_ticket_table }}
-    {% endif %}
+{{ block.super }}<h2>filtrer</h2>
+{% if empty %}
+{{ object }} {% trans 'did not place any ticket that was fully corrected yet' %}
+{% else %}
+{{ bet_list_helper.render_form }}<h2>{% trans 'tickets for your search' %}
+    {{ bet_list_helper.ticket_qs|length }}</h2>
+<div class="section">
+    <div class="ticket">
+        <p>
+            <span class="label">{% trans 'won' %}</span>
+            <span>{{ won_ticket_count }}</span>
+        </p>
+        <p>
+            <span class="label">{% trans 'lost' %}</span>
+            <span>{{ lost_ticket_count }}</span>
+        </p>
+        <hr/>
+        <p>
+            <span class="label">{% trans 'won percent' %}</span>
+            <span>{{ won_ticket_percent }}</span>
+        </p>
+        <p>
+            <span class="label">{% trans 'average odds' %}</span>
+            <span>{{ average_odds }}</span>
+        </p>
+        <p>
+            <span class="label">{% trans 'average stake' %}</span>
+            <span>{{ average_stake }}</span>
+        </p>
+        <p>
+            <span class="label">{% trans 'total engaged units' %}</span>
+            <span>{{ total_stake }}</span>
+        </p>
+        <hr/>
+        <p>
+            <span class="label">{% trans 'total earnings' %}</span>
+            <span>{{ total_earnings }}</span>
+        </p>
+        <p>
+            <span class="label">{% trans 'profit/loss' %}</span>
+            <span>{{ profit }}</span>
+        </p>
+        <p>
+            <span class="label">{% trans 'profitability' %}</span>
+            <span>{{ profitability }}%</span>
+        </p>
+    </div>
+    <div id="container_pie" style="display: inline-block; width: 600px; height: 300px; margin: 0 auto; ">
+    </div>
+</div>
+<h2>Historique</h2>
+<div class="section">
+    <div id="container_lines" style="width: 700px; height: 400px; margin: 0 auto">
+    </div>
+    {{ bet_list_helper.render_ticket_table }}
+</div>
+{% endif %}
 {% endblock %}
-
 {% block extra_body %}
 {% include 'highcharts.html' %}
 <script type="text/javascript">
-var chart;
-$(document).ready(function() {
-   chart_lines = new Highcharts.Chart({
-      chart: {
-         renderTo: 'container_lines',
-         defaultSeriesType: 'line',
-         marginRight: 130,
-         marginBottom: 25
-      },
-      title: {
-         text: '',
-      },
-      xAxis: {
-         categories: [{% for ticket in bet_list_helper.ticket_qs %}'{{ ticket }}'{% if not forloop.last %}, {% endif %}{% endfor %}]
-      },
-      yAxis: {
-         title: {
-            text: '{% trans 'balance' %}'
-         },
-         plotLines: [{
-            value: 0,
-            width: 1,
-            color: '#808080'
-         }]
-      },
-      tooltip: {
-         formatter: function() {
-            return '{% trans 'new balance after ticket' %} ' + this.x + ': <b>' + this.y + '</b>';
-         }
-      },
-      legend: {
-         layout: 'vertical',
-         align: 'right',
-         verticalAlign: 'top',
-         x: -10,
-         y: 100,
-         borderWidth: 0
-      },
-      series: [{
-         data: [{% for balance in balance_history %}{{ balance.balance }}{% if not forloop.last %}, {% endif %}{% endfor %}],
-         showInLegend: false
-      }]
-   });
-   
-   
-   chart_pie = new Highcharts.Chart({
-       chart: {
-           renderTo: 'container_pie',
-           plotBackgroundColor: null,
-           plotBorderWidth: null,
-           plotShadow: false
-       },
-       tooltip: {
-           formatter: function() {
-               return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
-           }
-       },
-       title: {
-            text: '',
-       },
-       plotOptions: {
-           pie: {
-               allowPointSelect: true,
-               cursor: 'pointer',
-               dataLabels: {
-                   enabled: true,
-                   color: '#000000',
-                   connectorColor: '#000000',
-                   formatter: function() {
-                       return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
-                   }
-               }
-           }
-       },
-       series: [{
-           type: 'pie',
-           name: '{% trans 'choice share' %}',
-           data: [
-                ['{% trans 'won' %}', {{ won_ticket_percent }}],
-                ['{% trans 'lost' %}', {{ lost_ticket_percent }}]
-           ]
-       }]
-   });
-
-});
+                var chart;
+                $(document).ready(function() {
+                   chart_lines = new Highcharts.Chart({
+                      chart: {
+                         renderTo: 'container_lines',
+                         defaultSeriesType: 'line',
+                         marginRight: 130,
+                         marginBottom: 25
+                      },
+                      title: {
+                         text: '',
+                      },
+                      xAxis: {
+                         categories: [{% for ticket in bet_list_helper.ticket_qs %}'{{ ticket }}'{% if not forloop.last %}, {% endif %}{% endfor %}]
+                      },
+                      yAxis: {
+                         title: {
+                            text: '{% trans 'balance' %}'
+                         },
+                         plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                         }]
+                      },
+                      tooltip: {
+                         formatter: function() {
+                            return '{% trans 'new balance after ticket' %} ' + this.x + ': <b>' + this.y + '</b>';
+                         }
+                      },
+                      legend: {
+                         layout: 'vertical',
+                         align: 'right',
+                         verticalAlign: 'top',
+                         x: -10,
+                         y: 100,
+                         borderWidth: 0
+                      },
+                      series: [{
+                         data: [{% for balance in balance_history %}{{ balance.balance }}{% if not forloop.last %}, {% endif %}{% endfor %}],
+                         showInLegend: false
+                      }]
+                   });
+                   
+                   
+                   chart_pie = new Highcharts.Chart({
+                       chart: {
+                           renderTo: 'container_pie',
+                           plotBackgroundColor: null,
+                           plotBorderWidth: null,
+                           plotShadow: false
+                       },
+                       tooltip: {
+                           formatter: function() {
+                               return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
+                           }
+                       },
+                       title: {
+                            text: '',
+                       },
+                       plotOptions: {
+                           pie: {
+                               allowPointSelect: true,
+                               cursor: 'pointer',
+                               dataLabels: {
+                                   enabled: true,
+                                   color: '#000000',
+                                   connectorColor: '#000000',
+                                   formatter: function() {
+                                       return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
+                                   }
+                               }
+                           }
+                       },
+                       series: [{
+                           type: 'pie',
+                           name: '{% trans 'choice share' %}',
+                           data: [
+                                ['{% trans 'won' %}', {{ won_ticket_percent }}],
+                                ['{% trans 'lost' %}', {{ lost_ticket_percent }}]
+                           ]
+                       }]
+                   });
+                
+                });
 </script>
 {% endblock %}

@@ -1,31 +1,43 @@
 {% extends 'auth/user_base.html' %}
 {% load i18n scoobet_tags %}
-
 {% block extra_css %}
 div.follower {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 300px;
-    display: inline-block;
+position: relative;
+top: 0;
+left: 0;
+width: 300px;
+display: inline-block;
 }
 div.following {
-    position: relative;
-    top: 0;
-    right: 0;
-    width: 300px;
-    display: inline-block;
+position: relative;
+top: 0;
+right: 0;
+width: 300px;
+display: inline-block;
 }
 div.follower, div.following {
-    vertical-align: top;
+vertical-align: top;
 }
 {% endblock %}
-
 {% block body %}
-    {{ block.super }}
+{{ block.super }}
 
-    <h2>{% trans 'following' %}</h2>
+<div class="tabs">
+    <ul>
+        <li class="tab_link tab_id_current">
+            {% trans 'following' %}
+        </li>
+        <li class="tab_link tab_id_statistics">
+            {% trans 'follows' %}
+        </li>
+    </ul>
+</div>
+<div class="squad tab_content tab_id_current">
     {% render_user_list request following_list %}
-    <h2>{% trans 'follows' %}</h2>
+	<div class="clear"></div>
+	</div>
+<div class="squad tab_content tab_id_statistics">
     {% render_user_list request follower_list %}
+	<div class="clear"></div>
+</div>
 {% endblock %}

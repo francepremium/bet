@@ -3,56 +3,63 @@
 {% block body %}
     {{ block.super }}
 
-    <ul>
-        {% for bookmaker in object.bookmaker_set.all %}
-        <li>
-            <a href="{{ bookmaker.get_absolute_url }}" title="{{ bookmaker }}">{{ bookmaker }}</a>
-        </li>
-        {% endfor %}
-    </ul>
-
-    <ul>
-        {% for sport in object.sport_set.all %}
-        <li>
-            <a href="{{ sport.get_absolute_url }}" title="{{ sport }}">{{ sport }}</a>
-        </li>
-        {% endfor %}
-    </ul>
-
-    <ul>
-        {% for session in object.session_set.all %}
-        <li>
-            <a href="{{ session.get_absolute_url }}" title="{{ session }}">{{ session }}</a>
-        </li>
-        {% endfor %}
-    </ul>
-
-    <ul>
-        {% for competition in object.competition_set.all %}
-        <li>
-            <a href="{{ competition.get_absolute_url }}" title="{{ competition }}">{{ competition }}</a>
-        </li>
-        {% endfor %}
-    </ul>
-
-    <ul>
+	<h2>Bookmaker favoris</h2>
+	<div class="section">
+    	<ul>
+        	{% for bookmaker in object.bookmaker_set.all %}
+        	<li>
+            	<a href="{{ bookmaker.get_absolute_url }}" title="{{ bookmaker }}"><img src="" alt="{{ bookmaker }}" /></a>
+				<a href="{{ bookmaker.get_absolute_url }}" title="{{ bookmaker }}">{{ bookmaker }}</a>
+        	</li>
+        	{% endfor %}
+    	</ul>
+	</div>
+	<h2>Sport favoris</h2>
+	<div class="section">
+    	<ul>
+        	{% for sport in object.sport_set.all %}
+        	<li>
+           		<a href="{{ sport.get_absolute_url }}" title="{{ sport }}" class="image"><img src="" alt="{{ sport }}"></a>
+				<a href="{{ sport.get_absolute_url }}" title="{{ sport }}">{{ sport }}</a>
+        	</li>
+        	{% endfor %}
+    	</ul>
+	</div>
+	<h2>Competition favorites</h2>
+	<div class="section">
+		<ul>
+        	{% for competition in object.competition_set.all %}
+        	<li>
+        		<a href="{{ competition.get_absolute_url }}" title="{{ competition }}" class="image"><img src="" alt="{{ competition }}"></a>
+            	<a href="{{ competition.get_absolute_url }}" title="{{ competition }}">{{ competition }}</a>
+        	</li>
+        	{% endfor %}
+    	</ul>
+	</div>
+	<h2>Equipe favoris</h2>
+	<div class="section">	
+    	<ul>
         {% for entity in object.gsmentity_set.all %}
             {% if entity.tag == 'team' %}
             <li>
+            	<a href="{{ entity.get_absolute_url }}" title="{{ entity }}" class="image"><img src="" alt="{{ entity }}"></a>
                 <a href="{{ entity.get_absolute_url }}" title="{{ entity }}">{{ entity }}</a>
-            </li>
+			</li>
             {% endif %}
         {% endfor %}
     </ul>
-
-    <ul>
-        {% for entity in object.gsmentity_set.all %}
-            {% if entity.tag == 'person' %}
-            <li>
-                <a href="{{ entity.get_absolute_url }}" title="{{ entity }}">{{ entity }}</a>
-            </li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-
+	</div>
+	<h2>Sportif favoris</h2>
+	<div class="section">
+   		<ul>
+        	{% for entity in object.gsmentity_set.all %}
+            	{% if entity.tag == 'person' %}
+            	<li>
+            		<a href="{{ entity.get_absolute_url }}" title="{{ entity }}" class="image"><img src="" alt="{{ entity }}"></a>
+                	<a href="{{ entity.get_absolute_url }}" title="{{ entity }}">{{ entity }}</a>
+            	</li>
+            	{% endif %}
+        	{% endfor %}
+    	</ul>
+	</div>
 {% endblock %}
