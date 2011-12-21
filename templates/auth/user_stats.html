@@ -19,10 +19,6 @@
         </p>
         <hr/>
         <p>
-            <span class="label">{% trans 'won percent' %}</span>
-            <span>{{ won_ticket_percent }}</span>
-        </p>
-        <p>
             <span class="label">{% trans 'average odds' %}</span>
             <span>{{ average_odds }}</span>
         </p>
@@ -34,10 +30,14 @@
             <span class="label">{% trans 'total engaged units' %}</span>
             <span>{{ total_stake }}</span>
         </p>
-        <hr/>
         <p>
             <span class="label">{% trans 'total earnings' %}</span>
             <span>{{ total_earnings }}</span>
+        </p>
+        <hr/>
+        <p>
+            <span class="label">{% trans 'won percent' %}</span>
+            <span>{{ won_ticket_percent }}</span>
         </p>
         <p>
             <span class="label">{% trans 'profit/loss' %}</span>
@@ -48,7 +48,9 @@
             <span>{{ profitability }}%</span>
         </p>
     </div>
-    <div id="container_pie" style="display: inline-block; width: 600px; height: 300px; margin: 0 auto; ">
+    <div id="container_pie" style=" width: 300px; height: 130px;  ">
+    </div>
+    <div class="clear">
     </div>
 </div>
 <h2>Historique</h2>
@@ -62,90 +64,90 @@
 {% block extra_body %}
 {% include 'highcharts.html' %}
 <script type="text/javascript">
-                var chart;
-                $(document).ready(function() {
-                   chart_lines = new Highcharts.Chart({
-                      chart: {
-                         renderTo: 'container_lines',
-                         defaultSeriesType: 'line',
-                         marginRight: 130,
-                         marginBottom: 25
-                      },
-                      title: {
-                         text: '',
-                      },
-                      xAxis: {
-                         categories: [{% for ticket in bet_list_helper.ticket_qs %}'{{ ticket }}'{% if not forloop.last %}, {% endif %}{% endfor %}]
-                      },
-                      yAxis: {
-                         title: {
-                            text: '{% trans 'balance' %}'
-                         },
-                         plotLines: [{
-                            value: 0,
-                            width: 1,
-                            color: '#808080'
-                         }]
-                      },
-                      tooltip: {
-                         formatter: function() {
-                            return '{% trans 'new balance after ticket' %} ' + this.x + ': <b>' + this.y + '</b>';
-                         }
-                      },
-                      legend: {
-                         layout: 'vertical',
-                         align: 'right',
-                         verticalAlign: 'top',
-                         x: -10,
-                         y: 100,
-                         borderWidth: 0
-                      },
-                      series: [{
-                         data: [{% for balance in balance_history %}{{ balance.balance }}{% if not forloop.last %}, {% endif %}{% endfor %}],
-                         showInLegend: false
-                      }]
-                   });
-                   
-                   
-                   chart_pie = new Highcharts.Chart({
-                       chart: {
-                           renderTo: 'container_pie',
-                           plotBackgroundColor: null,
-                           plotBorderWidth: null,
-                           plotShadow: false
-                       },
-                       tooltip: {
-                           formatter: function() {
-                               return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
-                           }
-                       },
-                       title: {
-                            text: '',
-                       },
-                       plotOptions: {
-                           pie: {
-                               allowPointSelect: true,
-                               cursor: 'pointer',
-                               dataLabels: {
-                                   enabled: true,
-                                   color: '#000000',
-                                   connectorColor: '#000000',
-                                   formatter: function() {
-                                       return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
+                    var chart;
+                    $(document).ready(function() {
+                       chart_lines = new Highcharts.Chart({
+                          chart: {
+                             renderTo: 'container_lines',
+                             defaultSeriesType: 'line',
+                             marginRight: 130,
+                             marginBottom: 25
+                          },
+                          title: {
+                             text: '',
+                          },
+                          xAxis: {
+                             categories: [{% for ticket in bet_list_helper.ticket_qs %}'{{ ticket }}'{% if not forloop.last %}, {% endif %}{% endfor %}]
+                          },
+                          yAxis: {
+                             title: {
+                                text: '{% trans 'balance' %}'
+                             },
+                             plotLines: [{
+                                value: 0,
+                                width: 1,
+                                color: '#808080'
+                             }]
+                          },
+                          tooltip: {
+                             formatter: function() {
+                                return '{% trans 'new balance after ticket' %} ' + this.x + ': <b>' + this.y + '</b>';
+                             }
+                          },
+                          legend: {
+                             layout: 'vertical',
+                             align: 'right',
+                             verticalAlign: 'top',
+                             x: -10,
+                             y: 100,
+                             borderWidth: 0
+                          },
+                          series: [{
+                             data: [{% for balance in balance_history %}{{ balance.balance }}{% if not forloop.last %}, {% endif %}{% endfor %}],
+                             showInLegend: false
+                          }]
+                       });
+                       
+                       
+                       chart_pie = new Highcharts.Chart({
+                           chart: {
+                               renderTo: 'container_pie',
+                               plotBackgroundColor: null,
+                               plotBorderWidth: null,
+                               plotShadow: false
+                           },
+                           tooltip: {
+                               formatter: function() {
+                                   return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
+                               }
+                           },
+                           title: {
+                                text: '',
+                           },
+                           plotOptions: {
+                               pie: {
+                                   allowPointSelect: true,
+                                   cursor: 'pointer',
+                                   dataLabels: {
+                                       enabled: true,
+                                       color: '#000000',
+                                       connectorColor: '#000000',
+                                       formatter: function() {
+                                           return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
+                                       }
                                    }
                                }
-                           }
-                       },
-                       series: [{
-                           type: 'pie',
-                           name: '{% trans 'choice share' %}',
-                           data: [
-                                ['{% trans 'won' %}', {{ won_ticket_percent }}],
-                                ['{% trans 'lost' %}', {{ lost_ticket_percent }}]
-                           ]
-                       }]
-                   });
-                
-                });
+                           },
+                           series: [{
+                               type: 'pie',
+                               name: '{% trans 'choice share' %}',
+                               data: [
+                                    ['{% trans 'won' %}', {{ won_ticket_percent }}],
+                                    ['{% trans 'lost' %}', {{ lost_ticket_percent }}]
+                               ]
+                           }]
+                       });
+                    
+                    });
 </script>
 {% endblock %}

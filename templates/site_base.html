@@ -126,6 +126,14 @@ table.bettype table.choices {
 			<ul>
 				<li class="image">
 					<a href="{% url scoobet_feed_friends %}">{% avatar user %}</a>
+                    <span class="link" id="avatar_form_toggle">{% trans 'change avatar' %}</span>
+                    <div style="display:none" id="avatar_form">
+                        <form enctype="multipart/form-data" method="post" action="{% url scoobet_upload_avatar %}">
+                            {% csrf_token %}
+                            <input type="file" name="avatar" />
+                            <input type="submit" value="{% trans 'Upload avatar' %}" />
+                        </form>
+                    </div>
 				</li>
 				<li>
 					<a href="{% url user_detail request.user.username %}">{{ request.user.username }}</a>
@@ -217,7 +225,7 @@ table.bettype table.choices {
 				<li class="friends_bets">
 					<a href="{% url bet_list_tab 'friends' %}">{% trans "friend's bets" %}</a>
 				</li>
-				{% if request.user.betprofile.is_referee %}
+				{% if request.user.is_staff %}
 				<li class="flagded_bets">
 					<a href="{% url bet_list_flagged %}">{% trans 'Flagged bets' %}</a>
 				</li>
@@ -228,7 +236,7 @@ table.bettype table.choices {
 					</div>
 				</li>
 				<li class="statistics">
-					<a href="{% url user_detail_tab request.user.username 'stats' %}">{% trans 'stats' %}</a>
+					<a href="{% url user_detail_tab request.user.username 'stats' %}" title="{% trans 'Your statistics' %}">{% trans 'stats' %}</a>
 				</li>
 				<li class="subscription friends">
 					<div class="dropdown outer friends" id="subscription_dropdown_friends">
@@ -241,7 +249,7 @@ table.bettype table.choices {
 					</div>
 				</li>
 				<li class="settings">
-					<a href="{% url acct_email %}">{% trans 'settings' %}</a>
+					<a href="{% url acct_email %}" title="{% trans 'Your account settings: timezone, email, password, avatar ...' %}">{% trans 'settings' %}</a>
 				</li>
 				<!--<li class="logout">
 					<a href="{% url acct_logout %}">{% trans 'logout' %}</a>
@@ -249,6 +257,16 @@ table.bettype table.choices {
 			</ul>
         {% endif %}
         </div>
+		<div id="navigation_flat">
+				{% load flatpages %}
+				{% get_flatpages as flatpages %}
+				listes
+				<ul>
+    				{% for page in flatpages %}
+        				<li><a href="{{ page.url }}">{{ page.title }}</a></li>
+    				{% endfor %}
+				</ul>
+			</div>
         <div id="body">
         {% if user.is_authenticated %}
 			<div id="publication">
@@ -275,7 +293,7 @@ table.bettype table.choices {
 			<div class="clear">&nbsp;</div>
 
 			<div id="navigation_sub">{% block subnav %}{% endblock %}</div>
-
+			
 			<div class="clear">&nbsp;</div>
 
 			<div id="body_content">
@@ -286,10 +304,11 @@ table.bettype table.choices {
 			</div>            
 
 			<div class="clear">&nbsp;</div>
-
+	
             <div id="footer" style="margin-top:50px; text-align: center; background-color: #F2F2F2; border-top: 1px solid #CCC">
                 Copyright © 2011-2012 Betspire - <a href="{% url terms %}">Terms &amp; Conditions</a> - <a href="mailto:contact@betspire.com">Contact</a>
             </div>
+			
         </div>
         {% endblock %}
         
@@ -301,6 +320,9 @@ table.bettype table.choices {
         <script src="{{ STATIC_URL }}yourlabs/autocomplete/jquery-implementation.js" type="text/javascript"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}subscription/jquery-implementation.js"></script>
         <script type="text/javascript">
+        $('#avatar_form_toggle').click(function() {
+            $('#avatar_form').toggle()
+        });
         $(document).bind('yourlabs_autocomplete.selectOption', function(e, autocomplete, option) {
             if (option.length) {
                 autocomplete.hide();

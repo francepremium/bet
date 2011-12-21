@@ -16,6 +16,7 @@ from django import db
 
 from emailconfirmation.models import EmailConfirmation
 from actstream.models import actor_stream, Follow, Action
+from avatar.views import add
 
 from bookmaker.models import *
 from bet.helpers import *
@@ -258,3 +259,12 @@ def user_detail(request, username, tab='activities',
     ret = shortcuts.render_to_response(template_name, context,
         context_instance=template.RequestContext(request))
     return ret
+
+
+def avatar_upload(request):
+    if request.method != 'POST':
+        return
+    if not request.FILES:
+        return
+
+    return add(request, next_override=request.META['HTTP_REFERER'])

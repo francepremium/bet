@@ -28,4 +28,9 @@ urlpatterns = patterns('scoobet.views',
         views.feed_friends,
         name='scoobet_feed_friends',
     ),
+    url(
+        r'avatar/upload/$',
+        views.avatar_upload,
+        name='scoobet_upload_avatar',
+    ),
 )

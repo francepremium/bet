@@ -89,6 +89,7 @@ body { position:relative; width:990px; margin:0px auto;}
 #navigation li li.active a { color:#ea4839; background-color:transparent; }
 #navigation ul:last-child li li a { text-transform:capitalize; }
 #navigation li a:first-letter { text-transform:uppercase; }
+#navigation_flat{ position:absolute; width:165px; top:136px; right:0;border:1px solid red; }
 
 /* Login form inside navigation */
 #navigation form.login { line-height:20px; padding:13px 0px 7px 0px; text-align:right; border-bottom:1px solid #cccccc; }
@@ -180,11 +181,13 @@ tr.odd td { background-color:#f7f7f7; }
 .auth .section ul li{float:left; margin:5px 2px 15px 2px;width:120px;text-align:center;}
 .auth .section ul li a{display:block;}
 .auth .section ul li a.image img{margin:2px 10px 0px 0px; padding:5px; width:75px; height:75px; border:1px solid #d9d9d9;}
+.auth .ticket{float:left;}
+.auth #container_pie{float:left;}
 .auth .ticket p{overflow:hidden;line-height:26px; }
-.auth .ticket p span{display:inline-block;width:150px;color:#343a4a;font-weight:bold;}
-.auth .ticket p span.label{margin-left:150px;width:250px;}
+.auth .ticket p span{display:inline-block;width:70px;color:#343a4a;font-weight:bold;}
+.auth .ticket p span.label{width:220px;}
 .auth .ticket p span.label:first-letter{text-transform:uppercase}
-.auth .ticket hr{background-color:#e6e6e6;color:#e6e6e6}
+.auth .ticket hr{background-color:#e6e6e6;color:#e6e6e6;border-color:#e6e6e6; width:250px;height: 1px;border: 0;}
 /* log_gen */
 .log_gen #body {top:101px;}
 .log_gen #logo{width:990px;text-align:center;}
