@@ -1,6 +1,6 @@
 {% extends 'gsm/session/base.html' %}
 
-{% load i18n gsm_tags comments %}
+{% load i18n gsm_tags comments cache %}
 
 {% block body %}{{ block.super }}
 
@@ -339,61 +339,51 @@
         {# avoid cases where we don't know the oponnent yet, ie. tournament #}
         {% gsm_tree key='h2h_tree' method='get_head_2_head_statistics' team_1_id=session.oponnent_A.gsm_id team_2_id=session.oponnent_B.gsm_id %}{# no available for basketball #}
     {% endif %}
-    {% if h2h_tree %}
-	<div class="session sessions">
-        <h2>{% trans 'previous matches' %}</h2>
-        <table>
-        {% for element in h2h_tree.getroot|findall:'head2head/match' %}
-            {% gsm_entity key='team_A' tag='team' gsm_id=element.attrib.team_A_id name=element.attrib.team_A %}
-            {% gsm_entity key='team_B' tag='team' gsm_id=element.attrib.team_B_id name=element.attrib.team_B %}
-            {% gsm_entity key='match' tag='session' gsm_id=element.attrib.match_id name=element.attrib.team_B %}
-            <tr>
-                <td class="date">
-                    {{ element.attrib.date|display_date }}
-                </td>
-                <td class="oponnent A {% if element.attrib.winner == 'team_A' %}winner{% endif %}">
-                    <a href="{{ team_A.get_absolute_url }}" title="{{ team_A.name }}">{{ team_A.name }}</a>
-                </td>
-				<td class="oponnent_image A tiny_image">
-					{% if team_A.get_tiny_image_url %}
-					<img src="{{ team_A.get_tiny_image_url }}" />
-					{% endif %}
-                </td>
-                <td class="score">
-                    <a href="{{ match.get_absolute_url }}">
-						{{ element.attrib.fs_A|add:element.attrib.ets_A }}
-						-
-						{{ element.attrib.fs_B|add:element.attrib.ets_B }}
-					</a>
-                </td>
-				<td class="oponnent_image B tiny_image">
-					{% if team_B.get_tiny_image_url %}
-					<img src="{{ team_B.get_tiny_image_url }}" />
-					{% endif %}
-                </td>
-                <td class="oponnent B {% if element.attrib.winner == 'team_B' %}winner{% endif %}">
-                    <a href="{{ team_B.get_absolute_url }}" title="{{ team_B.name }}">{{ team_B.name }}</a>
-                </td>
-            </tr>
-        {% endfor %}
-        </table>
-	</div>
 
-	{# TODO #}
-	{% comment %}
-	    <h2>{% trans 'head to head' %}</h2>
-        <table>
-        {% for element in h2h_tree.getroot|findall:'head2head/data' %}
-            <tr>
-                <th>{% trans element.attrib.type %}</th>
-                <td>{{ element.attrib.matches }}</td>
-                <td>{{ element.attrib.team_1_percent }}</td>
-                <td>{{ element.attrib.team_2_percent }}</td>
-                <td>{{ element.attrib.draw_percent }}</td>
-            </tr>
-        {% endfor %}
-        </table>
-    {% endcomment %}
+    {% if h2h_tree %}
+        {% cache 7200 h2h session.pk %}
+        <div class="session sessions">
+            <h2>{% trans 'previous matches' %}</h2>
+            <table>
+            {% for element in h2h_tree.getroot|findall:'head2head/match' %}
+                {% gsm_entity key='team_A' tag='team' gsm_id=element.attrib.team_A_id name=element.attrib.team_A %}
+                {% gsm_entity key='team_B' tag='team' gsm_id=element.attrib.team_B_id name=element.attrib.team_B %}
+                {% gsm_entity key='match' tag='match' gsm_id=element.attrib.match_id name=element.attrib.team_B %}
+
+                {% if match|session_exists %}
+                <tr>
+                    <td class="date">
+                        {{ element.attrib.date|display_date }}
+                    </td>
+                    <td class="oponnent A {% if element.attrib.winner == 'team_A' %}winner{% endif %}">
+                        <a href="{{ team_A.get_absolute_url }}" title="{{ team_A.name }}">{{ team_A.name }}</a>
+                    </td>
+                    <td class="oponnent_image A tiny_image">
+                        {% if team_A.get_tiny_image_url %}
+                        <img src="{{ team_A.get_tiny_image_url }}" />
+                        {% endif %}
+                    </td>
+                    <td class="score">
+                        <a href="{{ match.get_absolute_url }}">
+                            {{ element.attrib.fs_A|add:element.attrib.ets_A }}
+                            -
+                            {{ element.attrib.fs_B|add:element.attrib.ets_B }}
+                        </a>
+                    </td>
+                    <td class="oponnent_image B tiny_image">
+                        {% if team_B.get_tiny_image_url %}
+                        <img src="{{ team_B.get_tiny_image_url }}" />
+                        {% endif %}
+                    </td>
+                    <td class="oponnent B {% if element.attrib.winner == 'team_B' %}winner{% endif %}">
+                        <a href="{{ team_B.get_absolute_url }}" title="{{ team_B.name }}">{{ team_B.name }}</a>
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </table>
+        </div>
+        {% endcache %}
 
     {% endif %}
 

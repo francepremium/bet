@@ -14,6 +14,10 @@ from gsm.models import GsmEntity, Area, Session, AbstractGsmEntity
 register = template.Library()
 
 @register.filter
+def session_exists(session):
+    return Session.objects.filter(sport=session.sport, gsm_id=session.gsm_id).count()
+
+@register.filter
 def goal_column(session, goal):
     event = goal.getchildren()[0]
     if event.attrib['team_id'] == str(session.oponnent_A.gsm_id):
