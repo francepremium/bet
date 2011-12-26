@@ -789,6 +789,8 @@ class Sync(object):
             destination = source
         
         value = e.attrib.get(source, None) or None
+        if isinstance(value, str):
+            value = unicode(value)
 
         if unicode(value) == u'4294967295':
             # gsm screwd up again
@@ -831,7 +833,6 @@ class Sync(object):
             session_played.send(sender=self, session=model)
         
         self.copy_attr(model, e, 'gameweek')
-
         P = self.oponnent_tag
         for X in ('A', 'B'):
             self.copy_attr(model, e, 'fs_%s' % X, '%s_score' % X)
@@ -847,11 +848,15 @@ class Sync(object):
                     sport=self.sport,
                     gsm_id=e.attrib['%s_%s_id' % (P, X)],
                     tag=self.oponnent_tag)
-
-                if created:
+                
+                if created or not (oponnent.area and oponnent.name):
                     code = e.attrib.get('%s_%s_country' % (P, X))
-                    oponnent.area = Area.objects.get_for_country_code_3(code)
+                    try:
+                        oponnent.area = Area.objects.get_for_country_code_3(code)
+                    except:
+                        pass
                     self.copy_attr(oponnent, e, '%s_%s_name' % (P, X), 'name')
+                    oponnent.save()
 
                 setattr(model, 'oponnent_%s' % X, oponnent)
 
