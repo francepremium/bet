@@ -12,11 +12,19 @@
             {% if session|goal_column:goal == 'A' %}
 			<td class="goal A">
 				{% gsm_entity key='goal_person' tag='person' gsm_id=goal.getchildren.0.attrib.person_id name=goal.getchildren.0.attrib.person %}
-				<span class="goal G"><a href="{{ goal_person.get_absolute_url }}" title="{{ goal_person.name }}">{{ goal_person.name }}</a></span>
+				<span class="goal G">
+                    {% if sport.slug != 'hockey' %}
+                        <a href="{{ goal_person.get_absolute_url }}" title="{{ goal_person.name }}">
+                    {% endif %}
+                            {{ goal_person.name }}
+                    {% if sport.slug != 'hockey' %}
+                        </a>
+                    {% endif %}
+                </span>
 				{% if goal.getchildren.0.attrib.code == 'OG' %}
 					({% trans 'OG' %})
 				{% endif %}
-				<img class="event" src="{{ STATIC_URL }}img/events/G.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
+				<img class="event" src="{{ STATIC_URL }}img/sports/{{ sport.slug }}_tiny.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
 
 				{% comment %}
 				{% if goal.getchildren.1.attrib.code == 'AS' %}
@@ -32,8 +40,16 @@
             {% if session|goal_column:goal == 'B' %}
             <td class="goal B">
                 {% gsm_entity key='goal_person' tag='person' gsm_id=goal.getchildren.0.attrib.person_id name=goal.getchildren.0.attrib.person %}
-				<img class="event" src="{{ STATIC_URL }}img/events/G.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
-				<span class="goal G"><a href="{{ goal_person.get_absolute_url }}" title="{{ goal_person.name }}">{{ goal_person.name }}</a></span>
+				<img class="event" src="{{ STATIC_URL }}img/sports/{{ sport.slug }}_tiny.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
+				<span class="goal G">
+                    {% if sport.slug != 'hockey' %}
+                    <a href="{{ goal_person.get_absolute_url }}" title="{{ goal_person.name }}">
+                    {% endif %}
+                        {{ goal_person.name }}
+                    {% if sport.slug != 'hockey' %}
+                    </a>
+                    {% endif %}
+                </span>
 				{% if goal.getchildren.0.attrib.code == 'OG' %}
 					({% trans 'OG' %})
 				{% endif %}
@@ -59,7 +75,13 @@
 			{% if warning.attrib.team_id == session.oponnent_A.gsm_id|addslashes %}
             <td class="warning A">
 				{% gsm_entity key='warned_person' tag='person' gsm_id=warning.attrib.person_id name=warning.attrib.person %}
-				<a href="{{ warned_person.get_absolute_url }}" title="{{ warned_person.name }}">{{ warned_person.name }}</a>
+                {% if sport.slug != 'hockey' %}
+                    <a href="{{ warned_person.get_absolute_url }}" title="{{ warned_person.name }}">
+                {% endif %}
+                        {{ warned_person.name }}
+                {% if sport.slug != 'hockey' %}
+                    </a>
+                {% endif %}
 				<img class="event" src="{{ STATIC_URL }}img/events/{{ warning.attrib.code }}.png" alt="{% trans warning.attrib.name %}" title="{% trans warning.attrib.name %}" />
             </td>
            {% else %}<td></td>{% endif %}
@@ -70,7 +92,13 @@
 			<td class="warning B">
 				<img class="event" src="{{ STATIC_URL }}img/events/{{ warning.attrib.code }}.png" alt="{% trans warning.attrib.name %}" title="{% trans warning.attrib.name %}" />
 				{% gsm_entity key='warned_person' tag='person' gsm_id=warning.attrib.person_id name=warning.attrib.person %}
-				<a href="{{ warned_person.get_absolute_url }}" title="{{ warned_person.name }}">{{ warned_person.name }}</a>
+                {% if sport.slug != 'hockey' %}
+                    <a href="{{ warned_person.get_absolute_url }}" title="{{ warned_person.name }}">
+                {% endif %}
+                        {{ warned_person.name }}
+                {% if sport.slug != 'hockey' %}
+                    </a>
+                {% endif %}
             </td>
             {% else %}<td></td>{% endif %}
         </tr>
@@ -94,13 +122,19 @@
 				<tr>
 					<td class="L">
 						{% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
-						<a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">{{ lineup_person.name }}</a>
+                        {% if sport.slug != 'hockey' %}
+                            <a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">
+                        {% endif %}
+                                {{ lineup_person.name }}
+                        {% if sport.slug != 'hockey' %}
+                            </a>
+                        {% endif %}
 					</td>
 					<td>
 						{% for goal in elements.goals.getchildren %}
 							{% if goal.getchildren.0.attrib.person_id == lineup.attrib.person_id %}
 								{{ goal.getchildren.0.attrib.minute }}'
-								<img class="event" src="{{ STATIC_URL }}img/events/G.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
+								<img class="event" src="{{ STATIC_URL }}img/events/{{ sport.slug }}_tiny.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
 							{% endif %}
 						{% endfor %}
 						{% for substitution in elements.substitutions.getchildren %}
@@ -137,13 +171,19 @@
 				<tr>
 					<td class="L">
 						{% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
-						<a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">{{ lineup_person.name }}</a>
+                        {% if sport.slug != 'hockey' %}
+						<a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">
+                        {% endif %}
+                            {{ lineup_person.name }}
+                        {% if sport.slug != 'hockey' %}
+                        </a>
+                        {% endif %}
 					</td>
 					<td>
 						{% for goal in elements.goals.getchildren %}
 							{% if goal.getchildren.0.attrib.person_id == lineup.attrib.person_id %}
 								{{ goal.getchildren.0.attrib.minute }}'
-								<img class="event" src="{{ STATIC_URL }}img/events/G.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
+								<img class="event" src="{{ STATIC_URL }}img/events/{{ sport.slug }}_tiny.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
 							{% endif %}
 						{% endfor %}
 						{% for substitution in elements.substitutions.getchildren %}
@@ -182,13 +222,19 @@
 				<tr>
 					<td class="L">
 						{% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
-						<a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">{{ lineup_person.name }}</a>
+                        {% if sport.slug != 'hockey' %}
+                            <a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">
+                        {% endif %}
+                            {{ lineup_person.name }}
+                        {% if sport.slug != 'hockey' %}
+                            </a>
+                        {% endif %}
 					</td>
 					<td>
 						{% for goal in elements.goals.getchildren %}
 							{% if goal.getchildren.0.attrib.person_id == lineup.attrib.person_id %}
 								{{ goal.getchildren.0.attrib.minute }}'
-								<img class="event" src="{{ STATIC_URL }}img/events/G.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
+								<img class="event" src="{{ STATIC_URL }}img/events/{{ sport.slug }}_tiny.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
 							{% endif %}
 						{% endfor %}
 						{% for substitution in elements.substitutions.getchildren %}
@@ -225,13 +271,19 @@
 				<tr>
 					<td class="L">
 						{% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
-						<a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">{{ lineup_person.name }}</a>
+                        {% if sport.slug != 'hockey' %}
+						<a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">
+                        {% endif %}
+                            {{ lineup_person.name }}
+                        {% if sport.slug != 'hockey' %}
+                        </a>
+                        {% endif %}
 					</td>
 					<td>
 						{% for goal in elements.goals.getchildren %}
 							{% if goal.getchildren.0.attrib.person_id == lineup.attrib.person_id %}
 								{{ goal.getchildren.0.attrib.minute }}'
-								<img class="event" src="{{ STATIC_URL }}img/events/G.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
+								<img class="event" src="{{ STATIC_URL }}img/events/{{ sport.slug }}_tiny.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
 							{% endif %}
 						{% endfor %}
 						{% for substitution in elements.substitutions.getchildren %}
@@ -265,12 +317,29 @@
 				{% for event in substitution.getchildren %}
 					{% if event.attrib.code == 'SI' %}
 						{% gsm_entity key='person_in' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
-						<span class="substitution SI"><a href="{{ person_in.get_absolute_url }}" title="{{ person_in.name }}">{{ person_in.name }}</a></span>
+						<span class="substitution SI">
+                            {% if sport.slug != 'hockey' %}
+                            <a href="{{ person_in.get_absolute_url }}" title="{{ person_in.name }}">
+                            {% endif %}
+                                {{ person_in.name }}
+                            {% if sport.slug != 'hockey' %}
+                            </a>
+                            {% endif %}
+                            </span>
 					{% endif %}
 					{% if event.attrib.code == 'SO' %}
 						<br />
 						{% gsm_entity key='person_out' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
-						<span class="substitution SO">for <a href="{{ person_out.get_absolute_url }}" title="{{ person_out.name }}">{{ person_out.name }}</a></span>
+						<span class="substitution SO">for 
+                            {% if sport.slug != 'hockey' %}
+                            <a href="{{ person_out.get_absolute_url }}" title="{{ person_out.name }}">
+                            {% endif %}
+                                {{ person_out.name }}
+
+                            {% if sport.slug != 'hockey' %}
+                            </a>
+                            {% endif %}
+                        </span>
 					{% endif %}
 				{% endfor %}
 				</p>
@@ -287,12 +356,28 @@
 				{% for event in substitution.getchildren %}
 					{% if event.attrib.code == 'SI' %}
 						{% gsm_entity key='person_in' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
-						<span class="substitution SI"><a href="{{ person_in.get_absolute_url }}" title="{{ person_in.name }}">{{ person_in.name }}</a></span>
+						<span class="substitution SI">
+                            {% if sport.slug != 'hockey' %}
+                            <a href="{{ person_in.get_absolute_url }}" title="{{ person_in.name }}">
+                            {% endif %}
+                                {{ person_in.name }}
+                            {% if sport.slug != 'hockey' %}
+                            </a>
+                            {% endif %}
+                        </span>
 					{% endif %}
 					{% if event.attrib.code == 'SO' %}
 						<br />
 						{% gsm_entity key='person_out' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
-						<span class="substitution SO">for <a href="{{ person_out.get_absolute_url }}" title="{{ person_out.name }}">{{ person_out.name }}</a></span>
+						<span class="substitution SO">for 
+                            {% if sport.slug != 'hockey' %}
+                            <a href="{{ person_out.get_absolute_url }}" title="{{ person_out.name }}">
+                            {% endif %}
+                                {{ person_out.name }}
+                            {% if sport.slug != 'hockey' %}
+                            </a>
+                            {% endif %}
+                            </span>
 					{% endif %}
 				{% endfor %}
 				</p>
