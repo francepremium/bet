@@ -218,5 +218,27 @@
             "name": "basketball", 
             "slug": "basketball"
         }
+    },
+    {
+        "pk": 5, 
+        "model": "gsm.sport", 
+        "fields": {
+            "fans": [
+                28
+            ], 
+            "name": "American Football", 
+            "slug": "americanfootball"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "gsm.sport", 
+        "fields": {
+            "fans": [
+                28
+            ], 
+            "name": "Hockey", 
+            "slug": "hockey"
+        }
     }
 ]
