@@ -21,10 +21,16 @@ def session_exists(session):
 def goal_column(session, goal):
     event = goal.getchildren()[0]
     if event.attrib['team_id'] == str(session.oponnent_A.gsm_id):
-        return 'A'
-    elif event.attrib['code'] == 'OG':
-        return 'A'
-    return 'B'
+        team = 'A'
+    else:
+        team = 'B'
+
+    if event.attrib['code'] == 'OG':
+        if team == 'A':
+            team = 'B'
+        elif team == 'B':
+            team = 'A'
+    return team
 
 @register.filter
 def is_int(val):
