@@ -510,6 +510,14 @@ table.bettype table.choices {
                         container.slideDown();
                     });
                 }
+                else if ($(this).hasClass('load_in_global_form')) {
+                    e.preventDefault();
+                    var container = $('div#global_form');
+                    $.get($(this).attr('href'), {}, function(data) {
+                        container.html(data);
+                        container.show();
+                    })
+                }
 
                 return true;
             });

@@ -5,6 +5,11 @@ import views
 
 urlpatterns = patterns('bet.views',
     url(
+        r'correct/$',
+        views.bet_debug, {
+        }, 'bet_debug',
+    ),
+    url(
         r'list/flagged/$',
         views.BetListView.as_view(flagged=True), {
         }, 'bet_list_flagged'

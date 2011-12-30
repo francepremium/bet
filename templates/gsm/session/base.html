@@ -5,7 +5,8 @@
 
 {% block body %}
 {% if request.user.is_staff %}
-<a href="{% url admin:gsm_session_change session.pk %}">admin</a>
+<a href="{% url admin:gsm_session_change session.pk %}">admin for this session</a>
+<a class="load_in_global_form" href="{% url bet_debug %}?pk={{ session.pk }}">correct bets for this session</a>
 {% endif %}
 
 {{ block.super }}

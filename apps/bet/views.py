@@ -11,10 +11,32 @@ from django.views import generic
 import actstream
 from subscription.examples.yourlabs.shortcuts import emit_static
 
+import bet
 from bet.helpers import *
 from models import *
 from forms import *
 from filters import *
+
+
+def bet_debug(request, 
+    template_name='bet/bet_debug.html', extra_context=None):
+    if not request.user.is_staff:
+        return http.HttpResponseForbidden()
+    session = models.get_model('gsm', 'session').objects.get(pk=request.GET.get('pk'))
+    do = request.GET.get('do', False)
+
+    bets = session.bet_set.all()
+
+    bet.correct_for_session(session)
+
+    context = {
+        'session': session,
+        'bets': bets,
+    }
+    context['bet_list_helper'] = BetListHelper(request, bets)
+    context.update(extra_context or {})
+    return shortcuts.render_to_response(template_name, context,
+        context_instance=template.RequestContext(request))
 
 class BetDetailView(generic.DetailView):
     model = Bet
