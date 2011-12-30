@@ -66,7 +66,7 @@ class ApiClient(object):
         if sport != 'tennis' and method in ('get_seasons', 'get_competitions'):
             parameters['authorized'] = 'yes'
 
-        if sport == 'soccer' and method in LANGUAGE_FAILS:
+        if sport == 'soccer' and method in self.__class__.LANGUAGE_FAILS:
             parameters.pop('lang')
         
         if method == 'get_deleted':

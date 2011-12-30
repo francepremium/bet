@@ -570,6 +570,33 @@ class Session(AbstractGsmEntity):
         return urlresolvers.reverse('gsm_%s_detail_tab' % 'session', args=(
             self.get_sport().slug, self.gsm_id, tab))
 
+    def players(self):
+        players = []
+
+        if self.status == 'Played':
+            tree = gsm.get_tree('en', self.sport, 'get_matches', 
+                type=self.tag, id=self.gsm_id, detailed=True, retry=3)
+            
+            for parent in ('lineups', 'lineups_bench'):
+                for parent_e in gsm.parse_element_for(tree.getroot(), parent):
+                    for e in parent_e:
+                        players.append({
+                            'name': e.attrib['person'],
+                            'gsm_id': e.attrib['person_id'],
+                        })
+        
+        if not players:
+            for team_id in [self.oponnent_A.gsm_id, self.oponnent_B.gsm_id]:
+                tree = gsm.get_tree('en', self.sport, 'get_squads',
+                    type='team', id=team_id, retry=3)
+                for e in gsm.parse_element_for(tree.getroot(), 'person'):
+                    players.append({
+                        'name': e.attrib['name'],
+                        'gsm_id': e.attrib['person_id'],
+                    })
+
+        return players
+
 def ensure_ascii_name(sender, **kwargs):
     model = kwargs.pop('instance')
     for code, language in settings.LANGUAGES:

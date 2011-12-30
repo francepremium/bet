@@ -88,7 +88,7 @@
                 {% endif %}
                 {% if 'choice' not in exclude_columns %}
                     <td>
-                        <a href="{{ bet.get_absolute_url }}" title="{{ bet.choice }}">{{ bet.choice }}</a>
+                        <a href="{{ bet.get_absolute_url }}" title="{{ bet.choice }}">{{ bet.choice }}{% if bet.variable %} ({{ bet.variable }}){% endif %}</a>
                     </td>
                 {% endif %}
                 {% if 'odds' not in exclude_columns %}

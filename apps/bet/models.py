@@ -161,6 +161,21 @@ class Bet(models.Model):
     upload = models.FileField(upload_to=media_upload_to, null=True, blank=True)
     flagged = models.BooleanField()
     correction = models.IntegerField(choices=BET_CORRECTION_CHOICES, default=BET_CORRECTION_NEW)
+    variable = models.CharField(max_length=200, null=True, blank=True)
+    variable_hidden = models.CharField(max_length=200, null=True, blank=True)
+
+    @property
+    def get_variable(self):
+        if self.variable_hidden:
+            value = self.variable_hidden
+        else:
+            value = self.variable
+        
+        try:
+            return float(value.replace(',', '.').strip())
+        except ValueError, TypeError:
+            self.flagged = True
+            self.save()
 
     def __unicode__(self):
         return u'%s: %s' % (self.bettype, self.choice)

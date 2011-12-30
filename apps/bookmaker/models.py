@@ -12,6 +12,8 @@ from django.template import defaultfilters
 from django.conf import settings
 from django.core.cache import cache
 
+from bookmaker import *
+
 def logo_upload_to(instance, filename):
     return 'bookmaker/%s/%s' % (instance.pk, filename)
 
@@ -47,9 +49,17 @@ class Bookmaker(models.Model):
         return self.get_tab_absolute_url('picks')
 
 class BetType(models.Model):
+    VARIABLE_TYPE_CHOICES = (
+        ('float', _('float/decimal')),
+        ('player', _('player')),
+        ('chr', _('text')),
+    )
+
     name = models.CharField(max_length=100)
     sport = models.ForeignKey('gsm.Sport')
     creation_bookmaker = models.ForeignKey('Bookmaker', related_name='created_bettype', null=True)
+    variable_label = models.CharField(null=True, blank=True, max_length=200)
+    variable_type = models.CharField(choices=VARIABLE_TYPE_CHOICES, null=True, blank=True, max_length=20)
 
     def __unicode__(self):
         return self.name

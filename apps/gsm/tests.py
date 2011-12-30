@@ -2,7 +2,7 @@ from django.utils import unittest
 from django.test import TestCase
 
 import gsm
-from gsm.management.commands.gsm_sync_live import Command as GsmSyncLive
+import bet
 from bookmaker.models import *
 from gsm.models import *
 from bet.models import *
@@ -34,15 +34,36 @@ class LiveCorrectTestCase(TestCase):
         b2.choice = bettype.betchoice_set.get(name='2')
         b2.save()
 
-        root = gsm.get_tree('en', 'soccer', 'get_matches', 
-            id=self.session.gsm_id, type='match')
-
-        for element in gsm.parse_element_for(root.getroot(), 'match'):
-            GsmSyncLive().correct(element, self.session)
+        bet.correct_for_session(self.session)
         
         b1 = Bet.objects.get(pk=b1.pk)
         self.assertEqual(b1.correction, BET_CORRECTION_LOST)        
         bx = Bet.objects.get(pk=bx.pk)
         self.assertEqual(bx.correction, BET_CORRECTION_WON)       
+        b2 = Bet.objects.get(pk=b2.pk)
+        self.assertEqual(b2.correction, BET_CORRECTION_LOST)
+    
+    def test_goaler_bet(self):
+        bettype = BetType.objects.get(
+            name_fr='Buteur au cours du match', sport__slug='soccer')
+        bookmaker = Bookmaker.objects.get(name='Bwin.fr')
+        ticket = Ticket(user=User.objects.get(username='test'), stake=4)
+        ticket.bookmaker = bookmaker
+        ticket.save()
+
+        b1 = Bet(session=self.session, bettype=bettype, ticket=ticket, odds=5, 
+            variable_hidden=32444)
+        b1.choice = bettype.betchoice_set.get(name_en='will goal')
+        b1.save()
+        
+        b2 = Bet(session=self.session, bettype=bettype, ticket=ticket, odds=5, 
+            variable_hidden=3244423233)
+        b2.choice = bettype.betchoice_set.get(name_en='will goal')
+        b2.save()
+        
+        bet.correct_for_session(self.session)
+        
+        b1 = Bet.objects.get(pk=b1.pk)
+        self.assertEqual(b1.correction, BET_CORRECTION_WON)
         b2 = Bet.objects.get(pk=b2.pk)
         self.assertEqual(b2.correction, BET_CORRECTION_LOST)

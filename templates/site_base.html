@@ -185,6 +185,12 @@ table.bettype table.choices {
 				<li class="{% if sport.slug == 'basketball' %}active{% endif %}">
 					<a href="{% url gsm_sport_detail 'basketball' %}">{% trans "basketball" %}</a>
 				</li>
+				<li class="{% if sport.slug == 'hockey' %}active{% endif %}">
+					<a href="{% url gsm_sport_detail 'hockey' %}">{% trans "hockey" %}</a>
+				</li>
+				<li class="{% if sport.slug == 'americanfootball' %}active{% endif %}">
+					<a href="{% url gsm_sport_detail 'americanfootball' %}">{% trans "americanfootball" %}</a>
+				</li>
             </ul>
             <ul>
 			    <li>
@@ -531,9 +537,35 @@ table.bettype table.choices {
                     '{% url bookmaker_choices_for_bettype %}',
                     {
                         'bettype': $('#global_form select[name=bettype]').val(),
+                        'session': $('#global_form input[name=session]').val(),
                     },
                     function(data, textStatus, jqXHR) {
-                        update_select($('#global_form select[name=choice]'), data);
+                        $('#global_form .variable input').val('');
+                        $('#global_form .variable_hidden input').val('');
+                        if (data.bettype.variable_type) {
+                            $('#global_form .variable input').show();
+                            $('#global_form .variable').fadeIn();
+                            $('#global_form .variable label').html(data.bettype.variable_label + '<em>*</em>:');
+
+                            if (data.bettype.variable_type == 'player') {
+                                $('#global_form .variable input').autocomplete({
+                                    source: data.players,
+                                    select: function(event, ui) {
+                                        $('#global_form input[name=variable_hidden]').val(ui.item.gsm_id);
+                                        $('#global_form .variable .value').html(ui.item.name);
+                                        $('#global_form .variable input').hide();
+                                    },
+                                });
+                            } else {
+                                $('#global_form .variable input').autocomplete('destroy')
+                                $('#global_form .variable .value').html('');
+                            }
+                        } else {
+                            $('#global_form .variable').hide();
+                            $('#global_form .variable input').autocomplete('destroy')
+                            $('#global_form .variable .value').html('');
+                        }
+                        update_select($('#global_form select[name=choice]'), data.results);
                         $('#global_form div.choice').fadeIn();
                     },
                     'json'

@@ -387,6 +387,8 @@ input.search_submit{ width:40px; height:21px; margin:5px 0px 0px -45px; padding:
 .yourlabs_autocomplete a:hover,
 .yourlabs_autocomplete li.active a 		{ color:#ffffff; background-color:#ea4839; }
 .yourlabs_autocomplete li.soccer a 		{ background-image:url('../img/sports/soccer_tiny.png'); }
+.yourlabs_autocomplete li.hockey a 		{ background-image:url('../img/sports/hockey_tiny.png'); }
+.yourlabs_autocomplete li.americanfootball a 		{ background-image:url('../img/sports/americanfootball_tiny.png'); }
 .yourlabs_autocomplete li.rugby  a 		{ background-image:url('../img/sports/rugby_tiny.png'); }
 .yourlabs_autocomplete li.tennis a 		{ background-image:url('../img/sports/tennis_tiny.png'); }
 .yourlabs_autocomplete li.basketball a	{ background-image:url('../img/sports/basketball_tiny.png'); }
