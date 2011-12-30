@@ -63,6 +63,30 @@ class Ticket(models.Model):
     def __unicode__(self):
         return '#%s' % self.pk
 
+    def copy(self):
+        t = Ticket(
+            bookmaker=self.bookmaker, 
+            user=self.user, 
+            stake=self.stake, 
+            status=self.status
+        )
+
+        t.save()
+        for b in self.bet_set.all():
+            Bet(
+                bettype=b.bettype,
+                choice=b.choice,
+                session=b.session,
+                ticket=t,
+                odds=b.odds,
+                text=b.text,
+                upload=b.upload,
+                flagged=b.flagged,
+                correction=b.correction,
+                variable=b.variable,
+                variable_hidden=b.variable_hidden,
+            ).save()
+
     @property
     def correction(self):
         # if any bet is "new"
