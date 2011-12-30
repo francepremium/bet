@@ -37,7 +37,12 @@
         </td>
         <td>{{ request|timezone_adjust:bet.session.start_datetime|display_date }}</td>
         <td>{{ request|timezone_adjust:bet.session.start_datetime|display_time }}</td>
-        <td>{{ bet.bettype.name }}</td>
+        <td>
+            {{ bet.bettype.name }}
+            {% if bet.variable %}
+            ({{ bet.variable }})
+            {% endif %}
+        </td>
         <td>{{ bet.choice.name }}</td>
         <td><a href="{% url bet_form ticket.pk %}?bet={{ bet.pk }}">{% trans 'edit' %}</a></td>
         <td>
@@ -81,10 +86,19 @@
             <select name="choice"></select>
         {% endif %}
     </div>
+    <div class="variable" {% if not form.variable.errors %}style="display:none"{% endif %}>
+        {{ form.variable.errors }}
+        <label>{{ form.variable.label|capfirst }}<em>*</em>:</label>
+        {{ form.variable }}
+        <span class="value"></span>
+    </div>
     <div class="odds" >
         {{ form.odds.errors }}
         <label>{% trans 'odds'|capfirst %}<em>*</em>:</label>
         {{ form.odds }}
+    </div>
+    <div class="variable_hidden" style="display:none">
+        {{ form.variable_hidden }}
     </div>
     <div class="text">
         {{ form.text.errors }}

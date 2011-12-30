@@ -32,10 +32,15 @@
                     'bookmaker': bookmaker_pk,
                 },
                 function(data, textStatus, jqXHR) {
-                    update_select(bettypes, data);
+                    update_select(bettypes, data.results);
                     $('#global_form div.bettype').fadeIn(function() {
                         bettypes.focus();
                     });
+                    $('#global_form div.session').append(
+                        $('#global_form .session input[type=text]').val());
+                    $('#global_form div.session input[type=text]').remove()
+                    $('#global_form div.session span').remove()
+                    $('#global_form div.session').append(" {% trans 'to change match, refresh the page with F5)' %}");
                 },
                 'json'
             );

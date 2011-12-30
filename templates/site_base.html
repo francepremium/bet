@@ -97,7 +97,9 @@ table.bettype table.choices {
 				<input type="hidden" name="timezone_offset" />
 			</form>
 		</div>
-
+		<div id="logout">
+			<a href="{% url acct_logout %}">{% trans 'logout' %}</a>
+		</div>
 		<div id="signup">
 			{% if not request.user.is_authenticated %}
 			{#<a href="{% url acct_signup %}">{% trans 'sign up' %}</a>#}
@@ -124,6 +126,14 @@ table.bettype table.choices {
 			<ul>
 				<li class="image">
 					<a href="{% url scoobet_feed_friends %}">{% avatar user %}</a>
+                    <span class="link" id="avatar_form_toggle">{% trans 'change avatar' %}</span>
+                    <div style="display:none" id="avatar_form">
+                        <form enctype="multipart/form-data" method="post" action="{% url scoobet_upload_avatar %}">
+                            {% csrf_token %}
+                            <input type="file" name="avatar" />
+                            <input type="submit" value="{% trans 'Upload avatar' %}" />
+                        </form>
+                    </div>
 				</li>
 				<li>
 					<a href="{% url user_detail request.user.username %}">{{ request.user.username }}</a>
@@ -175,6 +185,12 @@ table.bettype table.choices {
 				<li class="{% if sport.slug == 'basketball' %}active{% endif %}">
 					<a href="{% url gsm_sport_detail 'basketball' %}">{% trans "basketball" %}</a>
 				</li>
+				<li class="{% if sport.slug == 'hockey' %}active{% endif %}">
+					<a href="{% url gsm_sport_detail 'hockey' %}">{% trans "hockey" %}</a>
+				</li>
+				<li class="{% if sport.slug == 'americanfootball' %}active{% endif %}">
+					<a href="{% url gsm_sport_detail 'americanfootball' %}">{% trans "americanfootball" %}</a>
+				</li>
             </ul>
             <ul>
 			    <li>
@@ -215,7 +231,7 @@ table.bettype table.choices {
 				<li class="friends_bets">
 					<a href="{% url bet_list_tab 'friends' %}">{% trans "friend's bets" %}</a>
 				</li>
-				{% if request.user.betprofile.is_referee %}
+				{% if request.user.is_staff %}
 				<li class="flagded_bets">
 					<a href="{% url bet_list_flagged %}">{% trans 'Flagged bets' %}</a>
 				</li>
@@ -226,7 +242,7 @@ table.bettype table.choices {
 					</div>
 				</li>
 				<li class="statistics">
-					<a href="{% url user_detail_tab request.user.username 'stats' %}">{% trans 'stats' %}</a>
+					<a href="{% url user_detail_tab request.user.username 'stats' %}" title="{% trans 'Your statistics' %}">{% trans 'stats' %}</a>
 				</li>
 				<li class="subscription friends">
 					<div class="dropdown outer friends" id="subscription_dropdown_friends">
@@ -239,14 +255,24 @@ table.bettype table.choices {
 					</div>
 				</li>
 				<li class="settings">
-					<a href="{% url acct_email %}">{% trans 'settings' %}</a>
+					<a href="{% url acct_email %}" title="{% trans 'Your account settings: timezone, email, password, avatar ...' %}">{% trans 'settings' %}</a>
 				</li>
-				<li class="logout">
+				<!--<li class="logout">
 					<a href="{% url acct_logout %}">{% trans 'logout' %}</a>
-				</li>
+				</li>-->
 			</ul>
         {% endif %}
         </div>
+		<div id="navigation_flat">
+				{% load flatpages %}
+				{% get_flatpages as flatpages %}
+                <h3>{% trans 'How to' %}</h3>
+				<ul>
+    				{% for page in flatpages %}
+        				<li><a href="{{ page.url }}">{{ page.title }}</a></li>
+    				{% endfor %}
+				</ul>
+			</div>
         <div id="body">
         {% if user.is_authenticated %}
 			<div id="publication">
@@ -273,7 +299,7 @@ table.bettype table.choices {
 			<div class="clear">&nbsp;</div>
 
 			<div id="navigation_sub">{% block subnav %}{% endblock %}</div>
-
+			
 			<div class="clear">&nbsp;</div>
 
 			<div id="body_content">
@@ -284,10 +310,11 @@ table.bettype table.choices {
 			</div>            
 
 			<div class="clear">&nbsp;</div>
-
+	
             <div id="footer" style="margin-top:50px; text-align: center; background-color: #F2F2F2; border-top: 1px solid #CCC">
                 Copyright © 2011-2012 Betspire - <a href="{% url terms %}">Terms &amp; Conditions</a> - <a href="mailto:contact@betspire.com">Contact</a>
             </div>
+			
         </div>
         {% endblock %}
         
@@ -299,6 +326,9 @@ table.bettype table.choices {
         <script src="{{ STATIC_URL }}yourlabs/autocomplete/jquery-implementation.js" type="text/javascript"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}subscription/jquery-implementation.js"></script>
         <script type="text/javascript">
+        $('#avatar_form_toggle').click(function() {
+            $('#avatar_form').toggle()
+        });
         $(document).bind('yourlabs_autocomplete.selectOption', function(e, autocomplete, option) {
             if (option.length) {
                 autocomplete.hide();
@@ -352,6 +382,10 @@ table.bettype table.choices {
             select.append($('<option value="">-------</option>'));
             for (var i in data) {
                 select.append($('<option value="'+data[i][0]+'">'+data[i][1]+'</option>'));
+            }
+
+            if (select.find('option').length == 2) {
+                select.find('option:last').attr('selected', 'selected');
             }
         }
 
@@ -480,6 +514,14 @@ table.bettype table.choices {
                         container.slideDown();
                     });
                 }
+                else if ($(this).hasClass('load_in_global_form')) {
+                    e.preventDefault();
+                    var container = $('div#global_form');
+                    $.get($(this).attr('href'), {}, function(data) {
+                        container.html(data);
+                        container.show();
+                    })
+                }
 
                 return true;
             });
@@ -507,9 +549,35 @@ table.bettype table.choices {
                     '{% url bookmaker_choices_for_bettype %}',
                     {
                         'bettype': $('#global_form select[name=bettype]').val(),
+                        'session': $('#global_form input[name=session]').val(),
                     },
                     function(data, textStatus, jqXHR) {
-                        update_select($('#global_form select[name=choice]'), data);
+                        $('#global_form .variable input').val('');
+                        $('#global_form .variable_hidden input').val('');
+                        if (data.bettype.variable_type) {
+                            $('#global_form .variable input').show();
+                            $('#global_form .variable').fadeIn();
+                            $('#global_form .variable label').html(data.bettype.variable_label + '<em>*</em>:');
+
+                            if (data.bettype.variable_type == 'player') {
+                                $('#global_form .variable input').autocomplete({
+                                    source: data.players,
+                                    select: function(event, ui) {
+                                        $('#global_form input[name=variable_hidden]').val(ui.item.gsm_id);
+                                        $('#global_form .variable .value').html(ui.item.name);
+                                        $('#global_form .variable input').hide();
+                                    },
+                                });
+                            } else {
+                                $('#global_form .variable input').autocomplete('destroy')
+                                $('#global_form .variable .value').html('');
+                            }
+                        } else {
+                            $('#global_form .variable').hide();
+                            $('#global_form .variable input').autocomplete('destroy')
+                            $('#global_form .variable .value').html('');
+                        }
+                        update_select($('#global_form select[name=choice]'), data.results);
                         $('#global_form div.choice').fadeIn();
                     },
                     'json'

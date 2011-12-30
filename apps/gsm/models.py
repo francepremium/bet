@@ -570,6 +570,33 @@ class Session(AbstractGsmEntity):
         return urlresolvers.reverse('gsm_%s_detail_tab' % 'session', args=(
             self.get_sport().slug, self.gsm_id, tab))
 
+    def players(self):
+        players = []
+
+        if self.status == 'Played':
+            tree = gsm.get_tree('en', self.sport, 'get_matches', 
+                type=self.tag, id=self.gsm_id, detailed=True, retry=3)
+            
+            for parent in ('lineups', 'lineups_bench'):
+                for parent_e in gsm.parse_element_for(tree.getroot(), parent):
+                    for e in parent_e:
+                        players.append({
+                            'name': e.attrib['person'],
+                            'gsm_id': e.attrib['person_id'],
+                        })
+        
+        if not players:
+            for team_id in [self.oponnent_A.gsm_id, self.oponnent_B.gsm_id]:
+                tree = gsm.get_tree('en', self.sport, 'get_squads',
+                    type='team', id=team_id, retry=3)
+                for e in gsm.parse_element_for(tree.getroot(), 'person'):
+                    players.append({
+                        'name': e.attrib['name'],
+                        'gsm_id': e.attrib['person_id'],
+                    })
+
+        return players
+
 def ensure_ascii_name(sender, **kwargs):
     model = kwargs.pop('instance')
     for code, language in settings.LANGUAGES:
@@ -789,6 +816,8 @@ class Sync(object):
             destination = source
         
         value = e.attrib.get(source, None) or None
+        if isinstance(value, str):
+            value = unicode(value)
 
         if unicode(value) == u'4294967295':
             # gsm screwd up again
@@ -831,7 +860,6 @@ class Sync(object):
             session_played.send(sender=self, session=model)
         
         self.copy_attr(model, e, 'gameweek')
-
         P = self.oponnent_tag
         for X in ('A', 'B'):
             self.copy_attr(model, e, 'fs_%s' % X, '%s_score' % X)
@@ -847,11 +875,15 @@ class Sync(object):
                     sport=self.sport,
                     gsm_id=e.attrib['%s_%s_id' % (P, X)],
                     tag=self.oponnent_tag)
-
-                if created:
+                
+                if created or not (oponnent.area and oponnent.name):
                     code = e.attrib.get('%s_%s_country' % (P, X))
-                    oponnent.area = Area.objects.get_for_country_code_3(code)
+                    try:
+                        oponnent.area = Area.objects.get_for_country_code_3(code)
+                    except:
+                        pass
                     self.copy_attr(oponnent, e, '%s_%s_name' % (P, X), 'name')
+                    oponnent.save()
 
                 setattr(model, 'oponnent_%s' % X, oponnent)
 

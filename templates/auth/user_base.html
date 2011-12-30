@@ -5,7 +5,7 @@
 {% load i18n %}
 {% load avatar_tags %}
 {% load activity_tags %}
-
+{% block body_class %}auth{% endblock %}
 {% block subnav %}
 <ul>
     <li class="{% if tab == 'activities' %}active{% endif %}">

@@ -63,7 +63,7 @@
         <tr>
             <th>{% trans 'bet' %}</th>
             <td>
-                <a href="{{ bet.get_absolute_url }}" rel="canonical">{{ bet.choice }}</a>
+                <a href="{{ bet.get_absolute_url }}" rel="canonical">{{ bet.choice }}{% if bet.variable %} ({{ bet.variable }}){% endif %}</a>
             </td>
         </tr>
         <tr>

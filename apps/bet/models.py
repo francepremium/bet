@@ -63,6 +63,30 @@ class Ticket(models.Model):
     def __unicode__(self):
         return '#%s' % self.pk
 
+    def copy(self):
+        t = Ticket(
+            bookmaker=self.bookmaker, 
+            user=self.user, 
+            stake=self.stake, 
+            status=self.status
+        )
+
+        t.save()
+        for b in self.bet_set.all():
+            Bet(
+                bettype=b.bettype,
+                choice=b.choice,
+                session=b.session,
+                ticket=t,
+                odds=b.odds,
+                text=b.text,
+                upload=b.upload,
+                flagged=b.flagged,
+                correction=b.correction,
+                variable=b.variable,
+                variable_hidden=b.variable_hidden,
+            ).save()
+
     @property
     def correction(self):
         # if any bet is "new"
@@ -137,6 +161,21 @@ class Bet(models.Model):
     upload = models.FileField(upload_to=media_upload_to, null=True, blank=True)
     flagged = models.BooleanField()
     correction = models.IntegerField(choices=BET_CORRECTION_CHOICES, default=BET_CORRECTION_NEW)
+    variable = models.CharField(max_length=200, null=True, blank=True)
+    variable_hidden = models.CharField(max_length=200, null=True, blank=True)
+
+    @property
+    def get_variable(self):
+        if self.variable_hidden:
+            value = self.variable_hidden
+        else:
+            value = self.variable
+        
+        try:
+            return float(value.replace(',', '.').strip())
+        except ValueError, TypeError:
+            self.flagged = True
+            self.save()
 
     def __unicode__(self):
         return u'%s: %s' % (self.bettype, self.choice)

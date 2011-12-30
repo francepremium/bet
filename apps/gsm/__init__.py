@@ -35,115 +35,156 @@ def parse_element_for(parent, tag):
             for subelement in parse_element_for(element, tag):
                 yield subelement
 
-def get_tree(lang, sport, method, update=False, retry=False, **parameters):
-    def get_tree_and_root(filename):
-        tree = etree.parse(filename)
-        root = tree.getroot()
-        return tree, root
-
-    for k, v in parameters.items():
-        if v is True:
-            parameters[k] = 'yes'
-        elif v is False:
-            parameters[k] = 'no'
-
-    # fix lang, sometimes fr_FR particularely in console/tests
-    lang = lang.split('_')[0]
-
+class ApiClient(object):
     LANGUAGE_FAILS = (
         'get_team_statistics',
         'get_squads',
         'get_career',
         'get_matches_live',
     )
-    parameters['lang'] = lang
+
+    def __init__(self, lang, sport, method, update=False, retry=False, **parameters):
+        self.sport = sport
+        self.method = method
+        self.update = update
+        self.retry = retry
+
+        for k, v in parameters.items():
+            if v is True:
+                parameters[k] = 'yes'
+            elif v is False:
+                parameters[k] = 'no'
+
+        # fix lang, sometimes fr_FR particularely in console/tests
+        self.lang = lang.split('_')[0]
+
+        parameters['lang'] = self.lang
+        
+        if sport.__class__.__name__ == 'Sport':
+            self.sport = self.sport.slug
+
+        if sport != 'tennis' and method in ('get_seasons', 'get_competitions'):
+            parameters['authorized'] = 'yes'
+
+        if sport == 'soccer' and method in self.__class__.LANGUAGE_FAILS:
+            parameters.pop('lang')
+        
+        if method == 'get_deleted':
+            parameters.pop('lang')
+
+        self.parameters = parameters
     
-    if sport.__class__.__name__ == 'Sport':
-        sport = sport.slug
+    @property
+    def url(self):
+        return '/%s/%s?%s' % (
+            self.sport,
+            self.method,
+            urllib.urlencode(self.parameters)
+        )
 
-    if sport != 'tennis' and method in ('get_seasons', 'get_competitions'):
-        parameters['authorized'] = 'yes'
+    @property
+    def full_url(self):
+        return settings.GSM_URL + self.url
 
-    if sport == 'soccer' and method in LANGUAGE_FAILS:
-        parameters.pop('lang')
+    @property
+    def cache_filename(self):
+        return '%s.xml' % sha.sha(self.url).hexdigest()
+
+    @property
+    def cache_filepath(self):
+        return os.path.join(settings.GSM_CACHE, self.cache_filename)
+
+    @property
+    def lockname(self):
+        return '%s.lock' % self.cache_filename
     
-    if method == 'get_deleted':
-        parameters.pop('lang')
+    @property
+    def lockpath(self):
+        return os.path.join(settings.GSM_CACHE, self.lockname)
 
-    url = '/%s/%s?%s' % (
-        sport,
-        method,
-        urllib.urlencode(parameters)
-    )
+    @property
+    def cache_exists(self):
+        return os.path.exists(self.cache_filepath)
 
-    cache_filename = '%s.xml' % sha.sha(url).hexdigest()
-    cache_filepath = os.path.join(settings.GSM_CACHE, cache_filename)
-    cache_lockname = '%s.lock' % cache_filename
-    cache_lockpath = os.path.join(settings.GSM_CACHE, cache_lockname)
-    cache_exists = os.path.exists(cache_filepath)
-    logger.debug('accessing %s' % settings.GSM_URL + url)
+    @property
+    def cache_valid(self):
+        if not self.cache_exists:
+            return False
 
-    # ensure cached version is not too old
-    if not update and cache_exists:
-        last = os.path.getmtime(cache_filepath)
-        if time.time()-last > 3600*1:
-            update = True
+        last = os.path.getmtime(self.cache_filepath)
+        if time.time()-last < 3600:
+            if self.root.tag == 'html':
+                raise HtmlInsteadOfXml(self.full_url)
+            return True
 
-    if update or not cache_exists:
+    @property
+    def tree(self):
+        return etree.parse(self.cache_filepath)
+    
+    @property
+    def root(self):
+        return self.tree.getroot()
+
+    def lock(self):
         try:
-            ld = os.open(cache_lockpath, os.O_WRONLY | os.O_EXCL | os.O_CREAT)
+            ld = os.open(self.lockpath, os.O_WRONLY | os.O_EXCL | os.O_CREAT)
             os.close(ld)
         except:
             waited = 0
-            while os.path.exists(cache_lockpath):
+            while os.path.exists(self.lockpath):
                 time.sleep(settings.GSM_LOCKFILE_POLLRATE)
-                waited += 1
                 if waited == settings.GSM_LOCKFILE_MAXPOLLS:
-                    # we've waited long enought
                     break
-            if os.path.exists(cache_lockpath):
-                # delete the lockfile and use cached file
-                os.unlink(cache_lockpath)
-                tree, root = get_tree_and_root(cache_filepath)
-                if root.tag == 'html':
-                    raise HtmlInsteadOfXml(settings.GSM_URL + url)
-                return tree
+                else:
+                    waited += 1
 
-        if retry:
-            tmp_filepath = False
-            trycount = 0
-            while not tmp_filepath:
-                try:
-                    tmp_filepath, message = urllib.urlretrieve(settings.GSM_URL + url)
-                except IOError:
-                    trycount += 1
-                    if trycount > retry:
-                        raise
-                    time.sleep(3)
-        else:
-            tmp_filepath, message = urllib.urlretrieve(settings.GSM_URL + url)
-        tree, root = get_tree_and_root(tmp_filepath)
+            if os.path.exists(self.lockpath):
+                os.unlink(self.lockpath)
 
-        if root is None:
-            if cache_exists:
-                tree, root = get_tree_and_root(cache_filepath)
-            else:
-                os.unlink(cache_lockpath)
-                raise ServerOverloaded(settings.GSM_URL + url)
-        else:
-            shutil.copyfile(tmp_filepath, cache_filepath)
+    def unlock(self):
+        os.unlink(self.lockpath)
 
-        try:
-            os.unlink(cache_lockpath)
-        except:
-            pass
-    else:
-        tree, root = get_tree_and_root(cache_filepath)
+    def refresh_cache(self):
+        tmp_filepath = None
 
-    if root.tag == 'html':
-        raise HtmlInsteadOfXml(settings.GSM_URL + url)
+        while not tmp_filepath:
+            try:
+                tmp_filepath, message = urllib.urlretrieve(self.full_url)
+                tree = etree.parse(tmp_filepath)
+                root = tree.getroot()
+                if not root:
+                    os.unlink(tmp_filepath)
+                    tmp_filepath = None
+                    raise ServerOverloaded(self.full_url)
+            except IOError, ServerOverloaded:
+                trycount += 1
+                if trycount > self.retry:
+                    raise
+                time.sleep(3)
 
-    return tree
+        shutil.copyfile(tmp_filepath, self.cache_filepath)
+        os.unlink(tmp_filepath)
+
+    def __call__(self):
+        logger.debug('accessing %s' % self.full_url)
+
+        if self.update or not self.cache_valid:
+            self.lock()
+            try:
+                if self.cache_exists:
+                    os.unlink(self.cache_filepath)
+                self.refresh_cache()
+                if not self.cache_valid:
+                    logger.warn('invalid cache %s' % self.cache_filepath)
+            finally:
+                self.unlock()
+
+        if self.cache_valid:
+            return self.tree
+
+def get_tree(lang, sport, method, update=False, retry=False, **parameters):
+    api = ApiClient(lang, sport, method, update=False, retry=False, **parameters)
+    return api()
 
 class GsmException(Exception):
     """

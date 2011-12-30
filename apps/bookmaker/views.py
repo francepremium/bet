@@ -1,3 +1,4 @@
+from django.db import models
 from django.db.models import Q, Sum
 from django.utils import simplejson
 from django.utils.translation import ugettext as _
@@ -8,6 +9,8 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.forms.models import inlineformset_factory
+
+import bookmaker
 
 from bet.helpers import *
 from filters import *
@@ -20,23 +23,46 @@ def bet_types_json(request,
         qs = qs.filter(sport__name__icontains=request.GET['sport'])
     if request.GET.get('bookmaker'):
         qs = qs.filter(bookmaker__pk=request.GET['bookmaker'])
+
+    qs = qs.order_by('name')
+
+    context = {}
     
     results = []
     for bettype in qs.select_related():
         results.append((bettype.pk, bettype.name))
+    context['results'] = results
 
-    return http.HttpResponse(simplejson.dumps(results))
+    return http.HttpResponse(simplejson.dumps(context))
 
 @login_required
 def choices_for_bettype(request, qs=BetChoice.objects.all()):
     if request.GET.get('bettype'):
         qs = qs.filter(bettype__pk=request.GET.get('bettype'))
+        bettype = BetType.objects.get(pk=request.GET.get('bettype'))
+
+    context = {}
 
     results = []
     for betchoice in qs:
         results.append((betchoice.pk, betchoice.name))
 
-    return http.HttpResponse(simplejson.dumps(results))
+    context['results'] = results
+    
+    if request.GET.get('bettype'):
+        context['bettype'] = {
+            'variable_label': bettype.variable_label,
+            'variable_type': bettype.variable_type,
+        }
+
+        if 'session' in request.GET and bettype.variable_type == 'player':
+            Session = models.get_model('gsm', 'session')
+            session = Session.objects.get(pk=request.GET['session'])
+            context['players'] = session.players()
+            for player in context['players']:
+                player['label'] = player['name']
+
+    return http.HttpResponse(simplejson.dumps(context))
 
 @login_required
 def bet_types(request, pk, form_class=BookmakerForm,
@@ -44,8 +70,9 @@ def bet_types(request, pk, form_class=BookmakerForm,
     context = { 'is_admin': True, }
 
     bookmaker = shortcuts.get_object_or_404(Bookmaker, pk=pk)
-    if request.user.bookmaker != bookmaker and not request.user.is_staff:
-        return http.HttpResponseForbidden()
+    if not request.user.is_staff:
+        if request.user.bookmaker != bookmaker:
+            return http.HttpResponseForbidden()
     context['bookmaker'] = bookmaker
 
     if request.method == 'POST':
@@ -67,8 +94,9 @@ def edit(request, pk, form_class=BookmakerForm,
     context = { 'is_admin': True, }
 
     bookmaker = shortcuts.get_object_or_404(Bookmaker, pk=pk)
-    if request.user.bookmaker != bookmaker and not request.user.is_staff:
-        return http.HttpResponseForbidden()
+    if not request.user.is_staff:
+        if request.user.bookmaker != bookmaker:
+            return http.HttpResponseForbidden()
     context['bookmaker'] = bookmaker
 
     if request.method == 'POST':
@@ -136,8 +164,9 @@ def list_bet_type(request, pk,
     context = { 'is_admin': True, }
 
     bookmaker = shortcuts.get_object_or_404(Bookmaker, pk=pk)
-    if request.user.bookmaker != bookmaker and not request.user.is_staff:
-        return http.HttpResponseForbidden()
+    if not request.user.is_staff:
+        if request.user.bookmaker != bookmaker:
+            return http.HttpResponseForbidden()
     context['bookmaker'] = bookmaker
 
     qs = BetType.objects.all()
@@ -152,8 +181,9 @@ def add_bet_type(request, pk,
     form_class=BetTypeForm,
     template_name='bookmaker/form.html', extra_context=None):
     bookmaker = shortcuts.get_object_or_404(Bookmaker, pk=pk)
-    if request.user.bookmaker != bookmaker and not request.user.is_staff:
-        return http.HttpResponseForbidden()
+    if not request.user.is_staff:
+        if request.user.bookmaker != bookmaker:
+            return http.HttpResponseForbidden()
 
     context = {
         'bookmaker': bookmaker,
@@ -229,8 +259,9 @@ def edit_bet_type(request, pk, bettype_pk, form_class=BetTypeForm,
 @login_required
 def change_bet_type(request, pk):
     bookmaker = shortcuts.get_object_or_404(Bookmaker, pk=pk)
-    if request.user.bookmaker != bookmaker and not request.user.is_staff:
-        return http.HttpResponseForbidden()
+    if not request.user.is_staff:
+        if request.user.bookmaker != bookmaker:
+            return http.HttpResponseForbidden()
 
     if request.method != 'POST':
         return http.HttpResponseBadRequest()

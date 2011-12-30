@@ -48,8 +48,11 @@ class BetForm(forms.ModelForm):
 
         bettype_pk = self.data.get('bettype', None)
         if bettype_pk:
+            self.bettype = BetType.objects.get(pk=bettype_pk)
             self.fields['choice'].queryset = BetChoice.objects.filter(
                                                 bettype__pk=bettype_pk)
+            if self.bettype.variable_type:
+                self.fields['variable'].required = True
 
     class Meta:
         model = Bet

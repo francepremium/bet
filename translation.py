@@ -17,7 +17,10 @@ class NameTranslation(TranslationOptions):
     fields = ('name', )
 translator.register(Area, NameTranslation)
 translator.register(BetChoice, NameTranslation)
-translator.register(BetType, NameTranslation)
+
+class BetTypeTranslation(TranslationOptions):
+    fields = ('name', 'variable_label')
+translator.register(BetType, BetTypeTranslation)
 
 class FlatPageTranslation(TranslationOptions):
     fields = ('title', 'content')
