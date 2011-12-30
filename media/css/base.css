@@ -89,7 +89,7 @@ body { position:relative; width:990px; margin:0px auto;}
 #navigation li li.active a { color:#ea4839; background-color:transparent; }
 #navigation ul:last-child li li a { text-transform:capitalize; }
 #navigation li a:first-letter { text-transform:uppercase; }
-#navigation_flat{ position:absolute; width:165px; top:136px; right:0;border:1px solid red; }
+#navigation_flat{ position:absolute; width:165px; top:136px; right:0;}
 
 /* Login form inside navigation */
 #navigation form.login { line-height:20px; padding:13px 0px 7px 0px; text-align:right; border-bottom:1px solid #cccccc; }
