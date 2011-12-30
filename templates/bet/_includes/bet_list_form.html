@@ -18,6 +18,6 @@
             {% endif %}
         {% endfor %}
     </table>
+    <a style="float:left; margin-top: 12px;" href="{{ request.path }}">{% trans 'clear filters' %}</a>
     <input type="submit" />
-    <a href="{{ request.path }}">{% trans 'all' %}</a>
 </form>
