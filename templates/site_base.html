@@ -266,7 +266,7 @@ table.bettype table.choices {
 		<div id="navigation_flat">
 				{% load flatpages %}
 				{% get_flatpages as flatpages %}
-				listes
+                <h3>{% trans 'How to' %}</h3>
 				<ul>
     				{% for page in flatpages %}
         				<li><a href="{{ page.url }}">{{ page.title }}</a></li>
@@ -382,6 +382,10 @@ table.bettype table.choices {
             select.append($('<option value="">-------</option>'));
             for (var i in data) {
                 select.append($('<option value="'+data[i][0]+'">'+data[i][1]+'</option>'));
+            }
+
+            if (select.find('option').length == 2) {
+                select.find('option:last').attr('selected', 'selected');
             }
         }
 
