@@ -1,6 +1,3 @@
-[yourlabs] Could not find your project root, not setting up
-[yourlabs] Setting PROJECT_ROOT: /srv/bet_test/main
-MOCKING what we need of uwsgi
 [
     {
         "pk": 4, 
