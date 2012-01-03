@@ -86,7 +86,7 @@ def correct_for_session(session, element=None):
         if e.attrib['code'] != 'G':
             pass
 
-        if not e.attrib['minute_extra']:
+        if not e.attrib.get('minute_extra', None):
             goalers.append(float(e.attrib['person_id']))
 
         goalers_with_extra.append(float(e.attrib['person_id']))

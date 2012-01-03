@@ -60,13 +60,13 @@ class ApiClient(object):
 
         parameters['lang'] = self.lang
         
-        if sport.__class__.__name__ == 'Sport':
+        if self.sport.__class__.__name__ == 'Sport':
             self.sport = self.sport.slug
 
-        if sport != 'tennis' and method in ('get_seasons', 'get_competitions'):
+        if self.sport != 'tennis' and method in ('get_seasons', 'get_competitions'):
             parameters['authorized'] = 'yes'
 
-        if sport == 'soccer' and method in self.__class__.LANGUAGE_FAILS:
+        if self.sport == 'soccer' and method in self.__class__.LANGUAGE_FAILS:
             parameters.pop('lang')
         
         if method == 'get_deleted':
