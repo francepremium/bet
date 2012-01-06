@@ -4,8 +4,7 @@
 {% load gsm_tags scoobet_tags %}
 
 {% block body %}{{ block.super }}
-
-
+    
     {% if next_sessions %}
         <h2 class="next_matches"><a href="{{ team.get_calendar_absolute_url }}" title="{% trans 'Calendar for team' %} {{ team.name }}">{% trans 'calendar' %}</a></h2>
         {% gsm_sessions_render next_sessions %}
@@ -24,7 +23,9 @@
     {% endif %}
 
     {% if resultstable %}
-        <h2 class="results_table">{% trans 'results table' %}</h2>
+        <h2 class="results_table">
+        {{ reference_season.competition }}: {{ reference_season.name }}
+        </h2>
         {% gsm_resultstable_render resultstable %}
     {% endif %}
 {% endblock %}

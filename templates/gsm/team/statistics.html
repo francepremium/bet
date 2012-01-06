@@ -11,10 +11,16 @@
 {% endblock %}
 
 {% block body %}{{ block.super }}
-    
-    
-    {{ reference_season.competition }}: {{ reference_season.name }}
+    {% if resultstable %}
+        <h2>
+        {{ reference_season.competition }}: {{ reference_season.name }}
+        </h2>
 
+        {% gsm_resultstable_render resultstable %}
+    {% endif %}
+
+    {# comment i have no idea why this is here #}
+    {% comment %}
     <table>
         <tr>
             <th></th>
@@ -50,6 +56,7 @@
             </tr>
         {% endfor %}
     </table>
+    {% endcomment %}
 
     {% if sport.slug == 'soccer' %}
 

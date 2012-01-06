@@ -49,7 +49,7 @@
 
 	<div class="action">
     {% if team in request.user.gsmentity_set.all %}
-        <a class="button" href="{% url gsm_fan 'unbecome' 'GsmEntity' team.pk %}">{% trans 'i do not bet on it' %}</a>
+        <a class="button button_favorite" href="{% url gsm_fan 'unbecome' 'GsmEntity' team.pk %}">{% trans 'i do not bet on it' %}</a>
     {% else %}
         <a class="button" href="{% url gsm_fan 'become' 'GsmEntity' team.pk %}">{% trans 'i bet on it' %}</a>
     {% endif %}

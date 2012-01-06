@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-03 15:02+0100\n"
-"PO-Revision-Date: 2011-11-04 17:23+0100\n"
+"POT-Creation-Date: 2012-01-05 11:44+0100\n"
+"PO-Revision-Date: 2012-01-05 17:00+0100\n"
 "Last-Translator: David <dav.bellaiche@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
-#: settings.py:149
+#: settings.py:164
 msgid "English"
 msgstr "anglais"
 
-#: settings.py:150
+#: settings.py:165
 msgid "French"
 msgstr "français"
 
@@ -29,7 +29,7 @@ msgstr "français"
 #: apps/ajax_select/fields.py:182
 #: apps/ajax_select/fields.py:244
 msgid "Enter text to search."
-msgstr "entrez le texte à rechercher"
+msgstr "entrez le texte à rechercher."
 
 #: apps/article/models.py:13
 msgid "title"
@@ -51,7 +51,6 @@ msgstr "ce n'est pas votre article, et vous ne faiîtes pas partie des modérate
 
 #: apps/bet/filters.py:37
 #: templates/bet/base.html:16
-#: templates/bet/_includes/bet_list_form.html:22
 msgid "all"
 msgstr "tous les membres"
 
@@ -70,100 +69,112 @@ msgstr "vous avez déjà établi un pari pour cette rencontre dans ce ticket. Ve
 
 #: apps/bet/forms.py:37
 msgid "odds must be at least equal to 1.00"
-msgstr "la côte du pari doit être au moins égale à 1.00"
+msgstr "la cote du pari doit être au moins égale à 1.00"
 
-#: apps/bet/models.py:49
+#: apps/bet/models.py:50
 msgid "incomplete"
 msgstr "incomplet"
 
-#: apps/bet/models.py:50
+#: apps/bet/models.py:51
 msgid "done"
 msgstr "effectué"
 
-#: apps/bet/models.py:124
+#: apps/bet/models.py:149
 msgid "waiting"
 msgstr "en attente"
 
-#: apps/bet/models.py:125
-#: templates/auth/user_stats.html:19
-#: templates/auth/user_stats.html.py:146
+#: apps/bet/models.py:150
+#: templates/auth/user_stats.html:13
+#: templates/auth/user_stats.html.py:145
 #: templates/auth/_includes/rankings_table.html:7
 msgid "won"
 msgstr "Gagné"
 
-#: apps/bet/models.py:126
-#: templates/auth/user_stats.html:23
-#: templates/auth/user_stats.html.py:147
+#: apps/bet/models.py:151
+#: templates/auth/user_stats.html:17
+#: templates/auth/user_stats.html.py:146
 #: templates/gsm/_includes/resultstable.html:15
-#: templates/gsm/team/statistics.html:25
 msgid "lost"
 msgstr "Perdu"
 
-#: apps/bet/models.py:127
+#: apps/bet/models.py:152
 msgid "canceled"
 msgstr "Annulé"
 
-#: apps/bet/views.py:105
+#: apps/bet/views.py:126
 msgid "ticket deleted"
 msgstr "ticket supprimé"
 
-#: apps/bet/views.py:117
+#: apps/bet/views.py:138
 msgid "bet deleted"
 msgstr "pari supprimé"
 
-#: apps/bet/views.py:119
+#: apps/bet/views.py:140
 msgid "bet deleted, ticket without bet deleted too"
 msgstr "pari supprimé, le ticket étant vide, il a été supprimé aussi"
 
-#: apps/bet/views.py:127
-#, fuzzy
+#: apps/bet/views.py:148
 msgid "ticket without bets deleted"
-msgstr "pari supprimé, le ticket étant vide, il a été supprimé aussi"
+msgstr "ticket supprimé car vide"
 
-#: apps/bet/views.py:158
+#: apps/bet/views.py:180
 msgid "ticket closed"
 msgstr "ticket clos"
 
-#: apps/bet/views.py:167
+#: apps/bet/views.py:192
 msgid "bet saved and ticket closed"
 msgstr "pari sauvegardé et ticket clos"
 
-#: apps/bookmaker/views.py:55
-#: apps/bookmaker/views.py:78
+#: apps/bookmaker/models.py:53
+msgid "float/decimal"
+msgstr "décimal"
+
+#: apps/bookmaker/models.py:54
+#: apps/gsm/views.py:417
+msgid "player"
+msgstr "joueur"
+
+#: apps/bookmaker/models.py:55
+#: templates/bet/_includes/bet_list_table.html:112
+msgid "text"
+msgstr "texte"
+
+#: apps/bookmaker/views.py:82
+#: apps/bookmaker/views.py:106
 msgid "bookmaker profile updated"
 msgstr "profil "
 
-#: apps/bookmaker/views.py:172
+#: apps/bookmaker/views.py:202
 #, python-format
 msgid "bet type %(bettype)s created and assigned to bookmaker %(bookmaker)s"
 msgstr "le type de pari %(bettype)s a été créé et assigné au bookmaker %(bookmaker)s"
 
-#: apps/bookmaker/views.py:177
+#: apps/bookmaker/views.py:207
 #, python-format
 msgid "bet type %s created"
 msgstr "le type de pari %s a été créé"
 
-#: apps/bookmaker/views.py:218
+#: apps/bookmaker/views.py:248
 #, python-format
 msgid "bet type %s updated"
 msgstr "le type de pari %s a été mis à jour"
 
-#: apps/bookmaker/views.py:242
+#: apps/bookmaker/views.py:273
 #, python-format
 msgid "bookmaker %s already supports bet type: no need to add"
 msgstr "le bookmaker %s possède déjà ce type de pari : inutile de l'ajouter"
 
-#: apps/bookmaker/views.py:248
+#: apps/bookmaker/views.py:279
 #, python-format
 msgid "successfully added bet type %(bettype)s to bookmaker %(bookmaker)s"
 msgstr "vous avez ajouté avec succès le type de pari %(bettype)s au bookmaker %(bookmaker)s"
 
-#: apps/bookmaker/views.py:256
+#: apps/bookmaker/views.py:287
 #, python-format
 msgid "successfully removed bet type %(bettype)s from bookmaker %(bookmaker)s"
 msgstr "vous avez retiré avec succès le type de pari %(bettype)s du bookmaker %(bookmaker)s"
 
-#: apps/bookmaker/views.py:263
+#: apps/bookmaker/views.py:294
 #, python-format
 msgid "bookmaker %(bookmaker)s does not bet type %(bettype)s: no need to remove"
 msgstr "le bookmaker %(bookmaker)s ne possède pas le type de pari %(bettype)s: inutile de le supprimer"
@@ -276,25 +287,23 @@ msgstr "créer un groupe"
 
 #: apps/clan/templates/clan/clan_detail.html:11
 #: templates/article/article_detail.html:9
-#: templates/bet/bet_form.html:42
+#: templates/bet/bet_form.html:47
 #: templates/bookmaker/base.html:9
 msgid "edit"
 msgstr "éditer"
 
 #: apps/clan/templates/clan/clan_detail.html:20
-#: templates/gsm/team/squad.html:56
+#: templates/gsm/team/squad.html:58
 msgid "name"
 msgstr "Nom"
 
 #: apps/clan/templates/clan/clan_detail.html:22
-#, fuzzy
 msgid "description"
-msgstr "poste"
+msgstr "decription"
 
 #: apps/clan/templates/clan/clan_detail.html:26
-#, fuzzy
 msgid "created by"
-msgstr "passe décisive de"
+msgstr "créé par"
 
 #: apps/clan/templates/clan/clan_detail.html:28
 msgid "created on"
@@ -327,27 +336,27 @@ msgstr "demandes en cours"
 msgid "save"
 msgstr "sauvegarder"
 
-#: apps/gsm/models.py:546
+#: apps/gsm/models.py:522
 msgid "match has been played"
 msgstr "le match a été joué"
 
-#: apps/gsm/models.py:547
+#: apps/gsm/models.py:523
 msgid "match is playing (live)"
 msgstr "le match est en cours"
 
-#: apps/gsm/models.py:548
+#: apps/gsm/models.py:524
 msgid "match is scheduled"
 msgstr "le match est programmé"
 
-#: apps/gsm/models.py:549
+#: apps/gsm/models.py:525
 msgid "match is postponed to other (unknown) date"
 msgstr "le match est reportée à une date inconnue"
 
-#: apps/gsm/models.py:550
+#: apps/gsm/models.py:526
 msgid "match is cancelled and won't be played again"
 msgstr "le match est annulé"
 
-#: apps/gsm/models.py:551
+#: apps/gsm/models.py:527
 msgid "match is suspended during match"
 msgstr "le match est interrompu"
 
@@ -357,20 +366,18 @@ msgid "Could not find sport %s"
 msgstr "Impossible de trouver le sport %s"
 
 #: apps/gsm/views.py:51
-#, fuzzy
 msgid "you indicated that you bet on"
-msgstr "vous avez indiqué que vous pariez sur%s"
+msgstr "vous avez indiqué que vous aimez"
 
 #: apps/gsm/views.py:64
-#, fuzzy
 msgid "you indicated that you do not bet anymore on"
-msgstr "vous avez indiqué que vous pariez sur%s"
+msgstr "vous avez indiqué que vous n'aimez plus"
 
-#: apps/gsm/views.py:417
-msgid "player"
-msgstr "joueur"
+#: apps/scoobet/admin.py:16
+msgid "Advanced options"
+msgstr "Options avancées"
 
-#: apps/scoobet/models.py:150
+#: apps/scoobet/models.py:149
 #: templates/activity/action.html:80
 msgid "started following"
 msgstr "est désormais abonné aux publications de"
@@ -380,10 +387,9 @@ msgstr "est désormais abonné aux publications de"
 msgid "Account"
 msgstr "Compte"
 
-#: templates/beta_homepage.html:93
-#, fuzzy
-msgid "your@email.com"
-msgstr "votre e-mail"
+#: templates/autocompleteselect_session.html:43
+msgid "to change match, refresh the page with F5)"
+msgstr "pour changer de match, merci de rafraîchir la page. "
 
 #: templates/error.html:5
 msgid "Oopsie"
@@ -391,7 +397,7 @@ msgstr "Oops"
 
 #: templates/error.html:9
 msgid "It's not your fault but our data provider is overloaded for the moment - and we don't have any cached version of the data you requested. Our techie has been notified but it's unlikely that he can do anything about it. Would you please try again later ?"
-msgstr "Ne vous inquiétez pas, "
+msgstr "Les données sont actuellement indisponibles. Notre équipe fait tout son possible pour rétablir celles-ci."
 
 #: templates/error.html:13
 msgid "It's not your fault but it seems like we can't access to the data you're looking for ... Hopefully John has been notified and will see what's wrong with the provider."
@@ -401,33 +407,54 @@ msgstr "Ce n'est pas votre faute, mais il semble que la page demandée est inacc
 msgid "does not follow you. Therefore we cannot let you send him a private message."
 msgstr "n'est pas abonné à vos publications. Vous ne pouvez donc pas lui envoyer de message privé."
 
+#: templates/error.html:23
+#, python-format
+msgid "You may not bet on %(session)s because it has already started."
+msgstr "Vous ne pouvez pas parier sur la rencontre %(session)s car celle-ci a déjà débuté."
+
 #: templates/homepage.html:5
 msgid "Welcome"
 msgstr "Bienvenue"
 
-#: templates/homepage.html:13
-#: templates/homepage.html.py:39
+#: templates/homepage.html:14
+msgid "by profit"
+msgstr "par profit"
+
+#: templates/homepage.html:17
+#: templates/homepage.html.py:47
 msgid "picker"
 msgstr "pronostics"
 
-#: templates/homepage.html:14
-#: templates/homepage.html.py:40
-#: templates/auth/user_stats.html:51
+#: templates/homepage.html:18
+#: templates/homepage.html.py:48
+#: templates/auth/user_stats.html:47
 msgid "profitability"
 msgstr "rentabilité"
 
-#: templates/homepage.html:15
-#: templates/homepage.html.py:41
+#: templates/homepage.html:19
+#: templates/homepage.html.py:49
 #: templates/activity/action.html:107
 #: templates/auth/_includes/rankings_table.html:6
 msgid "bets"
 msgstr "paris"
 
-#: templates/homepage.html:16
-#: templates/homepage.html.py:42
-#, fuzzy
+#: templates/homepage.html:20
+#: templates/homepage.html.py:50
 msgid "profit"
-msgstr "profit/perte"
+msgstr "profit"
+
+#: templates/homepage.html:40
+msgid "user count"
+msgstr "nombre d'utilisateurs"
+
+#: templates/homepage.html:44
+msgid "by profitability"
+msgstr "par rentabilité"
+
+#: templates/homepage.html:70
+#, fuzzy
+msgid "pending email confirmations"
+msgstr "demandes en cours"
 
 #: templates/session_bettype_detail.html:5
 #: templates/gsm/competition/base.html:7
@@ -448,37 +475,37 @@ msgstr "Obtenez tout ce dont vous avez besoin pour parier et gagner sur %(sport)
 #: templates/bet/bet_detail.html:27
 #: templates/bet/bet_detail.html.py:33
 #: templates/bet/bet_detail.html:54
-#: templates/bet/ticket_detail.html:9
+#: templates/bet/ticket_detail.html:6
 #: templates/bookmaker/base.html:15
 #: templates/gsm/competition/base.html:11
 #: templates/gsm/competition/base.html:38
 #: templates/gsm/person/base.html:24
-#: templates/gsm/session/base.html:151
+#: templates/gsm/session/base.html:141
 #: templates/gsm/sport/base.html:10
 #: templates/gsm/sport/base.html.py:37
 #: templates/gsm/team/base.html:38
 msgid "picks"
-msgstr "pronostics en cours"
-
-#: templates/session_bettype_detail.html:9
-#: templates/bet/bet_detail.html:9
-#: templates/bet/ticket_detail.html:9
-#: templates/gsm/competition/base.html:11
-#: templates/gsm/sport/base.html:10
-msgid "pick"
 msgstr "pronostics"
 
 #: templates/session_bettype_detail.html:9
 #: templates/bet/bet_detail.html:9
-#: templates/bet/bet_detail.html.py:64
-#: templates/bet/ticket_detail.html:9
-#: templates/bet/_includes/bet_list_table.html:31
-msgid "bet"
-msgstr "Choix"
+#: templates/bet/ticket_detail.html:6
+#: templates/gsm/competition/base.html:11
+#: templates/gsm/sport/base.html:10
+msgid "pick"
+msgstr "pronostic"
 
 #: templates/session_bettype_detail.html:9
 #: templates/bet/bet_detail.html:9
-#: templates/bet/ticket_detail.html:9
+#: templates/bet/bet_detail.html.py:64
+#: templates/bet/ticket_detail.html:6
+#: templates/bet/_includes/bet_list_table.html:31
+msgid "bet"
+msgstr "pari"
+
+#: templates/session_bettype_detail.html:9
+#: templates/bet/bet_detail.html:9
+#: templates/bet/ticket_detail.html:6
 #: templates/gsm/competition/base.html:11
 #: templates/gsm/sport/base.html:10
 msgid "betting"
@@ -486,15 +513,14 @@ msgstr ""
 
 #: templates/session_bettype_detail.html:9
 #: templates/bet/bet_detail.html:9
-#: templates/bet/ticket_detail.html:9
+#: templates/bet/ticket_detail.html:6
 #: templates/gsm/competition/base.html:11
 #: templates/gsm/sport/base.html:10
-#, fuzzy
 msgid "prediction"
-msgstr "compétition"
+msgstr "prédiction"
 
 #: templates/session_bettype_detail.html:45
-#: templates/auth/user_stats.html:144
+#: templates/auth/user_stats.html:143
 msgid "choice share"
 msgstr ""
 
@@ -506,20 +532,18 @@ msgstr "nombre de paris"
 #: templates/bet/bet_detail.html:48
 #: templates/bet/_includes/bet_list_table.html:46
 #: templates/bet/_includes/ticket_list_table.html:32
-#, fuzzy
 msgid "result"
-msgstr "Résultats"
+msgstr "résultat"
 
 #: templates/session_bettype_detail.html:74
-#: templates/bet/bet_form.html:77
+#: templates/bet/bet_form.html:82
 #: templates/bet/_includes/bet_list_table.html:34
 msgid "choice"
 msgstr "choix"
 
 #: templates/session_bettype_detail.html:75
-#, fuzzy
 msgid "count"
-msgstr "Compte"
+msgstr "compte"
 
 #: templates/session_bettype_detail_page.html:15
 msgid "read all"
@@ -529,164 +553,193 @@ msgstr "lire tout"
 msgid "Don't loose your bets, thank Scoobet"
 msgstr "Betspire, bet inspired"
 
-#: templates/site_base.html:102
-#: templates/site_base.html.py:141
-#, fuzzy
-msgid "sign up"
-msgstr "Inscription"
+#: templates/site_base.html:101
+#: templates/site_base.html.py:261
+msgid "logout"
+msgstr "se deconnecter"
 
-#: templates/site_base.html:111
-#: templates/site_base.html.py:331
+#: templates/site_base.html:114
+#: templates/site_base.html.py:373
 msgid "clear"
 msgstr "effacer"
 
-#: templates/site_base.html:135
-#, fuzzy
+#: templates/site_base.html:129
+msgid "change avatar"
+msgstr "Modifier photo"
+
+#: templates/site_base.html:134
+msgid "Upload avatar"
+msgstr "Envoyer une photo"
+
+#: templates/site_base.html:146
 msgid "user name"
-msgstr "prénom"
+msgstr "pseudo"
 
-#: templates/site_base.html:136
-#, fuzzy
+#: templates/site_base.html:147
 msgid "password"
-msgstr "Définir le mot de passe"
+msgstr "mot de passe"
 
-#: templates/site_base.html:137
+#: templates/site_base.html:148
 #, fuzzy
 msgid "Log in"
 msgstr "s'identifier"
 
-#: templates/site_base.html:138
-#, fuzzy
+#: templates/site_base.html:149
 msgid "remember me"
-msgstr "membre"
+msgstr "se souvenir de moi"
 
-#: templates/site_base.html:140
-#, fuzzy
+#: templates/site_base.html:151
 msgid "forgot password?"
-msgstr "Définir le mot de passe"
+msgstr "mot de passe oublié?"
 
-#: templates/site_base.html:146
+#: templates/site_base.html:152
+msgid "sign up"
+msgstr "s'inscrire"
+
+#: templates/site_base.html:157
 msgid "soccer"
 msgstr "football"
 
-#: templates/site_base.html:149
+#: templates/site_base.html:160
 msgid "ligue 1"
 msgstr "Ligue 1 (FRA)"
 
-#: templates/site_base.html:152
+#: templates/site_base.html:163
 msgid "premier league"
 msgstr "Premier league (ANG)"
 
-#: templates/site_base.html:155
+#: templates/site_base.html:166
 msgid "liga BBVA"
 msgstr "Liga BBVA (ESP)"
 
-#: templates/site_base.html:158
+#: templates/site_base.html:169
 msgid "serie A"
 msgstr "Serie A (ITA)"
 
-#: templates/site_base.html:161
+#: templates/site_base.html:172
 msgid "bundesliga 1"
 msgstr "Bundesliga 1 (ALL)"
 
-#: templates/site_base.html:164
+#: templates/site_base.html:175
 msgid "all competitions"
-msgstr "toutes les compétitions"
+msgstr "plus de compétitions"
 
-#: templates/site_base.html:169
+#: templates/site_base.html:180
 msgid "tennis"
 msgstr "tennis"
 
-#: templates/site_base.html:172
+#: templates/site_base.html:183
 msgid "rugby"
 msgstr "rugby"
 
-#: templates/site_base.html:175
+#: templates/site_base.html:186
 msgid "basketball"
 msgstr "basketball"
 
-#: templates/site_base.html:180
+#: templates/site_base.html:189
+msgid "hockey"
+msgstr "hockey"
+
+#: templates/site_base.html:192
+msgid "americanfootball"
+msgstr "football américain"
+
+#: templates/site_base.html:197
 msgid "leaderboard"
 msgstr "classement"
 
-#: templates/site_base.html:195
+#: templates/site_base.html:202
+msgid "Read about BetSpire concept"
+msgstr "Découvrez le concept Betspire"
+
+#: templates/site_base.html:202
+msgid "betspire concept"
+msgstr "le concept betspire"
+
+#: templates/site_base.html:217
 msgid "Hide announcement"
 msgstr "masquer l'annonce"
 
-#: templates/site_base.html:207
-#, fuzzy
+#: templates/site_base.html:229
 msgid "my bets"
-msgstr "paris"
+msgstr "mes paris"
 
-#: templates/site_base.html:210
-#, fuzzy
+#: templates/site_base.html:232
 msgid "friend's bets"
-msgstr "mes amis"
+msgstr "paris de mes amis"
 
-#: templates/site_base.html:214
-#, fuzzy
+#: templates/site_base.html:236
 msgid "Flagged bets"
-msgstr "Corrections signalées"
+msgstr "paris signalés"
 
-#: templates/site_base.html:223
+#: templates/site_base.html:245
+msgid "Your statistics"
+msgstr "statistiques"
+
+#: templates/site_base.html:245
 #, fuzzy
 msgid "stats"
 msgstr "statistiques"
 
-#: templates/site_base.html:236
+#: templates/site_base.html:258
+msgid "Your account settings: timezone, email, password, avatar ..."
+msgstr "Paramètres de votre compte : fuseau horaire, adresse e-mail, mot de passe, photo de profil"
+
+#: templates/site_base.html:258
 msgid "settings"
 msgstr "options"
 
-#: templates/site_base.html:239
-#, fuzzy
-msgid "logout"
-msgstr "Déconnection"
+#: templates/site_base.html:269
+msgid "How to"
+msgstr "Comment ?"
 
-#: templates/site_base.html:248
-#, fuzzy
+#: templates/site_base.html:282
 msgid "publication:"
-msgstr "public"
+msgstr "publier"
 
-#: templates/site_base.html:250
+#: templates/site_base.html:284
 #: templates/activity/action.html:65
 #: templates/bet/bet_detail.html:14
-#: templates/bet/ticket_detail.html:13
+#: templates/bet/ticket_detail.html:8
 msgid "ticket"
 msgstr "ticket"
 
-#: templates/site_base.html:251
-#: templates/bet/ticket_detail.html:16
+#: templates/site_base.html:285
+#: templates/bet/ticket_detail.html:21
 msgid "status"
 msgstr "statut"
 
-#: templates/site_base.html:256
+#: templates/site_base.html:290
 msgid "You have an openned ticket. It will open automatically here. Please finish it and/or close it."
 msgstr "Vous avez un ticket en cours de création, cette fenêtre s'ouvrira automatiquement. Veuiller terminer et/ou fermer ce ticket."
 
-#: templates/site_base.html:295
+#: templates/site_base.html:337
 msgid "loading page"
 msgstr "chargement"
 
-#: templates/site_base.html:306
+#: templates/site_base.html:348
 msgid "searching for"
 msgstr "recherche"
 
-#: templates/site_base.html:311
+#: templates/site_base.html:353
 msgid "Search : a match, a player, a team, a competition / a friend, a clan..."
 msgstr "Recherchez ici un match, une équipe, une compétition, un parieur, un bookmaker..."
 
-#: templates/site_base.html:318
+#: templates/site_base.html:360
 msgid "Sorry, our program failed to process your request. Our techie has been notified by email and will take care of it soonish"
 msgstr "Désolé, nous ne pouvons pas executer votre demande. Notre technicien vient d'être averti et fait de son mieux pour corriger le tir."
 
-#: templates/site_base.html:482
+#: templates/site_base.html:536
 msgid "Do you want to"
 msgstr "voulez-vous"
 
-#: templates/site_base.html:600
-#, fuzzy
-msgid "Bet flagged"
-msgstr "a signalé"
+#: templates/site_base.html:676
+msgid "Are you sure you want to report an error either in the odds or correction of this bet ?"
+msgstr "Etes vous sûrs de vouloir reporter une erreur sur la cote ou la correction de ce pari ?"
+
+#: templates/site_base.html:684
+msgid "Thanks for reporting an error in this bet. Our staff will check both the odds and the correction of this bet. If you want to report another error, please contact us."
+msgstr "Merci d'avoir reporté une erreur sur ce pari. Notre équipe s'occupe dès que possible de la correction de celle-ci."
 
 #: templates/account/base.html:11
 msgid "E-Mail Addresses"
@@ -735,9 +788,8 @@ msgid "Don't have an account? <a href=\"%(signup_url)s\">Sign up</a>!"
 msgstr "Vous n'avez pas de compter ? <a href=\"%(signup_url)s\">Inscrivez-vous</a>!"
 
 #: templates/account/login.html:29
-#, fuzzy
 msgid "Forgot password?"
-msgstr "Définir le mot de passe"
+msgstr "mot de passe oublié?"
 
 #: templates/account/login.html:36
 msgid "Log in &raquo;"
@@ -789,14 +841,12 @@ msgid "his"
 msgstr "ses"
 
 #: templates/activity/action.html:53
-#, fuzzy
 msgid "status update"
-msgstr "article %s mis à jour"
+msgstr "statut mis à jour"
 
 #: templates/activity/action.html:58
 #: templates/bet/bet_detail.html:14
-#: templates/bet/ticket_detail.html:5
-#: templates/bet/ticket_detail.html:13
+#: templates/bet/ticket_detail.html:3
 msgid "by"
 msgstr "de"
 
@@ -839,9 +889,8 @@ msgid "simple ticket"
 msgstr "ticket simple"
 
 #: templates/activity/action.html:97
-#, fuzzy
 msgid "on match"
-msgstr "prochains matchs"
+msgstr "sur la rencontre"
 
 #: templates/activity/action.html:105
 #: templates/activity/action.html.py:120
@@ -855,7 +904,6 @@ msgid "flagged"
 msgstr "a signalé"
 
 #: templates/activity/_includes/action_close.html:20
-#: templates/comments/form.html:21
 msgid "comment"
 msgstr "commenter"
 
@@ -884,25 +932,21 @@ msgid "social"
 msgstr "amis"
 
 #: templates/auth/user_base.html:19
-#, fuzzy
 msgid "file of"
-msgstr "Profil"
+msgstr "intérêt de"
 
 #: templates/auth/user_base.html:19
 #: templates/bookmaker/base.html:14
 #: templates/gsm/person/base.html:10
-#, fuzzy
 msgid "file"
-msgstr "Profil"
+msgstr "intérêt"
 
 #: templates/auth/user_base.html:22
-#, fuzzy
 msgid "statistics of"
-msgstr "statistiques"
+msgstr "statistiques de"
 
 #: templates/auth/user_base.html:22
 #: templates/gsm/competition/base.html:31
-#: templates/gsm/session/home.html:170
 #: templates/gsm/team/base.html:31
 #: templates/gsm/team/squad.html:20
 msgid "statistics"
@@ -913,6 +957,7 @@ msgid "picks of"
 msgstr "pronostics"
 
 #: templates/auth/user_base.html:48
+#: templates/auth/user_social.html:28
 msgid "following"
 msgstr "abonné"
 
@@ -920,50 +965,54 @@ msgstr "abonné"
 msgid "follow"
 msgstr "s'abonner"
 
-#: templates/auth/user_base.html:78
-#: templates/comments/form.html:35
+#: templates/auth/user_base.html:79
+#: templates/comments/form.html:37
 #: templates/comments/preview.html:32
 #: templates/scoobet/status_add.html:13
 msgid "Post"
 msgstr "publier"
 
-#: templates/auth/user_stats.html:8
+#: templates/auth/user_social.html:31
+msgid "follows"
+msgstr "suit"
+
+#: templates/auth/user_stats.html:6
 msgid "did not place any ticket that was fully corrected yet"
-msgstr "n'a pas encore publié de ticket."
+msgstr "n'a pas encore publié de ticket"
 
-#: templates/auth/user_stats.html:15
-msgid "total ticket count for your search"
-msgstr "nombre de tickets correspondant à votre recherche"
+#: templates/auth/user_stats.html:8
+msgid "tickets for your search"
+msgstr "tickets correspondant à votre recherche"
 
-#: templates/auth/user_stats.html:27
-msgid "won percent"
-msgstr "pourcentage de réussite"
-
-#: templates/auth/user_stats.html:31
+#: templates/auth/user_stats.html:22
 msgid "average odds"
-msgstr "côte moyenne"
+msgstr "cote moyenne"
 
-#: templates/auth/user_stats.html:35
+#: templates/auth/user_stats.html:26
 msgid "average stake"
 msgstr "mise moyenne"
 
-#: templates/auth/user_stats.html:39
+#: templates/auth/user_stats.html:30
 msgid "total engaged units"
 msgstr "unités jouées au total"
 
-#: templates/auth/user_stats.html:43
+#: templates/auth/user_stats.html:34
 msgid "total earnings"
 msgstr "unités remportées"
 
-#: templates/auth/user_stats.html:47
+#: templates/auth/user_stats.html:39
+msgid "won percent"
+msgstr "pourcentage de réussite"
+
+#: templates/auth/user_stats.html:43
 msgid "profit/loss"
 msgstr "profit/perte"
 
-#: templates/auth/user_stats.html:85
+#: templates/auth/user_stats.html:84
 msgid "balance"
 msgstr "solde"
 
-#: templates/auth/user_stats.html:95
+#: templates/auth/user_stats.html:94
 msgid "new balance after ticket"
 msgstr "solde après ce ticket"
 
@@ -972,9 +1021,8 @@ msgid "tipster"
 msgstr "pronostiqueurs"
 
 #: templates/auth/_includes/rankings_table.html:9
-#, fuzzy
 msgid "avg. odds"
-msgstr "côte moyenne"
+msgstr "cote moyenne"
 
 #: templates/auth/_includes/rankings_table.html:14
 msgid "more tips by tipster"
@@ -1009,18 +1057,16 @@ msgid "You have no avatars to delete. Please <a href=\"%(avatar_change_url)s\">u
 msgstr "Vous n'avez aucun avatar à supprimer. Veuillez en <a href=\"%(avatar_change_url)s\">ajouter</a> un."
 
 #: templates/avatar/confirm_delete.html:14
-#, fuzzy
 msgid "Delete These"
-msgstr "messages supprimés"
+msgstr "supprimer"
 
 #: templates/bet/base.html:9
 msgid "mine"
 msgstr "moi"
 
 #: templates/bet/bet_detail.html:5
-#, fuzzy
 msgid "pick for"
-msgstr "pronostics en cours"
+msgstr "pronostics"
 
 #: templates/bet/bet_detail.html:8
 #, python-format
@@ -1038,23 +1084,20 @@ msgstr "sport"
 
 #: templates/bet/bet_detail.html:25
 #: templates/bet/_includes/bet_list_table.html:25
-#: templates/gsm/person/home.html:73
-#: templates/gsm/session/base.html:100
+#: templates/gsm/person/home.html:78
 #: templates/search/_includes/competition.html:2
 msgid "competition"
 msgstr "compétition"
 
 #: templates/bet/bet_detail.html:31
-#: templates/bet/bet_form.html:62
+#: templates/bet/bet_form.html:67
 #: templates/bet/_includes/bet_list_table.html:28
-#, fuzzy
 msgid "match"
-msgstr "matchs"
+msgstr "match"
 
 #: templates/bet/bet_detail.html:40
 #: templates/bet/_includes/bet_list_table.html:13
 #: templates/bet/_includes/ticket_list_table.html:12
-#: templates/gsm/session/base.html:105
 msgid "date"
 msgstr "date"
 
@@ -1079,7 +1122,7 @@ msgstr "type de pari"
 #: templates/bet/bet_detail.html:70
 #: templates/bet/bet_form.html:12
 #: templates/bet/ticket_add.html:15
-#: templates/bet/ticket_detail.html:15
+#: templates/bet/ticket_detail.html:12
 #: templates/bet/_includes/bet_list_table.html:40
 #: templates/bet/_includes/ticket_list_table.html:21
 msgid "stake"
@@ -1105,97 +1148,114 @@ msgstr "combiné"
 
 #: templates/bet/bet_form.html:26
 msgid "current ticket odds"
-msgstr "côte du ticket en cours"
+msgstr "cote du ticket en cours"
 
-#: templates/bet/bet_form.html:47
+#: templates/bet/bet_form.html:52
 #: templates/bookmaker/edit_bet_type.html:18
 msgid "delete"
 msgstr "supprimer"
 
-#: templates/bet/bet_form.html:47
+#: templates/bet/bet_form.html:52
 msgid "delete bet for match"
 msgstr "supprimer le pari sur ce match"
 
-#: templates/bet/bet_form.html:64
-#, fuzzy
+#: templates/bet/bet_form.html:69
 msgid "start typing a team name"
-msgstr "match (écrivez les premières lettres d'une équipe)"
+msgstr "écrivez les premières lettres d'une équipe"
 
-#: templates/bet/bet_form.html:68
+#: templates/bet/bet_form.html:73
 #: templates/bet/_includes/ticket_list_table.html:15
 msgid "ticket type"
 msgstr "type de ticket"
 
-#: templates/bet/bet_form.html:86
-#: templates/bet/ticket_detail.html:18
+#: templates/bet/bet_form.html:97
+#: templates/bet/ticket_detail.html:17
 #: templates/bet/_includes/bet_list_table.html:37
 #: templates/bet/_includes/ticket_list_table.html:24
 msgid "odds"
-msgstr "côte"
+msgstr "cote"
 
-#: templates/bet/bet_form.html:91
-#, fuzzy
+#: templates/bet/bet_form.html:105
 msgid "reason"
-msgstr "saison"
+msgstr "argumentation"
 
-#: templates/bet/bet_form.html:96
+#: templates/bet/bet_form.html:110
 #: templates/bet/_includes/bet_list_table.html:113
 msgid "image"
 msgstr "image"
 
-#: templates/bet/bet_form.html:102
+#: templates/bet/bet_form.html:117
 msgid "save and close"
 msgstr "sauvegarder et finaliser le ticket"
 
-#: templates/bet/bet_form.html:105
+#: templates/bet/bet_form.html:120
 msgid "save and add another"
 msgstr "sauvegarder et ajouter un pari au ticket"
 
-#: templates/bet/bet_form.html:109
+#: templates/bet/bet_form.html:124
 msgid "close ticket"
 msgstr "fermer le ticket"
 
-#: templates/bet/bet_form.html:116
+#: templates/bet/bet_form.html:131
 msgid "delete ticket"
 msgstr "supprimer le ticket"
 
-#: templates/bet/bet_form.html:116
+#: templates/bet/bet_form.html:131
 msgid "delete the whole ticket"
 msgstr "supprimer entièrement le ticket"
 
-#: templates/bet/ticket_detail.html:5
+#: templates/bet/ticket_detail.html:3
 msgid "Combined"
 msgstr "combiné"
 
-#: templates/bet/ticket_detail.html:5
+#: templates/bet/ticket_detail.html:3
 msgid "Simple"
 msgstr "simple"
 
-#: templates/bet/ticket_detail.html:5
+#: templates/bet/ticket_detail.html:3
 msgid "ticket "
 msgstr "ticket"
 
-#: templates/bet/ticket_detail.html:8
+#: templates/bet/ticket_detail.html:5
 msgid "In this ticket"
 msgstr "dans ce ticket"
 
-#: templates/bet/ticket_detail.html:8
+#: templates/bet/ticket_detail.html:5
 msgid "shares his picks on matches"
 msgstr "partager ses pronostics"
 
-#: templates/bet/ticket_detail.html:8
+#: templates/bet/ticket_detail.html:5
 msgid "Discover his free picks now"
 msgstr "découvrez gratuitement ses pronostics"
 
-#: templates/bet/ticket_detail.html:17
+#: templates/bet/ticket_detail.html:15
 msgid "bet count"
 msgstr "Nombre de paris"
 
+#: templates/bet/ticket_detail.html:47
+#: templates/gsm/session/home.html:478
+msgid "comments"
+msgstr "commentaires"
+
+#: templates/bet/ticket_detail.html:51
+#: templates/gsm/session/home.html:482
+#, fuzzy
+msgid "add new comment"
+msgstr "commenter"
+
+#: templates/bet/ticket_detail.html:52
+#: templates/gsm/session/home.html:485
+msgid "all comments"
+msgstr "tous les commentaires"
+
+#: templates/bet/_includes/bet_list_form.html:21
+msgid "clear filters"
+msgstr "réinitialiser les filtres"
+
 #: templates/bet/_includes/bet_list_table.html:19
 #: templates/bet/_includes/ticket_list_table.html:18
-#, fuzzy
 msgid "nickname"
-msgstr "Nom"
+msgstr "pseudo"
 
 #: templates/bet/_includes/bet_list_table.html:43
 msgid "support"
@@ -1205,10 +1265,6 @@ msgstr "support"
 #, fuzzy
 msgid "Combined ticket"
 msgstr "ticket combiné"
-
-#: templates/bet/_includes/bet_list_table.html:112
-msgid "text"
-msgstr "texte"
 
 #: templates/bet/_includes/bet_list_table.html:141
 msgid "no bet match your search"
@@ -1273,14 +1329,12 @@ msgid "contact"
 msgstr "contact"
 
 #: templates/bookmaker/file.html:27
-#, fuzzy
 msgid "address"
-msgstr "Addresses email"
+msgstr "Addresse email"
 
 #: templates/bookmaker/file.html:29
-#, fuzzy
 msgid "live bets"
-msgstr "live"
+msgstr "liveaparis en direct"
 
 #: templates/bookmaker/file.html:30
 msgid "yes"
@@ -1306,7 +1360,7 @@ msgstr "approuver un commentaire"
 
 #: templates/comments/approve.html:7
 msgid "Really make this comment public?"
-msgstr "voulez-vous vraiment rendre ce commentaire public ?"
+msgstr "voulez-vous vraiment rendre ce commentaire public?"
 
 #: templates/comments/approve.html:12
 msgid "Approve"
@@ -1328,7 +1382,7 @@ msgstr "supprimer un commentaire"
 
 #: templates/comments/delete.html:7
 msgid "Really remove this comment?"
-msgstr "voulez-vous vraiment supprimer ce commentaire ?"
+msgstr "voulez-vous vraiment supprimer ce commentaire?"
 
 #: templates/comments/delete.html:12
 msgid "Remove"
@@ -1344,7 +1398,7 @@ msgstr "signaler ce commentaire"
 
 #: templates/comments/flag.html:7
 msgid "Really flag this comment?"
-msgstr "voulez-vous vraiment signaler ce commentaire ?"
+msgstr "voulez-vous vraiment signaler ce commentaire?"
 
 #: templates/comments/flag.html:12
 msgid "Flag"
@@ -1354,16 +1408,15 @@ msgstr "signaler"
 msgid "Thanks for flagging"
 msgstr "merci d'avoir signalé"
 
-#: templates/comments/form.html:10
-#, fuzzy
+#: templates/comments/form.html:11
 msgid "your name"
-msgstr "prénom"
+msgstr "nom"
 
-#: templates/comments/form.html:17
+#: templates/comments/form.html:18
 msgid "your email"
 msgstr "votre e-mail"
 
-#: templates/comments/form.html:36
+#: templates/comments/form.html:38
 #: templates/comments/preview.html:33
 msgid "Preview"
 msgstr "prévisualiser"
@@ -1373,9 +1426,8 @@ msgid "Thanks for commenting"
 msgstr "merci d'avoir commenté"
 
 #: templates/comments/posted.html:8
-#, fuzzy
 msgid "Thank you for posting your status"
-msgstr "merci pour votre commentaire"
+msgstr "merci d'avoir mis à jour votre statut"
 
 #: templates/comments/posted.html:11
 #, python-format
@@ -1426,9 +1478,8 @@ msgid "Sent Messages"
 msgstr "messages envoyés"
 
 #: templates/django_messages/base.html:12
-#, fuzzy
 msgid "New Message"
-msgstr "message"
+msgstr "Nouveau message"
 
 #: templates/django_messages/base.html:13
 #: templates/postman/base.html:13
@@ -1436,9 +1487,8 @@ msgid "Trash"
 msgstr "corbeille"
 
 #: templates/django_messages/compose.html:5
-#, fuzzy
 msgid "Compose Message"
-msgstr "message initial"
+msgstr "Ecrire un message"
 
 #: templates/django_messages/compose.html:12
 msgid "Send"
@@ -1449,32 +1499,27 @@ msgid "rank"
 msgstr "rang"
 
 #: templates/gsm/_includes/resultstable.html:11
-#: templates/gsm/person/home.html:75
+#: templates/gsm/person/home.html:80
 msgid "team"
 msgstr "équipe"
 
 #: templates/gsm/_includes/resultstable.html:12
-#: templates/gsm/team/statistics.html:22
 msgid "match played"
 msgstr "match joué"
 
 #: templates/gsm/_includes/resultstable.html:13
-#: templates/gsm/team/statistics.html:23
 msgid "wins"
 msgstr "victoires"
 
 #: templates/gsm/_includes/resultstable.html:14
-#: templates/gsm/team/statistics.html:24
 msgid "draw"
 msgstr "matchs nuls"
 
 #: templates/gsm/_includes/resultstable.html:17
-#: templates/gsm/team/statistics.html:26
 msgid "goal difference"
 msgstr "différence de buts"
 
 #: templates/gsm/_includes/resultstable.html:19
-#: templates/gsm/team/statistics.html:27
 #: templates/gsm/tennis/_includes/resultstable.html:12
 msgid "points"
 msgstr "points"
@@ -1506,9 +1551,8 @@ msgstr "Tout pour parier et gagner sur %(competition)s comme un pro : statistiqu
 
 #: templates/gsm/competition/base.html:11
 #: templates/gsm/sport/base.html:10
-#, fuzzy
 msgid "free picks"
-msgstr "pronostics en cours"
+msgstr "pronostics"
 
 #: templates/gsm/competition/base.html:11
 #: templates/gsm/sport/base.html:10
@@ -1523,16 +1567,17 @@ msgid "home"
 msgstr "accueil"
 
 #: templates/gsm/competition/base.html:35
+#: templates/gsm/session/home.html:420
+#: templates/gsm/session/home.html:423
 #: templates/gsm/team/base.html:35
-#: templates/gsm/team/home.html:10
+#: templates/gsm/team/home.html:9
 msgid "calendar"
 msgstr "calendrier"
 
 #: templates/gsm/competition/calendar.html:9
 #: templates/gsm/competition/calendar.html:18
-#, fuzzy
 msgid "previous"
-msgstr "matchs précédents"
+msgstr "précédent"
 
 #: templates/gsm/competition/calendar.html:12
 #: templates/gsm/competition/calendar.html:21
@@ -1549,15 +1594,15 @@ msgstr "prochains matchs"
 #: templates/gsm/competition/home.html:11
 #: templates/gsm/sport/base.html:40
 #: templates/gsm/sport/home.html:17
-#: templates/gsm/team/home.html:15
+#: templates/gsm/team/home.html:14
 msgid "best tipsters"
 msgstr "meilleurs pronostiqueurs"
 
 #: templates/gsm/competition/home.html:18
 #: templates/gsm/sport/home.html:24
-#: templates/gsm/team/home.html:22
+#: templates/gsm/team/home.html:21
 msgid "random tips"
-msgstr "mronostics au hasard"
+msgstr "pronostics au hasard"
 
 #: templates/gsm/person/base.html:40
 msgid "i do not bet on him"
@@ -1567,161 +1612,161 @@ msgstr "Je n'aime plus"
 msgid "i bet on him"
 msgstr "J'aime"
 
-#: templates/gsm/person/home.html:11
+#: templates/gsm/person/home.html:7
+msgid "identity"
+msgstr ""
+
+#: templates/gsm/person/home.html:19
 msgid "first name"
 msgstr "prénom"
 
-#: templates/gsm/person/home.html:17
+#: templates/gsm/person/home.html:25
 msgid "middle name"
 msgstr "deuxième prénom"
 
-#: templates/gsm/person/home.html:23
+#: templates/gsm/person/home.html:31
 msgid "last name"
 msgstr "nom"
 
-#: templates/gsm/person/home.html:29
-msgid "position"
-msgstr "poste"
-
-#: templates/gsm/person/home.html:35
+#: templates/gsm/person/home.html:37
 msgid "nationality"
 msgstr "nationalité"
 
-#: templates/gsm/person/home.html:41
+#: templates/gsm/person/home.html:43
 msgid "date of birth"
 msgstr "date de naissance"
 
-#: templates/gsm/person/home.html:47
+#: templates/gsm/person/home.html:49
 msgid "country of birth"
 msgstr "pays de naissance"
 
-#: templates/gsm/person/home.html:53
+#: templates/gsm/person/home.html:55
+msgid "position"
+msgstr "poste"
+
+#: templates/gsm/person/home.html:61
 msgid "height"
 msgstr "taille"
 
-#: templates/gsm/person/home.html:59
+#: templates/gsm/person/home.html:67
 msgid "weight"
 msgstr "poids"
 
-#: templates/gsm/person/home.html:69
+#: templates/gsm/person/home.html:74
 msgid "career"
 msgstr "carrière"
 
-#: templates/gsm/person/home.html:74
+#: templates/gsm/person/home.html:79
 msgid "season"
 msgstr "saison"
 
-#: templates/gsm/person/home.html:76
-#: templates/gsm/team/squad.html:60
+#: templates/gsm/person/home.html:81
+#: templates/gsm/team/squad.html:62
 msgid "Minutes played"
 msgstr "minutes jouées"
 
-#: templates/gsm/person/home.html:77
-#: templates/gsm/team/squad.html:61
+#: templates/gsm/person/home.html:82
+#: templates/gsm/team/squad.html:63
 msgid "Appearances"
 msgstr "apparitions"
 
-#: templates/gsm/person/home.html:78
-#: templates/gsm/team/squad.html:63
+#: templates/gsm/person/home.html:83
+#: templates/gsm/team/squad.html:65
 msgid "Substitute in"
 msgstr "entrées"
 
-#: templates/gsm/person/home.html:79
-#: templates/gsm/team/squad.html:64
+#: templates/gsm/person/home.html:84
+#: templates/gsm/team/squad.html:66
 msgid "Substitute out"
 msgstr "sorties"
 
-#: templates/gsm/person/home.html:80
-#: templates/gsm/team/squad.html:65
+#: templates/gsm/person/home.html:85
+#: templates/gsm/team/squad.html:67
 msgid "Substitutes on the bench"
 msgstr "remplaçant"
 
-#: templates/gsm/person/home.html:81
-#: templates/gsm/team/squad.html:66
+#: templates/gsm/person/home.html:86
+#: templates/gsm/team/squad.html:68
 msgid "Goal"
 msgstr "but"
 
-#: templates/gsm/person/home.html:82
-#: templates/gsm/team/squad.html:67
+#: templates/gsm/person/home.html:87
+#: templates/gsm/team/squad.html:69
 msgid "Yellow card"
 msgstr "carton jaune"
 
-#: templates/gsm/person/home.html:83
-#: templates/gsm/team/squad.html:68
+#: templates/gsm/person/home.html:88
+#: templates/gsm/team/squad.html:70
 msgid "Yellow 2nd/RC"
 msgstr "second carton jaune"
 
-#: templates/gsm/person/home.html:84
-#: templates/gsm/team/squad.html:69
+#: templates/gsm/person/home.html:89
+#: templates/gsm/team/squad.html:71
 msgid "Red card"
 msgstr "carton rouge"
 
-#: templates/gsm/session/base.html:113
+#: templates/gsm/session/base.html:20
+msgid "presentation"
+msgstr "presentation"
+
+#: templates/gsm/session/base.html:88
 msgid "gameweek"
 msgstr "journée"
 
-#: templates/gsm/session/base.html:121
-msgid "kickoff"
-msgstr "coup d'envoi"
-
-#: templates/gsm/session/base.html:124
-msgid "yet unknown"
-msgstr "inconnue pour l'instant"
-
-#: templates/gsm/session/base.html:142
+#: templates/gsm/session/base.html:132
 msgid "before"
 msgstr "le match"
 
-#: templates/gsm/session/home.html:20
+#: templates/gsm/session/home.html:8
 msgid "goals"
 msgstr "buts"
 
-#: templates/gsm/session/home.html:31
-#: templates/gsm/session/home.html.py:49
-msgid "assisted by"
-msgstr "passe décisive de"
-
-#: templates/gsm/session/home.html:34
-#: templates/gsm/session/home.html.py:52
+#: templates/gsm/session/home.html:25
+#: templates/gsm/session/home.html.py:55
 msgid "OG"
 msgstr "CSC"
 
-#: templates/gsm/session/home.html:62
+#: templates/gsm/session/home.html:27
+#: templates/gsm/session/home.html.py:44
+#: templates/gsm/session/home.html:139
+#: templates/gsm/session/home.html:188
+#: templates/gsm/session/home.html:239
+#: templates/gsm/session/home.html:288
+msgid "goal"
+msgstr "but"
+
+#: templates/gsm/session/home.html:73
+msgid "warnings"
+msgstr "cartons"
+
+#: templates/gsm/session/home.html:119
+#: templates/gsm/session/home.html:168
 msgid "lineups"
 msgstr "compositions d'équipes"
 
-#: templates/gsm/session/home.html:90
-msgid "substitutions"
+#: templates/gsm/session/home.html:145
+#: templates/gsm/session/home.html:194
+#: templates/gsm/session/home.html:245
+#: templates/gsm/session/home.html:294
+#: templates/gsm/session/home.html:348
+#: templates/gsm/session/home.html:356
+msgid "substitution"
 msgstr "remplaçants"
 
-#: templates/gsm/session/home.html:93
-#: templates/gsm/session/home.html.py:96
-msgid "in"
-msgstr "entré"
-
-#: templates/gsm/session/home.html:94
-#: templates/gsm/session/home.html.py:97
-#, fuzzy
-msgid "out"
-msgstr "A propos"
-
-#: templates/gsm/session/home.html:95
-msgid "minute"
-msgstr "minute"
-
-#: templates/gsm/session/home.html:142
+#: templates/gsm/session/home.html:219
+#: templates/gsm/session/home.html:268
 msgid "lineups bench"
 msgstr "remplaçants"
 
-#: templates/gsm/session/home.html:200
+#: templates/gsm/session/home.html:312
+msgid "substitutions"
+msgstr "remplaçants"
+
+#: templates/gsm/session/home.html:434
 #: templates/gsm/team/calendar.html:10
 #: templates/gsm/team/calendar.html:19
 msgid "previous matches"
 msgstr "matchs précédents"
-
-#: templates/gsm/session/home.html:229
-msgid "head to head"
-msgstr "face-à-face"
 
 #: templates/gsm/sport/base.html:25
 #: templates/scoobet/autocomplete.html:34
@@ -1729,9 +1774,8 @@ msgid "competitions"
 msgstr "compétitions"
 
 #: templates/gsm/sport/base.html:40
-#, fuzzy
 msgid "rankings"
-msgstr "rang"
+msgstr "classements"
 
 #: templates/gsm/sport/home.html:12
 msgid "last matches"
@@ -1751,43 +1795,35 @@ msgstr "demain"
 
 #: templates/gsm/team/base.html:20
 msgid "squad"
-msgstr "Effectif"
+msgstr "effectif"
 
-#: templates/gsm/team/home.html:10
+#: templates/gsm/team/home.html:9
 msgid "Calendar for team"
 msgstr "Calendrier de l'équipe"
-
-#: templates/gsm/team/home.html:27
-msgid "results table"
-msgstr "résultats"
 
 #: templates/gsm/team/squad.html:19
 msgid "current"
 msgstr "actuellement"
 
-#: templates/gsm/team/squad.html:38
+#: templates/gsm/team/squad.html:40
 msgid "years old"
 msgstr "ans"
 
-#: templates/gsm/team/squad.html:58
+#: templates/gsm/team/squad.html:60
 msgid "age"
-msgstr "Age"
+msgstr "age"
 
-#: templates/gsm/team/squad.html:59
+#: templates/gsm/team/squad.html:61
 msgid "Position"
 msgstr "poste"
 
-#: templates/gsm/team/squad.html:62
+#: templates/gsm/team/squad.html:64
 msgid "Lineups"
 msgstr "compositions d'équipes"
 
-#: templates/gsm/team/statistics.html:21
-msgid "club"
-msgstr "club"
-
 #: templates/gsm/tennis/_includes/resultstable.html:13
 msgid "tournaments played"
-msgstr "Tournois disputés"
+msgstr "tournois disputés"
 
 #: templates/postman/base.html:5
 msgid "Messaging"
@@ -1806,24 +1842,20 @@ msgid "users"
 msgstr "utilisateurs"
 
 #: templates/scoobet/autocomplete.html:13
-#, fuzzy
 msgid "teams"
-msgstr "équipe"
+msgstr "équipes"
 
 #: templates/scoobet/autocomplete.html:27
-#, fuzzy
 msgid "players"
-msgstr "joueur"
+msgstr "joueurs"
 
 #: templates/scoobet/autocomplete.html:41
-#, fuzzy
 msgid "bookmakers"
-msgstr "bookmaker"
+msgstr "bookmakers"
 
 #: templates/scoobet/autocomplete.html:48
-#, fuzzy
 msgid "no results"
-msgstr "Résultats"
+msgstr "pas de résultats"
 
 #: templates/scoobet/autocomplete.html:49
 #, python-format
@@ -1831,9 +1863,8 @@ msgid "Search for %(q)s"
 msgstr "Recherche de %(q)s"
 
 #: templates/search/_includes/article.html:2
-#, fuzzy
 msgid "article by"
-msgstr "articles"
+msgstr "articles de"
 
 #: templates/search/_includes/clan.html:2
 #, fuzzy
@@ -1843,7 +1874,7 @@ msgstr "groupements"
 #: templates/search/_includes/person.html:3
 #: templates/search/_includes/team.html:2
 msgid "person"
-msgstr "Sportif"
+msgstr "sportif"
 
 #: templates/search/_includes/user.html:2
 msgid "user"
@@ -1860,9 +1891,44 @@ msgid "was corrected"
 msgstr "a corrigé"
 
 #: templates/subscription/notifications/ticket_corrected.html:6
-#, fuzzy
 msgid "Your ticket"
-msgstr "ticket"
+msgstr "votre ticket"
+
+#, fuzzy
+#~ msgid "your@email.com"
+#~ msgstr "votre e-mail"
+
+#, fuzzy
+#~ msgid "Bet flagged"
+#~ msgstr "a signalé"
+
+#~ msgid "kickoff"
+#~ msgstr "coup d'envoi"
+
+#~ msgid "yet unknown"
+#~ msgstr "inconnue pour l'instant"
+
+#~ msgid "assisted by"
+#~ msgstr "passe décisive de"
+
+#~ msgid "in"
+#~ msgstr "entré"
+
+#, fuzzy
+#~ msgid "out"
+#~ msgstr "A propos"
+
+#~ msgid "minute"
+#~ msgstr "minute"
+
+#~ msgid "head to head"
+#~ msgstr "face-à-face"
+
+#~ msgid "results table"
+#~ msgstr "résultats"
+
+#~ msgid "club"
+#~ msgstr "club"
 
 #, fuzzy
 #~ msgid "new"

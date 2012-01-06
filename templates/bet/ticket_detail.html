@@ -1,37 +1,57 @@
 {% extends 'bet/base.html' %}
-
 {% load i18n bet_tags comments %}
-
 {% block head_title %}{% if ticket.bet_set.count > 1 %}{% trans 'Combined' %}{% else %}{% trans 'Simple' %}{% endif %} {% trans 'ticket ' %} #{{ ticket.pk }} {% trans 'by' %} {{ ticket.user }}{% endblock %}
-
 {% block meta %}
 <meta name="Description" content="{% trans 'In this ticket' %}, {{ user }} {% trans 'shares his picks on matches' %} {% for bet in ticket.bet_set.all %}{{ bet.session }}{% if not forloop.last %}, {% endif %}{% endfor %}. {% trans 'Discover his free picks now' %}!" />
 <meta name="keywords" content="{% trans 'picks' %}, {% trans 'pick' %}, {% trans 'bet' %}, {% trans 'betting' %}, {% trans 'prediction' %}, {% for bet in ticket.bet_set.all %}{{ bet.session }}, {{ bet.session.sport }}, {{ bet.session.season.competition }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
 {% endblock %}
+{% block body %}<h1>{% trans 'ticket' %} #{{ ticket.pk }} <em>(<span>{{ ticket.user }}</span>)</em></h1>
 
-{% block body %}
-<h1>{% trans 'ticket' %} #{{ ticket.pk }} {% trans 'by' %} {{ ticket.user }}</h1>
-
-{% trans 'stake' %}: {{ ticket.stake }}
-{% trans 'status' %}: {{ ticket.get_status_display }}
-{% trans 'bet count' %}: {{ ticket.bet_set.count }}
-{% trans 'odds' %}: {{ ticket.odds }}
-{% trans 'bookmaker' %}: <a href="{{ ticket.bookmaker.get_absolute_url }}" title="{{ ticket.bookmaker }}">{{ ticket.bookmaker }}</a>
-
-{{ bet_list_helper.render_bet_table }}
-
-{# remove this => #}<br />
-
-<h2>{% trans 'comments' %}</h2>
-<table class="ticket comments">
+<table class="inline_table">
+    <tr class="head-th">
+        <th class="first" width="100">  {% trans 'stake' %}
+        </th>
+       
+        <th>{% trans 'bet count' %}
+        </th>
+        <th width="70">{% trans 'odds' %}
+        </th>
+        <th class="last">{% trans 'bookmaker' %}
+        </th>
+		 <th>{% trans 'status' %}
+        </th>
+    </tr>
 	<tr>
+		<td class="first">
+			{{ ticket.stake }}
+		</td>
+		
 		<td>
-			<h3>{% trans 'add new comment' %}</h3>
-			{% render_comment_form for ticket %}
-
-			<h3>{% trans 'all comments' %}</h3>
-			{% render_comment_list for ticket %}
+			{{ ticket.bet_set.count }}
+		</td>
+		<td>
+			{{ ticket.odds }} 
+		</td>
+		<td class="last">
+			<a href="{{ ticket.bookmaker.get_absolute_url }}" title="{{ ticket.bookmaker }}">{{ ticket.bookmaker }}</a>
+		</td>
+		<td>
+			{{ ticket.get_status_display }}
 		</td>
 	</tr>
+ </table>
+<h2>Contenu du ticket</h2>
+{{ bet_list_helper.render_bet_table }}
+{# remove this => #}
+<br/>
+<h2>{% trans 'comments' %}</h2>
+<table class="ticket comments">
+    <tr>
+        <td>
+            <h3>{% trans 'add new comment' %}</h3>
+            {% render_comment_form for ticket %}<h3>{% trans 'all comments' %}</h3>
+            {% render_comment_list for ticket %}
+        </td>
+    </tr>
 </table>
 {% endblock %}

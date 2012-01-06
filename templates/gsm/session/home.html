@@ -105,7 +105,7 @@
         {% endfor %}
     </table>
     {% endif %}
-
+<div class="clear"></div>
     {% if elements.lineups.getchildren %}
     <div class="session lineups A">
 		<h2>
@@ -205,7 +205,7 @@
 		</table>
 	</div>
     {% endif %}
-
+<div class="clear"></div>
 	{% if elements.lineups_bench.tag == 'lineups_bench' and elements.lineups_bench.getchildren %}
 	<div class="session lineups bench A">
 		<h2>
@@ -415,10 +415,10 @@
     {% endif %}
 
 	<h2>{% trans 'calendar' %} {{ session.oponnent_A.name }}</h2>
-    {% gsm_sessions_render sessions_A %}
+    {% gsm_sessions_render sessions_A '' '' session.oponnent_A %}
 
 	<h2>{% trans 'calendar' %} {{ session.oponnent_B.name }}</h2>
-    {% gsm_sessions_render sessions_B %}
+    {% gsm_sessions_render sessions_B '' '' session.oponnent_B %}
 
     {% if session.oponnent_A.gsm_id and session.oponnent_B.gsm_id and sport.slug == 'soccer' %}
         {# avoid cases where we don't know the oponnent yet, ie. tournament #}

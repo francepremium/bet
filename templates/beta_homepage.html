@@ -20,10 +20,10 @@
         </div>
         <div id="body">
             <div class="fr_title">
-                <h1>Bienvenue sur Betspire, votre réseau social de paris sportif</h1>
+                <h1>Bienvenue sur Betspire, votre réseau social dedié aux paris sportifs</h1>
             </div>
             <p class="slogan">
-                Actuellement, Betspire est en période de test. Les inscriptions publiques seront ouvertes très bientôt.
+                Vivez une nouvelle expérience du pari sportif, adhérez à Betspire!
             </p>
             <div class="forms">
                 <fieldset>
@@ -31,7 +31,7 @@
                         Déjà inscrit?
                     </legend>
                     <p>
-                        Si vous avez la chance d'avoir reçu une invitation, merci d'entrer vos identifiants ci-dessous:
+                        Veuillez entrer vos identifiants ci-dessous pour vous connecter à votre compte:
                     </p>
                     <form method="post" action="{% url acct_login %}">
                         {% csrf_token %}
@@ -44,14 +44,19 @@
             <div class="forms last">
                 <fieldset>
                     <legend>
-                        Envie d'être invité?
+                        Pas encore membre?
                     </legend>
                     {% if lead %}
                     <p>Merci d'avoir soumis votre email. Vous receverez une invitation prochainement</p>
                     {% else %}
                     <p>
-                        Si vous souhaitez recevoir une invitation, merci de renseigner votre adresse e-mail ci-dessous:
+                        Rejoignez Betspire! Disposez de tous les outils pour parier judicieusement, partagez vos pronostics et augmentez vos gains!
                     </p>
+					<div class="align-center">
+					<a href="/fr/account/signup/" class="button_register">Inscription <span>gratuite</span></a>
+					<span class="acc_button">En moins de 30 secondes</span>
+					</div>
+					<!--
                     <form method="post" action="{% url beta_homepage %}">
                         {% csrf_token %}
                         <div class="errors">
@@ -59,23 +64,23 @@
                         </div>
 
                         <input type="text" value="Adresse e-mail" id="email_fr" name="email" /><input type="submit" value="ok" class="submit" />
-                    </form>
+                    </form>-->
                     {% endif %}
                 </fieldset>
             </div><hr/>
             <div class="en_title">
-                <h1>Welcome to Betspire, your betting network</h1>
+                <h1>Welcome to Betspire, your sports betting network</h1>
             </div>
             <p class="slogan">
-                Betspire is currently on a Beta version. Public registration will be available soon.
+                Live a new sports betting experience, join Betspire!
             </p>
             <div class="forms">
                 <fieldset>
                     <legend>
-                        Already invited?
+                        Already registered?
                     </legend>
                     <p>
-                        If you were lucky to get an invite, please enter your username and password below:
+                        Sign in below to access to your account:
                     </p>
                     <form method="post" action="{% url acct_login %}">
                         {% csrf_token %}
@@ -88,22 +93,27 @@
             <div class="forms last">
                 <fieldset>
                     <legend>
-                        Want to be invited?
+                        Not yet a member?
                     </legend>
                     {% if lead %}
                     <p>Thanks for submiting your email. You will receive an invitation shortly</p>
                     {% else %}
                     <p>
-                        If you wanted to receive an invite, please enter your e-mail address below:
+                        Join Betspire, the ultimate social network for sports tipsers. Get all the stats you need to bet wisely, share all your predictions and improve your winnings.
                     </p>
-                    <form method="post" action="{% url beta_homepage %}">
+					<div class="align-center">
+					<a href="/en/account/signup/" class="button_register">Sign up <span>for free</span></a>
+					<span class="acc_button">Take less than 30 seconds!</span>
+					</div>
+                   <!-- <form method="post" action="{% url beta_homepage %}">
                         <div class="errors">
                             {{ form.email.errors }}
                         </div>
 
                         {% csrf_token %}
                         <input type="text" value="E-mail address" name="email" id="email_en" /><input type="submit" value="ok" class="submit" />
-                    </form>
+                    </form>-->
+					
                     {% endif %}
                 </fieldset>
             </div>

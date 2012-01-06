@@ -112,15 +112,16 @@
     </div>
 
     <div class="action">
+    	
         <input type="radio" name="action" value="save_and_close" id="ticket_radio_save_and_close" />
-		<label for="ticket_radio_save_and_close"><input type="button" value="{% trans 'save and close' %}" /></label>
+		<label for="ticket_radio_save_and_close"><input type="button" class="button_final" value="{% trans 'save and close' %}" /></label>
 
         <input type="radio" name="action" value="save_and_add_another" id="ticket_radio_save_and_add_another"  />
 		<label for="ticket_radio_save_and_add_another"><input type="button" class="button_add" value="{% trans 'save and add another' %}" /></label>
 
         {% if ticket.bet_set.count > 0 %}
         <input type="radio" name="action" value="just_close" id="ticket_radio_just_close" />
-		<label for="ticket_radio_just_close"><input type="button" value="{% trans 'close ticket' %}" /></label>
+		<label for="ticket_radio_just_close"><input type="button" class="button_final" value="{% trans 'close ticket' %}" /></label>
         {% endif %}
     </div>
 </form>

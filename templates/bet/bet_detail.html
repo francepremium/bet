@@ -11,7 +11,7 @@
 
 {% block body %}
     {% if bet.ticket.bet_set.count > 1 %}
-    {% trans 'this pick is part of' %} <a href="{{ bet.ticket.get_absolute_url }}" title="{% trans 'ticket' %} #{{ bet.ticket.pk }} {% trans 'by' %} {{ bet.ticket.user }}">{% trans 'ticket' %} #{{ bet.ticket.pk }}</a>
+    <h2>{% trans 'this pick is part of' %}<a href="{{ bet.ticket.get_absolute_url }}" title="{% trans 'ticket' %} #{{ bet.ticket.pk }} {% trans 'by' %} {{ bet.ticket.user }}">{% trans 'ticket' %} #{{ bet.ticket.pk }}</a></h2>
     {% endif %}
 
     <table>

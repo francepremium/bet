@@ -50,7 +50,7 @@
 	
 	<div class="action">
     {% if sport in request.user.sport_set.all %}
-        <a class="button" href="{% url gsm_fan 'unbecome' 'Sport' sport.pk %}">{% trans 'i do not bet on it' %}</a>
+        <a class="button button_favorite" href="{% url gsm_fan 'unbecome' 'Sport' sport.pk %}">{% trans 'i do not bet on it' %}</a>
     {% else %}
         <a class="button" href="{% url gsm_fan 'become' 'Sport' sport.pk %}">{% trans 'i bet on it' %}</a>
     {% endif %}

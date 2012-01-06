@@ -8,7 +8,7 @@
 
     <table>
         <thead>
-            <tr class="{% if bet.is_won %}won{% endif %}{% if bet.is_lost %}lost{% endif %}{% if bet.is_canceled %}canceled{% endif %}">
+            <tr>
                 {% if 'date' not in exclude_columns %}
                     <th>{% trans 'date' %}</th>
                 {% endif %}
@@ -42,9 +42,9 @@
                 {% if 'support' not in exclude_columns %}
                     <th>{% trans 'support' %}</th>
                 {% endif %}
-                {% if 'result' not in exclude_columns %}
+                <!--{% if 'result' not in exclude_columns %}
                     <th><acronym title="{% trans 'result' %}">R</acronym></th>
-                {% endif %}
+                {% endif %}-->
                 {% if request.user.is_authenticated %}
                     <th><acronym title="{% trans 'flagged' %}">F</acronym></th>
                 {% endif %}
@@ -52,7 +52,7 @@
         </thead>
         <tbody>
             {% for bet in bet_list %}
-            <tr>
+            <tr class="{% if bet.is_won %}won{% endif %}{% if bet.is_lost %}lost{% endif %}{% if bet.is_canceled %}canceled{% endif %}">
                 {% if 'date' not in exclude_columns %}
                     <td>
                     {{ request|timezone_adjust:bet.session.start_datetime|display_date }}
@@ -113,7 +113,7 @@
                         {% if bet.upload %}{% trans 'image' %}{% endif %}
                     </td>
                 {% endif %}
-                {% if 'result' not in exclude_columns %}
+                <!--{% if 'result' not in exclude_columns %}
                 <td class="result">
                     <div class="won {% if bet.is_won %}initial{% endif %}" style="{% if not bet.is_won %}display:none;{% endif %}">
                     </div>
@@ -122,7 +122,7 @@
                     <div class="canceled {% if bet.is_canceled %}initial{% endif %}" style="{% if not bet.is_canceled %}display:none{% endif %}">
                     </div>
                 </td>
-                {% endif %}
+                {% endif %}-->
                 {% if request.user.is_authenticated %}
                 <td class="action">
                     <a class="flag" href="{% url bet_flag %}?bet_pk={{ bet.pk }}">

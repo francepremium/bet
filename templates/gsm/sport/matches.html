@@ -8,11 +8,11 @@
     <input type="submit" class="button_naked" value="go" />
 </form>
 
-
+<p class="align-center">
 <span class="link filter_date yesterday button button_simple button_small button_backward">{% trans 'yesterday' %}</span>
 <span class="link filter_date today 	button button_simple button_small">{% trans 'today' %}</span>
 <span class="link filter_date tomorrow	button button_simple button_small button_forward">{% trans 'tomorrow' %}</span>
-
+</p>
 {% autopaginate filter.qs 15 as session_list %}
 
 {% gsm_sessions_render filter.qs 1 1 %}
