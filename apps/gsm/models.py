@@ -823,7 +823,8 @@ class Sync(object):
             # gsm screwd up again
             return
 
-        setattr(model, destination, value)
+        if value is not None:
+            setattr(model, destination, value)
 
     def update_competition(self, model, e, parent=None):
         model.championship = parent
@@ -905,6 +906,9 @@ class Sync(object):
             i += 1
             if i > 5:
                 break
+
+    def update_hockey_session(self, model, e, parent=None):
+        self.update_soccer_session(model, e, parent)
 
     def update_soccer_session(self, model, e, parent=None):
         ps_A = e.attrib.get('ps_A', '')
