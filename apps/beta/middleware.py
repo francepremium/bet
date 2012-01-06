@@ -36,7 +36,7 @@ class LoginMiddleware(object):
         if not BETA_URL in BYPASS_URLS:
             BYPASS_URLS.append(BETA_URL)
 
-        if '/account/confirm_email/' in request.path:
+        if '/account/' in request.path:
             return None
     
         for url in BYPASS_URLS:
