@@ -681,7 +681,7 @@ table.bettype table.choices {
                     $(this).attr('href'), {
                         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
                     }, function(data, textStatus, jqXHR) {
-                        add_message('{% trans 'Thanks for reporting an error in this bet. Our staff will check both the odds and the correction of this bet. If you want to report another error, please contact us.' %}');
+                        add_message("{% trans 'Thanks for reporting an error in this bet. Our staff will check both the odds and the correction of this bet. If you want to report another error, please contact us.' %}");
                     }
                 );
             });
