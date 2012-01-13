@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-05 11:44+0100\n"
-"PO-Revision-Date: 2012-01-05 17:00+0100\n"
+"PO-Revision-Date: 2012-01-06 16:35+0100\n"
 "Last-Translator: David <dav.bellaiche@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -556,7 +556,7 @@ msgstr "Betspire, bet inspired"
 #: templates/site_base.html:101
 #: templates/site_base.html.py:261
 msgid "logout"
-msgstr "se deconnecter"
+msgstr "Déconnexion"
 
 #: templates/site_base.html:114
 #: templates/site_base.html.py:373
@@ -622,7 +622,7 @@ msgstr "Bundesliga 1 (ALL)"
 
 #: templates/site_base.html:175
 msgid "all competitions"
-msgstr "plus de compétitions"
+msgstr "Plus de compétitions"
 
 #: templates/site_base.html:180
 msgid "tennis"
@@ -933,13 +933,13 @@ msgstr "amis"
 
 #: templates/auth/user_base.html:19
 msgid "file of"
-msgstr "intérêt de"
+msgstr "intérêts de"
 
 #: templates/auth/user_base.html:19
 #: templates/bookmaker/base.html:14
 #: templates/gsm/person/base.html:10
 msgid "file"
-msgstr "intérêt"
+msgstr "intérêts"
 
 #: templates/auth/user_base.html:22
 msgid "statistics of"
@@ -1602,7 +1602,7 @@ msgstr "meilleurs pronostiqueurs"
 #: templates/gsm/sport/home.html:24
 #: templates/gsm/team/home.html:21
 msgid "random tips"
-msgstr "pronostics au hasard"
+msgstr "pronostics en cours"
 
 #: templates/gsm/person/base.html:40
 msgid "i do not bet on him"
