@@ -115,7 +115,7 @@ def correct_for_session(session, element=None):
         bet.save()
 
     for u in to_update.values_list('pk', flat=True):
-        refresh_betprofile_for_user({'userpk': u})
+        refresh_betprofile_for_user_nospool({'userpk': u})
 
 class BetTooLateException(Exception):
     def __init__(self, bet):

@@ -209,6 +209,9 @@ signals.post_delete.connect(delete_empty_ticket, sender=Bet)
 
 @spool
 def refresh_betprofile_for_user(arguments):
+    refresh_betprofile_for_user_nospool(arguments)
+
+def refresh_betprofile_for_user_nospool(arguments):
     user = User.objects.get(pk=arguments['userpk'])
     logger.debug('triggered profile refresh %s' % user)
     print 'triggered profile refresh %s' % user
