@@ -87,6 +87,11 @@ class Ticket(models.Model):
                 variable_hidden=b.variable_hidden,
             ).save()
 
+    def is_won(self):
+        return self.correction == BET_CORRECTION_WON
+    def is_lost(self):
+        return self.correction == BET_CORRECTION_LOST
+    
     @property
     def correction(self):
         # if any bet is "new"
