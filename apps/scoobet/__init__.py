@@ -122,6 +122,9 @@ def group_activities(activities):
         else:
             do_group = False
 
+        if previous and 'started following' == activity.verb == previous.verb and previous.target == activity.target:
+            do_group = True
+
         if do_group:
             # this activity groups with the previous one
             group.append(activity)
