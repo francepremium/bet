@@ -78,12 +78,22 @@
 {% endif %}
 {% if action.verb == 'started following' %}
     {% if action.group|length > 1 %}
-        {% if action.open %}
-            {% for action in action.group %}{% if not forloop.first %}{% if forloop.last %} {% trans 'and' %}{% else %},{% endif %}{% endif %}
-                <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a>{% endfor %}
-        {% endif %}
-        {% if action.close %}
-            {% trans 'all started following' %} <a href="{{ action.target.get_absolute_url }}" title="{{ action.target }}">{{ action.target }}</a>
+        {% if action.target == action.group.1.target %}
+            {% if action.open %}
+                {% for action in action.group %}{% if not forloop.first %}{% if forloop.last %} {% trans 'and' %}{% else %},{% endif %}{% endif %}
+                    <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a>{% endfor %}
+            {% endif %}
+            {% if action.close %}
+                {% trans 'all started following' %} <a href="{{ action.target.get_absolute_url }}" title="{{ action.target }}">{{ action.target }}</a>
+            {% endif %}
+        {% else %}
+            {% if action.open %}
+                <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'started following' %}
+            {% endif %}
+            {% if action.close %}
+                {% for action in action.group %}{% if not forloop.first %}{% if forloop.last %} {% trans 'and' %}{% else %},{% endif %}{% endif %}
+                    <a href="{{ action.target.get_absolute_url }}" title="{{ action.target }}">{{ action.target }}</a>{% endfor %}
+            {% endif %}
         {% endif %}
     {% else %}
         <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'started following' %} <a href="{{ action.target.get_absolute_url }}" title="{{ action.target }}">{{ action.target }}</a>

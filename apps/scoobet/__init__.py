@@ -115,7 +115,7 @@ def group_activities(activities):
     group = []
     groups = []
     duplicates = []
-    group_verbs = ('flagged', 'corrected')
+    group_verbs = ('flagged', 'corrected', 'started following')
     for activity in activities:
         if previous and activity.verb == previous.verb and activity.verb in group_verbs and activity.actor == previous.actor:
             do_group = True
