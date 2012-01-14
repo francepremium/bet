@@ -1,4 +1,4 @@
-{% load avatar_tags i18n comments bet_tags ipdb gsm_tags %}
+{% load avatar_tags i18n comments bet_tags ipdb gsm_tags scoobet_tags %}
 
 {% if action.open %}
     {% include 'activity/_includes/action_open.html' %}
@@ -28,17 +28,17 @@
 {% if action.verb == 'wall posted' %}
         <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> 
 		{% if action.target == object %}
-			<cite>{{ action.action_object.comment }}</cite>
+			<cite>{{ action.action_object.comment|render_comment }}</cite>
 		{% else %}
 			{% trans 'posted' %}
-			<cite>"{{ action.action_object.comment|truncatewords:5 }}"</cite>
+			<cite>"{{ action.action_object.comment|render_comment|truncatewords:5 }}"</cite>
 			{% trans 'to' %}
 			<a href="{{ action.target.get_absolute_url }}" title="{{ action.target.username }}">{{ action.target.username }}</a>
 		{% endif %}
 {% endif %}
 {% if action.verb == 'commented' %}
         <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'commented' %}
-		<cite>"{{ action.action_object.comment }}"</cite>
+		<cite>"{{ action.action_object.comment|render_comment }}"</cite>
 		{% trans 'on' %}
         {% if action.action_object.content_object.verb == 'wall posted' or action.action_object.content_object.verb == 'updated his status' %}
             {% spaceless %}
@@ -51,7 +51,7 @@
                         {% trans 'his' %}
                     {% endif %}
                     {% trans 'status update' %}
-                {% endif %} <span class="cite">"{{ action.action_object.content_object.action_object.comment }}"</span>
+                {% endif %} <span class="cite">"{{ action.action_object.content_object.action_object.comment|render_comment }}"</span>
             </a>
 
                 {% if action.action_object.content_object.action_object.user != action.action_object.user %}
