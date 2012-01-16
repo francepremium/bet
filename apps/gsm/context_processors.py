@@ -2,7 +2,18 @@ import pytz, datetime
 
 from timezones.utils import adjust_datetime_to_timezone
 
+from django.db.models import Count
+
+from gsm.models import Session
 from gsm.templatetags.gsm_tags import timezone_adjust
+
+def five_popular_sessions(request):
+    qs = Session.objects.filter(status='Fixture').annotate(
+        bet_count=Count('bet')).order_by('-bet_count').select_related(
+            'sport', 'oponnent_A', 'oponnent_B')[:5]
+    return {
+        'five_popular_sessions': qs,
+    }
 
 def available_timezones(request):
     now = datetime.datetime.now()

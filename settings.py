@@ -26,6 +26,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'bet.context_processors.incomplete_ticket',
     'scoobet.context_processors.inbox_count',
     'gsm.context_processors.available_timezones',
+    'gsm.context_processors.five_popular_sessions',
     'context_processors.save_user_locale',
 ]
 

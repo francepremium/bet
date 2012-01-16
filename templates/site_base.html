@@ -264,17 +264,34 @@ table.bettype table.choices {
         {% endif %}
         </div>
 		<div id="navigation_flat">
-				{% load flatpages %}
-				{% get_flatpages as flatpages %}
-                <h3>{% trans 'How to' %}</h3>
-				<ul>
-					
-    				{% for page in flatpages %}
-        				<li><a href="{{ page.url }}">{{ page.title }}</a></li>
-    				{% endfor %}
-					
-				</ul>
-			</div>
+            {% trans 'Most popular games' %}
+            {% load cache %}
+            {# cache 600 five_popular_sessions #}
+            <ul>
+                {% for session in five_popular_sessions %}
+                    <li>
+                        <a href="{{ session.get_absolute_url }}" title="{{ session }}">
+                            <img class="event" src="{{ STATIC_URL }}img/sports/{{ session.sport.slug }}_tiny.png" alt="{{ session }}" title="{{ session }}" />
+                        </a>
+                        <a href="{{ session.oponnent_A.get_absolute_url }}" title="{{ session.oponnent_A }}">{{ session.oponnent_A }}</a>
+                        <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ session.oponnent_B }}">{{ session.oponnent_B }}</a> 
+                        (<a href="{{ session.get_picks_absolute_url }}" title="{% trans "Picks for match" %}">{{ session.bet_count }}</a>)
+                    </li>
+                {% endfor %}
+            </ul>
+            {# endcache #}
+
+            {% load flatpages %}
+            {% get_flatpages as flatpages %}
+            <h3>{% trans 'How to' %}</h3>
+            <ul>
+                
+                {% for page in flatpages %}
+                    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                {% endfor %}
+                
+            </ul>
+        </div>
         <div id="body">
         {% if user.is_authenticated %}
 			<div id="publication">
