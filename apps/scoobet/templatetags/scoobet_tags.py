@@ -4,7 +4,7 @@ from django.core import urlresolvers
 from django import template
 from django.utils.translation import ugettext as _
 from django.db.models import Sum, Q
-from django.template.defaultfilters import linebreaksbr
+from django.template.defaultfilters import striptags, safe
 
 import scoobet
 from bet.models import Ticket, Bet
@@ -16,8 +16,16 @@ URL_REGEXP = r'((?i)\b((?:[a-z][\w-]+:(?:/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9
 
 @register.filter
 def render_comment(text):
-    text = re.sub(URL_REGEXP, r'<a href="\1">\3</a>', text)
-    text = linebreaksbr(text.strip())
+    text = text.strip()
+    text = striptags(text)
+
+    def link_replace(match):
+        url = match.group(1)
+        if not url.startswith("http://"):
+            url = u'http://' + url
+        return u'<a href="%s">%s</a>' % (url, match.group(3))
+    text = re.sub(URL_REGEXP, link_replace, text)
+    text = safe(text)
     return text
 
 @register.filter

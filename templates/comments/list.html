@@ -8,7 +8,7 @@
 		<a href="{{ comment.user.get_absolute_url }}">{{ comment.name }}</a>, {{ comment.submit_date }}
     </dt>
     <dd>
-        <p>{{ comment.comment|render_comment }}</p>
+        <p>{{ comment.comment|render_comment|linebreaksbr }}</p>
     </dd>
   {% endfor %}
 </dl>
