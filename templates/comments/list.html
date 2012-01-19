@@ -1,3 +1,4 @@
+{% load scoobet_tags %}
 {% load avatar_tags %}
 <dl id="comments">
   {% for comment in comment_list %}
@@ -7,7 +8,7 @@
 		<a href="{{ comment.user.get_absolute_url }}">{{ comment.name }}</a>, {{ comment.submit_date }}
     </dt>
     <dd>
-        <p>{{ comment.comment }}</p>
+        <p>{{ comment.comment|render_comment|linebreaksbr }}</p>
     </dd>
   {% endfor %}
 </dl>
