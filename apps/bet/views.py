@@ -25,6 +25,7 @@ def bet_debug(request,
     session = models.get_model('gsm', 'session').objects.get(pk=request.GET.get('pk'))
     do = request.GET.get('do', False)
 
+    session.resync()
     bets = session.bet_set.all()
 
     bet.correct_for_session(session)

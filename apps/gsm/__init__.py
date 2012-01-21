@@ -183,7 +183,7 @@ class ApiClient(object):
             return self.tree
 
 def get_tree(lang, sport, method, update=False, retry=False, **parameters):
-    api = ApiClient(lang, sport, method, update=False, retry=False, **parameters)
+    api = ApiClient(lang, sport, method, update=update, retry=retry, **parameters)
     return api()
 
 class GsmException(Exception):
