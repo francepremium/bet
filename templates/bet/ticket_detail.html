@@ -5,7 +5,7 @@
 <meta name="Description" content="{% trans 'In this ticket' %}, {{ user }} {% trans 'shares his picks on matches' %} {% for bet in ticket.bet_set.all %}{{ bet.session }}{% if not forloop.last %}, {% endif %}{% endfor %}. {% trans 'Discover his free picks now' %}!" />
 <meta name="keywords" content="{% trans 'picks' %}, {% trans 'pick' %}, {% trans 'bet' %}, {% trans 'betting' %}, {% trans 'prediction' %}, {% for bet in ticket.bet_set.all %}{{ bet.session }}, {{ bet.session.sport }}, {{ bet.session.season.competition }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
 {% endblock %}
-{% block body %}<h1>{% trans 'ticket' %} #{{ ticket.pk }} <em>(<span>{{ ticket.user }}</span>)</em></h1>
+{% block body %}<h1>{% trans 'ticket' %} #{{ ticket.pk }} <em>(<a href="{{ ticket.user.get_absolute_url }}" title="{{ ticket.user }}"><span>{{ ticket.user }}</span></a>)</em></h1>
 
 <table class="inline_table">
     <tr class="head-th">
