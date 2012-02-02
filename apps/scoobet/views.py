@@ -43,8 +43,8 @@ def homepage(request,
     template_name='homepage.html', extra_context=None):
     qs = User.objects.exclude(betprofile__profit=None).select_related('betprofile')
     context = {
-        'users_by_profitability': qs.order_by('-betprofile__profitability')[:7],
-        'users_by_profit': qs.order_by('-betprofile__profit')[:7],
+        'users_by_profitability': qs.order_by('-betprofile__profitability')[:50],
+        'users_by_profit': qs.order_by('-betprofile__profit')[:50],
         'user_count': User.objects.all().count(),
         'pending_confirmation_count': EmailConfirmation.objects.all().count(),
     }
