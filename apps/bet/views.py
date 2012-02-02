@@ -123,6 +123,8 @@ def ticket_delete(request, ticket_pk):
     ticket = shortcuts.get_object_or_404(Ticket, pk=ticket_pk)
     if ticket.user != request.user and not request.user.is_staff:
         return http.HttpResponseForbidden()
+    if ticket.status != TICKET_STATUS_INCOMPLETE:
+        return http.HttpResponseForbidden()
     if request.POST.get('confirm', False):
         ticket.delete()
     return http.HttpResponse(_(u'ticket deleted'))
@@ -133,6 +135,8 @@ def bet_delete(request, bet_pk):
     if bet.ticket.user != request.user and not request.user.is_staff:
         return http.HttpResponseForbidden()
     ticket = bet.ticket
+    if ticket.status != TICKET_STATUS_INCOMPLETE:
+        return http.HttpResponseForbidden()
     if request.POST.get('confirm', False):
         bet.delete()
     if request.POST.get('noredirect', False):
