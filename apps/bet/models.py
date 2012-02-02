@@ -40,6 +40,60 @@ class BetProfile(models.Model):
     profitability = models.FloatField(default=0)
     profit = models.FloatField(default=0)
 
+    def calculate(self, tickets=None):
+        context = {}
+        context['total_odds'] = 0
+        balance = 0
+        balance_history = context['balance_history'] = []
+        context['won_ticket_count'] = 0
+        context['lost_ticket_count'] = 0
+        context['total_stake'] = 0
+        context['total_earnings'] = 0
+
+        if tickets is None:
+            tickets = self.user.ticket_set.filter(status=TICKET_STATUS_DONE).exclude(
+                bet__correction=BET_CORRECTION_NEW)
+
+        for ticket in tickets:
+            balance += ticket.profit
+            balance_history.append({
+                'ticket': ticket,
+                'balance': int(balance),
+            })
+
+            context['total_odds'] += ticket.odds
+            context['total_stake'] += ticket.stake
+            
+            if ticket.correction == BET_CORRECTION_WON:
+                context['total_earnings'] += ticket.stake * ticket.odds
+                context['won_ticket_count'] += 1
+            elif ticket.correction == BET_CORRECTION_LOST:
+                context['lost_ticket_count'] += 1
+
+
+        context['average_odds'] = '%.2f' % (float(context['total_odds']) / len(tickets))
+        context['won_ticket_percent'] = int(
+            (float(context['won_ticket_count']) / len(tickets)) * 100)
+        context['lost_ticket_percent'] = 100 - context['won_ticket_percent']
+        context['average_stake'] = '%.2f' % (float(context['total_stake']) / len(tickets))
+        context['profit'] = context['total_earnings'] - context['total_stake']
+        if context['total_earnings'] > 0:
+            context['profitability'] = '%.2f' % ((
+                (context['total_earnings'] - context['total_stake']) / context['total_stake']
+            ) * 100)
+            int((context['total_stake'] / context['total_earnings'])*100)
+        else:
+            context['profitability'] = 0
+
+        context['total_earnings'] = float('%.2f' % context['total_earnings'])
+        context['profit'] = float('%.2f' % context['profit'])
+
+        self.profit = context['profit']
+        self.profitability = context['profitability']
+        self.save()
+
+        return context
+
     def refresh(self):
         logger.debug('spooling user profile refresh %s' % self.user)
         refresh_betprofile_for_user.spool(userpk=str(self.user.pk))
@@ -146,6 +200,11 @@ class Ticket(models.Model):
                 self._ticket_bet_count = self.ticket.bet_set.count()
         return self._ticket_bet_count
 
+def ticket_betprofile_refresh(sender, instance, **kwargs):
+    if instance.correction != BET_CORRECTION_NEW:
+        instance.user.betprofile.calculate()
+signals.post_save.connect(ticket_betprofile_refresh, sender=Ticket)
+
 def media_upload_to(instance, filename):
     return 'ticket/%s/%s' % (instance.ticket.pk, filename)
 
@@ -204,6 +263,11 @@ class Bet(models.Model):
     class Meta:
         ordering = ('-session__start_datetime', '-id')
 
+def bet_betprofile_refresh(sender, instance, **kwargs):
+    if instance.correction != BET_CORRECTION_NEW:
+        instance.ticket.user.betprofile.calculate()
+signals.post_save.connect(bet_betprofile_refresh, sender=Bet)
+
 def delete_empty_ticket(sender, **kwargs):
     try:
         if kwargs['instance'].ticket.bet_set.count() == 0:
@@ -222,44 +286,7 @@ def refresh_betprofile_for_user_nospool(arguments):
     print 'triggered profile refresh %s' % user
     if user.ticket_set.filter(status=TICKET_STATUS_DONE).count():
         logger.debug('starting user profile refresh %s' % user)
-        tickets = user.ticket_set.filter(status=TICKET_STATUS_DONE)
-
-        total_odds = 0
-        balance = 0
-        won_ticket_count = 0
-        lost_ticket_count = 0
-        total_stake = 0
-        total_earnings = 0
-
-        for ticket in tickets:
-            balance += ticket.profit
-
-            total_odds += ticket.odds
-            total_stake += ticket.stake
-            
-            if ticket.correction == BET_CORRECTION_WON:
-                total_earnings += ticket.stake * ticket.odds
-                won_ticket_count += 1
-            elif ticket.correction == BET_CORRECTION_LOST:
-                lost_ticket_count += 1
-
-        average_odds = '%.2f' % (float(total_odds) / len(tickets))
-        won_ticket_percent = int(
-            (float(won_ticket_count) / len(tickets)) * 100)
-        lost_ticket_percent = 100 - won_ticket_percent
-        average_stake = '%.2f' % (float(total_stake) / len(tickets))
-        profit = total_earnings - total_stake
-        if total_earnings > 0:
-            profitability = '%.2f' % ((
-                (total_earnings - total_stake) / total_stake
-            ) * 100)
-            int((total_stake / total_earnings)*100)
-        else:
-            profitability = 0
-
-        user.betprofile.profit = profit
-        user.betprofile.profitability = profitability
-        user.betprofile.save()
+        data = user.betprofile.calculate()
         logger.debug('ending user profile refresh %s' % user)
     else:
         logger.debug('user %s has no ticket' % user)
