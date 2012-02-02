@@ -854,11 +854,6 @@ class Sync(object):
             model.season = parent
 
         model.start_datetime = self.get_session_start_datetime(e)
-
-        old_status = model.status
-        self.copy_attr(model, e, 'status')
-        if model.status != old_status:
-            session_played.send(sender=self, session=model)
         
         self.copy_attr(model, e, 'gameweek')
         P = self.oponnent_tag
@@ -895,6 +890,11 @@ class Sync(object):
             model.winner = model.oponnent_B
         elif winner == 'draw':
             model.draw = True
+
+        old_status = model.status
+        self.copy_attr(model, e, 'status')
+        if model.status != old_status:
+            session_played.send(sender=self, session=model)
 
     def update_tennis_session(self, model, e, parent=None):
         i = 1
