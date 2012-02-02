@@ -38,11 +38,11 @@
 {% endif %}
 {% if action.verb == 'commented' %}
         <a href="{{ action.actor.get_absolute_url }}" title="{{ action.actor }}">{{ action.actor }}</a> {% trans 'commented' %}
-		<cite>"{{ action.action_object.comment|render_comment|safe }}"</cite>
+		<cite title="{{ action.action_object.comment }}">"{{ action.action_object.comment|truncatewords:7|render_comment|safe }}"</cite>
 		{% trans 'on' %}
         {% if action.action_object.content_object.verb == 'wall posted' or action.action_object.content_object.verb == 'updated his status' %}
             {% spaceless %}
-            <a href="{{ action.get_absolute_url }}" title="{{ action.action_object.content_object }}">
+            <a href="{{ action.get_absolute_url }}" title="{{ action.action_object.content_object.action_object.comment }}">
                 {% if action.action_object.content_object.verb == 'wall posted' %}
                     {% trans 'wall post' %}
                 {% endif %}
@@ -51,7 +51,7 @@
                         {% trans 'his' %}
                     {% endif %}
                     {% trans 'status update' %}
-                {% endif %} <span class="cite">"{{ action.action_object.content_object.action_object.comment|render_comment|safe }}"</span>
+                {% endif %} <span class="cite">"{{ action.action_object.content_object.action_object.comment|truncatewords:7|render_comment|safe }}"</span>
             </a>
 
                 {% if action.action_object.content_object.action_object.user != action.action_object.user %}
