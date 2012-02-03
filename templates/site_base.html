@@ -138,7 +138,7 @@ table.bettype table.choices {
 			{% if request.user.is_authenticated %}
 			<ul>
 				<li class="image">
-					<a href="{% url scoobet_feed_friends %}" id="avatar_image">{% avatar user %}</a>
+					<a href="{{ request.user.get_absolute_url }}" id="avatar_image">{% avatar user %}</a>
                     <span class="link" id="avatar_form_toggle">{% trans 'change avatar' %}</span>
                     <div style="display:none" id="avatar_form">
                         <form enctype="multipart/form-data" method="post" action="{% url scoobet_upload_avatar %}">
