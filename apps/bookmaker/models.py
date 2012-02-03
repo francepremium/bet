@@ -61,6 +61,8 @@ class BetType(models.Model):
     variable_label = models.CharField(null=True, blank=True, max_length=200)
     variable_type = models.CharField(choices=VARIABLE_TYPE_CHOICES, null=True, blank=True, max_length=20)
 
+    cancel_condition = models.TextField(null=True, blank=True)
+    
     def __unicode__(self):
         return self.name
     

@@ -62,7 +62,23 @@ def correct_for_session(session, element=None):
 
     to_update = User.objects.filter(ticket__bet__session=session).distinct()
     to_correct = BetType.objects.filter(bet__session=session, variable_type=None).distinct()
+
     for t in to_correct:
+        if t.cancel_condition:
+            try:
+                condition = t.cancel_condition
+                if condition is None:
+                    raise
+                for var in rewrite:
+                    condition = condition.replace(var, 'attrib["%s"]' % var)
+                result = eval(condition)
+                if result:
+                     Bet.objects.filter(session=session, bettype=t).update(
+                        correction=BET_CORRECTION_CANCELED)
+                     continue
+            except:
+                pass
+
         for c in t.betchoice_set.all():
             bets = Bet.objects.filter(session=session, bettype=t, choice=c)
 
