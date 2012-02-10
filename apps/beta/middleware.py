@@ -44,4 +44,4 @@ class LoginMiddleware(object):
                 return None
 
         if not request.user.is_authenticated():
-            return shortcuts.redirect(BETA_URL)
+            return shortcuts.redirect(BETA_URL + '?next=' + request.path)

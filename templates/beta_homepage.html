@@ -36,7 +36,7 @@
                     <form method="post" action="{% url acct_login %}">
                         {% csrf_token %}
                         <input name="username" type="text" value="Nom d'utilisateur" id="username_fr" /><input name="password" type="password" value="Votre mot de passe" id="password_fr" /><input type="submit" value="ok" class="submit" />
-                        <input type="hidden" name="next" value="/" />
+                        <input type="hidden" name="next" value="{{ request.GET.next }}" />
                     </form>
                     <p  class="forgot"><a href="{% url acct_passwd_reset %}">Mot de passe oublié ?</a></p>
                 </fieldset>
@@ -84,7 +84,7 @@
                     </p>
                     <form method="post" action="{% url acct_login %}">
                         {% csrf_token %}
-                        <input type="hidden" name="next" value="/" />
+                        <input type="hidden" name="next" value="{{ request.GET.next }}" />
                          <input type="text" value="Username" id="username_en" name="username" /><input name="password" type="password" value="Password" id="password_en" /><input type="submit" value="ok" class="submit" />
                     </form>
                     <p  class="forgot"><a href="{% url acct_passwd_reset %}" >Forgot your password ?</a></p>
