@@ -40,7 +40,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.transaction.TransactionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    #'beta.middleware.LoginMiddleware',
+    'beta.middleware.LoginMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
@@ -60,7 +60,7 @@ EXCEPTION_MIDDLEWARE_HANDLES = [
 
 INSTALLED_APPS = [
     'localeurl',
-    #'beta',
+    'beta',
     # Django
     'django.contrib.admin',
     'django.contrib.auth',
