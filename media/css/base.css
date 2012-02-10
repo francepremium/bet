@@ -59,7 +59,7 @@ body { position:relative; width:990px; margin:0px auto;}
 
 /* Language and timezone selectors shared styles */
 #language,
-#timezone { font-size:10px; color:#ffffff; text-transform:uppercase; background-color:#3f474f; border-radius:4px; }
+#timezone { font-size:10px; color:#ffffff; text-transform:uppercase; background-color:#3f474f; border-radius:4px; z-index:55 }
 #language .expandable,
 #timezone .expandable { box-shadow:0px -1px 2px #333333; border-radius:4px; }
 #language .expandable:hover,
@@ -150,7 +150,7 @@ body { position:relative; width:990px; margin:0px auto;}
 
 /* Logout position */
 #logout { position:absolute; top:101px; right:0px; z-index:50;height:30px; }
-#logout a{display:block; border-right:1px solid #cccccc;width:65px;height:28px;margin:1px 0;text-align:center;color:#7b7b7b;line-height:30px;}
+#logout a{display:block; border-right:1px solid #cccccc;width:70px;height:28px;margin:1px 0;text-align:center;color:#7b7b7b;line-height:30px;padding:0 4px;}
 #logout a:hover{color:#666; }
 
 /* Messages */

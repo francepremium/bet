@@ -39,6 +39,18 @@ def correct_for_session(session, element=None):
         'hts_B',
         'ets_A',
         'ets_B',
+        'p1s_A',
+        'p1s_B',
+        'p2s_A',
+        'p2s_B',
+        'p3s_A',
+        'p3s_B',
+        'p4s_A',
+        'p4s_B',
+        'ps_A',
+        'ps_B',
+        'eps_A',
+        'eps_B',
     )
 
     attrib = {}
