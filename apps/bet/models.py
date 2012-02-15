@@ -41,22 +41,34 @@ class BetProfile(models.Model):
     profit = models.FloatField(default=0)
 
     def calculate(self, tickets=None):
-        context = {}
+        context = {
+            'total_odds': 0,
+            'balance_history': [],
+            'won_ticket_count': 0,
+            'lost_ticket_count': 0,
+            'won_ticket_percent': 0,
+            'lost_ticket_percent': 0,
+            'total_stake': 0,
+            'total_odds': 0,
+            'total_earnings': 0,
+            'profit': 0,
+            'profitability': 0,
+            'average_odds': 0,
+            'average_stake': 0,
+        }
         context['total_odds'] = 0
         balance = 0
-        balance_history = context['balance_history'] = []
-        context['won_ticket_count'] = 0
-        context['lost_ticket_count'] = 0
-        context['total_stake'] = 0
-        context['total_earnings'] = 0
 
         if tickets is None:
             tickets = self.user.ticket_set.filter(status=TICKET_STATUS_DONE).exclude(
                 bet__correction=BET_CORRECTION_NEW)
 
+        if len(tickets) == 0:
+            return context
+
         for ticket in tickets:
             balance += ticket.profit
-            balance_history.append({
+            context['balance_history'].append({
                 'ticket': ticket,
                 'balance': int(balance),
             })
