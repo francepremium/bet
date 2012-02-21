@@ -38,11 +38,19 @@
         {% for person in persons %}
         <div class="person">
 			<div class="title">
+                {% if sport.slug != 'hockey' and sport.slug != 'americanfootball' %}
 				<a href="{{ person.get_absolute_url }}" title="{{ person.name }}">{{ person.name }}</a>
+                {% else %}
+                    {{ person.name }}
+                {% endif %}
 			</div>
             <div class="image">
 				{% if person.get_large_image_url %}
-				<a href="{{ person.get_absolute_url }}" title="{{ person.name }}"><img src="{{ person.get_large_image_url }}" /></a>
+                    {% if sport.slug != 'hockey' and sport.slug != 'americanfootball' %}
+                        <a href="{{ person.get_absolute_url }}" title="{{ person.name }}"><img src="{{ person.get_large_image_url }}" /></a>
+                    {% else %}
+                        <img src="{{ person.get_large_image_url }}" />
+                    {% endif %}
 				{% endif %}
 			</div>
 			<div class="content">
@@ -85,11 +93,19 @@
 			<td>{{ person.element.getchildren.0.attrib.shirtnumber }}</td>
 			<td>
 				{% if person.get_small_image_url %}
-				<a href="{{ person.get_absolute_url }}" title="{{ person.name }}"><img src="{{ person.get_small_image_url }}" /></a>
+                    {% if sport.slug != 'hockey' and sport.slug != 'americanfootball' %}
+                        <a href="{{ person.get_absolute_url }}" title="{{ person.name }}"><img src="{{ person.get_small_image_url }}" /></a>
+                    {% else %}
+                        <img src="{{ person.get_small_image_url }}" />
+                    {% endif %}
 				{% endif %}
 			</td>
 			<td>
-				<a href="{{ person.get_absolute_url }}" title="{{ person.attrib.first_name }} {{ person.attrib.last_name }}">{{ person.attrib.first_name }} {{ person.attrib.last_name }}</a>
+                {% if sport.slug != 'hockey' and sport.slug != 'americanfootball' %}
+                    <a href="{{ person.get_absolute_url }}" title="{{ person.attrib.first_name }} {{ person.attrib.last_name }}">{{ person.attrib.first_name }} {{ person.attrib.last_name }}</a>
+                {% else %}
+                    {{ person.attrib.first_name }} {{ person.attrib.last_name }}
+                {% endif %}
 			</td>
 			<td class="tiny_image">
 				<img src="{{ person.attrib.nationality_id|gsm_area_id_flag_url }}" alt="{{ person.attrib.nationality_name }}" title="{{ person.attrib.nationality_name }}" />
