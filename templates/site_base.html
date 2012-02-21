@@ -159,6 +159,7 @@ table.bettype table.choices {
 				<input type="text" name="username" defaultValue="{% trans 'user name' %}" />
 				<input type="password" name="password" defaultValue="{% trans 'password' %}" />
 				<input type="submit" class="button button_simple" value="{% trans 'Log in' %}" />
+                <input type="hidden" name="next" value="{{ request.path }}" />
 				<label for="login_remember">{% trans 'remember me' %}</label>
 				<input type="checkbox" name="remember" id="login_remember" />
 				<a href="{% url acct_passwd_reset %}">{% trans "forgot password?" %}</a>
