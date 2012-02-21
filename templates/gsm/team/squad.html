@@ -22,12 +22,14 @@
     </select>
 </form>
 {% endcomment %}
+{% if sport.slug == 'soccer' %}
 <div class="tabs">
     <ul>
         <li class="tab_link tab_id_current">{% trans 'current' %}</li>
         <li class="tab_link tab_id_statistics">{% trans 'statistics' %}</li>
     </ul>
 </div>
+{% endif %}
 
 <div class="squad tab_content tab_id_current">
     {% for position, persons in positions.items %}
