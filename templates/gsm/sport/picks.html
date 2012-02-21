@@ -2,6 +2,15 @@
 
 {% load bet_tags %}
 
+{% block head_title %}{{ sport|capfirst }} - {% trans 'Free predictions, advices and betting picks from the best tipsters' %}{% endblock %}
+
+{% block meta %}
+<meta name="Description" content="{% blocktrans %}Get free predictions and betting picks on {{ Sport }} from our large community of tipsters. And starts earning money thanks to them.{% endblocktrans %}" />
+<meta name="keywords" content="{% trans 'betting' %}, {{ sport }} {% trans 'betting' %}, {{ sport }} {% trans 'free picks' %}, {{ sport }} {% trans 'picks' %}, {{ sport }} {% trans 'pick' %}, {{ sport }} {% trans 'predictions' %}, {{ sport }} {% trans 'prediction' %}" />
+{% endblock %}
+
+
+
 {% block body %}{{ block.super }}
     {{ bet_list_helper.render_form }}
     {{ bet_list_helper.render_bet_table }}

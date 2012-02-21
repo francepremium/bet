@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>{% block head_title_base %}{% block head_title %}{% endblock %} - {% trans "Don't loose your bets, thank Betspire !" %}!{% endblock %}</title>
+        <title>{% block head_title_base %}{% block head_title %}{% endblock %} | Betspire {% endblock %}</title>
         {% block meta %}
         {% endblock %}
         <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" />

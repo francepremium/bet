@@ -3,6 +3,14 @@
 {% load i18n %}
 {% load gsm_tags scoobet_tags %}
 
+{% block head_title %}{{ team|capfirst }} - {% trans 'Picks, best tipsters, fixtures, livescores, stats, news, rankings' %}{% endblock %}
+
+{% block meta %}
+<meta name="Description" content="{% blocktrans %}Get everything to bet and win on {{ team }}'s games like a pro! From news and statistics to free picks from our best {{ sport }} tipsters.{% endblocktrans %}" />
+<meta name="keywords" content="{% trans 'betting' %}, {{ team }} {% trans 'betting' %}, {{ team }} {% trans 'free picks' %}, {{ team }} {% trans 'picks' %}, {{ team }} {% trans 'pick' %}, {{ team }} {% trans 'predictions' %}, {{ team }} {% trans 'prediction' %}" />
+{% endblock %}
+
+
 {% block body %}{{ block.super }}
     
     {% if next_sessions %}

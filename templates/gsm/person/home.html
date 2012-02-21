@@ -2,6 +2,14 @@
 
 {% load i18n gsm_tags %}
 
+{% block head_title %}{{ person|capfirst }} - {% trans 'Profile, bio, career, statistics' %}{% endblock %}
+
+{% block meta %}
+<meta name="Description" content="{% blocktrans %}Know everything about {{ Player }}: Find the latest news, games, stats and goals of {{ Player }}.{% endblocktrans %}" />
+<meta name="keywords" content="{% trans 'betting' %}, {{ sport }} {% trans 'betting' %}, {{ sport }} {% trans 'free picks' %}, {{ sport }} {% trans 'picks' %}, {{ sport }} {% trans 'pick' %}, {{ sport }} {% trans 'predictions' %}, {{ sport }} {% trans 'prediction' %}" />
+{% endblock %}
+
+
 {% block body %}{{ block.super }}
 
 <h2>{% trans 'identity' %}</h2>

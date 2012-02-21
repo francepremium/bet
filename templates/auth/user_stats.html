@@ -1,5 +1,16 @@
 {% extends 'auth/user_base.html' %}
 {% load i18n %}
+
+{% block head_title %}{{ object|capfirst }} - {% trans 'Sports betting statistics' %}{% endblock %}
+
+{% block meta %}
+<meta name="Description" content="{% blocktrans %}Check out {{ User }}'s statistics on Betspire and see what type of tipster {{ User }} is!{% endblocktrans %}" />
+<meta name="keywords" content="{% trans 'betting' %}, {{ sport }} {% trans 'betting' %}, {{ sport }} {% trans 'free picks' %}, {{ sport }} {% trans 'picks' %}, {{ sport }} {% trans 'pick' %}, {{ sport }} {% trans 'predictions' %}, {{ sport }} {% trans 'prediction' %}" />
+{% endblock %}
+
+
+
+
 {% block body %}
 {{ block.super }}<h2>filtrer</h2>
 {% if empty %}

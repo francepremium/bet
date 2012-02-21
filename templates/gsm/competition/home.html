@@ -1,6 +1,15 @@
 {% extends 'gsm/competition/base.html' %}
 {% load i18n scoobet_tags gsm_tags %}
 
+{% block head_title %}{{ competition|capfirst }} - {% trans 'Picks, best tipsters, fixtures, livescores, stats, news, rankings' %}{% endblock %}
+
+{% block meta %}
+<meta name="Description" content="{% blocktrans %}Get everything to bet and win on {{ Competition }} like a pro! From news and statistics to free picks from our best {{ sport }} tipsters.{% endblocktrans %}" />
+<meta name="keywords" content="{% trans 'betting' %}, {{ sport }} {% trans 'betting' %}, {{ sport }} {% trans 'free picks' %}, {{ sport }} {% trans 'picks' %}, {{ sport }} {% trans 'pick' %}, {{ sport }} {% trans 'predictions' %}, {{ sport }} {% trans 'prediction' %}" />
+{% endblock %}
+
+
+
 {% block body %}{{ block.super }}
     {% if sessions %}
         <h2 class="next_sessions">{% trans 'next matches' %}</h2>

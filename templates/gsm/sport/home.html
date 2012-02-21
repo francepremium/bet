@@ -2,6 +2,14 @@
 
 {% load i18n gsm_tags scoobet_tags bet_tags %}
 
+{% block head_title %}{{ sport|capfirst }} - {% trans 'Picks, best tipsers, fixtures, livescores, stats, news, rankings' %}{% endblock %}
+
+{% block meta %}
+<meta name="Description" content="{% blocktrans %}Get everything to bet and win on {{ sport }} like a pro! From news and statistics to the free picks of best {{ sport }} tipsers.{% endblocktrans %}" />
+<meta name="keywords" content="{% trans 'betting' %}, {{ sport }} {% trans 'betting' %}, {{ sport }} {% trans 'free picks' %}, {{ sport }} {% trans 'picks' %}, {{ sport }} {% trans 'pick' %}, {{ sport }} {% trans 'predictions' %}, {{ sport }} {% trans 'prediction' %}" />
+{% endblock %}
+
+
 {% block body %}{{ block.super }}
     {% if next_sessions %}
         <h2 class="next_sessions">{% trans 'next matches' %}</h2>

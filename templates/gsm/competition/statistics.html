@@ -1,6 +1,14 @@
 {% extends 'gsm/competition/base.html' %}
 {% load i18n gsm_tags %}
 
+{% block head_title %}{{ competition|capfirst }} - {% trans 'Rankings, tables, statistics, form' %}{% endblock %}
+
+{% block meta %}
+<meta name="Description" content="{% blocktrans %}Want to know everything about {{ Competition }} ? Explore all tables, rankings and see all statistics to bet wisely.{% endblocktrans %}" />
+<meta name="keywords" content="{% trans 'betting' %}, {{ sport }} {% trans 'betting' %}, {{ sport }} {% trans 'free picks' %}, {{ sport }} {% trans 'picks' %}, {{ sport }} {% trans 'pick' %}, {{ sport }} {% trans 'predictions' %}, {{ sport }} {% trans 'prediction' %}" />
+{% endblock %}
+
+
 {% block body %}{{ block.super }}
     {% gsm_tree key='tables_tree' method='get_tables' type='season' id=competition.get_last_season.gsm_id %}
 

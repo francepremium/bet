@@ -1,10 +1,13 @@
 {% extends 'bet/base.html' %}
 {% load i18n bet_tags comments %}
-{% block head_title %}{% if ticket.bet_set.count > 1 %}{% trans 'Combined' %}{% else %}{% trans 'Simple' %}{% endif %} {% trans 'ticket ' %} #{{ ticket.pk }} {% trans 'by' %} {{ ticket.user }}{% endblock %}
+
+{% block head_title %}{% blocktrans with ticket.user as user %}{{ user }} published a ticket on Betspire.{% endblocktrans %}{% endblock %}
+
 {% block meta %}
-<meta name="Description" content="{% trans 'In this ticket' %}, {{ user }} {% trans 'shares his picks on matches' %} {% for bet in ticket.bet_set.all %}{{ bet.session }}{% if not forloop.last %}, {% endif %}{% endfor %}. {% trans 'Discover his free picks now' %}!" />
+<meta name="Description" content="{% blocktrans with ticket.user as user and ticket.odds as odds %}{{ user }} published a ticket with an odd of {{ odds }}. Check out {{ user }}'s ticket to get inspiration for your bets!{% endblocktrans %}" />
 <meta name="keywords" content="{% trans 'picks' %}, {% trans 'pick' %}, {% trans 'bet' %}, {% trans 'betting' %}, {% trans 'prediction' %}, {% for bet in ticket.bet_set.all %}{{ bet.session }}, {{ bet.session.sport }}, {{ bet.session.season.competition }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
 {% endblock %}
+
 {% block body %}<h1>{% trans 'ticket' %} #{{ ticket.pk }} <em>(<a href="{{ ticket.user.get_absolute_url }}" title="{{ ticket.user }}"><span>{{ ticket.user }}</span></a>)</em></h1>
 
 <table class="inline_table">

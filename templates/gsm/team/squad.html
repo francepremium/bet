@@ -5,6 +5,14 @@
 {% block body %}{{ block.super }}
 
 
+{% block head_title %}{{ team|capfirst }} - {% trans 'Squad and players statistics ' %}{% endblock %}
+
+{% block meta %}
+<meta name="Description" content="{% blocktrans %}Explore all players of {{ Team }} and see each players statistics.{% endblocktrans %}" />
+<meta name="keywords" content="{% trans 'betting' %}, {{ sport }} {% trans 'betting' %}, {{ sport }} {% trans 'free picks' %}, {{ sport }} {% trans 'picks' %}, {{ sport }} {% trans 'pick' %}, {{ sport }} {% trans 'predictions' %}, {{ sport }} {% trans 'prediction' %}" />
+{% endblock %}
+
+
 {% comment %}
 <form action="" method="get">
     <select name="season_gsm_id" onChange="return this.form.submit();">
