@@ -104,7 +104,7 @@ def person_detail_tab(request, sport, gsm_id, tab, tag='person',
     if sport.slug == 'tennis':
         t = gsm.get_tree(context['language'], sport, 'get_players', 
             type='player', id=person.gsm_id, detailed='yes')
-    elif sport.slug != 'hockey':
+    else:
         t = gsm.get_tree(context['language'], sport, 'get_career', 
             type='player', id=person.gsm_id, detailed='yes')
     person.element = t.getroot().getchildren()[1]
