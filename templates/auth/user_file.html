@@ -13,7 +13,8 @@
 {% block body %}
     {{ block.super }}
 
-	<h2>Bookmaker favoris</h2>
+    {% if object.bookmaker_set.count %}
+	<h2>{% trans 'Favorite bookmakers' %}</h2>
 	<div class="section">
     	<ul>
         	{% for bookmaker in object.bookmaker_set.all %}
@@ -24,7 +25,9 @@
         	{% endfor %}
     	</ul>
 	</div>
-	<h2>Sport favoris</h2>
+    {% endif %}
+    {% if object.sport_set.count %}
+	<h2>{% trans 'Favorite sports' %}</h2>
 	<div class="section">
     	<ul>
         	{% for sport in object.sport_set.all %}
@@ -35,7 +38,9 @@
         	{% endfor %}
     	</ul>
 	</div>
-	<h2>Competition favorites</h2>
+    {% endif %}
+    {% if object.competition_set.count %}
+	<h2>{% trans 'Favorite competitions' %}</h2>
 	<div class="section">
 		<ul>
         	{% for competition in object.competition_set.all %}
@@ -46,30 +51,37 @@
         	{% endfor %}
     	</ul>
 	</div>
-	<h2>Equipe favoris</h2>
+    {% endif %}
+    {% if teams.count %}
+	<h2>{% trans 'Favorite teams' %}</h2>
 	<div class="section">	
     	<ul>
-        {% for entity in object.gsmentity_set.all %}
-            {% if entity.tag == 'team' %}
+        {% for entity in teams %}
             <li>
             	<a href="{{ entity.get_absolute_url }}" title="{{ entity }}" class="image"><img src="" alt="{{ entity }}"></a>
                 <a href="{{ entity.get_absolute_url }}" title="{{ entity }}">{{ entity }}</a>
 			</li>
-            {% endif %}
         {% endfor %}
     </ul>
 	</div>
-	<h2>Sportif favoris</h2>
+    {% endif %}
+    {% if persons.count %}
+	<h2>{% trans 'Favorite players' %}</h2>
 	<div class="section">
    		<ul>
-        	{% for entity in object.gsmentity_set.all %}
-            	{% if entity.tag == 'person' %}
+        	{% for entity in persons %}
             	<li>
             		<a href="{{ entity.get_absolute_url }}" title="{{ entity }}" class="image"><img src="" alt="{{ entity }}"></a>
                 	<a href="{{ entity.get_absolute_url }}" title="{{ entity }}">{{ entity }}</a>
             	</li>
-            	{% endif %}
         	{% endfor %}
     	</ul>
 	</div>
+    {% endif %}
+
+    {% if not object.bookmaker_set.count and not object.sport_set.count and not object.competition_set.count and not persons.count and not teams.count %}
+        <p>
+            {% blocktrans %}{{ object }} has not liked anything yet{% endblocktrans %}
+        </p>
+    {% endif %}
 {% endblock %}

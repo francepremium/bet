@@ -210,6 +210,9 @@ def user_detail(request, username, tab='activities',
             context.update(user.betprofile.calculate(tickets))
         else:
             context['empty'] = True
+    elif tab == 'file':
+        context['teams'] = user.gsmentity_set.filter(tag='team')
+        context['persons'] = user.gsmentity_set.filter(tag='person')
 
     if request.is_ajax() and 'page_template' in context.keys():
         template_name = context['page_template']
