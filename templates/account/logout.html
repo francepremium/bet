@@ -1,0 +1,22 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Logout" %}{% endblock %}
+
+{% block body %}
+    <p>{% trans "You've been logged out." %}</p>
+    {% if '/account/logout/' not in request.META.HTTP_REFERER %}
+    <p>
+        {% trans 'You will be redirected in a second' %}
+    </p>
+    {% endif %}
+{% endblock %}
+
+{% block extra_body %}
+    {% if '/account/logout/' not in request.META.HTTP_REFERER %}
+        <script type="text/javascript">
+        document.location.href = '{{ request.META.HTTP_REFERER }}';
+        </script>
+    {% endif %}
+{% endblock %}
