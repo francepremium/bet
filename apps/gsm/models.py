@@ -288,8 +288,9 @@ class AbstractGsmEntity(models.Model):
 
     def resync(self, element=None):
         if not element:
+            detailed = self.sport.slug == 'tennis'
             tree = gsm.get_tree('en', self.sport, 'get_matches', 
-                type='match', id=self.gsm_id, update=True, retry=True)
+                type='match', id=self.gsm_id, detailed=detailed, update=True, retry=True)
             for e in gsm.parse_element_for(tree.getroot(), 'match'):
                 element = e
 
