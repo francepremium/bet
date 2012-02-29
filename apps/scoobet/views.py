@@ -41,6 +41,12 @@ def action_detail(request, action_id):
 
 def homepage(request,
     template_name='homepage.html', extra_context=None):
+    if request.user.is_authenticated():
+        return shortcuts.redirect(urlresolvers.reverse('scoobet_feed_friends'))
+    return shortcuts.render(request, template_name, extra_context)
+
+def leaderboard(request,
+    template_name='leaderboard.html', extra_context=None):
     qs = User.objects.exclude(betprofile__profit=None).select_related('betprofile')
     context = {
         'users_by_profitability': qs.order_by('-betprofile__profitability')[:50],

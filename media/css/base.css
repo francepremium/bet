@@ -198,9 +198,11 @@ tr.odd td { background-color:#f7f7f7; }
 .auth .ticket hr{background-color:#e6e6e6;color:#e6e6e6;border-color:#e6e6e6; width:250px;height: 1px;border: 0;}
 
 /* log_gen */
+/*
 .log_gen #body {top:101px;}
 .log_gen #logo{width:990px;text-align:center;}
 .log_gen #logo a{margin:0 auto;}
+*/
 .log_gen .fr_title, .log_gen .en_title{	height:40px;background-repeat:no-repeat;background-image:url('../img/temp_flags.png');margin:20px 0}
 .log_gen .fr_title{background-position:top left }
 .log_gen .en_title{background-position:bottom left}

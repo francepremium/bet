@@ -1,79 +1,142 @@
-{% extends "site_base.html" %}
+{% extends 'site_base.html' %}
 
 {% load i18n %}
 
-{% block body_class %}home{% endblock %}
+{% block body_class %}log_gen{% endblock %}
 
-{% block head_title %}{% trans 'Leaderboad - Best sports tipsters ranked by profit and profitability' %}{% endblock %}
+{% block head_title %}{% trans 'Betspire, bet inspired - free picks and statistics on every sporting event in the world.' %}{% endblock %}
 
 {% block meta %}
-<meta name="Description" content="{% blocktrans %}Discover all the best sports tipsters and start following them to see their picks for free.{% endblocktrans %}" />
+<meta name="description" content="{% trans 'Betspire is the ultimate social network for tipsters and sports lovers. Get all the stats you need to bet wisely, share all your predictions, follow the best tipsters and improve your winnings.' %}" />
 <meta name="keywords" content="{% trans 'betting' %}, {{ sport }} {% trans 'betting' %}, {{ sport }} {% trans 'free picks' %}, {{ sport }} {% trans 'picks' %}, {{ sport }} {% trans 'pick' %}, {{ sport }} {% trans 'predictions' %}, {{ sport }} {% trans 'prediction' %}" />
 {% endblock %}
 
-
 {% block body %}
-	<div class="title">
-		<h1>{% trans 'leaderboard' %}</h1>
-	</div>
-    <div class="leaderboard">
-        <h2>{% trans 'by profit' %}</h2>
-        <table>
-            <tr>
-                <th>{% trans 'picker' %}</th>
-                <th>{% trans 'profitability' %}</th>
-                <th>{% trans 'bets' %}</th>
-                <th>{% trans 'profit' %}</th>
-            </tr>
-            {% for user in users_by_profit %}
-            <tr>
-                <td>
-                    <a href="{{ user.get_absolute_url }}" title="{{ user }}">{{ user }}</a>
-                </td>
-                <td>
-                    {{ user.betprofile.profitability }} %
-                </td>
-                <td>
-                    {{ user.ticket_set.count }}
-                </td>
-                <td>
-                    {{ user.betprofile.profit }}
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% if request.user.is_staff %}
-            {% trans 'user count' %}: {{ user_count }}
-        {% endif %}
+    <div class="fr_title">
+        <h1>Bienvenue sur Betspire, votre réseau social dedié aux paris sportifs</h1>
     </div>
-    <div class="leaderboard last">
-        <h2>{% trans 'by profitability' %}</h2>
-        <table>
-            <tr>
-                <th>{% trans 'picker' %}</th>
-                <th>{% trans 'profitability' %}</th>
-                <th>{% trans 'bets' %}</th>
-                <th>{% trans 'profit' %}</th>
-            </tr>
-            {% for user in users_by_profitability %}
-            <tr>
-                <td>
-                    <a href="{{ user.get_absolute_url }}" title="{{ user }}">{{ user }}</a>
-                </td>
-                <td>
-                    {{ user.betprofile.profitability }} %
-                </td>
-                <td>
-                    {{ user.ticket_set.count }}
-                </td>
-                <td>
-                    {{ user.betprofile.profit }}
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% if request.user.is_staff %}
-            {% trans 'pending email confirmations' %}: {{ pending_confirmation_count }}
-        {% endif %}
+    <p class="slogan">
+        Vivez une nouvelle expérience du pari sportif, adhérez à Betspire!
+    </p>
+    <div class="forms">
+        <fieldset>
+            <legend>
+                Déjà inscrit?
+            </legend>
+            <p>
+                Veuillez entrer vos identifiants ci-dessous pour vous connecter à votre compte:
+            </p>
+            <form method="post" action="{% url acct_login %}">
+                {% csrf_token %}
+                <input name="username" type="text" value="Nom d'utilisateur" id="username_fr" /><input name="password" type="password" value="Votre mot de passe" id="password_fr" /><input type="submit" value="ok" class="submit" />
+                <input type="hidden" name="next" value="{% url scoobet_feed_friends %}" />
+            </form>
+            <p  class="forgot"><a href="{% url acct_passwd_reset %}">Mot de passe oublié ?</a></p>
+        </fieldset>
     </div>
+    <div class="forms last">
+        <fieldset>
+            <legend>
+                Pas encore membre?
+            </legend>
+            {% if lead %}
+            <p>Merci d'avoir soumis votre email. Vous receverez une invitation prochainement</p>
+            {% else %}
+            <p>
+                Rejoignez Betspire! Disposez de tous les outils pour parier judicieusement, partagez vos pronostics et augmentez vos gains!
+            </p>
+            <div class="align-center">
+            <a href="/fr/account/signup/" class="button_register">Inscription <span>gratuite</span></a>
+            <span class="acc_button">En moins de 30 secondes</span>
+            </div>
+            <!--
+            <form method="post" action="{% url beta_homepage %}">
+                {% csrf_token %}
+                <div class="errors">
+                    {{ form.email.errors }}
+                </div>
+
+                <input type="text" value="Adresse e-mail" id="email_fr" name="email" /><input type="submit" value="ok" class="submit" />
+            </form>-->
+            {% endif %}
+        </fieldset>
+    </div><hr/>
+    <div class="en_title">
+        <h1>Welcome to Betspire, your sports betting network</h1>
+    </div>
+    <p class="slogan">
+        Live a new sports betting experience, join Betspire!
+    </p>
+    <div class="forms">
+        <fieldset>
+            <legend>
+                Already registered?
+            </legend>
+            <p>
+                Sign in below to access to your account:
+            </p>
+            <form method="post" action="{% url acct_login %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{% url scoobet_feed_friends %}" />
+                 <input type="text" value="Username" id="username_en" name="username" /><input name="password" type="password" value="Password" id="password_en" /><input type="submit" value="ok" class="submit" />
+            </form>
+            <p  class="forgot"><a href="{% url acct_passwd_reset %}" >Forgot your password ?</a></p>
+        </fieldset>
+    </div>
+    <div class="forms last">
+        <fieldset>
+            <legend>
+                Not yet a member?
+            </legend>
+            {% if lead %}
+            <p>Thanks for submiting your email. You will receive an invitation shortly</p>
+            {% else %}
+            <p>
+                Join Betspire, the ultimate social network for sports tipsers. Get all the stats you need to bet wisely, share all your predictions and improve your winnings.
+            </p>
+            <div class="align-center">
+            <a href="/en/account/signup/" class="button_register">Sign up <span>for free</span></a>
+            <span class="acc_button">Take less than 30 seconds!</span>
+            </div>
+           <!-- <form method="post" action="{% url beta_homepage %}">
+                <div class="errors">
+                    {{ form.email.errors }}
+                </div>
+
+                {% csrf_token %}
+                <input type="text" value="E-mail address" name="email" id="email_en" /><input type="submit" value="ok" class="submit" />
+            </form>-->
+            
+            {% endif %}
+        </fieldset>
+    </div>
+    <div class="clear">
+        &nbsp;
+    </div>
+
+{% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript">
+    var default_values = {};
+    $('input[type=text]').each(function() {
+        default_values[$(this).attr('id')] = $(this).val();
+        $(this).click(function() {
+            if ($(this).val() == default_values[$(this).attr('id')]) {
+                $(this).val('')
+                if ($(this).attr('name') == 'password') {
+                    this.type = 'password'
+                }
+            }
+        });
+        $(this).blur(function() {
+            if ($(this).val() == '') {
+                if ($(this).attr('type') == 'password') {
+                    this.type = 'text'
+                }
+                $(this).val(default_values[$(this).attr('id')]);
+            }
+        });
+    });
+    </script>
 {% endblock %}

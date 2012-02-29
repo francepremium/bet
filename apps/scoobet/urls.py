@@ -5,7 +5,7 @@ import views
 urlpatterns = patterns('scoobet.views',
     url(
         r'leaderboard/$',
-        views.homepage,
+        views.leaderboard,
         name='scoobet_leaderboard',
     ),
     url(

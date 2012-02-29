@@ -12,9 +12,8 @@ handler500 = "pinax.views.server_error"
 urlpatterns = patterns("",
     url(
         r'^$',
-        'django.views.generic.simple.redirect_to', {
-            'url': '/misc/feed/friends/',
-        }, name='home'
+        'scoobet.views.homepage',
+        name='home',
     ),
     #url(r"^$", 'scoobet.views.homepage', {
     #}, name="home"),
