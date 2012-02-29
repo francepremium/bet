@@ -468,9 +468,11 @@ table.bettype table.choices {
 		}
 
         $(document).ready(function() {
+            {% if request.user.is_authenticated %}
             Subscription.factory('{% url subscription_dropdown_ajax %}', '{% url subscription_dropdown_open %}', {
                 'delay': 3500,
             });
+            {% endif %}
 
             var comments = $('div.comments');
             if (comments.length == 1) {

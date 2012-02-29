@@ -35,12 +35,14 @@ DEFAULT_TEMPLATE = 'default.html'
 
 MIDDLEWARE_CLASSES = [
     'localeurl.middleware.LocaleURLMiddleware',
+    'johnny.middleware.LocalStoreClearMiddleware',
+    'johnny.middleware.QueryCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'beta.middleware.LoginMiddleware',
+    #'beta.middleware.LoginMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
@@ -178,6 +180,15 @@ HAYSTACK_ENABLE_REGISTRATION = False
 SUBSCRIPTION_BACKENDS = {
     'storage': 'subscription.examples.yourlabs.backends.RedisBackend',
 }
+
+CACHES = {
+    'default' : dict(
+        BACKEND = 'johnny.backends.memcached.MemcachedCache',
+        LOCATION = ['127.0.0.1:11211'],
+        JOHNNY_CACHE = True,
+    )
+}
+JOHNNY_MIDDLEWARE_KEY_PREFIX='bet'
 
 from yourlabs.setup import Setup
 setup = Setup(globals())

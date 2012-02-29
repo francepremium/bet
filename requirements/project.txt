@@ -53,3 +53,5 @@ django-taggit
 -e git+git@github.com:yourlabs/yourlabs.git#egg=yourlabs
 -e git+git@github.com:yourlabs/django-subscription.git#egg=subscription
 -e hg+https://bitbucket.org/funkybob/gnocchi-cms#egg=cms
+johnny-cache
+python-memcached
