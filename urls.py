@@ -12,9 +12,8 @@ handler500 = "pinax.views.server_error"
 urlpatterns = patterns("",
     url(
         r'^$',
-        'django.views.generic.simple.redirect_to', {
-            'url': '/misc/feed/friends/',
-        }, name='home'
+        'scoobet.views.homepage',
+        name='home',
     ),
     #url(r"^$", 'scoobet.views.homepage', {
     #}, name="home"),
@@ -29,6 +28,7 @@ urlpatterns = patterns("",
     url(r"^article/", include('article.urls')),
     url(r'^actstream/detail/(?P<action_id>\d+)/$', 'scoobet.views.action_detail', name='actstream_detail'),
     url(r"^actstream/", include('actstream.urls')),
+    url(r"^rosetta/", include('rosetta.urls')),
     url(r"^bookmaker/", include('bookmaker.urls')),
     url(r"^account/", include('pinax.apps.account.urls')),
     url(r"^localeurl/", include('localeurl.urls')),

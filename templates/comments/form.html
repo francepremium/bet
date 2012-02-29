@@ -1,6 +1,7 @@
 {% load comments i18n %}
 {% load avatar_tags %}
 <div class="comment_form_container">
+    {% if request.user.is_authenticated %}
     <form action="{% comment_form_target %}" method="post">{% csrf_token %}
       {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
 
@@ -38,4 +39,7 @@
         <!--<input type="submit" name="preview" class="submit-preview" value="{% trans "Preview" %}" />-->
       </p>
     </form>
+    {% else %}
+    <a href="{% url acct_signup %}">{% trans 'Sign up' %}</a> {% trans 'and post a comment' %}
+    {% endif %}
 </div>
