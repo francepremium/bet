@@ -2,31 +2,31 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-23 15:46+0100\n"
-"PO-Revision-Date: 2012-02-24 16:40+0100\n"
-"Last-Translator: David <dav.bellaiche@gmail.com>\n"
+"POT-Creation-Date: 2012-02-29 13:50+0100\n"
+"PO-Revision-Date: 2012-02-29 13:56\n"
+"Last-Translator: John Anthony <johnanthony.fr2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
+"X-Translated-Using: django-rosetta 0.6.5\n"
 
-#: settings.py:165
+#: settings.py:166
 msgid "English"
 msgstr "anglais"
 
-#: settings.py:166
+#: settings.py:167
 msgid "French"
 msgstr "français"
 
-#: apps/ajax_select/fields.py:81
-#: apps/ajax_select/fields.py:182
+#: apps/ajax_select/fields.py:81 apps/ajax_select/fields.py:182
 #: apps/ajax_select/fields.py:244
 msgid "Enter text to search."
 msgstr "entrez le texte à rechercher."
@@ -47,15 +47,14 @@ msgstr "article %s mis à jour"
 
 #: apps/article/views.py:37
 msgid "Not your article, and you are not staff"
-msgstr "ce n'est pas votre article, et vous ne faiîtes pas partie des modérateurs"
+msgstr ""
+"ce n'est pas votre article, et vous ne faiîtes pas partie des modérateurs"
 
-#: apps/bet/filters.py:37
-#: templates/bet/base.html:16
+#: apps/bet/filters.py:37 templates/bet/base.html:16
 msgid "all"
 msgstr "tous les membres"
 
-#: apps/bet/filters.py:38
-#: templates/bet/base.html:12
+#: apps/bet/filters.py:38 templates/bet/base.html:12
 msgid "friends"
 msgstr "mes amis"
 
@@ -64,40 +63,54 @@ msgid "who I follow"
 msgstr "Mes abonnements"
 
 #: apps/bet/forms.py:30
-msgid "there is already a pronostic for this match in this combined bet. Please choose another match"
-msgstr "vous avez déjà établi un pari pour cette rencontre dans ce ticket. Veuillez choisir un autre match"
+msgid ""
+"there is already a pronostic for this match in this combined bet. Please "
+"choose another match"
+msgstr ""
+"vous avez déjà établi un pari pour cette rencontre dans ce ticket. Veuillez "
+"choisir un autre match"
 
 #: apps/bet/forms.py:37
 msgid "odds must be at least equal to 1.00"
 msgstr "la cote du pari doit être au moins égale à 1.00"
 
-#: apps/bet/models.py:128
+#: apps/bet/models.py:116 apps/bet/models.py.BACKUP.27490.py:153
+#: apps/bet/models.py.BASE.27490.py:104 apps/bet/models.py.LOCAL.27490.py:130
+#: apps/bet/models.py.REMOTE.27490.py:116
 msgid "incomplete"
 msgstr "incomplet"
 
-#: apps/bet/models.py:129
+#: apps/bet/models.py:117 apps/bet/models.py.BACKUP.27490.py:154
+#: apps/bet/models.py.BASE.27490.py:105 apps/bet/models.py.LOCAL.27490.py:131
+#: apps/bet/models.py.REMOTE.27490.py:117
 msgid "done"
 msgstr "effectué"
 
-#: apps/bet/models.py:237
+#: apps/bet/models.py:225 apps/bet/models.py.BACKUP.27490.py:262
+#: apps/bet/models.py.BASE.27490.py:213 apps/bet/models.py.LOCAL.27490.py:239
+#: apps/bet/models.py.REMOTE.27490.py:225
 msgid "waiting"
 msgstr "en attente"
 
-#: apps/bet/models.py:238
-#: templates/auth/user_stats.html:24
+#: apps/bet/models.py:226 apps/bet/models.py.BACKUP.27490.py:263
+#: apps/bet/models.py.BASE.27490.py:214 apps/bet/models.py.LOCAL.27490.py:240
+#: apps/bet/models.py.REMOTE.27490.py:226 templates/auth/user_stats.html:24
 #: templates/auth/user_stats.html.py:156
 #: templates/auth/_includes/rankings_table.html:7
 msgid "won"
 msgstr "Gagné"
 
-#: apps/bet/models.py:239
-#: templates/auth/user_stats.html:28
+#: apps/bet/models.py:227 apps/bet/models.py.BACKUP.27490.py:264
+#: apps/bet/models.py.BASE.27490.py:215 apps/bet/models.py.LOCAL.27490.py:241
+#: apps/bet/models.py.REMOTE.27490.py:227 templates/auth/user_stats.html:28
 #: templates/auth/user_stats.html.py:157
 #: templates/gsm/_includes/resultstable.html:15
 msgid "lost"
 msgstr "Perdu"
 
-#: apps/bet/models.py:240
+#: apps/bet/models.py:228 apps/bet/models.py.BACKUP.27490.py:265
+#: apps/bet/models.py.BASE.27490.py:216 apps/bet/models.py.LOCAL.27490.py:242
+#: apps/bet/models.py.REMOTE.27490.py:228
 msgid "canceled"
 msgstr "Annulé"
 
@@ -129,25 +142,23 @@ msgstr "pari sauvegardé et ticket clos"
 msgid "float/decimal"
 msgstr "décimal"
 
-#: apps/bookmaker/models.py:54
-#: apps/gsm/views.py:417
+#: apps/bookmaker/models.py:54 apps/gsm/views.py:417
 msgid "player"
 msgstr "joueur"
 
-#: apps/bookmaker/models.py:55
-#: templates/bet/_includes/bet_list_table.html:112
+#: apps/bookmaker/models.py:55 templates/bet/_includes/bet_list_table.html:112
 msgid "text"
 msgstr "texte"
 
-#: apps/bookmaker/views.py:82
-#: apps/bookmaker/views.py:106
+#: apps/bookmaker/views.py:82 apps/bookmaker/views.py:106
 msgid "bookmaker profile updated"
 msgstr "profil "
 
 #: apps/bookmaker/views.py:202
 #, python-format
 msgid "bet type %(bettype)s created and assigned to bookmaker %(bookmaker)s"
-msgstr "le type de pari %(bettype)s a été créé et assigné au bookmaker %(bookmaker)s"
+msgstr ""
+"le type de pari %(bettype)s a été créé et assigné au bookmaker %(bookmaker)s"
 
 #: apps/bookmaker/views.py:207
 #, python-format
@@ -167,17 +178,24 @@ msgstr "le bookmaker %s possède déjà ce type de pari : inutile de l'ajouter"
 #: apps/bookmaker/views.py:279
 #, python-format
 msgid "successfully added bet type %(bettype)s to bookmaker %(bookmaker)s"
-msgstr "vous avez ajouté avec succès le type de pari %(bettype)s au bookmaker %(bookmaker)s"
+msgstr ""
+"vous avez ajouté avec succès le type de pari %(bettype)s au bookmaker "
+"%(bookmaker)s"
 
 #: apps/bookmaker/views.py:287
 #, python-format
 msgid "successfully removed bet type %(bettype)s from bookmaker %(bookmaker)s"
-msgstr "vous avez retiré avec succès le type de pari %(bettype)s du bookmaker %(bookmaker)s"
+msgstr ""
+"vous avez retiré avec succès le type de pari %(bettype)s du bookmaker "
+"%(bookmaker)s"
 
 #: apps/bookmaker/views.py:294
 #, python-format
-msgid "bookmaker %(bookmaker)s does not bet type %(bettype)s: no need to remove"
-msgstr "le bookmaker %(bookmaker)s ne possède pas le type de pari %(bettype)s: inutile de le supprimer"
+msgid ""
+"bookmaker %(bookmaker)s does not bet type %(bettype)s: no need to remove"
+msgstr ""
+"le bookmaker %(bookmaker)s ne possède pas le type de pari %(bettype)s: "
+"inutile de le supprimer"
 
 #: apps/clan/models.py:14
 msgid "public"
@@ -225,8 +243,12 @@ msgstr "vous avez rejoint le groupe %s"
 
 #: apps/clan/views.py:66
 #, python-format
-msgid "you have requested to join clan %s. A clan administrator will approve or reject your application"
-msgstr "vous avez demandé à rejoindre le groupe %s. Un administrateur du groupe va approuver ou rejeter votre demande"
+msgid ""
+"you have requested to join clan %s. A clan administrator will approve or "
+"reject your application"
+msgstr ""
+"vous avez demandé à rejoindre le groupe %s. Un administrateur du groupe va "
+"approuver ou rejeter votre demande"
 
 #: apps/clan/views.py:77
 #, python-format
@@ -236,7 +258,9 @@ msgstr "vous ne faites pas partie du groupe %s"
 #: apps/clan/views.py:81
 #, python-format
 msgid "you may not leave clan %s because you are the only admin"
-msgstr "vous ne pouvez pas quitter le groupe %s car vous en êtes le seul administrateur"
+msgstr ""
+"vous ne pouvez pas quitter le groupe %s car vous en êtes le seul "
+"administrateur"
 
 #: apps/clan/views.py:85
 #, python-format
@@ -255,11 +279,15 @@ msgstr "vous n'êtes pas un administrateur du groupe %s"
 
 #: apps/clan/views.py:105
 msgid "you may not kick an admin, he must quit by himself"
-msgstr "vous ne pouvez pas supprimer un administrateur, il doit quitter le groupe par lui-même."
+msgstr ""
+"vous ne pouvez pas supprimer un administrateur, il doit quitter le groupe "
+"par lui-même."
 
 #: apps/clan/views.py:110
 msgid "you may not kick a user from a public group, he must quit by himself"
-msgstr "vous ne pouvez pas supprimer un membre d'un groupe public, il doit quitter le groupe par lui-même."
+msgstr ""
+"vous ne pouvez pas supprimer un membre d'un groupe public, il doit quitter "
+"le groupe par lui-même."
 
 #: apps/clan/views.py:115
 #, python-format
@@ -286,8 +314,7 @@ msgid "create clan"
 msgstr "créer un groupe"
 
 #: apps/clan/templates/clan/clan_detail.html:11
-#: templates/article/article_detail.html:9
-#: templates/bet/bet_form.html:47
+#: templates/article/article_detail.html:9 templates/bet/bet_form.html:47
 #: templates/bookmaker/base.html:9
 msgid "edit"
 msgstr "éditer"
@@ -331,8 +358,7 @@ msgstr "demandes en cours"
 
 #: apps/clan/templates/clan/clan_form.html:8
 #: templates/article/article_form.html:8
-#: templates/bookmaker/edit_bet_type.html:29
-#: templates/bookmaker/form.html:7
+#: templates/bookmaker/edit_bet_type.html:29 templates/bookmaker/form.html:7
 msgid "save"
 msgstr "sauvegarder"
 
@@ -377,8 +403,7 @@ msgstr "vous avez indiqué que vous n'aimez plus"
 msgid "Advanced options"
 msgstr "Options avancées"
 
-#: apps/scoobet/models.py:149
-#: templates/activity/action.html:91
+#: apps/scoobet/models.py:149 templates/activity/action.html:91
 #: templates/activity/action.html.py:99
 msgid "started following"
 msgstr "est désormais abonné aux publications de"
@@ -397,304 +422,266 @@ msgid "Oopsie"
 msgstr "Oops"
 
 #: templates/error.html:9
-msgid "It's not your fault but our data provider is overloaded for the moment - and we don't have any cached version of the data you requested. Our techie has been notified but it's unlikely that he can do anything about it. Would you please try again later ?"
-msgstr "Les données sont actuellement indisponibles. Notre équipe fait tout son possible pour rétablir celles-ci."
+msgid ""
+"It's not your fault but our data provider is overloaded for the moment - and"
+" we don't have any cached version of the data you requested. Our techie has "
+"been notified but it's unlikely that he can do anything about it. Would you "
+"please try again later ?"
+msgstr ""
+"Les données sont actuellement indisponibles. Notre équipe fait tout son "
+"possible pour rétablir celles-ci."
 
 #: templates/error.html:13
-msgid "It's not your fault but it seems like we can't access to the data you're looking for ... Hopefully John has been notified and will see what's wrong with the provider."
-msgstr "Ce n'est pas votre faute, mais il semble que la page demandée est inaccessible. Heureusement, toute l'équipe de Betspire a été mise au courant de cette erreur et fera de son mieux pour la corriger."
+msgid ""
+"It's not your fault but it seems like we can't access to the data you're "
+"looking for ... Hopefully John has been notified and will see what's wrong "
+"with the provider."
+msgstr ""
+"Ce n'est pas votre faute, mais il semble que la page demandée est "
+"inaccessible. Heureusement, toute l'équipe de Betspire a été mise au courant"
+" de cette erreur et fera de son mieux pour la corriger."
 
 #: templates/error.html:17
-msgid "does not follow you. Therefore we cannot let you send him a private message."
-msgstr "n'est pas abonné à vos publications. Vous ne pouvez donc pas lui envoyer de message privé."
+msgid ""
+"does not follow you. Therefore we cannot let you send him a private message."
+msgstr ""
+"n'est pas abonné à vos publications. Vous ne pouvez donc pas lui envoyer de "
+"message privé."
 
 #: templates/error.html:23
 #, python-format
 msgid "You may not bet on %(session)s because it has already started."
-msgstr "Vous ne pouvez pas parier sur la rencontre %(session)s car celle-ci a déjà débuté."
+msgstr ""
+"Vous ne pouvez pas parier sur la rencontre %(session)s car celle-ci a déjà "
+"débuté."
 
-#: templates/homepage.html:5
-msgid "Welcome"
-msgstr "Bienvenue"
+#: templates/homepage.html:7
+msgid ""
+"Betspire, bet inspired - free picks and statistics on every sporting event "
+"in the world."
+msgstr ""
+"Betspire, votre réseau dédié aux pronostics sportifs ! Statistiques et "
+"pronostics gratuits et sur tous les matchs du moment"
 
-#: templates/homepage.html:9
-msgid "Leaderboad - Best sports tipsters ranked by profit and profitability"
-msgstr "Classement - Meilleurs pronostiqueurs sportifs classés par profit et rentabilité"
+#: templates/homepage.html:10
+msgid ""
+"Betspire is the ultimate social network for tipsters and sports lovers. Get "
+"all the stats you need to bet wisely, share all your predictions, follow the"
+" best tipsters and improve your winnings."
+msgstr ""
+"Betspire est le réseau social dédié aux pronostiqueurs. Obtenez toutes les "
+"statistiques dont vous avez besoin, partagez vos pronostics, suivez les "
+"meilleurs pronostiqueurs et augmentez vos gains aux paris sportifs !"
 
-#: templates/homepage.html:12
-msgid "Discover all the best sports tipsters and start following them to see their picks for free."
-msgstr "Découvrez tous les meilleurs pronostiqueurs sportifs et suivez les pour voir leurs pronostics gratuitement"
-
-#: templates/homepage.html:13
+#: templates/homepage.html:11 templates/leaderboard.html:11
 #: templates/session_bettype_detail.html:9
-#: templates/auth/user_activities.html:12
-#: templates/auth/user_file.html:9
-#: templates/auth/user_picks.html:10
-#: templates/auth/user_social.html:8
-#: templates/auth/user_stats.html:8
-#: templates/bet/bet_detail.html:9
-#: templates/bet/ticket_detail.html:8
-#: templates/bookmaker/file.html:10
-#: templates/bookmaker/picks.html:10
-#: templates/gsm/competition/base.html:11
+#: templates/auth/user_activities.html:12 templates/auth/user_file.html:9
+#: templates/auth/user_picks.html:10 templates/auth/user_social.html:8
+#: templates/auth/user_stats.html:8 templates/bet/bet_detail.html:9
+#: templates/bet/ticket_detail.html:8 templates/bookmaker/file.html:10
+#: templates/bookmaker/picks.html:10 templates/gsm/competition/base.html:11
 #: templates/gsm/competition/calendar.html:8
 #: templates/gsm/competition/home.html:8
-#: templates/gsm/competition/picks.html:9
+#: templates/gsm/competition/picks.html:10
 #: templates/gsm/competition/statistics.html:8
-#: templates/gsm/person/home.html:9
-#: templates/gsm/person/picks.html:9
-#: templates/gsm/session/home.html:9
-#: templates/gsm/session/picks.html:9
-#: templates/gsm/sport/competitions.html:8
-#: templates/gsm/sport/home.html:9
-#: templates/gsm/sport/matches.html:10
-#: templates/gsm/sport/picks.html:9
-#: templates/gsm/sport/rankings.html:9
-#: templates/gsm/team/calendar.html:9
-#: templates/gsm/team/home.html:10
-#: templates/gsm/team/picks.html:9
-#: templates/gsm/team/squad.html:12
-#: templates/gsm/team/statistics.html:9
+#: templates/gsm/person/home.html:9 templates/gsm/person/picks.html:9
+#: templates/gsm/session/home.html:9 templates/gsm/session/picks.html:9
+#: templates/gsm/sport/competitions.html:8 templates/gsm/sport/home.html:9
+#: templates/gsm/sport/matches.html:10 templates/gsm/sport/picks.html:9
+#: templates/gsm/sport/rankings.html:9 templates/gsm/team/calendar.html:9
+#: templates/gsm/team/home.html:10 templates/gsm/team/picks.html:9
+#: templates/gsm/team/squad.html:12 templates/gsm/team/statistics.html:9
 msgid "betting"
 msgstr ""
 
-#: templates/homepage.html:13
-#: templates/auth/user_activities.html:12
-#: templates/auth/user_file.html:9
-#: templates/auth/user_picks.html:10
-#: templates/auth/user_social.html:8
-#: templates/auth/user_stats.html:8
-#: templates/bookmaker/file.html:10
-#: templates/bookmaker/picks.html:10
-#: templates/gsm/competition/base.html:11
+#: templates/homepage.html:11 templates/leaderboard.html:11
+#: templates/auth/user_activities.html:12 templates/auth/user_file.html:9
+#: templates/auth/user_picks.html:10 templates/auth/user_social.html:8
+#: templates/auth/user_stats.html:8 templates/bookmaker/file.html:10
+#: templates/bookmaker/picks.html:10 templates/gsm/competition/base.html:11
 #: templates/gsm/competition/calendar.html:8
 #: templates/gsm/competition/home.html:8
-#: templates/gsm/competition/picks.html:9
+#: templates/gsm/competition/picks.html:10
 #: templates/gsm/competition/statistics.html:8
-#: templates/gsm/person/home.html:9
-#: templates/gsm/person/picks.html:9
-#: templates/gsm/session/home.html:9
-#: templates/gsm/session/picks.html:9
-#: templates/gsm/sport/competitions.html:8
-#: templates/gsm/sport/home.html:9
-#: templates/gsm/sport/matches.html:10
-#: templates/gsm/sport/picks.html:9
-#: templates/gsm/sport/rankings.html:9
-#: templates/gsm/team/calendar.html:9
-#: templates/gsm/team/home.html:10
-#: templates/gsm/team/picks.html:9
-#: templates/gsm/team/squad.html:12
-#: templates/gsm/team/statistics.html:9
+#: templates/gsm/person/home.html:9 templates/gsm/person/picks.html:9
+#: templates/gsm/session/home.html:9 templates/gsm/session/picks.html:9
+#: templates/gsm/sport/competitions.html:8 templates/gsm/sport/home.html:9
+#: templates/gsm/sport/matches.html:10 templates/gsm/sport/picks.html:9
+#: templates/gsm/sport/rankings.html:9 templates/gsm/team/calendar.html:9
+#: templates/gsm/team/home.html:10 templates/gsm/team/picks.html:9
+#: templates/gsm/team/squad.html:12 templates/gsm/team/statistics.html:9
 msgid "free picks"
 msgstr "pronostics"
 
-#: templates/homepage.html:13
+#: templates/homepage.html:11 templates/leaderboard.html:11
 #: templates/session_bettype_detail.html:9
-#: templates/auth/user_activities.html:12
-#: templates/auth/user_base.html:24
-#: templates/auth/user_file.html:9
-#: templates/auth/user_picks.html:10
-#: templates/auth/user_social.html:8
-#: templates/auth/user_stats.html:8
-#: templates/bet/bet_detail.html:9
-#: templates/bet/bet_detail.html.py:21
-#: templates/bet/bet_detail.html:27
-#: templates/bet/bet_detail.html.py:33
-#: templates/bet/bet_detail.html:54
-#: templates/bet/ticket_detail.html:8
-#: templates/bookmaker/base.html:15
-#: templates/bookmaker/file.html:10
-#: templates/bookmaker/picks.html:10
-#: templates/gsm/competition/base.html:11
+#: templates/auth/user_activities.html:12 templates/auth/user_base.html:24
+#: templates/auth/user_file.html:9 templates/auth/user_picks.html:10
+#: templates/auth/user_social.html:8 templates/auth/user_stats.html:8
+#: templates/bet/bet_detail.html:9 templates/bet/bet_detail.html.py:21
+#: templates/bet/bet_detail.html:27 templates/bet/bet_detail.html.py:33
+#: templates/bet/bet_detail.html:54 templates/bet/ticket_detail.html:8
+#: templates/bookmaker/base.html:15 templates/bookmaker/file.html:10
+#: templates/bookmaker/picks.html:10 templates/gsm/competition/base.html:11
 #: templates/gsm/competition/base.html:38
 #: templates/gsm/competition/calendar.html:8
 #: templates/gsm/competition/home.html:8
-#: templates/gsm/competition/picks.html:9
+#: templates/gsm/competition/picks.html:10
 #: templates/gsm/competition/statistics.html:8
-#: templates/gsm/person/base.html:24
-#: templates/gsm/person/home.html:9
-#: templates/gsm/person/picks.html:9
-#: templates/gsm/session/base.html:141
-#: templates/gsm/session/home.html:9
-#: templates/gsm/session/picks.html:9
-#: templates/gsm/sport/base.html:30
-#: templates/gsm/sport/competitions.html:8
-#: templates/gsm/sport/home.html:9
-#: templates/gsm/sport/matches.html:10
-#: templates/gsm/sport/picks.html:9
-#: templates/gsm/sport/rankings.html:9
-#: templates/gsm/team/base.html:38
-#: templates/gsm/team/calendar.html:9
-#: templates/gsm/team/home.html:10
-#: templates/gsm/team/picks.html:9
-#: templates/gsm/team/squad.html:12
-#: templates/gsm/team/statistics.html:9
+#: templates/gsm/person/base.html:24 templates/gsm/person/home.html:9
+#: templates/gsm/person/picks.html:9 templates/gsm/session/base.html:141
+#: templates/gsm/session/home.html:9 templates/gsm/session/picks.html:9
+#: templates/gsm/sport/base.html:30 templates/gsm/sport/competitions.html:8
+#: templates/gsm/sport/home.html:9 templates/gsm/sport/matches.html:10
+#: templates/gsm/sport/picks.html:9 templates/gsm/sport/rankings.html:9
+#: templates/gsm/team/base.html:38 templates/gsm/team/calendar.html:9
+#: templates/gsm/team/home.html:10 templates/gsm/team/picks.html:9
+#: templates/gsm/team/squad.html:12 templates/gsm/team/statistics.html:9
 msgid "picks"
 msgstr "pronostics"
 
-#: templates/homepage.html:13
+#: templates/homepage.html:11 templates/leaderboard.html:11
 #: templates/session_bettype_detail.html:9
-#: templates/auth/user_activities.html:12
-#: templates/auth/user_file.html:9
-#: templates/auth/user_picks.html:10
-#: templates/auth/user_social.html:8
-#: templates/auth/user_stats.html:8
-#: templates/bet/bet_detail.html:9
-#: templates/bet/ticket_detail.html:8
-#: templates/bookmaker/file.html:10
-#: templates/bookmaker/picks.html:10
-#: templates/gsm/competition/base.html:11
+#: templates/auth/user_activities.html:12 templates/auth/user_file.html:9
+#: templates/auth/user_picks.html:10 templates/auth/user_social.html:8
+#: templates/auth/user_stats.html:8 templates/bet/bet_detail.html:9
+#: templates/bet/ticket_detail.html:8 templates/bookmaker/file.html:10
+#: templates/bookmaker/picks.html:10 templates/gsm/competition/base.html:11
 #: templates/gsm/competition/calendar.html:8
 #: templates/gsm/competition/home.html:8
-#: templates/gsm/competition/picks.html:9
+#: templates/gsm/competition/picks.html:10
 #: templates/gsm/competition/statistics.html:8
-#: templates/gsm/person/home.html:9
-#: templates/gsm/person/picks.html:9
-#: templates/gsm/session/home.html:9
-#: templates/gsm/session/picks.html:9
-#: templates/gsm/sport/competitions.html:8
-#: templates/gsm/sport/home.html:9
-#: templates/gsm/sport/matches.html:10
-#: templates/gsm/sport/picks.html:9
-#: templates/gsm/sport/rankings.html:9
-#: templates/gsm/team/calendar.html:9
-#: templates/gsm/team/home.html:10
-#: templates/gsm/team/picks.html:9
-#: templates/gsm/team/squad.html:12
-#: templates/gsm/team/statistics.html:9
+#: templates/gsm/person/home.html:9 templates/gsm/person/picks.html:9
+#: templates/gsm/session/home.html:9 templates/gsm/session/picks.html:9
+#: templates/gsm/sport/competitions.html:8 templates/gsm/sport/home.html:9
+#: templates/gsm/sport/matches.html:10 templates/gsm/sport/picks.html:9
+#: templates/gsm/sport/rankings.html:9 templates/gsm/team/calendar.html:9
+#: templates/gsm/team/home.html:10 templates/gsm/team/picks.html:9
+#: templates/gsm/team/squad.html:12 templates/gsm/team/statistics.html:9
 msgid "pick"
 msgstr "pronostic"
 
-#: templates/homepage.html:13
-#: templates/auth/user_activities.html:12
-#: templates/auth/user_file.html:9
-#: templates/auth/user_picks.html:10
-#: templates/auth/user_social.html:8
-#: templates/auth/user_stats.html:8
-#: templates/bookmaker/file.html:10
-#: templates/bookmaker/picks.html:10
-#: templates/gsm/competition/base.html:11
+#: templates/homepage.html:11 templates/leaderboard.html:11
+#: templates/auth/user_activities.html:12 templates/auth/user_file.html:9
+#: templates/auth/user_picks.html:10 templates/auth/user_social.html:8
+#: templates/auth/user_stats.html:8 templates/bookmaker/file.html:10
+#: templates/bookmaker/picks.html:10 templates/gsm/competition/base.html:11
 #: templates/gsm/competition/calendar.html:8
 #: templates/gsm/competition/home.html:8
-#: templates/gsm/competition/picks.html:9
+#: templates/gsm/competition/picks.html:10
 #: templates/gsm/competition/statistics.html:8
-#: templates/gsm/person/home.html:9
-#: templates/gsm/person/picks.html:9
-#: templates/gsm/session/home.html:9
-#: templates/gsm/session/picks.html:9
-#: templates/gsm/sport/competitions.html:8
-#: templates/gsm/sport/home.html:9
-#: templates/gsm/sport/matches.html:10
-#: templates/gsm/sport/picks.html:9
-#: templates/gsm/sport/rankings.html:9
-#: templates/gsm/team/calendar.html:9
-#: templates/gsm/team/home.html:10
-#: templates/gsm/team/picks.html:9
-#: templates/gsm/team/squad.html:12
-#: templates/gsm/team/statistics.html:9
+#: templates/gsm/person/home.html:9 templates/gsm/person/picks.html:9
+#: templates/gsm/session/home.html:9 templates/gsm/session/picks.html:9
+#: templates/gsm/sport/competitions.html:8 templates/gsm/sport/home.html:9
+#: templates/gsm/sport/matches.html:10 templates/gsm/sport/picks.html:9
+#: templates/gsm/sport/rankings.html:9 templates/gsm/team/calendar.html:9
+#: templates/gsm/team/home.html:10 templates/gsm/team/picks.html:9
+#: templates/gsm/team/squad.html:12 templates/gsm/team/statistics.html:9
 #, fuzzy
 msgid "predictions"
 msgstr "compétitions"
 
-#: templates/homepage.html:13
+#: templates/homepage.html:11 templates/leaderboard.html:11
 #: templates/session_bettype_detail.html:9
-#: templates/auth/user_activities.html:12
-#: templates/auth/user_file.html:9
-#: templates/auth/user_picks.html:10
-#: templates/auth/user_social.html:8
-#: templates/auth/user_stats.html:8
-#: templates/bet/bet_detail.html:9
-#: templates/bet/ticket_detail.html:8
-#: templates/bookmaker/file.html:10
-#: templates/bookmaker/picks.html:10
-#: templates/gsm/competition/base.html:11
+#: templates/auth/user_activities.html:12 templates/auth/user_file.html:9
+#: templates/auth/user_picks.html:10 templates/auth/user_social.html:8
+#: templates/auth/user_stats.html:8 templates/bet/bet_detail.html:9
+#: templates/bet/ticket_detail.html:8 templates/bookmaker/file.html:10
+#: templates/bookmaker/picks.html:10 templates/gsm/competition/base.html:11
 #: templates/gsm/competition/calendar.html:8
 #: templates/gsm/competition/home.html:8
-#: templates/gsm/competition/picks.html:9
+#: templates/gsm/competition/picks.html:10
 #: templates/gsm/competition/statistics.html:8
-#: templates/gsm/person/home.html:9
-#: templates/gsm/person/picks.html:9
-#: templates/gsm/session/home.html:9
-#: templates/gsm/session/picks.html:9
-#: templates/gsm/sport/competitions.html:8
-#: templates/gsm/sport/home.html:9
-#: templates/gsm/sport/matches.html:10
-#: templates/gsm/sport/picks.html:9
-#: templates/gsm/sport/rankings.html:9
-#: templates/gsm/team/calendar.html:9
-#: templates/gsm/team/home.html:10
-#: templates/gsm/team/picks.html:9
-#: templates/gsm/team/squad.html:12
-#: templates/gsm/team/statistics.html:9
+#: templates/gsm/person/home.html:9 templates/gsm/person/picks.html:9
+#: templates/gsm/session/home.html:9 templates/gsm/session/picks.html:9
+#: templates/gsm/sport/competitions.html:8 templates/gsm/sport/home.html:9
+#: templates/gsm/sport/matches.html:10 templates/gsm/sport/picks.html:9
+#: templates/gsm/sport/rankings.html:9 templates/gsm/team/calendar.html:9
+#: templates/gsm/team/home.html:10 templates/gsm/team/picks.html:9
+#: templates/gsm/team/squad.html:12 templates/gsm/team/statistics.html:9
 msgid "prediction"
 msgstr "prédiction"
 
-#: templates/homepage.html:19
-#: templates/site_base.html:211
+#: templates/leaderboard.html:7
+msgid "Leaderboad - Best sports tipsters ranked by profit and profitability"
+msgstr ""
+"Classement - Meilleurs pronostiqueurs sportifs classés par profit et "
+"rentabilité"
+
+#: templates/leaderboard.html:10
+msgid ""
+"Discover all the best sports tipsters and start following them to see their "
+"picks for free."
+msgstr ""
+"Découvrez tous les meilleurs pronostiqueurs sportifs et suivez les pour voir"
+" leurs pronostics gratuitement"
+
+#: templates/leaderboard.html:17 templates/site_base.html:211
 msgid "leaderboard"
 msgstr "classement"
 
-#: templates/homepage.html:22
+#: templates/leaderboard.html:20
 msgid "by profit"
 msgstr "par profit"
 
-#: templates/homepage.html:25
-#: templates/homepage.html.py:55
+#: templates/leaderboard.html:23 templates/leaderboard.html.py:53
 msgid "picker"
 msgstr "pronostics"
 
-#: templates/homepage.html:26
-#: templates/homepage.html.py:56
+#: templates/leaderboard.html:24 templates/leaderboard.html.py:54
 #: templates/auth/user_stats.html:58
 msgid "profitability"
 msgstr "rentabilité"
 
-#: templates/homepage.html:27
-#: templates/homepage.html.py:57
+#: templates/leaderboard.html:25 templates/leaderboard.html.py:55
 #: templates/activity/action.html:127
 #: templates/auth/_includes/rankings_table.html:6
 msgid "bets"
 msgstr "paris"
 
-#: templates/homepage.html:28
-#: templates/homepage.html.py:58
+#: templates/leaderboard.html:26 templates/leaderboard.html.py:56
 msgid "profit"
 msgstr "profit"
 
-#: templates/homepage.html:48
+#: templates/leaderboard.html:46
 msgid "user count"
 msgstr "nombre d'utilisateurs"
 
-#: templates/homepage.html:52
+#: templates/leaderboard.html:50
 msgid "by profitability"
 msgstr "par rentabilité"
 
-#: templates/homepage.html:78
+#: templates/leaderboard.html:76
 #, fuzzy
 msgid "pending email confirmations"
 msgstr "demandes en cours"
 
 #: templates/session_bettype_detail.html:5
 #: templates/gsm/competition/base.html:7
-msgid "Free betting picks, best tipser, live scores, news, results, rankings & fixtures"
-msgstr "Pronostics gratuits, meilleurs pronostiqueurs, scores en direct, actualités, résultats, classements et prochains matchs."
+msgid ""
+"Free betting picks, best tipser, live scores, news, results, rankings & "
+"fixtures"
+msgstr ""
+"Pronostics gratuits, meilleurs pronostiqueurs, scores en direct, actualités,"
+" résultats, classements et prochains matchs."
 
-#: templates/session_bettype_detail.html:8
-#: templates/gsm/sport/home.html:8
+#: templates/session_bettype_detail.html:8 templates/gsm/sport/home.html:8
 #, python-format
-msgid "Get everything to bet and win on %(sport)s like a pro! From news and statistics to the free picks of best %(sport)s tipsers."
-msgstr "Obtenez tout ce dont vous avez besoin pour parier et gagner sur %(sport)s comme un pro ! Des actualites aux statistiques, en passant par les pronostics gratuis de nos meilleurs parieurs %(sport)s."
+msgid ""
+"Get everything to bet and win on %(sport)s like a pro! From news and "
+"statistics to the free picks of best %(sport)s tipsers."
+msgstr ""
+"Obtenez tout ce dont vous avez besoin pour parier et gagner sur %(sport)s "
+"comme un pro ! Des actualites aux statistiques, en passant par les "
+"pronostics gratuis de nos meilleurs parieurs %(sport)s."
 
-#: templates/session_bettype_detail.html:9
-#: templates/bet/bet_detail.html:9
-#: templates/bet/bet_detail.html.py:64
-#: templates/bet/ticket_detail.html:8
+#: templates/session_bettype_detail.html:9 templates/bet/bet_detail.html:9
+#: templates/bet/bet_detail.html.py:64 templates/bet/ticket_detail.html:8
 #: templates/bet/_includes/bet_list_table.html:31
 msgid "bet"
 msgstr "pari"
 
-#: templates/session_bettype_detail.html:45
-#: templates/auth/user_stats.html:154
+#: templates/session_bettype_detail.html:45 templates/auth/user_stats.html:154
 msgid "choice share"
 msgstr ""
 
@@ -702,15 +689,13 @@ msgstr ""
 msgid "numbers of bets"
 msgstr "nombre de paris"
 
-#: templates/session_bettype_detail.html:68
-#: templates/bet/bet_detail.html:48
+#: templates/session_bettype_detail.html:68 templates/bet/bet_detail.html:48
 #: templates/bet/_includes/bet_list_table.html:46
 #: templates/bet/_includes/ticket_list_table.html:32
 msgid "result"
 msgstr "résultat"
 
-#: templates/session_bettype_detail.html:74
-#: templates/bet/bet_form.html:82
+#: templates/session_bettype_detail.html:74 templates/bet/bet_form.html:82
 #: templates/bet/_includes/bet_list_table.html:34
 msgid "choice"
 msgstr "choix"
@@ -723,13 +708,11 @@ msgstr "compte"
 msgid "read all"
 msgstr "lire tout"
 
-#: templates/site_base.html:114
-#: templates/site_base.html.py:275
+#: templates/site_base.html:114 templates/site_base.html.py:275
 msgid "logout"
 msgstr "Déconnexion"
 
-#: templates/site_base.html:127
-#: templates/site_base.html.py:409
+#: templates/site_base.html:127 templates/site_base.html.py:409
 msgid "clear"
 msgstr "effacer"
 
@@ -849,7 +832,9 @@ msgstr "statistiques"
 
 #: templates/site_base.html:272
 msgid "Your account settings: timezone, email, password, avatar ..."
-msgstr "Paramètres de votre compte : fuseau horaire, adresse e-mail, mot de passe, photo de profil"
+msgstr ""
+"Paramètres de votre compte : fuseau horaire, adresse e-mail, mot de passe, "
+"photo de profil"
 
 #: templates/site_base.html:272
 msgid "settings"
@@ -872,21 +857,22 @@ msgstr "Comment ?"
 msgid "publication:"
 msgstr "publier"
 
-#: templates/site_base.html:315
-#: templates/activity/action.html:65
-#: templates/bet/bet_detail.html:14
-#: templates/bet/ticket_detail.html:11
+#: templates/site_base.html:315 templates/activity/action.html:65
+#: templates/bet/bet_detail.html:14 templates/bet/ticket_detail.html:11
 msgid "ticket"
 msgstr "ticket"
 
-#: templates/site_base.html:316
-#: templates/bet/ticket_detail.html:24
+#: templates/site_base.html:316 templates/bet/ticket_detail.html:24
 msgid "status"
 msgstr "statut"
 
 #: templates/site_base.html:321
-msgid "You have an openned ticket. It will open automatically here. Please finish it and/or close it."
-msgstr "Vous avez un ticket en cours de création, cette fenêtre s'ouvrira automatiquement. Veuiller terminer et/ou fermer ce ticket."
+msgid ""
+"You have an openned ticket. It will open automatically here. Please finish "
+"it and/or close it."
+msgstr ""
+"Vous avez un ticket en cours de création, cette fenêtre s'ouvrira "
+"automatiquement. Veuiller terminer et/ou fermer ce ticket."
 
 #: templates/site_base.html:371
 msgid "loading page"
@@ -897,24 +883,40 @@ msgid "searching for"
 msgstr "recherche"
 
 #: templates/site_base.html:389
-msgid "Search : a match, a player, a team, a competition / a friend, a clan..."
-msgstr "Recherchez ici un match, une équipe, une compétition, un parieur, un bookmaker..."
+msgid ""
+"Search : a match, a player, a team, a competition / a friend, a clan..."
+msgstr ""
+"Recherchez ici un match, une équipe, une compétition, un parieur, un "
+"bookmaker..."
 
 #: templates/site_base.html:396
-msgid "Sorry, our program failed to process your request. Our techie has been notified by email and will take care of it soonish"
-msgstr "Désolé, nous ne pouvons pas executer votre demande. Notre technicien vient d'être averti et fait de son mieux pour corriger le tir."
+msgid ""
+"Sorry, our program failed to process your request. Our techie has been "
+"notified by email and will take care of it soonish"
+msgstr ""
+"Désolé, nous ne pouvons pas executer votre demande. Notre technicien vient "
+"d'être averti et fait de son mieux pour corriger le tir."
 
-#: templates/site_base.html:572
+#: templates/site_base.html:574
 msgid "Do you want to"
 msgstr "voulez-vous"
 
-#: templates/site_base.html:712
-msgid "Are you sure you want to report an error either in the odds or correction of this bet ?"
-msgstr "Etes vous sûrs de vouloir reporter une erreur sur la cote ou la correction de ce pari ?"
+#: templates/site_base.html:714
+msgid ""
+"Are you sure you want to report an error either in the odds or correction of"
+" this bet ?"
+msgstr ""
+"Etes vous sûrs de vouloir reporter une erreur sur la cote ou la correction "
+"de ce pari ?"
 
-#: templates/site_base.html:720
-msgid "Thanks for reporting an error in this bet. Our staff will check both the odds and the correction of this bet. If you want to report another error, please contact us."
-msgstr "Merci d'avoir reporté une erreur sur ce pari. Notre équipe s'occupe dès que possible de la correction de celle-ci."
+#: templates/site_base.html:722
+msgid ""
+"Thanks for reporting an error in this bet. Our staff will check both the "
+"odds and the correction of this bet. If you want to report another error, "
+"please contact us."
+msgstr ""
+"Merci d'avoir reporté une erreur sur ce pari. Notre équipe s'occupe dès que "
+"possible de la correction de celle-ci."
 
 #: templates/account/base.html:11
 msgid "E-Mail Addresses"
@@ -960,7 +962,8 @@ msgstr "vous êtes déjà identifié en tant que %(user_display)s"
 #: templates/account/login.html:20
 #, python-format
 msgid "Don't have an account? <a href=\"%(signup_url)s\">Sign up</a>!"
-msgstr "Vous n'avez pas de compter ? <a href=\"%(signup_url)s\">Inscrivez-vous</a>!"
+msgstr ""
+"Vous n'avez pas de compter ? <a href=\"%(signup_url)s\">Inscrivez-vous</a>!"
 
 #: templates/account/login.html:29
 msgid "Forgot password?"
@@ -972,8 +975,13 @@ msgstr "S'identifier &raquo;"
 
 #: templates/account/login.html:41
 #, python-format
-msgid "If you have any trouble logging in to your account, contact us at <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
-msgstr "Si vous rencontrez le moindre soucis pour accéder à votre compte, n'hésitez pas à nous contacter sur <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+msgid ""
+"If you have any trouble logging in to your account, contact us at <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+msgstr ""
+"Si vous rencontrez le moindre soucis pour accéder à votre compte, n'hésitez "
+"pas à nous contacter sur <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
 
 #: templates/account/logout.html:5
 #, fuzzy
@@ -1032,8 +1040,7 @@ msgstr "ses"
 msgid "status update"
 msgstr "statut mis à jour"
 
-#: templates/activity/action.html:58
-#: templates/bet/bet_detail.html:14
+#: templates/activity/action.html:58 templates/bet/bet_detail.html:14
 msgid "by"
 msgstr "de"
 
@@ -1049,8 +1056,7 @@ msgstr "article mis à jour"
 msgid "created article"
 msgstr "article créé"
 
-#: templates/activity/action.html:83
-#: templates/activity/action.html.py:94
+#: templates/activity/action.html:83 templates/activity/action.html.py:94
 #: templates/comments/preview.html:16
 msgid "and"
 msgstr "et"
@@ -1060,13 +1066,11 @@ msgstr "et"
 msgid "all started following"
 msgstr "est désormais abonné aux publications de"
 
-#: templates/activity/action.html:105
-#: templates/activity/action.html.py:115
+#: templates/activity/action.html:105 templates/activity/action.html.py:115
 msgid "published"
 msgstr "a publié un"
 
-#: templates/activity/action.html:106
-#: templates/bet/bet_detail.html:73
+#: templates/activity/action.html:106 templates/bet/bet_detail.html:73
 msgid "combined ticket"
 msgstr "ticket combiné"
 
@@ -1074,10 +1078,8 @@ msgstr "ticket combiné"
 msgid "including"
 msgstr "dont"
 
-#: templates/activity/action.html:107
-#: templates/gsm/person/base.html:20
-#: templates/gsm/person/matches.html:9
-#: templates/gsm/sport/base.html:27
+#: templates/activity/action.html:107 templates/gsm/person/base.html:20
+#: templates/gsm/person/matches.html:9 templates/gsm/sport/base.html:27
 #: templates/scoobet/autocomplete.html:20
 msgid "matches"
 msgstr "matchs"
@@ -1090,13 +1092,11 @@ msgstr "ticket simple"
 msgid "on match"
 msgstr "sur la rencontre"
 
-#: templates/activity/action.html:125
-#: templates/activity/action.html.py:140
+#: templates/activity/action.html:125 templates/activity/action.html.py:140
 msgid "corrected"
 msgstr "a corrigé"
 
-#: templates/activity/action.html:126
-#: templates/activity/action.html.py:141
+#: templates/activity/action.html:126 templates/activity/action.html.py:141
 #: templates/bet/_includes/bet_list_table.html:49
 msgid "flagged"
 msgstr "a signalé"
@@ -1119,13 +1119,15 @@ msgstr "profil de parieur : statistiques, pronostics et activités"
 
 #: templates/auth/user_activities.html:11
 #, python-format
-msgid "Sign up for Betspire to start following %(User)s to see all sports picks and predictions from this tipster!"
-msgstr "Inscrivez-vous sur Betspire et suivez %(User)s pour voir tous ses pronostics sportifs, ses conseils et "
+msgid ""
+"Sign up for Betspire to start following %(User)s to see all sports picks and"
+" predictions from this tipster!"
+msgstr ""
+"Inscrivez-vous sur Betspire et suivez %(User)s pour voir tous ses pronostics"
+" sportifs, ses conseils et "
 
-#: templates/auth/user_activities.html:29
-#: templates/comments/form.html:37
-#: templates/comments/preview.html:32
-#: templates/scoobet/status_add.html:13
+#: templates/auth/user_activities.html:29 templates/comments/form.html:37
+#: templates/comments/preview.html:32 templates/scoobet/status_add.html:13
 msgid "Post"
 msgstr "publier"
 
@@ -1149,8 +1151,7 @@ msgstr "amis"
 msgid "file of"
 msgstr "intérêts de"
 
-#: templates/auth/user_base.html:18
-#: templates/bookmaker/base.html:14
+#: templates/auth/user_base.html:18 templates/bookmaker/base.html:14
 #: templates/gsm/person/base.html:10
 msgid "file"
 msgstr "intérêts"
@@ -1159,10 +1160,8 @@ msgstr "intérêts"
 msgid "statistics of"
 msgstr "statistiques de"
 
-#: templates/auth/user_base.html:21
-#: templates/gsm/competition/base.html:31
-#: templates/gsm/team/base.html:31
-#: templates/gsm/team/squad.html:29
+#: templates/auth/user_base.html:21 templates/gsm/competition/base.html:31
+#: templates/gsm/team/base.html:31 templates/gsm/team/squad.html:29
 msgid "statistics"
 msgstr "Statistiques"
 
@@ -1170,8 +1169,7 @@ msgstr "Statistiques"
 msgid "picks of"
 msgstr "pronostics"
 
-#: templates/auth/user_base.html:47
-#: templates/auth/user_social.html:38
+#: templates/auth/user_base.html:47 templates/auth/user_social.html:38
 msgid "following"
 msgstr "abonné"
 
@@ -1185,8 +1183,12 @@ msgstr "Sports et paris favoris"
 
 #: templates/auth/user_file.html:8
 #, python-format
-msgid "See what %(User)s likes to bet on, and start showing your interests to other tipsters. "
-msgstr "Découvrez sur quels sports, ligues, équipes (...)  %(User)s aime parier et montrez aux autres pronostiqueurs vos pronostics favoris."
+msgid ""
+"See what %(User)s likes to bet on, and start showing your interests to other"
+" tipsters. "
+msgstr ""
+"Découvrez sur quels sports, ligues, équipes (...)  %(User)s aime parier et "
+"montrez aux autres pronostiqueurs vos pronostics favoris."
 
 #: templates/auth/user_file.html:17
 #, fuzzy
@@ -1216,15 +1218,18 @@ msgstr "joueurs"
 msgid "%(object)s has not liked anything yet"
 msgstr "%(object)s n'a pas encore dévoilé ses passions sportives."
 
-#: templates/auth/user_picks.html:6
-#: templates/bookmaker/picks.html:6
+#: templates/auth/user_picks.html:6 templates/bookmaker/picks.html:6
 msgid "Sports Picks, predictions, advices, analysis"
 msgstr "Pronostics sportifs, prédictions, conseils, analyses."
 
 #: templates/auth/user_picks.html:9
 #, python-format
-msgid "See all sports picks from %(User)s and get some inspiration for your personal bets. Earn money thanks to %(User)s!"
-msgstr "Regardez tous les pronostics sportifs de %(User)s et prenez de l'inspiration pour vos propres paris. Gagnez de l'argent grâce à  %(User)s!"
+msgid ""
+"See all sports picks from %(User)s and get some inspiration for your "
+"personal bets. Earn money thanks to %(User)s!"
+msgstr ""
+"Regardez tous les pronostics sportifs de %(User)s et prenez de l'inspiration"
+" pour vos propres paris. Gagnez de l'argent grâce à  %(User)s!"
 
 #: templates/auth/user_social.html:4
 msgid "Tipster's network"
@@ -1232,8 +1237,14 @@ msgstr "réseau du pronostiqueur"
 
 #: templates/auth/user_social.html:7
 #, python-format
-msgid "%(object)s is on Betspire and already has a great network of sports tipsters! Like %(object)s, make your own tipster network and improve your betting earnings."
-msgstr "%(object)s est sur Betspire et a déjà  un réseau performant de pronostiqueurs sportifs! Comme %(object)s, tissez votre réseau de pronostiqueurs et augmentez vos gains aux paris sportifs."
+msgid ""
+"%(object)s is on Betspire and already has a great network of sports "
+"tipsters! Like %(object)s, make your own tipster network and improve your "
+"betting earnings."
+msgstr ""
+"%(object)s est sur Betspire et a déjà  un réseau performant de "
+"pronostiqueurs sportifs! Comme %(object)s, tissez votre réseau de "
+"pronostiqueurs et augmentez vos gains aux paris sportifs."
 
 #: templates/auth/user_social.html:41
 msgid "follows"
@@ -1246,8 +1257,12 @@ msgstr "statistiques"
 
 #: templates/auth/user_stats.html:7
 #, python-format
-msgid "Check out %(User)s's statistics on Betspire and see what type of tipster %(User)s is!"
-msgstr "Consultez gratuitement les performances de %(User)s sur Betspire et suivez ses pronostics !"
+msgid ""
+"Check out %(User)s's statistics on Betspire and see what type of tipster "
+"%(User)s is!"
+msgstr ""
+"Consultez gratuitement les performances de %(User)s sur Betspire et suivez "
+"ses pronostics !"
 
 #: templates/auth/user_stats.html:17
 msgid "did not place any ticket that was fully corrected yet"
@@ -1301,18 +1316,15 @@ msgstr "cote moyenne"
 msgid "more tips by tipster"
 msgstr "ses autres pronostics"
 
-#: templates/avatar/add.html:5
-#: templates/avatar/change.html:5
+#: templates/avatar/add.html:5 templates/avatar/change.html:5
 msgid "Your current avatar: "
 msgstr "Votre avatar actuel :"
 
-#: templates/avatar/add.html:8
-#: templates/avatar/change.html:8
+#: templates/avatar/add.html:8 templates/avatar/change.html:8
 msgid "You haven't uploaded an avatar yet. Please upload one now."
 msgstr "Vous n'avez pas encore d'avatar. Veuiller en définir un."
 
-#: templates/avatar/add.html:12
-#: templates/avatar/change.html:19
+#: templates/avatar/add.html:12 templates/avatar/change.html:19
 msgid "Upload New Image"
 msgstr "Charger une nouvelle image"
 
@@ -1326,8 +1338,12 @@ msgstr "Veuillez sélectionner les avatars que vous souhaitez supprimer."
 
 #: templates/avatar/confirm_delete.html:8
 #, python-format
-msgid "You have no avatars to delete. Please <a href=\"%(avatar_change_url)s\">upload one</a> now."
-msgstr "Vous n'avez aucun avatar à supprimer. Veuillez en <a href=\"%(avatar_change_url)s\">ajouter</a> un."
+msgid ""
+"You have no avatars to delete. Please <a "
+"href=\"%(avatar_change_url)s\">upload one</a> now."
+msgstr ""
+"Vous n'avez aucun avatar à supprimer. Veuillez en <a "
+"href=\"%(avatar_change_url)s\">ajouter</a> un."
 
 #: templates/avatar/confirm_delete.html:14
 msgid "Delete These"
@@ -1343,8 +1359,12 @@ msgstr "pronostics"
 
 #: templates/bet/bet_detail.html:8
 #, python-format
-msgid "%(user)s bets on %(sport)s. Discover the analysis and prediction of %(session)s he shares now!"
-msgstr "%(user)s parie sur le %(sport)s. Découvrez les analyses et pronostics de %(session)s qu'il partage !"
+msgid ""
+"%(user)s bets on %(sport)s. Discover the analysis and prediction of "
+"%(session)s he shares now!"
+msgstr ""
+"%(user)s parie sur le %(sport)s. Découvrez les analyses et pronostics de "
+"%(session)s qu'il partage !"
 
 #: templates/bet/bet_detail.html:14
 msgid "this pick is part of"
@@ -1362,8 +1382,7 @@ msgstr "sport"
 msgid "competition"
 msgstr "compétition"
 
-#: templates/bet/bet_detail.html:31
-#: templates/bet/bet_form.html:67
+#: templates/bet/bet_detail.html:31 templates/bet/bet_form.html:67
 #: templates/bet/_includes/bet_list_table.html:28
 msgid "match"
 msgstr "match"
@@ -1379,10 +1398,8 @@ msgstr "date"
 msgid "time"
 msgstr "heure"
 
-#: templates/bet/bet_detail.html:52
-#: templates/bet/bet_form.html:8
-#: templates/bet/ticket_add.html:9
-#: templates/bet/ticket_detail.html:22
+#: templates/bet/bet_detail.html:52 templates/bet/bet_form.html:8
+#: templates/bet/ticket_add.html:9 templates/bet/ticket_detail.html:22
 #: templates/bet/_includes/ticket_list_table.html:27
 #: templates/search/_includes/bookmaker.html:2
 msgid "bookmaker"
@@ -1392,18 +1409,20 @@ msgstr "bookmaker"
 msgid "bet type"
 msgstr "type de pari"
 
-#: templates/bet/bet_detail.html:70
-#: templates/bet/bet_form.html:12
-#: templates/bet/ticket_add.html:15
-#: templates/bet/ticket_detail.html:15
+#: templates/bet/bet_detail.html:70 templates/bet/bet_form.html:12
+#: templates/bet/ticket_add.html:15 templates/bet/ticket_detail.html:15
 #: templates/bet/_includes/bet_list_table.html:40
 #: templates/bet/_includes/ticket_list_table.html:21
 msgid "stake"
 msgstr "mise"
 
 #: templates/bet/bet_form.html:3
-msgid "You have an open ticket. Please delete or complete this ticket. Then you will be able to create another ticket."
-msgstr "Vous avez un ticket ouvert. Veuillez supprimer ou completer ce ticket, vous pourrez ensuite en créer un autre."
+msgid ""
+"You have an open ticket. Please delete or complete this ticket. Then you "
+"will be able to create another ticket."
+msgstr ""
+"Vous avez un ticket ouvert. Veuillez supprimer ou completer ce ticket, vous "
+"pourrez ensuite en créer un autre."
 
 #: templates/bet/bet_form.html:17
 msgid "type"
@@ -1423,8 +1442,7 @@ msgstr "combiné"
 msgid "current ticket odds"
 msgstr "cote du ticket en cours"
 
-#: templates/bet/bet_form.html:52
-#: templates/bookmaker/edit_bet_type.html:18
+#: templates/bet/bet_form.html:52 templates/bookmaker/edit_bet_type.html:18
 msgid "delete"
 msgstr "supprimer"
 
@@ -1441,8 +1459,7 @@ msgstr "écrivez les premières lettres d'une équipe"
 msgid "ticket type"
 msgstr "type de ticket"
 
-#: templates/bet/bet_form.html:97
-#: templates/bet/ticket_detail.html:20
+#: templates/bet/bet_form.html:97 templates/bet/ticket_detail.html:20
 #: templates/bet/_includes/bet_list_table.html:37
 #: templates/bet/_includes/ticket_list_table.html:24
 msgid "odds"
@@ -1484,26 +1501,27 @@ msgstr "%(user)s a publié un ticket sur Betspire. Découvrez-le !"
 
 #: templates/bet/ticket_detail.html:7
 #, python-format
-msgid "%(user)s published a ticket with an odd of %(odds)s. Check out %(user)s's ticket to get inspiration for your bets!"
-msgstr "%(user)s a publié un ticket avec une cote de %(odds)s. Découvrez son ticket et prenez en de l'inspiration pour vos propres paris."
+msgid ""
+"%(user)s published a ticket with an odd of %(odds)s. Check out %(user)s's "
+"ticket to get inspiration for your bets!"
+msgstr ""
+"%(user)s a publié un ticket avec une cote de %(odds)s. Découvrez son ticket "
+"et prenez en de l'inspiration pour vos propres paris."
 
 #: templates/bet/ticket_detail.html:18
 msgid "bet count"
 msgstr "Nombre de paris"
 
-#: templates/bet/ticket_detail.html:50
-#: templates/gsm/session/home.html:486
+#: templates/bet/ticket_detail.html:50 templates/gsm/session/home.html:486
 msgid "comments"
 msgstr "commentaires"
 
-#: templates/bet/ticket_detail.html:54
-#: templates/gsm/session/home.html:490
+#: templates/bet/ticket_detail.html:54 templates/gsm/session/home.html:490
 #, fuzzy
 msgid "add new comment"
 msgstr "commenter"
 
-#: templates/bet/ticket_detail.html:55
-#: templates/gsm/session/home.html:493
+#: templates/bet/ticket_detail.html:55 templates/gsm/session/home.html:493
 msgid "all comments"
 msgstr "tous les commentaires"
 
@@ -1545,22 +1563,21 @@ msgstr "types de paris"
 msgid "add bet type"
 msgstr "ajouter un type de pari"
 
-#: templates/bookmaker/base.html:29
-#: templates/gsm/competition/base.html:53
-#: templates/gsm/sport/base.html:48
-#: templates/gsm/team/base.html:54
+#: templates/bookmaker/base.html:29 templates/gsm/competition/base.html:53
+#: templates/gsm/sport/base.html:48 templates/gsm/team/base.html:54
 msgid "i do not bet on it"
 msgstr "Je n'aime plus"
 
-#: templates/bookmaker/base.html:31
-#: templates/gsm/competition/base.html:55
-#: templates/gsm/sport/base.html:50
-#: templates/gsm/team/base.html:56
+#: templates/bookmaker/base.html:31 templates/gsm/competition/base.html:55
+#: templates/gsm/sport/base.html:50 templates/gsm/team/base.html:56
 msgid "i bet on it"
 msgstr "J'aime"
 
 #: templates/bookmaker/edit_bet_type.html:9
-msgid "For bet types like \"what player will score first\", leave empty the following table. For bet types with fixed choices like \"1X2\" fill the table with one choice per line."
+msgid ""
+"For bet types like \"what player will score first\", leave empty the "
+"following table. For bet types with fixed choices like \"1X2\" fill the "
+"table with one choice per line."
 msgstr "f"
 
 #: templates/bookmaker/edit_bet_type.html:16
@@ -1573,12 +1590,18 @@ msgstr "traduction française"
 
 #: templates/bookmaker/file.html:6
 msgid "Bookmaker profile: Bonus, contact, informations"
-msgstr "Fiche du bookmaker : retrouvez tous les bonus offerts par %(bookmaker)s, ses informations de contact ainsi que son actualité."
+msgstr ""
+"Fiche du bookmaker : retrouvez tous les bonus offerts par %(bookmaker)s, ses"
+" informations de contact ainsi que son actualité."
 
 #: templates/bookmaker/file.html:9
 #, python-format
-msgid "Open an account on %(bookmaker)s and claim you bonus to bet without any risk."
-msgstr "Ouvrez un compte chez %(bookmaker)s et bénéficiez d'un bonus afin de parier sans risques pour vos débuts chez %(bookmaker)s."
+msgid ""
+"Open an account on %(bookmaker)s and claim you bonus to bet without any "
+"risk."
+msgstr ""
+"Ouvrez un compte chez %(bookmaker)s et bénéficiez d'un bonus afin de parier "
+"sans risques pour vos débuts chez %(bookmaker)s."
 
 #: templates/bookmaker/file.html:23
 msgid "creation date"
@@ -1624,8 +1647,14 @@ msgstr "ajouter à mes types de paris"
 
 #: templates/bookmaker/picks.html:9
 #, python-format
-msgid "See some sports picks placed on %(bookmaker)s and get some inspiration for your personal bets. Earn money thanks on %(bookmaker)s!"
-msgstr "Explorez tous les pronostics placés chez %(bookmaker)s par les meilleurs pronostiqueurs de Betspire et obtenez quelques pistes pour vos pronostics personnels. Gagnez de l'argent sur %(bookmaker)s grâce à la communauté Betspire !"
+msgid ""
+"See some sports picks placed on %(bookmaker)s and get some inspiration for "
+"your personal bets. Earn money thanks on %(bookmaker)s!"
+msgstr ""
+"Explorez tous les pronostics placés chez %(bookmaker)s par les meilleurs "
+"pronostiqueurs de Betspire et obtenez quelques pistes pour vos pronostics "
+"personnels. Gagnez de l'argent sur %(bookmaker)s grâce à la communauté "
+"Betspire !"
 
 #: templates/comments/approve.html:4
 msgid "Approve a comment"
@@ -1643,11 +1672,13 @@ msgstr "approuver"
 msgid "Thanks for approving"
 msgstr "merci d'avoir approuvé"
 
-#: templates/comments/approved.html:7
-#: templates/comments/deleted.html:7
+#: templates/comments/approved.html:7 templates/comments/deleted.html:7
 #: templates/comments/flagged.html:7
-msgid "Thanks for taking the time to improve the quality of discussion on our site"
-msgstr "merci d'avoir pris le temps d'améliorer la qualité des discussions sur notre site"
+msgid ""
+"Thanks for taking the time to improve the quality of discussion on our site"
+msgstr ""
+"merci d'avoir pris le temps d'améliorer la qualité des discussions sur notre"
+" site"
 
 #: templates/comments/delete.html:4
 msgid "Remove a comment"
@@ -1689,8 +1720,7 @@ msgstr "nom"
 msgid "your email"
 msgstr "votre e-mail"
 
-#: templates/comments/form.html:38
-#: templates/comments/preview.html:33
+#: templates/comments/form.html:38 templates/comments/preview.html:33
 msgid "Preview"
 msgstr "prévisualiser"
 
@@ -1717,8 +1747,7 @@ msgstr ""
 msgid "Thank you for your comment"
 msgstr "merci pour votre commentaire"
 
-#: templates/comments/preview.html:4
-#: templates/comments/preview.html.py:13
+#: templates/comments/preview.html:4 templates/comments/preview.html.py:13
 msgid "Preview your comment"
 msgstr "prévisualisez votre commentaire"
 
@@ -1736,13 +1765,11 @@ msgstr "publiez votre commentaire"
 msgid "or make changes"
 msgstr "ou faites des modifications"
 
-#: templates/django_messages/base.html:10
-#: templates/postman/base.html:9
+#: templates/django_messages/base.html:10 templates/postman/base.html:9
 msgid "Inbox"
 msgstr "boite de reception"
 
-#: templates/django_messages/base.html:11
-#: templates/postman/base.html:10
+#: templates/django_messages/base.html:11 templates/postman/base.html:10
 msgid "Sent Messages"
 msgstr "messages envoyés"
 
@@ -1750,8 +1777,7 @@ msgstr "messages envoyés"
 msgid "New Message"
 msgstr "Nouveau message"
 
-#: templates/django_messages/base.html:13
-#: templates/postman/base.html:13
+#: templates/django_messages/base.html:13 templates/postman/base.html:13
 msgid "Trash"
 msgstr "corbeille"
 
@@ -1815,33 +1841,37 @@ msgstr "aucun match à afficher"
 
 #: templates/gsm/competition/base.html:10
 #, python-format
-msgid "Get everything to bet and win on %(competition)s like a pro! From news and statistics to the free picks of best %(competition)s tipsers."
-msgstr "Tout pour parier et gagner sur %(competition)s comme un pro : statistiques, actualités, pronostics gratuits des experts de %(competition)s ..."
+msgid ""
+"Get everything to bet and win on %(competition)s like a pro! From news and "
+"statistics to the free picks of best %(competition)s tipsers."
+msgstr ""
+"Tout pour parier et gagner sur %(competition)s comme un pro : statistiques, "
+"actualités, pronostics gratuits des experts de %(competition)s ..."
 
-#: templates/gsm/competition/base.html:18
-#: templates/gsm/sport/base.html:9
+#: templates/gsm/competition/base.html:18 templates/gsm/sport/base.html:9
 #: templates/gsm/team/base.html:10
 msgid "home"
 msgstr "accueil"
 
-#: templates/gsm/competition/base.html:35
-#: templates/gsm/session/home.html:428
-#: templates/gsm/session/home.html:431
-#: templates/gsm/team/base.html:35
+#: templates/gsm/competition/base.html:35 templates/gsm/session/home.html:428
+#: templates/gsm/session/home.html:431 templates/gsm/team/base.html:35
 #: templates/gsm/team/home.html:17
 msgid "calendar"
 msgstr "calendrier"
 
 #: templates/gsm/competition/calendar.html:4
-#: templates/gsm/sport/matches.html:5
-#: templates/gsm/team/calendar.html:5
+#: templates/gsm/sport/matches.html:5 templates/gsm/team/calendar.html:5
 msgid "Results, livescores and fixtures of every games"
 msgstr "Resultats, scores en direct et programme de "
 
 #: templates/gsm/competition/calendar.html:7
 #, python-format
-msgid "Get all results and fixtures of %(Competition)s and follow each game in live."
-msgstr "Retrouvez tous les résultats et les prochains matchs de %(Competition)s et suivez l'évolution en direct des scores de chaque rencontre."
+msgid ""
+"Get all results and fixtures of %(Competition)s and follow each game in "
+"live."
+msgstr ""
+"Retrouvez tous les résultats et les prochains matchs de %(Competition)s et "
+"suivez l'évolution en direct des scores de chaque rencontre."
 
 #: templates/gsm/competition/calendar.html:17
 #: templates/gsm/competition/calendar.html:26
@@ -1853,49 +1883,54 @@ msgstr "précédent"
 msgid "next"
 msgstr "Suivant"
 
-#: templates/gsm/competition/home.html:4
-#: templates/gsm/team/home.html:6
+#: templates/gsm/competition/home.html:4 templates/gsm/team/home.html:6
 #, fuzzy
 msgid "Picks, best tipsters, fixtures, livescores, stats, news, rankings"
-msgstr "Pronostics gratuits, meilleurs pronostiqueurs, scores en direct, actualités, résultats, classements et prochains matchs."
+msgstr ""
+"Pronostics gratuits, meilleurs pronostiqueurs, scores en direct, actualités,"
+" résultats, classements et prochains matchs."
 
 #: templates/gsm/competition/home.html:7
 #, fuzzy, python-format
-msgid "Get everything to bet and win on %(Competition)s like a pro! From news and statistics to free picks from our best %(sport)s tipsters."
-msgstr "Obtenez tout ce dont vous avez besoin pour parier et gagner sur %(sport)s comme un pro ! Des actualites aux statistiques, en passant par les pronostics gratuis de nos meilleurs parieurs %(sport)s."
+msgid ""
+"Get everything to bet and win on %(Competition)s like a pro! From news and "
+"statistics to free picks from our best %(sport)s tipsters."
+msgstr ""
+"Obtenez tout ce dont vous avez besoin pour parier et gagner sur %(sport)s "
+"comme un pro ! Des actualites aux statistiques, en passant par les "
+"pronostics gratuis de nos meilleurs parieurs %(sport)s."
 
-#: templates/gsm/competition/home.html:15
-#: templates/gsm/sport/home.html:15
-#: templates/gsm/team/calendar.html:21
-#: templates/gsm/team/calendar.html:30
+#: templates/gsm/competition/home.html:15 templates/gsm/sport/home.html:15
+#: templates/gsm/team/calendar.html:21 templates/gsm/team/calendar.html:30
 msgid "next matches"
 msgstr "prochains matchs"
 
-#: templates/gsm/competition/home.html:20
-#: templates/gsm/sport/base.html:33
-#: templates/gsm/sport/home.html:25
-#: templates/gsm/team/home.html:22
+#: templates/gsm/competition/home.html:20 templates/gsm/sport/base.html:33
+#: templates/gsm/sport/home.html:25 templates/gsm/team/home.html:22
 msgid "best tipsters"
 msgstr "meilleurs pronostiqueurs"
 
-#: templates/gsm/competition/home.html:27
-#: templates/gsm/sport/home.html:32
+#: templates/gsm/competition/home.html:27 templates/gsm/sport/home.html:32
 #: templates/gsm/team/home.html:29
 msgid "random tips"
 msgstr "pronostics en cours"
 
-#: templates/gsm/competition/picks.html:5
-#: templates/gsm/person/picks.html:5
-#: templates/gsm/session/picks.html:5
-#: templates/gsm/sport/picks.html:5
+#: templates/gsm/competition/picks.html:6 templates/gsm/person/picks.html:5
+#: templates/gsm/session/picks.html:5 templates/gsm/sport/picks.html:5
 #: templates/gsm/team/picks.html:5
 msgid "Free predictions, advices and betting picks from the best tipsters"
-msgstr "Pronostics gratuits, conseils et analyses des meilleurs pronostiqueurs du web."
+msgstr ""
+"Pronostics gratuits, conseils et analyses des meilleurs pronostiqueurs du "
+"web."
 
-#: templates/gsm/competition/picks.html:8
+#: templates/gsm/competition/picks.html:9
 #, python-format
-msgid "Get free predictions and betting picks on %(Competition)s from our large community of tipsters. And starts earning money thanks to them."
-msgstr "Obtenez les pronostics gratuits sur l'équipe de %(Competition)s réalisés par tous les pronostiqueurs de Betspire, et gagnez de l'argent grâce à eux !"
+msgid ""
+"Get free predictions and betting picks on %(Competition)s from our large "
+"community of tipsters. And starts earning money thanks to them."
+msgstr ""
+"Obtenez les pronostics gratuits sur l'équipe de %(Competition)s réalisés par"
+" tous les pronostiqueurs de Betspire, et gagnez de l'argent grâce à eux !"
 
 #: templates/gsm/competition/statistics.html:4
 #: templates/gsm/team/statistics.html:5
@@ -1904,8 +1939,13 @@ msgstr "Classements, résultats, statistiques, forme..."
 
 #: templates/gsm/competition/statistics.html:7
 #, python-format
-msgid "Want to know everything about %(Competition)s ? Explore all tables, rankings and see all statistics to bet wisely."
-msgstr "Vous souhaitez tout savoir sur %(Competition)s ? Consultez les classements, les statistiques, les résultats, les prochains matchs et toutes les actualités."
+msgid ""
+"Want to know everything about %(Competition)s ? Explore all tables, rankings"
+" and see all statistics to bet wisely."
+msgstr ""
+"Vous souhaitez tout savoir sur %(Competition)s ? Consultez les classements, "
+"les statistiques, les résultats, les prochains matchs et toutes les "
+"actualités."
 
 #: templates/gsm/person/base.html:40
 msgid "i do not bet on him"
@@ -1921,8 +1961,12 @@ msgstr "Profil, biographie, carrière, statistiques"
 
 #: templates/gsm/person/home.html:8
 #, python-format
-msgid "Know everything about %(Player)s: Find the latest news, games, stats and goals of %(Player)s."
-msgstr "Sachez tout sur %(Player)s : ses dernières actualités, ses dernières rencontres, ses statistiques, ses buts..."
+msgid ""
+"Know everything about %(Player)s: Find the latest news, games, stats and "
+"goals of %(Player)s."
+msgstr ""
+"Sachez tout sur %(Player)s : ses dernières actualités, ses dernières "
+"rencontres, ses statistiques, ses buts..."
 
 #: templates/gsm/person/home.html:15
 msgid "identity"
@@ -1972,55 +2016,50 @@ msgstr "carrière"
 msgid "season"
 msgstr "saison"
 
-#: templates/gsm/person/home.html:89
-#: templates/gsm/team/squad.html:80
+#: templates/gsm/person/home.html:89 templates/gsm/team/squad.html:80
 msgid "Minutes played"
 msgstr "minutes jouées"
 
-#: templates/gsm/person/home.html:90
-#: templates/gsm/team/squad.html:81
+#: templates/gsm/person/home.html:90 templates/gsm/team/squad.html:81
 msgid "Appearances"
 msgstr "apparitions"
 
-#: templates/gsm/person/home.html:91
-#: templates/gsm/team/squad.html:83
+#: templates/gsm/person/home.html:91 templates/gsm/team/squad.html:83
 msgid "Substitute in"
 msgstr "entrées"
 
-#: templates/gsm/person/home.html:92
-#: templates/gsm/team/squad.html:84
+#: templates/gsm/person/home.html:92 templates/gsm/team/squad.html:84
 msgid "Substitute out"
 msgstr "sorties"
 
-#: templates/gsm/person/home.html:93
-#: templates/gsm/team/squad.html:85
+#: templates/gsm/person/home.html:93 templates/gsm/team/squad.html:85
 msgid "Substitutes on the bench"
 msgstr "remplaçant"
 
-#: templates/gsm/person/home.html:94
-#: templates/gsm/team/squad.html:86
+#: templates/gsm/person/home.html:94 templates/gsm/team/squad.html:86
 msgid "Goal"
 msgstr "but"
 
-#: templates/gsm/person/home.html:95
-#: templates/gsm/team/squad.html:87
+#: templates/gsm/person/home.html:95 templates/gsm/team/squad.html:87
 msgid "Yellow card"
 msgstr "carton jaune"
 
-#: templates/gsm/person/home.html:96
-#: templates/gsm/team/squad.html:88
+#: templates/gsm/person/home.html:96 templates/gsm/team/squad.html:88
 msgid "Yellow 2nd/RC"
 msgstr "second carton jaune"
 
-#: templates/gsm/person/home.html:97
-#: templates/gsm/team/squad.html:89
+#: templates/gsm/person/home.html:97 templates/gsm/team/squad.html:89
 msgid "Red card"
 msgstr "carton rouge"
 
 #: templates/gsm/person/picks.html:8
 #, python-format
-msgid "Discover all the best tipsters on %(Player)s and start following them to see their picks for free."
-msgstr "Découvrez tous les meilleurs pronostiqueurs sur %(Player)s et suivez-les pour voir gratuitement leurs pronostics !"
+msgid ""
+"Discover all the best tipsters on %(Player)s and start following them to see"
+" their picks for free."
+msgstr ""
+"Découvrez tous les meilleurs pronostiqueurs sur %(Player)s et suivez-les "
+"pour voir gratuitement leurs pronostics !"
 
 #: templates/gsm/session/base.html:20
 msgid "presentation"
@@ -2036,28 +2075,32 @@ msgstr "le match"
 
 #: templates/gsm/session/home.html:5
 msgid "Statistics, tables, previous games, H2H, picks"
-msgstr "Statistiques, classements, derniers matchs, dernières confrontations, pronostics, analyses."
+msgstr ""
+"Statistiques, classements, derniers matchs, dernières confrontations, "
+"pronostics, analyses."
 
 #: templates/gsm/session/home.html:8
 #, python-format
-msgid "Before betting on %(Match)s, you need to see this page. You will find there every statistics, news and picks of others tipsters."
-msgstr "Avant de parier sur la rencontre %(Match)s, vous devez consulter cette page ! Vous y retrouverez tous les classements, les statistiques, les derniers matchs et les actualités de chaque équipe ainsi que les pronostics, analyses et conseils de nos meilleurs pronostiqueurs."
+msgid ""
+"Before betting on %(Match)s, you need to see this page. You will find there "
+"every statistics, news and picks of others tipsters."
+msgstr ""
+"Avant de parier sur la rencontre %(Match)s, vous devez consulter cette page "
+"! Vous y retrouverez tous les classements, les statistiques, les derniers "
+"matchs et les actualités de chaque équipe ainsi que les pronostics, analyses"
+" et conseils de nos meilleurs pronostiqueurs."
 
 #: templates/gsm/session/home.html:16
 msgid "goals"
 msgstr "buts"
 
-#: templates/gsm/session/home.html:33
-#: templates/gsm/session/home.html.py:63
+#: templates/gsm/session/home.html:33 templates/gsm/session/home.html.py:63
 msgid "OG"
 msgstr "CSC"
 
-#: templates/gsm/session/home.html:35
-#: templates/gsm/session/home.html.py:52
-#: templates/gsm/session/home.html:147
-#: templates/gsm/session/home.html:196
-#: templates/gsm/session/home.html:247
-#: templates/gsm/session/home.html:296
+#: templates/gsm/session/home.html:35 templates/gsm/session/home.html.py:52
+#: templates/gsm/session/home.html:147 templates/gsm/session/home.html:196
+#: templates/gsm/session/home.html:247 templates/gsm/session/home.html:296
 msgid "goal"
 msgstr "but"
 
@@ -2065,22 +2108,17 @@ msgstr "but"
 msgid "warnings"
 msgstr "cartons"
 
-#: templates/gsm/session/home.html:127
-#: templates/gsm/session/home.html:176
+#: templates/gsm/session/home.html:127 templates/gsm/session/home.html:176
 msgid "lineups"
 msgstr "compositions d'équipes"
 
-#: templates/gsm/session/home.html:153
-#: templates/gsm/session/home.html:202
-#: templates/gsm/session/home.html:253
-#: templates/gsm/session/home.html:302
-#: templates/gsm/session/home.html:356
-#: templates/gsm/session/home.html:364
+#: templates/gsm/session/home.html:153 templates/gsm/session/home.html:202
+#: templates/gsm/session/home.html:253 templates/gsm/session/home.html:302
+#: templates/gsm/session/home.html:356 templates/gsm/session/home.html:364
 msgid "substitution"
 msgstr "remplaçants"
 
-#: templates/gsm/session/home.html:227
-#: templates/gsm/session/home.html:276
+#: templates/gsm/session/home.html:227 templates/gsm/session/home.html:276
 msgid "lineups bench"
 msgstr "remplaçants"
 
@@ -2088,8 +2126,7 @@ msgstr "remplaçants"
 msgid "substitutions"
 msgstr "remplaçants"
 
-#: templates/gsm/session/home.html:442
-#: templates/gsm/team/calendar.html:18
+#: templates/gsm/session/home.html:442 templates/gsm/team/calendar.html:18
 #: templates/gsm/team/calendar.html:27
 msgid "previous matches"
 msgstr "matchs précédents"
@@ -2097,10 +2134,11 @@ msgstr "matchs précédents"
 #: templates/gsm/session/picks.html:8
 #, python-format
 msgid "Discover all picks on %(session)s for free from our best tipsters."
-msgstr "Découvrez tous les pronostics, analyses et conseils de nos meilleurs pronostiqueurs sur la rencontre %(session)s. "
+msgstr ""
+"Découvrez tous les pronostics, analyses et conseils de nos meilleurs "
+"pronostiqueurs sur la rencontre %(session)s. "
 
-#: templates/gsm/sport/base.html:18
-#: templates/scoobet/autocomplete.html:34
+#: templates/gsm/sport/base.html:18 templates/scoobet/autocomplete.html:34
 msgid "competitions"
 msgstr "compétitions"
 
@@ -2115,13 +2153,19 @@ msgstr "Plus de compétitions"
 
 #: templates/gsm/sport/competitions.html:7
 #, python-format
-msgid "Explore more than 130 %(Sport)s competitions, leagues and cups all over the world."
-msgstr "Explorez plus de 130 compétitions, championnats, ligues et coupes de %(Sport)s dans le monde entier."
+msgid ""
+"Explore more than 130 %(Sport)s competitions, leagues and cups all over the "
+"world."
+msgstr ""
+"Explorez plus de 130 compétitions, championnats, ligues et coupes de "
+"%(Sport)s dans le monde entier."
 
 #: templates/gsm/sport/home.html:5
 #, fuzzy
 msgid "Picks, best tipsers, fixtures, livescores, stats, news, rankings"
-msgstr "Pronostics gratuits, meilleurs pronostiqueurs, scores en direct, actualités, résultats, classements et prochains matchs."
+msgstr ""
+"Pronostics gratuits, meilleurs pronostiqueurs, scores en direct, actualités,"
+" résultats, classements et prochains matchs."
 
 #: templates/gsm/sport/home.html:20
 msgid "last matches"
@@ -2130,7 +2174,9 @@ msgstr "derniers matchs"
 #: templates/gsm/sport/matches.html:8
 #, python-format
 msgid "Get all results and fixtures of %(Sport)s's main leagues :"
-msgstr "Obtenez tous les résultats et matchs à venir des principaux championnats et compétitions de %(Sport)s"
+msgstr ""
+"Obtenez tous les résultats et matchs à venir des principaux championnats et "
+"compétitions de %(Sport)s"
 
 #: templates/gsm/sport/matches.html:8
 msgid "and more than 130 others."
@@ -2150,8 +2196,12 @@ msgstr "demain"
 
 #: templates/gsm/sport/picks.html:8
 #, python-format
-msgid "Get free predictions and betting picks on %(Sport)s from our large community of tipsters. And starts earning money thanks to them."
-msgstr "Obtenez les pronostics gratuits sur l'équipe de %(Sport)s réalisés par tous les pronostiqueurs de Betspire, et gagnez de l'argent grâce à eux !"
+msgid ""
+"Get free predictions and betting picks on %(Sport)s from our large community"
+" of tipsters. And starts earning money thanks to them."
+msgstr ""
+"Obtenez les pronostics gratuits sur l'équipe de %(Sport)s réalisés par tous "
+"les pronostiqueurs de Betspire, et gagnez de l'argent grâce à eux !"
 
 #: templates/gsm/sport/rankings.html:5
 msgid "Best tipsters ranked by profit and profitability"
@@ -2159,8 +2209,12 @@ msgstr "Meilleurs pronostiqueurs classés par profit et rentabilité"
 
 #: templates/gsm/sport/rankings.html:8
 #, python-format
-msgid "Discover all the best %(Sport)s tipsters and start following them to see their picks for free."
-msgstr "Découvrez tous les meilleurs pronostiqueurs sur le %(Sport)s et suivez-les pour voir gratuitement leurs pronostics !"
+msgid ""
+"Discover all the best %(Sport)s tipsters and start following them to see "
+"their picks for free."
+msgstr ""
+"Découvrez tous les meilleurs pronostiqueurs sur le %(Sport)s et suivez-les "
+"pour voir gratuitement leurs pronostics !"
 
 #: templates/gsm/team/base.html:20
 msgid "squad"
@@ -2168,13 +2222,22 @@ msgstr "effectif"
 
 #: templates/gsm/team/calendar.html:8
 #, python-format
-msgid "Get all results and fixtures of %(Team)s and follow each game of your favourite team in live."
-msgstr "Obtenez tous les résultats et le programme des matchs de %(Team)s et suivez les résultats en direct de votre équipe favorite."
+msgid ""
+"Get all results and fixtures of %(Team)s and follow each game of your "
+"favourite team in live."
+msgstr ""
+"Obtenez tous les résultats et le programme des matchs de %(Team)s et suivez "
+"les résultats en direct de votre équipe favorite."
 
 #: templates/gsm/team/home.html:9
 #, fuzzy, python-format
-msgid "Get everything to bet and win on %(team)s's games like a pro! From news and statistics to free picks from our best %(sport)s tipsters."
-msgstr "Obtenez tout ce dont vous avez besoin pour parier et gagner sur %(sport)s comme un pro ! Des actualites aux statistiques, en passant par les pronostics gratuis de nos meilleurs parieurs %(sport)s."
+msgid ""
+"Get everything to bet and win on %(team)s's games like a pro! From news and "
+"statistics to free picks from our best %(sport)s tipsters."
+msgstr ""
+"Obtenez tout ce dont vous avez besoin pour parier et gagner sur %(sport)s "
+"comme un pro ! Des actualites aux statistiques, en passant par les "
+"pronostics gratuis de nos meilleurs parieurs %(sport)s."
 
 #: templates/gsm/team/home.html:17
 msgid "Calendar for team"
@@ -2182,17 +2245,25 @@ msgstr "Calendrier de l'équipe"
 
 #: templates/gsm/team/picks.html:8
 #, python-format
-msgid "Get free predictions and betting picks on %(Team)s from our large community of tipsters. And starts earning money thanks to them."
-msgstr "Obtenez les pronostics gratuits sur l'équipe de %(Team)s réalisés par tous les pronostiqueurs de Betspire, et gagnez de l'argent grâce à eux !"
+msgid ""
+"Get free predictions and betting picks on %(Team)s from our large community "
+"of tipsters. And starts earning money thanks to them."
+msgstr ""
+"Obtenez les pronostics gratuits sur l'équipe de %(Team)s réalisés par tous "
+"les pronostiqueurs de Betspire, et gagnez de l'argent grâce à eux !"
 
 #: templates/gsm/team/squad.html:8
 msgid "Squad and players statistics "
-msgstr "Effectif, fiche des joueurs et statistiques (carrières, apparitions, buts...)"
+msgstr ""
+"Effectif, fiche des joueurs et statistiques (carrières, apparitions, "
+"buts...)"
 
 #: templates/gsm/team/squad.html:11
 #, python-format
 msgid "Explore all players of %(Team)s and see each players statistics."
-msgstr "Obtenez la liste de tous les joueurs qui évoluent à %(Team)s et consultez leurs statistiques."
+msgstr ""
+"Obtenez la liste de tous les joueurs qui évoluent à %(Team)s et consultez "
+"leurs statistiques."
 
 #: templates/gsm/team/squad.html:28
 msgid "current"
@@ -2216,8 +2287,13 @@ msgstr "compositions d'équipes"
 
 #: templates/gsm/team/statistics.html:8
 #, python-format
-msgid "Want to know everything about %(Team)s ? Explore all tables, ranking and, see all statistics to bet wisely."
-msgstr "Vous souhaitez tout savoir sur %(Team)s ? Consultez ses classements, ses statistiques, ses résultats, ses prochains matchs et toutes les actualités de %(Team)s."
+msgid ""
+"Want to know everything about %(Team)s ? Explore all tables, ranking and, "
+"see all statistics to bet wisely."
+msgstr ""
+"Vous souhaitez tout savoir sur %(Team)s ? Consultez ses classements, ses "
+"statistiques, ses résultats, ses prochains matchs et toutes les actualités "
+"de %(Team)s."
 
 #: templates/gsm/tennis/_includes/resultstable.html:13
 msgid "tournaments played"
@@ -2302,6 +2378,9 @@ msgstr "a corrigé"
 msgid "Your ticket"
 msgstr "votre ticket"
 
+#~ msgid "Welcome"
+#~ msgstr "Bienvenue"
+
 #~ msgid "Don't loose your bets, thank Scoobet"
 #~ msgstr "Betspire, bet inspired"
 
@@ -2323,11 +2402,9 @@ msgstr "votre ticket"
 #~ msgid "Discover his free picks now"
 #~ msgstr "découvrez gratuitement ses pronostics"
 
-#, fuzzy
 #~ msgid "your@email.com"
 #~ msgstr "votre e-mail"
 
-#, fuzzy
 #~ msgid "Bet flagged"
 #~ msgstr "a signalé"
 
@@ -2343,7 +2420,6 @@ msgstr "votre ticket"
 #~ msgid "in"
 #~ msgstr "entré"
 
-#, fuzzy
 #~ msgid "out"
 #~ msgstr "A propos"
 
@@ -2359,14 +2435,12 @@ msgstr "votre ticket"
 #~ msgid "club"
 #~ msgstr "club"
 
-#, fuzzy
 #~ msgid "new"
 #~ msgstr "actualités"
 
 #~ msgid "flagged for moderation"
 #~ msgstr "signalé pour modération"
 
-#, fuzzy
 #~ msgid "correction"
 #~ msgstr "compétition"
 
@@ -2394,7 +2468,6 @@ msgstr "votre ticket"
 #~ msgid "bets to correct"
 #~ msgstr "paris à corriger"
 
-#, fuzzy
 #~ msgid "inbox"
 #~ msgstr "boite de reception"
 
@@ -2421,11 +2494,9 @@ msgstr "votre ticket"
 #~ msgid "prev"
 #~ msgstr "Précédent"
 
-#, fuzzy
 #~ msgid "day"
 #~ msgstr "aujourd'hui"
 
-#, fuzzy
 #~ msgid "week"
 #~ msgstr "journée"
 
@@ -2458,8 +2529,8 @@ msgstr "votre ticket"
 
 #~ msgid "Deletion date by recipient must be later to sending date."
 #~ msgstr ""
-#~ "la date de suppression par le destinataire doit être postérieure à la "
-#~ "date d'envoi"
+#~ "la date de suppression par le destinataire doit être postérieure à la date "
+#~ "d'envoi"
 
 #~ msgid "Response date must be later to sending date."
 #~ msgstr "la date de réponse doit être postérieure à la date d'envoi"
@@ -2483,7 +2554,6 @@ msgstr "votre ticket"
 #~ msgid "Dates"
 #~ msgstr "dates"
 
-#, fuzzy
 #~ msgid "Moderation"
 #~ msgstr "poste"
 
@@ -2494,15 +2564,15 @@ msgstr "votre ticket"
 #~ "Ensure this value has at most {limit_value} distinct items (it has "
 #~ "{show_value})."
 #~ msgstr ""
-#~ "assurez-vous que cette valeur a au maximum {limit_value} éléments "
-#~ "distincs (it has {show_value})"
+#~ "assurez-vous que cette valeur a au maximum {limit_value} éléments distincs "
+#~ "(it has {show_value})"
 
 #~ msgid ""
 #~ "Ensure this value has at least {limit_value} distinct items (it has "
 #~ "{show_value})."
 #~ msgstr ""
-#~ "assurez-vous que cette valeur a au moins {limit_value} éléments distincs "
-#~ "(it has {show_value})"
+#~ "assurez-vous que cette valeur a au moins {limit_value} éléments distincs (it"
+#~ " has {show_value})"
 
 #~ msgid "Some usernames are rejected: {users}."
 #~ msgstr "ces pseudonymes sont rejetés : {users}"
@@ -2646,7 +2716,6 @@ msgstr "votre ticket"
 #~ msgstr "vous avez reçu une réponse"
 
 #~ msgid "Please correct the error below."
-
 #~ msgid_plural "Please correct the errors below."
 #~ msgstr[0] "veuillez corriger l'erreur ci-dessous"
 #~ msgstr[1] "veuillez corriger les erreurs ci-dessous"
@@ -2661,8 +2730,8 @@ msgstr "votre ticket"
 #~ msgstr "messages archivés"
 
 #~ msgid ""
-#~ "Messages in this folder will never be removed. You can use this folder "
-#~ "for long term storage."
+#~ "Messages in this folder will never be removed. You can use this folder for "
+#~ "long term storage."
 #~ msgstr ""
 #~ "les messages dans ce dossier ne seront jamais supprimés. vous pouvez "
 #~ "utiliser ce dossier pour sauvegarder vos messages à long termes"
@@ -2717,7 +2786,6 @@ msgstr "votre ticket"
 #~ "temps. pour une sauvegarde à long termes, merci d'utiliser le dossier "
 #~ "archive."
 
-#, fuzzy
 #~ msgid "Conversation"
 #~ msgstr "poste"
 
@@ -2743,11 +2811,11 @@ msgstr "votre ticket"
 #~ msgstr "score de l'équipe A"
 
 #~ msgid ""
-#~ "Full-time score represents result after regular time (90 minutes) when "
-#~ "match status is played."
+#~ "Full-time score represents result after regular time (90 minutes) when match"
+#~ " status is played."
 #~ msgstr ""
-#~ "le score final correspond au résultat à l'issue du temps réglementaire "
-#~ "(90 minutes), lorsque le match a été joué."
+#~ "le score final correspond au résultat à l'issue du temps réglementaire (90 "
+#~ "minutes), lorsque le match a été joué."
 
 #~ msgid "full time score of team B"
 #~ msgstr "score de l'équipe B"
@@ -2770,8 +2838,8 @@ msgstr "votre ticket"
 #~ "Score made in penalty shootout, usually when overtime ended with draw. "
 #~ "Updated live."
 #~ msgstr ""
-#~ "score des tirs aux buts, lorsque les prolongations s'achèvent sur un "
-#~ "match nul."
+#~ "score des tirs aux buts, lorsque les prolongations s'achèvent sur un match "
+#~ "nul."
 
 #~ msgid "Score made in penalty shootout by team B"
 #~ msgstr "score de l'équipe B aux tirs aux buts"
@@ -2803,22 +2871,20 @@ msgstr "votre ticket"
 #~ msgid "&copy; 2010 &lt;your company here&gt;"
 #~ msgstr "&copy; 2010 &lt;votre raison sociale ici&gt;"
 
-#, fuzzy
 #~ msgid "Wondering <a href=\"%(what_next_url)s\">What Next</a>?"
-#~ msgstr ""
-#~ "Vous vous demandez <a href=\"%(what_next_url)s\">Que faire apres</a>?"
+#~ msgstr "Vous vous demandez <a href=\"%(what_next_url)s\">Que faire apres</a>?"
 
 #~ msgid ""
-#~ "You can <a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s"
-#~ "\">Log in</a> to try out the site."
+#~ "You can <a href=\"%(signup_url)s\">Sign up</a> and <a "
+#~ "href=\"%(login_url)s\">Log in</a> to try out the site."
 #~ msgstr ""
-#~ "Vous pouvez <a href=\"%(signup_url)s\">vous inscrire</a> et <a href="
-#~ "\"%(login_url)s\">vous authentifier</a> pour essayer le site."
+#~ "Vous pouvez <a href=\"%(signup_url)s\">vous inscrire</a> et <a "
+#~ "href=\"%(login_url)s\">vous authentifier</a> pour essayer le site."
 
 #~ msgid "You can <a href=\"%(login_url)s\">Log in</a> to try out the site."
 #~ msgstr ""
-#~ "Vous pouvez <a href=\"%(login_url)s\">vous authentifier</a> pour essayer "
-#~ "le site."
+#~ "Vous pouvez <a href=\"%(login_url)s\">vous authentifier</a> pour essayer le "
+#~ "site."
 
 #~ msgid "Admin"
 #~ msgstr "Admin"
@@ -2829,7 +2895,6 @@ msgstr "votre ticket"
 #~ msgid "Notices"
 #~ msgstr "Notifications"
 
-#, fuzzy
 #~ msgid "Terms of Service"
 #~ msgstr "Termes de service"
 
@@ -2840,11 +2905,11 @@ msgstr "votre ticket"
 #~ msgstr "Que faire maintenant?"
 
 #~ msgid ""
-#~ "Start by <a href=\"%(signup_url)s\">signing up</a> and <a href="
-#~ "\"%(login_url)s\">logging in</a>."
+#~ "Start by <a href=\"%(signup_url)s\">signing up</a> and <a "
+#~ "href=\"%(login_url)s\">logging in</a>."
 #~ msgstr ""
-#~ "Commencez par <a href=\"%(signup_url)s\">vous inscrire</a> et <a href="
-#~ "\"%(login_url)s\">vous authentifier</a>"
+#~ "Commencez par <a href=\"%(signup_url)s\">vous inscrire</a> et <a "
+#~ "href=\"%(login_url)s\">vous authentifier</a>"
 
 #~ msgid "Start by <a href=\"%(login_url)s\">logging in</a>."
 #~ msgstr "Commencez par <a href=\"%(login_url)s\">vous authentifier</a>"
