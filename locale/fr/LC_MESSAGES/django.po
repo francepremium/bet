@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-29 13:50+0100\n"
-"PO-Revision-Date: 2012-02-29 13:56\n"
-"Last-Translator: John Anthony <johnanthony.fr2@gmail.com>\n"
+"POT-Creation-Date: 2012-02-29 17:30+0100\n"
+"PO-Revision-Date: 2012-02-29 17:34\n"
+"Last-Translator:   <jamespic@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 "X-Translated-Using: django-rosetta 0.6.5\n"
 
-#: settings.py:166
+#: settings.py:170
 msgid "English"
 msgstr "anglais"
 
-#: settings.py:167
+#: settings.py:171
 msgid "French"
 msgstr "français"
 
@@ -409,7 +409,6 @@ msgid "started following"
 msgstr "est désormais abonné aux publications de"
 
 #: templates/_account_bar.html:7
-#, fuzzy
 msgid "Account"
 msgstr "Compte"
 
@@ -577,9 +576,8 @@ msgstr "pronostic"
 #: templates/gsm/sport/rankings.html:9 templates/gsm/team/calendar.html:9
 #: templates/gsm/team/home.html:10 templates/gsm/team/picks.html:9
 #: templates/gsm/team/squad.html:12 templates/gsm/team/statistics.html:9
-#, fuzzy
 msgid "predictions"
-msgstr "compétitions"
+msgstr "prédictions"
 
 #: templates/homepage.html:11 templates/leaderboard.html:11
 #: templates/session_bettype_detail.html:9
@@ -652,7 +650,6 @@ msgid "by profitability"
 msgstr "par rentabilité"
 
 #: templates/leaderboard.html:76
-#, fuzzy
 msgid "pending email confirmations"
 msgstr "demandes en cours"
 
@@ -733,7 +730,6 @@ msgid "password"
 msgstr "mot de passe"
 
 #: templates/site_base.html:161
-#, fuzzy
 msgid "Log in"
 msgstr "s'identifier"
 
@@ -826,7 +822,6 @@ msgid "Your statistics"
 msgstr "statistiques"
 
 #: templates/site_base.html:259
-#, fuzzy
 msgid "stats"
 msgstr "statistiques"
 
@@ -845,9 +840,8 @@ msgid "Most popular games"
 msgstr "Matchs les plus joués"
 
 #: templates/site_base.html:292
-#, fuzzy
 msgid "Picks for match"
-msgstr "tickets correspondant à votre recherche"
+msgstr "tickets du match"
 
 #: templates/site_base.html:300
 msgid "How to"
@@ -874,11 +868,11 @@ msgstr ""
 "Vous avez un ticket en cours de création, cette fenêtre s'ouvrira "
 "automatiquement. Veuiller terminer et/ou fermer ce ticket."
 
-#: templates/site_base.html:371
+#: templates/site_base.html:372
 msgid "loading page"
 msgstr "chargement"
 
-#: templates/site_base.html:382
+#: templates/site_base.html:383
 msgid "searching for"
 msgstr "recherche"
 
@@ -984,7 +978,6 @@ msgstr ""
 "href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
 
 #: templates/account/logout.html:5
-#, fuzzy
 msgid "Logout"
 msgstr "Déconnexion"
 
@@ -1062,9 +1055,8 @@ msgid "and"
 msgstr "et"
 
 #: templates/activity/action.html:87
-#, fuzzy
 msgid "all started following"
-msgstr "est désormais abonné aux publications de"
+msgstr "sont désormais abonnés aux publications de"
 
 #: templates/activity/action.html:105 templates/activity/action.html.py:115
 msgid "published"
@@ -1126,7 +1118,7 @@ msgstr ""
 "Inscrivez-vous sur Betspire et suivez %(User)s pour voir tous ses pronostics"
 " sportifs, ses conseils et "
 
-#: templates/auth/user_activities.html:29 templates/comments/form.html:37
+#: templates/auth/user_activities.html:29 templates/comments/form.html:38
 #: templates/comments/preview.html:32 templates/scoobet/status_add.html:13
 msgid "Post"
 msgstr "publier"
@@ -1191,27 +1183,24 @@ msgstr ""
 "montrez aux autres pronostiqueurs vos pronostics favoris."
 
 #: templates/auth/user_file.html:17
-#, fuzzy
 msgid "Favorite bookmakers"
-msgstr "bookmakers"
+msgstr "Bookmakers favoris"
 
 #: templates/auth/user_file.html:30
 msgid "Favorite sports"
 msgstr "Sports préférés"
 
 #: templates/auth/user_file.html:43
-#, fuzzy
 msgid "Favorite competitions"
-msgstr "Plus de compétitions"
+msgstr "Compétitions favorites"
 
 #: templates/auth/user_file.html:56
 msgid "Favorite teams"
 msgstr "Equipes préférées"
 
 #: templates/auth/user_file.html:69
-#, fuzzy
 msgid "Favorite players"
-msgstr "joueurs"
+msgstr "Joueurs favoris"
 
 #: templates/auth/user_file.html:84
 #, python-format
@@ -1251,9 +1240,8 @@ msgid "follows"
 msgstr "suit"
 
 #: templates/auth/user_stats.html:4
-#, fuzzy
 msgid "Sports betting statistics"
-msgstr "statistiques"
+msgstr "statistiques de paris sportifs"
 
 #: templates/auth/user_stats.html:7
 #, python-format
@@ -1517,7 +1505,6 @@ msgid "comments"
 msgstr "commentaires"
 
 #: templates/bet/ticket_detail.html:54 templates/gsm/session/home.html:490
-#, fuzzy
 msgid "add new comment"
 msgstr "commenter"
 
@@ -1539,7 +1526,6 @@ msgid "support"
 msgstr "support"
 
 #: templates/bet/_includes/bet_list_table.html:101
-#, fuzzy
 msgid "Combined ticket"
 msgstr "ticket combiné"
 
@@ -1712,17 +1698,25 @@ msgstr "signaler"
 msgid "Thanks for flagging"
 msgstr "merci d'avoir signalé"
 
-#: templates/comments/form.html:11
+#: templates/comments/form.html:12
 msgid "your name"
 msgstr "nom"
 
-#: templates/comments/form.html:18
+#: templates/comments/form.html:19
 msgid "your email"
 msgstr "votre e-mail"
 
-#: templates/comments/form.html:38 templates/comments/preview.html:33
+#: templates/comments/form.html:39 templates/comments/preview.html:33
 msgid "Preview"
 msgstr "prévisualiser"
+
+#: templates/comments/form.html:43
+msgid "Sign up"
+msgstr "s'inscrire"
+
+#: templates/comments/form.html:43
+msgid "and post a comment"
+msgstr "et vous pourrez commenter"
 
 #: templates/comments/posted.html:4
 msgid "Thanks for commenting"
@@ -2355,14 +2349,12 @@ msgid "user"
 msgstr "utilisateur"
 
 #: templates/subscription/dropdown.html:13
-#, fuzzy
 msgid "You have not received any notification yet"
-msgstr "vous avez reçu un message"
+msgstr "vous n'avez encore reçu aucune notification"
 
 #: templates/subscription/dropdown.html:25
-#, fuzzy
 msgid "See all notifications"
-msgstr "Plus de compétitions"
+msgstr "Voir toutes les notifications"
 
 #: templates/subscription/notifications/bet_corrected.html:6
 msgid "Your bet"
@@ -2370,9 +2362,8 @@ msgstr "Votre pari"
 
 #: templates/subscription/notifications/bet_corrected.html:8
 #: templates/subscription/notifications/ticket_corrected.html:8
-#, fuzzy
 msgid "was corrected"
-msgstr "a corrigé"
+msgstr "a été corrigée"
 
 #: templates/subscription/notifications/ticket_corrected.html:6
 msgid "Your ticket"
