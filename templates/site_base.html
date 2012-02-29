@@ -365,6 +365,7 @@ table.bettype table.choices {
         $('#avatar_form_toggle').click(function() {
             $('#avatar_form').toggle()
         });
+        {% endif %}
         $(document).bind('yourlabs_autocomplete.selectOption', function(e, autocomplete, option) {
             if (option.length) {
                 autocomplete.hide();
@@ -382,7 +383,6 @@ table.bettype table.choices {
                 autocomplete.el.val('{% trans 'searching for' %}: ' + $.trim(autocomplete.el.val()));
             }
         });
-        {% endif %}
 
         $('input.search_input[name=q]').yourlabs_autocomplete({
             url: '{% url scoobet_autocomplete %}',
