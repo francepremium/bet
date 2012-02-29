@@ -55,3 +55,4 @@ django-taggit
 -e hg+https://bitbucket.org/funkybob/gnocchi-cms#egg=cms
 johnny-cache
 python-memcached
+django-rosetta

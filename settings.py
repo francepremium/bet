@@ -103,6 +103,7 @@ INSTALLED_APPS = [
     'subscription.examples.yourlabs',
     #'devserver',
 
+    'rosetta',
     # Pinax
    
     # to open source
@@ -122,6 +123,10 @@ INSTALLED_APPS = [
     'haystack',
     'modeltranslation',
 ]
+
+ROSETTA_MESSAGES_PER_PAGE=100
+ROSETTA_ENABLE_TRANSLATION_SUGGESTIONS=True
+BING_APP_ID='3AF372499E210397A857F17733E469F3323B164C'
 
 SUBSCRIPTION_NOTIFICATION_QUEUES = [
     'chat',
