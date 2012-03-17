@@ -22,7 +22,7 @@
     {% endif %}
     
     <form class="login uniForm" method="POST" action="{% url acct_login %}">
-        <input type="hidden" value="{% url me %}" name="next" />
+        <input type="hidden" value="{% if request.REQUEST.next %}{{ request.REQUEST.next }}{% else %}{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url me %}{% endif %}{% endif %}" name="next" />
         {% csrf_token %}
         <fieldset class="inlineLabels">
             <div class="form_block">

@@ -60,6 +60,12 @@ class BetListView(generic.ListView):
     flagged = False
     preset = {}
 
+    def get(self, *args, **kwargs):
+        if self.kwargs.get('tab', False) == 'friends' and \
+            not self.request.user.is_authenticated():
+            return shortcuts.redirect(urlresolvers.reverse('acct_login') + '?next=' + self.request.path)
+        return super(BetListView, self).get(*args, **kwargs)
+
     def get_queryset(self):
         qs = super(BetListView, self).get_queryset()
         
