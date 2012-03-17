@@ -69,7 +69,11 @@
 
     {% if sport.slug == 'soccer' %}
 
-        {% gsm_tree key='team_statistics' method='get_team_statistics' team_id=team.gsm_id season_id=reference_season.gsm_id %}
+        {% if reference_season %}
+            {% gsm_tree key='team_statistics' method='get_team_statistics' team_id=team.gsm_id season_id=reference_season.gsm_id %}
+        {% else %}
+            {% gsm_tree key='team_statistics' method='get_team_statistics' team_id=team.gsm_id %}
+        {% endif %}
 
         <table class="team_statistics">
             {% for element in team_statistics.getroot.getchildren.1.getchildren %}
