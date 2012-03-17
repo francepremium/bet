@@ -84,7 +84,11 @@ def following_autocomplete(request):
 
 def autocomplete(request,
     template_name='scoobet/autocomplete.html', extra_context=None):
-    q = request.GET['q'] # crash if q is not in the url
+
+    if 'q' not in request.GET.keys():
+        return http.HttpResponseBadRequest()
+
+    q = request.GET['q']
     context = {
         'q': q,
     }
