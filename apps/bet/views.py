@@ -61,7 +61,7 @@ class BetListView(generic.ListView):
     preset = {}
 
     def get(self, *args, **kwargs):
-        if self.kwargs.get('tab', False) == 'friends' and \
+        if self.kwargs.get('tab', False) in ('friends', 'mine') and \
             not self.request.user.is_authenticated():
             return shortcuts.redirect(urlresolvers.reverse('acct_login') + '?next=' + self.request.path)
         return super(BetListView, self).get(*args, **kwargs)
