@@ -88,6 +88,9 @@ def person_detail_tab(request, sport, gsm_id, tab, tag='person',
     template_name='', extra_context=None):
     sport = get_sport_or_404(sport)
 
+    if sport.slug in ('hockey', 'basketball', 'americanfootball'):
+        return http.HttpResponseGone()
+
     gsm_entity_class = model_class_for_tag(tag)
     person, created = gsm_entity_class.objects.get_or_create(
         sport = sport,
@@ -101,7 +104,7 @@ def person_detail_tab(request, sport, gsm_id, tab, tag='person',
         'tab': tab,
     }
 
-    if sport.slug == 'tennis':
+    if sport.slug in 'tennis':
         t = gsm.get_tree(context['language'], sport, 'get_players', 
             type='player', id=person.gsm_id, detailed='yes')
     else:
