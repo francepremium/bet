@@ -1,2 +1,5 @@
 User-agent: *
 Disallow: {% url gsm_timezone_adjust %}
+Disallow: {% url scoobet_autocomplete %}
+Disallow: {% url scoobet_feed_friends %}
+Disallow: {% url scoobet_following_autocomplete %}
