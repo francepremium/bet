@@ -5,7 +5,7 @@
 {% block head_title %}{{ bet.session }} - {{ bet.ticket.user }} {% trans 'pick for' %} {{ bet.bettype }}{% endblock %}
 
 {% block meta %}
-<meta name="Description" content="{% blocktrans with user=bet.ticket.user session=bet.session sport=bet.session.sport %}{{ user }} bets on {{ sport }}. Discover the analysis and prediction of {{ session }} he shares now!{% endblocktrans %}" />
+<meta name="Description" content="{% blocktrans with user=bet.ticket.user session=bet.session sport=bet.session.sport %}{{ user }} bets on {{ sport }}. Discover the analysis and prediction of {{ bet.bettype }} for {{ session }} he shares now!{% endblocktrans %}" />
 <meta name="keywords" content="{% trans 'picks' %}, {% trans 'pick' %}, {% trans 'bet' %}, {% trans 'betting' %}, {% trans 'prediction' %}, {{ bet.session }}, {{ bet.session.sport }}, {{ bet.session.season.competition }}" />
 {% endblock %}
 
