@@ -9,7 +9,7 @@
 # force pip upgrade to support hard coded git clones
 -e git+https://github.com/vbabiy/pip.git#egg=pip
 
-
+django-compressor
 -e svn+http://django-modeltranslation.googlecode.com/svn/trunk/@111#egg=modeltranslation
 django-filter==0.5.3
 django-autoslug==1.4.1
