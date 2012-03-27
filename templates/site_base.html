@@ -1,23 +1,27 @@
-{% load i18n %}
-{% load localeurl_tags %}
-{% load comments %}
-{% load avatar_tags %}
-{% load subscription_yourlabs_tags %}
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}">
+
+    {% load compress %}
+    {% load i18n %}
+    {% load localeurl_tags %}
+    {% load comments %}
+    {% load avatar_tags %}
+    {% load subscription_yourlabs_tags %}
+
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>{% block head_title_base %}{% block head_title %}{% endblock %} | Betspire {% endblock %}</title>
         {% block meta %}
         {% endblock %}
+        {% compress css %}
         <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" />
         <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/tabs.css" />
         <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/facebox.css" />
         <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/announcements.css" />
         <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/accounts.css" />
-        <link rel="stylesheet" href="{{ STATIC_URL }}uni_form/uni-form.css" />
         <link rel="stylesheet" href="{{ STATIC_URL }}css/ui-lightness/jquery-ui-1.8.13.custom.css" />
+        {% endcompress %}
 
         <link rel="icon" 
               type="image/png" 
@@ -74,8 +78,10 @@ table.bettype table.choices {
         {% endblock %}
         </style>
         
-        <script src="{% block jquery_src %}{{ STATIC_URL }}js/jquery-1.6.2.min.js{% endblock %}" type="text/javascript"></script>
+        {% compress js %}
+        <script src="{{ STATIC_URL }}js/jquery-1.6.2.min.js" type="text/javascript"></script>
         <script src="{{ STATIC_URL }}js/jquery-ui-1.8.13.custom.min.js" type="text/javascript"></script>
+        {% endcompress %}
     </head>
     
     <body class="{% block body_class %}{% endblock %}">
@@ -357,11 +363,12 @@ table.bettype table.choices {
         {% endblock %}
         
         {% csrf_token %}
-        
+        {% compress js %}
         <script src="{{ STATIC_URL }}pinax/js/base.js" type="text/javascript"></script>
-        <script src="{{ STATIC_URL }}uni_form/uni-form.jquery.js" type="text/javascript"></script>
         <script src="{{ STATIC_URL }}js/jquery.form.js" type="text/javascript"></script>
         <script src="{{ STATIC_URL }}yourlabs/autocomplete/jquery-implementation.js" type="text/javascript"></script>
+        {% endcompress %}
+
         {% if request.user.is_authenticated %}
         <script type="text/javascript" src="{{ STATIC_URL }}subscription/jquery-implementation.js"></script>
         {% endif %}

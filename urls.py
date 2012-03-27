@@ -52,9 +52,3 @@ urlpatterns = patterns("",
     url(r'^robots.txt', direct_to_template, {
         'template': 'robots.txt'}, name='robots_txt'),
 )
-
-
-if settings.SERVE_MEDIA:
-    urlpatterns += patterns("",
-        url(r"", include("staticfiles.urls")),
-    )

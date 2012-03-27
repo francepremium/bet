@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # https://docs.djangoproject.com/en/dev/ref/settings/
 
-import os
+import os, os.path, posixpath
 
 ADMINS = [
     ('James Pic', 'jpic@yourlabs.org'),
@@ -13,6 +13,12 @@ MANAGERS = ADMINS
 LANGUAGE_CODE = 'fr'
 TIME_ZONE = 'Europe/Paris'
 
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+
+MEDIA_ROOT=os.path.join(PROJECT_ROOT, 'media')
+MEDIA_URL='/site_media/media/'
+STATIC_ROOT=os.path.join(PROJECT_ROOT, 'static')
+STATIC_URL='/site_media/static/'
 
 TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.auth',
@@ -21,7 +27,8 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.media',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
-    'staticfiles.context_processors.static_url',
+    'django.core.context_processors.static',
+    #'staticfiles.context_processors.static_url',
     'pinax.core.context_processors.pinax_settings',
     'bet.context_processors.incomplete_ticket',
     'scoobet.context_processors.inbox_count',
@@ -63,6 +70,7 @@ EXCEPTION_MIDDLEWARE_HANDLES = [
 INSTALLED_APPS = [
     'localeurl',
     'beta',
+    'compressor',
     # Django
     'django.contrib.admin',
     'django.contrib.auth',
@@ -74,13 +82,14 @@ INSTALLED_APPS = [
     'django.contrib.comments',
     'django.contrib.markup',
     'django.contrib.flatpages',
+    'django.contrib.staticfiles',
     
     'pinax.templatetags',
     'emailconfirmation',
     'pinax.apps.account',
     
     # external
-    'staticfiles',
+    #'staticfiles',
     'debug_toolbar',
     #'mailer',
     'uni_form',
@@ -133,10 +142,13 @@ SUBSCRIPTION_NOTIFICATION_QUEUES = [
     'friends',
 ]
 
+COMPRESS_ENABLED=True
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 ACCOUNT_EMAIL_VERIFICATION = True
