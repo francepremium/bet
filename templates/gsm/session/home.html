@@ -21,11 +21,11 @@
 			<td class="goal A">
 				{% gsm_entity key='goal_person' tag='person' gsm_id=goal.getchildren.0.attrib.person_id name=goal.getchildren.0.attrib.person %}
 				<span class="goal G">
-                    {% if sport.slug != 'hockey' %}
+                    {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                         <a href="{{ goal_person.get_absolute_url }}" title="{{ goal_person.name }}">
                     {% endif %}
                             {{ goal_person.name }}
-                    {% if sport.slug != 'hockey' %}
+                    {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                         </a>
                     {% endif %}
                 </span>
@@ -50,11 +50,11 @@
                 {% gsm_entity key='goal_person' tag='person' gsm_id=goal.getchildren.0.attrib.person_id name=goal.getchildren.0.attrib.person %}
 				<img class="event" src="{{ STATIC_URL }}img/sports/{{ sport.slug }}_tiny.png" alt="{% trans 'goal' %}" title="{% trans 'goal' %}" />
 				<span class="goal G">
-                    {% if sport.slug != 'hockey' %}
+                    {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                     <a href="{{ goal_person.get_absolute_url }}" title="{{ goal_person.name }}">
                     {% endif %}
                         {{ goal_person.name }}
-                    {% if sport.slug != 'hockey' %}
+                    {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                     </a>
                     {% endif %}
                 </span>
@@ -83,11 +83,11 @@
 			{% if warning.attrib.team_id == session.oponnent_A.gsm_id|addslashes %}
             <td class="warning A">
 				{% gsm_entity key='warned_person' tag='person' gsm_id=warning.attrib.person_id name=warning.attrib.person %}
-                {% if sport.slug != 'hockey' %}
+                {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                     <a href="{{ warned_person.get_absolute_url }}" title="{{ warned_person.name }}">
                 {% endif %}
                         {{ warned_person.name }}
-                {% if sport.slug != 'hockey' %}
+                {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                     </a>
                 {% endif %}
 				<img class="event" src="{{ STATIC_URL }}img/events/{{ warning.attrib.code }}.png" alt="{% trans warning.attrib.name %}" title="{% trans warning.attrib.name %}" />
@@ -100,11 +100,11 @@
 			<td class="warning B">
 				<img class="event" src="{{ STATIC_URL }}img/events/{{ warning.attrib.code }}.png" alt="{% trans warning.attrib.name %}" title="{% trans warning.attrib.name %}" />
 				{% gsm_entity key='warned_person' tag='person' gsm_id=warning.attrib.person_id name=warning.attrib.person %}
-                {% if sport.slug != 'hockey' %}
+                {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                     <a href="{{ warned_person.get_absolute_url }}" title="{{ warned_person.name }}">
                 {% endif %}
                         {{ warned_person.name }}
-                {% if sport.slug != 'hockey' %}
+                {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                     </a>
                 {% endif %}
             </td>
@@ -130,11 +130,11 @@
 				<tr>
 					<td class="L">
 						{% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
-                        {% if sport.slug != 'hockey' %}
+                        {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                             <a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">
                         {% endif %}
                                 {{ lineup_person.name }}
-                        {% if sport.slug != 'hockey' %}
+                        {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                             </a>
                         {% endif %}
 					</td>
@@ -179,11 +179,11 @@
 				<tr>
 					<td class="L">
 						{% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
-                        {% if sport.slug != 'hockey' %}
+                        {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
 						<a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">
                         {% endif %}
                             {{ lineup_person.name }}
-                        {% if sport.slug != 'hockey' %}
+                        {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                         </a>
                         {% endif %}
 					</td>
@@ -230,11 +230,11 @@
 				<tr>
 					<td class="L">
 						{% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
-                        {% if sport.slug != 'hockey' %}
+                        {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                             <a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">
                         {% endif %}
                             {{ lineup_person.name }}
-                        {% if sport.slug != 'hockey' %}
+                        {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                             </a>
                         {% endif %}
 					</td>
@@ -279,11 +279,11 @@
 				<tr>
 					<td class="L">
 						{% gsm_entity key='lineup_person' tag='person' gsm_id=lineup.attrib.person_id name=lineup.attrib.person %}
-                        {% if sport.slug != 'hockey' %}
+                        {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
 						<a href="{{ lineup_person.get_absolute_url }}" title="{{ lineup_person.name }}">
                         {% endif %}
                             {{ lineup_person.name }}
-                        {% if sport.slug != 'hockey' %}
+                        {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                         </a>
                         {% endif %}
 					</td>
@@ -326,11 +326,11 @@
 					{% if event.attrib.code == 'SI' %}
 						{% gsm_entity key='person_in' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
 						<span class="substitution SI">
-                            {% if sport.slug != 'hockey' %}
+                            {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                             <a href="{{ person_in.get_absolute_url }}" title="{{ person_in.name }}">
                             {% endif %}
                                 {{ person_in.name }}
-                            {% if sport.slug != 'hockey' %}
+                            {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                             </a>
                             {% endif %}
                             </span>
@@ -339,12 +339,12 @@
 						<br />
 						{% gsm_entity key='person_out' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
 						<span class="substitution SO">for 
-                            {% if sport.slug != 'hockey' %}
+                            {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                             <a href="{{ person_out.get_absolute_url }}" title="{{ person_out.name }}">
                             {% endif %}
                                 {{ person_out.name }}
 
-                            {% if sport.slug != 'hockey' %}
+                            {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                             </a>
                             {% endif %}
                         </span>
@@ -365,11 +365,11 @@
 					{% if event.attrib.code == 'SI' %}
 						{% gsm_entity key='person_in' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
 						<span class="substitution SI">
-                            {% if sport.slug != 'hockey' %}
+                            {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                             <a href="{{ person_in.get_absolute_url }}" title="{{ person_in.name }}">
                             {% endif %}
                                 {{ person_in.name }}
-                            {% if sport.slug != 'hockey' %}
+                            {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                             </a>
                             {% endif %}
                         </span>
@@ -378,11 +378,11 @@
 						<br />
 						{% gsm_entity key='person_out' tag='person' gsm_id=event.attrib.person_id name=event.attrib.person %}
 						<span class="substitution SO">for 
-                            {% if sport.slug != 'hockey' %}
+                            {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                             <a href="{{ person_out.get_absolute_url }}" title="{{ person_out.name }}">
                             {% endif %}
                                 {{ person_out.name }}
-                            {% if sport.slug != 'hockey' %}
+                            {% if sport.slug != 'hockey' and sport.slug != 'rugby' and sport.slug != 'basketball' and sport.slug != 'americanfootball' %}
                             </a>
                             {% endif %}
                             </span>
