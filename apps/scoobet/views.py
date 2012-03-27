@@ -1,7 +1,7 @@
 import datetime
 
 from django.utils import simplejson
-from django.db.models import Q, Avg
+from django.db.models import Q, Avg, Count
 from django.utils.translation import ugettext as _
 from django import template
 from django import http
@@ -45,14 +45,27 @@ def homepage(request,
         return shortcuts.redirect(urlresolvers.reverse('scoobet_feed_friends'))
     return shortcuts.render(request, template_name, extra_context)
 
-def leaderboard(request,
+def leaderboard(request, tab='all',
     template_name='leaderboard.html', extra_context=None):
-    qs = User.objects.exclude(betprofile__profit=None).select_related('betprofile')
+
+    qs = User.objects.exclude(betprofile__profit=None).annotate(
+        cnt=Count('ticket')).filter(cnt__gt=7).select_related('betprofile')
+
+    if tab == 'all':
+        profitability_order = '-betprofile__profitability'
+        profit_order = '-betprofile__profit'
+    elif tab == 'week':
+        profitability_order = '-betprofile__week_profitability'
+        profit_order = '-betprofile__week_profit'
+    elif tab == 'month':
+        profitability_order = '-betprofile__month_profitability'
+        profit_order = '-betprofile__month_profit'
+
     context = {
-        'users_by_profitability': qs.order_by('-betprofile__profitability')[:50],
-        'users_by_profit': qs.order_by('-betprofile__profit')[:50],
+        'tab': tab,
+        'users_by_profitability': qs.order_by(profitability_order)[:50],
+        'users_by_profit': qs.order_by(profit_order)[:50],
         'user_count': User.objects.all().count(),
-        'pending_confirmation_count': EmailConfirmation.objects.all().count(),
     }
     return shortcuts.render_to_response(template_name, context,
         context_instance=template.RequestContext(request))

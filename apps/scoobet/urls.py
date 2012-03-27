@@ -1,12 +1,31 @@
 from django.conf.urls.defaults import *
+from django.views.generic import simple
 
 import views
 
 urlpatterns = patterns('scoobet.views',
     url(
         r'leaderboard/$',
+        simple.redirect_to, {
+            'url': 'leaderboard/week/',
+        }, 'scoobet_leaderboard',
+    ),
+    url(
+        r'leaderboard/all/$',
         views.leaderboard,
-        name='scoobet_leaderboard',
+        name='scoobet_leaderboard_all',
+    ),
+    url(
+        r'leaderboard/week/$',
+        views.leaderboard, {
+            'tab': 'week',
+        }, 'scoobet_leaderboard_week',
+    ),
+    url(
+        r'leaderboard/month/$',
+        views.leaderboard, {
+            'tab': 'month',
+        }, name='scoobet_leaderboard_month',
     ),
     url(
         r'status/add/$',

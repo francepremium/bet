@@ -1,6 +1,6 @@
 {% extends "site_base.html" %}
 
-{% load i18n %}
+{% load i18n pagination_tags %}
 
 {% block body_class %}home{% endblock %}
 
@@ -16,6 +16,21 @@
 	<div class="title">
 		<h1>{% trans 'leaderboard' %}</h1>
 	</div>
+
+    <div class="tabs">
+        <ul>
+            <li class="{% if tab == 'week' %}current{% endif %}">
+                <a href="{% url scoobet_leaderboard_week %}" title="{% trans 'Week leaderboard' %}">{% trans 'Week' %}</a>
+            </li>
+            <li class="{% if tab == 'month' %}current{% endif %}">
+                <a href="{% url scoobet_leaderboard_month %}" title="{% trans 'Month leaderboard' %}">{% trans 'Month' %}</a>
+            </li>
+            <li class="{% if tab == 'all' %}current{% endif %}">
+                <a href="{% url scoobet_leaderboard_all %}" title="{% trans 'All time leaderboard' %}">{% trans 'All time' %}</a>
+            </li>
+        </ul>
+    </div>
+
     <div class="leaderboard">
         <h2>{% trans 'by profit' %}</h2>
         <table>
@@ -31,13 +46,38 @@
                     <a href="{{ user.get_absolute_url }}" title="{{ user }}">{{ user }}</a>
                 </td>
                 <td>
-                    {{ user.betprofile.profitability }} %
+                    {% if tab == 'week' %}
+                        {{ user.betprofile.week_profitability }}
+                    {% endif %}
+                    {% if tab == 'month' %}
+                        {{ user.betprofile.month_profitability }}
+                    {% endif %}
+                    {% if tab == 'all' %}
+                        {{ user.betprofile.profitability }}
+                    {% endif %}
+                    %
                 </td>
                 <td>
-                    {{ user.ticket_set.count }}
+                    {% if tab == 'week' %}
+                        {{ user.betprofile.week_tickets }}
+                    {% endif %}
+                    {% if tab == 'month' %}
+                        {{ user.betprofile.month_tickets }}
+                    {% endif %}
+                    {% if tab == 'all' %}
+                        {{ user.betprofile.tickets }}
+                    {% endif %}
                 </td>
                 <td>
-                    {{ user.betprofile.profit }}
+                    {% if tab == 'week' %}
+                        {{ user.betprofile.week_profit }}
+                    {% endif %}
+                    {% if tab == 'month' %}
+                        {{ user.betprofile.month_profit }}
+                    {% endif %}
+                    {% if tab == 'all' %}
+                        {{ user.betprofile.profit }}
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}
@@ -61,13 +101,38 @@
                     <a href="{{ user.get_absolute_url }}" title="{{ user }}">{{ user }}</a>
                 </td>
                 <td>
-                    {{ user.betprofile.profitability }} %
+                    {% if tab == 'week' %}
+                        {{ user.betprofile.week_profitability }}
+                    {% endif %}
+                    {% if tab == 'month' %}
+                        {{ user.betprofile.month_profitability }}
+                    {% endif %}
+                    {% if tab == 'all' %}
+                        {{ user.betprofile.profitability }}
+                    {% endif %}
+                    %
                 </td>
                 <td>
-                    {{ user.ticket_set.count }}
+                    {% if tab == 'week' %}
+                        {{ user.betprofile.week_tickets }}
+                    {% endif %}
+                    {% if tab == 'month' %}
+                        {{ user.betprofile.month_tickets }}
+                    {% endif %}
+                    {% if tab == 'all' %}
+                        {{ user.betprofile.tickets }}
+                    {% endif %}
                 </td>
                 <td>
-                    {{ user.betprofile.profit }}
+                    {% if tab == 'week' %}
+                        {{ user.betprofile.week_profit }}
+                    {% endif %}
+                    {% if tab == 'month' %}
+                        {{ user.betprofile.month_profit }}
+                    {% endif %}
+                    {% if tab == 'all' %}
+                        {{ user.betprofile.profit }}
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}

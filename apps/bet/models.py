@@ -39,6 +39,15 @@ class BetProfile(models.Model):
     offside_on = models.DateTimeField(null=True, blank=True)
     profitability = models.FloatField(default=0)
     profit = models.FloatField(default=0)
+    tickets = models.IntegerField()
+    
+    week_profitability = models.FloatField(default=0)
+    week_profit = models.FloatField(default=0)
+    week_tickets = models.IntegerField()
+    
+    month_profitability = models.FloatField(default=0)
+    month_profit = models.FloatField(default=0)
+    month_tickets = models.IntegerField()
 
     def calculate(self, tickets=None):
         context = {
@@ -93,7 +102,6 @@ class BetProfile(models.Model):
             context['profitability'] = '%.2f' % ((
                 (context['total_earnings'] - context['total_stake']) / context['total_stake']
             ) * 100)
-            int((context['total_stake'] / context['total_earnings'])*100)
         else:
             context['profitability'] = 0
 
@@ -105,6 +113,51 @@ class BetProfile(models.Model):
         self.save()
 
         return context
+
+    def _calculate_for_tickets(self, tickets):
+        if not len(tickets):
+            return 0, 0
+
+        profit = 0
+        profitability = 0
+        stake = 0
+
+        for ticket in tickets:
+            profit += ticket.profit
+            stake += ticket.stake
+        
+        profitability = (profit / stake) * 100
+
+        profitability = float('%.2f' % profitability)
+        profit = float('%.2f' % profit)
+
+        return profitability, profit
+
+    def _refresh(self):
+        today = datetime.date.today()
+
+        tickets_base = self.user.ticket_set.filter(status=TICKET_STATUS_DONE).exclude(
+            bet__correction=BET_CORRECTION_NEW)
+
+        week_start_day = datetime.date.today() - datetime.timedelta(days=1)
+        while week_start_day.weekday() != 3:
+            week_start_day -= datetime.timedelta(days=1)
+        week_tickets = tickets_base.filter(bet__session__start_datetime__gte=week_start_day)
+
+        month_start_day = datetime.date.today() - datetime.timedelta(days=1)
+        while month_start_day.day != 1:
+            month_start_day -= datetime.timedelta(days=1)
+        month_tickets = tickets_base.filter(bet__session__start_datetime__gte=month_start_day)
+
+
+        self.profitability, self.profit = self._calculate_for_tickets(tickets_base)
+        self.week_profitability, self.week_profit = self._calculate_for_tickets(week_tickets)
+        self.month_profitability, self.month_profit = self._calculate_for_tickets(month_tickets)
+        
+        self.week_tickets = week_tickets.count()
+        self.month_tickets = month_tickets.count()
+        self.tickets = self.user.ticket_set.count()
+        self.save()
 
     def refresh(self):
         logger.debug('spooling user profile refresh %s' % self.user)
@@ -298,7 +351,7 @@ def refresh_betprofile_for_user_nospool(arguments):
     print 'triggered profile refresh %s' % user
     if user.ticket_set.filter(status=TICKET_STATUS_DONE).count():
         logger.debug('starting user profile refresh %s' % user)
-        data = user.betprofile.calculate()
+        data = user.betprofile._refresh()
         logger.debug('ending user profile refresh %s' % user)
     else:
         logger.debug('user %s has no ticket' % user)
