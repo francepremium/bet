@@ -493,7 +493,11 @@ table.bettype table.choices {
             }
 
             $('.tab_link').live('click', function(e) {
-                var tabid = $(this).attr('class').match(/tab_id_([a-z]*)/)[1];
+                var m = $(this).attr('class').match(/tab_id_([a-z]*)/);
+                if (!m) {
+                    return;
+                }
+                var tabid = m[1];
                 var group = $(this).attr('class').match(/tab_group_([a-z]*)/);
                 if (group && group.length) {
                     var tabgroup = group[1];
