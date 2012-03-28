@@ -496,7 +496,7 @@ table.bettype table.choices {
                 var m = $(this).attr('class').match(/tab_id_([a-z]*)/);
                 if (!m) {
                     var a = $(this).find('a');
-                    if (a.length) window.location.href = a.attr('href');
+                    if (first_tab_click && a.length) window.location.href = a.attr('href');
                     return;
                 }
                 var tabid = m[1];
@@ -512,7 +512,9 @@ table.bettype table.choices {
                 $('.tab_link').removeClass('selected');
                 $('.tab_link.tab_id_'+tabid).addClass('selected');
             });
+            first_tab_click = false;
             $('.tab_link:first').click();
+            first_tab_click = true;
 
             $('input[name=start_datetime][type=text]').datepicker({ dateFormat: 'yy-mm-dd', });
             $('input[name=max_date]').datepicker({ dateFormat: 'yy-mm-dd', });
