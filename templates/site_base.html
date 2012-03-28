@@ -495,6 +495,8 @@ table.bettype table.choices {
             $('.tab_link').live('click', function(e) {
                 var m = $(this).attr('class').match(/tab_id_([a-z]*)/);
                 if (!m) {
+                    var a = $(this).find('a');
+                    if (a.length) window.location.href = a.attr('href');
                     return;
                 }
                 var tabid = m[1];
