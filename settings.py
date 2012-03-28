@@ -44,8 +44,8 @@ DEFAULT_TEMPLATE = 'default.html'
 
 MIDDLEWARE_CLASSES = [
     'localeurl.middleware.LocaleURLMiddleware',
-    'johnny.middleware.LocalStoreClearMiddleware',
-    'johnny.middleware.QueryCacheMiddleware',
+    #'johnny.middleware.LocalStoreClearMiddleware',
+    #'johnny.middleware.QueryCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
