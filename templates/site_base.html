@@ -291,23 +291,65 @@ table.bettype table.choices {
         {% endif %}
         </div>
 		<div id="navigation_flat">
-            {% trans 'Most popular games' %}
+			 <h3>{% trans 'Get your bonus' %}</h3>
+			  <ul class="banner_list">
+			 	<li>
+			 		<a href="http://www.betclic.fr/partner.aspx?p=BTS&z=c01" target="_blank"><img src="{{ STATIC_URL }}img/navigation_flat/betclic.png" alt="Betclic" /></a>
+			 	</li>
+				<li>
+			 		<a href="https://www.bwin.fr/sportsbook.aspx?pid=4600&adid=15797&refererid=VWWHG9UR8J&zoneid=165555" target="_blank"><img src="{{ STATIC_URL }}img/navigation_flat/bwin.png" alt="Bwin" /></a>
+			 	</li>
+				<li>
+			 		<a href="https://www.france-pari-sportif.fr/match/?xtor=AL-105&p=00026" target="_blank"><img src="{{ STATIC_URL }}img/navigation_flat/france_pari_sportif.png" alt="France pari sportif" /></a>
+			 	</li>
+				<li>
+			 		<a href="http://affiliation.france-pari.fr/processing/clickthrgh.asp?btag=a_220b_1" target="_blank"><img src="{{ STATIC_URL }}img/navigation_flat/france_pari.png" alt="France pari" /></a>
+			 	</li>
+				<li>
+			 		<a href="http://www.gambling-affiliation.com/cpc/v=4KSisezvHtj17eS.2bwP4ZfG7LS6JYpkWVIqZr8IQEo_" target="_blank"><img src="{{ STATIC_URL }}img/navigation_flat/pmu.png" alt="PMU" /></a>
+			 	</li>
+				<li>
+			 		<a href="http://www.gambling-affiliation.com/cpc/v=5o4Ski8c5-ScMF6vje0i-iYEFhuNG.BWfhyiXycMQvs_" target="_blank"><img src="{{ STATIC_URL }}img/navigation_flat/joa_online.png" alt="joa online" /></a>
+			 	</li>
+				<li>
+			 		<a href="http://www.unibet.fr/" target="_blank"><img src="{{ STATIC_URL }}img/navigation_flat/unibet.png" alt="Unibet" /></a>
+			 	</li>
+			 </ul>
+			 <h3>{% trans 'Punter tools' %}</h3>
+			 <ul class="banner_list">
+			 	<li>
+			 		<a href="https://www.cmesdonnees.com/ps/MVLNS" target="_blank"><img src="{{ STATIC_URL }}img/navigation_flat/c_mes_donnees.png" alt="C mes données" /></a>
+			 	</li>
+				<li>
+			 		<a href="http://www.betpocket.com/?origin_ref=betspire" target="_blank"><img src="{{ STATIC_URL }}img/navigation_flat/betpocket.png" alt="Betpocket" /></a>
+			 	</li>
+			 </ul>
+             <h3>{% trans 'Most popular games' %}</h3>
             {% load cache %}
             {# cache 600 five_popular_sessions #}
-            <ul>
+            <div class="prono-list">
                 {% for session in five_popular_sessions %}
-                    <li>
-                        <a href="{{ session.get_absolute_url }}" title="{{ session }}">
-                            <img class="event" src="{{ STATIC_URL }}img/sports/{{ session.sport.slug }}_tiny.png" alt="{{ session }}" title="{{ session }}" />
-                        </a>
-                        <a href="{{ session.oponnent_A.get_absolute_url }}" title="{{ session.oponnent_A }}">{{ session.oponnent_A }}</a>
-                        <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ session.oponnent_B }}">{{ session.oponnent_B }}</a> 
-                        (<a href="{{ session.get_picks_absolute_url }}" title="{% trans "Picks for match" %}">{{ session.bet_count }}</a>)
-                    </li>
+                <table width="100%">
+                    <tr>
+                        <td rowspan="2" class="rowspan">
+                            <a href="{{ session.get_absolute_url }}" title="{{ session }}"><img class="event" src="{{ STATIC_URL }}img/sports/{{ session.sport.slug }}_tiny.png" alt="{{ session }}" title="{{ session }}" /></a>
+                        </td>
+                        <td>
+                            <a href="{{ session.oponnent_A.get_absolute_url }}" title="{{ session.oponnent_A }}">{{ session.oponnent_A }}</a>
+                        </td>
+                        <td rowspan="2" class="rowspan">
+                            <a href="{{ session.get_picks_absolute_url }}" title="{% trans "Picks for match" %}">{{   session.bet_count }}  </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="{{ session.oponnent_B.get_absolute_url }}" title="{{ session.oponnent_B }}">{{ session.oponnent_B }}</a>
+                        </td>
+                    </tr>
+                </table>
                 {% endfor %}
-            </ul>
+            </div>
             {# endcache #}
-
             {% load flatpages %}
             {% get_flatpages as flatpages %}
             <h3>{% trans 'How to' %}</h3>
