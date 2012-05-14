@@ -15,9 +15,9 @@ TIME_ZONE = 'Europe/Paris'
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
-MEDIA_ROOT=os.path.join(PROJECT_ROOT, 'media')
+MEDIA_ROOT=os.path.join(PROJECT_ROOT, 'site_media', 'media')
 MEDIA_URL='/site_media/media/'
-STATIC_ROOT=os.path.join(PROJECT_ROOT, 'static')
+STATIC_ROOT=os.path.join(PROJECT_ROOT, 'site_media', 'static')
 STATIC_URL='/site_media/static/'
 COMPRESS_ROOT=os.path.join(PROJECT_ROOT, 'site_media', 'static')
 
