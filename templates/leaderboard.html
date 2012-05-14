@@ -19,13 +19,13 @@
 
     <div class="tabs">
         <ul>
-            <li class="{% if tab == 'week' %}current{% endif %}">
+            <li class="tab_link {% if tab == 'week' %}selected{% endif %}">
                 <a href="{% url scoobet_leaderboard_week %}" title="{% trans 'Week leaderboard' %}">{% trans 'Week' %}</a>
             </li>
-            <li class="{% if tab == 'month' %}current{% endif %}">
+            <li class="tab_link {% if tab == 'month' %}selected{% endif %}">
                 <a href="{% url scoobet_leaderboard_month %}" title="{% trans 'Month leaderboard' %}">{% trans 'Month' %}</a>
             </li>
-            <li class="{% if tab == 'all' %}current{% endif %}">
+            <li class="tab_link {% if tab == 'all' %}selected{% endif %}">
                 <a href="{% url scoobet_leaderboard_all %}" title="{% trans 'All time leaderboard' %}">{% trans 'All time' %}</a>
             </li>
         </ul>

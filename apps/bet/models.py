@@ -137,10 +137,10 @@ class BetProfile(models.Model):
         today = datetime.date.today()
 
         tickets_base = self.user.ticket_set.filter(status=TICKET_STATUS_DONE).exclude(
-            bet__correction=BET_CORRECTION_NEW)
+            bet__correction=BET_CORRECTION_NEW).order_by('pk').distinct()
 
         week_start_day = datetime.date.today() - datetime.timedelta(days=1)
-        while week_start_day.weekday() != 3:
+        while week_start_day.weekday() != 0:
             week_start_day -= datetime.timedelta(days=1)
         week_tickets = tickets_base.filter(bet__session__start_datetime__gte=week_start_day)
 

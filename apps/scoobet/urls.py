@@ -7,13 +7,14 @@ urlpatterns = patterns('scoobet.views',
     url(
         r'leaderboard/$',
         simple.redirect_to, {
-            'url': 'leaderboard/week/',
+            'url': 'month/',
         }, 'scoobet_leaderboard',
     ),
     url(
         r'leaderboard/all/$',
-        views.leaderboard,
-        name='scoobet_leaderboard_all',
+        views.leaderboard, {
+            'tab': 'all',
+        }, name='scoobet_leaderboard_all',
     ),
     url(
         r'leaderboard/week/$',

@@ -19,6 +19,8 @@ MEDIA_ROOT=os.path.join(PROJECT_ROOT, 'media')
 MEDIA_URL='/site_media/media/'
 STATIC_ROOT=os.path.join(PROJECT_ROOT, 'static')
 STATIC_URL='/site_media/static/'
+COMPRESS_ROOT=os.path.join(PROJECT_ROOT, 'site_media', 'static')
+
 
 TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.auth',
@@ -42,8 +44,8 @@ DEFAULT_TEMPLATE = 'default.html'
 
 MIDDLEWARE_CLASSES = [
     'localeurl.middleware.LocaleURLMiddleware',
-    'johnny.middleware.LocalStoreClearMiddleware',
-    'johnny.middleware.QueryCacheMiddleware',
+    #'johnny.middleware.LocalStoreClearMiddleware',
+    #'johnny.middleware.QueryCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.transaction.TransactionMiddleware',

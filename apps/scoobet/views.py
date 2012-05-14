@@ -45,7 +45,7 @@ def homepage(request,
         return shortcuts.redirect(urlresolvers.reverse('scoobet_feed_friends'))
     return shortcuts.render(request, template_name, extra_context)
 
-def leaderboard(request, tab='all',
+def leaderboard(request, tab='month',
     template_name='leaderboard.html', extra_context=None):
 
     qs = User.objects.exclude(betprofile__profit=None).annotate(
@@ -55,9 +55,11 @@ def leaderboard(request, tab='all',
         profitability_order = '-betprofile__profitability'
         profit_order = '-betprofile__profit'
     elif tab == 'week':
+        qs = qs.exclude(betprofile__week_tickets=0)
         profitability_order = '-betprofile__week_profitability'
         profit_order = '-betprofile__week_profit'
     elif tab == 'month':
+        qs = qs.exclude(betprofile__month_tickets=0)
         profitability_order = '-betprofile__month_profitability'
         profit_order = '-betprofile__month_profit'
 
