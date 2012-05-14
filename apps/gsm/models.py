@@ -694,6 +694,11 @@ class Sync(object):
             self.log('debug', 'Skipping tag %s' % e.tag)
             return True
 
+        type = e.attrib.get('type', False)
+        if type == 'double':
+            self.log('debug', 'Skipping double season %s' % e.attrib)
+            return True
+
         last_updated = string_to_datetime(e.attrib['last_updated'])
         if last_updated:
             last_updated = london.localize(last_updated)
@@ -769,10 +774,17 @@ class Sync(object):
                 self.sport.slug, model.tag, model.gsm_id))
 
     def update(self, e, parent=None):
+        if 'person_A1_name' in e.attrib.keys():
+            return
+
         model = self.element_to_model(e)
         self.log('debug', 'Updating %s:%s' % (model.tag, model.gsm_id))
 
-        self.set_model_name(model, e)
+        try:
+            self.set_model_name(model, e)
+        except:
+            self.log('debug', 'Failed, passing on %s:%s' % (model.tag, model.gsm_id))
+            return
 
         if not self.names_only:
             self.set_model_area(model, e)
