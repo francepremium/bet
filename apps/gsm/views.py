@@ -266,7 +266,6 @@ def competition_detail_tab(request, sport, gsm_id, tab, tag='competition',
         seasons = competition.season_set.filter(end_date=season.end_date)
         context['rankings_trees'] = trees = []
         for season in seasons:
-            import ipdb; ipdb.set_trace()
             if season.season_type == 'double':
                 trees.append({
                     'tree': gsm.get_tree(context['language'], sport, 
