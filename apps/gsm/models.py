@@ -82,6 +82,9 @@ class AreaManager(CachedManager):
         return value
 
     def get_for_country_code_3(self, code):
+        if code == 'ANT':
+            code = 'ATG'
+
         key = '%scc3%s' % (self.attribute_name, code)
         
         value = cache.get(key)
