@@ -598,6 +598,13 @@ class Session(AbstractGsmEntity):
 
         return players
 
+    def delete_if_no_bet(self):
+        if not self.bet_set.all().count():
+            self.delete()
+        else:
+            print 'no delete'
+
+
 def ensure_ascii_name(sender, **kwargs):
     model = kwargs.pop('instance')
     for code, language in settings.LANGUAGES:
