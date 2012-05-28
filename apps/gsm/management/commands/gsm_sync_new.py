@@ -37,17 +37,6 @@ class Command(BaseCommand):
         self.status_path = os.path.join(settings.VAR_ROOT, 'gsm_last_updated')
         status = self.get_status()
 
-        buggy_sessions = Session.objects.filter(status='Fixture',
-            start_datetime__lte=datetime.datetime.now() - datetime.timedelta(hours=2))
-        for session in buggy_sessions:
-            tree = gsm.get_tree('en', session.sport, 'get_matches', retry=30,
-                update=True, type=session.tag, id=session.gsm_id, detailed=True)
-            for element in gsm.parse_element_for(tree.getroot(), 'match'):
-                break
-            d = datetime.datetime.now() - datetime.timedelta(days=6)
-            sync = Sync(session.sport, d, d, logger)
-            sync.update(element)
-
         now = local.localize(datetime.datetime.now())
         last_updated = status['last_updated'] or now - datetime.timedelta(hours=6)
         if not last_updated.tzinfo:
@@ -67,6 +56,7 @@ class Command(BaseCommand):
                 start_date = now - datetime.timedelta(hours=22)
             else:
                 start_date = last_updated
+            
             root = sync.get_tree('get_deleted', start_date=start_date)
             for child in root.getchildren():
                 if child.tag not in sync._tag_class_map:
@@ -102,6 +92,18 @@ class Command(BaseCommand):
 
         delta = local.localize(datetime.datetime.now()) + datetime.timedelta(minutes=7) - now
         status['last_updated'] = now - delta
+
+        buggy_sessions = Session.objects.filter(status='Fixture',
+            start_datetime__lte=datetime.datetime.now() - datetime.timedelta(hours=2))
+        for session in buggy_sessions:
+            tree = gsm.get_tree('en', session.sport, 'get_matches', retry=30,
+                update=True, type=session.tag, id=session.gsm_id, detailed=True)
+            for element in gsm.parse_element_for(tree.getroot(), 'match'):
+                break
+            d = datetime.datetime.now() - datetime.timedelta(days=6)
+            sync = Sync(session.sport, d, d, logger)
+            sync.update(element)
+
 
         if not args:
             self.store_status(status)
