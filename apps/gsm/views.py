@@ -161,7 +161,10 @@ def session_detail_tab(request, sport, gsm_id, tab, tag='match',
         if t != False:
             c = t.getroot().getchildren()[1]
             while c.tag != 'match':
-                c = c.getchildren()[0]
+                try:
+                    c = c.getchildren()[0]
+                except IndexError:
+                    break
             context['statistics'] = statistics = c
     except gsm.GsmException:
         pass
