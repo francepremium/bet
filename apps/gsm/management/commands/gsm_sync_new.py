@@ -56,6 +56,7 @@ class Command(BaseCommand):
                 start_date = now - datetime.timedelta(hours=22)
             else:
                 start_date = last_updated
+            
             root = sync.get_tree('get_deleted', start_date=start_date)
             for child in root.getchildren():
                 if child.tag not in sync._tag_class_map:
@@ -68,7 +69,7 @@ class Command(BaseCommand):
                         tag=child.tag, gsm_id__in=gsm_ids, sport=sport).delete()
 
             if sport.slug == 'soccer':
-                root = sync.get_tree('get_matches_live', now_playing='yes')
+                root = sync.get_tree('get_matches_live', update=True, now_playing='yes')
                 for e in gsm.parse_element_for(root, 'match'):
                     sync.update(e)
             
@@ -76,7 +77,7 @@ class Command(BaseCommand):
                 sync = Sync(sport, last_updated, minimal_date, logger, 
                     language=code, names_only=code != 'en')
 
-                root = sync.get_tree('get_seasons', last_updated=last_updated)
+                root = sync.get_tree('get_seasons', update=True, last_updated=last_updated)
 
                 if not root:
                     logger.error('Did not get tree for get_seasons')
@@ -91,7 +92,19 @@ class Command(BaseCommand):
 
         delta = local.localize(datetime.datetime.now()) + datetime.timedelta(minutes=7) - now
         status['last_updated'] = now - delta
-        
+
+        buggy_sessions = Session.objects.filter(status='Fixture',
+            start_datetime__lte=datetime.datetime.now() - datetime.timedelta(hours=2))
+        for session in buggy_sessions:
+            tree = gsm.get_tree('en', session.sport, 'get_matches', retry=30,
+                update=True, type=session.tag, id=session.gsm_id, detailed=True)
+            for element in gsm.parse_element_for(tree.getroot(), 'match'):
+                break
+            d = datetime.datetime.now() - datetime.timedelta(days=6)
+            sync = Sync(session.sport, d, d, logger)
+            sync.update(element)
+
+
         if not args:
             self.store_status(status)
         

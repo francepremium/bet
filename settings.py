@@ -19,7 +19,7 @@ MEDIA_ROOT=os.path.join(PROJECT_ROOT, 'site_media', 'media')
 MEDIA_URL='/site_media/media/'
 STATIC_ROOT=os.path.join(PROJECT_ROOT, 'site_media', 'static')
 STATIC_URL='/site_media/static/'
-COMPRESS_ROOT=os.path.join(PROJECT_ROOT, 'static')
+COMPRESS_ROOT=os.path.join(PROJECT_ROOT, 'site_media', 'static')
 
 
 TEMPLATE_CONTEXT_PROCESSORS = [
